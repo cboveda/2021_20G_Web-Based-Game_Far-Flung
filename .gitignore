@@ -1,0 +1,10 @@
+# Folders
+MonoBleedingEdge/
+TestProject_Data/
+UserSettings/
+Logs/
+Library/
+Temp/
+
+*.dll
+*.exe
