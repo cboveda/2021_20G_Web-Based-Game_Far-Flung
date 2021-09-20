@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
 
 public class TileActions : MonoBehaviour
 {
@@ -11,10 +12,15 @@ public class TileActions : MonoBehaviour
     bool onTile = false;
     bool validMove = false;
     string tileName = "";
+    string winScene = "";
+    bool success = false;
 
     Vector3 tilePosition;
     Vector3 blankPosition;
     GameObject blank;
+
+    ComGameData gameData;
+
 
     void Start()
     {
@@ -31,7 +37,7 @@ public class TileActions : MonoBehaviour
 
         onTile = true;
         validMove = checkValidMove();
-        Debug.Log(validMove);
+        //Debug.Log(validMove);
     }
 
     void OnMouseExit()
@@ -43,9 +49,10 @@ public class TileActions : MonoBehaviour
 
     void Update()
     {
+            
         if (Input.GetMouseButtonDown(0) && onTile && validMove)
         {
-            Debug.Log("Pressed primary button on " + tileName);
+            //Debug.Log("Pressed primary button on " + tileName);
 
             // get current tile and blank tile positions
             tilePosition = rend.transform.position;
@@ -55,6 +62,15 @@ public class TileActions : MonoBehaviour
             // swap current tile and blank tile positons
             rend.transform.position = blankPosition;
             blank.transform.position = tilePosition;
+
+            success = checkSuccess();
+
+            if (success)
+            {
+                winScene = "comGameWin";
+                SceneManager.LoadScene(winScene);
+            }
+           
         }
     }
 
@@ -93,5 +109,58 @@ public class TileActions : MonoBehaviour
         }
 
         return validMove;
+    }
+
+    public bool checkSuccess()
+    {
+
+        float[] winPos = { 0.0F, 0.0F };
+        int numberOfTiles = 11;
+        int position = 11;
+        int increment = 1;
+        Vector3 tilePos;
+        string tileNumber = "";        
+        int x = 0;
+        int y = 1;
+
+        for (int i = 0; i < numberOfTiles; i++)
+        {
+
+            winPos = FindObjectOfType<ComGameData>().getWinPosition(position);
+
+            tileNumber = position.ToString();
+            tilePos = GameObject.Find(tileNumber).transform.position;            
+
+            if (i == 2)
+            {
+                position += 7;
+            }
+            if (i == 6)
+            {
+                position += 6;
+            }
+            position += increment;
+
+            if (winPos[x] != tilePos.x)
+            {
+                Debug.Log("false");
+                return false;
+            }
+
+            if (winPos[y] != tilePos.y)
+            {
+                Debug.Log("false");
+                return false;
+            }
+
+            //Debug.Log(winPos[x]);
+            //Debug.Log(tilePos.x);
+
+            //Debug.Log(winPos[y]);
+            //Debug.Log(tilePos.y);
+        }
+
+        Debug.Log("true");
+        return true;
     }
 }
