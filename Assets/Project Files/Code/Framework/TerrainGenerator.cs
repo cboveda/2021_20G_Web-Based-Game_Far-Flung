@@ -49,6 +49,9 @@ public class TerrainGenerator : MonoBehaviour
         }
 
         terrain_heights = UpdateHeights( terrain_heights );
+
+        Terrain terrain = GetComponent<Terrain>();
+        terrain.terrainData.SetHeights(0,0, terrain_heights);
     }
 
     TerrainData GetTerrainData( TerrainData terrainData ) {
@@ -83,10 +86,7 @@ public class TerrainGenerator : MonoBehaviour
         return Mathf.PerlinNoise( xCoord, zCoord );
     }
 
-
-
     float[,] UpdateHeights( float[,] heights ) {
-
 
         for ( int x = 0; x < width; ++x ) {
 
@@ -94,7 +94,6 @@ public class TerrainGenerator : MonoBehaviour
 
                 heights[x, z] = heights[x,z+1];
             }
-
         }
 
         for ( int x = 0; x < width; ++x ) {
