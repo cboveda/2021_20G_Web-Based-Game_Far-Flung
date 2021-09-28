@@ -1,10 +1,11 @@
 # Folders
 MonoBleedingEdge/
-TestProject_Data/
 UserSettings/
 Logs/
 Library/
 Temp/
+pysche-game_Data/
+
 
 *.dll
 *.exe
