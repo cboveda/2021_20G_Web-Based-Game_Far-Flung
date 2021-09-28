@@ -37,6 +37,7 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets\Project Files\Code\Framework\TriggerScene.cs" />
+     <Compile Include="Assets\Project Files\Code\Framework\TerrainGenerator.cs" />
     <Reference Include="UnityEngine">
         <HintPath>/home/void/Documents/ASU/SER_401/Unity/2020.3.18f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
