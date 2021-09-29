@@ -307,11 +307,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xDim: 500
   zDim: 500
-  yDim: 20
-  perlin_octaves: 3
-  lacunarity: 0
-  persistance: 0
-  tempScale: 20
+  yDim: 100
+  perlin_octaves: 4
+  lacunarity: 2.2
+  persistance: 0.5
+  zScale: 0
+  xScale: 0
 --- !u!1 &1823388972
 GameObject:
   m_ObjectHideFlags: 0

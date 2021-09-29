@@ -7,16 +7,20 @@ public class TerrainGenerator : MonoBehaviour
 
     public int xDim = 500; // x
     public int zDim = 500; // z
-    public int yDim = 20; // y
-    public int perlin_octaves = 3;
+    public int yDim = 100; // y
+    public int perlin_octaves = 4;
+
+    private float normalMin;
+    private float normalMax;
 
     public float lacunarity;
     public float persistance;
 
-    private float satillite_offset, satillite_speed;
+    private int satillite_offset;
     private bool ascending;
 
-    public float tempScale = 20f;
+    public float zScale;
+    public float xScale;
 
     private float[,] terrain_heights;
 
@@ -24,8 +28,16 @@ public class TerrainGenerator : MonoBehaviour
     void Start()
     {
         satillite_offset = 0;
-        satillite_speed = 2f;
         ascending = true;
+
+        zScale = zDim;
+        xScale = xDim;
+
+        lacunarity = 2f;
+        persistance = 0.5f;
+
+        normalMax = float.MinValue;
+        normalMin = float.MaxValue;
 
         Terrain terrain = GetComponent<Terrain>();
         terrain.terrainData = GetTerrainData( terrain.terrainData );
@@ -79,11 +91,44 @@ public class TerrainGenerator : MonoBehaviour
 
     float PerlinCalculator( int z, int x, int octaves ) {
 
-        float zCoord = ((float)(z+satillite_offset) / zDim) * tempScale;
-        float xCoord = ((float)x / xDim) * tempScale;
+        float amplitude = 1f;
+        float frequency = 1f;
+        float height = 0;
 
-        return Mathf.PerlinNoise( zCoord, xCoord );
+
+        for ( int o = 0; o < octaves; ++o ) {
+
+            float zCoord = ((float)z / zScale) * frequency;
+            float xCoord = ((float)x / xScale) * frequency;
+
+            height += ( Mathf.PerlinNoise( zCoord, xCoord ) * amplitude );
+
+            amplitude *= persistance;
+            frequency *= lacunarity;
+        }
+
+        if (height > normalMax) {
+            normalMax = height;
+        } else if ( height < normalMin ) {
+            normalMin = height;
+        }
+
+        return height;
     }
+
+    float[,] NormalizeHeights( float[,] heights ) {
+
+        for ( int z = 0; z < zDim; ++z ) {
+
+            for ( int x = 0; x < xDim; ++x ) {
+
+                heights[z, x] = Mathf.InverseLerp(normalMin, normalMax, heights[z,x]);
+            }
+        }
+
+        return heights;
+    }
+       
 
     float[,] UpdateHeights( float[,] heights ) {
 
@@ -96,7 +141,10 @@ public class TerrainGenerator : MonoBehaviour
         }
 
         for ( int x = 0; x < xDim; ++x ) {
-            heights[zDim-1, x] = PerlinCalculator( zDim-1, x, perlin_octaves );
+
+            float hTemp = PerlinCalculator( (zDim-1 + satillite_offset), x, perlin_octaves );
+            heights[zDim-1, x] = Mathf.InverseLerp(normalMin, normalMax, hTemp);
+             
         }
 
         return heights;
