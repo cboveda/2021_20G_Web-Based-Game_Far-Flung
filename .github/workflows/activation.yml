@@ -1,0 +1,24 @@
+# author: cboveda
+
+name: Activation file for Unity
+
+# Requires manual running from a default branch
+on:
+  workflow_dispatch: {}
+
+jobs:
+  activation:
+    name: Request activation file
+    runs-on: ubuntu-latest
+    steps:
+      # Request file
+      - name: Request file
+        id: getManualLicenseFile
+        uses: game-ci/unity-request-activation-file@v2.0-alpha-1
+
+      # Upload artifact
+      - name: Upload file as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ steps.getManualLicenseFile.outputs.filePath }}
+          path: ${{ steps.getManualLicenseFile.outputs.filePath }}
