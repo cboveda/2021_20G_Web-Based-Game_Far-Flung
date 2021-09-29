@@ -5,9 +5,9 @@ using UnityEngine;
 public class TerrainGenerator : MonoBehaviour
 {
 
-    public int width = 500; // x
-    public int length = 500; // z
-    public int depth = 20; // y
+    public int xDim = 500; // x
+    public int zDim = 500; // z
+    public int yDim = 20; // y
     public int perlin_octaves = 3;
 
     public float lacunarity;
@@ -23,9 +23,8 @@ public class TerrainGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
         satillite_offset = 0;
-        satillite_speed = 5f;
+        satillite_speed = 2f;
         ascending = true;
 
         Terrain terrain = GetComponent<Terrain>();
@@ -36,9 +35,9 @@ public class TerrainGenerator : MonoBehaviour
     void Update() {
 
         if ( ascending ) {
-            satillite_offset += Time.deltaTime * satillite_speed;
+            satillite_offset += 1;
         } else {
-            satillite_offset -= Time.deltaTime * satillite_speed;
+            satillite_offset -= 1;
         }
 
         if ( satillite_offset > 99999 ) {
@@ -56,50 +55,48 @@ public class TerrainGenerator : MonoBehaviour
 
     TerrainData GetTerrainData( TerrainData terrainData ) {
 
-        terrainData.heightmapResolution = width + 1;
+        terrainData.heightmapResolution = xDim + 1;
         terrain_heights = GenerateHeights();
 
-        terrainData.size = new Vector3( width, depth, length );
+        terrainData.size = new Vector3( xDim, yDim, zDim );
         terrainData.SetHeights(0, 0, terrain_heights);
         return terrainData;
     }
 
     float[,] GenerateHeights() {
 
-        float[,] heights = new float[width, length];
+        float[,] heights = new float[zDim, xDim];
 
-        for ( int x = 0; x < width; ++x ) {
+        for ( int z = 0; z < zDim; ++z ) {
 
-            for ( int z = 0; z < length; ++z ) {
+            for ( int x = 0; x < xDim; ++x ) {
 
-                heights[x,z] = PerlinCalculator( x, z, perlin_octaves );
+                heights[z, x] = PerlinCalculator( z, x, perlin_octaves );
             }
         }
         return heights;
     }
 
-    float PerlinCalculator( int x, int z, int octaves ) {
+    float PerlinCalculator( int z, int x, int octaves ) {
 
-        float xCoord = (float)x / width * tempScale + satillite_offset;
-        float zCoord = (float)z / width * tempScale + satillite_offset;
+        float zCoord = ((float)(z+satillite_offset) / zDim) * tempScale;
+        float xCoord = ((float)x / xDim) * tempScale;
 
-        return Mathf.PerlinNoise( xCoord, zCoord );
+        return Mathf.PerlinNoise( zCoord, xCoord );
     }
 
     float[,] UpdateHeights( float[,] heights ) {
 
-        for ( int x = 0; x < width; ++x ) {
+        for ( int z = 0; z < zDim-1; ++z ) {
 
-            for ( int z = 0; z < length-1; ++z ) {
+            for ( int x = 0; x < xDim; ++x ) {
 
-                heights[x, z] = heights[x,z+1];
+                heights[z, x] = heights[z+1,x];
             }
         }
 
-        for ( int x = 0; x < width; ++x ) {
-
-            heights[x, length-1] = PerlinCalculator(x, length-1, perlin_octaves );
-
+        for ( int x = 0; x < xDim; ++x ) {
+            heights[zDim-1, x] = PerlinCalculator( zDim-1, x, perlin_octaves );
         }
 
         return heights;
