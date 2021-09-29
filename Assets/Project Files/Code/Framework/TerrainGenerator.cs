@@ -69,6 +69,7 @@ public class TerrainGenerator : MonoBehaviour
 
         terrainData.heightmapResolution = xDim + 1;
         terrain_heights = GenerateHeights();
+        terrain_heights = NormalizeHeights( terrain_heights );
 
         terrainData.size = new Vector3( xDim, yDim, zDim );
         terrainData.SetHeights(0, 0, terrain_heights);
