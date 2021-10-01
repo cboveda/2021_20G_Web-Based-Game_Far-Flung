@@ -5,28 +5,31 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/Project Files/Scenes/Framework/scene0.unity
-    guid: cc41d014bdef0f6419d9aefb6402066e
+    path: Assets/Framework/Scenes/scene0.unity
+    guid: 69d6c260cbe9f3e4c9cf1808042a18b8
   - enabled: 1
-    path: Assets/Project Files/Scenes/Framework/scene1.unity
+    path: Assets/Framework/Scenes/scene1.unity
     guid: c04eed336ccffd749b5333bb8d4f4dd9
   - enabled: 1
-    path: Assets/Project Files/Scenes/Framework/scene2.unity
+    path: Assets/Framework/Scenes/scene2.unity
     guid: f648057acedd0764db5f51a9151943d1
   - enabled: 1
-    path: Assets/Project Files/Scenes/Framework/scene3.unity
+    path: Assets/Framework/Scenes/scene3.unity
     guid: d2f6b74b56e90b54196aee27c09e4137
   - enabled: 1
-    path: Assets/Project Files/Scenes/Framework/scene4.unity
+    path: Assets/Framework/Scenes/scene4.unity
     guid: cb685a458af135040b1ac5ccea5f71ac
   - enabled: 1
-    path: Assets/Project Files/Scenes/Framework/scene5.unity
+    path: Assets/Framework/Scenes/scene5.unity
     guid: 63f719445c5338540908079b4d7fec98
   - enabled: 1
-    path: Assets/Project Files/Scenes/Framework/scene6.unity
+    path: Assets/Framework/Scenes/scene6.unity
     guid: dcedf053a1a3e36459750ce968a5596a
+  - enabled: 1
+    path: Assets/Scanning/Scenes/Scanning.unity
+    guid: 7c2194d453b8cc223b9c07a2a72c5cf1
+  - enabled: 1
+    path: Assets/Flightpath/Scenes/Flightpath.unity
+    guid: e95114b7c953db04e94cb71d5f1f3e14
   m_configObjects: {}
