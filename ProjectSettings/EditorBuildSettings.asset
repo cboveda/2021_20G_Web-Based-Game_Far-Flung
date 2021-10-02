@@ -32,4 +32,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Flightpath/Scenes/Flightpath.unity
     guid: e95114b7c953db04e94cb71d5f1f3e14
+  - enabled: 1
+    path: Assets/ComPuzzle/Scenes/comGame.unity
+    guid: 5615433c53d8b1e4ba0e982ce4f3a8bb
+  - enabled: 1
+    path: Assets/ComPuzzle/Scenes/comGameWin.unity
+    guid: f26a666ca39c9f84c87dd90ec94613db
   m_configObjects: {}
