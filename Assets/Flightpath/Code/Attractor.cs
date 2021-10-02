@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Attractor : MonoBehaviour
 {
-    public static float minDistance = 1f;
+    public static float maxMagnitude = 3f;
     Rigidbody body;
     public bool affected;
     
@@ -28,11 +28,10 @@ public class Attractor : MonoBehaviour
         Rigidbody bodyToAttract = a.body;
         Vector3 direction = body.position - bodyToAttract.position;
         float distance = direction.magnitude;
+        float magnitude = (body.mass * bodyToAttract.mass) / Mathf.Pow(distance, 2);
+        magnitude = (magnitude > Attractor.maxMagnitude) ? Attractor.maxMagnitude : magnitude;
+        Vector3 force = direction.normalized * magnitude;
+        bodyToAttract.AddForce(force);
 
-        if (distance > Attractor.minDistance) {
-            float magnitude = (body.mass * bodyToAttract.mass) / Mathf.Pow(distance, 2);
-            Vector3 force = direction.normalized * magnitude;
-            bodyToAttract.AddForce(force);
-        }
     }
 }
