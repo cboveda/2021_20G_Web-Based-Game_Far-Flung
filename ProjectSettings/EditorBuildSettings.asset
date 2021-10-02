@@ -21,7 +21,7 @@ EditorBuildSettings:
     path: Assets/Framework/Scenes/scene4.unity
     guid: cb685a458af135040b1ac5ccea5f71ac
   - enabled: 1
-    path: Assets/Framework/Scenes/scene5.unity
+    path: Assets/Labgame/scene5.unity
     guid: 63f719445c5338540908079b4d7fec98
   - enabled: 1
     path: Assets/Framework/Scenes/scene6.unity
