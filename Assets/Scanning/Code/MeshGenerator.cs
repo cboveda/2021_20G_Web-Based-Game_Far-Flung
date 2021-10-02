@@ -1,11 +1,14 @@
 using UnityEngine;
 
-public static class MeshGenerator
-{
+/* 
+    A utility class for generating meshData objects for which represent
+   terrain heights. 
+*/
 
-    public const int mapChunkSize = 241; // mesh X & Z dim
-    
-    public static MeshData GenerateTerrainMesh( float[,] heightMap ) {
+public static class MeshGenerator
+{  
+    public static MeshData GenerateTerrainMesh( float[,] heightMap, float terrainHeight ) {
+
         int width = heightMap.GetLength(0);
         int height = heightMap.GetLength(1);
 
@@ -15,7 +18,7 @@ public static class MeshGenerator
         // set mesh data
         for ( int z = 0; z < height; ++z ) {
             for ( int x = 0; x < width; ++x ) {
-                meshData.vertices[vi] = new Vector3(x, heightMap[x,z], z);
+                meshData.vertices[vi] = new Vector3(x, (terrainHeight * heightMap[x,z]), z);
                 meshData.uvs[vi] = new Vector2( x/(float)width, z/(float)height );
 
                 if ( x < (width-1) && z < (height-1) ) {
@@ -23,7 +26,6 @@ public static class MeshGenerator
                     meshData.AddTriangle( vi, (vi+width), (vi+1) );
                     meshData.AddTriangle( (vi+1), (vi+width), (vi+width+1) );
                 }
-
                 vi++;
             }
         }

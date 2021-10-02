@@ -2,14 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/* 
+    A utility class for createing height maps using perlin noise which emulate
+    psyche 16's surface.
+*/
 public static class TerrainGenerator
 {
     public static int perlin_octaves = 5;
-
     public static float lacunarity = 2.2f;
     public static float persistance = 0.5f;
 
-    static float[,] GetTerrainHeights( int xOffset, int zOffset, int chunkDim ) {
+    public static float[,] GetTerrainHeights( int xOffset, int zOffset, int chunkDim ) {
 
         float[,] heights = new float[chunkDim, chunkDim];
         float normalMin = float.MaxValue;
