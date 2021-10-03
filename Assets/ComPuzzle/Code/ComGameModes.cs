@@ -33,7 +33,7 @@ public class ComGameModes : MonoBehaviour
 
         foreach (string tileNumber in tileNumbers)
         {
-            //Debug.Log(tileNumber);
+            // set the sorting layer for the tile numbers based on mode
             tileNumberObject = GameObject.Find(tileNumber);
             tileNumberRend = tileNumberObject.GetComponent<SpriteRenderer>();
             tileNumberRend.sortingLayerName = sortingLayer;
@@ -42,24 +42,28 @@ public class ComGameModes : MonoBehaviour
 
     public void SolvePuzzle()
     {
-        Debug.Log("solve puzzle");
+        //Debug.Log("solve puzzle");
 
         string tileNumber = "";
         float[] winPos = { 0.0F, 0.0F };
+        int blankPosition = 0;
         int x = 0;
         int y = 1;
         int[] tilePositions = { 11, 12, 13, 21, 22, 23, 24, 31, 32, 33, 34, };
 
         foreach (int tilePosition in tilePositions)
         {
+            // set the win position for each tile
             winPos = FindObjectOfType<ComGameData>().getWinPosition(tilePosition);
             tileNumber = tilePosition.ToString();
             tilePosObject = GameObject.Find(tileNumber);
             tilePosObject.transform.position = new Vector3(winPos[x], winPos[y]);         
         }
 
+        // set the win position for blank tile 
+        winPos = FindObjectOfType<ComGameData>().getWinPosition(blankPosition);
         blankPosObject = GameObject.Find("blank");
-        blankPosObject.transform.position = new Vector3(5.5f, 2.5f);
+        blankPosObject.transform.position = new Vector3(winPos[x], winPos[y]);
     }
 
 }
