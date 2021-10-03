@@ -6,13 +6,24 @@ public class RadioPuzzle : LabPuzzle
 {
     private float frequency;
     private float amplitude;
+    //private SineWave wave;
+    public GameObject grapher;
 
-    public RadioPuzzle(string name, float frequency, float amplitude)
+    public RadioPuzzle(string name, RadioPuzzleParams radioParams)
     {
+        //TODO:  Implement some boundry checks on puzzle attributes.
         this.Name = name;
-        this.frequency = frequency;
-        this.amplitude = amplitude;
+        this.frequency = radioParams.Frequency;
+        this.amplitude = radioParams.Amplitude;
+        
+        
+
     }
+
+    //public SineWave GetWave()
+    //{
+    //    return wave;
+    //}
 
     public override bool CheckSolution(IPuzzleParams puzzleParams)
     {
@@ -27,5 +38,6 @@ public class RadioPuzzle : LabPuzzle
         }
  
     }
+
 
 }
