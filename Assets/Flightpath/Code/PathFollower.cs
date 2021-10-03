@@ -47,10 +47,5 @@ public class PathFollower : MonoBehaviour
             //Sync with framerate
             yield return new WaitForEndOfFrame();
         }
-    
-        t = 0f;
-
-        // Release lock on Coroutines.
-        unlocked = true;
     }
 }
