@@ -4,40 +4,28 @@ using UnityEngine;
 
 public class TerrainController : MonoBehaviour
 {
-    public MeshFilter meshFilter;
-    public MeshRenderer meshRenderer;
-    public int chunkMeshDim = 301;
-    public Color[] terrainGradient = new Color[2];
+    public static Material mapMaterial;
+
+    public int chunkMeshDim = 225;
+    public static Color[] terrainGradient = new Color[2];
     public GameObject satellite;
     public int renderDistance = 500;
 
-    private int chunkRenderRange;
+    public static int chunkRenderRange;
     private Dictionary<Vector2, MapSection> mapSecDic = new Dictionary<Vector2, MapSection>();
     private List<MapSection> mapSecLst = new List<MapSection>();
 
 
     void Start() {
-
         chunkRenderRange = Mathf.RoundToInt( renderDistance / chunkMeshDim );
-
-        float[,] terrain = TerrainGenerator.GetTerrainHeights(0, 0, chunkMeshDim);
-        meshFilter.sharedMesh = MeshGenerator.GenerateTerrainMesh(terrain, 50).CreateMesh();
-
-        // fetch a texture for mesh
-        Texture2D texture = TerrainTextureGenerator.CreateTexture(terrainGradient, terrain, chunkMeshDim, chunkMeshDim);
-        meshRenderer.sharedMaterial.mainTexture = texture;
-
-
     }
 
-    void UpdateChunksInView() {
+    void Update() {
 
         // calculate the coordinates of 9 adjacent chunks;
 
         int currChunkX = (int) Mathf.Floor(satellite.transform.position.x / chunkMeshDim);
         int currChunkZ = (int) Mathf.Floor(satellite.transform.position.z / chunkMeshDim);
-
-        Vector2 vecSample = new Vector2();
 
         foreach ( MapSection ms in mapSecLst ) {
             ms.UnsetVisible();
@@ -46,15 +34,13 @@ public class TerrainController : MonoBehaviour
         for ( int z = (currChunkZ-chunkRenderRange); z <= (currChunkZ+chunkRenderRange); ++z ) {
             for ( int x = (currChunkX-chunkRenderRange); x <= (currChunkX+chunkRenderRange); ++x ) {
 
-                vecSample.x = x;
-                vecSample.y = z;
+                Vector2 pVec = new Vector2( x, z );
 
-                if ( mapSecDic.ContainsKey( vecSample ) ) {
-                    mapSecDic[vecSample].SetVisible();
+                if ( mapSecDic.ContainsKey( pVec ) ) {
+                    mapSecDic[pVec].SetVisible();
                 } else {
-                    Vector2 nVec = new Vector2(x,z);
-                    MapSection nSec = new MapSection(x,z);
-                    mapSecDic.Add( nVec, nSec );
+                    MapSection nSec = new MapSection( x, z, chunkMeshDim );
+                    mapSecDic.Add( pVec, nSec );
                     mapSecLst.Add( nSec );
                     nSec.SetVisible();
                 }
@@ -70,11 +56,31 @@ public class TerrainController : MonoBehaviour
     public class MapSection {
 
         private bool isVisible;
-        public Vector2 coord;
+        public Vector3 real_coord;
 
-        public MapSection(int x, int z) {
+        GameObject meshObj;
+        MeshRenderer meshRenderer;
+        MeshFilter meshFilter;
+
+        public MapSection( int x, int z, int scale ) {
+
             isVisible = false;
-            coord = new Vector2(x, z);
+            real_coord = new Vector3( (x * scale), 0, (z * scale) );
+
+            meshObj = new GameObject("Mesh(" + real_coord.ToString() + ")");
+            meshRenderer = meshObj.AddComponent<MeshRenderer>();
+            meshFilter = meshObj.AddComponent<MeshFilter>();
+
+            meshRenderer.material = mapMaterial;
+
+            float[,] terrain = TerrainGenerator.GetTerrainHeights( (x * scale), (z * scale), scale);
+            meshFilter.mesh = MeshGenerator.GenerateTerrainMesh(terrain, 50).CreateMesh();
+
+            meshObj.transform.position = real_coord;
+
+            // fetch a texture for mesh
+            //Texture2D texture = TerrainTextureGenerator.CreateTexture(terrainGradient, terrain, scale, scale);
+            //meshRenderer.sharedMaterial.mainTexture = texture;
         }
 
         public void SetVisible() {
@@ -85,9 +91,8 @@ public class TerrainController : MonoBehaviour
             isVisible = false;
         }
 
-        public void Update() {}
-
+        public void Update() {
+            meshObj.SetActive( isVisible );
+        }
     }
-
-
 }
