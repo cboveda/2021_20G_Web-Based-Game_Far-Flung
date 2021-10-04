@@ -8,10 +8,12 @@ public class ComGameData : MonoBehaviour
 
     public float[] getWinPosition(int position)
     {
+        // blank tile win position
+        Tuple<float, float> pos00 = new Tuple<float, float>(5.5F, 2.5F);
+
         Tuple<float, float> pos11 = new Tuple<float, float>(-3.5F, 2.5F);
         Tuple<float, float> pos12 = new Tuple<float, float>(-0.5F, 2.5F);
-        Tuple<float, float> pos13 = new Tuple<float, float>(2.5F, 2.5F);
-        Tuple<float, float> pos14 = new Tuple<float, float>(5.5F, 2.5F);
+        Tuple<float, float> pos13 = new Tuple<float, float>(2.5F, 2.5F);        
         Tuple<float, float> pos21 = new Tuple<float, float>(-3.5F, 0.5F);
         Tuple<float, float> pos22 = new Tuple<float, float>(-0.5F, 0.5F);
         Tuple<float, float> pos23 = new Tuple<float, float>(2.5F, 0.5F);
@@ -27,6 +29,12 @@ public class ComGameData : MonoBehaviour
 
         switch (position)
         {
+            // blank tile case
+            case 0:
+                winPosX = pos00.Item1;
+                winPosY = pos00.Item2;
+                break;
+
             case 11:
                 winPosX = pos11.Item1;
                 winPosY = pos11.Item2;
