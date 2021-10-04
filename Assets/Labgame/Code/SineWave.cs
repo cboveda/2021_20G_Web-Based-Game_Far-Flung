@@ -4,14 +4,10 @@ using UnityEngine;
 
 public class SineWave : MonoBehaviour
 {
-    //public Vector3 waveStart;
-    //public Vector3 waveEnd;
     public LineRenderer wave;
     
     public float amplitude;
     public float frequency;
-    //public float speed;
-    //public int positionCount;
 
     const float WAVE_START_X_POSITION = -2;
     const float WAVE_RESOLUTION = 0.0001f;
@@ -19,12 +15,6 @@ public class SineWave : MonoBehaviour
     const float WAVE_WIDTH = 0.05f;
     const float SPEED = 1;
 
-    //public Plane myPlane;
-    //public SineWave(RadioPuzzleParams radioParameters)
-    //{
-    //    amplitude = radioParameters.Amplitude;
-    //    frequency = radioParameters.Frequency;
-    //}
 
     // Start is called before the first frame update
     void Start()
@@ -34,15 +24,7 @@ public class SineWave : MonoBehaviour
         wave.startWidth = WAVE_WIDTH;
         wave.endWidth = WAVE_WIDTH;
         wave.useWorldSpace = false;
-        //waveStartX = -2;
-        //amplitude = 1;
-        //frequency = 1;
-        //positionCount = 400;
-        //speed = 1;
-        //waveStart = new Vector3(-2, .5f);
-        //waveEnd = new Vector3(2, .5f);
-        //wave.SetPosition(0, waveStart);
-        //wave.SetPosition(1, waveEnd);
+
         
 
     }

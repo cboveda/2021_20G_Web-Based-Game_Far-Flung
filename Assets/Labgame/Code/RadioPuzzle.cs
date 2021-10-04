@@ -20,11 +20,6 @@ public class RadioPuzzle : LabPuzzle
 
     }
 
-    //public SineWave GetWave()
-    //{
-    //    return wave;
-    //}
-
     public override bool CheckSolution(IPuzzleParams puzzleParams)
     {
        if (!(puzzleParams is RadioPuzzleParams))
