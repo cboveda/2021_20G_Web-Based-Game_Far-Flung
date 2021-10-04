@@ -143,13 +143,13 @@ public class TileActions : MonoBehaviour
 
             if (winPos[x] != tilePos.x)
             {
-                Debug.Log("false");
+                //Debug.Log("false");
                 return false;
             }
 
             if (winPos[y] != tilePos.y)
             {
-                Debug.Log("false");
+                //Debug.Log("false");
                 return false;
             }
 
@@ -160,7 +160,7 @@ public class TileActions : MonoBehaviour
             //Debug.Log(tilePos.y);
         }
 
-        Debug.Log("true");
+        //Debug.Log("true");
         return true;
     }
 }
