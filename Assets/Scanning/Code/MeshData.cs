@@ -12,8 +12,7 @@ public class MeshData {
 
     public MeshData( int meshDim ) {
         vertices = new Vector3[ meshDim * meshDim ];
-        uvs = new Vector2[ meshDim * meshDim ];
-        triangles = new int[ (meshDim - 1) * (meshDim -1 ) * 6 ];
+        triangles = new int[ ( meshDim - 1 ) * ( meshDim - 1 ) * 6 ];
         triangleIndex = 0;
     }
 
@@ -28,7 +27,6 @@ public class MeshData {
         Mesh mesh = new Mesh();
         mesh.vertices = vertices;
         mesh.triangles = triangles;
-        mesh.uv = uvs;
         mesh.RecalculateNormals();
         return mesh;
     }

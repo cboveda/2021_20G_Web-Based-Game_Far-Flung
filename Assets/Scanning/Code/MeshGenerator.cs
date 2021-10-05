@@ -19,8 +19,6 @@ public static class MeshGenerator
             {
                 meshData.vertices[vi] = new Vector3( x, ( terrainScale * heightMap[x, z] ), z );
 
-                meshData.uvs[vi] = new Vector2( x/meshDim, z/meshDim );
-
                 if ( x < (meshDim-1) && z < (meshDim-1) ) 
                 {
                     meshData.AddTriangle( vi, (vi+meshDim), (vi+1) );

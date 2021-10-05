@@ -19,7 +19,7 @@ public class TerrainController : MonoBehaviour
 
     void Start() {
         tileRenderRange = Mathf.RoundToInt( renderDistance / tileMeshDim );
-        terrainScale = 70;
+        terrainScale = 150;
     }
 
     void Update() {
