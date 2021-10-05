@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class TileActions : MonoBehaviour
 {
 
     SpriteRenderer rend;
+    SpriteRenderer instructionsRend;
     Color currentColor;
+    Color instructionsColor;
     bool onTile = false;
     bool validMove = false;
     string tileName = "";
@@ -18,6 +21,10 @@ public class TileActions : MonoBehaviour
     Vector3 tilePosition;
     Vector3 blankPosition;
     GameObject blank;
+    GameObject instructionsObject;
+    GameObject instructionsBox;
+    string objectName = "";
+    string instructionsLayer = "";
 
     ComGameData gameData;
 
@@ -27,7 +34,19 @@ public class TileActions : MonoBehaviour
         // get current tile color
         rend = GetComponent<SpriteRenderer>();
         currentColor = rend.color;
+
+
+        // get the instructions objects starting color and layer
+        instructionsObject = GameObject.Find("InstructionsText");
+        instructionsColor = instructionsObject.GetComponent<Text>().color;
+
+        instructionsBox = GameObject.Find("InstructionsBox");
+        instructionsRend = instructionsBox.GetComponent<SpriteRenderer>();
+        instructionsLayer = instructionsRend.sortingLayerName;
     }
+
+
+
 
     void OnMouseEnter()
     {
@@ -38,6 +57,18 @@ public class TileActions : MonoBehaviour
         onTile = true;
         validMove = checkValidMove();
         //Debug.Log(validMove);
+
+        // show instructions
+        objectName = rend.transform.name;
+        //Debug.Log(objectName);
+        if (objectName == "Instructions")
+        {            
+            instructionsObject.GetComponent<Text>().color = Color.yellow;
+            instructionsRend.sortingLayerName = "Numbers";
+        }
+        
+        
+
     }
 
     void OnMouseExit()
@@ -45,6 +76,13 @@ public class TileActions : MonoBehaviour
         // reset tile color
         rend.color = currentColor;
         onTile = false;
+
+        // hide instructions
+        if (objectName == "Instructions")
+        {
+            instructionsObject.GetComponent<Text>().color = instructionsColor;
+            instructionsRend.sortingLayerName = instructionsLayer;
+        }
     }
 
     void Update()
