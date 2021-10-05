@@ -3,7 +3,10 @@
 # author: cboveda
 
 name: Build
-on: [pull_request]
+on:
+  pull_request:
+    branches-ignore:
+      - 'main'
 
 jobs:
   build:
@@ -43,7 +46,7 @@ jobs:
       # Output
       - uses: actions/upload-artifact@v2
         with:
-          name: Build
+          name: build
           path: build
           
 
