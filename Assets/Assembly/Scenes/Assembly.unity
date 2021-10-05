@@ -133,6 +133,8 @@ GameObject:
   m_Component:
   - component: {fileID: 91097062}
   - component: {fileID: 91097063}
+  - component: {fileID: 91097065}
+  - component: {fileID: 91097064}
   m_Layer: 2
   m_Name: Body
   m_TagString: Untagged
@@ -171,7 +173,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b16685742872f4242adce1228848fa08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _slotOffset: {x: 0, y: 0}
+  _slotOffset: {x: 1, y: 63}
+--- !u!114 &91097064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 91097061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &91097065
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 91097061}
+  m_CullTransparentMesh: 1
 --- !u!1 &318922393
 GameObject:
   m_ObjectHideFlags: 0
@@ -182,6 +222,8 @@ GameObject:
   m_Component:
   - component: {fileID: 318922394}
   - component: {fileID: 318922395}
+  - component: {fileID: 318922397}
+  - component: {fileID: 318922396}
   m_Layer: 2
   m_Name: Right Solar Panel
   m_TagString: Untagged
@@ -220,7 +262,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b16685742872f4242adce1228848fa08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _slotOffset: {x: 0, y: 0}
+  _slotOffset: {x: -1, y: -3}
+--- !u!114 &318922396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 318922393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &318922397
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 318922393}
+  m_CullTransparentMesh: 1
 --- !u!1 &349385479
 GameObject:
   m_ObjectHideFlags: 0
@@ -481,6 +561,8 @@ GameObject:
   m_Component:
   - component: {fileID: 465832169}
   - component: {fileID: 465832170}
+  - component: {fileID: 465832172}
+  - component: {fileID: 465832171}
   m_Layer: 5
   m_Name: Left Solar Panel
   m_TagString: Untagged
@@ -519,7 +601,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b16685742872f4242adce1228848fa08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _slotOffset: {x: 0, y: 0}
+  _slotOffset: {x: -3, y: 61}
+--- !u!114 &465832171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 465832168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &465832172
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 465832168}
+  m_CullTransparentMesh: 1
 --- !u!1 &638276046
 GameObject:
   m_ObjectHideFlags: 0
@@ -707,7 +827,7 @@ SortingGroup:
   m_GameObject: {fileID: 839747979}
   m_Enabled: 1
   m_SortingLayerID: 1721305953
-  m_SortingLayer: -1
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!1 &1251495984
 GameObject:
