@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LabMain : MonoBehaviour
 {
+    RadioPuzzle currentPuzzle;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +19,7 @@ public class LabMain : MonoBehaviour
         RadioPuzzle puzzle1 = main.AddComponent<RadioPuzzle>();
         puzzle1.InitializeRadioPuzzle("Puzzle 1", puzzle1params);
 
-        //GameObject grapher = GameObject.Find("RadioQuestion");
+        currentPuzzle = puzzle1;
         
 
         
@@ -28,5 +29,25 @@ public class LabMain : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void IncrementFrequency()
+    {
+        currentPuzzle.IncrementFrequency();
+    }
+
+    public void DecrementFrequency()
+    {
+        currentPuzzle.DecrementFrequency();
+    }
+
+    public void IncrementAmplitude()
+    {
+        currentPuzzle.IncrementAmplitude();
+    }
+
+    public void DecrementAmplitude()
+    {
+        currentPuzzle.DecrementAmplitude();
     }
 }

@@ -13,5 +13,5 @@ abstract public class LabPuzzle : MonoBehaviour
         set { name = value; }
     }
 
-    public abstract bool CheckSolution(IPuzzleParams puzzleParams);
+    public abstract bool CheckSolution();
 }
