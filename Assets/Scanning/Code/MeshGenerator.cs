@@ -24,6 +24,8 @@ public static class MeshGenerator
                     meshData.AddTriangle( vi, (vi+meshDim), (vi+1) );
                     meshData.AddTriangle( (vi+1), (vi+meshDim), (vi+meshDim+1) );
                 }
+
+                meshData.uvs[vi] = new Vector2( ( (float)x / ( meshDim - 1 ) ), ( (float)z / ( meshDim - 1 ) ) );
                 vi++;
             }
         }

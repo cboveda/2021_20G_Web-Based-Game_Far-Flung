@@ -31,15 +31,15 @@ public static class TerrainGenerator
             }
         }
 
-        float normMaxP = 0f;
+        float absMax = 0f;
         float amplitude = 1f;
 
         for ( int o = 0; o < perlin_octaves; ++o ) {
 
-            normMaxP += amplitude;
+            absMax += amplitude;
             amplitude *= persistance;
         }
-        return heights;
+        return NormalizeHeights( heights, meshDim, absMax);
     }
 
     static float PerlinCalculator( float x, float z, int meshDim ) {
@@ -59,5 +59,17 @@ public static class TerrainGenerator
             frequency *= lacunarity;
         }
         return height;
+    }
+
+    static float[,] NormalizeHeights( float[,] heights, int meshDim, float max ) {
+
+        for ( int x = 0; x < meshDim; ++x )
+        {
+            for ( int z = 0; z < meshDim; ++z )
+            {
+				heights [x, z] = Mathf.Clamp( (heights[x, z] / max), 0, 1 );
+            }
+        }
+        return heights;
     }
 }

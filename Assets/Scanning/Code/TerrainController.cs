@@ -7,24 +7,23 @@ public class TerrainController : MonoBehaviour
     public static Material mapMaterial;
 
     public int tileMeshDim = 225;
-    public Color[] terrainGradient = new Color[2];
-    public GameObject satellite;
     public int renderDistance = 500;
-    public float terrainScale;
-
+    public float terrainScale = 150;
     public static int tileRenderRange;
+    public Gradient surfaceGrad;
+    public GameObject satellite;
+
     private Dictionary<Vector2, MapSection> mapSecDic = new Dictionary<Vector2, MapSection>();
     private List<MapSection> mapSecLst = new List<MapSection>();
 
 
     void Start() {
         tileRenderRange = Mathf.RoundToInt( renderDistance / tileMeshDim );
-        terrainScale = 150;
     }
 
     void Update() {
 
-        // calculate the coordinates of 9 adjacent tiles;
+        // calculate the coordinates of 9 adjacent tiles, not memory efficient;
 
         int currTileZ = (int) Mathf.Floor(satellite.transform.position.z / tileMeshDim);
         int currTileX = (int) Mathf.Floor(satellite.transform.position.x / tileMeshDim);
@@ -44,7 +43,7 @@ public class TerrainController : MonoBehaviour
                 } 
                 else 
                 {
-                    MapSection nSec = new MapSection( z, x, tileMeshDim, terrainScale );
+                    MapSection nSec = new MapSection( z, x, tileMeshDim, terrainScale, surfaceGrad );
                     mapSecDic.Add( pVec, nSec );
                     mapSecLst.Add( nSec );
                     nSec.SetVisible();
@@ -56,7 +55,6 @@ public class TerrainController : MonoBehaviour
         {
             ms.Update();
         }
-
     }
 
     public class MapSection {
@@ -68,7 +66,7 @@ public class TerrainController : MonoBehaviour
         MeshRenderer meshRenderer;
         MeshFilter meshFilter;
 
-        public MapSection( int z, int x, int tileDim, float terrainScale ) {
+        public MapSection( int z, int x, int tileDim, float terrainScale, Gradient surfaceGrad ) {
 
             isVisible = false;
             real_coord = new Vector3( (x * tileDim), 0, (z * tileDim) );
@@ -83,9 +81,9 @@ public class TerrainController : MonoBehaviour
 
             float[,] terrain = TerrainGenerator.GetTerrainHeights( real_coord, meshDim );
             meshFilter.mesh = MeshGenerator.GenerateTerrainMesh( terrain, meshDim, terrainScale ).CreateMesh();
+            meshRenderer.material.mainTexture = TextureGenerator.CreateTexture( surfaceGrad, terrain, meshDim );
 
             meshObj.transform.position = real_coord;
-            meshRenderer.material.SetColor("_color", Color.gray);
         }
 
         public void SetVisible() {
