@@ -4,7 +4,12 @@
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
-        "Flightpath"
+        "AssemblyGameAssembly",
+        "ComPuzzleAssembly",
+        "ScanningAssembly",
+        "FrameworkAssembly",
+        "LabgameAssembly",
+        "FlightpathAssembly"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

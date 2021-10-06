@@ -4,7 +4,7 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-public class Flightpath
+public class FlightpathTest
 {
     [UnityTest]
     public IEnumerator Test_LaunchComponentLaunchesOnFirstFrame()
