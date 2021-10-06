@@ -9,31 +9,40 @@ using UnityEngine;
 public static class TerrainGenerator
 {
     public static int perlin_octaves = 5;
-    public static float lacunarity = 2.2f;
-    public static float persistance = 0.5f;
+    public static float lacunarity = 2f;
+    public static float persistance = 0.4f;
 
-    public static float[,] GetTerrainHeights( int xOffset, int zOffset, int chunkDim ) {
+    public static float[,] GetTerrainHeights( Vector3 vBase, int meshDim ) {
 
-        float[,] heights = new float[chunkDim, chunkDim];
+        float[,] heights = new float[meshDim, meshDim];
         float normalMin = float.MaxValue;
         float normalMax = float.MinValue;
+        
+        for ( int x = 0; x < meshDim; ++x ) {
+            for ( int z = 0; z < meshDim; ++z ) {
 
-        for ( int z = 0; z < chunkDim; ++z ) {
-            for ( int x = 0; x < chunkDim; ++x ) {
+                heights[x, z] = PerlinCalculator( ( vBase.x + x ), ( vBase.z + z ), meshDim );
 
-                heights[z, x] = PerlinCalculator( (z+zOffset), (x+xOffset), chunkDim );
-
-                if (heights[z, x] > normalMax) {
-                    normalMax = heights[z, x];
-                } else if ( heights[z, x] < normalMin ) {
-                    normalMin = heights[z, x];
+                if (heights[x, z] > normalMax) {
+                    normalMax = heights[x, z];
+                } else if ( heights[x, z] < normalMin ) {
+                    normalMin = heights[x, z];
                 }
             }
         }
-        return NormalizeHeights(heights, chunkDim, normalMin, normalMax);
+
+        float absMax = 0f;
+        float amplitude = 1f;
+
+        for ( int o = 0; o < perlin_octaves; ++o ) {
+
+            absMax += amplitude;
+            amplitude *= persistance;
+        }
+        return NormalizeHeights( heights, meshDim, absMax);
     }
 
-    private static float PerlinCalculator( int z, int x, int chunkDim ) {
+    static float PerlinCalculator( float x, float z, int meshDim ) {
 
         float amplitude = 1f;
         float frequency = 1f;
@@ -41,10 +50,10 @@ public static class TerrainGenerator
 
         for ( int o = 0; o < perlin_octaves; ++o ) {
 
-            float zCoord = ((float)z / chunkDim) * frequency;
-            float xCoord = ((float)x / chunkDim) * frequency;
+            float xCoord = ((float)x / meshDim) * frequency;
+            float zCoord = ((float)z / meshDim) * frequency;
 
-            height += ( Mathf.PerlinNoise( zCoord, xCoord ) * amplitude );
+            height += Mathf.PerlinNoise( xCoord, zCoord ) * amplitude;
 
             amplitude *= persistance;
             frequency *= lacunarity;
@@ -52,11 +61,13 @@ public static class TerrainGenerator
         return height;
     }
 
-    private static float[,] NormalizeHeights( float[,] heights, int chunkDim, float normMin, float normMax ) {
+    static float[,] NormalizeHeights( float[,] heights, int meshDim, float max ) {
 
-        for ( int z = 0; z < chunkDim; ++z ) {
-            for ( int x = 0; x < chunkDim; ++x ) {
-                heights[z, x] = Mathf.InverseLerp(normMin, normMax, heights[z,x]);
+        for ( int x = 0; x < meshDim; ++x )
+        {
+            for ( int z = 0; z < meshDim; ++z )
+            {
+				heights [x, z] = Mathf.Clamp( (heights[x, z] / max), 0, 1 );
             }
         }
         return heights;

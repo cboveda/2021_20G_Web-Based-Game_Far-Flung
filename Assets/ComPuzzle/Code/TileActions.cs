@@ -14,7 +14,6 @@ public class TileActions : MonoBehaviour
     Color instructionsColor;
     bool onTile = false;
     bool validMove = false;
-    string tileName = "";
     string winScene = "";
     bool success = false;
 
@@ -27,6 +26,12 @@ public class TileActions : MonoBehaviour
     string instructionsLayer = "";
 
     ComGameData gameData;
+
+    string finalPiece = "row-1-column-4";
+    string spriteName = "";
+    bool mouseDown = false;
+    bool finalOn = false;
+    GameObject successObject;
 
 
     void Start()
@@ -43,6 +48,7 @@ public class TileActions : MonoBehaviour
         instructionsBox = GameObject.Find("InstructionsBox");
         instructionsRend = instructionsBox.GetComponent<SpriteRenderer>();
         instructionsLayer = instructionsRend.sortingLayerName;
+
     }
 
 
@@ -51,8 +57,12 @@ public class TileActions : MonoBehaviour
     void OnMouseEnter()
     {
         // highlight tile
-        rend.color = Color.yellow;
-        tileName = rend.sprite.name;
+        spriteName = rend.sprite.name;
+        success = checkSuccess();
+        if (spriteName != finalPiece || success)
+        {
+            rend.color = Color.yellow;
+        }
 
         onTile = true;
         validMove = checkValidMove();
@@ -65,8 +75,7 @@ public class TileActions : MonoBehaviour
         {            
             instructionsObject.GetComponent<Text>().color = Color.yellow;
             instructionsRend.sortingLayerName = "Numbers";
-        }
-        
+        }                
         
 
     }
@@ -85,12 +94,46 @@ public class TileActions : MonoBehaviour
         }
     }
 
+    public void OnMouseDown()
+    {
+        mouseDown = true;
+    }
+
+    public void OnMouseUp()
+    {
+        mouseDown = false;
+    }
+
+    public void OnTriggerEnter2D(Collider2D puzzlePiece)
+    {
+
+        if (puzzlePiece.gameObject.name == "14")
+        {
+            //Debug.Log("trigger on");
+            finalOn = true;
+        }
+
+    }
+
+    public void OnTriggerExit2D(Collider2D puzzlePiece)
+    {
+
+        if (puzzlePiece.gameObject.name == "14")
+        {
+            //Debug.Log("trigger off");
+            finalOn = false;
+        }
+
+    }
+
     void Update()
     {
 
+        spriteName = rend.sprite.name;
+
         if (Input.GetMouseButtonDown(0) && onTile && validMove)
         {
-            //Debug.Log("Pressed primary button on " + tileName);
+            //Debug.Log("Pressed primary button on " + spriteName);
 
             // get current tile and blank tile positions
             tilePosition = rend.transform.position;
@@ -106,11 +149,38 @@ public class TileActions : MonoBehaviour
             if (success)
             {
                 winScene = "comGameWin";
-                SceneManager.LoadScene(winScene);
+                //SceneManager.LoadScene(winScene);
             }
+            
+        }
+
+        if (mouseDown && spriteName == finalPiece && success)
+        {
+            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+            transform.Translate(mousePosition);
+        }
+
+        if (finalOn && !Input.GetMouseButton(0))
+        {
+            //Debug.Log("final");
+            successObject = GameObject.Find("Success");
+            successObject.GetComponent<Text>().color = Color.yellow;
+
+            StartCoroutine(WinScene());                    
 
         }
+
+
     }
+
+    IEnumerator WinScene()
+    {
+        yield return new WaitForSeconds(3f);
+        winScene = "comGameWin";
+        SceneManager.LoadScene(winScene);
+    }
+
+
 
     public bool checkValidMove()
     {

@@ -4,34 +4,109 @@ using UnityEngine;
 
 public class RadioPuzzle : LabPuzzle
 {
-    private float frequency;
-    private float amplitude;
-    //private SineWave wave;
-    public GameObject grapher;
+    private float frequencyAnswer;
+    private float amplitudeAnswer;
+    private float frequencyStart;
+    private float amplitudeStart;
+    private float frequencyCurrentGuess;
+    private float amplitudeCurrentGuess;
+    
+    public GameObject radioSolver;
+    public GameObject radioReference;
+    public SineWave waveReference;
+    public SineWave waveSolver;
 
-    public RadioPuzzle(string name, RadioPuzzleParams radioParams)
+    const float INCREMENT_AMOUNT = 0.1f;
+    const float MAX_RADIO_VALUE = 2.0f;
+    const float MIN_RADIO_VALUE = 0.2f;
+    
+    public void InitializeRadioPuzzle(string name, RadioPuzzleParams radioParams)
     {
         //TODO:  Implement some boundry checks on puzzle attributes.
         this.Name = name;
-        this.frequency = radioParams.Frequency;
-        this.amplitude = radioParams.Amplitude;
-        
-        
+        this.frequencyAnswer = radioParams.Frequency;
+        this.amplitudeAnswer = radioParams.Amplitude;
+
+        RadioPuzzleParams start = new RadioPuzzleParams();
+        RandomizeSolverStart();
+        start.Amplitude = amplitudeStart;
+        start.Frequency = frequencyStart;
+
+
+        GameObject radioReference = GameObject.Find("RadioReference");
+        GameObject radioSolver = GameObject.Find("RadioSolver");
+
+        waveReference = radioReference.AddComponent<SineWave>();
+        waveReference.SetParameters(radioParams);
+        waveSolver = radioSolver.AddComponent<SineWave>();
+        waveSolver.SetParameters(start);
 
     }
 
-    public override bool CheckSolution(IPuzzleParams puzzleParams)
+    public void IncrementFrequency()
     {
-       if (!(puzzleParams is RadioPuzzleParams))
+
+        float newValue = frequencyCurrentGuess + INCREMENT_AMOUNT;
+        if (newValue >= MIN_RADIO_VALUE && newValue <= MAX_RADIO_VALUE)
+        {
+            frequencyCurrentGuess = newValue;
+            waveSolver.frequency = frequencyCurrentGuess;
+        }
+    }
+
+    public void DecrementFrequency()
+    {
+
+        float newValue = frequencyCurrentGuess - INCREMENT_AMOUNT;
+        if (newValue >= MIN_RADIO_VALUE && newValue <= MAX_RADIO_VALUE)
+        {
+            frequencyCurrentGuess = newValue;
+            waveSolver.frequency = frequencyCurrentGuess;
+        }
+    }
+
+    public void IncrementAmplitude()
+    {
+
+        float newValue = amplitudeCurrentGuess + INCREMENT_AMOUNT;
+        if (newValue >= MIN_RADIO_VALUE && newValue <= MAX_RADIO_VALUE)
+        {
+            amplitudeCurrentGuess = newValue;
+            waveSolver.amplitude = amplitudeCurrentGuess;
+        }
+    }
+
+    public void DecrementAmplitude()
+    {
+
+        float newValue = amplitudeCurrentGuess - INCREMENT_AMOUNT;
+        if (newValue >= MIN_RADIO_VALUE && newValue <= MAX_RADIO_VALUE)
+        {
+            amplitudeCurrentGuess = newValue;
+            waveSolver.amplitude = amplitudeCurrentGuess;
+        }
+    }
+
+
+    public override bool CheckSolution()
+    {
+       if (frequencyCurrentGuess == frequencyAnswer && amplitudeCurrentGuess == amplitudeAnswer)
+        {
+            return true;
+        }
+        else
         {
             return false;
         }
-       else
-        {
-            RadioPuzzleParams paramsToCheck = puzzleParams as RadioPuzzleParams;
-            return (paramsToCheck.Frequency == frequency && paramsToCheck.Amplitude == amplitude);
-        }
  
+    }
+
+    private void RandomizeSolverStart()
+    {
+        frequencyStart = Random.Range(2, 21)/10.0f;
+        amplitudeStart = Random.Range(2, 21)/10.0f;
+        frequencyCurrentGuess = frequencyStart;
+        amplitudeCurrentGuess = amplitudeStart;
     }
 
 

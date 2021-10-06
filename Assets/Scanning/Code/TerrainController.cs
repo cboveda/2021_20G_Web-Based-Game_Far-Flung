@@ -6,40 +6,44 @@ public class TerrainController : MonoBehaviour
 {
     public static Material mapMaterial;
 
-    public int chunkMeshDim = 225;
-    public static Color[] terrainGradient = new Color[2];
-    public GameObject satellite;
+    public int tileMeshDim = 225;
     public int renderDistance = 500;
+    public float terrainScale = 150;
+    public static int tileRenderRange;
+    public Gradient surfaceGrad;
+    public GameObject satellite;
 
-    public static int chunkRenderRange;
     private Dictionary<Vector2, MapSection> mapSecDic = new Dictionary<Vector2, MapSection>();
     private List<MapSection> mapSecLst = new List<MapSection>();
 
 
     void Start() {
-        chunkRenderRange = Mathf.RoundToInt( renderDistance / chunkMeshDim );
+        tileRenderRange = Mathf.RoundToInt( renderDistance / tileMeshDim );
     }
 
     void Update() {
 
-        // calculate the coordinates of 9 adjacent chunks;
+        // calculate the coordinates of 9 adjacent tiles, not memory efficient;
 
-        int currChunkX = (int) Mathf.Floor(satellite.transform.position.x / chunkMeshDim);
-        int currChunkZ = (int) Mathf.Floor(satellite.transform.position.z / chunkMeshDim);
+        int currTileZ = (int) Mathf.Floor(satellite.transform.position.z / tileMeshDim);
+        int currTileX = (int) Mathf.Floor(satellite.transform.position.x / tileMeshDim);
 
         foreach ( MapSection ms in mapSecLst ) {
             ms.UnsetVisible();
         }
 
-        for ( int z = (currChunkZ-chunkRenderRange); z <= (currChunkZ+chunkRenderRange); ++z ) {
-            for ( int x = (currChunkX-chunkRenderRange); x <= (currChunkX+chunkRenderRange); ++x ) {
-
-                Vector2 pVec = new Vector2( x, z );
-
-                if ( mapSecDic.ContainsKey( pVec ) ) {
+        for ( int z = ( currTileZ - tileRenderRange ); z <= ( currTileZ + tileRenderRange ); ++z ) 
+        {
+            for ( int x = ( currTileX - tileRenderRange ); x <= ( currTileX + tileRenderRange ); ++x ) 
+            {
+                Vector2 pVec = new Vector2( z, x );
+                if ( mapSecDic.ContainsKey( pVec ) ) 
+                {
                     mapSecDic[pVec].SetVisible();
-                } else {
-                    MapSection nSec = new MapSection( x, z, chunkMeshDim );
+                } 
+                else 
+                {
+                    MapSection nSec = new MapSection( z, x, tileMeshDim, terrainScale, surfaceGrad );
                     mapSecDic.Add( pVec, nSec );
                     mapSecLst.Add( nSec );
                     nSec.SetVisible();
@@ -47,10 +51,10 @@ public class TerrainController : MonoBehaviour
             }
         }
 
-        foreach ( MapSection ms in mapSecLst ) {
+        foreach ( MapSection ms in mapSecLst ) 
+        {
             ms.Update();
         }
-
     }
 
     public class MapSection {
@@ -62,10 +66,10 @@ public class TerrainController : MonoBehaviour
         MeshRenderer meshRenderer;
         MeshFilter meshFilter;
 
-        public MapSection( int x, int z, int scale ) {
+        public MapSection( int z, int x, int tileDim, float terrainScale, Gradient surfaceGrad ) {
 
             isVisible = false;
-            real_coord = new Vector3( (x * scale), 0, (z * scale) );
+            real_coord = new Vector3( (x * tileDim), 0, (z * tileDim) );
 
             meshObj = new GameObject("Mesh(" + real_coord.ToString() + ")");
             meshRenderer = meshObj.AddComponent<MeshRenderer>();
@@ -73,14 +77,13 @@ public class TerrainController : MonoBehaviour
 
             meshRenderer.material = mapMaterial;
 
-            float[,] terrain = TerrainGenerator.GetTerrainHeights( (x * scale), (z * scale), scale);
-            meshFilter.mesh = MeshGenerator.GenerateTerrainMesh(terrain, 50).CreateMesh();
+            int meshDim = tileDim + 1;
+
+            float[,] terrain = TerrainGenerator.GetTerrainHeights( real_coord, meshDim );
+            meshFilter.mesh = MeshGenerator.GenerateTerrainMesh( terrain, meshDim, terrainScale ).CreateMesh();
+            meshRenderer.material.mainTexture = TextureGenerator.CreateTexture( surfaceGrad, terrain, meshDim );
 
             meshObj.transform.position = real_coord;
-
-            // fetch a texture for mesh
-            //Texture2D texture = TerrainTextureGenerator.CreateTexture(terrainGradient, terrain, scale, scale);
-            //meshRenderer.sharedMaterial.mainTexture = texture;
         }
 
         public void SetVisible() {
