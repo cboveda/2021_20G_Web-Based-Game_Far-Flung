@@ -7,18 +7,21 @@ public class LabMain : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        RadioPuzzleParams puzzleParams = new RadioPuzzleParams();
-        puzzleParams.Amplitude = 1;
-        puzzleParams.Frequency = 1;
-        RadioPuzzle puzzle = new RadioPuzzle("Puzzle 1", puzzleParams);
+        GameObject main = GameObject.Find("LabGameStart");
 
-        GameObject grapher = GameObject.Find("Grapher");
-        GraphViewer viewer = grapher.AddComponent<GraphViewer>();
-        SineWave wave = grapher.AddComponent<SineWave>();
+        
 
-        wave.SetParameters(puzzleParams);
+        RadioPuzzleParams puzzle1params = new RadioPuzzleParams();
+        puzzle1params.Amplitude = 1;
+        puzzle1params.Frequency = 1;
 
+        RadioPuzzle puzzle1 = main.AddComponent<RadioPuzzle>();
+        puzzle1.InitializeRadioPuzzle("Puzzle 1", puzzle1params);
 
+        //GameObject grapher = GameObject.Find("RadioQuestion");
+        
+
+        
     }
 
     // Update is called once per frame

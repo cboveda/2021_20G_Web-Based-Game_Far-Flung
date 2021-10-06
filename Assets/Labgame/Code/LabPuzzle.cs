@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-abstract public class LabPuzzle
+abstract public class LabPuzzle : MonoBehaviour
 {
-    private string name;
+    //private string name;
   
 
     public string Name
