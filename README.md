@@ -1,5 +1,6 @@
 # psyche-game
 [![Build](https://github.com/cboveda/psyche-game/actions/workflows/main.yml/badge.svg)](https://github.com/cboveda/psyche-game/actions/workflows/main.yml)
+[![codecov](https://codecov.io/gh/cboveda/psyche-game/branch/dev/graph/badge.svg?token=VODBNEAIG3)](https://codecov.io/gh/cboveda/psyche-game)
 
 ## Playable Release
 - [cboveda.github.io/psyche-game/](https://cboveda.github.io/psyche-game/)

@@ -1,5 +1,3 @@
-# Following guide from https://game.ci, actions and packages licensed under the MIT Licence.
-# 
 # author: cboveda
 
 name: Build
@@ -16,6 +14,8 @@ jobs:
       # Checks out the active branch
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          lfs: true
 
       # Access the private repo
       - uses: webfactory/ssh-agent@v0.5.2
@@ -30,9 +30,6 @@ jobs:
           restore-keys: |
             Library-psyche-game
             Library-
-
-      # This is where the test runner will go in the future
-      #
       
       # Builder
       - name: Unity - Builder
@@ -48,8 +45,47 @@ jobs:
         with:
           name: build
           path: build
-          
 
+  test:
+    name: Test Runner
+    runs-on: ubuntu-latest
+    steps:
+      # Checks out the active branch
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          lfs: true
+      
+      # Cache library files to improve build time
+      - uses: actions/cache@v2
+        with:
+          path: Library
+          key: Library-psyche-game-WebGL
+          restore-keys: |
+            Library-psyche-game
+            Library-
+
+      # Test Runner
+      - name: Run tests
+        uses: game-ci/unity-test-runner@v2
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+        with:
+          unityVersion: 2020.3.18f1
+          testMode: All
+          customParameters: |
+            -debugCodeOptimization 
+            -enableCodeCoverage 
+            -coverageResultsPath ./coverage-results 
+            -coverageOptions generateAdditionalMetrics
+
+      # CodeCov integration
+      - name: Upload to Codecov
+        uses: codecov/codecov-action@v2
+        with:
+          flags: automated
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: coverage-results/**/*.xml
 
 
 
