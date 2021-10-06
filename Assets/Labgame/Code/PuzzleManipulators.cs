@@ -9,7 +9,7 @@ public class PuzzleManipulators : MonoBehaviour
     GameObject main;
     string buttonName;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         main = GameObject.Find("LabGameStart");
 
