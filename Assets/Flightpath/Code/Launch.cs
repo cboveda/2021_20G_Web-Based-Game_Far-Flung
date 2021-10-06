@@ -25,4 +25,8 @@ public class Launch : MonoBehaviour
             launched = true;
         }
     }
+
+    public bool hasLaunched() {
+        return launched;
+    }
 }
