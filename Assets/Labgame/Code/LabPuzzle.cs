@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-abstract public class LabPuzzle
+abstract public class LabPuzzle : MonoBehaviour
 {
-    private string name;
+    //private string name;
   
 
     public string Name
@@ -13,5 +13,5 @@ abstract public class LabPuzzle
         set { name = value; }
     }
 
-    public abstract bool CheckSolution(IPuzzleParams puzzleParams);
+    public abstract bool CheckSolution();
 }

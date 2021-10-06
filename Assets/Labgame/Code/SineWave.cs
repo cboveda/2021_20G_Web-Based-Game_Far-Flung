@@ -19,7 +19,7 @@ public class SineWave : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //myPlane = GetComponent<Plane>();
+        
         wave = gameObject.AddComponent<LineRenderer>();
         wave.startWidth = WAVE_WIDTH;
         wave.endWidth = WAVE_WIDTH;
