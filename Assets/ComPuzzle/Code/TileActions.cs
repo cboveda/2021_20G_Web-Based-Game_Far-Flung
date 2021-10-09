@@ -33,6 +33,14 @@ public class TileActions : MonoBehaviour
     bool finalOn = false;
     GameObject successObject;
 
+    GameObject finalInstructionsObject;
+    GameObject finalInstructionsBox;
+    string finalInstructionsLayer = "";
+    Color finalInstructionsColor;
+    SpriteRenderer finalInstructionsRend;
+    
+
+
 
     void Start()
     {
@@ -48,6 +56,14 @@ public class TileActions : MonoBehaviour
         instructionsBox = GameObject.Find("InstructionsBox");
         instructionsRend = instructionsBox.GetComponent<SpriteRenderer>();
         instructionsLayer = instructionsRend.sortingLayerName;
+
+        // get the final instructions objects starting color and layer
+        finalInstructionsObject = GameObject.Find("FinalInstructionsText");
+        finalInstructionsColor = finalInstructionsObject.GetComponent<Text>().color;
+
+        finalInstructionsBox = GameObject.Find("FinalInstructionsBox");
+        finalInstructionsRend = finalInstructionsBox.GetComponent<SpriteRenderer>();
+        finalInstructionsLayer = finalInstructionsRend.sortingLayerName;
 
     }
 
@@ -145,11 +161,10 @@ public class TileActions : MonoBehaviour
             blank.transform.position = tilePosition;
 
             success = checkSuccess();
-
+            hideFinalInstructions();
             if (success)
             {
-                winScene = "comGameWin";
-                //SceneManager.LoadScene(winScene);
+                showFinalInstructions();
             }
             
         }
@@ -163,15 +178,31 @@ public class TileActions : MonoBehaviour
         if (finalOn && !Input.GetMouseButton(0))
         {
             //Debug.Log("final");
+
+            hideFinalInstructions();
+
             successObject = GameObject.Find("Success");
             successObject.GetComponent<Text>().color = Color.yellow;
 
             StartCoroutine(WinScene());                    
 
         }
-
+        
 
     }
+
+    public void showFinalInstructions()
+    {
+        finalInstructionsObject.GetComponent<Text>().color = Color.yellow;
+        finalInstructionsRend.sortingLayerName = "Numbers";
+    }
+
+    public void hideFinalInstructions()
+    {
+        finalInstructionsObject.GetComponent<Text>().color = finalInstructionsColor;
+        finalInstructionsRend.sortingLayerName = "Hidden";
+    }
+
 
     IEnumerator WinScene()
     {
