@@ -6,6 +6,7 @@ public class FlightControl : MonoBehaviour
     public float speed = 10f;
     public float rollSpeed = 100f;
     public float pitchSpeed = 100f;
+    public float maxAltitude = 500f;
 
     float pitch, roll;
 
@@ -20,10 +21,21 @@ public class FlightControl : MonoBehaviour
         if ( Input.GetKey("space") ) {
             transform.Translate( Vector3.forward * speed * Time.deltaTime );
         }
+
+        if ( transform.position.y > maxAltitude ) {
+            Debug.Log("Leaving orbit");
+            ExitScene();
+        }
+
+
     }
 
     void OnTriggerEnter() {
-        Debug.Log(" Collision! ");
+        Debug.Log("Collision!");
+        ExitScene();
+    }
+
+    void ExitScene() {
         SceneManager.LoadScene( SceneManager.GetActiveScene().buildIndex + 1 );
     }
 
