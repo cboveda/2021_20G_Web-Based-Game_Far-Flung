@@ -10,11 +10,13 @@ public class RadioPuzzle : LabPuzzle
     private float amplitudeStart;
     private float frequencyCurrentGuess;
     private float amplitudeCurrentGuess;
-    
+    public bool solved;
+
     public GameObject radioSolver;
     public GameObject radioReference;
     public SineWave waveReference;
     public SineWave waveSolver;
+    
 
     const float INCREMENT_AMOUNT = 0.1f;
     const float MAX_RADIO_VALUE = 2.0f;
@@ -22,10 +24,11 @@ public class RadioPuzzle : LabPuzzle
     
     public void InitializeRadioPuzzle(string name, RadioPuzzleParams radioParams)
     {
-        //TODO:  Implement some boundry checks on puzzle attributes.
+        
         this.Name = name;
         this.frequencyAnswer = radioParams.Frequency;
         this.amplitudeAnswer = radioParams.Amplitude;
+        solved = false;
 
         RadioPuzzleParams start = new RadioPuzzleParams();
         RandomizeSolverStart();
@@ -40,6 +43,8 @@ public class RadioPuzzle : LabPuzzle
         waveReference.SetParameters(radioParams);
         waveSolver = radioSolver.AddComponent<SineWave>();
         waveSolver.SetParameters(start);
+        waveReference.InitializeSineWave();
+        waveSolver.InitializeSineWave();
 
     }
 
@@ -47,10 +52,12 @@ public class RadioPuzzle : LabPuzzle
     {
 
         float newValue = frequencyCurrentGuess + INCREMENT_AMOUNT;
+        newValue = Mathf.Round(newValue * 10.0f) * 0.1f;
         if (newValue >= MIN_RADIO_VALUE && newValue <= MAX_RADIO_VALUE)
         {
             frequencyCurrentGuess = newValue;
             waveSolver.frequency = frequencyCurrentGuess;
+            CheckSolution();
         }
     }
 
@@ -58,10 +65,12 @@ public class RadioPuzzle : LabPuzzle
     {
 
         float newValue = frequencyCurrentGuess - INCREMENT_AMOUNT;
+        newValue = Mathf.Round(newValue * 10.0f) * 0.1f;
         if (newValue >= MIN_RADIO_VALUE && newValue <= MAX_RADIO_VALUE)
         {
             frequencyCurrentGuess = newValue;
             waveSolver.frequency = frequencyCurrentGuess;
+            CheckSolution();
         }
     }
 
@@ -69,10 +78,12 @@ public class RadioPuzzle : LabPuzzle
     {
 
         float newValue = amplitudeCurrentGuess + INCREMENT_AMOUNT;
+        newValue = Mathf.Round(newValue * 10.0f) * 0.1f;
         if (newValue >= MIN_RADIO_VALUE && newValue <= MAX_RADIO_VALUE)
         {
             amplitudeCurrentGuess = newValue;
             waveSolver.amplitude = amplitudeCurrentGuess;
+            CheckSolution();
         }
     }
 
@@ -80,10 +91,12 @@ public class RadioPuzzle : LabPuzzle
     {
 
         float newValue = amplitudeCurrentGuess - INCREMENT_AMOUNT;
+        newValue = Mathf.Round(newValue * 10.0f) * 0.1f;
         if (newValue >= MIN_RADIO_VALUE && newValue <= MAX_RADIO_VALUE)
         {
             amplitudeCurrentGuess = newValue;
             waveSolver.amplitude = amplitudeCurrentGuess;
+            CheckSolution();
         }
     }
 
@@ -92,6 +105,9 @@ public class RadioPuzzle : LabPuzzle
     {
        if (frequencyCurrentGuess == frequencyAnswer && amplitudeCurrentGuess == amplitudeAnswer)
         {
+            solved = true;
+            waveReference.DestroyWave();
+            waveSolver.DestroyWave();
             return true;
         }
         else
