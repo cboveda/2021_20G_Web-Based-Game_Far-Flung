@@ -27,8 +27,14 @@ EditorBuildSettings:
     path: Assets/Framework/Scenes/scene6.unity
     guid: dcedf053a1a3e36459750ce968a5596a
   - enabled: 1
+    path: Assets/Scanning/Scenes/StartScene.Scanning.unity
+    guid: 5c44dbbdc2dacd4168d9968496d85147
+  - enabled: 1
     path: Assets/Scanning/Scenes/Scanning.unity
     guid: 7c2194d453b8cc223b9c07a2a72c5cf1
+  - enabled: 1
+    path: Assets/Scanning/Scenes/EndScene.Scanning.unity
+    guid: 2442ec248f112d2809fde9e47b827524
   - enabled: 1
     path: Assets/Flightpath/Scenes/Flightpath.unity
     guid: e95114b7c953db04e94cb71d5f1f3e14
