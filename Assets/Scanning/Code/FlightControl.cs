@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FlightControl : MonoBehaviour
 {
@@ -22,4 +21,10 @@ public class FlightControl : MonoBehaviour
             transform.Translate( Vector3.forward * speed * Time.deltaTime );
         }
     }
+
+    void OnTriggerEnter() {
+        Debug.Log(" Collision! ");
+        SceneManager.LoadScene( SceneManager.GetActiveScene().buildIndex + 1 );
+    }
+
 }

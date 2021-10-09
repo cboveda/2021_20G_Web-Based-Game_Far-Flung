@@ -65,6 +65,7 @@ public class TerrainController : MonoBehaviour
         GameObject meshObj;
         MeshRenderer meshRenderer;
         MeshFilter meshFilter;
+        MeshCollider meshCollider;
 
         public MapSection( int z, int x, int tileDim, float terrainScale, Gradient surfaceGrad ) {
 
@@ -74,6 +75,8 @@ public class TerrainController : MonoBehaviour
             meshObj = new GameObject("Mesh(" + real_coord.ToString() + ")");
             meshRenderer = meshObj.AddComponent<MeshRenderer>();
             meshFilter = meshObj.AddComponent<MeshFilter>();
+            meshCollider = meshObj.AddComponent<MeshCollider>();
+
 
             meshRenderer.material = mapMaterial;
 
@@ -82,6 +85,9 @@ public class TerrainController : MonoBehaviour
             float[,] terrain = TerrainGenerator.GetTerrainHeights( real_coord, meshDim );
             meshFilter.mesh = MeshGenerator.GenerateTerrainMesh( terrain, meshDim, terrainScale ).CreateMesh();
             meshRenderer.material.mainTexture = TextureGenerator.CreateTexture( surfaceGrad, terrain, meshDim );
+
+            meshCollider.sharedMesh = meshFilter.mesh;
+
 
             meshObj.transform.position = real_coord;
         }

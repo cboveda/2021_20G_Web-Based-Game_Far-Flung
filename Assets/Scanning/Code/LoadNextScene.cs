@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LoadGame : MonoBehaviour
+public class LoadNextScene : MonoBehaviour
 {
-    public void LoadMainScene() {
+    public void LoadScene() {
         SceneManager.LoadScene( SceneManager.GetActiveScene().buildIndex + 1 );
     }
 
