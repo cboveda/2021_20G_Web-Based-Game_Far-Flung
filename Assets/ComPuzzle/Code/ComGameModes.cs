@@ -64,6 +64,9 @@ public class ComGameModes : MonoBehaviour
         winPos = FindObjectOfType<ComGameData>().getWinPosition(blankPosition);
         blankPosObject = GameObject.Find("blank");
         blankPosObject.transform.position = new Vector3(winPos[x], winPos[y]);
+
+        FindObjectOfType<TileActions>().showFinalInstructions();
+
     }
 
 }
