@@ -5,6 +5,8 @@ using UnityEngine;
 public class SineWave : MonoBehaviour
 {
     public LineRenderer wave;
+    GameObject worldObj;
+    bool isInitialized;
     
     public float amplitude;
     public float frequency;
@@ -20,29 +22,40 @@ public class SineWave : MonoBehaviour
     void Start()
     {
         
-        wave = gameObject.AddComponent<LineRenderer>();
-        wave.startWidth = WAVE_WIDTH;
-        wave.endWidth = WAVE_WIDTH;
-        wave.useWorldSpace = false;
+        
 
         
 
     }
 
+    public void InitializeSineWave()
+    {
+        wave = gameObject.AddComponent<LineRenderer>();
+        wave.startWidth = WAVE_WIDTH;
+        wave.endWidth = WAVE_WIDTH;
+        wave.useWorldSpace = false;
+        isInitialized = true;
+    }
+
     // Update is called once per frame
     void Update()
     {
-        float x = WAVE_START_X_POSITION;
-        float y;
-        float waveNumber = 2 * Mathf.PI * frequency;
-        float w = waveNumber * SPEED;
-        wave.positionCount = POSITION_COUNT;
-        for (int i = 0; i < wave.positionCount; i++)
+
+        if (wave != null)
         {
-            x += i * WAVE_RESOLUTION;
-            y = amplitude * Mathf.Sin(waveNumber * x + w * Time.time);
-            wave.SetPosition(i, new Vector3(x, y, 0));
+            float x = WAVE_START_X_POSITION;
+            float y;
+            float waveNumber = 2 * Mathf.PI * frequency;
+            float w = waveNumber * SPEED;
+            wave.positionCount = POSITION_COUNT;
+            for (int i = 0; i < wave.positionCount; i++)
+            {
+                x += i * WAVE_RESOLUTION;
+                y = amplitude * Mathf.Sin(waveNumber * x + w * Time.time);
+                wave.SetPosition(i, new Vector3(x, y, 0));
+            }
         }
+        
 
 
         
@@ -52,5 +65,13 @@ public class SineWave : MonoBehaviour
     {
         amplitude = myParams.Amplitude;
         frequency = myParams.Frequency;
+    }
+
+    public void DestroyWave()
+    {
+        //Destroy the linerenderer
+        Destroy(wave);
+        //Destroy this object too
+        Destroy(this);
     }
 }

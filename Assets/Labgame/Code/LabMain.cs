@@ -4,31 +4,64 @@ using UnityEngine;
 
 public class LabMain : MonoBehaviour
 {
+    GameObject main;
     RadioPuzzle currentPuzzle;
+    bool isCurrentPuzzleSolved;
+    int level;
     // Start is called before the first frame update
     void Start()
     {
-        GameObject main = GameObject.Find("LabGameStart");
+        main = GameObject.Find("LabGameStart");
+        level = 0;
+        GetNewRadioPuzzle();
 
-        
 
-        RadioPuzzleParams puzzle1params = new RadioPuzzleParams();
-        puzzle1params.Amplitude = 1;
-        puzzle1params.Frequency = 1;
 
-        RadioPuzzle puzzle1 = main.AddComponent<RadioPuzzle>();
-        puzzle1.InitializeRadioPuzzle("Puzzle 1", puzzle1params);
 
-        currentPuzzle = puzzle1;
-        
 
-        
+
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (isCurrentPuzzleSolved)
+        {
+            GetNewRadioPuzzle();
+        }
+        if (currentPuzzle.solved)
+        {
+            //Destroy(currentPuzzle.gameObject);
+            isCurrentPuzzleSolved = true;
+            
+        }
+
+
+    }
+
+    public void GetNewRadioPuzzle()
+    {
+        if (currentPuzzle != null)
+        {
+            //Destroy(currentPuzzle.gameObject);
+        }
+        level++;
+        RadioPuzzleParams radioPuzzleSettings = new RadioPuzzleParams();
+        radioPuzzleSettings.Amplitude = 1;
+        radioPuzzleSettings.Frequency = 1;
+
+        RadioPuzzle myRadioPuzzle = main.AddComponent<RadioPuzzle>();
+        myRadioPuzzle.InitializeRadioPuzzle("Puzzle " + level.ToString(), radioPuzzleSettings);
+
+        currentPuzzle = myRadioPuzzle;
+        isCurrentPuzzleSolved = false;
+    }
+
+    public void SetPuzzleSolved()
+    {
+        isCurrentPuzzleSolved = true;
     }
 
     public void IncrementFrequency()
