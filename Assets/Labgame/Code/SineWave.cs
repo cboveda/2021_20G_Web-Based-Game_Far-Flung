@@ -5,6 +5,7 @@ using UnityEngine;
 public class SineWave : MonoBehaviour
 {
     public LineRenderer wave;
+    Shader lineShader;
     GameObject worldObj;
     bool isInitialized;
     
@@ -31,6 +32,9 @@ public class SineWave : MonoBehaviour
     public void InitializeSineWave()
     {
         wave = gameObject.AddComponent<LineRenderer>();
+        lineShader = Shader.Find("Custom/CRTLine");
+        wave.material.shader = lineShader;
+        
         wave.startWidth = WAVE_WIDTH;
         wave.endWidth = WAVE_WIDTH;
         wave.useWorldSpace = false;
