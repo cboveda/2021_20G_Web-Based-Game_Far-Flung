@@ -32,8 +32,10 @@ public class SineWave : MonoBehaviour
     public void InitializeSineWave()
     {
         wave = gameObject.AddComponent<LineRenderer>();
-        lineShader = Shader.Find("Custom/CRTLine");
-        wave.material.shader = lineShader;
+        //lineShader = Shader.Find("Custom/CRTLine");
+        //wave.material.shader = lineShader;
+        Material myMat = (Material)Resources.Load("CRTMat", typeof(Material));
+        wave.material = myMat;
         
         wave.startWidth = WAVE_WIDTH;
         wave.endWidth = WAVE_WIDTH;
