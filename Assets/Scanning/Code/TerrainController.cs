@@ -12,6 +12,7 @@ public class TerrainController : MonoBehaviour
     public static int tileRenderRange;
     public Gradient surfaceGrad;
     public GameObject satellite;
+    public SignalSpawner sigSpawner;
 
     private Dictionary<Vector2, MapSection> mapSecDic = new Dictionary<Vector2, MapSection>();
     private List<MapSection> mapSecLst = new List<MapSection>();
@@ -43,7 +44,7 @@ public class TerrainController : MonoBehaviour
                 } 
                 else 
                 {
-                    MapSection nSec = new MapSection( z, x, tileMeshDim, terrainScale, surfaceGrad );
+                    MapSection nSec = new MapSection( z, x, tileMeshDim, terrainScale, surfaceGrad, sigSpawner );
                     mapSecDic.Add( pVec, nSec );
                     mapSecLst.Add( nSec );
                     nSec.SetVisible();
@@ -66,8 +67,9 @@ public class TerrainController : MonoBehaviour
         MeshRenderer meshRenderer;
         MeshFilter meshFilter;
         MeshCollider meshCollider;
+        GameObject[] neutronSignals;
 
-        public MapSection( int z, int x, int tileDim, float terrainScale, Gradient surfaceGrad ) {
+        public MapSection( int z, int x, int tileDim, float terrainScale, Gradient surfaceGrad, SignalSpawner sigSpawner ) {
 
             isVisible = false;
             real_coord = new Vector3( (x * tileDim), 0, (z * tileDim) );
@@ -76,7 +78,6 @@ public class TerrainController : MonoBehaviour
             meshRenderer = meshObj.AddComponent<MeshRenderer>();
             meshFilter = meshObj.AddComponent<MeshFilter>();
             meshCollider = meshObj.AddComponent<MeshCollider>();
-
 
             meshRenderer.material = mapMaterial;
 
@@ -87,9 +88,9 @@ public class TerrainController : MonoBehaviour
             meshRenderer.material.mainTexture = TextureGenerator.CreateTexture( surfaceGrad, terrain, meshDim );
 
             meshCollider.sharedMesh = meshFilter.mesh;
-
-
             meshObj.transform.position = real_coord;
+
+            neutronSignals = sigSpawner.CreateSignals (terrain, terrainScale, real_coord );
         }
 
         public void SetVisible() {
