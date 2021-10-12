@@ -9,6 +9,7 @@ public class Path : MonoBehaviour
     public Transform end;
     public Transform endDir;
     public Vector2 position;
+    public float lineSize;
 
     private void OnDrawGizmos() {
         for (float t = 0; t <= 1; t += .05f) {
@@ -17,7 +18,7 @@ public class Path : MonoBehaviour
                 3 * (1-t) * Mathf.Pow(t, 2) * endDir.position +
                 Mathf.Pow(t, 3) * end.position;
 
-            Gizmos.DrawSphere(position, 0.1f);
+            Gizmos.DrawSphere(position, lineSize);
         }
 
         Gizmos.DrawLine(new Vector2(start.position.x, start.position.y), 
