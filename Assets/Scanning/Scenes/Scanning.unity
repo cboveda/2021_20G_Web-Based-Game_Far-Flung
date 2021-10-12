@@ -323,7 +323,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabSignal: {fileID: 1686005818469206814, guid: c9d0107e666bb5ab4bcdf42ee69cce01, type: 3}
-  spawnFrequency: 5
+  spawnFrequency: 2
 --- !u!4 &989866035
 Transform:
   m_ObjectHideFlags: 0

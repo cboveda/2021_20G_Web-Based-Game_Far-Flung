@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6607944371051272925}
   m_Layer: 0
   m_Name: NeutronSignal
-  m_TagString: Untagged
+  m_TagString: NeutronSignal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
