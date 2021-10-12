@@ -23,6 +23,7 @@ public class Launch : MonoBehaviour
         if (!launched) {
             body.AddForce(new Vector3 (xMagnitude, yMagnitude, 0f), ForceMode.VelocityChange);
             launched = true;
+            Debug.Log("Launched");
         }
     }
 
