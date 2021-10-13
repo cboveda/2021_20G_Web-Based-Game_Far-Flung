@@ -15,7 +15,7 @@ public class Launch : MonoBehaviour
     {
         _body = GetComponent<Rigidbody>();
         _attractor = GetComponent<Attractor>();
-        _attractor.affected = false;
+        _attractor.Affected = false;
         _launched = false;
 
     }
@@ -24,7 +24,7 @@ public class Launch : MonoBehaviour
     {
         if (!_launched)
         {
-            _attractor.affected = true;
+            _attractor.Affected = true;
             _body.AddForce(_launchDirection * _launchPower, ForceMode.VelocityChange);
             _launched = true;
         }

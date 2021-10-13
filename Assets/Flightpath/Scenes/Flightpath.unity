@@ -655,8 +655,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5ecd18c63cbc4745a38244a1616b983, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  path: {fileID: 2110831841}
-  speed: 0.09
+  Path: {fileID: 2110831841}
+  Speed: 0.1
 --- !u!212 &508537620
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -852,7 +852,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9670a7f1c39786e4da4b4edd07b9763d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  affected: 1
+  Affected: 0
 --- !u!96 &569487277
 TrailRenderer:
   serializedVersion: 2
@@ -1422,12 +1422,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d80019e7e911de7439eb92e63276ded4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  start: {fileID: 1173954360}
-  startDir: {fileID: 1270767313}
-  end: {fileID: 1692817476}
-  endDir: {fileID: 421485029}
-  position: {x: -1121.1288, y: 154.33916}
-  lineSize: 5
+  Start: {fileID: 1173954360}
+  StartDirection: {fileID: 1270767313}
+  End: {fileID: 1692817476}
+  EndDirection: {fileID: 421485029}
+  LineSize: 10
 --- !u!1 &1165237222
 GameObject:
   m_ObjectHideFlags: 0
@@ -1452,7 +1451,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1165237222}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.25, y: -4.051, z: 0}
+  m_LocalPosition: {x: -9.05, y: -4.161, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1332908797}
@@ -1490,8 +1489,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5ecd18c63cbc4745a38244a1616b983, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  path: {fileID: 995101709}
-  speed: 0.04
+  Path: {fileID: 995101709}
+  Speed: 0.03
 --- !u!212 &1170956534
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1585,7 +1584,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9670a7f1c39786e4da4b4edd07b9763d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  affected: 0
+  Affected: 0
 --- !u!1 &1173954359
 GameObject:
   m_ObjectHideFlags: 0
@@ -1776,12 +1775,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d80019e7e911de7439eb92e63276ded4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  start: {fileID: 1956802721}
-  startDir: {fileID: 1356501888}
-  end: {fileID: 1165237223}
-  endDir: {fileID: 1695930369}
-  position: {x: -1030.467, y: 458.5614}
-  lineSize: 5
+  Start: {fileID: 1956802721}
+  StartDirection: {fileID: 1356501888}
+  End: {fileID: 1165237223}
+  EndDirection: {fileID: 1695930369}
+  LineSize: 10
 --- !u!1 &1356501887
 GameObject:
   m_ObjectHideFlags: 0
@@ -1806,7 +1804,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1356501887}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.35, y: -5.036, z: 0}
+  m_LocalPosition: {x: -1.75, y: -4.835, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1332908797}
@@ -1880,8 +1878,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5ecd18c63cbc4745a38244a1616b983, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  path: {fileID: 1332908797}
-  speed: 0.025
+  Path: {fileID: 1332908797}
+  Speed: 0.03
 --- !u!54 &1398318355
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1975,7 +1973,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9670a7f1c39786e4da4b4edd07b9763d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  affected: 0
+  Affected: 0
 --- !u!1 &1422191761
 GameObject:
   m_ObjectHideFlags: 0
@@ -2276,7 +2274,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1695930368}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.04, y: -4.183, z: 0}
+  m_LocalPosition: {x: -6.42, y: -4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1332908797}
@@ -2385,7 +2383,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1956802720}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.13, y: -7.183, z: 0}
+  m_LocalPosition: {x: -0.5, y: -6.918, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1332908797}
@@ -2722,9 +2720,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d80019e7e911de7439eb92e63276ded4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  start: {fileID: 1422191762}
-  startDir: {fileID: 502098552}
-  end: {fileID: 1662177587}
-  endDir: {fileID: 694030650}
-  position: {x: -1166.4773, y: -248.33263}
-  lineSize: 5
+  Start: {fileID: 1422191762}
+  StartDirection: {fileID: 502098552}
+  End: {fileID: 1662177587}
+  EndDirection: {fileID: 694030650}
+  LineSize: 10
