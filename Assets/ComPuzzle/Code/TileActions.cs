@@ -38,9 +38,10 @@ public class TileActions : MonoBehaviour
     string finalInstructionsLayer = "";
     Color finalInstructionsColor;
     SpriteRenderer finalInstructionsRend;
-    
 
-
+    GameObject finalPieceObject;
+    Vector3 finalPiecePosition;
+    Vector3 finalPieceCurrentPos;
 
     void Start()
     {
@@ -65,6 +66,9 @@ public class TileActions : MonoBehaviour
         finalInstructionsRend = finalInstructionsBox.GetComponent<SpriteRenderer>();
         finalInstructionsLayer = finalInstructionsRend.sortingLayerName;
 
+        // get final piece position
+        finalPieceObject = GameObject.Find("14");
+        finalPiecePosition = finalPieceObject.transform.position;
     }
 
 
@@ -177,19 +181,26 @@ public class TileActions : MonoBehaviour
 
         if (finalOn && !Input.GetMouseButton(0))
         {
-            //Debug.Log("final");
+            //Debug.Log("final");         
 
             hideFinalInstructions();
-
+            
             successObject = GameObject.Find("Success");
             successObject.GetComponent<Text>().color = Color.yellow;
 
             StartCoroutine(WinScene());                    
 
         }
+
+        success = checkSuccess();
+        if (!success)
+        {
+            finalPieceObject.transform.position = finalPiecePosition;
+        }
         
 
     }
+
 
     public void showFinalInstructions()
     {

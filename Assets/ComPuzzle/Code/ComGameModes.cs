@@ -21,6 +21,7 @@ public class ComGameModes : MonoBehaviour
 
         string[] tileNumbers = { "n1", "n2", "n3", "n4", "n5", "n6", "n7", "n8", "n9", "n10", "n11", "n12" };
         string sortingLayer = "";
+        string finalSortingLayer = "";
 
         easyToggleObject = GameObject.Find("EasyMode");
         easyToggle = easyToggleObject.GetComponent<Toggle>();
@@ -29,6 +30,7 @@ public class ComGameModes : MonoBehaviour
         if (easyToggle.isOn)
         {
             sortingLayer = "Numbers";
+            finalSortingLayer = "FinalPieceNumber";
         }
 
         foreach (string tileNumber in tileNumbers)
@@ -37,6 +39,10 @@ public class ComGameModes : MonoBehaviour
             tileNumberObject = GameObject.Find(tileNumber);
             tileNumberRend = tileNumberObject.GetComponent<SpriteRenderer>();
             tileNumberRend.sortingLayerName = sortingLayer;
+            if ( tileNumber == "n4")
+            {
+                tileNumberRend.sortingLayerName = finalSortingLayer;
+            }
         }       
     }
 
