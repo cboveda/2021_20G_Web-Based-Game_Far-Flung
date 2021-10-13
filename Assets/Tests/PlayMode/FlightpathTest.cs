@@ -12,6 +12,7 @@ public class FlightpathTest
         GameObject gameObject = new GameObject();
         gameObject.AddComponent<Rigidbody>();
         gameObject.AddComponent<Launch>();
+        gameObject.GetComponent<Launch>().doLaunch();
         yield return null;
         Assert.True(gameObject.GetComponent<Launch>().hasLaunched());
     }

@@ -768,7 +768,7 @@ GameObject:
   - component: {fileID: 569487278}
   m_Layer: 0
   m_Name: Satellite
-  m_TagString: Untagged
+  m_TagString: FlightpathSatellite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1004,8 +1004,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32b0d5b92212b2940b58a12fe5ed9200, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xMagnitude: 80
-  yMagnitude: 32
 --- !u!1 &590166924
 GameObject:
   m_ObjectHideFlags: 0

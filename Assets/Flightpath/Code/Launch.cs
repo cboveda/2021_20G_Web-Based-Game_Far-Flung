@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class Launch : MonoBehaviour
 {
-    public float xMagnitude;
-    public float yMagnitude;
-    
+    private Vector3 launchDirection;
+    private float launchPower;
     Rigidbody body;
     bool launched;
     
@@ -17,11 +16,10 @@ public class Launch : MonoBehaviour
         launched = false;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void doLaunch()
     {
         if (!launched) {
-            body.AddForce(new Vector3 (xMagnitude, yMagnitude, 0f), ForceMode.VelocityChange);
+            body.AddForce(launchDirection * launchPower, ForceMode.VelocityChange);
             launched = true;
             Debug.Log("Launched");
         }
@@ -29,5 +27,15 @@ public class Launch : MonoBehaviour
 
     public bool hasLaunched() {
         return launched;
+    }
+
+    public void setAngle (float angle) {
+            float xDirection = Mathf.Cos(angle / (2f * 3.14f));
+            float yDirection = Mathf.Sin(angle / (2f * 3.14f));
+            launchDirection = new Vector3(xDirection, yDirection, 0);
+    }
+
+    public void setPower (float power) { 
+        launchPower = power;
     }
 }
