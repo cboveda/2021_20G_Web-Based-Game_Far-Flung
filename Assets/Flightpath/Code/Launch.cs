@@ -17,7 +17,6 @@ public class Launch : MonoBehaviour
         _attractor = GetComponent<Attractor>();
         _attractor.Affected = false;
         _launched = false;
-
     }
 
     public void DoLaunch()

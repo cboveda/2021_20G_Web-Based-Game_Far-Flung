@@ -6,7 +6,11 @@ public class Attractor : MonoBehaviour
 {
     public static float MinDistance = 1f;
     Rigidbody Body;
-    public bool Affected;
+    public bool Affected
+    {
+        get;
+        set;
+    }
 
     // Start is called before the first frame update
     void Start()

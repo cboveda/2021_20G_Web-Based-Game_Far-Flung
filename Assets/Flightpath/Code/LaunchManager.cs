@@ -5,32 +5,30 @@ using UnityEngine.UI;
 
 public class LaunchManager : MonoBehaviour
 {
-    private Launch _satelliteLaunch;
-    private Slider _angleSlider;
-    private Slider _powerSlider;
+    public GameObject Satellite;
+    public Slider AngleSlider;
+    public Slider PowerSlider;
+    
 
     void Start()
     {
-        _satelliteLaunch = GameObject.Find("Satellite").GetComponent<Launch>();
-        _angleSlider = GameObject.Find("LaunchAngleSlider").GetComponent<Slider>();
-        _powerSlider = GameObject.Find("LaunchPowerSlider").GetComponent<Slider>();
-        _satelliteLaunch.SetAngle(_angleSlider.minValue);
-        _satelliteLaunch.SetPower(_powerSlider.minValue);
+        Satellite.GetComponent<Launch>().SetAngle(AngleSlider.GetComponent<Slider>().minValue);
+        Satellite.GetComponent<Launch>().SetPower(PowerSlider.GetComponent<Slider>().minValue);
     }
 
     public void OnAngleSliderChanged(float value)
     {
-        _satelliteLaunch.SetAngle(value);
+        Satellite.GetComponent<Launch>().SetAngle(value);
     }
 
     public void OnPowerSliderChanged(float value)
     {
-        _satelliteLaunch.SetPower(value);
+        Satellite.GetComponent<Launch>().SetPower(value);
     }
 
     public void OnLaunchButtonClicked()
     {
-        _satelliteLaunch.DoLaunch();
+        Satellite.GetComponent<Launch>().DoLaunch();
         PathFollower[] pathFollowers = FindObjectsOfType<PathFollower>();
         foreach (PathFollower p in pathFollowers)
         {

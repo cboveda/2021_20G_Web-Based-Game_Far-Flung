@@ -218,6 +218,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41d6d8493d233cb4898f1003f3d9e431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Satellite: {fileID: 569487272}
+  AngleSlider: {fileID: 472336773}
+  PowerSlider: {fileID: 1957714126}
 --- !u!4 &95846920
 Transform:
   m_ObjectHideFlags: 0
@@ -852,7 +855,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9670a7f1c39786e4da4b4edd07b9763d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Affected: 0
 --- !u!96 &569487277
 TrailRenderer:
   serializedVersion: 2
@@ -1584,7 +1586,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9670a7f1c39786e4da4b4edd07b9763d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Affected: 0
 --- !u!1 &1173954359
 GameObject:
   m_ObjectHideFlags: 0
@@ -1973,7 +1974,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9670a7f1c39786e4da4b4edd07b9763d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Affected: 0
 --- !u!1 &1422191761
 GameObject:
   m_ObjectHideFlags: 0
