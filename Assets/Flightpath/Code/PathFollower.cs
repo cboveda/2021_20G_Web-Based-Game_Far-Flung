@@ -15,10 +15,11 @@ public class PathFollower : MonoBehaviour
     {
         t = 0f;
         unlocked = true;
+        this.transform.position = path.GetChild(0).position;
     }
 
     // Update is called once per frame
-    void Update()
+    public void BeginMovement()
     {
         if (unlocked) {
             StartCoroutine(Move());

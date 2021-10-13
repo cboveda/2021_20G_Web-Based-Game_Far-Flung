@@ -21,6 +21,9 @@ public class LaunchManager : MonoBehaviour
         GameObject satellite = GameObject.Find("Satellite");
         var launch = satellite.GetComponent<Launch>();
         launch.doLaunch();
+        PathFollower[] pathFollowers = FindObjectsOfType<PathFollower>();
+        foreach (PathFollower p in pathFollowers) {
+            p.BeginMovement();
+        }
     }
-
 }

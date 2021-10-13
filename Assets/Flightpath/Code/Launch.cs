@@ -13,6 +13,7 @@ public class Launch : MonoBehaviour
     void Start()
     {
         body = this.GetComponent<Rigidbody>();
+        this.GetComponent<Attractor>().affected = false;
         launched = false;
     }
 
@@ -22,6 +23,7 @@ public class Launch : MonoBehaviour
             body.AddForce(launchDirection * launchPower, ForceMode.VelocityChange);
             launched = true;
             Debug.Log("Launched");
+            this.GetComponent<Attractor>().affected = true;
         }
     }
 
@@ -30,8 +32,8 @@ public class Launch : MonoBehaviour
     }
 
     public void setAngle (float angle) {
-            float xDirection = Mathf.Cos(angle / (2f * 3.14f));
-            float yDirection = Mathf.Sin(angle / (2f * 3.14f));
+            float xDirection = Mathf.Cos(angle * (3.14f / 180f));
+            float yDirection = Mathf.Sin(angle * (3.14f / 180f));
             launchDirection = new Vector3(xDirection, yDirection, 0);
     }
 
