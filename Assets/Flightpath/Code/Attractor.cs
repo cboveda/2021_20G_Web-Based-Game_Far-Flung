@@ -32,7 +32,5 @@ public class Attractor : MonoBehaviour
         float magnitude = (body.mass * bodyToAttract.mass) / Mathf.Pow(distance, 2);
         Vector3 force = direction.normalized * magnitude;
         bodyToAttract.AddForce(force);
-        Debug.Log("Adding " + force.magnitude + " to " + a + " in direction " + direction.normalized);
-
     }
 }
