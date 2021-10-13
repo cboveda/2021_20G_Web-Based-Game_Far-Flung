@@ -5,24 +5,35 @@ using UnityEngine.UI;
 
 public class LaunchManager : MonoBehaviour
 {
-    public void OnAngleSliderChanged(float value) {
-        GameObject satellite = GameObject.Find("Satellite");
-        var launch = satellite.GetComponent<Launch>();
-        launch.setAngle(value);
+    private Launch _satelliteLaunch;
+    private Slider _angleSlider;
+    private Slider _powerSlider;
+
+    void Start()
+    {
+        _satelliteLaunch = GameObject.Find("Satellite").GetComponent<Launch>();
+        _angleSlider = GameObject.Find("LaunchAngleSlider").GetComponent<Slider>();
+        _powerSlider = GameObject.Find("LaunchPowerSlider").GetComponent<Slider>();
+        _satelliteLaunch.SetAngle(_angleSlider.minValue);
+        _satelliteLaunch.SetPower(_powerSlider.minValue);
     }
 
-    public void OnPowerSliderChanged(float value) {
-        GameObject satellite = GameObject.Find("Satellite");
-        var launch = satellite.GetComponent<Launch>();
-        launch.setPower(value);
+    public void OnAngleSliderChanged(float value)
+    {
+        _satelliteLaunch.SetAngle(value);
     }
 
-    public void OnLaunchButtonClicked() {
-        GameObject satellite = GameObject.Find("Satellite");
-        var launch = satellite.GetComponent<Launch>();
-        launch.doLaunch();
+    public void OnPowerSliderChanged(float value)
+    {
+        _satelliteLaunch.SetPower(value);
+    }
+
+    public void OnLaunchButtonClicked()
+    {
+        _satelliteLaunch.DoLaunch();
         PathFollower[] pathFollowers = FindObjectsOfType<PathFollower>();
-        foreach (PathFollower p in pathFollowers) {
+        foreach (PathFollower p in pathFollowers)
+        {
             p.BeginMovement();
         }
     }
