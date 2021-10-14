@@ -126,11 +126,14 @@ public class FlightpathTest
         pathFollower.AddComponent<PathFollower>();
         var pathFollowerComponent = pathFollower.GetComponent<PathFollower>();
         pathFollowerComponent.Path = path.transform;
-        pathFollowerComponent.Speed = 1.0f;
+        pathFollowerComponent.Speed = 100.0f;
         pathFollowerComponent.Start();
         pathFollowerComponent.BeginMovement();
-        yield return new WaitForSeconds(1.1f);
-        Assert.AreEqual((Vector3) Vector2.left, pathFollower.transform.position);
+        yield return new WaitForFixedUpdate();
+        yield return new WaitForFixedUpdate();
+        Debug.Log(Vector2.left);
+        Debug.Log((Vector2) pathFollower.transform.position);
+        Assert.AreEqual(Vector2.left, (Vector2) pathFollower.transform.position);
     }
 }
  
