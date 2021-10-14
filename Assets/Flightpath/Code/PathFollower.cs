@@ -11,14 +11,13 @@ public class PathFollower : MonoBehaviour
     public float Speed;
 
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         _t = 0f;
         _unlocked = true;
         transform.position = Path.GetChild(0).position;
     }
 
-    // Update is called once per frame
     public void BeginMovement()
     {
         if (_unlocked)
@@ -51,5 +50,6 @@ public class PathFollower : MonoBehaviour
             //Sync with framerate
             yield return new WaitForEndOfFrame();
         }
+        transform.position = end;
     }
 }

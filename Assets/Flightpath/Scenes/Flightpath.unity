@@ -855,6 +855,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9670a7f1c39786e4da4b4edd07b9763d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Affected: 0
 --- !u!96 &569487277
 TrailRenderer:
   serializedVersion: 2
@@ -1424,9 +1425,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d80019e7e911de7439eb92e63276ded4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Start: {fileID: 1173954360}
+  StartPoint: {fileID: 1173954360}
   StartDirection: {fileID: 1270767313}
-  End: {fileID: 1692817476}
+  EndPoint: {fileID: 1692817476}
   EndDirection: {fileID: 421485029}
   LineSize: 10
 --- !u!1 &1165237222
@@ -1586,6 +1587,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9670a7f1c39786e4da4b4edd07b9763d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Affected: 0
 --- !u!1 &1173954359
 GameObject:
   m_ObjectHideFlags: 0
@@ -1776,9 +1778,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d80019e7e911de7439eb92e63276ded4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Start: {fileID: 1956802721}
+  StartPoint: {fileID: 1956802721}
   StartDirection: {fileID: 1356501888}
-  End: {fileID: 1165237223}
+  EndPoint: {fileID: 1165237223}
   EndDirection: {fileID: 1695930369}
   LineSize: 10
 --- !u!1 &1356501887
@@ -1974,6 +1976,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9670a7f1c39786e4da4b4edd07b9763d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Affected: 0
 --- !u!1 &1422191761
 GameObject:
   m_ObjectHideFlags: 0
@@ -2720,8 +2723,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d80019e7e911de7439eb92e63276ded4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Start: {fileID: 1422191762}
+  StartPoint: {fileID: 1422191762}
   StartDirection: {fileID: 502098552}
-  End: {fileID: 1662177587}
+  EndPoint: {fileID: 1662177587}
   EndDirection: {fileID: 694030650}
   LineSize: 10

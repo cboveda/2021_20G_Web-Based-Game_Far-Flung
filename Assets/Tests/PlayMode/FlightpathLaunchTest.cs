@@ -32,7 +32,7 @@ public class FlightpathLaunchTest
     public IEnumerator Test_LaunchComponentDoesNotLaunchOnFirstFrame()
     {
         yield return new WaitForFixedUpdate();
-        Assert.True(gameObject.GetComponent<Rigidbody>().velocity.magnitude == 0);
+        Assert.AreEqual(0, gameObject.GetComponent<Rigidbody>().velocity.magnitude);
     }
 
     [UnityTest]
@@ -40,7 +40,7 @@ public class FlightpathLaunchTest
     {
         gameObject.GetComponent<Launch>().DoLaunch();
         yield return new WaitForFixedUpdate();
-        Assert.True(gameObject.GetComponent<Rigidbody>().velocity.magnitude != 0);
+        Assert.AreNotEqual(0, gameObject.GetComponent<Rigidbody>().velocity.magnitude);
 
     }
 

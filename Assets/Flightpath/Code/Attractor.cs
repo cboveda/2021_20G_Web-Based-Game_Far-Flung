@@ -9,7 +9,7 @@ public class Attractor : MonoBehaviour
     public bool Affected;
 
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         Body = this.GetComponent<Rigidbody>();
     }

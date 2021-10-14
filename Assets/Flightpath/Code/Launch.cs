@@ -28,12 +28,7 @@ public class Launch : MonoBehaviour
             _launched = true;
         }
     }
-
-    public bool HasLaunched()
-    {
-        return _launched;
-    }
-
+    
     public void SetAngle(float angle)
     {
         float xDirection = Mathf.Cos(angle * (3.14f / 180f));
