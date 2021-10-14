@@ -129,8 +129,7 @@ public class FlightpathTest
         pathFollowerComponent.Speed = 100.0f;
         pathFollowerComponent.Start();
         pathFollowerComponent.BeginMovement();
-        yield return new WaitForFixedUpdate();
-        yield return new WaitForFixedUpdate();
+        yield return new WaitForSeconds(2f);
         Debug.Log(Vector2.left);
         Debug.Log((Vector2) pathFollower.transform.position);
         Assert.AreEqual(Vector2.left, (Vector2) pathFollower.transform.position);
