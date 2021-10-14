@@ -26,13 +26,17 @@ public class FlightControl : MonoBehaviour
             Debug.Log("Leaving orbit");
             ExitScene();
         }
-
-
     }
 
-    void OnTriggerEnter() {
-        Debug.Log("Collision!");
-        ExitScene();
+    void OnTriggerEnter( Collider collider ) {
+
+        if ( collider.gameObject.CompareTag("NeutronSignal") ) {
+            Debug.Log("Hit Signal");
+
+        } else {
+            Debug.Log("Terrain Collision!");
+            ExitScene();
+        }        
     }
 
     void ExitScene() {
