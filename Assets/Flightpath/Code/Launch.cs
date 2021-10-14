@@ -11,10 +11,10 @@ public class Launch : MonoBehaviour
     private bool _launched;
 
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
-        _body = GetComponent<Rigidbody>();
-        _attractor = GetComponent<Attractor>();
+        _body = this.GetComponent<Rigidbody>();
+        _attractor = this.GetComponent<Attractor>();
         _attractor.Affected = false;
         _launched = false;
     }
