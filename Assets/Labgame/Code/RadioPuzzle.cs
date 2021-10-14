@@ -41,8 +41,10 @@ public class RadioPuzzle : LabPuzzle
 
         waveReference = radioReference.AddComponent<SineWave>();
         waveReference.SetParameters(radioParams);
+        waveReference.SetMaterial((Material)Resources.Load("CRTDarkGreen", typeof(Material)));
         waveSolver = radioSolver.AddComponent<SineWave>();
         waveSolver.SetParameters(start);
+        waveSolver.SetMaterial((Material)Resources.Load("CRTGreen", typeof(Material)));
         waveReference.InitializeSineWave();
         waveSolver.InitializeSineWave();
 
