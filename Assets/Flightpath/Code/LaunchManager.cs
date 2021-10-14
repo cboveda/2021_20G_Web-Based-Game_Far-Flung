@@ -10,7 +10,7 @@ public class LaunchManager : MonoBehaviour
     public Slider PowerSlider;
     
 
-    void Start()
+    public void Start()
     {
         Satellite.GetComponent<Launch>().SetAngle(AngleSlider.GetComponent<Slider>().minValue);
         Satellite.GetComponent<Launch>().SetPower(PowerSlider.GetComponent<Slider>().minValue);

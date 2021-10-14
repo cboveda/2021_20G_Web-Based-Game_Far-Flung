@@ -92,8 +92,6 @@ public class FlightpathTest
         pathFollowerComponent.Start();
 
         yield return new WaitForSeconds(0.1f);
-        Debug.Log(Vector2.right);
-        Debug.Log(pathFollower.transform.position);
         Assert.AreEqual((Vector3) Vector2.right, pathFollower.transform.position);
     }
 

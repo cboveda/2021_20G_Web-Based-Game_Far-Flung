@@ -40,4 +40,12 @@ public class Launch : MonoBehaviour
     {
         _launchPower = power;
     }
+
+    public float GetAngle() {
+        return Vector3.Angle(_launchDirection, Vector3.right);
+    }
+
+    public float GetPower() {
+        return _launchPower;
+    }
 }
