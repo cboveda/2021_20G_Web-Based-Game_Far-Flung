@@ -248,6 +248,7 @@ MonoBehaviour:
   tileMeshDim: 225
   renderDistance: 500
   terrainScale: 150
+  terrainSeed: 20
   surfaceGrad:
     serializedVersion: 2
     key0: {r: 0, g: 0, b: 0, a: 1}
@@ -371,12 +372,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 053b128d7adec0cf694dccbfe73642f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 50
-  rollSpeed: 75
-  pitchSpeed: 75
+  speed: 40
   maxAltitude: 500
-  hozSlerpSpped: 1
-  vertSlerpSpeed: 1
+  hozSlerpSpped: 0.498
+  vertSlerpSpeed: 0.486
+  rlTranslate: {x: 10, y: 0, z: 0}
+  velocity: {x: 0, y: 0, z: 0}
+  smoothTime: 0.3
 --- !u!65 &1681562933
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -567,4 +569,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lead: {fileID: 1681562931}
   smoothTime: 0.1
-  turnspeed: 0.6

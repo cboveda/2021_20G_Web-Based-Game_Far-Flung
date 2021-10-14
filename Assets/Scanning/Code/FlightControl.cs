@@ -4,8 +4,6 @@ using UnityEngine.SceneManagement;
 public class FlightControl : MonoBehaviour
 {
     public float speed = 10f;
-    public float rollSpeed = 100f;
-    public float pitchSpeed = 100f;
     public float maxAltitude = 500f;
 
     [Range(0,1)]
@@ -14,6 +12,8 @@ public class FlightControl : MonoBehaviour
     public float vertSlerpSpeed;
 
     public Vector3 rlTranslate = new Vector3(10, 0, 0);
+    public Vector3 velocity = Vector3.zero;
+    public float smoothTime = 0.3f;
 
     Quaternion bankRight = Quaternion.Euler(0, 30, -30);
     Quaternion bankLeft = Quaternion.Euler(0, -30, 30);
@@ -21,10 +21,6 @@ public class FlightControl : MonoBehaviour
     Quaternion noseDown = Quaternion.Euler(30, 0, 0);
     Quaternion noQuat = Quaternion.Euler(0, 0, 0);
     
-    public float smoothTime = 0.3f;
-    private Vector3 velocity = Vector3.zero;
-
-
     void Update() {
 
         float roll  = Input.GetAxis("Horizontal");

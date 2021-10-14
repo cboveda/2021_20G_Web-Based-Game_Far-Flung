@@ -10,6 +10,7 @@ public class TerrainController : MonoBehaviour
     public int renderDistance = 500;
     public float terrainScale = 150;
     public static int tileRenderRange;
+    public int terrainSeed = 20;
     public Gradient surfaceGrad;
     public GameObject satellite;
     public SignalSpawner sigSpawner;
@@ -44,7 +45,7 @@ public class TerrainController : MonoBehaviour
                 } 
                 else 
                 {
-                    MapSection nSec = new MapSection( z, x, tileMeshDim, terrainScale, surfaceGrad, sigSpawner );
+                    MapSection nSec = new MapSection( z, x, tileMeshDim, terrainScale, surfaceGrad, sigSpawner, terrainSeed );
                     mapSecDic.Add( pVec, nSec );
                     mapSecLst.Add( nSec );
                     nSec.SetVisible();
@@ -69,7 +70,7 @@ public class TerrainController : MonoBehaviour
         MeshCollider meshCollider;
         GameObject[] neutronSignals;
 
-        public MapSection( int z, int x, int tileDim, float terrainScale, Gradient surfaceGrad, SignalSpawner sigSpawner ) {
+        public MapSection( int z, int x, int tileDim, float terrainScale, Gradient surfaceGrad, SignalSpawner sigSpawner, int terrainSeed ) {
 
             isVisible = false;
             real_coord = new Vector3( (x * tileDim), 0, (z * tileDim) );
@@ -83,7 +84,7 @@ public class TerrainController : MonoBehaviour
 
             int meshDim = tileDim + 1;
 
-            float[,] terrain = TerrainGenerator.GetTerrainHeights( real_coord, meshDim );
+            float[,] terrain = TerrainGenerator.GetTerrainHeights( real_coord, meshDim, terrainSeed );
             meshFilter.mesh = MeshGenerator.GenerateTerrainMesh( terrain, meshDim, terrainScale ).CreateMesh();
             meshRenderer.material.mainTexture = TextureGenerator.CreateTexture( surfaceGrad, terrain, meshDim );
 
