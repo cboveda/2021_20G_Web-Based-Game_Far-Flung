@@ -17,7 +17,7 @@ public class SineWave : MonoBehaviour
     const float WAVE_START_X_POSITION = -2;
     const float WAVE_RESOLUTION = 0.0001f;
     const int POSITION_COUNT = 400;
-    const float WAVE_WIDTH = 0.05f;
+    const float WAVE_WIDTH = 0.1f;
     const float SPEED = 1;
     const float WAVE_LERP_AMOUNT = 0.001f;
     const float WAVE_LERP_ROUNDING_MULTIPLIER = 1000.0f;
