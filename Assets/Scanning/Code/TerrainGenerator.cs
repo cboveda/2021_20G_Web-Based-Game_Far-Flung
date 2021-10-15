@@ -75,7 +75,6 @@ public static class TerrainGenerator {
             float offZ = rand.Next( -99999, 99999 ) + vBase.z;
             offsets[o] = new Vector2(offX, offZ);
         }
-
         return offsets;
     }
 
