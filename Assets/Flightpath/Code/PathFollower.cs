@@ -74,4 +74,9 @@ public class PathFollower : MonoBehaviour
         _resetRequested = false;
         transform.position = Path.GetChild(0).position;
     }
+
+    public bool IsUnlocked()
+    {
+        return _unlocked;
+    }
 }
