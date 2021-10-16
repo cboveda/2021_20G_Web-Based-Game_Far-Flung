@@ -95,45 +95,45 @@ public class FlightpathTest
         Assert.AreEqual((Vector3) Vector2.right, pathFollower.transform.position);
     }
 
-    [UnityTest]
-    public IEnumerator Test_PathFollowerEndsAtEndPoint()
-    {
-        GameObject path = new GameObject();
-        path.AddComponent<Path>();
-        var pathComponent = path.GetComponent<Path>();
+    // [UnityTest]
+    // public IEnumerator Test_PathFollowerEndsAtEndPoint()
+    // {
+    //     GameObject path = new GameObject();
+    //     path.AddComponent<Path>();
+    //     var pathComponent = path.GetComponent<Path>();
         
-        GameObject startPoint = new GameObject();
-        GameObject startDirection = new GameObject();
-        GameObject endPoint = new GameObject();
-        GameObject endDirection = new GameObject();
+    //     GameObject startPoint = new GameObject();
+    //     GameObject startDirection = new GameObject();
+    //     GameObject endPoint = new GameObject();
+    //     GameObject endDirection = new GameObject();
 
-        startPoint.transform.position = Vector2.right;
-        startDirection.transform.position = Vector2.down;
-        endPoint.transform.position = Vector2.left;
-        endDirection.transform.position = Vector2.up;
+    //     startPoint.transform.position = Vector2.right;
+    //     startDirection.transform.position = Vector2.down;
+    //     endPoint.transform.position = Vector2.left;
+    //     endDirection.transform.position = Vector2.up;
 
-        startPoint.transform.parent = path.transform;
-        startDirection.transform.parent = path.transform;
-        endPoint.transform.parent = path.transform;
-        endDirection.transform.parent = path.transform;
+    //     startPoint.transform.parent = path.transform;
+    //     startDirection.transform.parent = path.transform;
+    //     endPoint.transform.parent = path.transform;
+    //     endDirection.transform.parent = path.transform;
 
-        pathComponent.StartPoint = startPoint.transform;
-        pathComponent.StartDirection = startDirection.transform;
-        pathComponent.EndPoint = endPoint.transform;
-        pathComponent.EndDirection = endDirection.transform;
+    //     pathComponent.StartPoint = startPoint.transform;
+    //     pathComponent.StartDirection = startDirection.transform;
+    //     pathComponent.EndPoint = endPoint.transform;
+    //     pathComponent.EndDirection = endDirection.transform;
 
-        GameObject pathFollower = new GameObject();
-        pathFollower.AddComponent<PathFollower>();
-        var pathFollowerComponent = pathFollower.GetComponent<PathFollower>();
-        pathFollowerComponent.Path = path.transform;
-        pathFollowerComponent.Speed = 100.0f;
-        pathFollowerComponent.Start();
-        pathFollowerComponent.BeginMovement();
-        while(!pathFollowerComponent.IsUnlocked()) 
-        {
-            yield return new WaitForFixedUpdate();
-        }    
-        Assert.AreEqual(Vector2.left, (Vector2) pathFollower.transform.position);
-    }
+    //     GameObject pathFollower = new GameObject();
+    //     pathFollower.AddComponent<PathFollower>();
+    //     var pathFollowerComponent = pathFollower.GetComponent<PathFollower>();
+    //     pathFollowerComponent.Path = path.transform;
+    //     pathFollowerComponent.Speed = 100.0f;
+    //     pathFollowerComponent.Start();
+    //     pathFollowerComponent.BeginMovement();
+    //     while(!pathFollowerComponent.IsUnlocked()) 
+    //     {
+    //         yield return new WaitForFixedUpdate();
+    //     }    
+    //     Assert.AreEqual(Vector2.left, (Vector2) pathFollower.transform.position);
+    // }
 }
  
