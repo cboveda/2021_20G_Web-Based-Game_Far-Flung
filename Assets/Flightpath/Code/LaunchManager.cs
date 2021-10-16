@@ -35,4 +35,13 @@ public class LaunchManager : MonoBehaviour
             p.BeginMovement();
         }
     }
+
+    public void OnResetButtonClicked()
+    {
+        Satellite.GetComponent<Launch>().ResetLaunch();
+        PathFollower[] pathFollowers = FindObjectsOfType<PathFollower>();
+        foreach (PathFollower p in pathFollowers) {
+            p.ResetPosition();
+        }
+    }
 }

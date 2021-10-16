@@ -7,22 +7,30 @@ public class PathFollower : MonoBehaviour
     private float _t;
     private Vector2 _position;
     private bool _unlocked;
+    private bool _resetRequested;
     public Transform Path;
     public float Speed;
 
     // Start is called before the first frame update
     public void Start()
     {
-        _t = 0f;
-        _unlocked = true;
-        transform.position = Path.GetChild(0).position;
+        InitializePosition();
+    }
+
+    private void FixedUpdate() 
+    {
+        if (_resetRequested)
+        {
+            StopCoroutine("Move");
+            InitializePosition();
+        }    
     }
 
     public void BeginMovement()
     {
         if (_unlocked)
         {
-            StartCoroutine(Move());
+            StartCoroutine("Move");
         }
     }
 
@@ -36,7 +44,7 @@ public class PathFollower : MonoBehaviour
         Vector2 end = Path.GetChild(2).position;
         Vector2 endDir = Path.GetChild(3).position;
 
-        while (_t < 1)
+        while (_t <= 1)
         {
             _t += Time.deltaTime * Speed;
 
@@ -51,5 +59,19 @@ public class PathFollower : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
         transform.position = end;
+        _unlocked = true;
+    }
+
+    public void ResetPosition()
+    {
+        _resetRequested = true;
+    }
+
+    public void InitializePosition()
+    {
+        _t = 0f;
+        _unlocked = true;
+        _resetRequested = false;
+        transform.position = Path.GetChild(0).position;
     }
 }
