@@ -129,9 +129,10 @@ public class FlightpathTest
     //     pathFollowerComponent.Speed = 100.0f;
     //     pathFollowerComponent.Start();
     //     pathFollowerComponent.BeginMovement();
-    //     yield return new WaitForSeconds(2f);
-    //     Debug.Log(Vector2.left);
-    //     Debug.Log((Vector2) pathFollower.transform.position);
+    //     while(!pathFollowerComponent.IsUnlocked()) 
+    //     {
+    //         yield return new WaitForFixedUpdate();
+    //     }    
     //     Assert.AreEqual(Vector2.left, (Vector2) pathFollower.transform.position);
     // }
 }

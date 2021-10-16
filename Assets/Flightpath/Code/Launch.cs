@@ -9,16 +9,24 @@ public class Launch : MonoBehaviour
     private Rigidbody _body;
     private Attractor _attractor;
     private bool _launched;
+    public float StartX;
+    public float StartY;
 
     // Start is called before the first frame update
     public void Start()
     {
         _body = this.GetComponent<Rigidbody>();
         _attractor = this.GetComponent<Attractor>();
-        _attractor.Affected = false;
-        _launched = false;
+        InitializePosition();
     }
 
+    public void InitializePosition()
+    {
+        _attractor.Affected = false;
+        _launched = false;
+        _body.velocity = Vector3.zero;
+        this.transform.position = new Vector3 (StartX, StartY, 0);
+    }
     public void DoLaunch()
     {
         if (!_launched)
@@ -27,6 +35,11 @@ public class Launch : MonoBehaviour
             _body.AddForce(_launchDirection * _launchPower, ForceMode.VelocityChange);
             _launched = true;
         }
+    }
+
+    public void ResetLaunch()
+    {
+        InitializePosition();
     }
     
     public void SetAngle(float angle)
