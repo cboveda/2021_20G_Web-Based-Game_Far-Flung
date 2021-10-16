@@ -1939,7 +1939,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1385639200}
   - component: {fileID: 1385639201}
-  - component: {fileID: 1385639203}
   - component: {fileID: 1385639202}
   m_Layer: 5
   m_Name: ComputerUIMainPane
@@ -1988,19 +1987,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf7bfd7c22cafe0419c4e7180ca95895, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shellTyper: {fileID: 0}
---- !u!114 &1385639203
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1385639199}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5213606acff3cd408ece8e4173881ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  shellTyper: {fileID: 1520957664}
 --- !u!1 &1439381209
 GameObject:
   m_ObjectHideFlags: 0
