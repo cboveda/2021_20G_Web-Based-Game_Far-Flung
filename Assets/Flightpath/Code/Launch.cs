@@ -4,29 +4,48 @@ using UnityEngine;
 
 public class Launch : MonoBehaviour
 {
-    public float xMagnitude;
-    public float yMagnitude;
-    
-    Rigidbody body;
-    bool launched;
-    
+    private Vector3 _launchDirection;
+    private float _launchPower;
+    private Rigidbody _body;
+    private Attractor _attractor;
+    private bool _launched;
+
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
-        body = this.GetComponent<Rigidbody>();
-        launched = false;
+        _body = this.GetComponent<Rigidbody>();
+        _attractor = this.GetComponent<Attractor>();
+        _attractor.Affected = false;
+        _launched = false;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void DoLaunch()
     {
-        if (!launched) {
-            body.AddForce(new Vector3 (xMagnitude, yMagnitude, 0f), ForceMode.VelocityChange);
-            launched = true;
+        if (!_launched)
+        {
+            _attractor.Affected = true;
+            _body.AddForce(_launchDirection * _launchPower, ForceMode.VelocityChange);
+            _launched = true;
         }
     }
+    
+    public void SetAngle(float angle)
+    {
+        float xDirection = Mathf.Cos(angle * (3.14f / 180f));
+        float yDirection = Mathf.Sin(angle * (3.14f / 180f));
+        _launchDirection = new Vector3(xDirection, yDirection, 0);
+    }
 
-    public bool hasLaunched() {
-        return launched;
+    public void SetPower(float power)
+    {
+        _launchPower = power;
+    }
+
+    public float GetAngle() {
+        return Vector3.Angle(_launchDirection, Vector3.right);
+    }
+
+    public float GetPower() {
+        return _launchPower;
     }
 }
