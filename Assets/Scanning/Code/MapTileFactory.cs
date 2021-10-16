@@ -10,22 +10,21 @@ public class MapTileFactory {
 
         
         Vector3 real_coord = new Vector3( (x * tileDim), 0, (z * tileDim) );
-        Vector3 super_coord = real_coord - new Vector3(1, 0, 1);
         
         int meshDim = tileDim + 1;
-        int meshSuperDim = tileDim + 3;
 
         MapTile tile = new MapTile( "Mesh(" + real_coord.ToString() + ")" );
 
-        float[,] terrain = TerrainGenerator.GetTerrainHeights( real_coord, meshDim, terrainSeed );
+        MeshData meshData = MeshGenerator.GenerateTerrainMesh( real_coord, terrainSeed, meshDim, terrainScale );
 
-        tile.meshFilter.mesh = MeshGenerator.GenerateTerrainMesh( terrain, meshDim, terrainScale ).CreateMesh();
-        tile.meshRenderer.material.mainTexture = TextureGenerator.CreateTexture( surfaceGrad, terrain, meshDim );
+        tile.meshFilter.mesh = meshData.CreateMesh();
+
+        tile.meshRenderer.material.mainTexture = TextureGenerator.CreateTexture( surfaceGrad, meshData.normalizedHeightMap, meshDim );
 
         tile.meshCollider.sharedMesh = tile.meshFilter.mesh;
         tile.meshObj.transform.position = real_coord;
 
-        tile.neutronSignals = sigSpawner.CreateSignals (terrain, terrainScale, real_coord );
+        tile.neutronSignals = sigSpawner.CreateSignals( meshData.normalizedHeightMap, terrainScale, real_coord );
 
         return tile;
     }
@@ -49,7 +48,6 @@ public class MapTile {
         meshRenderer = meshObj.AddComponent<MeshRenderer>();
         meshFilter = meshObj.AddComponent<MeshFilter>();
         meshCollider = meshObj.AddComponent<MeshCollider>();
-        // meshRenderer.material = mapMaterial;
     }
 
     public void SetVisible() {

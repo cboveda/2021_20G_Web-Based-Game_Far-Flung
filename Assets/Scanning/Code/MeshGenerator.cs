@@ -7,9 +7,17 @@ using UnityEngine;
 
 public static class MeshGenerator
 {  
-    public static MeshData GenerateTerrainMesh( float[,] heightMap, int meshDim, float terrainScale ) {
+    public static MeshData GenerateTerrainMesh( Vector3 real_coord, int terrainSeed, int meshDim, float terrainScale ) {
 
         MeshData meshData = new MeshData( meshDim );
+
+        Vector3 super_coord = real_coord - new Vector3( 1, 0, 1 );
+        int superDim = meshDim + 2;
+
+        float[,] superHeights = TerrainGenerator.GetTerrainHeights( super_coord, superDim, terrainSeed );
+
+        meshData.normalizedHeightMap = getSubsetHeightMapFromSuperset( superHeights, meshDim, superDim );
+
         int vi = 0;
 
         // set mesh data
@@ -17,7 +25,7 @@ public static class MeshGenerator
         {
             for ( int x = 0; x < meshDim; ++x )
             {
-                meshData.vertices[vi] = new Vector3( x, ( terrainScale * heightMap[x, z] ), z );
+                meshData.vertices[vi] = new Vector3( x, ( terrainScale * meshData.normalizedHeightMap[x, z] ), z );
 
                 if ( x < (meshDim-1) && z < (meshDim-1) ) 
                 {
@@ -31,13 +39,30 @@ public static class MeshGenerator
         }
         return meshData;
     }
+
+    private static float[,] getSubsetHeightMapFromSuperset( float[,] superHeights, int meshDim, int superDim ) {
+
+        float[,] subHeights = new float[meshDim, meshDim];
+
+        for ( int x = 1; x < ( superDim-1 ); ++x )
+        {
+            for ( int z = 1; z < ( superDim-1 ); ++z )
+            {
+                subHeights[ ( x-1 ), ( z-1 ) ] = superHeights[x,z];
+            }
+        }
+
+        return subHeights;
+    }
 }
 
 public class MeshData {
 
     public Vector3[] vertices;
-    public int[] triangles;
+    public Vector3[] normals;
     public Vector2[] uvs;
+    public float[,] normalizedHeightMap;
+    public int[] triangles;
 
     int triangleIndex;
 
@@ -62,10 +87,9 @@ public class MeshData {
         mesh.uv = uvs;
         mesh.RecalculateNormals();
 
-        // prune vertices
-        // prune triangles
-        // prune normals
-
+        //mesh.normals = UpdateBorderNormals()
+        
         return mesh;
     }
+
 }

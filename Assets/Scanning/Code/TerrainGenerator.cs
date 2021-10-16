@@ -41,6 +41,7 @@ public static class TerrainGenerator {
             absMax += amplitude;
             amplitude *= persistance;
         }
+
         return NormalizeHeights( heights, meshDim, absMax);
     }
 

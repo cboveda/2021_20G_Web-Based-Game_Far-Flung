@@ -372,7 +372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 053b128d7adec0cf694dccbfe73642f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 40
+  speed: 0
   maxAltitude: 500
   hozSlerpSpped: 0.498
   vertSlerpSpeed: 0.486
