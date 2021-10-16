@@ -4,48 +4,52 @@ using UnityEngine;
 
 public class PathFollower : MonoBehaviour
 {
-    public Transform path;
-    private float t;
-    public float speed;
-    private Vector2 position;
-    private bool unlocked;
+    private float _t;
+    private Vector2 _position;
+    private bool _unlocked;
+    public Transform Path;
+    public float Speed;
 
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
-        t = 0f;
-        unlocked = true;
+        _t = 0f;
+        _unlocked = true;
+        transform.position = Path.GetChild(0).position;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void BeginMovement()
     {
-        if (unlocked) {
+        if (_unlocked)
+        {
             StartCoroutine(Move());
         }
     }
 
-    private IEnumerator Move() {
+    private IEnumerator Move()
+    {
         // Prevent other Coroutines from starting.
-        unlocked = false;
+        _unlocked = false;
 
-        Vector2 start = path.GetChild(0).position;
-        Vector2 startDir = path.GetChild(1).position;
-        Vector2 end = path.GetChild(2).position;
-        Vector2 endDir = path.GetChild(3).position;
+        Vector2 start = Path.GetChild(0).position;
+        Vector2 startDir = Path.GetChild(1).position;
+        Vector2 end = Path.GetChild(2).position;
+        Vector2 endDir = Path.GetChild(3).position;
 
-        while (t < 1) {
-            t += Time.deltaTime * speed;
+        while (_t < 1)
+        {
+            _t += Time.deltaTime * Speed;
 
             // Determine and set new position
-            position = Mathf.Pow(1-t, 3) * start +
-                3 * Mathf.Pow(1-t, 2) * t * startDir +
-                3 * (1-t) * Mathf.Pow(t, 2) * endDir +
-                Mathf.Pow(t, 3) * end;
-            transform.position = position;
-            
+            _position = Mathf.Pow(1 - _t, 3) * start +
+                3 * Mathf.Pow(1 - _t, 2) * _t * startDir +
+                3 * (1 - _t) * Mathf.Pow(_t, 2) * endDir +
+                Mathf.Pow(_t, 3) * end;
+            transform.position = _position;
+
             //Sync with framerate
             yield return new WaitForEndOfFrame();
         }
+        transform.position = end;
     }
 }
