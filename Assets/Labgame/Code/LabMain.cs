@@ -7,12 +7,16 @@ public class LabMain : MonoBehaviour
     GameObject main;
     RadioPuzzle currentPuzzle;
     bool isCurrentPuzzleSolved;
+    bool radioPuzzleActive;
+    bool introDisplayFinished;
     int level;
     // Start is called before the first frame update
     void Start()
     {
         main = GameObject.Find("LabGameStart");
         level = 0;
+        radioPuzzleActive = false;
+        //isCurrentPuzzleSolved = false;
         GetNewRadioPuzzle();
 
 
