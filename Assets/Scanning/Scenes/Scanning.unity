@@ -247,7 +247,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileMeshDim: 225
   renderDistance: 500
-  terrainScale: 150
+  terrainScale: 200
   terrainSeed: 20
   surfaceGrad:
     serializedVersion: 2
@@ -286,24 +286,24 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 0.773591
-      outSlope: 0.773591
+      inSlope: 1.3867652
+      outSlope: 1.3867652
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.17661332
-      value: 0.13662647
-      inSlope: 0.043109037
-      outSlope: 0.043109037
+      time: 0.18445633
+      value: 0.25579762
+      inSlope: 0.6439107
+      outSlope: 0.6439107
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.06371881
+      outWeight: 0.28137407
     - serializedVersion: 3
-      time: 0.43446356
-      value: 0.20041639
+      time: 0.4008332
+      value: 0.40369397
       inSlope: 0.55538946
       outSlope: 0.55538946
       tangentMode: 0
@@ -311,14 +311,14 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.26006958
     - serializedVersion: 3
-      time: 0.6433522
-      value: 0.32271034
-      inSlope: 0.72255415
-      outSlope: 0.72255415
+      time: 0.6467702
+      value: 0.4698966
+      inSlope: 0.16396824
+      outSlope: 0.16396824
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.31874388
+      outWeight: 0.46937653
     - serializedVersion: 3
       time: 0.79504675
       value: 0.6029331
