@@ -7,14 +7,14 @@ using UnityEngine;
 
 public static class MeshGenerator
 {  
-    public static MeshData GenerateTerrainMesh( Vector3 real_coord, int terrainSeed, int meshDim, float terrainScale ) {
+    public static MeshData GenerateTerrainMesh( Vector3 real_coord, int terrainSeed, int meshDim, float terrainScale, AnimationCurve basePerlinCurve ) {
 
         MeshData meshData = new MeshData( meshDim, terrainScale );
 
         Vector3 super_coord = real_coord - new Vector3( 1, 0, 1 );
         int superDim = meshDim + 2;
 
-        meshData.superHeights = TerrainGenerator.GetTerrainHeights( super_coord, superDim, terrainSeed );
+        meshData.superHeights = TerrainGenerator.GetTerrainHeights( super_coord, superDim, terrainSeed, basePerlinCurve );
 
         meshData.normalizedHeightMap = getSubsetHeightMapFromSuperset( meshData.superHeights, meshDim, superDim );
 

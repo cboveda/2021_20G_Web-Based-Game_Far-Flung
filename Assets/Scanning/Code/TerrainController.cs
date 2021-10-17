@@ -12,6 +12,7 @@ public class TerrainController : MonoBehaviour {
     public Gradient surfaceGrad;
     public GameObject satellite;
     public SignalSpawner sigSpawner;
+    public AnimationCurve basePerlinCurve;
 
     private Dictionary<Vector2, MapTile> mapSecDic = new Dictionary<Vector2, MapTile>();
     private List<MapTile> mapSecLst = new List<MapTile>();
@@ -42,7 +43,7 @@ public class TerrainController : MonoBehaviour {
                 } 
                 else 
                 {
-                    MapTile nSec = MapTileFactory.CreateMapTile( z, x, tileMeshDim, terrainScale, surfaceGrad, sigSpawner, terrainSeed );
+                    MapTile nSec = MapTileFactory.CreateMapTile( z, x, tileMeshDim, terrainScale, surfaceGrad, sigSpawner, terrainSeed, basePerlinCurve );
                     mapSecDic.Add( pVec, nSec );
                     mapSecLst.Add( nSec );
                     nSec.SetVisible();

@@ -6,7 +6,7 @@ public class MapTileFactory {
 
     public static MapTile CreateMapTile(
             int z, int x, int tileDim, float terrainScale, Gradient surfaceGrad, 
-            SignalSpawner sigSpawner, int terrainSeed ) {
+            SignalSpawner sigSpawner, int terrainSeed, AnimationCurve basePerlinCurve ) {
 
         
         Vector3 real_coord = new Vector3( (x * tileDim), 0, (z * tileDim) );
@@ -15,7 +15,7 @@ public class MapTileFactory {
 
         MapTile tile = new MapTile( "Mesh(" + real_coord.ToString() + ")" );
 
-        MeshData meshData = MeshGenerator.GenerateTerrainMesh( real_coord, terrainSeed, meshDim, terrainScale );
+        MeshData meshData = MeshGenerator.GenerateTerrainMesh( real_coord, terrainSeed, meshDim, terrainScale, basePerlinCurve );
 
         tile.meshFilter.mesh = meshData.CreateMesh();
 

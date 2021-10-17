@@ -12,7 +12,7 @@ public static class TerrainGenerator {
     public static float lacunarity = 2f;
     public static float persistance = 0.4f;
 
-    public static float[,] GetTerrainHeights( Vector3 vBase, int meshDim, int terrainSeed ) {
+    public static float[,] GetTerrainHeights( Vector3 vBase, int meshDim, int terrainSeed, AnimationCurve basePerlinCurve ) {
 
         float[,] heights = new float[meshDim, meshDim];
         float normalMin = float.MaxValue;
@@ -23,7 +23,7 @@ public static class TerrainGenerator {
         for ( int x = 0; x < meshDim; ++x ) {
             for ( int z = 0; z < meshDim; ++z ) {
 
-                heights[x, z] = PerlinCalculator( x, z, offsets, meshDim );
+                heights[x, z] = PerlinCalculator( x, z, offsets, meshDim, basePerlinCurve );
 
                 if (heights[x, z] > normalMax) {
                     normalMax = heights[x, z];
@@ -45,22 +45,29 @@ public static class TerrainGenerator {
         return NormalizeHeights( heights, meshDim, absMax);
     }
 
-    static float PerlinCalculator( float x, float z, Vector2[] offsets, int meshDim ) {
+    static float PerlinCalculator( float x, float z, Vector2[] offsets, int meshDim, AnimationCurve basePerlinCurve ) {
 
-        float amplitude = 1f;
-        float frequency = 1f;
+        float amplitude = persistance;
+        float frequency = lacunarity;
         float height = 0;
 
-        for ( int o = 0; o < perlin_octaves; ++o ) {
+        float xCoord = ( ( x + offsets[0].x ) / meshDim );
+        float zCoord = ( ( z + offsets[0].y ) / meshDim );
 
-            float xCoord = ( ( x + offsets[o].x ) / meshDim ) * frequency;
-            float zCoord = ( ( z + offsets[o].y ) / meshDim ) * frequency;
+        float baseHeigt = Mathf.PerlinNoise( xCoord, zCoord );
+        height += basePerlinCurve.Evaluate( baseHeigt );
+
+        for ( int o = 1; o < perlin_octaves; ++o ) {
+
+            xCoord = ( ( x + offsets[o].x ) / meshDim ) * frequency;
+            zCoord = ( ( z + offsets[o].y ) / meshDim ) * frequency;
 
             height += Mathf.PerlinNoise( xCoord, zCoord ) * amplitude;
 
             amplitude *= persistance;
             frequency *= lacunarity;
         }
+
         return height;
     }
 
