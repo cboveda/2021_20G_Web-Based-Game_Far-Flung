@@ -280,6 +280,75 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   satellite: {fileID: 1681562931}
   sigSpawner: {fileID: 989866034}
+  basePerlinCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.773591
+      outSlope: 0.773591
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.17661332
+      value: 0.13662647
+      inSlope: 0.043109037
+      outSlope: 0.043109037
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.06371881
+    - serializedVersion: 3
+      time: 0.43446356
+      value: 0.20041639
+      inSlope: 0.55538946
+      outSlope: 0.55538946
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.26006958
+    - serializedVersion: 3
+      time: 0.6433522
+      value: 0.32271034
+      inSlope: 0.72255415
+      outSlope: 0.72255415
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.31874388
+    - serializedVersion: 3
+      time: 0.79504675
+      value: 0.6029331
+      inSlope: 2.3146675
+      outSlope: 2.3146675
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.061850727
+      outWeight: 0.10293365
+    - serializedVersion: 3
+      time: 0.88708913
+      value: 0.8717945
+      inSlope: 3.1784093
+      outSlope: 3.1784093
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.28512034
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0.36501095
+      outSlope: 0.36501095
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.4567293
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!4 &916778657
 Transform:
   m_ObjectHideFlags: 0
