@@ -8,10 +8,26 @@ public class SceneActions : MonoBehaviour
 {
 
     string gameScene = "";
+    string sceneName = "";
 
     public void StartGameScene()
     {
+        Scene scene = SceneManager.GetActiveScene();
+        sceneName = scene.name;
+
         gameScene = "comGame";
+        
+        if ( sceneName == "comGameWin")
+        {
+            gameScene = "comUnscrambleIntro";
+        }
+
+        if (sceneName == "comUnscrambleIntro")
+        {
+            gameScene = "comUnscramble";
+        }
+
+        Debug.Log(gameScene);
         SceneManager.LoadScene(gameScene);
     }
 
