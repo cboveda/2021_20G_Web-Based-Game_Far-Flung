@@ -4,26 +4,28 @@ using UnityEngine;
 
 public class Path : MonoBehaviour
 {
-    public Transform start;
-    public Transform startDir;
-    public Transform end;
-    public Transform endDir;
-    public Vector2 position;
+    public Transform StartPoint;
+    public Transform StartDirection;
+    public Transform EndPoint;
+    public Transform EndDirection;
+    public float LineSize;
 
-    private void OnDrawGizmos() {
-        for (float t = 0; t <= 1; t += .05f) {
-            position = Mathf.Pow(1-t, 3) * start.position +
-                3 * Mathf.Pow(1-t, 2) * t * startDir.position +
-                3 * (1-t) * Mathf.Pow(t, 2) * endDir.position +
-                Mathf.Pow(t, 3) * end.position;
+    private void OnDrawGizmos()
+    {
+        for (float t = 0; t <= 1; t += .05f)
+        {
+            Vector2 Position = Mathf.Pow(1 - t, 3) * StartPoint.position +
+                3 * Mathf.Pow(1 - t, 2) * t * StartDirection.position +
+                3 * (1 - t) * Mathf.Pow(t, 2) * EndDirection.position +
+                Mathf.Pow(t, 3) * EndPoint.position;
 
-            Gizmos.DrawSphere(position, 0.1f);
+            Gizmos.DrawSphere(Position, LineSize);
         }
 
-        Gizmos.DrawLine(new Vector2(start.position.x, start.position.y), 
-            new Vector2(startDir.position.x, startDir.position.y));
+        Gizmos.DrawLine(new Vector2(StartPoint.position.x, StartPoint.position.y),
+            new Vector2(StartDirection.position.x, StartDirection.position.y));
 
-        Gizmos.DrawLine(new Vector2(end.position.x, end.position.y), 
-            new Vector2(endDir.position.x, endDir.position.y));
+        Gizmos.DrawLine(new Vector2(EndPoint.position.x, EndPoint.position.y),
+            new Vector2(EndDirection.position.x, EndDirection.position.y));
     }
 }

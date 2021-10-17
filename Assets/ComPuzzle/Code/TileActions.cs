@@ -43,6 +43,19 @@ public class TileActions : MonoBehaviour
     Vector3 finalPiecePosition;
     Vector3 finalPieceCurrentPos;
 
+    GameObject viewImageObject;
+    Color viewImageColor;
+    SpriteRenderer viewImageRend;
+
+    GameObject imageObject;
+    string imageLayer = "";
+    SpriteRenderer imageRend;
+
+
+    GameObject lockedObject;
+    Color lockedColor;
+    SpriteRenderer lockedRend;
+
     void Start()
     {
         // get current tile color
@@ -69,6 +82,20 @@ public class TileActions : MonoBehaviour
         // get final piece position
         finalPieceObject = GameObject.Find("14");
         finalPiecePosition = finalPieceObject.transform.position;
+
+
+        // get the image objects starting color and layer
+        viewImageObject = GameObject.Find("ViewImage");
+        viewImageRend = viewImageObject.GetComponent<SpriteRenderer>();
+        viewImageColor = viewImageRend.color;
+        imageObject = GameObject.Find("Image");
+        imageRend = imageObject.GetComponent<SpriteRenderer>();
+        imageLayer = imageRend.sortingLayerName;
+
+        // get the locked objects starting color 
+        lockedObject = GameObject.Find("Locked");
+        lockedColor = lockedObject.GetComponent<Text>().color;
+
     }
 
 
@@ -95,8 +122,21 @@ public class TileActions : MonoBehaviour
         {            
             instructionsObject.GetComponent<Text>().color = Color.yellow;
             instructionsRend.sortingLayerName = "Numbers";
-        }                
+        }
+
+        // show image
+        if (objectName == "ViewImage")
+        {
+            viewImageRend.color = Color.yellow;
+            imageRend.sortingLayerName = "ViewImage";
+        }
         
+        // show locked
+        success = checkSuccess();
+        if (objectName == "14" && !success)
+        {
+            lockedObject.GetComponent<Text>().color = Color.yellow;
+        }
 
     }
 
@@ -111,6 +151,19 @@ public class TileActions : MonoBehaviour
         {
             instructionsObject.GetComponent<Text>().color = instructionsColor;
             instructionsRend.sortingLayerName = instructionsLayer;
+        }
+
+        // hide image
+        if (objectName == "ViewImage")
+        {
+            viewImageRend.color = viewImageColor;
+            imageRend.sortingLayerName = imageLayer;
+        }
+
+        // hide locked
+        if (objectName == "14")
+        {
+            lockedObject.GetComponent<Text>().color = lockedColor;
         }
     }
 

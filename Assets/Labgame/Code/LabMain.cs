@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class LabMain : MonoBehaviour
 {
+    private ComputerUIMainPane mainComputerUI;
     GameObject main;
     RadioPuzzle currentPuzzle;
     bool isCurrentPuzzleSolved;
+    bool radioPuzzleActive;
     int level;
     // Start is called before the first frame update
     void Start()
     {
         main = GameObject.Find("LabGameStart");
+        mainComputerUI = GameObject.Find("ComputerUIMainPane").GetComponent<ComputerUIMainPane>();
         level = 0;
+        radioPuzzleActive = false;
         GetNewRadioPuzzle();
 
 
@@ -29,11 +33,11 @@ public class LabMain : MonoBehaviour
     {
         if (isCurrentPuzzleSolved)
         {
+            mainComputerUI.DisplayComputerText("Congrats! You've solved " + level.ToString() + " waves!");
             GetNewRadioPuzzle();
         }
         if (currentPuzzle.solved)
         {
-            //Destroy(currentPuzzle.gameObject);
             isCurrentPuzzleSolved = true;
             
         }
