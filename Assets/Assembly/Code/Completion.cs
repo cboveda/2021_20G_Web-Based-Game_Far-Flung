@@ -1,11 +1,16 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityEngine.Events;
+
 
 public class Completion : MonoBehaviour
 {
     public TextAsset completionTextAsset;
+    public UnityEvent nextScene;
+
     public void CheckCompletion()
     {
         foreach (Transform child in transform)
@@ -23,11 +28,6 @@ public class Completion : MonoBehaviour
             
         } 
         TextPanel textPanel = Resources.FindObjectsOfTypeAll<TextPanel>()[0];
-        textPanel.ShowText(completionTextAsset, OpenNextScene);
-    }
-
-    public void OpenNextScene()
-    {
-        Debug.Log("Open Next Scene");
+        textPanel.ShowText(completionTextAsset, nextScene.Invoke);
     }
 }
