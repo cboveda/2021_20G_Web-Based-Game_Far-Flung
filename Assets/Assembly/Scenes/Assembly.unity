@@ -175,7 +175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slotOffset: {x: 35, y: 110}
   slotMatch: {fileID: 638276046}
-  completionText: {fileID: 4900000, guid: 0659008030dbba54288236fe07511093, type: 3}
+  completionTextAsset: {fileID: 4900000, guid: 0659008030dbba54288236fe07511093, type: 3}
 --- !u!114 &91097064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -232,7 +232,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &185447203
 RectTransform:
   m_ObjectHideFlags: 0
@@ -358,7 +358,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slotOffset: {x: 32, y: 109}
   slotMatch: {fileID: 1557097174}
-  completionText: {fileID: 4900000, guid: 2d97f385385904c46be2201e9033da9e, type: 3}
+  completionTextAsset: {fileID: 4900000, guid: 2d97f385385904c46be2201e9033da9e, type: 3}
 --- !u!114 &318922396
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -779,7 +779,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slotOffset: {x: 30, y: 110}
   slotMatch: {fileID: 1633703359}
-  completionText: {fileID: 4900000, guid: 705bf8751a828d443ad94b0491d657db, type: 3}
+  completionTextAsset: {fileID: 4900000, guid: 705bf8751a828d443ad94b0491d657db, type: 3}
 --- !u!114 &465832171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1018,7 +1018,6 @@ GameObject:
   - component: {fileID: 1251495985}
   - component: {fileID: 1251495987}
   - component: {fileID: 1251495986}
-  - component: {fileID: 1251495988}
   - component: {fileID: 1251495989}
   m_Layer: 2
   m_Name: Spacecraft
@@ -1087,21 +1086,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1251495984}
   m_CullTransparentMesh: 1
---- !u!114 &1251495988
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1251495984}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b16685742872f4242adce1228848fa08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slotOffset: {x: 0, y: 0}
-  slotMatch: {fileID: 0}
-  completionText: {fileID: 0}
 --- !u!114 &1251495989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1114,6 +1098,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e70828d6964fa64d99ae11faeddfe30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  completionTextAsset: {fileID: 4900000, guid: fa2e58de62cb93c4ca8f973f7c962b59, type: 3}
 --- !u!1 &1557097174
 GameObject:
   m_ObjectHideFlags: 0
