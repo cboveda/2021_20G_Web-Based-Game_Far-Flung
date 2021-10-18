@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class TerrainController : MonoBehaviour {
 
-    public int tileMeshDim = 225;
+    public int tileDim = 225;
     public int renderDistance = 500;
     public float terrainScale = 150;
     public static int tileRenderRange;
@@ -18,15 +19,15 @@ public class TerrainController : MonoBehaviour {
     private List<MapTile> mapSecLst = new List<MapTile>();
 
     void Start() {
-        tileRenderRange = Mathf.RoundToInt( renderDistance / tileMeshDim );
+        tileRenderRange = Mathf.RoundToInt( renderDistance / tileDim );
     }
 
     void Update() {
         
         // calculate the coordinates of 9 adjacent tiles, not memory efficient;
 
-        int currTileZ = (int) Mathf.Floor(satellite.transform.position.z / tileMeshDim);
-        int currTileX = (int) Mathf.Floor(satellite.transform.position.x / tileMeshDim);
+        int currTileZ = (int) Mathf.Floor(satellite.transform.position.z / tileDim);
+        int currTileX = (int) Mathf.Floor(satellite.transform.position.x / tileDim);
 
         foreach ( MapTile ms in mapSecLst ) {
             ms.UnsetVisible();
@@ -43,10 +44,17 @@ public class TerrainController : MonoBehaviour {
                 } 
                 else 
                 {
-                    MapTile nSec = MapTileFactory.CreateMapTile( z, x, tileMeshDim, terrainScale, surfaceGrad, sigSpawner, terrainSeed, basePerlinCurve );
-                    mapSecDic.Add( pVec, nSec );
-                    mapSecLst.Add( nSec );
-                    nSec.SetVisible();
+                    MapTile tile = new MapTile( "Mesh( " + z + ", " + x + " )", tileDim, sigSpawner );
+
+                    ThreadStart threadStart = delegate {
+                        MapTileFactory.CreateMapTile( tile, z, x, tileDim, terrainScale, surfaceGrad, terrainSeed, basePerlinCurve );
+                    };
+
+                    new Thread(threadStart).Start();
+
+                    mapSecDic.Add( pVec, tile );
+                    mapSecLst.Add( tile );
+                    tile.SetVisible();
                 }
             }
         }

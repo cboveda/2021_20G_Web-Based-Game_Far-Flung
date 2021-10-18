@@ -248,7 +248,7 @@ MonoBehaviour:
   tileMeshDim: 225
   renderDistance: 500
   terrainScale: 200
-  terrainSeed: 20
+  terrainSeed: 45
   surfaceGrad:
     serializedVersion: 2
     key0: {r: 0, g: 0, b: 0, a: 1}
@@ -443,7 +443,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   maxAltitude: 500
-  hozSlerpSpped: 0.498
+  hozSlerpSpped: 0.487
   vertSlerpSpeed: 0.486
   rlTranslate: {x: 10, y: 0, z: 0}
   velocity: {x: 0, y: 0, z: 0}

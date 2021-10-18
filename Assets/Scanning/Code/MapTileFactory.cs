@@ -4,50 +4,50 @@ using UnityEngine;
 
 public class MapTileFactory {
 
-    public static MapTile CreateMapTile(
-            int z, int x, int tileDim, float terrainScale, Gradient surfaceGrad, 
-            SignalSpawner sigSpawner, int terrainSeed, AnimationCurve basePerlinCurve ) {
+    public static void CreateMapTile(
+            MapTile tile, int z, int x, int tileDim, float terrainScale, Gradient surfaceGrad, 
+            int terrainSeed, AnimationCurve basePerlinCurve ) {
 
-        
-        Vector3 real_coord = new Vector3( (x * tileDim), 0, (z * tileDim) );
+        tile.real_coord = new Vector3( (x * tileDim), 0, (z * tileDim) );
+        tile.terrainScale = terrainScale;
         
         int meshDim = tileDim + 1;
 
-        MapTile tile = new MapTile( "Mesh(" + real_coord.ToString() + ")" );
+        tile.meshData = MeshGenerator.GenerateTerrainMesh( tile.real_coord, terrainSeed, meshDim, terrainScale, basePerlinCurve );
 
-        MeshData meshData = MeshGenerator.GenerateTerrainMesh( real_coord, terrainSeed, meshDim, terrainScale, basePerlinCurve );
+        tile.colors = TextureGenerator.CreateColorMap( surfaceGrad, tile.meshData.normalizedHeightMap, meshDim );
 
-        tile.meshFilter.mesh = meshData.CreateMesh();
-
-        tile.meshRenderer.material.mainTexture = TextureGenerator.CreateTexture( surfaceGrad, meshData.normalizedHeightMap, meshDim );
-
-        tile.meshCollider.sharedMesh = tile.meshFilter.mesh;
-        tile.meshObj.transform.position = real_coord;
-
-        tile.neutronSignals = sigSpawner.CreateSignals( meshData.normalizedHeightMap, terrainScale, real_coord );
-
-        return tile;
+        tile.fresh = true;
     }
 }
 
 public class MapTile {
 
     private bool isVisible;
+    public bool fresh;
     public Vector3 real_coord;
+    int meshDim;
+    public float terrainScale;
 
     public GameObject meshObj;
     public MeshRenderer meshRenderer;
     public MeshFilter meshFilter;
     public MeshCollider meshCollider;
     public GameObject[] neutronSignals;
+    public MeshData meshData;
+    public Color[] colors;
+    SignalSpawner sigSpawner;
 
-    public MapTile( string tileName ) {
+    public MapTile( string tileName, int tileDim, SignalSpawner sigSpawner ) {
 
         isVisible = false;
+        fresh = false;
+        meshDim = tileDim + 1;
         meshObj = new GameObject( tileName );
         meshRenderer = meshObj.AddComponent<MeshRenderer>();
         meshFilter = meshObj.AddComponent<MeshFilter>();
         meshCollider = meshObj.AddComponent<MeshCollider>();
+        this.sigSpawner = sigSpawner;
     }
 
     public void SetVisible() {
@@ -59,6 +59,17 @@ public class MapTile {
     }
 
     public void Update() {
-        meshObj.SetActive( isVisible );
+
+        if ( fresh ) {
+            meshFilter.mesh = meshData.CreateMesh();
+            meshCollider.sharedMesh = meshFilter.mesh;
+            meshObj.transform.position = real_coord;
+            meshRenderer.material.mainTexture = TextureGenerator.CreateTexture( colors, meshDim );
+            neutronSignals = sigSpawner.CreateSignals( meshData.normalizedHeightMap, terrainScale, real_coord );
+            fresh = false;
+        }
+        if ( isVisible ) {
+            meshObj.SetActive( isVisible );
+        }
     }
 }
