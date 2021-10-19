@@ -16,7 +16,7 @@ public class TerrainController : MonoBehaviour {
     public AnimationCurve basePerlinCurve;
 
     private Dictionary<Vector2, MapTile> tileDict = new Dictionary<Vector2, MapTile>();
-    private ConcurrentQueue<MapTile> readyTiles = new ConcurrentQueue<MapTile>();
+    private ConcurrentQueue<MapTileReady> readyTiles = new ConcurrentQueue<MapTileReady>();
     private ConcurrentQueue<MapTileJob> tileJobs = new ConcurrentQueue<MapTileJob>();
 
     void Start() {
@@ -49,13 +49,10 @@ public class TerrainController : MonoBehaviour {
 
                     tileJobs.Enqueue (
                         new MapTileJob {
-                            tile = tile, z = z, x = x, tileDim = tileDim, terrainScale = terrainScale, 
+                            key = pVec, tile = tile, z = z, x = x, tileDim = tileDim, terrainScale = terrainScale, 
                             surfaceGrad = surfaceGrad, terrainSeed = terrainSeed, basePerlinCurve = basePerlinCurve
                         }
                     );
-                    
-                    tileDict.Add( pVec, tile );
-                    tile.SetVisible();
                 }
             }
         }
@@ -66,12 +63,12 @@ public class TerrainController : MonoBehaviour {
             mt.Value.UnsetVisible();
         }
 
-        MapTile rTile;
+        MapTileReady rTile;
 
         if ( readyTiles.TryDequeue( out rTile ) ) {
 
-            rTile.GenerateTile();
-            // tileDict.Add( rTile );
+            rTile.tile.GenerateTile();
+            tileDict.Add( rTile.key, rTile.tile );
 
         }
     }
@@ -87,14 +84,18 @@ public class TerrainController : MonoBehaviour {
                 MapTileFactory.CreateMapTile( job.tile, job.z, job.x, job.tileDim, 
                     job.terrainScale, job.surfaceGrad, job.terrainSeed, job.basePerlinCurve );
 
-                readyTiles.Enqueue( job.tile );
-
+                readyTiles.Enqueue( 
+                    new MapTileReady {
+                        key = job.key, tile = job.tile
+                    }
+                 );
             }
         }
     }
 }
 
 public struct MapTileJob {
+    public Vector2 key;
     public MapTile tile; 
     public int z; 
     public int x;
@@ -103,4 +104,9 @@ public struct MapTileJob {
     public Gradient surfaceGrad;
     public int terrainSeed;
     public AnimationCurve basePerlinCurve;
+}
+
+public struct MapTileReady {
+    public Vector2 key;
+    public MapTile tile;
 }
