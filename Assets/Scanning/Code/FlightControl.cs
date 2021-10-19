@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
+using System.Threading;
 
 public class FlightControl : MonoBehaviour
 {
@@ -20,7 +22,9 @@ public class FlightControl : MonoBehaviour
     Quaternion noseUp = Quaternion.Euler(-30, 0, 0);
     Quaternion noseDown = Quaternion.Euler(30, 0, 0);
     Quaternion noQuat = Quaternion.Euler(0, 0, 0);
-    
+
+    List<Thread> Listeners = new List<Thread>();
+
     void Update() {
 
         float roll  = Input.GetAxis("Horizontal");
@@ -52,6 +56,10 @@ public class FlightControl : MonoBehaviour
         }
     }
 
+    public void addListener( Thread t ) {
+        Listeners.Add( t ); 
+    }
+
     void OnTriggerEnter( Collider collider ) {
 
         if ( collider.gameObject.CompareTag("NeutronSignal") ) {
@@ -64,6 +72,11 @@ public class FlightControl : MonoBehaviour
     }
 
     void ExitScene() {
+
+        foreach ( Thread t in Listeners ) {
+            t.Abort();
+        }
+
         SceneManager.LoadScene( SceneManager.GetActiveScene().buildIndex + 1 );
     }
 

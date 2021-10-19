@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Collections.Concurrent;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TerrainController : MonoBehaviour {
 
@@ -16,14 +17,18 @@ public class TerrainController : MonoBehaviour {
     public AnimationCurve basePerlinCurve;
 
     private Dictionary<Vector2, MapTile> tileDict = new Dictionary<Vector2, MapTile>();
-    private ConcurrentQueue<MapTileReady> readyTiles = new ConcurrentQueue<MapTileReady>();
+    private ConcurrentQueue<MapTile> readyTiles = new ConcurrentQueue<MapTile>();
     private ConcurrentQueue<MapTileJob> tileJobs = new ConcurrentQueue<MapTileJob>();
 
     void Start() {
 
         tileRenderRange = Mathf.RoundToInt( renderDistance / tileDim );
 
-        new Thread( RunTileGenerator ).Start();
+        Thread t = new Thread( RunTileGenerator );
+        FlightControl fc = FindObjectOfType<FlightControl>();
+        
+        fc.addListener( t );
+        t.Start();
     }
 
     void Update() {
@@ -49,7 +54,7 @@ public class TerrainController : MonoBehaviour {
 
                     tileJobs.Enqueue (
                         new MapTileJob {
-                            key = pVec, tile = tile, z = z, x = x, tileDim = tileDim, terrainScale = terrainScale, 
+                            tile = tile, z = z, x = x, tileDim = tileDim, terrainScale = terrainScale, 
                             surfaceGrad = surfaceGrad, terrainSeed = terrainSeed, basePerlinCurve = basePerlinCurve
                         }
                     );
@@ -65,38 +70,37 @@ public class TerrainController : MonoBehaviour {
             mt.Value.UnsetVisible();
         }
 
-        MapTileReady rTile;
+        MapTile rTile;
 
         if ( readyTiles.TryDequeue( out rTile ) ) {
 
-            rTile.tile.GenerateTile();
-
+            rTile.GenerateTile();
         }
     }
 
     void RunTileGenerator() {
-        
-        while ( true ) {
 
-            MapTileJob job;
+        try {
+            while ( true ) {
 
-            if ( tileJobs.TryDequeue( out job ) ) {
+                MapTileJob job;
 
-                MapTileFactory.CreateMapTile( job.tile, job.z, job.x, job.tileDim, 
-                    job.terrainScale, job.surfaceGrad, job.terrainSeed, job.basePerlinCurve );
+                if ( tileJobs.TryDequeue( out job ) ) {
 
-                readyTiles.Enqueue( 
-                    new MapTileReady {
-                        key = job.key, tile = job.tile
-                    }
-                 );
+                    MapTileFactory.CreateMapTile( job.tile, job.z, job.x, job.tileDim, 
+                        job.terrainScale, job.surfaceGrad, job.terrainSeed, job.basePerlinCurve );
+
+                    readyTiles.Enqueue( job.tile );
+                }
+                Debug.Log( "gen up" );
             }
+        } catch ( ThreadAbortException ex ) {
+            Debug.Log( "Tile generator closed : " + ex.ToString() );
         }
     }
 }
 
 public struct MapTileJob {
-    public Vector2 key;
     public MapTile tile; 
     public int z; 
     public int x;
@@ -105,9 +109,4 @@ public struct MapTileJob {
     public Gradient surfaceGrad;
     public int terrainSeed;
     public AnimationCurve basePerlinCurve;
-}
-
-public struct MapTileReady {
-    public Vector2 key;
-    public MapTile tile;
 }
