@@ -53,6 +53,8 @@ public class TerrainController : MonoBehaviour {
                             surfaceGrad = surfaceGrad, terrainSeed = terrainSeed, basePerlinCurve = basePerlinCurve
                         }
                     );
+
+                    tileDict.Add( pVec, tile );
                 }
             }
         }
@@ -68,7 +70,6 @@ public class TerrainController : MonoBehaviour {
         if ( readyTiles.TryDequeue( out rTile ) ) {
 
             rTile.tile.GenerateTile();
-            tileDict.Add( rTile.key, rTile.tile );
 
         }
     }
