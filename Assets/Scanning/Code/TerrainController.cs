@@ -1,5 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Concurrent;
 using System.Threading;
 using UnityEngine;
 
@@ -15,11 +15,15 @@ public class TerrainController : MonoBehaviour {
     public SignalSpawner sigSpawner;
     public AnimationCurve basePerlinCurve;
 
-    private Dictionary<Vector2, MapTile> mapSecDic = new Dictionary<Vector2, MapTile>();
-    private List<MapTile> mapSecLst = new List<MapTile>();
+    private Dictionary<Vector2, MapTile> tileDict = new Dictionary<Vector2, MapTile>();
+    private ConcurrentQueue<MapTile> readyTiles = new ConcurrentQueue<MapTile>();
+    private ConcurrentQueue<MapTileJob> tileJobs = new ConcurrentQueue<MapTileJob>();
 
     void Start() {
+
         tileRenderRange = Mathf.RoundToInt( renderDistance / tileDim );
+
+        new Thread( RunTileGenerator ).Start();
     }
 
     void Update() {
@@ -29,39 +33,74 @@ public class TerrainController : MonoBehaviour {
         int currTileZ = (int) Mathf.Floor(satellite.transform.position.z / tileDim);
         int currTileX = (int) Mathf.Floor(satellite.transform.position.x / tileDim);
 
-        foreach ( MapTile ms in mapSecLst ) {
-            ms.UnsetVisible();
-        }
-
         for ( int z = ( currTileZ - tileRenderRange ); z <= ( currTileZ + tileRenderRange ); ++z ) 
         {
             for ( int x = ( currTileX - tileRenderRange ); x <= ( currTileX + tileRenderRange ); ++x ) 
             {
                 Vector2 pVec = new Vector2( z, x );
-                if ( mapSecDic.ContainsKey( pVec ) ) 
-                {
-                    mapSecDic[pVec].SetVisible();
-                } 
-                else 
-                {
-                    MapTile tile = new MapTile( "Mesh( " + z + ", " + x + " )", tileDim, sigSpawner );
 
-                    ThreadStart threadStart = delegate {
-                        MapTileFactory.CreateMapTile( tile, z, x, tileDim, terrainScale, surfaceGrad, terrainSeed, basePerlinCurve );
-                    };
+                if ( tileDict.ContainsKey( pVec ) ) {
 
-                    new Thread(threadStart).Start();
+                    tileDict[pVec].SetVisible();
 
-                    mapSecDic.Add( pVec, tile );
-                    mapSecLst.Add( tile );
+                } else {
+
+                    MapTile tile = new MapTile( "Mesh( " + z + ", " + x + " )", sigSpawner );
+
+                    tileJobs.Enqueue (
+                        new MapTileJob {
+                            tile = tile, z = z, x = x, tileDim = tileDim, terrainScale = terrainScale, 
+                            surfaceGrad = surfaceGrad, terrainSeed = terrainSeed, basePerlinCurve = basePerlinCurve
+                        }
+                    );
+                    
+                    tileDict.Add( pVec, tile );
                     tile.SetVisible();
                 }
             }
         }
 
-        foreach ( MapTile ms in mapSecLst ) 
-        {
-            ms.Update();
+        foreach ( KeyValuePair<Vector2, MapTile> mt in tileDict ) {
+      
+            mt.Value.Update();
+            mt.Value.UnsetVisible();
+        }
+
+        MapTile rTile;
+
+        if ( readyTiles.TryDequeue( out rTile ) ) {
+
+            rTile.GenerateTile();
+            // tileDict.Add( rTile );
+
         }
     }
+
+    void RunTileGenerator() {
+        
+        while ( true ) {
+
+            MapTileJob job;
+
+            if ( tileJobs.TryDequeue( out job ) ) {
+
+                MapTileFactory.CreateMapTile( job.tile, job.z, job.x, job.tileDim, 
+                    job.terrainScale, job.surfaceGrad, job.terrainSeed, job.basePerlinCurve );
+
+                readyTiles.Enqueue( job.tile );
+
+            }
+        }
+    }
+}
+
+public struct MapTileJob {
+    public MapTile tile; 
+    public int z; 
+    public int x;
+    public int tileDim;
+    public float terrainScale;
+    public Gradient surfaceGrad;
+    public int terrainSeed;
+    public AnimationCurve basePerlinCurve;
 }
