@@ -16,7 +16,7 @@ public class TerrainController : MonoBehaviour {
     public SignalSpawner sigSpawner;
     public AnimationCurve basePerlinCurve;
 
-    private Dictionary<Vector2, MapTile> tileDict = new Dictionary<Vector2, MapTile>();
+    private Dictionary<Vector2, OpenMapTile> tileDict = new Dictionary<Vector2, OpenMapTile>();
     private ConcurrentQueue<MapTile> readyTiles = new ConcurrentQueue<MapTile>();
     private ConcurrentQueue<MapTileJob> tileJobs = new ConcurrentQueue<MapTileJob>();
 
@@ -26,7 +26,7 @@ public class TerrainController : MonoBehaviour {
 
         Thread t = new Thread( RunTileGenerator );
         FlightControl fc = FindObjectOfType<FlightControl>();
-        
+
         fc.addListener( t );
         t.Start();
     }
@@ -38,7 +38,7 @@ public class TerrainController : MonoBehaviour {
         int currTileZ = (int) Mathf.Floor(satellite.transform.position.z / tileDim);
         int currTileX = (int) Mathf.Floor(satellite.transform.position.x / tileDim);
 
-        for ( int z = ( currTileZ - tileRenderRange ); z <= ( currTileZ + tileRenderRange ); ++z ) 
+        for ( int z = currTileZ; z <= ( currTileZ + tileRenderRange ); ++z ) 
         {
             for ( int x = ( currTileX - tileRenderRange ); x <= ( currTileX + tileRenderRange ); ++x ) 
             {
@@ -46,7 +46,7 @@ public class TerrainController : MonoBehaviour {
 
                 if ( tileDict.ContainsKey( pVec ) ) {
 
-                    tileDict[pVec].SetVisible();
+                    tileDict[pVec].tile.SetVisible();
 
                 } else {
 
@@ -59,22 +59,30 @@ public class TerrainController : MonoBehaviour {
                         }
                     );
 
-                    tileDict.Add( pVec, tile );
+                    OpenMapTile omTile = new OpenMapTile {
+                        key = pVec, tile = tile
+                    };
+
+                    tileDict.Add( pVec, omTile );
                 }
             }
         }
 
-        foreach ( KeyValuePair<Vector2, MapTile> mt in tileDict ) {
+        foreach ( KeyValuePair<Vector2, OpenMapTile> mt in tileDict ) {
       
-            mt.Value.Update();
-            mt.Value.UnsetVisible();
+            mt.Value.tile.Update();
+            mt.Value.tile.UnsetVisible();
+
+            if ( mt.Value.key.x < currTileZ ) { // .x is in this case the Z vector, 2d vs 3d vector
+                tileDict.Remove( mt.Value.key );
+            }
         }
 
-        MapTile rTile;
+        MapTile oTile;
 
-        if ( readyTiles.TryDequeue( out rTile ) ) {
+        if ( readyTiles.TryDequeue( out oTile ) ) {
 
-            rTile.GenerateTile();
+            oTile.GenerateTile();
         }
     }
 
@@ -109,4 +117,9 @@ public struct MapTileJob {
     public Gradient surfaceGrad;
     public int terrainSeed;
     public AnimationCurve basePerlinCurve;
+}
+
+public struct OpenMapTile {
+    public Vector2 key;
+    public MapTile tile;
 }
