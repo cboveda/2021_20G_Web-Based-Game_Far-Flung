@@ -8,12 +8,19 @@ public class LaunchManager : MonoBehaviour
     public GameObject Satellite;
     public Slider AngleSlider;
     public Slider PowerSlider;
-    
+
+    // Placeholder members for win/lose text
+    public Text WinText;
+    public Text LoseText;
+
 
     public void Start()
     {
         Satellite.GetComponent<Launch>().SetAngle(AngleSlider.GetComponent<Slider>().minValue);
         Satellite.GetComponent<Launch>().SetPower(PowerSlider.GetComponent<Slider>().minValue);
+
+        // todo
+        ResetPlaceholderText();
     }
 
     public void OnAngleSliderChanged(float value)
@@ -40,8 +47,65 @@ public class LaunchManager : MonoBehaviour
     {
         Satellite.GetComponent<Launch>().ResetLaunch();
         PathFollower[] pathFollowers = FindObjectsOfType<PathFollower>();
-        foreach (PathFollower p in pathFollowers) {
+        foreach (PathFollower p in pathFollowers)
+        {
             p.ResetPosition();
+        }
+        ResetPlaceholderText();
+    }
+
+    public void OnAsteroidCollisionDetected()
+    {
+        Satellite.GetComponent<Launch>().StopLaunch();
+        PathFollower[] pathFollowers = FindObjectsOfType<PathFollower>();
+        foreach (PathFollower p in pathFollowers)
+        {
+            p.StopPosition();
+        }
+
+        // todo
+        EnablePlaceholderWinText();
+    }
+
+    public void OnSatelliteLeaveWindow()
+    {
+        Satellite.GetComponent<Launch>().StopLaunch();
+        PathFollower[] pathFollowers = FindObjectsOfType<PathFollower>();
+        foreach (PathFollower p in pathFollowers)
+        {
+            p.StopPosition();
+        }
+
+        // todo
+        LoseText.enabled = true;
+    }
+
+    private void ResetPlaceholderText()
+    {
+        if (WinText)
+        {
+            WinText.enabled = false;
+        }
+        if (LoseText)
+        {
+            LoseText.enabled = false;
+        }
+    }
+
+    // Temporary methods for placeholder win/lose text
+    private void EnablePlaceholderWinText()
+    {
+        if (WinText)
+        {
+            WinText.enabled = true;
+        }
+    }
+
+    private void EnablePlaceholderLoseText()
+    {
+        if (LoseText)
+        {
+            LoseText.enabled = true;
         }
     }
 }
