@@ -7,9 +7,17 @@ using UnityEngine;
 
 public static class MeshGenerator
 {  
-    public static MeshData GenerateTerrainMesh( float[,] heightMap, int meshDim, float terrainScale ) {
+    public static MeshData GenerateTerrainMesh( Vector3 real_coord, int terrainSeed, int meshDim, float terrainScale, AnimationCurve basePerlinCurve ) {
 
-        MeshData meshData = new MeshData( meshDim );
+        MeshData meshData = new MeshData( meshDim, terrainScale );
+
+        Vector3 super_coord = real_coord - new Vector3( 1, 0, 1 );
+        int superDim = meshDim + 2;
+
+        meshData.superHeights = TerrainGenerator.GetTerrainHeights( super_coord, superDim, terrainSeed, basePerlinCurve );
+
+        meshData.normalizedHeightMap = getSubsetHeightMapFromSuperset( meshData.superHeights, meshDim, superDim );
+
         int vi = 0;
 
         // set mesh data
@@ -17,11 +25,11 @@ public static class MeshGenerator
         {
             for ( int x = 0; x < meshDim; ++x )
             {
-                meshData.vertices[vi] = new Vector3( x, ( terrainScale * heightMap[x, z] ), z );
+                meshData.vertices[vi] = new Vector3( x, ( terrainScale * meshData.normalizedHeightMap[x, z] ), z );
 
                 if ( x < (meshDim-1) && z < (meshDim-1) ) 
                 {
-                    meshData.AddTriangle( vi, (vi+meshDim), (vi+1) );
+                    meshData.AddTriangle( (vi),   (vi+meshDim), (vi+1)         );
                     meshData.AddTriangle( (vi+1), (vi+meshDim), (vi+meshDim+1) );
                 }
 
@@ -31,4 +39,117 @@ public static class MeshGenerator
         }
         return meshData;
     }
+
+    private static float[,] getSubsetHeightMapFromSuperset( float[,] superHeights, int meshDim, int superDim ) {
+
+        float[,] subHeights = new float[meshDim, meshDim];
+
+        for ( int x = 1; x < ( superDim-1 ); ++x )
+        {
+            for ( int z = 1; z < ( superDim-1 ); ++z )
+            {
+                subHeights[ ( x-1 ), ( z-1 ) ] = superHeights[x,z];
+            }
+        }
+
+        return subHeights;
+    }
+}
+
+public class MeshData {
+
+    public Vector3[] vertices;
+    public Vector3[] normals;
+    public Vector2[] uvs;
+    public float[,] normalizedHeightMap;
+    public float[,] superHeights;
+    public int[] triangles;
+
+    int triangleIndex;
+    int meshDim;
+    float terrainScale;
+
+
+    public MeshData( int meshDim, float terrainScale ) {
+        vertices = new Vector3[ meshDim * meshDim ];
+        uvs = new Vector2[ meshDim * meshDim ];
+        triangles = new int[ ( meshDim - 1 ) * ( meshDim - 1 ) * 6 ];
+        triangleIndex = 0;
+        this.meshDim = meshDim;
+        this.terrainScale = terrainScale;
+    }
+
+    public void AddTriangle( int a, int b, int c ) {
+        triangles[triangleIndex] = a;
+        triangles[++triangleIndex] = b;
+        triangles[++triangleIndex] = c;
+        triangleIndex++;
+    }
+
+    public Mesh CreateMesh() {
+        Mesh mesh = new Mesh();
+        mesh.vertices = vertices;
+        mesh.triangles = triangles;
+        mesh.uv = uvs;
+
+        mesh.RecalculateNormals();
+        mesh.normals = UpdateBorderNormals( mesh.normals );
+        
+        return mesh;
+    }
+
+    Vector3[] UpdateBorderNormals( Vector3[] normals ) {
+
+        
+        for ( int x = 0; x < meshDim; ++x )
+        {
+            int z = 0;
+
+            normals[ x + (z * meshDim) ] = CalcNormalFromPoints( (x+1), (z+1) );
+            
+            z = ( meshDim-1 );
+
+            normals[ x + (z * meshDim) ] = CalcNormalFromPoints( (x+1), (z+1) );
+        }
+        
+        for ( int z = 0; z < meshDim; ++z )
+        {
+            int x = 0;
+            
+            normals[ x + (z * meshDim) ] = CalcNormalFromPoints( (x+1), (z+1) );
+
+            x = ( meshDim-1 );
+
+            normals[ x + (z * meshDim) ] = CalcNormalFromPoints( (x+1), (z+1) );
+        }
+
+        return normals;
+
+    }
+
+    Vector3 CalcNormalFromPoints( int x, int z ) {
+
+        Vector3 norm = AdjacentTriangleNormal( Vscale( x, z ), Vscale( x-1, z ), Vscale( x-1, z+1 ) );
+
+        norm += AdjacentTriangleNormal( Vscale( x, z ), Vscale( x-1, z+1 ), Vscale( x  , z+1 ) );
+        norm += AdjacentTriangleNormal( Vscale( x, z ), Vscale( x  , z+1 ), Vscale( x+1, z   ) );
+        norm += AdjacentTriangleNormal( Vscale( x, z ), Vscale( x+1, z   ), Vscale( x+1, z-1 ) );
+        norm += AdjacentTriangleNormal( Vscale( x, z ), Vscale( x+1, z-1 ), Vscale( x  , z-1 ) );
+        norm += AdjacentTriangleNormal( Vscale( x, z ), Vscale( x  , z-1 ), Vscale( x-1, z   ) );
+
+        return norm.normalized;
+    }
+
+    Vector3 Vscale( int x, int z ) {
+        
+        return new Vector3( x, terrainScale * superHeights[x, z], z );
+    }
+
+    Vector3 AdjacentTriangleNormal( Vector3 r, Vector3 a, Vector3 b ) {
+
+        Vector3 ra = a - r;
+        Vector3 rb = b - r;
+        return Vector3.Cross( ra, rb ).normalized;
+    }
+
 }

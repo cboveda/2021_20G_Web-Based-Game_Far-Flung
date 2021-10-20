@@ -247,7 +247,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileMeshDim: 225
   renderDistance: 500
-  terrainScale: 150
+  terrainScale: 200
+  terrainSeed: 20
   surfaceGrad:
     serializedVersion: 2
     key0: {r: 0, g: 0, b: 0, a: 1}
@@ -279,6 +280,75 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   satellite: {fileID: 1681562931}
   sigSpawner: {fileID: 989866034}
+  basePerlinCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1.3867652
+      outSlope: 1.3867652
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.18445633
+      value: 0.25579762
+      inSlope: 0.6439107
+      outSlope: 0.6439107
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.28137407
+    - serializedVersion: 3
+      time: 0.4008332
+      value: 0.40369397
+      inSlope: 0.55538946
+      outSlope: 0.55538946
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.26006958
+    - serializedVersion: 3
+      time: 0.6467702
+      value: 0.4698966
+      inSlope: 0.16396824
+      outSlope: 0.16396824
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.46937653
+    - serializedVersion: 3
+      time: 0.79504675
+      value: 0.6029331
+      inSlope: 2.3146675
+      outSlope: 2.3146675
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.061850727
+      outWeight: 0.10293365
+    - serializedVersion: 3
+      time: 0.88708913
+      value: 0.8717945
+      inSlope: 3.1784093
+      outSlope: 3.1784093
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.28512034
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0.36501095
+      outSlope: 0.36501095
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.4567293
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!4 &916778657
 Transform:
   m_ObjectHideFlags: 0
@@ -371,10 +441,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 053b128d7adec0cf694dccbfe73642f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 50
-  rollSpeed: 75
-  pitchSpeed: 75
+  speed: 0
   maxAltitude: 500
+  hozSlerpSpped: 0.498
+  vertSlerpSpeed: 0.486
+  rlTranslate: {x: 10, y: 0, z: 0}
+  velocity: {x: 0, y: 0, z: 0}
+  smoothTime: 0.3
 --- !u!65 &1681562933
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -565,4 +638,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lead: {fileID: 1681562931}
   smoothTime: 0.1
-  turnspeed: 0.6

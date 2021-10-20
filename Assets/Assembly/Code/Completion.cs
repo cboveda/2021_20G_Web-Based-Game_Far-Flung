@@ -1,10 +1,16 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityEngine.Events;
+
 
 public class Completion : MonoBehaviour
 {
+    public TextAsset completionTextAsset;
+    public UnityEvent nextScene;
+
     public void CheckCompletion()
     {
         foreach (Transform child in transform)
@@ -16,13 +22,12 @@ public class Completion : MonoBehaviour
                 Debug.Log(child.name + " is " + slotCompleted);
                 if (!slotCompleted)
                 {
-                    return;
+                    return; //does nothing if one of the slots is incomplete
                 }
             }
             
-        }
-        // GameObject textPanel = Resources.FindObjectsOfTypeAll<TextPanel>()[0].gameObject;
-        // textPanel.SetActive(true);
-        // StartCoroutine(textPanel.GetComponentInChildren<TextPanelButton>().CloseOnClick(() => Debug.Log("All Slots Completed")));
+        } 
+        TextPanel textPanel = Resources.FindObjectsOfTypeAll<TextPanel>()[0];
+        textPanel.ShowText(completionTextAsset, nextScene.Invoke);
     }
 }

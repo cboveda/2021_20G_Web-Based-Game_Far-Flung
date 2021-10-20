@@ -9,8 +9,8 @@ EditorBuildSettings:
     path: Assets/Framework/Scenes/scene0.unity
     guid: 69d6c260cbe9f3e4c9cf1808042a18b8
   - enabled: 1
-    path: Assets/Framework/Scenes/scene1.unity
-    guid: c04eed336ccffd749b5333bb8d4f4dd9
+    path: Assets/Assembly/Scenes/Assembly.unity
+    guid: 051981de1bb5d3e4a96cde09828909ef
   - enabled: 1
     path: Assets/Framework/Scenes/scene2.unity
     guid: f648057acedd0764db5f51a9151943d1
