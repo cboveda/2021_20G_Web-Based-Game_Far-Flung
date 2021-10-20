@@ -23,8 +23,6 @@ public class FlightControl : MonoBehaviour
     Quaternion noseDown = Quaternion.Euler(30, 0, 0);
     Quaternion noQuat = Quaternion.Euler(0, 0, 0);
 
-    List<TerrainController> Listeners = new List<TerrainController>();
-
     void Update() {
 
         float roll  = Input.GetAxis("Horizontal");
@@ -56,10 +54,6 @@ public class FlightControl : MonoBehaviour
         }
     }
 
-    public void addListener( TerrainController t ) {
-        Listeners.Add( t ); 
-    }
-
     void OnTriggerEnter( Collider collider ) {
 
         if ( collider.gameObject.CompareTag("NeutronSignal") ) {
@@ -72,13 +66,6 @@ public class FlightControl : MonoBehaviour
     }
 
     void ExitScene() {
-
-        foreach ( TerrainController t in Listeners ) {
-            Debug.Log( " Attempting to kill... " );
-            t.StopGenerator();
-        }
-
         SceneManager.LoadScene( SceneManager.GetActiveScene().buildIndex + 1 );
     }
-
 }
