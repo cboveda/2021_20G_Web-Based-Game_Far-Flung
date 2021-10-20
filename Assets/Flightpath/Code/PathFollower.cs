@@ -8,6 +8,7 @@ public class PathFollower : MonoBehaviour
     private Vector2 _position;
     private bool _unlocked;
     private bool _resetRequested;
+    private bool _stopRequested;
     public Transform Path;
     public float Speed;
 
@@ -17,19 +18,24 @@ public class PathFollower : MonoBehaviour
         InitializePosition();
     }
 
-    private void FixedUpdate() 
+    private void FixedUpdate()
     {
+        if (_stopRequested)
+        {
+            StopOrbitter();
+            StopCoroutine("Move");
+        }
         if (_resetRequested)
         {
-            StopCoroutine("Move");
             InitializePosition();
-        }    
+        }
     }
 
     public void BeginMovement()
     {
         if (_unlocked)
         {
+            StartOrbitter();
             StartCoroutine("Move");
         }
     }
@@ -64,7 +70,13 @@ public class PathFollower : MonoBehaviour
 
     public void ResetPosition()
     {
+        _stopRequested = true;
         _resetRequested = true;
+    }
+
+    public void StopPosition()
+    {
+        _stopRequested = true;
     }
 
     public void InitializePosition()
@@ -72,11 +84,36 @@ public class PathFollower : MonoBehaviour
         _t = 0f;
         _unlocked = true;
         _resetRequested = false;
+        _stopRequested = false;
         transform.position = Path.GetChild(0).position;
     }
 
     public bool IsUnlocked()
     {
         return _unlocked;
+    }
+
+    public void StartOrbitter()
+    {
+        if (transform.childCount > 0)
+        {
+            Orbit orbitter = transform.GetChild(0).GetComponent<Orbit>();
+            if (orbitter != null)
+            {
+                orbitter.orbitting = true;
+            }
+        }
+    }
+
+    public void StopOrbitter()
+    {
+        if (transform.childCount > 0)
+        {
+            Orbit orbitter = transform.GetChild(0).GetComponent<Orbit>();
+            if (orbitter != null)
+            {
+                orbitter.orbitting = false;
+            }
+        }
     }
 }
