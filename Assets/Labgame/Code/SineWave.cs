@@ -5,7 +5,7 @@ using UnityEngine;
 public class SineWave : MonoBehaviour
 {
     public LineRenderer wave;
-    bool isInitialized;
+    public bool isInitialized;
     Material myMat;
     public float amplitude;
     public float frequency;
