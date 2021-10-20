@@ -1,7 +1,5 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Collections.Generic;
-using System.Threading;
 
 public class FlightControl : MonoBehaviour
 {

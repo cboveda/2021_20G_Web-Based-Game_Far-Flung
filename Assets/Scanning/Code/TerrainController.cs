@@ -62,7 +62,6 @@ public class TerrainController : MonoBehaviour {
     
             mt.Value.tile.Update();
             mt.Value.tile.UnsetVisible();
-            
         }
 
         if ( stageTwo.Count > 0 ) {
