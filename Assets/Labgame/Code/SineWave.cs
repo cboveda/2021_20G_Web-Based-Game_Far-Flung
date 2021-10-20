@@ -21,11 +21,14 @@ public class SineWave : MonoBehaviour
     const float SPEED = 1;
     const float WAVE_LERP_AMOUNT = 0.001f;
     const float WAVE_LERP_ROUNDING_MULTIPLIER = 1000.0f;
+    const float LERP_SPEED = 1.0f;
+    private float timer;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        timer = 0.0f;
         
         
 
@@ -66,8 +69,8 @@ public class SineWave : MonoBehaviour
             }
         }
 
-        waveLERP();
-        
+        //waveLERP();
+        newLERP();
 
 
         
@@ -127,6 +130,21 @@ public class SineWave : MonoBehaviour
                 displayFrequency -= WAVE_LERP_AMOUNT;
                 displayFrequency = Mathf.Round(displayFrequency * WAVE_LERP_ROUNDING_MULTIPLIER) * WAVE_LERP_AMOUNT;
             }
+        }
+    }
+
+    private void newLERP()
+    {
+        timer += 0.5f * Time.deltaTime;
+        displayAmplitude = Mathf.Lerp(displayAmplitude, amplitude, timer);
+        displayFrequency = Mathf.Lerp(displayFrequency, frequency, timer);
+
+        float testFrequency = Mathf.Round(displayFrequency * 10) * 0.1f;
+        float testAmplitude = Mathf.Round(displayAmplitude * 10) * 0.1f;
+
+        if (displayFrequency == frequency && displayAmplitude == amplitude)
+        {
+            timer = 0;
         }
     }
 
