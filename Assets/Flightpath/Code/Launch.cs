@@ -22,9 +22,7 @@ public class Launch : MonoBehaviour
 
     public void InitializePosition()
     {
-        _attractor.Affected = false;
-        _launched = false;
-        _body.velocity = Vector3.zero;
+        StopLaunch();
         this.transform.position = new Vector3 (StartX, StartY, 0);
     }
     public void DoLaunch()
@@ -40,6 +38,13 @@ public class Launch : MonoBehaviour
     public void ResetLaunch()
     {
         InitializePosition();
+    }
+
+    public void StopLaunch()
+    {
+        _attractor.Affected = false;
+        _launched = false;
+        _body.velocity = Vector3.zero;
     }
     
     public void SetAngle(float angle)
