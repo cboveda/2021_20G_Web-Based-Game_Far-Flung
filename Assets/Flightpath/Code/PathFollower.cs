@@ -18,22 +18,24 @@ public class PathFollower : MonoBehaviour
         InitializePosition();
     }
 
-    private void FixedUpdate() 
+    private void FixedUpdate()
     {
         if (_stopRequested)
         {
+            StopOrbitter();
             StopCoroutine("Move");
         }
         if (_resetRequested)
         {
             InitializePosition();
-        }    
+        }
     }
 
     public void BeginMovement()
     {
         if (_unlocked)
         {
+            StartOrbitter();
             StartCoroutine("Move");
         }
     }
@@ -89,5 +91,29 @@ public class PathFollower : MonoBehaviour
     public bool IsUnlocked()
     {
         return _unlocked;
+    }
+
+    public void StartOrbitter()
+    {
+        if (transform.childCount > 0)
+        {
+            Orbit orbitter = transform.GetChild(0).GetComponent<Orbit>();
+            if (orbitter != null)
+            {
+                orbitter.orbitting = true;
+            }
+        }
+    }
+
+    public void StopOrbitter()
+    {
+        if (transform.childCount > 0)
+        {
+            Orbit orbitter = transform.GetChild(0).GetComponent<Orbit>();
+            if (orbitter != null)
+            {
+                orbitter.orbitting = false;
+            }
+        }
     }
 }

@@ -14,6 +14,9 @@ public class SatelliteCollision : MonoBehaviour
     }
 
     private void OnBecameInvisible() {
-        EventSystem.GetComponent<LaunchManager>().OnSatelliteLeaveWindow();
+        if (EventSystem)
+        {
+            EventSystem.GetComponent<LaunchManager>().OnSatelliteLeaveWindow();
+        }
     }
 }

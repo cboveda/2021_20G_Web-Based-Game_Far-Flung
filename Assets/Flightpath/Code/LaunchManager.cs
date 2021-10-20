@@ -12,13 +12,14 @@ public class LaunchManager : MonoBehaviour
     // Placeholder members for win/lose text
     public Text WinText;
     public Text LoseText;
+    private bool _sceneAdvanceStart;
 
 
     public void Start()
     {
         Satellite.GetComponent<Launch>().SetAngle(AngleSlider.GetComponent<Slider>().minValue);
         Satellite.GetComponent<Launch>().SetPower(PowerSlider.GetComponent<Slider>().minValue);
-
+        _sceneAdvanceStart = false;
         // todo
         ResetPlaceholderText();
     }
@@ -40,6 +41,7 @@ public class LaunchManager : MonoBehaviour
         foreach (PathFollower p in pathFollowers)
         {
             p.BeginMovement();
+            p.StartOrbitter();
         }
     }
 
@@ -50,6 +52,7 @@ public class LaunchManager : MonoBehaviour
         foreach (PathFollower p in pathFollowers)
         {
             p.ResetPosition();
+            p.StopOrbitter();
         }
         ResetPlaceholderText();
     }
@@ -61,8 +64,13 @@ public class LaunchManager : MonoBehaviour
         foreach (PathFollower p in pathFollowers)
         {
             p.StopPosition();
+            p.StopOrbitter();
         }
 
+        if (!_sceneAdvanceStart)
+        {
+            StartCoroutine("DelayedSceneAdvance");
+        }
         // todo
         EnablePlaceholderWinText();
     }
@@ -74,6 +82,7 @@ public class LaunchManager : MonoBehaviour
         foreach (PathFollower p in pathFollowers)
         {
             p.StopPosition();
+            p.StopOrbitter();
         }
 
         // todo
@@ -108,4 +117,12 @@ public class LaunchManager : MonoBehaviour
             LoseText.enabled = true;
         }
     }
+
+    private IEnumerator DelayedSceneAdvance()
+    {
+        _sceneAdvanceStart = true;
+        yield return new WaitForSeconds(3.0f);
+        GetComponent<SceneControls>().Next();
+    }
+
 }
