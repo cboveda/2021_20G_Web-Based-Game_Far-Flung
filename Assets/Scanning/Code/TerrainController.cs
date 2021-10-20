@@ -2,11 +2,11 @@ using System.Collections.Generic;
 using System.Collections.Concurrent;
 using System.Threading;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using System;
 
 public class TerrainController : MonoBehaviour {
 
-    public int tileDim = 225;
+    public int tileDim = 100;
     public int renderDistance = 500;
     public float terrainScale = 150;
     public static int tileRenderRange;
@@ -20,20 +20,21 @@ public class TerrainController : MonoBehaviour {
     private ConcurrentQueue<MapTile> readyTiles = new ConcurrentQueue<MapTile>();
     private ConcurrentQueue<MapTileJob> tileJobs = new ConcurrentQueue<MapTileJob>();
 
+    volatile bool genProcess;
+
     void Start() {
 
         tileRenderRange = Mathf.RoundToInt( renderDistance / tileDim );
 
-        Thread t = new Thread( RunTileGenerator );
-        FlightControl fc = FindObjectOfType<FlightControl>();
+        genProcess = true;
 
-        fc.addListener( t );
-        t.Start();
+        new Thread( RunTileGenerator ).Start();
+
+        FlightControl fc = FindObjectOfType<FlightControl>();
+        fc.addListener( this );
     }
 
     void Update() {
-        
-        // calculate the coordinates of 9 adjacent tiles, not memory efficient;
 
         int currTileZ = (int) Mathf.Floor(satellite.transform.position.z / tileDim);
         int currTileX = (int) Mathf.Floor(satellite.transform.position.x / tileDim);
@@ -67,16 +68,18 @@ public class TerrainController : MonoBehaviour {
                 }
             }
         }
+        try {
+            foreach ( KeyValuePair<Vector2, OpenMapTile> mt in tileDict ) {
+        
+                if ( mt.Value.key.x < currTileZ ) { // .x is in this case the Z vector, 2d vs 3d vectors
+                    tileDict.Remove( mt.Value.key );
+                    mt.Value.tile.UnsetVisible();
+                }
 
-        foreach ( KeyValuePair<Vector2, OpenMapTile> mt in tileDict ) {
-      
-            mt.Value.tile.Update();
-            mt.Value.tile.UnsetVisible();
-
-            if ( mt.Value.key.x < currTileZ ) { // .x is in this case the Z vector, 2d vs 3d vector
-                tileDict.Remove( mt.Value.key );
+                mt.Value.tile.Update();
+                mt.Value.tile.UnsetVisible();
             }
-        }
+        } catch ( InvalidOperationException ) {} // class contained by OpenMapTile modified on other thread
 
         MapTile oTile;
 
@@ -86,25 +89,25 @@ public class TerrainController : MonoBehaviour {
         }
     }
 
+    public void StopGenerator() {
+        genProcess = false;
+    }
+
     void RunTileGenerator() {
 
-        try {
-            while ( true ) {
+        while ( genProcess ) {
 
-                MapTileJob job;
+            MapTileJob job;
 
-                if ( tileJobs.TryDequeue( out job ) ) {
+            if ( tileJobs.TryDequeue( out job ) ) {
 
-                    MapTileFactory.CreateMapTile( job.tile, job.z, job.x, job.tileDim, 
-                        job.terrainScale, job.surfaceGrad, job.terrainSeed, job.basePerlinCurve );
+                MapTileFactory.CreateMapTile( job.tile, job.z, job.x, job.tileDim, 
+                    job.terrainScale, job.surfaceGrad, job.terrainSeed, job.basePerlinCurve );
 
-                    readyTiles.Enqueue( job.tile );
-                }
-                Debug.Log( "gen up" );
+                readyTiles.Enqueue( job.tile );
             }
-        } catch ( ThreadAbortException ex ) {
-            Debug.Log( "Tile generator closed : " + ex.ToString() );
         }
+        Debug.Log( " Stopped tile generator. " );
     }
 }
 
@@ -121,5 +124,5 @@ public struct MapTileJob {
 
 public struct OpenMapTile {
     public Vector2 key;
-    public MapTile tile;
+    public volatile MapTile tile;
 }

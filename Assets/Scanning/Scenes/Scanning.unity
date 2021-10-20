@@ -245,10 +245,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afad57b0f006967b5ab50e5661a572bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileDim: 225
+  tileDim: 100
   renderDistance: 500
   terrainScale: 200
-  terrainSeed: 45
+  terrainSeed: 60
   surfaceGrad:
     serializedVersion: 2
     key0: {r: 0, g: 0, b: 0, a: 1}

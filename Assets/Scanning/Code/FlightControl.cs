@@ -23,7 +23,7 @@ public class FlightControl : MonoBehaviour
     Quaternion noseDown = Quaternion.Euler(30, 0, 0);
     Quaternion noQuat = Quaternion.Euler(0, 0, 0);
 
-    List<Thread> Listeners = new List<Thread>();
+    List<TerrainController> Listeners = new List<TerrainController>();
 
     void Update() {
 
@@ -40,9 +40,9 @@ public class FlightControl : MonoBehaviour
             transform.rotation = Quaternion.Slerp( transform.rotation, noQuat, hozSlerpSpped );
         }
 
-        if ( pitch > 0 ) {
+        if ( pitch < 0 ) {
             transform.rotation = Quaternion.Slerp( transform.rotation, noseUp, vertSlerpSpeed );
-        } else if ( pitch < 0 ) {
+        } else if ( pitch > 0 ) {
             transform.rotation = Quaternion.Slerp( transform.rotation, noseDown, vertSlerpSpeed );
         } else {
             transform.rotation = Quaternion.Slerp( transform.rotation, noQuat, vertSlerpSpeed );
@@ -56,7 +56,7 @@ public class FlightControl : MonoBehaviour
         }
     }
 
-    public void addListener( Thread t ) {
+    public void addListener( TerrainController t ) {
         Listeners.Add( t ); 
     }
 
@@ -73,8 +73,9 @@ public class FlightControl : MonoBehaviour
 
     void ExitScene() {
 
-        foreach ( Thread t in Listeners ) {
-            t.Abort();
+        foreach ( TerrainController t in Listeners ) {
+            Debug.Log( " Attempting to kill... " );
+            t.StopGenerator();
         }
 
         SceneManager.LoadScene( SceneManager.GetActiveScene().buildIndex + 1 );
