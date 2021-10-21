@@ -91,10 +91,8 @@ public class MeshData {
         mesh.vertices = vertices;
         mesh.triangles = triangles;
         mesh.uv = uvs;
-
         mesh.RecalculateNormals();
         mesh.normals = UpdateBorderNormals( mesh.normals );
-        
         return mesh;
     }
 
@@ -124,7 +122,6 @@ public class MeshData {
         }
 
         return normals;
-
     }
 
     Vector3 CalcNormalFromPoints( int x, int z ) {

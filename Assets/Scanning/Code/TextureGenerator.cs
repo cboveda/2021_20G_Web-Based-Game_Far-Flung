@@ -2,12 +2,12 @@ using UnityEngine;
 
 public static class TextureGenerator
 {
-    public static Texture2D CreateTexture( Gradient grad, float[,] heights, int tileDim )
+    public static Texture2D CreateTexture( Color[] colors, int tileDim )
     {
         Texture2D texture = new Texture2D(tileDim, tileDim);
 		texture.wrapMode = TextureWrapMode.Clamp;
         texture.filterMode = FilterMode.Point;
-        texture.SetPixels( CreateColorMap( grad, heights, tileDim ) );
+        texture.SetPixels( colors );
         texture.Apply();
         return texture;
     }

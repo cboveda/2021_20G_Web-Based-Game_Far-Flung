@@ -20,7 +20,7 @@ public class FlightControl : MonoBehaviour
     Quaternion noseUp = Quaternion.Euler(-30, 0, 0);
     Quaternion noseDown = Quaternion.Euler(30, 0, 0);
     Quaternion noQuat = Quaternion.Euler(0, 0, 0);
-    
+
     void Update() {
 
         float roll  = Input.GetAxis("Horizontal");
@@ -36,9 +36,9 @@ public class FlightControl : MonoBehaviour
             transform.rotation = Quaternion.Slerp( transform.rotation, noQuat, hozSlerpSpped );
         }
 
-        if ( pitch > 0 ) {
+        if ( pitch < 0 ) {
             transform.rotation = Quaternion.Slerp( transform.rotation, noseUp, vertSlerpSpeed );
-        } else if ( pitch < 0 ) {
+        } else if ( pitch > 0 ) {
             transform.rotation = Quaternion.Slerp( transform.rotation, noseDown, vertSlerpSpeed );
         } else {
             transform.rotation = Quaternion.Slerp( transform.rotation, noQuat, vertSlerpSpeed );
@@ -66,5 +66,4 @@ public class FlightControl : MonoBehaviour
     void ExitScene() {
         SceneManager.LoadScene( SceneManager.GetActiveScene().buildIndex + 1 );
     }
-
 }
