@@ -10,6 +10,7 @@ public class FlightControl : MonoBehaviour
     public Text altitude;
     public Text signals;
     int signals_collected = 0;
+    public int limit = 10;
 
     [Range(0,1)]
     public float hozSlerpSpped;
@@ -29,7 +30,8 @@ public class FlightControl : MonoBehaviour
     void Update() {
 
         altitude.text = Mathf.RoundToInt(transform.position.y).ToString();
-        signals.text = signals_collected.ToString();
+        signals.text = signals_collected.ToString() + "/" + limit.ToString();
+        
 
         float roll  = Input.GetAxis("Horizontal");
         float pitch = Input.GetAxis("Vertical");
