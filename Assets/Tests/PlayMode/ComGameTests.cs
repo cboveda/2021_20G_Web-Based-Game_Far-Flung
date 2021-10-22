@@ -11,38 +11,48 @@ using UnityEngine.UI;
 public class ComGameTests
 {
 
-    [Test]
-    public void TestSceneSwitching()
+    [UnityTest]
+    
+    public IEnumerator TestSceneSwitching()
     {
+        // Verify scenes are switching correctly.
+
         Dictionary<string, string> testScenes = new Dictionary<string, string>()
-           {
-              {"comGame", "comGameWin"},
+        {
+              {"comGame", "comGame"},
               {"comGameWin", "comUnscrambleIntro"},
               {"comUnscrambleIntro", "comUnscramble"}
-           };
+        };
 
         GameObject ob = new GameObject();
         ob.AddComponent<SceneActions>();
         SceneActions sceneObject = GameObject.FindObjectOfType<SceneActions>();
 
+        string sceneName = "";
+        string nextScene = "";
+        Scene scene;
         foreach (KeyValuePair<string, string> testScene in testScenes)
         {
-            //Debug.Log(testScene.Key);
-            //Debug.Log(testScene.Value);
-
             // set the test scene
             SceneManager.LoadScene(testScene.Key);
+            yield return new WaitForSeconds(0.2f); // delay to load
+            
+            // verify the test scene was loaded
+            scene = SceneManager.GetActiveScene();
+            yield return new WaitForSeconds(0.2f); // delay to get active scene
+            sceneName = scene.name;
+            Assert.AreEqual(testScene.Key, sceneName);
 
             // switch to the next scene
             sceneObject.StartGameScene();
+            yield return new WaitForSeconds(0.2f); // delay to switch scene
 
-            // get the scene that has been switched to
-            Scene scenes = SceneManager.GetActiveScene();
-            string sceneName = scenes.name;
-            Debug.Log(sceneName);
+            // verify the next scene was loaded
+            scene = SceneManager.GetActiveScene();
+            yield return new WaitForSeconds(0.2f); // delay to get active scene
+            nextScene = scene.name;
+            Assert.AreEqual(testScene.Value, nextScene);
 
-            // verify next scene is correct
-            Assert.AreEqual(testScene.Value, sceneName);
         }
     }
 }
