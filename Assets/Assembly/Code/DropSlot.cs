@@ -14,7 +14,7 @@ public class DropSlot : MonoBehaviour, IDropHandler
         {
             eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition =
                 GetComponent<RectTransform>().anchoredPosition + slotOffset;
-            Debug.Log("User has placed " + slotMatch.name);
+            // Debug.Log("User has placed " + slotMatch.name);
             Resources.FindObjectsOfTypeAll<TextPanel>()[0].ShowText(completionTextAsset, CallParentCompletion);
             
 
