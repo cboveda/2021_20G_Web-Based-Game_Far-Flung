@@ -376,13 +376,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 818508278}
-  m_LocalRotation: {x: 0.7380481, y: -0.36388716, z: -0.25127295, w: 0.50964016}
-  m_LocalPosition: {x: 0, y: 100, z: 0}
+  m_LocalRotation: {x: 0.47623324, y: -0.7212507, z: 0.037256937, w: 0.50160867}
+  m_LocalPosition: {x: 0, y: 160, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 34.709, y: -115.527, z: -105.212}
+  m_LocalEulerAnglesHint: {x: 32.107, y: -125.676, z: -50.075}
 --- !u!1001 &849347423
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -434,6 +434,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: e280168549324e34593087dd7e112f1b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c1a6ffafc716218f6964f6227c685518, type: 2}
     - target: {fileID: 919132149155446097, guid: e280168549324e34593087dd7e112f1b, type: 3}
       propertyPath: m_Name
       value: Psyche
