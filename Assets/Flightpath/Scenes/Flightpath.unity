@@ -210,7 +210,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 65087356}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 41d6d8493d233cb4898f1003f3d9e431, type: 3}
   m_Name: 
@@ -218,7 +218,7 @@ MonoBehaviour:
   Satellite: {fileID: 569487272}
   AngleSlider: {fileID: 472336773}
   PowerSlider: {fileID: 1957714126}
-  TrajectoryArrow: {fileID: 0}
+  TrajectoryArrow: {fileID: 207803552}
   WinText: {fileID: 262924679}
   LoseText: {fileID: 325797910}
 --- !u!1001 &128958733
@@ -475,8 +475,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Satellite: {fileID: 569487278}
-  Earth: {fileID: 1063351489}
-  visible: 0
 --- !u!212 &207803553
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -521,7 +519,7 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
+  m_DrawMode: 1
   m_Size: {x: 2.21, y: 5.58}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
@@ -535,13 +533,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 207803551}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 50, y: 50, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 1127, y: -521, z: 0}
+  m_LocalScale: {x: 30, y: 25, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 11
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!1 &262924678
 GameObject:
   m_ObjectHideFlags: 0
@@ -2470,7 +2468,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1422191761}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.54, y: -6.8, z: 0}
+  m_LocalPosition: {x: -5.07, y: -6.17, z: 0}
   m_LocalScale: {x: 120, y: 120, z: 120}
   m_Children: []
   m_Father: {fileID: 2110831841}
