@@ -26,10 +26,13 @@ public class FlightpathLaunchTest
         satellite.GetComponent<Launch>().SetAngle(0f);
         satellite.GetComponent<Launch>().SetPower(1.0f);
 
+
+
         launchManager = new GameObject();
         launchManager.AddComponent<LaunchManager>();
         var launchManagerComponent = launchManager.GetComponent<LaunchManager>();
         launchManagerComponent.Satellite = satellite;
+
         GameObject angleSlider = new GameObject();
         angleSlider.AddComponent<Slider>();
         angleSlider.GetComponent<Slider>().minValue = 10f;
@@ -38,6 +41,11 @@ public class FlightpathLaunchTest
         powerSlider.GetComponent<Slider>().minValue = 10f;
         launchManagerComponent.AngleSlider = angleSlider.GetComponent<Slider>();
         launchManagerComponent.PowerSlider = angleSlider.GetComponent<Slider>();
+        GameObject arrow = new GameObject();
+        arrow.AddComponent<Trajectory>();
+        arrow.GetComponent<Trajectory>().Satellite = satellite.GetComponent<Launch>();
+        arrow.AddComponent<SpriteRenderer>();
+        launchManagerComponent.TrajectoryArrow = arrow.GetComponent<Trajectory>();
         launchManagerComponent.Start();
 
         path = new GameObject();
