@@ -8,6 +8,7 @@ public class LaunchManager : MonoBehaviour
     public GameObject Satellite;
     public Slider AngleSlider;
     public Slider PowerSlider;
+    public Trajectory TrajectoryArrow;
 
     // Placeholder members for win/lose text
     public Text WinText;
@@ -19,6 +20,8 @@ public class LaunchManager : MonoBehaviour
     {
         Satellite.GetComponent<Launch>().SetAngle(AngleSlider.GetComponent<Slider>().minValue);
         Satellite.GetComponent<Launch>().SetPower(PowerSlider.GetComponent<Slider>().minValue);
+        TrajectoryArrow.GetComponent<SpriteRenderer>().enabled = true;
+        TrajectoryArrow.SetPowerRange(PowerSlider.GetComponent<Slider>().minValue, PowerSlider.GetComponent<Slider>().maxValue);
         _sceneAdvanceStart = false;
         // todo
         ResetPlaceholderText();
@@ -32,10 +35,12 @@ public class LaunchManager : MonoBehaviour
     public void OnPowerSliderChanged(float value)
     {
         Satellite.GetComponent<Launch>().SetPower(value);
+
     }
 
     public void OnLaunchButtonClicked()
     {
+        TrajectoryArrow.GetComponent<SpriteRenderer>().enabled = false;
         Satellite.GetComponent<Launch>().DoLaunch();
         PathFollower[] pathFollowers = FindObjectsOfType<PathFollower>();
         foreach (PathFollower p in pathFollowers)
@@ -48,6 +53,7 @@ public class LaunchManager : MonoBehaviour
     public void OnResetButtonClicked()
     {
         Satellite.GetComponent<Launch>().ResetLaunch();
+        TrajectoryArrow.GetComponent<SpriteRenderer>().enabled = true;
         PathFollower[] pathFollowers = FindObjectsOfType<PathFollower>();
         foreach (PathFollower p in pathFollowers)
         {
