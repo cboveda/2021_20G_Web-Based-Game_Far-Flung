@@ -62,6 +62,7 @@ public class TerrainController : MonoBehaviour {
     
             mt.Value.tile.Update();
             mt.Value.tile.UnsetVisible();
+            
         }
 
         if ( stageTwo.Count > 0 ) {
@@ -93,5 +94,5 @@ public struct MapTileJob {
 
 public struct OpenMapTile {
     public Vector2 key;
-    public volatile MapTile tile;
+    public MapTile tile;
 }
