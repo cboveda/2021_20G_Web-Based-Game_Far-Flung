@@ -12,7 +12,7 @@ public class ComGameMain : MonoBehaviour
     }
 
 
-    void SetTileStartPositions()
+    public void SetTileStartPositions()
     {
         //Debug.Log("set start positions");
 
