@@ -294,7 +294,7 @@ public class TileActions : MonoBehaviour
             //Debug.Log(yDiff);
         }
 
-        if (yDiff == 2.0F)
+        if (yDiff == 1.9F)
         {
             validMove = true;
         }
@@ -306,7 +306,7 @@ public class TileActions : MonoBehaviour
             //Debug.Log(xDiff);
         }
 
-        if (xDiff == 3.0F)
+        if (xDiff == 2.75F)
         {
             validMove = true;
         }
