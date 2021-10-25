@@ -20,7 +20,6 @@ public class TerrainController : MonoBehaviour {
     private Queue<MapTileJob> stageThree = new Queue<MapTileJob>();
     
     void Start() {
-
         tileRenderRange = Mathf.RoundToInt( renderDistance / tileDim );
     }
 
@@ -33,7 +32,7 @@ public class TerrainController : MonoBehaviour {
         {
             for ( int x = ( currTileX - tileRenderRange ); x <= ( currTileX + tileRenderRange ); ++x ) 
             {
-                Vector2 pVec = new Vector2( z, x );
+                Vector2 pVec = new Vector2( z, x ); // .x = z, .y = x
 
                 if ( tileDict.ContainsKey( pVec ) ) {
 
@@ -60,18 +59,29 @@ public class TerrainController : MonoBehaviour {
             }
         }
 
+        List<Vector2> forRemoval = new List<Vector2>();
+
         // update each tiles visibility each frame and prune tiles from dict as the fall behind
         foreach ( KeyValuePair<Vector2, OpenMapTile> mt in tileDict ) {
     
             mt.Value.tile.Update();
             mt.Value.tile.UnsetVisible();
+
+            if ( mt.Key.x < currTileZ && mt.Value.tile.fin ) {
+                forRemoval.Add( mt.Key ); 
+            }
         }
 
+        foreach ( Vector2 v2 in forRemoval ) {
+
+            tileDict[v2].tile.Destroy();
+            tileDict.Remove( v2 );
+        }
+
+        // cycle through queued jobs
         if ( stageThree.Count > 0 ) {
         
             MapTileFactory.MapTileStageThree( stageThree.Dequeue() );
-
-            // finish process
 
         } else if ( stageTwo.Count > 0 ) {
 

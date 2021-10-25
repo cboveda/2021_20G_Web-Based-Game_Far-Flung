@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MapTileFactory {
@@ -25,12 +23,14 @@ public class MapTileFactory {
         job.tile.meshRenderer.material.mainTexture = TextureGenerator.CreateTexture( job.colors, job.meshDim );
         job.tile.meshObj.transform.position = job.coord;
         job.tile.neutronSignals = job.sigSpawner.CreateSignals( job.meshData.normalizedHeightMap, job.tScale, job.coord );
+        job.tile.fin = true;
     }
 }
 
 public class MapTile {
 
     private bool isVisible;
+    public bool fin;
 
     public GameObject meshObj;
     public MeshRenderer meshRenderer;
@@ -41,6 +41,8 @@ public class MapTile {
     public MapTile( string tileName ) {
 
         isVisible = false;
+        fin = false;
+
         meshObj = new GameObject( tileName );
         meshRenderer = meshObj.AddComponent<MeshRenderer>();
         meshFilter = meshObj.AddComponent<MeshFilter>();
@@ -57,5 +59,15 @@ public class MapTile {
 
     public void Update() {
         meshObj.SetActive( isVisible );
+    }
+
+    public void Destroy() {
+        Object.Destroy( meshCollider );
+        Object.Destroy( meshRenderer );
+        Object.Destroy( meshFilter );
+        Object.Destroy( meshObj );
+        foreach ( GameObject o in neutronSignals ) {
+            Object.Destroy( o );
+        }
     }
 }

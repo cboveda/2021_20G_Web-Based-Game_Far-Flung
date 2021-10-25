@@ -11,17 +11,14 @@ public static class MeshGenerator
             int meshDim, float terrainScale, AnimationCurve basePerlinCurve ) {
 
         MeshData meshData = new MeshData( meshDim, terrainScale );
-
         Vector3 super_coord = real_coord - new Vector3( 1, 0, 1 );
         int superDim = meshDim + 2;
 
         meshData.superHeights = TerrainGenerator.GetTerrainHeights( super_coord, superDim, terrainSeed, basePerlinCurve );
-
         meshData.normalizedHeightMap = getSubsetHeightMapFromSuperset( meshData.superHeights, meshDim, superDim );
 
-        int vi = 0;
-
         // set mesh data
+        int vi = 0;
         for ( int z = 0; z < meshDim; ++z )
         {
             for ( int x = 0; x < meshDim; ++x )
@@ -52,7 +49,6 @@ public static class MeshGenerator
                 subHeights[ ( x-1 ), ( z-1 ) ] = superHeights[x,z];
             }
         }
-
         return subHeights;
     }
 }
@@ -69,7 +65,6 @@ public class MeshData {
     int triangleIndex;
     int meshDim;
     float terrainScale;
-
 
     public MeshData( int meshDim, float terrainScale ) {
         vertices = new Vector3[ meshDim * meshDim ];
@@ -93,13 +88,12 @@ public class MeshData {
         mesh.triangles = triangles;
         mesh.uv = uvs;
         mesh.RecalculateNormals();
-        mesh.normals = UpdateBorderNormals( mesh.normals );
+        mesh.normals = UpdateBorderNormals( mesh.normals ); // refactor both together to reduce overhead if needed / tangible reduction
         return mesh;
     }
 
     Vector3[] UpdateBorderNormals( Vector3[] normals ) {
 
-        
         for ( int x = 0; x < meshDim; ++x )
         {
             int z = 0;
@@ -121,7 +115,6 @@ public class MeshData {
 
             normals[ x + (z * meshDim) ] = CalcNormalFromPoints( (x+1), (z+1) );
         }
-
         return normals;
     }
 
@@ -149,5 +142,4 @@ public class MeshData {
         Vector3 rb = b - r;
         return Vector3.Cross( ra, rb ).normalized;
     }
-
 }
