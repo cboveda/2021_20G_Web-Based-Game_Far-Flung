@@ -7,7 +7,8 @@ using UnityEngine;
 
 public static class MeshGenerator
 {  
-    public static MeshData GenerateTerrainMesh( Vector3 real_coord, int terrainSeed, int meshDim, float terrainScale, AnimationCurve basePerlinCurve ) {
+    public static MeshData GenerateTerrainMesh( Vector3 real_coord, int terrainSeed, 
+            int meshDim, float terrainScale, AnimationCurve basePerlinCurve ) {
 
         MeshData meshData = new MeshData( meshDim, terrainScale );
 

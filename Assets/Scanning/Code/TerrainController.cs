@@ -14,9 +14,11 @@ public class TerrainController : MonoBehaviour {
     public AnimationCurve basePerlinCurve;
 
     private Dictionary<Vector2, OpenMapTile> tileDict = new Dictionary<Vector2, OpenMapTile>();
+
     private Queue<MapTileJob> stageOne = new Queue<MapTileJob>();
     private Queue<MapTileJob> stageTwo = new Queue<MapTileJob>();
-
+    private Queue<MapTileJob> stageThree = new Queue<MapTileJob>();
+    
     void Start() {
 
         tileRenderRange = Mathf.RoundToInt( renderDistance / tileDim );
@@ -39,12 +41,13 @@ public class TerrainController : MonoBehaviour {
 
                 } else {
 
-                    MapTile tile = new MapTile( "Mesh( " + z + ", " + x + " )", sigSpawner );
+                    MapTile tile = new MapTile( "Mesh( " + z + ", " + x + " )" );
 
                     stageOne.Enqueue (
                         new MapTileJob {
-                            tile = tile, z = z, x = x, tileDim = tileDim, terrainScale = terrainScale, 
-                            surfaceGrad = surfaceGrad, terrainSeed = terrainSeed, basePerlinCurve = basePerlinCurve
+                            tile = tile, z = z, x = x, tileDim = tileDim, tScale = terrainScale, 
+                            surfaceGrad = surfaceGrad, tSeed = terrainSeed, pCurve = basePerlinCurve,
+                            sigSpawner = sigSpawner
                         }
                     );
 
@@ -62,34 +65,39 @@ public class TerrainController : MonoBehaviour {
     
             mt.Value.tile.Update();
             mt.Value.tile.UnsetVisible();
-            
         }
 
-        if ( stageTwo.Count > 0 ) {
+        if ( stageThree.Count > 0 ) {
+        
+            MapTileFactory.MapTileStageThree( stageThree.Dequeue() );
 
-            stageTwo.Dequeue().tile.GenerateTile();
+            // finish process
 
-        } else if ( stageOne.Count > 0 ) {
+        } else if ( stageTwo.Count > 0 ) {
 
-            MapTileJob job = stageOne.Dequeue();
+            stageThree.Enqueue( MapTileFactory.MapTileStageTwo( stageTwo.Dequeue() ) );
             
-            MapTileFactory.CreateMapTile( job.tile, job.z, job.x, job.tileDim, 
-                job.terrainScale, job.surfaceGrad, job.terrainSeed, job.basePerlinCurve );
-
-            stageTwo.Enqueue( job );
+        } else if ( stageOne.Count > 0 ) {
+            
+            stageTwo.Enqueue( MapTileFactory.MapTileStageOne( stageOne.Dequeue() ) );
         }        
     }
 }
 
 public struct MapTileJob {
     public MapTile tile; 
+    public Vector3 coord;
+    public Gradient surfaceGrad;
+    public AnimationCurve pCurve;
+    public SignalSpawner sigSpawner;
+    public MeshData meshData;
+    public Color[] colors;
     public int z; 
     public int x;
     public int tileDim;
-    public float terrainScale;
-    public Gradient surfaceGrad;
-    public int terrainSeed;
-    public AnimationCurve basePerlinCurve;
+    public int meshDim;
+    public float tScale;
+    public int tSeed;
 }
 
 public struct OpenMapTile {
