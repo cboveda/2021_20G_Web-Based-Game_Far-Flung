@@ -64,6 +64,8 @@ public class DebugMenu : MonoBehaviour
             }
         }
 
+        debugMenuOpen = false;
+
         
         
 
@@ -90,7 +92,7 @@ public class DebugMenu : MonoBehaviour
         //Debug.Log("Creating button.  Adding Listener.");
         //goButton.AddComponent<DebugMenu>();
         
-        //goButton.GetComponent<Button>().onClick.AddListener(() => { DebugButtonClicked(); });
+        goButton.GetComponent<Button>().onClick.AddListener(() => { DebugButtonClicked(); });
 
 
         return goButton;
@@ -102,7 +104,7 @@ public class DebugMenu : MonoBehaviour
         string buttonName = EventSystem.current.currentSelectedGameObject.name;
         Debug.Log(buttonName + " is what got clicked.");
 
-        if (buttonName == "Debug Menu")
+        if (buttonName.Equals("Debug Menu"))
         {
             if (!debugMenuOpen)
             {
@@ -116,7 +118,7 @@ public class DebugMenu : MonoBehaviour
             {
                 foreach (GameObject button in debugButtons)
                 {
-                    if(name != "Debug Menu")
+                    if(!button.name.Equals("Debug Menu"))
                     {
                         button.SetActive(false);
                     }
