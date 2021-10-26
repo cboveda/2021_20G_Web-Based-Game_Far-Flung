@@ -43,6 +43,7 @@ public class DebugMenu : MonoBehaviour
         debugCanvas = gameObject.AddComponent<Canvas>();
         
         debugCanvas.name = "DebugMenu";
+        debugCanvas.sortingOrder = 999;
         debugCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
 
         GraphicRaycaster myCaster = gameObject.AddComponent<GraphicRaycaster>();
@@ -130,13 +131,21 @@ public class DebugMenu : MonoBehaviour
         {
             SceneManager.LoadScene("Assembly");
         }
+        else if (buttonName == "Flight Plan")
+        {
+            SceneManager.LoadScene("Flightpath");
+        }
         else if (buttonName == "Communications")
         {
             SceneManager.LoadScene("ComGame");
         }
         else if (buttonName == "Scanning")
         {
-            SceneManager.LoadScene("Scanning");
+            SceneManager.LoadScene("StartScene.Scanning");
+        }
+        else if (buttonName == "Lab Analysis")
+        {
+            SceneManager.LoadScene("scene5");
         }
     }
 }
