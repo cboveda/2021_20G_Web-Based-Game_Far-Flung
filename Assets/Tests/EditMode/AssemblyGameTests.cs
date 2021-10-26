@@ -63,4 +63,20 @@ public class AssemblyGameTests
     }
 
 
+    [Test]
+    public void TextPanelTest()
+    {
+        GameObject textPanelGameObject = new GameObject("TextPanel");
+        TextPanel textPanel = textPanelGameObject.AddComponent<TextPanel>();
+        textPanel.textPanelButton = new GameObject("button").AddComponent<TextPanelButton>();
+        textPanel.mainText = (new GameObject()).AddComponent<Text>();
+        textPanelGameObject.SetActive(false);
+
+        textPanel.ShowText(new TextAsset("Test Me"), () => { });
+        Assert.IsTrue(textPanel.gameObject.activeSelf);//textPanel should be set active
+        Assert.IsTrue(textPanel.mainText.text=="Test Me");//Make sure the text in text asset is shown correctly
+
+        textPanel.ShowText(null,() => { });
+        Assert.IsTrue(textPanel.mainText.text== "Error Text not found");//check error message
+    }
 }
