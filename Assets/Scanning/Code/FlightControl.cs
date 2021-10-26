@@ -1,10 +1,16 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class FlightControl : MonoBehaviour
 {
     public float speed = 10f;
     public float maxAltitude = 500f;
+    // HUD
+    public Text altitude;
+    public Text signals;
+    int signals_collected = 0;
+    public int limit = 10;
 
     [Range(0,1)]
     public float hozSlerpSpped;
@@ -22,6 +28,10 @@ public class FlightControl : MonoBehaviour
     Quaternion noQuat = Quaternion.Euler(0, 0, 0);
 
     void Update() {
+
+        altitude.text = Mathf.RoundToInt(transform.position.y).ToString();
+        signals.text = signals_collected.ToString() + "/" + limit.ToString();
+        
 
         float roll  = Input.GetAxis("Horizontal");
         float pitch = Input.GetAxis("Vertical");
@@ -56,6 +66,7 @@ public class FlightControl : MonoBehaviour
 
         if ( collider.gameObject.CompareTag("NeutronSignal") ) {
             Debug.Log("Hit Signal");
+            signals_collected++;
 
         } else {
             Debug.Log("Terrain Collision!");
