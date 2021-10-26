@@ -66,4 +66,9 @@ public class Launch : MonoBehaviour
     public float GetPower() {
         return _launchPower;
     }
+
+    public Vector3 GetLaunchDirection()
+    {
+        return _launchDirection;
+    }
 }
