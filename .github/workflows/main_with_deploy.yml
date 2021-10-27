@@ -1,0 +1,90 @@
+# author: cboveda
+
+name: Build and Deploy
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  build:
+    name: Project Builder
+    runs-on: ubuntu-latest
+    steps:
+      # Checks out the active branch
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      # Access the private repo
+      - uses: webfactory/ssh-agent@v0.5.2
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      # Cache library files to improve build time
+      - uses: actions/cache@v2
+        with:
+          path: Library
+          key: Library-psyche-game-WebGL
+          restore-keys: |
+            Library-psyche-game
+            Library-
+
+      # This is where the test runner will go in the future
+      #
+      
+      # Builder
+      - name: Unity - Builder
+        uses: game-ci/unity-builder@v2.0-alpha-13
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+        with:
+          targetPlatform: WebGL
+          sshAgent: ${{ env.SSH_AUTH_SOCK }}
+
+      # Output
+      - uses: actions/upload-artifact@v2
+        with:
+          name: build
+          path: build
+  
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      # Checks out the active branch
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      # Download the artifact
+      - name: Download artifact
+        id: download
+        uses: actions/download-artifact@v2
+        with:
+          name: build
+      
+      # # Find the artifact
+      # - name: Echo download path
+      #   run: echo ${{ steps.download.outputs.download-path }}
+
+      # # Extract artifact
+      #- name: Extract artifact
+      #  run: unzip ${{ steps.download.outputs.download-path }}/build.zip
+
+      # Deploy the root of the index.html
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@4.1.5
+        with:
+          branch: gh-page
+          folder: ${{ steps.download.outputs.download-path }}/WebGL/WebGL
+
+
+
+          
+
+
+
+
+
+
+
