@@ -87,8 +87,8 @@ public class MeshData {
         mesh.vertices = vertices;
         mesh.triangles = triangles;
         mesh.uv = uvs;
-        mesh.RecalculateNormals();
-        mesh.normals = UpdateBorderNormals( mesh.normals ); // refactor both together to reduce overhead if needed / tangible reduction
+        mesh.RecalculateNormals(); // ~ 0.3 ms 
+        mesh.normals = UpdateBorderNormals( mesh.normals ); // ~ 10 ms, god awful 
         return mesh;
     }
 

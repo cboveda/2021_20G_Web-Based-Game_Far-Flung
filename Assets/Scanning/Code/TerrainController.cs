@@ -13,14 +13,18 @@ public class TerrainController : MonoBehaviour {
     public SignalSpawner sigSpawner;
     public AnimationCurve basePerlinCurve;
 
-    private Dictionary<Vector2, OpenMapTile> tileDict = new Dictionary<Vector2, OpenMapTile>();
+    Dictionary<Vector2, OpenMapTile> tileDict = new Dictionary<Vector2, OpenMapTile>();
 
-    private Queue<MapTileJob> stageOne = new Queue<MapTileJob>();
-    private Queue<MapTileJob> stageTwo = new Queue<MapTileJob>();
-    private Queue<MapTileJob> stageThree = new Queue<MapTileJob>();
+    Queue<MapTileJob> stageOne = new Queue<MapTileJob>();
+    Queue<MapTileJob> stageTwo = new Queue<MapTileJob>();
+    Queue<MapTileJob> stageThree = new Queue<MapTileJob>();
+
+    List<Vector2> forRemoval = new List<Vector2>();
+    bool unloadWaste;
     
     void Start() {
         tileRenderRange = Mathf.RoundToInt( renderDistance / tileDim );
+        unloadWaste = false;
     }
 
     void Update() {
@@ -57,9 +61,7 @@ public class TerrainController : MonoBehaviour {
                     tileDict.Add( pVec, omTile );
                 }
             }
-        }
-
-        List<Vector2> forRemoval = new List<Vector2>();
+        } 
 
         // update each tiles visibility each frame and prune tiles from dict as the fall behind
         foreach ( KeyValuePair<Vector2, OpenMapTile> mt in tileDict ) {
@@ -76,7 +78,10 @@ public class TerrainController : MonoBehaviour {
 
             tileDict[v2].tile.Destroy();
             tileDict.Remove( v2 );
+            unloadWaste = true;
         }
+
+        forRemoval.Clear();
 
         // cycle through queued jobs
         if ( stageThree.Count > 0 ) {
@@ -90,7 +95,12 @@ public class TerrainController : MonoBehaviour {
         } else if ( stageOne.Count > 0 ) {
             
             stageTwo.Enqueue( MapTileFactory.MapTileStageOne( stageOne.Dequeue() ) );
-        }        
+
+        } else if ( unloadWaste ) {
+
+            Resources.UnloadUnusedAssets();
+            unloadWaste = false;
+        }
     }
 }
 

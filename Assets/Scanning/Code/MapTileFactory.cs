@@ -62,10 +62,21 @@ public class MapTile {
     }
 
     public void Destroy() {
-        Object.Destroy( meshCollider );
-        Object.Destroy( meshRenderer );
+
+        Object.Destroy( meshFilter.sharedMesh );
+        Object.Destroy( meshFilter.mesh );
         Object.Destroy( meshFilter );
+
+        Object.Destroy( meshCollider.sharedMesh );
+        Object.Destroy( meshCollider.material );
+        Object.Destroy( meshCollider );
+
+        Object.Destroy( meshRenderer.material.mainTexture );
+        Object.Destroy( meshRenderer.material );
+        Object.Destroy( meshRenderer );
+        
         Object.Destroy( meshObj );
+
         foreach ( GameObject o in neutronSignals ) {
             Object.Destroy( o );
         }
