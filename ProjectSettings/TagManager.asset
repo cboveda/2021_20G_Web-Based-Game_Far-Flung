@@ -65,3 +65,6 @@ TagManager:
   - name: ViewImage
     uniqueID: 1796528267
     locked: 0
+  - name: FinalPieceNumber
+    uniqueID: 3725535621
+    locked: 0
