@@ -53,8 +53,9 @@ public class TileActions : MonoBehaviour
 
 
     GameObject lockedObject;
-    Color lockedColor;
-    SpriteRenderer lockedRend;
+    //Color lockedColor;
+    string lockLayer = "";
+    //SpriteRenderer lockedRend;
 
     void Start()
     {
@@ -93,8 +94,8 @@ public class TileActions : MonoBehaviour
         imageLayer = imageRend.sortingLayerName;
 
         // get the locked objects starting color 
-        lockedObject = GameObject.Find("Locked");
-        lockedColor = lockedObject.GetComponent<Text>().color;
+        lockedObject = GameObject.Find("lock");
+        lockLayer = lockedObject.GetComponent<SpriteRenderer>().sortingLayerName;
 
     }
 
@@ -135,7 +136,8 @@ public class TileActions : MonoBehaviour
         success = checkSuccess();
         if (objectName == "14" && !success)
         {
-            lockedObject.GetComponent<Text>().color = Color.yellow;
+            //lockedObject.GetComponent<Text>().color = Color.yellow;
+            lockedObject.GetComponent<SpriteRenderer>().sortingLayerName = "FinalPieceNumber";
         }
 
     }
@@ -163,7 +165,8 @@ public class TileActions : MonoBehaviour
         // hide locked
         if (objectName == "14")
         {
-            lockedObject.GetComponent<Text>().color = lockedColor;
+            //lockedObject.GetComponent<Text>().color = lockedColor;
+            lockedObject.GetComponent<SpriteRenderer>().sortingLayerName = "hidden";
         }
     }
 
