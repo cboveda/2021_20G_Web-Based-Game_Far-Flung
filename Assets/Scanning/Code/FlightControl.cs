@@ -31,7 +31,6 @@ public class FlightControl : MonoBehaviour
 
         altitude.text = Mathf.RoundToInt(transform.position.y).ToString();
         signals.text = signals_collected.ToString() + "/" + limit.ToString();
-        
 
         float roll  = Input.GetAxis("Horizontal");
         float pitch = Input.GetAxis("Vertical");
