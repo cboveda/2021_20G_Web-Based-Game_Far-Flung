@@ -9,18 +9,18 @@ public class ComGameData : MonoBehaviour
     public float[] getWinPosition(int position)
     {
         // blank tile win position
-        Tuple<float, float> pos00 = new Tuple<float, float>(5.5F, 2.5F);
+        Tuple<float, float> pos00 = new Tuple<float, float>(5.5F, 2.3F);
 
-        Tuple<float, float> pos11 = new Tuple<float, float>(-3.5F, 2.5F);
-        Tuple<float, float> pos12 = new Tuple<float, float>(-0.5F, 2.5F);
-        Tuple<float, float> pos13 = new Tuple<float, float>(2.5F, 2.5F);        
-        Tuple<float, float> pos21 = new Tuple<float, float>(-3.5F, 0.5F);
-        Tuple<float, float> pos22 = new Tuple<float, float>(-0.5F, 0.5F);
-        Tuple<float, float> pos23 = new Tuple<float, float>(2.5F, 0.5F);
-        Tuple<float, float> pos24 = new Tuple<float, float>(5.5F, 0.5F);
-        Tuple<float, float> pos31 = new Tuple<float, float>(-3.5F, -1.5F);
-        Tuple<float, float> pos32 = new Tuple<float, float>(-0.5F, -1.5F);
-        Tuple<float, float> pos33 = new Tuple<float, float>(2.5F, -1.5F);
+        Tuple<float, float> pos11 = new Tuple<float, float>(-2.75F, 2.3F);
+        Tuple<float, float> pos12 = new Tuple<float, float>(0.0F, 2.3F);
+        Tuple<float, float> pos13 = new Tuple<float, float>(2.75F, 2.3F);        
+        Tuple<float, float> pos21 = new Tuple<float, float>(-2.75F, 0.4F);
+        Tuple<float, float> pos22 = new Tuple<float, float>(0.0F, 0.4F);
+        Tuple<float, float> pos23 = new Tuple<float, float>(2.75F, 0.4F);
+        Tuple<float, float> pos24 = new Tuple<float, float>(5.5F, 0.4F);
+        Tuple<float, float> pos31 = new Tuple<float, float>(-2.75F, -1.5F);
+        Tuple<float, float> pos32 = new Tuple<float, float>(0.0F, -1.5F);
+        Tuple<float, float> pos33 = new Tuple<float, float>(2.75F, -1.5F);
         Tuple<float, float> pos34 = new Tuple<float, float>(5.5F, -1.5F);
 
         float[] winPosition = { 0.0F, 0.0F };
@@ -90,20 +90,20 @@ public class ComGameData : MonoBehaviour
 
     public float[] getStartPosition(int position)
     {
-        // blank tile win position
-        Tuple<float, float> pos00 = new Tuple<float, float>(2.5F, -1.5F);
+        // blank tile
+        Tuple<float, float> pos00 = new Tuple<float, float>(2.75F, -1.5F);
 
-        Tuple<float, float> pos11 = new Tuple<float, float>(-0.5F, 0.5F);
-        Tuple<float, float> pos12 = new Tuple<float, float>(-3.5F, 2.5F);
-        Tuple<float, float> pos13 = new Tuple<float, float>(2.5F, 0.5F);
-        Tuple<float, float> pos21 = new Tuple<float, float>(-3.5F, -1.5F);
-        Tuple<float, float> pos22 = new Tuple<float, float>(-3.5F, 0.5F);
-        Tuple<float, float> pos23 = new Tuple<float, float>(2.5F, 2.5F);
-        Tuple<float, float> pos24 = new Tuple<float, float>(5.5F, 2.5F);
+        Tuple<float, float> pos11 = new Tuple<float, float>(0.0F, 0.4F);
+        Tuple<float, float> pos12 = new Tuple<float, float>(-2.75F, 2.3F);
+        Tuple<float, float> pos13 = new Tuple<float, float>(2.75F, 0.4F);
+        Tuple<float, float> pos21 = new Tuple<float, float>(-2.75F, -1.5F);
+        Tuple<float, float> pos22 = new Tuple<float, float>(-2.75F, 0.4F);
+        Tuple<float, float> pos23 = new Tuple<float, float>(2.75F, 2.3F);
+        Tuple<float, float> pos24 = new Tuple<float, float>(5.5F, 2.3F);
         Tuple<float, float> pos31 = new Tuple<float, float>(5.5F, -1.5F);
-        Tuple<float, float> pos32 = new Tuple<float, float>(-0.5F, -1.5F);
-        Tuple<float, float> pos33 = new Tuple<float, float>(-0.5F, 2.5F);
-        Tuple<float, float> pos34 = new Tuple<float, float>(5.5F, 0.5F);
+        Tuple<float, float> pos32 = new Tuple<float, float>(0.0F, -1.5F);
+        Tuple<float, float> pos33 = new Tuple<float, float>(0.0F, 2.3F);
+        Tuple<float, float> pos34 = new Tuple<float, float>(5.5F, 0.4F);
 
         float[] winPosition = { 0.0F, 0.0F };
         float winPosX = 0.0F;
