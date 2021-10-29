@@ -9,7 +9,7 @@ public class MapTileFactory {
         job.coord = new Vector3( (job.x * job.tileDim), 0, (job.z * job.tileDim) );
         job.meshDim = job.tileDim + 1;
         job.meshData = MeshGenerator.GenerateTerrainMesh( job.coord, job.tSeed, job.meshDim, job.tScale, job.pCurve );
-        job.colors = TextureGenerator.CreateColorMap( job.surfaceGrad, job.meshData.normalizedHeightMap, job.meshDim );
+        
         return job;
     }
 
@@ -17,6 +17,7 @@ public class MapTileFactory {
 
         job.tile.meshFilter.mesh = job.meshData.CreateMesh();
         job.tile.meshCollider.sharedMesh = job.tile.meshFilter.mesh;
+        job.colors = TextureGenerator.CreateColorMap( job.surfaceGrad, job.meshData.normalizedHeightMap, job.meshDim );
         return job;
     }
 

@@ -325,7 +325,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 651636224}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 150, z: 0}
+  m_LocalPosition: {x: 0, y: 130, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 486658906}
@@ -374,15 +374,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 40
-  maxAltitude: 225
+  maxAltitude: 150
+  altitudeBuffer: 5
   altitude: {fileID: 1195211580}
   signals: {fileID: 1978883741}
   limit: 10
   hozSlerpSpped: 0.215
   vertSlerpSpeed: 0.224
+  heightBufferTranslate: {x: 0, y: 0, z: 0}
   rlTranslate: {x: 10, y: 0, z: 0}
   velocity: {x: 0, y: 0, z: 0}
   smoothTime: 0.3
+  tampTime: 1
 --- !u!1 &818508278
 GameObject:
   m_ObjectHideFlags: 0
