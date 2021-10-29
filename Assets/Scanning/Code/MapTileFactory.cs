@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class MapTileFactory {
 
+    static Shader shad = Shader.Find("Custom/CurvedWorld");
+
     public static MapTileJob MapTileStageOne( MapTileJob job ) {
 
         job.coord = new Vector3( (job.x * job.tileDim), 0, (job.z * job.tileDim) );
@@ -19,7 +21,7 @@ public class MapTileFactory {
     }
 
     public static void MapTileStageThree( MapTileJob job ) {
-        
+        job.tile.meshRenderer.material.shader = shad;
         job.tile.meshRenderer.material.mainTexture = TextureGenerator.CreateTexture( job.colors, job.meshDim );
         job.tile.meshObj.transform.position = job.coord;
         job.tile.neutronSignals = job.sigSpawner.CreateSignals( job.meshData.normalizedHeightMap, job.tScale, job.coord );

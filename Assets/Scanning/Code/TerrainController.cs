@@ -4,9 +4,11 @@ using UnityEngine;
 public class TerrainController : MonoBehaviour {
 
     public int tileDim = 100;
-    public int renderDistance = 500;
+    public int renderDistX = 500;
+    public int renderDistZ = 800;
     public float terrainScale = 150;
-    public static int tileRenderRange;
+    public static int tileRenderRangeZ; // forward
+    public static int tileRenderRangeX; // left-right
     public int terrainSeed = 20;
     public Gradient surfaceGrad;
     public GameObject satellite;
@@ -23,7 +25,8 @@ public class TerrainController : MonoBehaviour {
     bool unloadWaste;
     
     void Start() {
-        tileRenderRange = Mathf.RoundToInt( renderDistance / tileDim );
+        tileRenderRangeZ = Mathf.RoundToInt( renderDistZ / tileDim );
+        tileRenderRangeX = Mathf.RoundToInt( renderDistX / tileDim );
         unloadWaste = false;
     }
 
@@ -32,9 +35,9 @@ public class TerrainController : MonoBehaviour {
         int currTileZ = (int) Mathf.Floor(satellite.transform.position.z / tileDim);
         int currTileX = (int) Mathf.Floor(satellite.transform.position.x / tileDim);
 
-        for ( int z = currTileZ; z <= ( currTileZ + tileRenderRange ); ++z ) 
+        for ( int z = currTileZ; z <= ( currTileZ + tileRenderRangeZ ); ++z ) 
         {
-            for ( int x = ( currTileX - tileRenderRange ); x <= ( currTileX + tileRenderRange ); ++x ) 
+            for ( int x = ( currTileX - tileRenderRangeX ); x <= ( currTileX + tileRenderRangeX ); ++x ) 
             {
                 Vector2 pVec = new Vector2( z, x ); // .x = z, .y = x
 
