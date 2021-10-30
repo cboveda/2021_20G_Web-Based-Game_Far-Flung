@@ -57,6 +57,17 @@ public class TileActions : MonoBehaviour
     GameObject continueButton;
     GameObject continueText;
 
+    GameObject background;
+    GameObject board;
+
+    GameObject imageTextBox;
+    GameObject instructionsTextBox;
+    GameObject easyModeBackground;
+    GameObject easyModeLabel;
+    GameObject solveText;
+    GameObject solveButton;
+
+
     void Start()
     {
         // get current tile color
@@ -103,7 +114,7 @@ public class TileActions : MonoBehaviour
 
         continueText = GameObject.Find("ContinueText");
         continueText.GetComponent<Text>().enabled = false;
-
+               
 
     }
 
@@ -112,6 +123,8 @@ public class TileActions : MonoBehaviour
 
     void OnMouseEnter()
     {
+
+
         // highlight tile
         spriteName = rend.sprite.name;
         success = checkSuccess();
@@ -211,6 +224,7 @@ public class TileActions : MonoBehaviour
     void Update()
     {
 
+
         spriteName = rend.sprite.name;
 
         if (Input.GetMouseButtonDown(0) && onTile && validMove)
@@ -246,19 +260,45 @@ public class TileActions : MonoBehaviour
             //Debug.Log("final");         
 
             hideFinalInstructions();
-            
+
+            // update background and board layer to the front
+            background = GameObject.Find("Background");
+            background.GetComponent<SpriteRenderer>().sortingLayerName = "WinBackground";
+
+            board = GameObject.Find("board");
+            board.GetComponent<SpriteRenderer>().sortingLayerName = "WinBoard";
+
+            // disable canvas objects
+            imageTextBox = GameObject.Find("ImageTextBox");
+            imageTextBox.GetComponent<Text>().enabled = false;
+
+            instructionsTextBox = GameObject.Find("InstructionsTextBox");
+            instructionsTextBox.GetComponent<Text>().enabled = false;
+
+            easyModeBackground = GameObject.Find("EasyModeBackground");
+            easyModeBackground.GetComponent<Image>().enabled = false;
+
+            easyModeLabel = GameObject.Find("EasyModeLabel");
+            easyModeLabel.GetComponent<Text>().enabled = false;
+
+            solveButton = GameObject.Find("Solve");
+            solveButton.GetComponent<Image>().enabled = false;
+
+            solveText = GameObject.Find("SolveText");
+            solveText.GetComponent<Text>().enabled = false;
+
+            // display success comments
             successObject = GameObject.Find("Success");
             successObject.GetComponent<Text>().color = Color.yellow;
 
-            imageRend.sortingLayerName = "ViewImage";
+            // display complete image
+            imageRend.sortingLayerName = "WinImage";
 
+            // display continue button
             continueButton.GetComponent<Button>().enabled = true;
             continueButton.GetComponent<Image>().enabled = true;
-
-            continueText.GetComponent<Text>().enabled = true;
-
-            //StartCoroutine(WinScene());                    
-
+            continueText.GetComponent<Text>().enabled = true;                       
+                                        
         }
 
         success = checkSuccess();
@@ -281,16 +321,6 @@ public class TileActions : MonoBehaviour
     {
         finalInstructionsObject.GetComponent<Text>().color = finalInstructionsColor;
         finalInstructionsRend.sortingLayerName = "Hidden";
-    }
-
-
-    IEnumerator WinScene()
-    {
-        yield return new WaitForSeconds(3f);
-
-
-        //winScene = "comGameWin";
-        //SceneManager.LoadScene(winScene);
     }
 
 
