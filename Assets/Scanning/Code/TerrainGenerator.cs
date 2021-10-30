@@ -1,9 +1,5 @@
 using UnityEngine;
 
-/* 
-    A utility class for createing height maps using perlin noise which emulate
-    psyche 16's surface.
-*/
 public static class TerrainGenerator {
 
     public static int perlin_octaves = 5;
