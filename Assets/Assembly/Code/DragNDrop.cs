@@ -5,14 +5,12 @@ using UnityEngine.EventSystems;
 
 public class DragNDrop : MonoBehaviour, IPointerDownHandler, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
-    [SerializeField] private Canvas _canvas;
-    private RectTransform _rectTransform;
-    private CanvasGroup _canvasGroup;
+    private Transform _transform;
+    public Canvas canvas;
 
     private void Awake()
     {
-        _rectTransform = GetComponent<RectTransform>();
-        _canvasGroup = GetComponent<CanvasGroup>();
+        _transform = GetComponent<Transform>();
     }
 
     // Start is called before the first frame update
@@ -34,22 +32,17 @@ public class DragNDrop : MonoBehaviour, IPointerDownHandler, IDragHandler, IBegi
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        // Debug.Log("OnBeginDrag");
-        _canvasGroup.alpha = .6f;
-        _canvasGroup.blocksRaycasts = false;
 
     }
 
     public void OnDrag(PointerEventData eventData)
     {
         // Debug.Log("OnDrag");
-        _rectTransform.anchoredPosition += eventData.delta / _canvas.scaleFactor;
+        _transform.position += new Vector3(eventData.delta.x, eventData.delta.y, 0);
     }
 
 public void OnEndDrag(PointerEventData eventData)
     {
-        // Debug.Log("OnEndDrag");
-        _canvasGroup.alpha = 1f;
-        _canvasGroup.blocksRaycasts = true;
+        
     }
 }
