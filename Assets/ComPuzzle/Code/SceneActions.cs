@@ -16,7 +16,12 @@ public class SceneActions : MonoBehaviour
         sceneName = scene.name;
 
         gameScene = "comGame";
-        
+
+        if (sceneName == "comGame")
+        {
+            gameScene = "comGameWin";
+        }
+
         if ( sceneName == "comGameWin")
         {
             gameScene = "comUnscrambleIntro";

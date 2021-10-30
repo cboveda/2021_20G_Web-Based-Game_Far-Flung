@@ -54,6 +54,9 @@ public class TileActions : MonoBehaviour
     GameObject lockedObject;
     string lockLayer = "";
 
+    GameObject continueButton;
+    GameObject continueText;
+
     void Start()
     {
         // get current tile color
@@ -93,6 +96,14 @@ public class TileActions : MonoBehaviour
         // get the locked objects starting color 
         lockedObject = GameObject.Find("lock");
         lockLayer = lockedObject.GetComponent<SpriteRenderer>().sortingLayerName;
+
+        continueButton = GameObject.Find("Continue");
+        continueButton.GetComponent<Button>().enabled = false;
+        continueButton.GetComponent<Image>().enabled = false;
+
+        continueText = GameObject.Find("ContinueText");
+        continueText.GetComponent<Text>().enabled = false;
+
 
     }
 
@@ -239,7 +250,14 @@ public class TileActions : MonoBehaviour
             successObject = GameObject.Find("Success");
             successObject.GetComponent<Text>().color = Color.yellow;
 
-            StartCoroutine(WinScene());                    
+            imageRend.sortingLayerName = "ViewImage";
+
+            continueButton.GetComponent<Button>().enabled = true;
+            continueButton.GetComponent<Image>().enabled = true;
+
+            continueText.GetComponent<Text>().enabled = true;
+
+            //StartCoroutine(WinScene());                    
 
         }
 
@@ -269,8 +287,10 @@ public class TileActions : MonoBehaviour
     IEnumerator WinScene()
     {
         yield return new WaitForSeconds(3f);
-        winScene = "comGameWin";
-        SceneManager.LoadScene(winScene);
+
+
+        //winScene = "comGameWin";
+        //SceneManager.LoadScene(winScene);
     }
 
 
