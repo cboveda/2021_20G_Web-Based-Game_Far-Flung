@@ -61,11 +61,17 @@ public class TileActions : MonoBehaviour
     GameObject board;
 
     GameObject imageTextBox;
+    GameObject imageBox;
     GameObject instructionsTextBox;
+    GameObject instructions;
+
     GameObject easyModeBackground;
     GameObject easyModeLabel;
+    GameObject easyModeBox;
     GameObject solveText;
     GameObject solveButton;
+        
+    bool disable = false;
 
 
     void Start()
@@ -124,6 +130,11 @@ public class TileActions : MonoBehaviour
     void OnMouseEnter()
     {
 
+        // disable tiles
+        if (FindObjectOfType<TileActions>().DisableTiles == true)
+        {
+            return;
+        }
 
         // highlight tile
         spriteName = rend.sprite.name;
@@ -223,7 +234,12 @@ public class TileActions : MonoBehaviour
 
     void Update()
     {
-
+        
+        // disable tiles
+        if (FindObjectOfType<TileActions>().DisableTiles == true )
+        {
+            return;
+        }
 
         spriteName = rend.sprite.name;
 
@@ -261,19 +277,26 @@ public class TileActions : MonoBehaviour
 
             hideFinalInstructions();
 
-            // update background and board layer to the front
-            background = GameObject.Find("Background");
-            background.GetComponent<SpriteRenderer>().sortingLayerName = "WinBackground";
+            float[] finalWinPos = { 0.0F, 0.0F };
+            int x = 0;
+            int y = 1;
+            finalWinPos = FindObjectOfType<ComGameData>().getWinPosition(0);
+            finalPieceObject.transform.position = new Vector3(finalWinPos[x], finalWinPos[y]);
 
-            board = GameObject.Find("board");
-            board.GetComponent<SpriteRenderer>().sortingLayerName = "WinBoard";
+            // disable tiles
+            FindObjectOfType<TileActions>().DisableTiles = true;            
 
             // disable canvas objects
             imageTextBox = GameObject.Find("ImageTextBox");
             imageTextBox.GetComponent<Text>().enabled = false;
+            imageBox = GameObject.Find("ViewImage");
+            imageBox.GetComponent<SpriteRenderer>().enabled = false;
 
             instructionsTextBox = GameObject.Find("InstructionsTextBox");
             instructionsTextBox.GetComponent<Text>().enabled = false;
+
+            instructions = GameObject.Find("Instructions");
+            instructions.GetComponent<SpriteRenderer>().enabled = false;
 
             easyModeBackground = GameObject.Find("EasyModeBackground");
             easyModeBackground.GetComponent<Image>().enabled = false;
@@ -281,24 +304,16 @@ public class TileActions : MonoBehaviour
             easyModeLabel = GameObject.Find("EasyModeLabel");
             easyModeLabel.GetComponent<Text>().enabled = false;
 
+            easyModeBox = GameObject.Find("EasyModeBox");
+            easyModeBox.GetComponent<SpriteRenderer>().enabled = false;
+
             solveButton = GameObject.Find("Solve");
             solveButton.GetComponent<Image>().enabled = false;
 
             solveText = GameObject.Find("SolveText");
             solveText.GetComponent<Text>().enabled = false;
 
-            // display success comments
-            successObject = GameObject.Find("Success");
-            successObject.GetComponent<Text>().color = Color.yellow;
-
-            // display complete image
-            imageRend.sortingLayerName = "WinImage";
-
-            // display continue button
-            continueButton.GetComponent<Button>().enabled = true;
-            continueButton.GetComponent<Image>().enabled = true;
-            continueText.GetComponent<Text>().enabled = true;                       
-                                        
+            StartCoroutine(WinScene());
         }
 
         success = checkSuccess();
@@ -308,6 +323,37 @@ public class TileActions : MonoBehaviour
         }
         
 
+    }
+
+    public bool DisableTiles
+    {
+        get { return disable; }
+        set { disable = value; }
+    }
+
+    IEnumerator WinScene()
+    {
+        // add 3 second delay
+        yield return new WaitForSeconds(3f);
+
+        // update background and board layer to the front
+        background = GameObject.Find("Background");
+        background.GetComponent<SpriteRenderer>().sortingLayerName = "WinBackground";
+
+        board = GameObject.Find("board");
+        board.GetComponent<SpriteRenderer>().sortingLayerName = "WinBoard";
+
+        // display success comments
+        successObject = GameObject.Find("Success");
+        successObject.GetComponent<Text>().color = Color.yellow;
+
+        // display complete image
+        imageRend.sortingLayerName = "WinImage";
+
+        // display continue button
+        continueButton.GetComponent<Button>().enabled = true;
+        continueButton.GetComponent<Image>().enabled = true;
+        continueText.GetComponent<Text>().enabled = true;
     }
 
 

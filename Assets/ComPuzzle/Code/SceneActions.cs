@@ -32,7 +32,7 @@ public class SceneActions : MonoBehaviour
             gameScene = "comUnscramble";
         }
 
-        Debug.Log(gameScene);
+        //Debug.Log(gameScene);
         SceneManager.LoadScene(gameScene);
     }
 
