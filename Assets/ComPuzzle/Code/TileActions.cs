@@ -168,7 +168,7 @@ public class TileActions : MonoBehaviour
         success = checkSuccess();
         if (objectName == "14" && !success)
         {            
-            lockedObject.GetComponent<SpriteRenderer>().sortingLayerName = "FinalPieceNumber";
+            lockedObject.GetComponent<SpriteRenderer>().sortingLayerName = "WinBackground";
         }
 
     }
