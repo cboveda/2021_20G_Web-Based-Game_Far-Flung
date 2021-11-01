@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class FlightControl : MonoBehaviour
 {
     public float speed = 10f;
-    public float maxAltitude = 500f;
+    public float maxAltitude = 150f;
     // HUD
     public Text altitude;
     public Text signals;
@@ -45,7 +45,7 @@ public class FlightControl : MonoBehaviour
             transform.rotation = Quaternion.Slerp( transform.rotation, noQuat, hozSlerpSpped );
         }
 
-        if ( pitch < 0 ) {
+        if ( pitch < 0 && ( transform.position.y < maxAltitude ) ) {
             transform.rotation = Quaternion.Slerp( transform.rotation, noseUp, vertSlerpSpeed );
         } else if ( pitch > 0 ) {
             transform.rotation = Quaternion.Slerp( transform.rotation, noseDown, vertSlerpSpeed );
@@ -54,11 +54,6 @@ public class FlightControl : MonoBehaviour
         }
 
         transform.Translate( Vector3.forward * speed * Time.deltaTime ); 
-        
-        if ( transform.position.y > maxAltitude ) {
-            Debug.Log("Leaving orbit");
-            ExitScene();
-        }
     }
 
     void OnTriggerEnter( Collider collider ) {
