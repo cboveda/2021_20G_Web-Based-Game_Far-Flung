@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 
 public class ComGameTests
-{
+{ 
 
     [UnityTest]
     public IEnumerator TestSceneSwitching()
@@ -77,7 +77,7 @@ public class ComGameTests
         // solve puzzle
         modeObject.SolvePuzzle();
         yield return new WaitForSeconds(0.2f); // delay to solve
-        
+
         VerifySuccess(scriptObject, true);
 
         GameObject main = new GameObject();
@@ -96,5 +96,48 @@ public class ComGameTests
         bool success = scriptObject.GetComponent<TileActions>().checkSuccess();
         yield return new WaitForSeconds(0.2f); // delay to check
         Assert.AreEqual(success, condition);
+    }
+
+
+    [UnityTest]
+    public IEnumerator TestEasyMode()
+    {
+        // Verify easy mode displays numbers on tiles when on and hides numbers when off.
+
+        // load scene with that has the easy mode button
+        SceneManager.LoadScene("comGame");
+        yield return new WaitForSeconds(0.2f); // delay to load scene
+
+        // verify easy mode is off
+        GameObject easyModeToggle = GameObject.Find("EasyMode");
+        Assert.AreEqual(easyModeToggle.GetComponent<Toggle>().isOn, false);
+
+        // verify numbers on tiles are on Default layer
+        string[] tileNumbers = { "n1", "n2", "n3", "n4", "n5", "n6", "n7", "n8", "n9", "n10", "n11", "n12" };
+        GameObject tileNumberObject;
+        foreach (string tileNumber in tileNumbers)
+        {
+            tileNumberObject = GameObject.Find(tileNumber);
+            Assert.AreEqual(tileNumberObject.GetComponent<SpriteRenderer>().sortingLayerName, "Default");
+        }
+
+        // turn on easy mode and verify it is on
+        easyModeToggle.GetComponent<Toggle>().isOn = true;
+        yield return new WaitForSeconds(0.2f); // delay to load scene
+        Assert.AreEqual(easyModeToggle.GetComponent<Toggle>().isOn, true);
+
+        // verify numbers on tiles are on Numbers layer and verify n4 is on FinalPieceNumber layer 
+        foreach (string tileNumber in tileNumbers)
+        {
+            tileNumberObject = GameObject.Find(tileNumber);
+            if (tileNumber == "n4")
+            {
+                Assert.AreEqual(tileNumberObject.GetComponent<SpriteRenderer>().sortingLayerName, "FinalPieceNumber");
+            }
+            else
+            {
+                Assert.AreEqual(tileNumberObject.GetComponent<SpriteRenderer>().sortingLayerName, "Numbers");
+            }
+        }
     }
 }

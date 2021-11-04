@@ -13,8 +13,7 @@ public class TileActions : MonoBehaviour
     Color currentColor;
     Color instructionsColor;
     bool onTile = false;
-    bool validMove = false;
-    string winScene = "";
+    bool validMove = false;    
     bool success = false;
 
     Vector3 tilePosition;
@@ -127,7 +126,7 @@ public class TileActions : MonoBehaviour
 
 
 
-    void OnMouseEnter()
+    public void OnMouseEnter()
     {
 
         // disable tiles
@@ -173,7 +172,7 @@ public class TileActions : MonoBehaviour
 
     }
 
-    void OnMouseExit()
+    public void OnMouseExit()
     {
         // reset tile color
         rend.color = currentColor;
