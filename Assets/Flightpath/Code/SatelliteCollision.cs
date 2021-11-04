@@ -2,21 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SatelliteCollision : MonoBehaviour
+namespace Flightpath
 {
-    public GameObject EventSystem;
-    private void OnTriggerEnter(Collider other) 
+    public class SatelliteCollision : MonoBehaviour
     {
-        if (other.CompareTag("FlightpathAsteroid"))
+        public GameObject EventSystem;
+        private void OnTriggerEnter(Collider other)
         {
-            EventSystem.GetComponent<LaunchManager>().OnAsteroidCollisionDetected();
+            if (other.CompareTag("FlightpathAsteroid"))
+            {
+                EventSystem.GetComponent<LaunchManager>().OnAsteroidCollisionDetected();
+            }
         }
-    }
 
-    private void OnBecameInvisible() {
-        if (EventSystem)
+        private void OnBecameInvisible()
         {
-            EventSystem.GetComponent<LaunchManager>().OnSatelliteLeaveWindow();
+            if (EventSystem)
+            {
+                EventSystem.GetComponent<LaunchManager>().OnSatelliteLeaveWindow();
+            }
         }
     }
 }
