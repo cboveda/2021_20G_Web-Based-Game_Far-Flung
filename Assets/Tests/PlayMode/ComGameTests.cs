@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 
 public class ComGameTests
-{
+{ 
 
     [UnityTest]
     public IEnumerator TestSceneSwitching()
@@ -77,7 +77,7 @@ public class ComGameTests
         // solve puzzle
         modeObject.SolvePuzzle();
         yield return new WaitForSeconds(0.2f); // delay to solve
-        
+
         VerifySuccess(scriptObject, true);
 
         GameObject main = new GameObject();
@@ -96,5 +96,101 @@ public class ComGameTests
         bool success = scriptObject.GetComponent<TileActions>().checkSuccess();
         yield return new WaitForSeconds(0.2f); // delay to check
         Assert.AreEqual(success, condition);
+    }
+
+
+    [UnityTest]
+    public IEnumerator TestEasyMode()
+    {
+        // Verify easy mode displays numbers on tiles when on and hides numbers when off.
+
+        // load scene with that has the easy mode button
+        SceneManager.LoadScene("comGame");
+        yield return new WaitForSeconds(0.2f); // delay to load scene
+
+        // verify easy mode is off
+        GameObject easyModeToggle = GameObject.Find("EasyMode");
+        Assert.AreEqual(easyModeToggle.GetComponent<Toggle>().isOn, false);
+
+        // verify numbers on tiles are on Default layer
+        string[] tileNumbers = { "n1", "n2", "n3", "n4", "n5", "n6", "n7", "n8", "n9", "n10", "n11", "n12" };
+        GameObject tileNumberObject;
+        foreach (string tileNumber in tileNumbers)
+        {
+            tileNumberObject = GameObject.Find(tileNumber);
+            Assert.AreEqual(tileNumberObject.GetComponent<SpriteRenderer>().sortingLayerName, "Default");
+        }
+
+        // turn on easy mode and verify it is on
+        easyModeToggle.GetComponent<Toggle>().isOn = true;
+        yield return new WaitForSeconds(0.2f); // delay to load scene
+        Assert.AreEqual(easyModeToggle.GetComponent<Toggle>().isOn, true);
+
+        // verify numbers on tiles are on Numbers layer and verify n4 is on FinalPieceNumber layer 
+        foreach (string tileNumber in tileNumbers)
+        {
+            tileNumberObject = GameObject.Find(tileNumber);
+            if (tileNumber == "n4")
+            {
+                Assert.AreEqual(tileNumberObject.GetComponent<SpriteRenderer>().sortingLayerName, "FinalPieceNumber");
+            }
+            else
+            {
+                Assert.AreEqual(tileNumberObject.GetComponent<SpriteRenderer>().sortingLayerName, "Numbers");
+            }
+        }
+    }
+
+    [UnityTest]
+    public IEnumerator TestTileActions()
+    {
+        // Verify methods for TileActions
+
+        // load scene with the scriptable tile objects
+        SceneManager.LoadScene("comGame");
+        yield return new WaitForSeconds(0.2f); // delay to load scene
+
+        // get a scriptable tile object to use
+        GameObject scriptObject = GameObject.Find("11");
+
+        // get scriptable tile default color
+        Color scriptObjectDefaultColor = scriptObject.GetComponent<SpriteRenderer>().color;
+
+        // verify tile is highlighted yellow with mouse on
+        scriptObject.GetComponent<TileActions>().OnMouseEnter();
+        Assert.AreEqual(scriptObject.GetComponent<SpriteRenderer>().color, Color.yellow);
+
+        // verify tile is not highlighted with mouse off
+        scriptObject.GetComponent<TileActions>().OnMouseExit();
+        Assert.AreEqual(scriptObject.GetComponent<SpriteRenderer>().color, scriptObjectDefaultColor);
+
+        // get default color for show final instructions
+        GameObject finalObject = GameObject.Find("FinalInstructionsText");
+        Color finalObjectDefaultColor = finalObject.GetComponent<Text>().color;
+
+        // verify color when selecting show final instructions
+        scriptObject.GetComponent<TileActions>().showFinalInstructions();
+        Assert.AreEqual(finalObject.GetComponent<Text>().color, Color.yellow);
+
+        // verify color is back to default when selecting hide final instructions
+        scriptObject.GetComponent<TileActions>().hideFinalInstructions();
+        Assert.AreEqual(finalObject.GetComponent<Text>().color, finalObjectDefaultColor);
+        
+        // verify tiles that have valid moves at default positions
+        string[] validMoveTiles = { "13", "31", "32" };
+        GameObject tileObject;
+        foreach (string tile in validMoveTiles)
+        {
+            tileObject = GameObject.Find(tile);            
+            Assert.AreEqual(tileObject.GetComponent<TileActions>().checkValidMove(), true);
+        }
+
+        // verify tiles that do not have valid moves at default positions
+        string[] invalidMoveTiles = { "11", "12", "14", "21", "22", "23", "24", "33", "34" };        
+        foreach (string tile in invalidMoveTiles)
+        {
+            tileObject = GameObject.Find(tile);
+            Assert.AreEqual(tileObject.GetComponent<TileActions>().checkValidMove(), false);
+        }
     }
 }
