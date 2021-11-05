@@ -8,8 +8,8 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: NeutronSignalMaterial
-  m_Shader: {fileID: 4800000, guid: b3a218b07ea6b2424b7ac73fa51374e2, type: 3}
-  m_ShaderKeywords: 
+  m_Shader: {fileID: 4800000, guid: 3b720de19c1ada805a79528d4157b8fe, type: 3}
+  m_ShaderKeywords: _ALPHABLEND_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -60,20 +60,22 @@ Material:
     - _Curvature: 0.0003
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
-    - _DstBlend: 0
+    - _DstBlend: 10
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _Metallic: 0
-    - _Mode: 0
+    - _Mode: 2
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _SrcBlend: 1
+    - _SrcBlend: 5
+    - _Transparency: 0.367
     - _UVSec: 0
-    - _ZWrite: 1
+    - _ZWrite: 0
     m_Colors:
-    - _Color: {r: 0.07787468, g: 0.6603774, b: 0.09582596, a: 0.23529412}
+    - _Color: {r: 0.8584906, g: 0.82947814, b: 0.1822268, a: 0.08627451}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Tint: {r: 0.9716981, g: 0.0779192, b: 0.0779192, a: 1}
   m_BuildTextureStacks: []

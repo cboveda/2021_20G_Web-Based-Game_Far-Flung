@@ -5,12 +5,12 @@ Shader "Unlit/unlit_exp"
         _MainTex ("Texture", 2D) = "white" {}
         _Tint("Tint Color", Color) = (1,1,1,1)
         _Transparency("Transparency", Range(0.0,0.5)) = 0.25
-        _Curvature("Curvature", Float) = 0.0003
+        _Curvature("Curvature", Float) = 0.005
     }
     SubShader
     {
         Tags { "Queue"="Transparent" "RenderType"="Transparent" }
-        LOD 100
+        LOD 200
 
         ZWrite Off
 		Blend SrcAlpha OneMinusSrcAlpha
@@ -23,16 +23,14 @@ Shader "Unlit/unlit_exp"
 
             #include "UnityCG.cginc"
 
-            struct appdata
-            {
+            struct appdata {
                 float4 vertex : POSITION;
                 float2 uv : TEXCOORD0;
             };
 
-            struct v2f
-            {
-                float2 uv : TEXCOORD0;
+            struct v2f {
                 float4 vertex : SV_POSITION;
+                float2 uv : TEXCOORD0;
             };
 
             sampler2D _MainTex;
@@ -41,16 +39,8 @@ Shader "Unlit/unlit_exp"
             float4 _Tint;
             float _Transparency;
 
-            /*v2f vert (appdata v)
-            {
-                v2f o;
-                o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = TRANSFORM_TEX(v.uv, _MainTex);
-                return o;
-            }*/
-
-            v2f vert (appdata v)
-            {            
+            v2f vert( appdata v ) {
+            
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
 
@@ -60,10 +50,11 @@ Shader "Unlit/unlit_exp"
                 o.vertex += mul(unity_WorldToObject, vv);
 
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
+
                 return o;
             }
 
-            fixed4 frag (v2f i) : SV_Target
+            fixed4 frag(v2f i) : SV_Target //https://www.youtube.com/watch?v=3penhrrKCYg
             {
                 fixed4 col = tex2D(_MainTex, i.uv) * _Tint;
                 col.a = _Transparency;
