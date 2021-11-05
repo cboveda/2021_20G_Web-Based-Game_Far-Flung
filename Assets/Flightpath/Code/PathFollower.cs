@@ -11,7 +11,7 @@ namespace Flightpath
         private bool _unlocked;
         private bool _resetRequested;
         private bool _stopRequested;
-        public Transform Path;
+        public GameObject Path;
         public float Speed;
 
         // Start is called before the first frame update
@@ -47,10 +47,10 @@ namespace Flightpath
             // Prevent other Coroutines from starting.
             _unlocked = false;
 
-            Vector2 start = Path.GetChild(0).position;
-            Vector2 startDir = Path.GetChild(1).position;
-            Vector2 end = Path.GetChild(2).position;
-            Vector2 endDir = Path.GetChild(3).position;
+            Vector2 start = Path.transform.GetChild(0).position;
+            Vector2 startDir = Path.transform.GetChild(1).position;
+            Vector2 end = Path.transform.GetChild(2).position;
+            Vector2 endDir = Path.transform.GetChild(3).position;
 
             while (_t <= 1)
             {
@@ -87,7 +87,7 @@ namespace Flightpath
             _unlocked = true;
             _resetRequested = false;
             _stopRequested = false;
-            transform.position = Path.GetChild(0).position;
+            transform.position = Path.transform.GetChild(0).position;
         }
 
         public bool IsUnlocked()

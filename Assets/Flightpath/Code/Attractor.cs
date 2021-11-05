@@ -30,13 +30,16 @@ namespace Flightpath
 
         private void Attract(Attractor a)
         {
-            Rigidbody bodyToAttract = a.Body;
-            Vector3 direction = Body.position - bodyToAttract.position;
-            float distance = direction.magnitude;
-            distance = (distance < MinDistance) ? MinDistance : distance;
-            float magnitude = (Body.mass * bodyToAttract.mass) / Mathf.Pow(distance, 2);
-            Vector3 force = direction.normalized * magnitude;
-            bodyToAttract.AddForce(force);
+            if (a.Body != null) 
+            {    
+                Rigidbody bodyToAttract = a.Body;
+                Vector3 direction = Body.position - bodyToAttract.position;
+                float distance = direction.magnitude;
+                distance = (distance < MinDistance) ? MinDistance : distance;
+                float magnitude = (Body.mass * bodyToAttract.mass) / Mathf.Pow(distance, 2);
+                Vector3 force = direction.normalized * magnitude;
+                bodyToAttract.AddForce(force);
+            }
         }
     }
 }
