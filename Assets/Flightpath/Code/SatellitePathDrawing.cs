@@ -22,7 +22,9 @@ public class SatellitePathDrawing : MonoBehaviour
         if (Active) {
             _timer += Time.deltaTime;
             if (_timer >= TimeInterval) {
-                _pathHistory.AddLast(Instantiate(PathPrefab, Satellite.transform.position, Satellite.transform.rotation));
+                _pathHistory.AddLast(Instantiate(PathPrefab, 
+                    new Vector3(Satellite.transform.position.x, Satellite.transform.position.y, Satellite.transform.position.z + 10),
+                    Satellite.transform.rotation));
                 _timer = 0;
             }
         }
