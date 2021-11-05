@@ -140,4 +140,55 @@ public class ComGameTests
             }
         }
     }
+
+    [UnityTest]
+    public IEnumerator TestTileActions()
+    {
+        // load scene with the scriptable tile objects
+        SceneManager.LoadScene("comGame");
+        yield return new WaitForSeconds(0.2f); // delay to load scene
+
+        // get a scriptable tile object to use
+        GameObject scriptObject = GameObject.Find("11");
+
+        // get scriptable tile default color
+        Color scriptObjectDefaultColor = scriptObject.GetComponent<SpriteRenderer>().color;
+
+        // verify tile is highlighted yellow with mouse on
+        scriptObject.GetComponent<TileActions>().OnMouseEnter();
+        Assert.AreEqual(scriptObject.GetComponent<SpriteRenderer>().color, Color.yellow);
+
+        // verify tile is not highlighted with mouse off
+        scriptObject.GetComponent<TileActions>().OnMouseExit();
+        Assert.AreEqual(scriptObject.GetComponent<SpriteRenderer>().color, scriptObjectDefaultColor);
+
+        // get default color for show final instructions
+        GameObject finalObject = GameObject.Find("FinalInstructionsText");
+        Color finalObjectDefaultColor = finalObject.GetComponent<Text>().color;
+
+        // verify color when selecting show final instructions
+        scriptObject.GetComponent<TileActions>().showFinalInstructions();
+        Assert.AreEqual(finalObject.GetComponent<Text>().color, Color.yellow);
+
+        // verify color is back to default when selecting hide final instructions
+        scriptObject.GetComponent<TileActions>().hideFinalInstructions();
+        Assert.AreEqual(finalObject.GetComponent<Text>().color, finalObjectDefaultColor);
+        
+        // verify tiles that have valid moves at default positions
+        string[] validMoveTiles = { "13", "31", "32" };
+        GameObject tileObject;
+        foreach (string tile in validMoveTiles)
+        {
+            tileObject = GameObject.Find(tile);            
+            Assert.AreEqual(tileObject.GetComponent<TileActions>().checkValidMove(), true);
+        }
+
+        // verify tiles that do not have valid moves at default positions
+        string[] invalidMoveTiles = { "11", "12", "14", "21", "22", "23", "24", "33", "34" };        
+        foreach (string tile in invalidMoveTiles)
+        {
+            tileObject = GameObject.Find(tile);
+            Assert.AreEqual(tileObject.GetComponent<TileActions>().checkValidMove(), false);
+        }
+    }
 }
