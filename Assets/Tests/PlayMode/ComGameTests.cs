@@ -144,6 +144,8 @@ public class ComGameTests
     [UnityTest]
     public IEnumerator TestTileActions()
     {
+        // Verify methods for TileActions
+
         // load scene with the scriptable tile objects
         SceneManager.LoadScene("comGame");
         yield return new WaitForSeconds(0.2f); // delay to load scene
