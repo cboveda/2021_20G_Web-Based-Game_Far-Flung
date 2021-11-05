@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LaunchManager : MonoBehaviour
 {
@@ -142,7 +143,8 @@ public class LaunchManager : MonoBehaviour
     {
         _sceneAdvanceStart = true;
         yield return new WaitForSeconds(3.0f);
-        GetComponent<SceneControls>().Next();
+        //todo:
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
 }
