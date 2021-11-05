@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa10a91475b667c4d91bccad3b86eac6, type: 3}
   m_Name: EarthPath
   m_EditorClassIdentifier: 
-  StartPosition: {x: -315, y: -458}
-  StartDirection: {x: -550, y: -82}
+  StartPosition: {x: -310, y: -458}
+  StartDirection: {x: -545, y: -82}
   EndPosition: {x: -1080, y: 56}
   EndDirection: {x: -811, y: -25}

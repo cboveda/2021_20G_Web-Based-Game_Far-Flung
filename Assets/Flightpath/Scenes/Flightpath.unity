@@ -202,7 +202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41d6d8493d233cb4898f1003f3d9e431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Satellite: {fileID: 2138767802}
+  Satellite: {fileID: 0}
   AngleSlider: {fileID: 472336773}
   PowerSlider: {fileID: 1957714126}
   TrajectoryArrow: {fileID: 207803552}
@@ -389,7 +389,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8f45954f87164a4f929976253dd4fd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Satellite: {fileID: 2138767805}
+  Satellite: {fileID: 0}
 --- !u!212 &207803553
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1265,7 +1265,7 @@ Transform:
   - {fileID: 1460014374}
   - {fileID: 1633913002}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &906570685
 GameObject:
@@ -1703,6 +1703,9 @@ MonoBehaviour:
   _earthPath: {fileID: 11400000, guid: f761327af285d104f9b336909d81b1a9, type: 2}
   _marsPath: {fileID: 11400000, guid: 89019f3e12919e74d990626683385c92, type: 2}
   _asteroidPath: {fileID: 11400000, guid: e573b9ed75b360f4f88b120a5cd3205b, type: 2}
+  _eventSystem: {fileID: 65087356}
+  _arrow: {fileID: 207803551}
+  _satellitePathDrawing: {fileID: 1648258612}
 --- !u!4 &1334412776
 Transform:
   m_ObjectHideFlags: 0
@@ -1715,7 +1718,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1385206009
 GameObject:
@@ -2150,7 +2153,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1633913001
 GameObject:
@@ -2214,7 +2217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PathPrefab: {fileID: 4237389722860251384, guid: 51c15874464677748aaf379e2a2f8102, type: 3}
-  Satellite: {fileID: 2138767802}
+  Satellite: {fileID: 0}
   Active: 0
   TimeInterval: 0.5
 --- !u!4 &1648258614
@@ -2229,7 +2232,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1805849378
 GameObject:
@@ -2273,7 +2276,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1844954955
 GameObject:
@@ -2354,67 +2357,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1844954955}
   m_CullTransparentMesh: 1
---- !u!1001 &1845701784
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2138767803, guid: 7a992dedeb7aef8449ccb29f6f830418, type: 3}
-      propertyPath: EventSystem
-      value: 
-      objectReference: {fileID: 65087356}
-    - target: {fileID: 442565428988246798, guid: 7a992dedeb7aef8449ccb29f6f830418, type: 3}
-      propertyPath: m_Name
-      value: Psyche Variant
-      objectReference: {fileID: 0}
-    - target: {fileID: 968166464802922932, guid: 7a992dedeb7aef8449ccb29f6f830418, type: 3}
-      propertyPath: m_RootOrder
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 968166464802922932, guid: 7a992dedeb7aef8449ccb29f6f830418, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1154.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 968166464802922932, guid: 7a992dedeb7aef8449ccb29f6f830418, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -457.76
-      objectReference: {fileID: 0}
-    - target: {fileID: 968166464802922932, guid: 7a992dedeb7aef8449ccb29f6f830418, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 968166464802922932, guid: 7a992dedeb7aef8449ccb29f6f830418, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.68411404
-      objectReference: {fileID: 0}
-    - target: {fileID: 968166464802922932, guid: 7a992dedeb7aef8449ccb29f6f830418, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.3252303
-      objectReference: {fileID: 0}
-    - target: {fileID: 968166464802922932, guid: 7a992dedeb7aef8449ccb29f6f830418, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.042219732
-      objectReference: {fileID: 0}
-    - target: {fileID: 968166464802922932, guid: 7a992dedeb7aef8449ccb29f6f830418, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.65148354
-      objectReference: {fileID: 0}
-    - target: {fileID: 968166464802922932, guid: 7a992dedeb7aef8449ccb29f6f830418, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 968166464802922932, guid: 7a992dedeb7aef8449ccb29f6f830418, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 968166464802922932, guid: 7a992dedeb7aef8449ccb29f6f830418, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 94
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 7a992dedeb7aef8449ccb29f6f830418, type: 3}
 --- !u!1 &1869939711
 GameObject:
   m_ObjectHideFlags: 0
@@ -2785,19 +2727,3 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2077255940}
   m_CullTransparentMesh: 1
---- !u!1 &2138767802 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 442565428988246798, guid: 7a992dedeb7aef8449ccb29f6f830418, type: 3}
-  m_PrefabInstance: {fileID: 1845701784}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2138767805 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2138767805, guid: 7a992dedeb7aef8449ccb29f6f830418, type: 3}
-  m_PrefabInstance: {fileID: 1845701784}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2138767802}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32b0d5b92212b2940b58a12fe5ed9200, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

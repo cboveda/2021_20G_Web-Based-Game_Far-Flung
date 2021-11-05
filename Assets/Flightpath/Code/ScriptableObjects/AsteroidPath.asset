@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StartPosition: {x: 807, y: 43}
   StartDirection: {x: 661, y: 329}
-  EndPosition: {x: 534, y: 473}
-  EndDirection: {x: 323, y: 649}
+  EndPosition: {x: 323, y: 649}
+  EndDirection: {x: 534, y: 473}
