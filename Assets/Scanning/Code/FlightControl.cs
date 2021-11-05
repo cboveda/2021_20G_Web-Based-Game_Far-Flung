@@ -27,6 +27,8 @@ public class FlightControl : MonoBehaviour
     Quaternion noseDown = Quaternion.Euler(30, 0, 0);
     Quaternion noQuat = Quaternion.Euler(0, 0, 0);
 
+    Collider prevCollision;
+
     void Update() {
 
         altitude.text = Mathf.RoundToInt(transform.position.y).ToString();
@@ -60,7 +62,11 @@ public class FlightControl : MonoBehaviour
 
         if ( collider.gameObject.CompareTag("NeutronSignal") ) {
             Debug.Log("Hit Signal");
-            signals_collected++;
+
+            if ( collider != prevCollision ) {
+                signals_collected++;
+            }
+            prevCollision = collider;
 
         } else {
             Debug.Log("Terrain Collision!");
