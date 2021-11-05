@@ -67,6 +67,7 @@ public class TileActions : MonoBehaviour
     GameObject easyModeBackground;
     GameObject easyModeLabel;
     GameObject easyModeBox;
+    GameObject easyModeButton;
     GameObject solveText;
     GameObject solveButton;
         
@@ -305,6 +306,9 @@ public class TileActions : MonoBehaviour
 
             easyModeBox = GameObject.Find("EasyModeBox");
             easyModeBox.GetComponent<SpriteRenderer>().enabled = false;
+
+            easyModeButton = GameObject.Find("EasyMode");
+            easyModeButton.GetComponent<Toggle>().isOn = false;
 
             solveButton = GameObject.Find("Solve");
             solveButton.GetComponent<Image>().enabled = false;
