@@ -21,7 +21,7 @@ public class SignalSpawner : MonoBehaviour
             int zCord = (int) Random.Range( 0, terrain_heights.GetLength(1) );
             int yCord = (int) (terrain_heights[xCord, zCord] * terrainScale ) - 1;
 
-            sigRefArr[i] = Instantiate( prefabSignal, new Vector3( (terrainBase.x + xCord), ( 50 + yCord ), ( terrainBase.z + zCord) ), Quaternion.identity );
+            sigRefArr[i] = Instantiate( prefabSignal, new Vector3( (terrainBase.x + xCord), ( yCord ), ( terrainBase.z + zCord) ), Quaternion.identity );
         }
         return sigRefArr;
     }
