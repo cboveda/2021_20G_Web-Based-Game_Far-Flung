@@ -18,9 +18,8 @@ public class Completion : MonoBehaviour
             //Implement completion check
             if (child != null && child.GetComponent<DropSlot>() != null)
             {
-                // bool slotCompleted = child.GetComponent<DropSlot>().IsCompleted();
-                bool slotCompleted = false;
-                Debug.Log(child.name + " is " + slotCompleted);
+                bool slotCompleted = child.GetComponent<DropSlot>().IsCompleted();
+                // Debug.Log(child.name + " is " + slotCompleted);
                 if (!slotCompleted)
                 {
                     return; //does nothing if one of the slots is incomplete

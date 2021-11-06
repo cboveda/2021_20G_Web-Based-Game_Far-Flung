@@ -1198,9 +1198,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 444431307}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 742c2cd2943292042917ee2984a57382, type: 3}
+  m_Script: {fileID: 11500000, guid: 5e70828d6964fa64d99ae11faeddfe30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  completionTextAsset: {fileID: 4900000, guid: fa2e58de62cb93c4ca8f973f7c962b59, type: 3}
+  nextScene:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 365149717}
+        m_TargetAssemblyTypeName: TriggerScene, FrameworkAssembly
+        m_MethodName: LoadNext
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &653741697
 GameObject:
   m_ObjectHideFlags: 0
@@ -1231,8 +1247,8 @@ Transform:
   - {fileID: 1736911857}
   - {fileID: 1659054998}
   - {fileID: 1204614705}
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_Father: {fileID: 1974831502}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &744927220
 GameObject:
@@ -1344,6 +1360,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0, z: 0}
+  slotMatch: {fileID: 1204614704}
+  completionTextAsset: {fileID: 4900000, guid: 0659008030dbba54288236fe07511093, type: 3}
 --- !u!1 &819621522
 GameObject:
   m_ObjectHideFlags: 0
@@ -1761,6 +1779,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0, z: 0}
+  slotMatch: {fileID: 1659054997}
+  completionTextAsset: {fileID: 4900000, guid: 2d97f385385904c46be2201e9033da9e, type: 3}
 --- !u!1 &1060633695
 GameObject:
   m_ObjectHideFlags: 0
@@ -1871,6 +1891,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0, z: 0}
+  slotMatch: {fileID: 1736911856}
+  completionTextAsset: {fileID: 4900000, guid: 705bf8751a828d443ad94b0491d657db, type: 3}
 --- !u!1 &1204614704
 GameObject:
   m_ObjectHideFlags: 0
@@ -2920,6 +2942,7 @@ Transform:
   - {fileID: 312445027}
   - {fileID: 2029127992}
   - {fileID: 1344023750}
+  - {fileID: 653741700}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
