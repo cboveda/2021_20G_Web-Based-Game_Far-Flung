@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class FlightControl : MonoBehaviour
 {
     public float speed = 10f;
-    public float maxAltitude = 500f;
+    public float maxAltitude = 150f;
     // HUD
     public Text altitude;
     public Text signals;
@@ -27,11 +27,12 @@ public class FlightControl : MonoBehaviour
     Quaternion noseDown = Quaternion.Euler(30, 0, 0);
     Quaternion noQuat = Quaternion.Euler(0, 0, 0);
 
+    Collider prevCollision;
+
     void Update() {
 
         altitude.text = Mathf.RoundToInt(transform.position.y).ToString();
         signals.text = signals_collected.ToString() + "/" + limit.ToString();
-        
 
         float roll  = Input.GetAxis("Horizontal");
         float pitch = Input.GetAxis("Vertical");
@@ -46,7 +47,7 @@ public class FlightControl : MonoBehaviour
             transform.rotation = Quaternion.Slerp( transform.rotation, noQuat, hozSlerpSpped );
         }
 
-        if ( pitch < 0 ) {
+        if ( pitch < 0 && ( transform.position.y < maxAltitude ) ) {
             transform.rotation = Quaternion.Slerp( transform.rotation, noseUp, vertSlerpSpeed );
         } else if ( pitch > 0 ) {
             transform.rotation = Quaternion.Slerp( transform.rotation, noseDown, vertSlerpSpeed );
@@ -55,18 +56,17 @@ public class FlightControl : MonoBehaviour
         }
 
         transform.Translate( Vector3.forward * speed * Time.deltaTime ); 
-        
-        if ( transform.position.y > maxAltitude ) {
-            Debug.Log("Leaving orbit");
-            ExitScene();
-        }
     }
 
     void OnTriggerEnter( Collider collider ) {
 
         if ( collider.gameObject.CompareTag("NeutronSignal") ) {
             Debug.Log("Hit Signal");
-            signals_collected++;
+
+            if ( collider != prevCollision ) {
+                signals_collected++;
+            }
+            prevCollision = collider;
 
         } else {
             Debug.Log("Terrain Collision!");

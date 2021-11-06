@@ -7,7 +7,7 @@ public class SignalSpawner : MonoBehaviour
     public GameObject prefabSignal;
     
     [Range(0, 5)]
-    public int spawnFrequency = 5;
+    public int spawnFrequency;
 
     public GameObject[] CreateSignals( float[,] terrain_heights, float terrainScale, Vector3 terrainBase ) {
 
@@ -21,9 +21,8 @@ public class SignalSpawner : MonoBehaviour
             int zCord = (int) Random.Range( 0, terrain_heights.GetLength(1) );
             int yCord = (int) (terrain_heights[xCord, zCord] * terrainScale ) - 1;
 
-            sigRefArr[i] = Instantiate( prefabSignal, new Vector3( (terrainBase.x + xCord), ( 50 + yCord ), ( terrainBase.z + zCord) ), Quaternion.identity );
+            sigRefArr[i] = Instantiate( prefabSignal, new Vector3( (terrainBase.x + xCord), ( yCord ), ( terrainBase.z + zCord) ), Quaternion.identity );
         }
-
         return sigRefArr;
     }
 }

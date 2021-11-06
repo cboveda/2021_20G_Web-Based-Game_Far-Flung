@@ -65,3 +65,15 @@ TagManager:
   - name: ViewImage
     uniqueID: 1796528267
     locked: 0
+  - name: FinalPieceNumber
+    uniqueID: 3725535621
+    locked: 0
+  - name: WinBackground
+    uniqueID: 2501096523
+    locked: 0
+  - name: WinBoard
+    uniqueID: 2666429677
+    locked: 0
+  - name: WinImage
+    uniqueID: 3944205665
+    locked: 0

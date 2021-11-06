@@ -1,23 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;using UnityEngine.EventSystems;
+using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class DropSlot : MonoBehaviour, IDropHandler
+public class DropSlot : MonoBehaviour
 {
-    public Vector2 slotOffset;
+
+    public Vector3 offset;
     public GameObject slotMatch;
     public TextAsset completionTextAsset;
 
-    public void OnDrop(PointerEventData eventData)
+    void OnTriggerStay(Collider other)
     {
-        if (eventData.pointerDrag != null && eventData.pointerDrag.gameObject == slotMatch)
+        if(!Input.GetMouseButton(0))
         {
-            eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition =
-                GetComponent<RectTransform>().anchoredPosition + slotOffset;
-            // Debug.Log("User has placed " + slotMatch.name);
-            Resources.FindObjectsOfTypeAll<TextPanel>()[0].ShowText(completionTextAsset, CallParentCompletion);
-            
-
+            if(other.gameObject == slotMatch){
+                Debug.Log("Collision");
+                other.transform.SetPositionAndRotation(transform.position + offset, transform.rotation);
+                Resources.FindObjectsOfTypeAll<TextPanel>()[0].ShowText(completionTextAsset, CallParentCompletion);
+                other.enabled = false;
+            }
         }
     }
 
@@ -35,7 +37,8 @@ public class DropSlot : MonoBehaviour, IDropHandler
 
     public bool IsCompleted()
     {
-        return (slotMatch.GetComponent<RectTransform>().anchoredPosition ==
-               GetComponent<RectTransform>().anchoredPosition + slotOffset);
+        bool completed = (slotMatch.transform.position == transform.position + offset);
+        // Debug.Log(transform.name + " " + completed);
+        return completed;
     }
 }
