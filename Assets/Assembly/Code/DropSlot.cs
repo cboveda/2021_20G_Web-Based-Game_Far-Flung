@@ -10,12 +10,12 @@ public class DropSlot : MonoBehaviour
     public GameObject slotMatch;
     public TextAsset completionTextAsset;
 
-    void OnTriggerStay(Collider other)
+    public void OnTriggerStay(Collider other)
     {
         if(!Input.GetMouseButton(0))
         {
-            if(other.gameObject == slotMatch){
-                Debug.Log("Collision");
+            if(other != null && other.gameObject == slotMatch){
+                // Debug.Log("Collision");
                 other.transform.SetPositionAndRotation(transform.position + offset, transform.rotation);
                 Resources.FindObjectsOfTypeAll<TextPanel>()[0].ShowText(completionTextAsset, CallParentCompletion);
                 other.enabled = false;
