@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LaunchManager : MonoBehaviour
 {
@@ -9,11 +10,13 @@ public class LaunchManager : MonoBehaviour
     public Slider AngleSlider;
     public Slider PowerSlider;
     public Trajectory TrajectoryArrow;
+    public SatellitePathDrawing SatellitePath;
 
     // Placeholder members for win/lose text
     public Text WinText;
     public Text LoseText;
     private bool _sceneAdvanceStart;
+    private bool _launchLocked;
 
 
     public void Start()
@@ -23,6 +26,8 @@ public class LaunchManager : MonoBehaviour
         TrajectoryArrow.GetComponent<SpriteRenderer>().enabled = true;
         TrajectoryArrow.SetPowerRange(PowerSlider.GetComponent<Slider>().minValue, PowerSlider.GetComponent<Slider>().maxValue);
         _sceneAdvanceStart = false;
+        _launchLocked = false;
+        SatellitePath.Active = false;
         // todo
         ResetPlaceholderText();
     }
@@ -40,13 +45,19 @@ public class LaunchManager : MonoBehaviour
 
     public void OnLaunchButtonClicked()
     {
-        TrajectoryArrow.GetComponent<SpriteRenderer>().enabled = false;
-        Satellite.GetComponent<Launch>().DoLaunch();
-        PathFollower[] pathFollowers = FindObjectsOfType<PathFollower>();
-        foreach (PathFollower p in pathFollowers)
+        if (!_launchLocked)
         {
-            p.BeginMovement();
-            p.StartOrbitter();
+            _launchLocked = true;
+            TrajectoryArrow.GetComponent<SpriteRenderer>().enabled = false;
+            Satellite.GetComponent<Launch>().DoLaunch();
+            PathFollower[] pathFollowers = FindObjectsOfType<PathFollower>();
+            foreach (PathFollower p in pathFollowers)
+            {
+                p.BeginMovement();
+                p.StartOrbitter();
+            }
+            SatellitePath.ClearHistory();
+            SatellitePath.Active = true;
         }
     }
 
@@ -61,6 +72,8 @@ public class LaunchManager : MonoBehaviour
             p.StopOrbitter();
         }
         ResetPlaceholderText();
+        SatellitePath.Active = false;
+        _launchLocked = false;
     }
 
     public void OnAsteroidCollisionDetected()
@@ -72,6 +85,7 @@ public class LaunchManager : MonoBehaviour
             p.StopPosition();
             p.StopOrbitter();
         }
+        SatellitePath.Active = false;
 
         if (!_sceneAdvanceStart)
         {
@@ -90,6 +104,7 @@ public class LaunchManager : MonoBehaviour
             p.StopPosition();
             p.StopOrbitter();
         }
+        SatellitePath.Active = false;
 
         // todo
         LoseText.enabled = true;
@@ -128,7 +143,8 @@ public class LaunchManager : MonoBehaviour
     {
         _sceneAdvanceStart = true;
         yield return new WaitForSeconds(3.0f);
-        GetComponent<SceneControls>().Next();
+        //todo:
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
 }
