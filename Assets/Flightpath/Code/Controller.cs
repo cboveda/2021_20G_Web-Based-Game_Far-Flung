@@ -32,9 +32,8 @@ namespace Flightpath
         private GameObject _satellite;
 
         // Start is called before the first frame update
-        void Start()
+        void Awake()
         {
-
             // Setup Dynamic Objects Container
             _dynamicObjects = new GameObject();
             _dynamicObjects.name = "Dynamic Objects";
@@ -56,7 +55,6 @@ namespace Flightpath
 
             // Satellite
             _satellite = _objectFactory.GetFlightpathObject(FlightpathObjectFactory.BuildableObjects.Satellite, _dynamicObjects.transform);
-            //      TODO STILL, IMPLEMENT SCRIPTABLEOBJECTS TO DECOUPLE ALL OF THIS:
             _satellite.GetComponent<SatelliteCollision>().EventSystem = _eventSystem;
             _eventSystem.GetComponent<LaunchManager>().Satellite = _satellite;
             _arrow.GetComponent<Trajectory>().Satellite = _satellite.GetComponent<Launch>();

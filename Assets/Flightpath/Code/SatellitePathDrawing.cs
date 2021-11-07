@@ -14,18 +14,18 @@ namespace Flightpath
         private float _timer;
         private LinkedList<GameObject> _pathHistory;
 
-        void Start()
+        public void Start()
         {
+            _timer = 0;
             _pathHistory = new LinkedList<GameObject>();
         }
 
-        // Update is called once per frame
         void Update()
         {
             if (Active)
             {
                 _timer += Time.deltaTime;
-                if (_timer >= TimeInterval)
+                if (_timer >= TimeInterval && PathPrefab != null)
                 {
                     _pathHistory.AddLast(Instantiate(PathPrefab,
                         new Vector3(Satellite.transform.position.x, Satellite.transform.position.y, Satellite.transform.position.z + 10),

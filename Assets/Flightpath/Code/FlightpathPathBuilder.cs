@@ -13,7 +13,10 @@ namespace Flightpath
 
         void Start()
         {
-            ResetPath();
+            if (_output == null) 
+            {
+                ResetPath();
+            }
         }
 
         public void ResetPath()  
@@ -22,7 +25,7 @@ namespace Flightpath
         }
 
         public void SetStartPosition(Vector2 position) 
-        {
+        {            
             _output.transform.GetChild(0).transform.position = position;
         }
 
@@ -43,6 +46,10 @@ namespace Flightpath
 
         public GameObject GetPath(Transform parent)
         {
+            if (_output == null) 
+            {
+                Start();
+            }
             GameObject temp = _output;
             temp.transform.parent = parent;
             ResetPath();
@@ -51,6 +58,10 @@ namespace Flightpath
 
         public GameObject GetPath(PathScriptableObject target, Transform parent)
         {
+            if (_output == null) 
+            {
+                Start();
+            }
             SetStartPosition(target.StartPosition);
             SetStartDirection(target.StartDirection);
             SetEndPosition(target.EndPosition);
