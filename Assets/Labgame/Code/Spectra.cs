@@ -26,4 +26,9 @@ public class Spectra
     {
         return compositionArray;
     }
+
+    public string GetSpectraName()
+    {
+        return elementName;
+    }
 }

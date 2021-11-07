@@ -7,19 +7,22 @@ public class LabMain : MonoBehaviour
     private ComputerUIMainPane mainComputerUI;
     GameObject main;
     RadioPuzzle currentRadioPuzzle;
+    SpectraPuzzle currentSpectraPuzzle;
     bool isCurrentRadioPuzzleSolved;
     bool isCurrentSpectraPuzzleSolved;
     bool radioPuzzleActive;
     bool spectraPuzzleActive;
-    int level;
+    int levelRadio;
+    int levelSpectra;
     // Start is called before the first frame update
     void Start()
     {
         main = GameObject.Find("LabGameStart");
         mainComputerUI = GameObject.Find("ComputerUIMainPane").GetComponent<ComputerUIMainPane>();
-        level = 0;
+        levelRadio = 0;
         radioPuzzleActive = true;
         spectraPuzzleActive = false;
+        isCurrentSpectraPuzzleSolved = false;
         GetNewRadioPuzzle();
 
 
@@ -37,9 +40,9 @@ public class LabMain : MonoBehaviour
         if (isCurrentRadioPuzzleSolved && radioPuzzleActive)
         {
             
-            if(level < 2)
+            if(levelRadio < 2)
             {
-                mainComputerUI.DisplayComputerText("Congrats! You've solved " + level.ToString() + " waves!");
+                mainComputerUI.DisplayComputerText("Congrats! You've solved " + levelRadio.ToString() + " waves!");
                 GetNewRadioPuzzle();
             }
             else
@@ -56,8 +59,32 @@ public class LabMain : MonoBehaviour
             
         }
 
-        if (isCurrentRadioPuzzleSolved && spectraPuzzleActive)
+        
+
+        if(isCurrentSpectraPuzzleSolved && spectraPuzzleActive)
         {
+            if(levelSpectra < 2)
+            {
+                mainComputerUI.DisplayComputerText("Congrats! You've solved Spectra " + levelSpectra.ToString());
+                GetNewSpectraPuzzle();
+            }
+            else
+            {
+                mainComputerUI.DisplayComputerText("Congrats, you solved all spectra puzzles.  Well done!");
+                radioPuzzleActive = false;
+                spectraPuzzleActive = false;
+            }
+        }
+
+        if (isCurrentRadioPuzzleSolved && spectraPuzzleActive && levelSpectra == 0)
+        {
+            GetNewSpectraPuzzle();
+        }
+
+        if (spectraPuzzleActive && currentSpectraPuzzle.solved && !isCurrentSpectraPuzzleSolved)
+        {
+            isCurrentSpectraPuzzleSolved = true;
+            
 
         }
 
@@ -70,19 +97,42 @@ public class LabMain : MonoBehaviour
         {
             //Destroy(currentPuzzle.gameObject);
         }
-        level++;
+        levelRadio++;
         RadioPuzzleParams radioPuzzleSettings = new RadioPuzzleParams();
         radioPuzzleSettings.Amplitude = 1;
         radioPuzzleSettings.Frequency = 1;
 
         RadioPuzzle myRadioPuzzle = main.AddComponent<RadioPuzzle>();
-        myRadioPuzzle.InitializeRadioPuzzle("Puzzle " + level.ToString(), radioPuzzleSettings);
+        myRadioPuzzle.InitializeRadioPuzzle("Puzzle " + levelRadio.ToString(), radioPuzzleSettings);
 
         currentRadioPuzzle = myRadioPuzzle;
         isCurrentRadioPuzzleSolved = false;
     }
 
-    public void SetPuzzleSolved()
+    public void GetNewSpectraPuzzle()
+    {
+        if(currentSpectraPuzzle != null)
+        {
+
+        }
+        levelSpectra++;
+        SpectraPuzzle mySpectraPuzzle = main.AddComponent<SpectraPuzzle>();
+        currentSpectraPuzzle = mySpectraPuzzle;
+        isCurrentSpectraPuzzleSolved = false;
+
+        mySpectraPuzzle.InitializeSpectraPuzzle("Puzzle " + levelSpectra.ToString(), 0);
+
+        
+        
+
+    }
+
+    public void SetRadioPuzzleSolved()
+    {
+        isCurrentRadioPuzzleSolved = true;
+    }
+
+    public void SetSpectraPuzzleSolved()
     {
         isCurrentRadioPuzzleSolved = true;
     }
@@ -106,4 +156,17 @@ public class LabMain : MonoBehaviour
     {
         currentRadioPuzzle.DecrementAmplitude();
     }
+
+    public void InsertSpectra(Spectra insertedElement)
+    {
+        currentSpectraPuzzle.AddSpectraToTest(insertedElement);
+    }
+
+    public void CheckSpectraAnswer()
+    {
+        currentSpectraPuzzle.CheckSolution();
+    }
+
+
+
 }
