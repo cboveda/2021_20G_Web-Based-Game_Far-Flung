@@ -4,6 +4,7 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 using UnityEngine.UI;
+using Flightpath;
 
 public class FlightpathLaunchTest
 {
@@ -43,6 +44,7 @@ public class FlightpathLaunchTest
         
         GameObject pathDrawing = new GameObject();
         pathDrawing.AddComponent<SatellitePathDrawing>();
+        pathDrawing.GetComponent<SatellitePathDrawing>().Start();
         launchManagerComponent.SatellitePath = pathDrawing.GetComponent<SatellitePathDrawing>();
 
         GameObject arrow = new GameObject();
@@ -79,7 +81,7 @@ public class FlightpathLaunchTest
         pathFollower = new GameObject();
         pathFollower.AddComponent<PathFollower>();
         var pathFollowerComponent = pathFollower.GetComponent<PathFollower>();
-        pathFollowerComponent.Path = path.transform;
+        pathFollowerComponent.Path = path;
         pathFollowerComponent.Speed = 1.0f;
         pathFollowerComponent.Start();
     }
@@ -146,33 +148,33 @@ public class FlightpathLaunchTest
         Assert.AreEqual(10f, satellite.GetComponent<Launch>().GetPower(), 0.1f);
     }
 
-    // [UnityTest]
-    // public IEnumerator Test_LaunchManagerLaunchesAllMovableObjects()
-    // {
-    //     Vector3 satelliteStart = satellite.transform.position;
-    //     Vector3 pathFollowerStart = pathFollower.transform.position;
-    //     var launchManagerComponent = launchManager.GetComponent<LaunchManager>();
-    //     launchManagerComponent.OnLaunchButtonClicked();
-    //     yield return new WaitForFixedUpdate();
-    //     Assert.AreNotEqual(0, satellite.GetComponent<Rigidbody>().velocity.magnitude);
-    //     Assert.AreNotEqual(satelliteStart, satellite.transform.position);
-    //     Assert.AreNotEqual(pathFollowerStart, pathFollower.transform.position);
-    // }
+    [UnityTest]
+    public IEnumerator Test_LaunchManagerLaunchesAllMovableObjects()
+    {
+        Vector3 satelliteStart = satellite.transform.position;
+        Vector3 pathFollowerStart = pathFollower.transform.position;
+        var launchManagerComponent = launchManager.GetComponent<LaunchManager>();
+        launchManagerComponent.OnLaunchButtonClicked();
+        yield return new WaitForFixedUpdate();
+        Assert.AreNotEqual(0, satellite.GetComponent<Rigidbody>().velocity.magnitude);
+        Assert.AreNotEqual(satelliteStart, satellite.transform.position);
+        Assert.AreNotEqual(pathFollowerStart, pathFollower.transform.position);
+    }
 
-    // [UnityTest]
-    // public IEnumerator Test_LaunchManagerResetsAllMovableObjects()
-    // {
-    //     Vector3 satelliteStart = satellite.transform.position;
-    //     Vector3 pathFollowerStart = pathFollower.transform.position;
-    //     var launchManagerComponent = launchManager.GetComponent<LaunchManager>();
-    //     launchManagerComponent.OnLaunchButtonClicked();
-    //     yield return new WaitForFixedUpdate();
-    //     launchManagerComponent.OnResetButtonClicked();
-    //     yield return new WaitForFixedUpdate();
-    //     Assert.AreEqual(0, satellite.GetComponent<Rigidbody>().velocity.magnitude);
-    //     Assert.AreEqual(satelliteStart, satellite.transform.position);
-    //     Assert.AreEqual(pathFollowerStart, pathFollower.transform.position);
-    // }
+    [UnityTest]
+    public IEnumerator Test_LaunchManagerResetsAllMovableObjects()
+    {
+        Vector3 satelliteStart = satellite.transform.position;
+        Vector3 pathFollowerStart = pathFollower.transform.position;
+        var launchManagerComponent = launchManager.GetComponent<LaunchManager>();
+        launchManagerComponent.OnLaunchButtonClicked();
+        yield return new WaitForFixedUpdate();
+        launchManagerComponent.OnResetButtonClicked();
+        yield return new WaitForFixedUpdate();
+        Assert.AreEqual(0, satellite.GetComponent<Rigidbody>().velocity.magnitude);
+        Assert.AreEqual(satelliteStart, satellite.transform.position);
+        Assert.AreEqual(pathFollowerStart, pathFollower.transform.position);
+    }
 
     [UnityTest]
     public IEnumerator Test_LaunchManagerChangesSatelliteAngle()
@@ -192,31 +194,31 @@ public class FlightpathLaunchTest
         Assert.AreEqual(20f, satellite.GetComponent<Launch>().GetPower(), 0.1f);
     }
 
-    // [UnityTest]
-    // public IEnumerator Test_SatelliteStartsAtDefinedLocation()
-    // {
-    //     float expectedX = 15f;
-    //     float expectedY = 30f;
-    //     Vector3 expectedPosition = new Vector3 (expectedX, expectedY, 0);
-    //     satellite.GetComponent<Launch>().StartX = expectedX;
-    //     satellite.GetComponent<Launch>().StartY = expectedY;
-    //     satellite.GetComponent<Launch>().InitializePosition();
-    //     yield return new WaitForFixedUpdate();
-    //     Assert.AreEqual(expectedPosition, satellite.transform.position);
-    // }
+    [UnityTest]
+    public IEnumerator Test_SatelliteStartsAtDefinedLocation()
+    {
+        float expectedX = 15f;
+        float expectedY = 30f;
+        Vector3 expectedPosition = new Vector3 (expectedX, expectedY, 0);
+        satellite.GetComponent<Launch>().StartX = expectedX;
+        satellite.GetComponent<Launch>().StartY = expectedY;
+        satellite.GetComponent<Launch>().InitializePosition();
+        yield return new WaitForFixedUpdate();
+        Assert.AreEqual(expectedPosition, satellite.transform.position);
+    }
 
-    // [UnityTest]
-    // public IEnumerator Test_SatelliteResetsToDefinedLocation()
-    // {
-    //     float expectedX = 1f;
-    //     float expectedY = 1f;
-    //     Vector3 expectedPosition = new Vector3 (expectedX, expectedY, 0);
-    //     satellite.GetComponent<Launch>().StartX = expectedX;
-    //     satellite.GetComponent<Launch>().StartY = expectedY;
-    //     Vector3 newPosition = new Vector3(15, 30, 0);
-    //     satellite.transform.position = newPosition;
-    //     satellite.GetComponent<Launch>().ResetLaunch();
-    //     yield return new WaitForFixedUpdate();
-    //     Assert.AreEqual(expectedPosition, satellite.transform.position);
-    // }
+    [UnityTest]
+    public IEnumerator Test_SatelliteResetsToDefinedLocation()
+    {
+        float expectedX = 1f;
+        float expectedY = 1f;
+        Vector3 expectedPosition = new Vector3 (expectedX, expectedY, 0);
+        satellite.GetComponent<Launch>().StartX = expectedX;
+        satellite.GetComponent<Launch>().StartY = expectedY;
+        Vector3 newPosition = new Vector3(15, 30, 0);
+        satellite.transform.position = newPosition;
+        satellite.GetComponent<Launch>().ResetLaunch();
+        yield return new WaitForFixedUpdate();
+        Assert.AreEqual(expectedPosition, satellite.transform.position);
+    }
 }

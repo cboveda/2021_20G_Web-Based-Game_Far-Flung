@@ -13,8 +13,7 @@ public class TileActions : MonoBehaviour
     Color currentColor;
     Color instructionsColor;
     bool onTile = false;
-    bool validMove = false;
-    string winScene = "";
+    bool validMove = false;    
     bool success = false;
 
     Vector3 tilePosition;
@@ -53,6 +52,27 @@ public class TileActions : MonoBehaviour
 
     GameObject lockedObject;
     string lockLayer = "";
+
+    GameObject continueButton;
+    GameObject continueText;
+
+    GameObject background;
+    GameObject board;
+
+    GameObject imageTextBox;
+    GameObject imageBox;
+    GameObject instructionsTextBox;
+    GameObject instructions;
+
+    GameObject easyModeBackground;
+    GameObject easyModeLabel;
+    GameObject easyModeBox;
+    GameObject easyModeButton;
+    GameObject solveText;
+    GameObject solveButton;
+        
+    bool disable = false;
+
 
     void Start()
     {
@@ -94,13 +114,28 @@ public class TileActions : MonoBehaviour
         lockedObject = GameObject.Find("lock");
         lockLayer = lockedObject.GetComponent<SpriteRenderer>().sortingLayerName;
 
+        continueButton = GameObject.Find("Continue");
+        continueButton.GetComponent<Button>().enabled = false;
+        continueButton.GetComponent<Image>().enabled = false;
+
+        continueText = GameObject.Find("ContinueText");
+        continueText.GetComponent<Text>().enabled = false;
+               
+
     }
 
 
 
 
-    void OnMouseEnter()
+    public void OnMouseEnter()
     {
+
+        // disable tiles
+        if (FindObjectOfType<TileActions>().DisableTiles == true)
+        {
+            return;
+        }
+
         // highlight tile
         spriteName = rend.sprite.name;
         success = checkSuccess();
@@ -133,12 +168,12 @@ public class TileActions : MonoBehaviour
         success = checkSuccess();
         if (objectName == "14" && !success)
         {            
-            lockedObject.GetComponent<SpriteRenderer>().sortingLayerName = "FinalPieceNumber";
+            lockedObject.GetComponent<SpriteRenderer>().sortingLayerName = "WinBackground";
         }
 
     }
 
-    void OnMouseExit()
+    public void OnMouseExit()
     {
         // reset tile color
         rend.color = currentColor;
@@ -199,6 +234,12 @@ public class TileActions : MonoBehaviour
 
     void Update()
     {
+        
+        // disable tiles
+        if (FindObjectOfType<TileActions>().DisableTiles == true )
+        {
+            return;
+        }
 
         spriteName = rend.sprite.name;
 
@@ -235,12 +276,47 @@ public class TileActions : MonoBehaviour
             //Debug.Log("final");         
 
             hideFinalInstructions();
-            
-            successObject = GameObject.Find("Success");
-            successObject.GetComponent<Text>().color = Color.yellow;
 
-            StartCoroutine(WinScene());                    
+            float[] finalWinPos = { 0.0F, 0.0F };
+            int x = 0;
+            int y = 1;
+            finalWinPos = FindObjectOfType<ComGameData>().getWinPosition(0);
+            finalPieceObject.transform.position = new Vector3(finalWinPos[x], finalWinPos[y]);
 
+            // disable tiles
+            FindObjectOfType<TileActions>().DisableTiles = true;            
+
+            // disable canvas objects
+            imageTextBox = GameObject.Find("ImageTextBox");
+            imageTextBox.GetComponent<Text>().enabled = false;
+            imageBox = GameObject.Find("ViewImage");
+            imageBox.GetComponent<SpriteRenderer>().enabled = false;
+
+            instructionsTextBox = GameObject.Find("InstructionsTextBox");
+            instructionsTextBox.GetComponent<Text>().enabled = false;
+
+            instructions = GameObject.Find("Instructions");
+            instructions.GetComponent<SpriteRenderer>().enabled = false;
+
+            easyModeBackground = GameObject.Find("EasyModeBackground");
+            easyModeBackground.GetComponent<Image>().enabled = false;
+
+            easyModeLabel = GameObject.Find("EasyModeLabel");
+            easyModeLabel.GetComponent<Text>().enabled = false;
+
+            easyModeBox = GameObject.Find("EasyModeBox");
+            easyModeBox.GetComponent<SpriteRenderer>().enabled = false;
+
+            easyModeButton = GameObject.Find("EasyMode");
+            easyModeButton.GetComponent<Toggle>().isOn = false;
+
+            solveButton = GameObject.Find("Solve");
+            solveButton.GetComponent<Image>().enabled = false;
+
+            solveText = GameObject.Find("SolveText");
+            solveText.GetComponent<Text>().enabled = false;
+
+            StartCoroutine(WinScene());
         }
 
         success = checkSuccess();
@@ -250,6 +326,37 @@ public class TileActions : MonoBehaviour
         }
         
 
+    }
+
+    public bool DisableTiles
+    {
+        get { return disable; }
+        set { disable = value; }
+    }
+
+    IEnumerator WinScene()
+    {
+        // add 3 second delay
+        yield return new WaitForSeconds(3f);
+
+        // update background and board layer to the front
+        background = GameObject.Find("Background");
+        background.GetComponent<SpriteRenderer>().sortingLayerName = "WinBackground";
+
+        board = GameObject.Find("board");
+        board.GetComponent<SpriteRenderer>().sortingLayerName = "WinBoard";
+
+        // display success comments
+        successObject = GameObject.Find("Success");
+        successObject.GetComponent<Text>().color = Color.yellow;
+
+        // display complete image
+        imageRend.sortingLayerName = "WinImage";
+
+        // display continue button
+        continueButton.GetComponent<Button>().enabled = true;
+        continueButton.GetComponent<Image>().enabled = true;
+        continueText.GetComponent<Text>().enabled = true;
     }
 
 
@@ -263,14 +370,6 @@ public class TileActions : MonoBehaviour
     {
         finalInstructionsObject.GetComponent<Text>().color = finalInstructionsColor;
         finalInstructionsRend.sortingLayerName = "Hidden";
-    }
-
-
-    IEnumerator WinScene()
-    {
-        yield return new WaitForSeconds(3f);
-        winScene = "comGameWin";
-        SceneManager.LoadScene(winScene);
     }
 
 
