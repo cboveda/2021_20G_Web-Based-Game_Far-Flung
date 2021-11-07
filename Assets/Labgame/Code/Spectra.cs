@@ -21,4 +21,9 @@ public class Spectra
             this.compositionArray = compositionArray;
         }
     }
+
+    public int[] GetSpectraArray()
+    {
+        return compositionArray;
+    }
 }
