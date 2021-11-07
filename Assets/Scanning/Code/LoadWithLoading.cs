@@ -1,10 +1,12 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using UnityEngine.UI;
 
 public class LoadWithLoading : MonoBehaviour {
 
     public GameObject buttonParent;
+    public Slider slider;
 
     public void LoadScene() {
         
@@ -20,12 +22,14 @@ public class LoadWithLoading : MonoBehaviour {
 
         while ( !nextScene.isDone ) { // creates game objects in next scene
 
+            slider.value = nextScene.progress;
+
             if (nextScene.progress >= 0.9f)
             {
                 yield return new WaitForSeconds(1f); // add delay to finish awake call, happens in unity an unspecified amount of time after 90% loaded
                 nextScene.allowSceneActivation = true;
             }
-            yield return null;
+            yield return new WaitForSeconds(0.1f);
         }
     }
 }
