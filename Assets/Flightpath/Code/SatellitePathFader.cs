@@ -2,40 +2,44 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SatellitePathFader : MonoBehaviour
+namespace Flightpath
 {
-    private SpriteRenderer _renderer;
-    private bool _locked;
-    private float _timer;
-    private float _fadeDuration;
-
-    void Start()
+    public class SatellitePathFader : MonoBehaviour
     {
-        _renderer = GetComponent<SpriteRenderer>();
-        _locked = false;
-        _timer = 0;
-        _fadeDuration = 1;
-    }
+        private SpriteRenderer _renderer;
+        private bool _locked;
+        private bool _startFade;
+        private float _timer;
+        private float _fadeDuration;
 
-    public void BeginFade(float duration)
-    {
-        _fadeDuration = duration;
-        if (!_locked)
+        void Start()
         {
-            StartCoroutine("Fade");
+            _renderer = GetComponent<SpriteRenderer>();
+            _locked = false;
+            _startFade = false;
+            _timer = 0;
+            _fadeDuration = 1;
         }
-    }
 
-    private IEnumerator Fade()
-    {
-        while (_timer < _fadeDuration) 
+        void Update()
         {
-            _timer += Time.deltaTime;
-            float alpha = 1 - (_timer / _fadeDuration);
-            Color newColor = new Color(_renderer.color.r, _renderer.color.g, _renderer.color.b, alpha);
-            _renderer.color = newColor;
-            yield return new WaitForEndOfFrame();
+            if (_startFade)
+            {
+                _timer += Time.deltaTime;
+                float alpha = 1 - (_timer / _fadeDuration);
+                Color newColor = new Color(_renderer.color.r, _renderer.color.g, _renderer.color.b, alpha);
+                _renderer.color = newColor;
+            }
+            if (_timer >= _fadeDuration)
+            {
+                Destroy(GetComponent<Transform>().gameObject);
+            }
         }
-        Destroy(GetComponent<Transform>().gameObject);
+
+        public void BeginFade(float duration)
+        {
+            _fadeDuration = duration;
+            _startFade = true;
+        }
     }
 }
