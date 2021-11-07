@@ -6,9 +6,11 @@ public class LabMain : MonoBehaviour
 {
     private ComputerUIMainPane mainComputerUI;
     GameObject main;
-    RadioPuzzle currentPuzzle;
-    bool isCurrentPuzzleSolved;
+    RadioPuzzle currentRadioPuzzle;
+    bool isCurrentRadioPuzzleSolved;
+    bool isCurrentSpectraPuzzleSolved;
     bool radioPuzzleActive;
+    bool spectraPuzzleActive;
     int level;
     // Start is called before the first frame update
     void Start()
@@ -16,7 +18,8 @@ public class LabMain : MonoBehaviour
         main = GameObject.Find("LabGameStart");
         mainComputerUI = GameObject.Find("ComputerUIMainPane").GetComponent<ComputerUIMainPane>();
         level = 0;
-        radioPuzzleActive = false;
+        radioPuzzleActive = true;
+        spectraPuzzleActive = false;
         GetNewRadioPuzzle();
 
 
@@ -31,15 +34,31 @@ public class LabMain : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isCurrentPuzzleSolved)
+        if (isCurrentRadioPuzzleSolved && radioPuzzleActive)
         {
-            mainComputerUI.DisplayComputerText("Congrats! You've solved " + level.ToString() + " waves!");
-            GetNewRadioPuzzle();
-        }
-        if (currentPuzzle.solved)
-        {
-            isCurrentPuzzleSolved = true;
             
+            if(level < 2)
+            {
+                mainComputerUI.DisplayComputerText("Congrats! You've solved " + level.ToString() + " waves!");
+                GetNewRadioPuzzle();
+            }
+            else
+            {
+                mainComputerUI.DisplayComputerText("Congrats, you solved all radio puzzles.  Solve the spectra puzzle to the right.");
+                radioPuzzleActive = false;
+                spectraPuzzleActive = true;
+            }
+            
+        }
+        if (currentRadioPuzzle.solved && !isCurrentRadioPuzzleSolved)
+        {
+            isCurrentRadioPuzzleSolved = true;
+            
+        }
+
+        if (isCurrentRadioPuzzleSolved && spectraPuzzleActive)
+        {
+
         }
 
 
@@ -47,7 +66,7 @@ public class LabMain : MonoBehaviour
 
     public void GetNewRadioPuzzle()
     {
-        if (currentPuzzle != null)
+        if (currentRadioPuzzle != null)
         {
             //Destroy(currentPuzzle.gameObject);
         }
@@ -59,32 +78,32 @@ public class LabMain : MonoBehaviour
         RadioPuzzle myRadioPuzzle = main.AddComponent<RadioPuzzle>();
         myRadioPuzzle.InitializeRadioPuzzle("Puzzle " + level.ToString(), radioPuzzleSettings);
 
-        currentPuzzle = myRadioPuzzle;
-        isCurrentPuzzleSolved = false;
+        currentRadioPuzzle = myRadioPuzzle;
+        isCurrentRadioPuzzleSolved = false;
     }
 
     public void SetPuzzleSolved()
     {
-        isCurrentPuzzleSolved = true;
+        isCurrentRadioPuzzleSolved = true;
     }
 
     public void IncrementFrequency()
     {
-        currentPuzzle.IncrementFrequency();
+        currentRadioPuzzle.IncrementFrequency();
     }
 
     public void DecrementFrequency()
     {
-        currentPuzzle.DecrementFrequency();
+        currentRadioPuzzle.DecrementFrequency();
     }
 
     public void IncrementAmplitude()
     {
-        currentPuzzle.IncrementAmplitude();
+        currentRadioPuzzle.IncrementAmplitude();
     }
 
     public void DecrementAmplitude()
     {
-        currentPuzzle.DecrementAmplitude();
+        currentRadioPuzzle.DecrementAmplitude();
     }
 }
