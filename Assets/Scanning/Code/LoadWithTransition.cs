@@ -3,14 +3,14 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 using UnityEngine.UI;
 
-public class LoadWithLoading : MonoBehaviour {
+public class LoadWithTransition : MonoBehaviour {
 
-    public GameObject buttonParent;
+    public GameObject loadingScreen;
     public Slider slider;
 
     public void LoadScene() {
         
-        buttonParent.SetActive(false);
+        loadingScreen.SetActive(true);
         StartCoroutine(LoadSceneInBG());
     }
 
@@ -22,11 +22,11 @@ public class LoadWithLoading : MonoBehaviour {
 
         while ( !nextScene.isDone ) { // creates game objects in next scene
 
-            slider.value = nextScene.progress;
+            slider.value = Mathf.Clamp01( nextScene.progress / 0.9f );
 
             if (nextScene.progress >= 0.9f)
             {
-                yield return new WaitForSeconds(1f); // add delay to finish awake call, happens in unity an unspecified amount of time after 90% loaded
+                yield return new WaitForSeconds(1f); // allow activation stage on next scene
                 nextScene.allowSceneActivation = true;
             }
             yield return new WaitForSeconds(0.1f);
