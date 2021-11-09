@@ -1,12 +1,21 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class LoadFromEnd : MonoBehaviour
 {
+    public FadeDriver fadeDriver;
+
     public void LoadNextScene() {
-        SceneManager.LoadScene( SceneManager.GetActiveScene().buildIndex + 1 );
+        StartCoroutine( TriggerTransition( SceneManager.GetActiveScene().buildIndex + 1)  );
     }
     public void RestartGame() {
-        SceneManager.LoadScene( SceneManager.GetActiveScene().buildIndex - 2 );
+        StartCoroutine( TriggerTransition( SceneManager.GetActiveScene().buildIndex - 2)  );
+    }
+
+    IEnumerator TriggerTransition( int sceneIndex ) {
+        fadeDriver.TriggerFade();
+        yield return new WaitForSeconds(1.0f);
+        SceneManager.LoadScene( sceneIndex );
     }
 }
