@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 using UnityEngine.UI;
 
-public class LoadWithTransition : MonoBehaviour {
+public class LoadFromStart : MonoBehaviour {
 
     public GameObject loadingScreen;
     public Slider slider;
