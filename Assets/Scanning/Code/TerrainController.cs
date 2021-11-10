@@ -15,7 +15,8 @@ public class TerrainController : MonoBehaviour {
     public SignalSpawner sigSpawner;
     public AnimationCurve basePerlinCurve;
 
-    Dictionary<Vector2, OpenMapTile> tileDict = new Dictionary<Vector2, OpenMapTile>();
+    [HideInInspector]
+    public Dictionary<Vector2, OpenMapTile> tileDict = new Dictionary<Vector2, OpenMapTile>();
 
     Queue<MapTileJob> stageOne = new Queue<MapTileJob>();
     Queue<MapTileJob> stageTwo = new Queue<MapTileJob>();
