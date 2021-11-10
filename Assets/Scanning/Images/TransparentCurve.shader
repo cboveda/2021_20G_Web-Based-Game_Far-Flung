@@ -12,7 +12,7 @@ Shader "Custom/TransparentCurve" {
 	}
 	SubShader {
 		Tags { "Queue"="Transparent" "RenderType"="Transparent" }
-        LOD 200
+        LOD 100
 
         ZWrite Off
 		Blend SrcAlpha OneMinusSrcAlpha
