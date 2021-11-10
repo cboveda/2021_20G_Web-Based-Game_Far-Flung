@@ -13,6 +13,13 @@ public class Completion : MonoBehaviour
 
     public void CheckCompletion()
     {
+        if(IsCompleted()){
+            TextPanel textPanel = Resources.FindObjectsOfTypeAll<TextPanel>()[0];
+            textPanel.ShowText(completionTextAsset, nextScene.Invoke);
+        }
+    }
+
+    public bool IsCompleted(){
         foreach (Transform child in transform)
         {
             //Implement completion check
@@ -22,12 +29,10 @@ public class Completion : MonoBehaviour
                 // Debug.Log(child.name + " is " + slotCompleted);
                 if (!slotCompleted)
                 {
-                    return; //does nothing if one of the slots is incomplete
+                    return false; //does nothing if one of the slots is incomplete
                 }
             }
-            
-        } 
-        TextPanel textPanel = Resources.FindObjectsOfTypeAll<TextPanel>()[0];
-        textPanel.ShowText(completionTextAsset, nextScene.Invoke);
+        }
+        return true; 
     }
 }

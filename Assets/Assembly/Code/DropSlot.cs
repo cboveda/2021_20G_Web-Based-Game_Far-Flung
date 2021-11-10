@@ -15,7 +15,7 @@ public class DropSlot : MonoBehaviour
         if(!Input.GetMouseButton(0))
         {
             if(other != null && other.gameObject == slotMatch){
-                // Debug.Log("Collision");
+                Debug.Log("Collision");
                 other.transform.SetPositionAndRotation(transform.position + offset, transform.rotation);
                 Resources.FindObjectsOfTypeAll<TextPanel>()[0].ShowText(completionTextAsset, CallParentCompletion);
                 other.enabled = false;
