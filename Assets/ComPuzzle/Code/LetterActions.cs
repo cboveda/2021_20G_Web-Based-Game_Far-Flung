@@ -9,39 +9,37 @@ public class LetterActions : MonoBehaviour
 
     Text letterText;
     GameObject textObject;
+    Button buttonObject;
     string buttonName = "";
     string letter = "None";
     string button = "None";
-    bool mouseDown = false;
-    bool finalOn = false;
-    SpriteRenderer rend;
-    string spriteName = "";
+    string row = "None";
+    bool switched = false;
+    int switchCount = 0;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        rend = GetComponent<SpriteRenderer>();
+       
     }
 
     // Update is called once per frame
     void Update()
     {
-       // spriteName = rend.sprite.name;
-       // if (spriteName == "pointer" )
-       // {
-        //    Debug.Log(spriteName);
-        //}
         
     }
 
-    public void OnMouseDown()
+    public int switchedCount
     {
-        mouseDown = true;
+        get { return switchCount; }
+        set { switchCount = value; }
     }
 
-    public void OnMouseUp()
+    public bool switchedLetters
     {
-        mouseDown = false;
+        get { return switched; }
+        set { switched = value; }
     }
 
     public string selectedLetter
@@ -56,88 +54,128 @@ public class LetterActions : MonoBehaviour
         set { button = value; }
     }
 
-    public void SwapLetter()
+    public string selectedRow
     {
-        Debug.Log("here");
-        Debug.Log(mouseDown);
-        if (mouseDown)
-        {
-            Debug.Log("down");
-            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-            transform.Translate(mousePosition);
-        }
+        get { return row; }
+        set { row = value; }
     }
 
     public void SwapLetters()
     {
-        
-
-
-        //Debug.Log("swap");
         int textChild = 0;
         string prevLetter = "";
         string prevButton = "";
-        string letterSelected = "";
+        string prevRow = "";
+        string letterSelected = "";        
+        string rowSelected = "";
+        
 
         buttonName = EventSystem.current.currentSelectedGameObject.name;
         textObject = GameObject.Find(buttonName);
 
+        buttonObject = textObject.GetComponent<Button>();
+
+        buttonObject.Select();
+
         prevLetter = FindObjectOfType<LetterActions>().selectedLetter;
         prevButton = FindObjectOfType<LetterActions>().selectedButton;
+        prevRow = FindObjectOfType<LetterActions>().selectedRow;
 
-        Debug.Log(prevLetter);
-        Debug.Log(prevButton);
+        //Debug.Log(rowSelected);
+        //Debug.Log(buttonNumber);
+        //Debug.Log(prevLetter);
+        //Debug.Log(prevButton);
 
+        
+
+        rowSelected = getSelectedRow(buttonName);
         letterSelected = textObject.transform.GetChild(textChild).GetComponent<UnityEngine.UI.Text>().text;
         if (prevLetter == "None")
         {            
             FindObjectOfType<LetterActions>().selectedLetter = letterSelected;
             FindObjectOfType<LetterActions>().selectedButton = buttonName;
+            FindObjectOfType<LetterActions>().selectedRow = rowSelected;
+            
             //Debug.Log(FindObjectOfType<LetterActions>().selectedLetter);
             //Debug.Log(FindObjectOfType<LetterActions>().selectedButton);
         }
         else
         {
-            // swap letter with previous letter selected
-            textObject.transform.GetChild(textChild).GetComponent<UnityEngine.UI.Text>().text = prevLetter;
+            
+            Debug.Log(prevRow);
+            Debug.Log(rowSelected);
+            if (prevRow == rowSelected)
+            {
+
+                // swap letter with previous letter selected
+                textObject.transform.GetChild(textChild).GetComponent<UnityEngine.UI.Text>().text = prevLetter;
+                EventSystem.current.SetSelectedGameObject(null);
+
+                // swap previous letter with current letter selected
+                textObject = GameObject.Find(prevButton);
+                textObject.transform.GetChild(textChild).GetComponent<UnityEngine.UI.Text>().text = letterSelected;
+
+
+            }
+            else
+            {
+                Debug.Log("not correct row");
+                
+            }
+
             EventSystem.current.SetSelectedGameObject(null);
-
-            // swap previous letter with current letter selected
-            textObject = GameObject.Find(prevButton);
-            textObject.transform.GetChild(textChild).GetComponent<UnityEngine.UI.Text>().text = letterSelected;
-
             // update previous selected letter and button to None
             FindObjectOfType<LetterActions>().selectedLetter = "None";
             FindObjectOfType<LetterActions>().selectedButton = "None";
+            FindObjectOfType<LetterActions>().selectedRow = "None";
+        }
+                
+
+    }
+
+    public string getSelectedRow(string button)
+    {
+
+        string dash = "_";
+        string buttonIndex1 = "";
+        string buttonIndex = "";
+        int buttonNumber = 0;
+        string row = "";
+
+        buttonIndex1 = buttonName.Substring(1, 1);
+        if (buttonIndex1 == dash)
+        {
+            buttonIndex = buttonName.Substring(0, 1);
+            buttonNumber = int.Parse(buttonIndex);
+        }
+        else
+        {
+            buttonIndex = buttonName.Substring(0, 2);
+            buttonNumber = int.Parse(buttonIndex);
         }
 
-         
+        if (buttonNumber < 8)
+        {
+            FindObjectOfType<LetterActions>().selectedRow = "1";
+        }
+        else if (buttonNumber < 19)
+        {
+            FindObjectOfType<LetterActions>().selectedRow = "2";
+        }
+        else if (buttonNumber < 27)
+        {
+            FindObjectOfType<LetterActions>().selectedRow = "3";
+        }
+        else
+        {
+            FindObjectOfType<LetterActions>().selectedRow = "4";
+        }
 
-
-        //letterText = textObject.transform.GetChild(textChild).GetComponent<UnityEngine.UI.Text>();
-        //FindObjectOfType<LetterActions>().selectedLetter = letterText.text;
-        //FindObjectOfType<LetterActions>().selectedButton = buttonName;
+        row = FindObjectOfType<LetterActions>().selectedRow;
         
-
-        //Debug.Log(FindObjectOfType<LetterActions>().selectedLetter);
-
-
-
-
-        //FindObjectOfType<LetterActions>().selected = buttonName;
-
-        //Debug.Log(FindObjectOfType<LetterActions>().selected);
-
-        //textObject = GameObject.Find(buttonName);
-        //letterText = textObject.transform.GetChild(0).GetComponent<UnityEngine.UI.Text>();
-        //letterText.text = "B";
-
-
-        //textObject = GameObject.Find("1_Text");
-        //letterText = textObject.GetComponent<UnityEngine.UI.Text>();
-        //letterText.text = "B";
-        //letterText<UnityEngine.UI.Text>().text = "B";
+        return row;
     }
+
 
 
 }
