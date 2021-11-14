@@ -27,7 +27,7 @@ public class DebugMenu : MonoBehaviour
     {
         "Debug Menu",
         "Assembly",
-        "Flight Plan",
+        "Flightpath",
         "Scanning",
         "Communications",
         "Lab Analysis"
