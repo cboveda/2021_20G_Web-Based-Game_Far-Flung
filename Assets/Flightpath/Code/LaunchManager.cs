@@ -145,8 +145,7 @@ namespace Flightpath
         {
             _sceneAdvanceStart = true;
             yield return new WaitForSeconds(3.0f);
-            //todo:
-            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
 
     }
