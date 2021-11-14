@@ -30,7 +30,7 @@ public class SendDataActions : MonoBehaviour
 
     public void SendData()
     {
-        int buttonStart = 0;
+        //int buttonStart = 0;
         int letterCount = 0;
 
         buttonName = EventSystem.current.currentSelectedGameObject.name;
@@ -55,7 +55,7 @@ public class SendDataActions : MonoBehaviour
             letterCount = 7;
         }
 
-        buttonStart = FindObjectOfType<SendDataActions>().buttonStart;
+        //buttonStart = FindObjectOfType<SendDataActions>().buttonStart;
         StartCoroutine(SignalAnimation(letterCount));
 
     }

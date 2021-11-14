@@ -170,4 +170,60 @@ public class ComGameData : MonoBehaviour
         return winPosition;
     }
 
+
+    public string getWinLetter(int row, int letterPos)
+    {
+        string letter = "";
+        string [] row1Word = { "S", "U", "R", "F", "A", "C", "E"};
+        string [] row2Word = { "C", "O", "M", "P", "O", "S", "I", "T", "I", "O", "N" };
+        string [] row3Word = { "M", "A", "G", "N", "E", "T", "I", "C" };
+        string [] row4Word = { "G", "R", "A", "V", "I", "T", "Y" };
+
+        switch (row)
+        {
+            case 1:
+                letter = row1Word[letterPos];
+                break;
+            case 2:
+                letter = row2Word[letterPos];
+                break;
+            case 3:
+                letter = row3Word[letterPos];
+                break;
+            case 4:
+                letter = row4Word[letterPos];
+                break;
+        }
+
+        return letter;
+    }
+
+    public string [] getSpecialLetters(int row)
+    {
+        string[] specialLetterButtons = { };
+        string[] word1special = { "6" };
+        string[] word2special = { "9", "12", "18" };
+        string[] word3special = { "19", "23" };
+        string[] word4special = { "32" };
+
+        switch (row)
+        {
+            case 1:
+                specialLetterButtons = word1special;
+                break;
+            case 2:
+                specialLetterButtons = word2special;
+                break;
+            case 3:
+                specialLetterButtons = word3special;
+                break;
+            case 4:
+                specialLetterButtons = word4special;
+                break;
+        }
+
+        return specialLetterButtons;
+    }
+
+
 }

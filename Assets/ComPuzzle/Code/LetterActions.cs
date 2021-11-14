@@ -17,20 +17,20 @@ public class LetterActions : MonoBehaviour
     string row = "None";
     bool switched = false;
     int switchCount = 0;
-
+    
+    
 
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        
     }
-
 
 
     public string selectedLetter
@@ -64,6 +64,7 @@ public class LetterActions : MonoBehaviour
     }
 
 
+
     public void SwapLetters()
     {
         int textChild = 0;
@@ -83,7 +84,7 @@ public class LetterActions : MonoBehaviour
             switchCount = FindObjectOfType<LetterActions>().switchedCount;
             if (switchCount < 1)
             {
-                Debug.Log("switched");
+                //Debug.Log("switched");
                 FindObjectOfType<LetterActions>().switchedCount += 1;
             }
             else
@@ -125,7 +126,7 @@ public class LetterActions : MonoBehaviour
         {
             if (prevRow == rowSelected)
             {
-                Debug.Log("swap");
+                //Debug.Log("swap");
                 // swap letter with previous letter selected
                 textObject.transform.GetChild(backgroundChild).GetChild(textChild).GetComponent<UnityEngine.UI.Text>().text = prevLetter;
                 //EventSystem.current.SetSelectedGameObject(null);
