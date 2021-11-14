@@ -15,7 +15,8 @@ public class TerrainController : MonoBehaviour {
     public SignalSpawner sigSpawner;
     public AnimationCurve basePerlinCurve;
 
-    Dictionary<Vector2, OpenMapTile> tileDict = new Dictionary<Vector2, OpenMapTile>();
+    [HideInInspector]
+    public Dictionary<Vector2, OpenMapTile> tileDict = new Dictionary<Vector2, OpenMapTile>();
 
     Queue<MapTileJob> stageOne = new Queue<MapTileJob>();
     Queue<MapTileJob> stageTwo = new Queue<MapTileJob>();
@@ -24,10 +25,22 @@ public class TerrainController : MonoBehaviour {
     List<Vector2> forRemoval = new List<Vector2>();
     bool unloadWaste;
     
-    void Start() {
+    void Awake() {
+
+        satellite.GetComponent<FlightControl>().speed = 0;
+
         tileRenderRangeZ = Mathf.RoundToInt( renderDistZ / tileDim );
         tileRenderRangeX = Mathf.RoundToInt( renderDistX / tileDim );
         unloadWaste = false;
+
+        Update();
+        while ( stageOne.Count != 0 ) {
+            Update();
+        }
+    }
+
+    void Start() {
+        satellite.GetComponent<FlightControl>().speed = 40f;
     }
 
     void Update() {

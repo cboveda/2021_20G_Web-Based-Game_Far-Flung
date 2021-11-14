@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
+using Flightpath;
 
 public class FlightpathTest
 {
@@ -87,7 +88,7 @@ public class FlightpathTest
         GameObject pathFollower = new GameObject();
         pathFollower.AddComponent<PathFollower>();
         var pathFollowerComponent = pathFollower.GetComponent<PathFollower>();
-        pathFollowerComponent.Path = path.transform;
+        pathFollowerComponent.Path = path;
         pathFollowerComponent.Speed = 1.0f;
         pathFollowerComponent.Start();
 

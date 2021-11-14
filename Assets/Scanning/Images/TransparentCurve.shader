@@ -1,20 +1,17 @@
-﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
-// Upgrade NOTE: replaced '_World2Object' with 'unity_WorldToObject'
-
-Shader "Custom/TransparentCurve" {
+﻿Shader "Custom/TransparentCurve" {
 	Properties {
 		_Color ("Color", Color) = (1,1,1,1)
 		_MainTex ("Albedo (RGB)", 2D) = "white" {}
 		_BumpMap ("Normalmap", 2D) = "bump" {}
 		_Glossiness ("Smoothness", Range(0,1)) = 0.5
 		_Metallic ("Metallic", Range(0,1)) = 0.0
-        _Curvature ("Curvature", Float) = 0.001
+		_Curvature ("Curvature", Float) = 0.001
 	}
 	SubShader {
 		Tags { "Queue"="Transparent" "RenderType"="Transparent" }
-        LOD 200
+		LOD 100
 
-        ZWrite Off
+		ZWrite Off
 		Blend SrcAlpha OneMinusSrcAlpha
 		
 		CGPROGRAM
@@ -23,10 +20,10 @@ Shader "Custom/TransparentCurve" {
 
 		sampler2D _MainTex;
 		sampler2D _BumpMap;
-	    float _Curvature;
+		float _Curvature;
 		fixed4 _Color;
 		half _Glossiness;
-        half _Metallic;
+		half _Metallic;
 
 		struct Input {
 			float2 uv_MainTex;
@@ -34,19 +31,19 @@ Shader "Custom/TransparentCurve" {
 		};
 		
 		void vert( inout appdata_full v)
-        {            
-            float4 vv = mul( unity_ObjectToWorld, v.vertex ); 
-            vv.xyz -= _WorldSpaceCameraPos.xyz;
-            vv = float4( 0.0f, ((vv.z * vv.z) + (vv.x * vv.x)) * - _Curvature, 0.0f, 0.0f );
-            v.vertex += mul(unity_WorldToObject, vv);
-        }
+		{            
+			float4 vv = mul( unity_ObjectToWorld, v.vertex ); 
+			vv.xyz -= _WorldSpaceCameraPos.xyz;
+			vv = float4( 0.0f, ((vv.z * vv.z) + (vv.x * vv.x)) * - _Curvature, 0.0f, 0.0f );
+			v.vertex += mul(unity_WorldToObject, vv);
+		}
 
 		void surf (Input IN, inout SurfaceOutputStandard o) {
 			fixed4 c = tex2D (_MainTex, IN.uv_MainTex) * _Color;
 			o.Normal = UnpackNormal (tex2D (_BumpMap, IN.uv_BumpMap));
 			o.Albedo = c.rgb;
 			o.Metallic = _Metallic;
-            o.Smoothness = _Glossiness;
+			o.Smoothness = _Glossiness;
 			o.Alpha = _Color.a;
 		}
 		ENDCG
