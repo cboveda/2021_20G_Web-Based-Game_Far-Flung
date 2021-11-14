@@ -178,6 +178,7 @@ public class ComGameData : MonoBehaviour
         string [] row2Word = { "C", "O", "M", "P", "O", "S", "I", "T", "I", "O", "N" };
         string [] row3Word = { "M", "A", "G", "N", "E", "T", "I", "C" };
         string [] row4Word = { "G", "R", "A", "V", "I", "T", "Y" };
+        string[] rowFinalWord = { "N", "O", "C", "O", "M", "E", "T" };
 
         switch (row)
         {
@@ -193,6 +194,9 @@ public class ComGameData : MonoBehaviour
             case 4:
                 letter = row4Word[letterPos];
                 break;
+            case 5:
+                letter = rowFinalWord[letterPos];
+                break;
         }
 
         return letter;
@@ -205,6 +209,7 @@ public class ComGameData : MonoBehaviour
         string[] word2special = { "9", "12", "18" };
         string[] word3special = { "19", "23" };
         string[] word4special = { "32" };
+        string[] word5special = { "34", "35", "36", "37", "38", "39", "40" };
 
         switch (row)
         {
@@ -219,6 +224,9 @@ public class ComGameData : MonoBehaviour
                 break;
             case 4:
                 specialLetterButtons = word4special;
+                break;
+            case 5:
+                specialLetterButtons = word5special;
                 break;
         }
 

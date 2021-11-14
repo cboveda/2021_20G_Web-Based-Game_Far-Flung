@@ -39,6 +39,7 @@ public class SendDataActions : MonoBehaviour
         buttonName = EventSystem.current.currentSelectedGameObject.name;               
         
         DisableDataButtons();
+
         
         if (buttonName == "ImagerButton")
         {            
@@ -69,18 +70,21 @@ public class SendDataActions : MonoBehaviour
             letterCount = 7;
         }
 
+
+        FindObjectOfType<ComUnscrambleMain>().DisableWord(wordRow);
+
         if (!wordUpdated)
         {
             FindObjectOfType<ComUnscrambleMain>().HideWord(wordRow);
         }
 
- 
+        
         //buttonStart = FindObjectOfType<SendDataActions>().buttonStart;
-        StartCoroutine(SignalAnimation(letterCount, wordUpdated));
+        StartCoroutine(SignalAnimation(letterCount, wordUpdated, wordRow));
 
     }
 
-    IEnumerator SignalAnimation(int letterCount, bool wordUpdated)
+    IEnumerator SignalAnimation(int letterCount, bool wordUpdated, int wordRow)
     {
 
         for (int letter = 0; letter < letterCount; letter++)
@@ -98,6 +102,11 @@ public class SendDataActions : MonoBehaviour
             yield return new WaitForSeconds(0.6f);
         }
 
+        if (!wordUpdated)
+        {
+            FindObjectOfType<ComUnscrambleMain>().EnableWord(wordRow);
+        }        
+
         EnableDataButtons();
 
     }
@@ -110,7 +119,9 @@ public class SendDataActions : MonoBehaviour
         float yIncrement = 0.012632f;
         Color letterColor = new Color32(246, 34, 250, 255);
         Color hiddenColor = new Color32(246, 34, 250, 0);
-        Color winColorText = new Color32(0, 0, 0, 0); 
+        Color winColorText = new Color32(0, 0, 0, 0);
+        Color winColorBackground = new Color32(0, 90, 0, 255);
+        Color winLetterText = new Color32(75, 255, 35, 255);
         int backgroundChild = 0;
         int textChild = 0;
         GameObject letterObject;
@@ -138,9 +149,11 @@ public class SendDataActions : MonoBehaviour
             if (wordUpdated)
             {
                 winColorText = letterObject.transform.GetChild(backgroundChild).GetChild(textChild).GetComponent<UnityEngine.UI.Text>().color;
-                letterObject.transform.GetChild(backgroundChild).GetChild(textChild).GetComponent<UnityEngine.UI.Text>().color = letterColor;
+                //winColorBackground = letterObject.transform.GetChild(backgroundChild).GetComponent<UnityEngine.UI.Image>().color;
+                letterObject.transform.GetChild(backgroundChild).GetChild(textChild).GetComponent<UnityEngine.UI.Text>().color = winLetterText;
                 yield return new WaitForSeconds(0.1f);
                 letterObject.transform.GetChild(backgroundChild).GetChild(textChild).GetComponent<UnityEngine.UI.Text>().color = winColorText;
+                letterObject.transform.GetChild(backgroundChild).GetComponent<UnityEngine.UI.Image>().color = winColorBackground;
             }
             else
             {
