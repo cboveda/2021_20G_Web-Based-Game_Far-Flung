@@ -83,7 +83,7 @@ public class LetterActions : MonoBehaviour
             switchCount = FindObjectOfType<LetterActions>().switchedCount;
             if (switchCount < 1)
             {
-                //Debug.Log("switched");
+                Debug.Log("switched");
                 FindObjectOfType<LetterActions>().switchedCount += 1;
             }
             else
@@ -125,7 +125,7 @@ public class LetterActions : MonoBehaviour
         {
             if (prevRow == rowSelected)
             {
-
+                Debug.Log("swap");
                 // swap letter with previous letter selected
                 textObject.transform.GetChild(backgroundChild).GetChild(textChild).GetComponent<UnityEngine.UI.Text>().text = prevLetter;
                 //EventSystem.current.SetSelectedGameObject(null);
@@ -144,7 +144,11 @@ public class LetterActions : MonoBehaviour
             FindObjectOfType<LetterActions>().selectedButton = "None";
             FindObjectOfType<LetterActions>().selectedRow = "None";
 
-            FindObjectOfType<LetterActions>().switchedLetters = true;
+            if (prevButton != buttonName)
+            {
+                FindObjectOfType<LetterActions>().switchedLetters = true;
+            }                
+            
             GameObject.Find(prevButton).GetComponent<Toggle>().isOn = false;
             GameObject.Find(prevButton).transform.GetChild(backgroundChild).GetComponent<Image>().color = new Color(0.0f, 1.0f, 1.0f, 0.02f);
             GameObject.Find(buttonName).GetComponent<Toggle>().isOn = false;
