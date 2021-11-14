@@ -13,76 +13,35 @@ public class ComUnscrambleMain : MonoBehaviour
     bool word4 = false;
     bool wordsAll = false;
 
-    // Start is called before the first frame update
-    void Start()
+    bool word1Color = false;
+    bool word2Color = false;
+    bool word3Color = false;
+    bool word4Color = false;
+
+    public bool word1ColorUpdated
     {
-        HideLetters();
-        
+        get { return word1Color; }
+        set { word1Color = value; }
     }
 
-    // Update is called once per frame
-    void Update()
+    public bool word2ColorUpdated
     {
-        bool winWord1 = false;
-        bool winWord2 = false;
-        bool winWord3 = false;
-        bool winWord4 = false;
-        bool winWordsAll = false;
-        int row1 = 1;
-        int row2 = 2;
-        int row3 = 3;
-        int row4 = 4;               
-
-        winWordsAll = FindObjectOfType<ComUnscrambleMain>().wordsAllWin;
-        if (!winWordsAll)
-        {
-            Debug.Log(checkWinAllWords());
-        }
-
-        winWord1 = FindObjectOfType<ComUnscrambleMain>().word1win;
-        if (!winWord1)
-        {
-            Debug.Log(checkWordWin(row1));
-        }
-
-        winWord2 = FindObjectOfType<ComUnscrambleMain>().word2win;
-        if (!winWord2)
-        {
-            Debug.Log(checkWordWin(row2));
-        }
-
-        winWord3 = FindObjectOfType<ComUnscrambleMain>().word3win;
-        if (!winWord3)
-        {
-            Debug.Log(checkWordWin(row3));
-        }
-
-        winWord4 = FindObjectOfType<ComUnscrambleMain>().word4win;
-        if (!winWord4)
-        {
-            Debug.Log(checkWordWin(row4));
-        }
-
+        get { return word2Color; }
+        set { word2Color = value; }
     }
 
-
-    public void HideLetters()
+    public bool word3ColorUpdated
     {
-        //Debug.Log("hide");
-        Color hiddenColor = new Color32(246, 34, 250, 0);
-        
-        int backgroundChild = 0;
-        int textChild = 0;
-        int buttonLastIndex = 49;
-
-        GameObject buttons = GameObject.Find("ButtonCanvas");
-
-        for (int buttonIndex = 9; buttonIndex < buttonLastIndex; buttonIndex++)
-        {
-            buttons.transform.GetChild(buttonIndex).GetChild(backgroundChild).GetChild(textChild).GetComponent<UnityEngine.UI.Text>().color = hiddenColor;
-
-        }
+        get { return word3Color; }
+        set { word3Color = value; }
     }
+
+    public bool word4ColorUpdated
+    {
+        get { return word4Color; }
+        set { word4Color = value; }
+    }
+
 
     public int buttonStart
     {
@@ -120,6 +79,127 @@ public class ComUnscrambleMain : MonoBehaviour
         set { wordsAll = value; }
     }
 
+    // Start is called before the first frame update
+    void Start()
+    {
+        HideLetters();
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        bool winWord1 = false;
+        bool winWord2 = false;
+        bool winWord3 = false;
+        bool winWord4 = false;
+        bool winWordsAll = false;
+        int row1 = 1;
+        int row2 = 2;
+        int row3 = 3;
+        int row4 = 4;
+
+        winWordsAll = FindObjectOfType<ComUnscrambleMain>().wordsAllWin;
+        if (!winWordsAll)
+        {
+            //Debug.Log(checkWinAllWords());
+            checkWinAllWords();
+        }
+
+        winWord1 = FindObjectOfType<ComUnscrambleMain>().word1win;
+        if (!winWord1)
+        {
+            //Debug.Log(checkWordWin(row1));
+            checkWordWin(row1);
+        }
+
+        winWord2 = FindObjectOfType<ComUnscrambleMain>().word2win;
+        if (!winWord2)
+        {
+            //Debug.Log(checkWordWin(row2));
+            checkWordWin(row2);
+        }
+
+        winWord3 = FindObjectOfType<ComUnscrambleMain>().word3win;
+        if (!winWord3)
+        {
+            //Debug.Log(checkWordWin(row3));
+            checkWordWin(row3);
+        }
+
+        winWord4 = FindObjectOfType<ComUnscrambleMain>().word4win;
+        if (!winWord4)
+        {
+            //Debug.Log(checkWordWin(row4));
+            checkWordWin(row4);
+        }
+
+    }
+
+    public void HideLetters()
+    {
+        //Debug.Log("hide");
+        Color hiddenColor = new Color32(246, 34, 250, 0);
+        
+        int backgroundChild = 0;
+        int textChild = 0;
+        int buttonLastIndex = 49;
+
+        GameObject buttons = GameObject.Find("ButtonCanvas");
+
+        for (int buttonIndex = 9; buttonIndex < buttonLastIndex; buttonIndex++)
+        {
+            buttons.transform.GetChild(buttonIndex).GetChild(backgroundChild).GetChild(textChild).GetComponent<UnityEngine.UI.Text>().color = hiddenColor;
+
+        }
+    }
+
+    public void HideWord(int row)
+    {
+        //Debug.Log("hide word");
+        int backgroundChild = 0;
+        int textChild = 0;       
+        int letterCount = 0;
+        int buttonNumber = 0;     
+        GameObject letterObject;
+        Color hiddenColor = new Color32(246, 34, 250, 0);
+
+
+        if (row == 1)
+        {
+            FindObjectOfType<ComUnscrambleMain>().buttonStart = 1;
+            letterCount = 7;
+        }
+        if (row == 2)
+        {
+            FindObjectOfType<ComUnscrambleMain>().buttonStart = 8;
+            letterCount = 11;
+        }
+        if (row == 3)
+        {
+            FindObjectOfType<ComUnscrambleMain>().buttonStart = 19;
+            letterCount = 8;
+        }
+        if (row == 4)
+        {
+            FindObjectOfType<ComUnscrambleMain>().buttonStart = 27;
+            letterCount = 7;
+        }
+
+        for (int letterPos = 0; letterPos < letterCount; letterPos++)
+        {
+
+            buttonNumber = FindObjectOfType<ComUnscrambleMain>().buttonStart;
+            letterObject = GameObject.Find(buttonNumber.ToString() + "_Button");
+
+            letterObject.transform.GetChild(backgroundChild).GetChild(textChild).GetComponent<UnityEngine.UI.Text>().color = hiddenColor;
+
+            buttonNumber++;
+            FindObjectOfType<ComUnscrambleMain>().buttonStart = buttonNumber;
+        }
+    }
+
+
     public bool checkWinAllWords()
     {
         bool win = true;
@@ -154,6 +234,8 @@ public class ComUnscrambleMain : MonoBehaviour
         GameObject letterObject;
         int wordRow = 0;
         string winLetter = "";
+        bool wordUpdated = false;
+       
 
 
 
@@ -210,28 +292,59 @@ public class ComUnscrambleMain : MonoBehaviour
         switch (row)
         {
             case 1:
-                FindObjectOfType<ComUnscrambleMain>().word1win = true;                
+                FindObjectOfType<ComUnscrambleMain>().word1win = true;
+                wordUpdated = FindObjectOfType<ComUnscrambleMain>().word1ColorUpdated;
+                if (!wordUpdated)
+                {
+                    UpdateWinColor(row);
+                    DisableWord(row);
+                    FindObjectOfType<ComUnscrambleMain>().word1ColorUpdated = true;
+                }
                 break;
             case 2:
+                FindObjectOfType<ComUnscrambleMain>().word2win = true;
+                wordUpdated = FindObjectOfType<ComUnscrambleMain>().word2ColorUpdated;
+                if (!wordUpdated)
+                {
+                    UpdateWinColor(row);
+                    DisableWord(row);
+                    FindObjectOfType<ComUnscrambleMain>().word2ColorUpdated = true;
+                }
                 FindObjectOfType<ComUnscrambleMain>().word2win = true;
                 break;
             case 3:
                 FindObjectOfType<ComUnscrambleMain>().word3win = true;
+                wordUpdated = FindObjectOfType<ComUnscrambleMain>().word3ColorUpdated;
+                if (!wordUpdated)
+                {
+                    UpdateWinColor(row);
+                    DisableWord(row);
+                    FindObjectOfType<ComUnscrambleMain>().word3ColorUpdated = true;
+                }
+                FindObjectOfType<ComUnscrambleMain>().word3win = true;
                 break;
             case 4:
+                FindObjectOfType<ComUnscrambleMain>().word4win = true;
+                wordUpdated = FindObjectOfType<ComUnscrambleMain>().word4ColorUpdated;
+                if (!wordUpdated)
+                {
+                    UpdateWinColor(row);
+                    DisableWord(row);
+                    FindObjectOfType<ComUnscrambleMain>().word4ColorUpdated = true;
+                }
                 FindObjectOfType<ComUnscrambleMain>().word4win = true;
                 break;
         }
 
-        UpdateWinColor(row);
 
         return wordWin;
 
     }
+        
+
 
     public void UpdateWinColor(int row)
     {
-        Debug.Log("update win color");
 
         int backgroundChild = 0;
         int textChild = 0;
@@ -277,6 +390,7 @@ public class ComUnscrambleMain : MonoBehaviour
         }
 
         HighlightLetters(row);
+
     }
 
     public void HighlightLetters(int row)
@@ -297,4 +411,93 @@ public class ComUnscrambleMain : MonoBehaviour
 
     }
 
+    public void DisableWord(int row)
+    {
+        //Debug.Log("disable word");
+        int letterCount = 0;
+        int buttonNumber = 0;
+        GameObject letterObject;
+
+        if (row == 1)
+        {
+            FindObjectOfType<ComUnscrambleMain>().buttonStart = 1;
+            letterCount = 7;
+        }
+
+        if (row == 2)
+        {
+            FindObjectOfType<ComUnscrambleMain>().buttonStart = 8;
+            letterCount = 11;
+        }
+
+        if (row == 3)
+        {
+            FindObjectOfType<ComUnscrambleMain>().buttonStart = 19;
+            letterCount = 8;
+        }
+
+        if (row == 4)
+        {
+            FindObjectOfType<ComUnscrambleMain>().buttonStart = 27;
+            letterCount = 7;
+        }
+
+        for (int letterPos = 0; letterPos < letterCount; letterPos++)
+        {
+
+            buttonNumber = FindObjectOfType<ComUnscrambleMain>().buttonStart;
+            letterObject = GameObject.Find(buttonNumber.ToString() + "_Button");
+
+            letterObject.GetComponent<UnityEngine.UI.Toggle>().interactable = false;
+
+            buttonNumber++;
+            FindObjectOfType<ComUnscrambleMain>().buttonStart = buttonNumber;
+        }
+
+    }
+
+    public void EnableWord(int row)
+    {
+        //Debug.Log("enable word");
+
+        int letterCount = 0;
+        int buttonNumber = 0;
+        GameObject letterObject;
+
+        if (row == 1)
+        {
+            FindObjectOfType<ComUnscrambleMain>().buttonStart = 1;
+            letterCount = 7;
+        }
+
+        if (row == 2)
+        {
+            FindObjectOfType<ComUnscrambleMain>().buttonStart = 8;
+            letterCount = 11;
+        }
+
+        if (row == 3)
+        {
+            FindObjectOfType<ComUnscrambleMain>().buttonStart = 19;
+            letterCount = 8;
+        }
+
+        if (row == 4)
+        {
+            FindObjectOfType<ComUnscrambleMain>().buttonStart = 27;
+            letterCount = 7;
+        }
+
+        for (int letterPos = 0; letterPos < letterCount; letterPos++)
+        {
+
+            buttonNumber = FindObjectOfType<ComUnscrambleMain>().buttonStart;
+            letterObject = GameObject.Find(buttonNumber.ToString() + "_Button");
+
+            letterObject.GetComponent<UnityEngine.UI.Toggle>().interactable = true;
+
+            buttonNumber++;
+            FindObjectOfType<ComUnscrambleMain>().buttonStart = buttonNumber;
+        }
+    }
 }
