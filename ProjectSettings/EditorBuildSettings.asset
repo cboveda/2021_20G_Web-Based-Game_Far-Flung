@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Assembly/Scenes/Assembly.unity
     guid: 051981de1bb5d3e4a96cde09828909ef
   - enabled: 1
-    path: Assets/Flightpath/Scenes/Flightpath.unity
+    path: Assets/Flightpath/Scenes/2_Flightpath.unity
     guid: e95114b7c953db04e94cb71d5f1f3e14
   - enabled: 1
     path: Assets/Scanning/Scenes/StartScene.Scanning.unity
