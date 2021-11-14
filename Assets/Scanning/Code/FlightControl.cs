@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Collections;
 
 public class FlightControl : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class FlightControl : MonoBehaviour
     public Text signals;
     int signals_collected = 0;
     public int limit = 10;
+
+    public FadeDriver fadeDriver;
 
     [Range(0,1)]
     public float hozSlerpSpped;
@@ -27,9 +30,13 @@ public class FlightControl : MonoBehaviour
     Quaternion noseDown = Quaternion.Euler(30, 0, 0);
     Quaternion noQuat = Quaternion.Euler(0, 0, 0);
 
+    bool frozen = false;
+
     Collider prevCollision;
 
     void Update() {
+
+        if (frozen) return;
 
         altitude.text = Mathf.RoundToInt(transform.position.y).ToString();
         signals.text = signals_collected.ToString() + "/" + limit.ToString();
@@ -70,11 +77,14 @@ public class FlightControl : MonoBehaviour
 
         } else {
             Debug.Log("Terrain Collision!");
-            ExitScene();
+            frozen = true;
+            StartCoroutine(ExitScene());
         }        
     }
 
-    void ExitScene() {
+    IEnumerator ExitScene() {
+        fadeDriver.TriggerFade();
+        yield return new WaitForSeconds(1.0f);
         SceneManager.LoadScene( SceneManager.GetActiveScene().buildIndex + 1 );
     }
 }
