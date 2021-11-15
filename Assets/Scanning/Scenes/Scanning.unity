@@ -284,7 +284,7 @@ MonoBehaviour:
   maxAltitude: 150
   altitude: {fileID: 1195211580}
   signals: {fileID: 1978883741}
-  limit: 1
+  limit: 10
   fadeDriver: {fileID: 1397074217}
   bannerFader: {fileID: 1432689468}
   hozSlerpSpped: 0.215
