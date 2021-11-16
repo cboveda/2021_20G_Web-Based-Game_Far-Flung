@@ -8,7 +8,7 @@ public class FlightControl : MonoBehaviour
     public float speed = 10f;
     public float maxAltitude = 150f;
     // HUD
-    public Text altitude;
+    public GameObject altitudeNeedle;
     public Text signals;
     int signals_collected = 0;
     public int limit = 10;
@@ -39,8 +39,8 @@ public class FlightControl : MonoBehaviour
 
         if (frozen) return;
 
-        altitude.text = Mathf.RoundToInt(transform.position.y).ToString();
-        signals.text = signals_collected.ToString() + "/" + limit.ToString();
+        altitudeNeedle.transform.rotation = Quaternion.Euler( 0, 0, ( 238 - (transform.position.y * 1.881f) ) );
+        //signals.text = signals_collected.ToString() + "/" + limit.ToString();
 
         float roll  = Input.GetAxis("Horizontal");
         float pitch = Input.GetAxis("Vertical");
