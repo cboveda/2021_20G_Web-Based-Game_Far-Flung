@@ -14,6 +14,7 @@ public class FlightControl : MonoBehaviour
     public int limit = 10;
 
     public FadeDriver fadeDriver;
+    public FadeBanner bannerFader;
 
     [Range(0,1)]
     public float hozSlerpSpped;
@@ -72,17 +73,28 @@ public class FlightControl : MonoBehaviour
 
             if ( collider != prevCollision ) {
                 signals_collected++;
+
+                if ( signals_collected >= limit ) {
+                    frozen = true;
+                    StartCoroutine(ExitOnWin());
+                }
             }
             prevCollision = collider;
 
         } else {
             Debug.Log("Terrain Collision!");
             frozen = true;
-            StartCoroutine(ExitScene());
+            StartCoroutine(ExitOnLose());
         }        
     }
 
-    IEnumerator ExitScene() {
+    IEnumerator ExitOnWin() {
+        bannerFader.TriggerFade();
+        yield return new WaitForSeconds(1.0f);
+        StartCoroutine(ExitOnLose());
+    }
+
+    IEnumerator ExitOnLose() {
         fadeDriver.TriggerFade();
         yield return new WaitForSeconds(1.0f);
         SceneManager.LoadScene( SceneManager.GetActiveScene().buildIndex + 1 );
