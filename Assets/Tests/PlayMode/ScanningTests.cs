@@ -79,6 +79,7 @@ public class ScanningTests {
         terrainController.SetActive(true);
     }
 
+    /* Remove for US301, add for US299
     [UnityTest]
     public IEnumerator Test_FlightControl() {
 
@@ -88,8 +89,8 @@ public class ScanningTests {
 
         yield return new WaitForSeconds(2.0f);
        
-        //Assert.True( satellite.GetComponent<FlightControl>().signals.text.Equals("2/10") );
-    }
+        Assert.True( satellite.GetComponent<FlightControl>().signals.text.Equals("2/10") );
+    } 
 
     [UnityTest]
     public IEnumerator Test_TerrainConroller() {
@@ -106,4 +107,5 @@ public class ScanningTests {
 
         Assert.AreEqual( 25, terrainController.GetComponent<TerrainController>().tileDict.Count );
     }
+    */
 }
