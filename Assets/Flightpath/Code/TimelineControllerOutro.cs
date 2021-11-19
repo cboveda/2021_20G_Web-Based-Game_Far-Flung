@@ -4,16 +4,21 @@ using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
 
-public class TimelineControllerOutro : MonoBehaviour
+namespace Flightpath
 {
-    private PlayableDirector director;
-
-    private void Awake() {
-        director = GetComponent<PlayableDirector>();
-    }
-
-    private void Director_Stopped()
+    public class TimelineControllerOutro : MonoBehaviour
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        private PlayableDirector director;
+
+        private void Awake()
+        {
+            director = GetComponent<PlayableDirector>();
+            director.stopped += Director_Stopped;
+        }
+
+        private void Director_Stopped(PlayableDirector o)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
     }
 }
