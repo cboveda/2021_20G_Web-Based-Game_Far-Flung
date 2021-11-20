@@ -18,6 +18,8 @@ public class ScanningTests {
     GameObject sigSpawner;
     AnimationCurve basePerlinCurve;
 
+    GameObject camera;
+
     [SetUp]
     public void SetUp() {
 
@@ -26,7 +28,7 @@ public class ScanningTests {
         neutronSignal = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Scanning/Prefabs/Signal_Variant.prefab");
 
         alt_needle = new GameObject();
-        miss_needle = new GameObject();   
+        miss_needle = new GameObject();
 
         satellite.AddComponent<FlightControl>();
         satellite.GetComponent<FlightControl>().hozSlerpSpped  = 0.2f;
@@ -54,6 +56,8 @@ public class ScanningTests {
 
         sigSpawner = new GameObject();
         sigSpawner.AddComponent<SignalSpawner>();
+        sigSpawner.GetComponent<SignalSpawner>().spawnFrequency = 3;
+        sigSpawner.GetComponent<SignalSpawner>().prefabSignal = neutronSignal;
 
         basePerlinCurve = AnimationCurve.Constant(0f, 1f, 1f);
         surfaceGrad = new Gradient();
@@ -72,6 +76,13 @@ public class ScanningTests {
         terrainController.GetComponent<TerrainController>().renderDistX = 20;
 
         terrainController.SetActive(true);
+
+        // set up camera
+        camera = new GameObject();
+        camera.AddComponent<CameraFollow>();
+        camera.GetComponent<CameraFollow>().lead = terrainSatellite;
+        camera.GetComponent<CameraFollow>().smoothTime = 0f;
+
     }
 
     [UnityTest]
@@ -102,4 +113,13 @@ public class ScanningTests {
         Assert.AreEqual( 25, terrainController.GetComponent<TerrainController>().tileDict.Count );
     }
     
+    [UnityTest]
+    public IEnumerator Test_TestCameraFollow() {
+
+        Vector3 delta = camera.transform.position - ( terrainSatellite.transform.position + new Vector3( 0, 4, -10 ) );
+        Assert.AreEqual( delta.x, 0, 1.0f );
+        Assert.AreEqual( delta.y, 0, 1.0f );
+        Assert.AreEqual( delta.z, 0, 1.0f );
+        yield return null;
+    }
 }
