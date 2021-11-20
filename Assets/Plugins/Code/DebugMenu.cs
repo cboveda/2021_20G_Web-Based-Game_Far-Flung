@@ -26,6 +26,7 @@ public class DebugMenu : MonoBehaviour
     private string[] buttonNames =
     {
         "Debug Menu",
+        "Hub",
         "Assembly",
         "Flight Plan",
         "Scanning",
@@ -146,6 +147,10 @@ public class DebugMenu : MonoBehaviour
         else if (buttonName == "Lab Analysis")
         {
             SceneManager.LoadScene("scene5");
+        }
+        else if (buttonName == "Hub")
+        {
+            SceneManager.LoadScene("Hub");
         }
     }
 }
