@@ -27,7 +27,7 @@ public class DebugMenu : MonoBehaviour
     {
         "Debug Menu",
         "Assembly",
-        "Flight Plan",
+        "Flightpath",
         "Scanning",
         "Communications",
         "Lab Analysis"
@@ -131,9 +131,9 @@ public class DebugMenu : MonoBehaviour
         {
             SceneManager.LoadScene("Assembly");
         }
-        else if (buttonName == "Flight Plan")
+        else if (buttonName == "Flightpath")
         {
-            SceneManager.LoadScene("Flightpath");
+            SceneManager.LoadScene("1_FlightpathIntro");
         }
         else if (buttonName == "Communications")
         {
