@@ -5,7 +5,7 @@ using UnityEngine;
 public class Pickup : MonoBehaviour
 {
 
-    public float pickupRange = 5; //changes how far out the player can pickup objects
+    public float pickupRange = 10; //changes how far out the player can pickup objects
     public Transform holdParent; //a transform object that effects where the held object is located
     public float moveForce = 250;
 
@@ -16,11 +16,13 @@ public class Pickup : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
+            Debug.Log("E pressed");
             if (heldObj == null)
             {
                 RaycastHit hit;
                 if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, pickupRange))
                 {
+                    Debug.Log("Call Pickup Object");
                     PickupObject(hit.transform.gameObject);
                 }
             }
@@ -32,6 +34,7 @@ public class Pickup : MonoBehaviour
 
         if (heldObj != null)
         {
+            Debug.Log("Move call");
             MoveObject();
         }
 
@@ -39,6 +42,7 @@ public class Pickup : MonoBehaviour
 
     void PickupObject(GameObject pickObj)
     {
+        Debug.Log(pickObj.name);
         if (pickObj.GetComponent<Rigidbody>())
         {
             Rigidbody objRig = pickObj.GetComponent<Rigidbody>();
@@ -52,16 +56,19 @@ public class Pickup : MonoBehaviour
     }
     void MoveObject()
     {
-        Vector3 moveDirection = (holdParent.position - heldObj.transform.position); //move towards the hold parent
+        if (Vector3.Distance(heldObj.transform.position, holdParent.position) > 0.1f)
+        {
+            Vector3 moveDirection = (holdParent.position - heldObj.transform.position); //move towards the hold parent
+            heldObj.GetComponent<Rigidbody>().AddForce(moveDirection * moveForce);
 
-        heldObj.GetComponent<Rigidbody>().AddForce(moveDirection * moveForce);
+        }
     }
     void DropObject()
     {
         Rigidbody heldRig = heldObj.GetComponent<Rigidbody>();
         heldRig.useGravity = true;
         heldRig.drag = 1;
-        
+
         heldObj.transform.parent = null;
         heldObj = null;
     }
