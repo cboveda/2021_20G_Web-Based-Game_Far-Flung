@@ -8,10 +8,11 @@ public class FlightControl : MonoBehaviour
     public float speed = 10f;
     public float maxAltitude = 150f;
     // HUD
-    public Text altitude;
-    public Text signals;
+    public GameObject altitudeNeedle;
+    public GameObject signalsNeedle;
     int signals_collected = 0;
     public int limit = 10;
+    float limitAdjust;
 
     public FadeDriver fadeDriver;
     public FadeBanner bannerFader;
@@ -35,12 +36,19 @@ public class FlightControl : MonoBehaviour
 
     Collider prevCollision;
 
+    void Start() {
+        limitAdjust = ( 264f / limit );
+    }
+
     void Update() {
 
         if (frozen) return;
 
-        altitude.text = Mathf.RoundToInt(transform.position.y).ToString();
-        signals.text = signals_collected.ToString() + "/" + limit.ToString();
+        altitudeNeedle.transform.rotation = Quaternion.Euler( 0, 0, ( 238 - (transform.position.y * 1.881f) ) );
+        signalsNeedle.transform.rotation = Quaternion.Slerp( 
+            signalsNeedle.transform.rotation, 
+            Quaternion.Euler( 0, 0, ( 223 - ( signals_collected * limitAdjust ) ) ), 
+            hozSlerpSpped );
 
         float roll  = Input.GetAxis("Horizontal");
         float pitch = Input.GetAxis("Vertical");
@@ -75,7 +83,7 @@ public class FlightControl : MonoBehaviour
                 signals_collected++;
 
                 if ( signals_collected >= limit ) {
-                    frozen = true;
+                    speed = 10f;
                     StartCoroutine(ExitOnWin());
                 }
             }
