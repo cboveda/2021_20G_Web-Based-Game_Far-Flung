@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Collections;
 
 public class FlightControl : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class FlightControl : MonoBehaviour
     public Text signals;
     int signals_collected = 0;
     public int limit = 10;
+
+    public FadeDriver fadeDriver;
+    public FadeBanner bannerFader;
 
     [Range(0,1)]
     public float hozSlerpSpped;
@@ -27,9 +31,13 @@ public class FlightControl : MonoBehaviour
     Quaternion noseDown = Quaternion.Euler(30, 0, 0);
     Quaternion noQuat = Quaternion.Euler(0, 0, 0);
 
+    bool frozen = false;
+
     Collider prevCollision;
 
     void Update() {
+
+        if (frozen) return;
 
         altitude.text = Mathf.RoundToInt(transform.position.y).ToString();
         signals.text = signals_collected.ToString() + "/" + limit.ToString();
@@ -65,16 +73,30 @@ public class FlightControl : MonoBehaviour
 
             if ( collider != prevCollision ) {
                 signals_collected++;
+
+                if ( signals_collected >= limit ) {
+                    frozen = true;
+                    StartCoroutine(ExitOnWin());
+                }
             }
             prevCollision = collider;
 
         } else {
             Debug.Log("Terrain Collision!");
-            ExitScene();
+            frozen = true;
+            StartCoroutine(ExitOnLose());
         }        
     }
 
-    void ExitScene() {
+    IEnumerator ExitOnWin() {
+        bannerFader.TriggerFade();
+        yield return new WaitForSeconds(1.0f);
+        StartCoroutine(ExitOnLose());
+    }
+
+    IEnumerator ExitOnLose() {
+        fadeDriver.TriggerFade();
+        yield return new WaitForSeconds(1.0f);
         SceneManager.LoadScene( SceneManager.GetActiveScene().buildIndex + 1 );
     }
 }
