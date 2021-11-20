@@ -2,15 +2,14 @@ using System.Collections;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
-using UnityEngine.UI;
 using UnityEditor;
 
 public class ScanningTests {
 
     GameObject satellite;
     GameObject neutronSignal;
-    GameObject HUD1;
-    GameObject HUD2;
+    GameObject alt_needle;
+    GameObject miss_needle;
 
     GameObject terrainController;
     GameObject terrainSatellite;
@@ -26,17 +25,14 @@ public class ScanningTests {
         satellite = new GameObject();
         neutronSignal = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Scanning/Prefabs/Signal_Variant.prefab");
 
-        HUD1 = new GameObject();
-        HUD1.AddComponent<Text>();
-
-        HUD2 = new GameObject();   
-        HUD2.AddComponent<Text>();
+        alt_needle = new GameObject();
+        miss_needle = new GameObject();   
 
         satellite.AddComponent<FlightControl>();
         satellite.GetComponent<FlightControl>().hozSlerpSpped  = 0.2f;
         satellite.GetComponent<FlightControl>().vertSlerpSpeed = 0.2f;
-        //satellite.GetComponent<FlightControl>().altitude = HUD1.GetComponent<Text>();
-        //satellite.GetComponent<FlightControl>().signals = HUD2.GetComponent<Text>();
+        satellite.GetComponent<FlightControl>().altitudeNeedle = alt_needle;
+        satellite.GetComponent<FlightControl>().signalsNeedle = miss_needle;
 
         satellite.AddComponent<BoxCollider>();
         satellite.GetComponent<BoxCollider>().isTrigger = true;
@@ -51,9 +47,8 @@ public class ScanningTests {
         // Setup for terraincontroller
         terrainSatellite = new GameObject();
         terrainSatellite.AddComponent<FlightControl>();
-
-        //terrainSatellite.GetComponent<FlightControl>().altitude = HUD1.GetComponent<Text>();
-        //terrainSatellite.GetComponent<FlightControl>().signals = HUD2.GetComponent<Text>();
+        terrainSatellite.GetComponent<FlightControl>().altitudeNeedle = alt_needle;
+        terrainSatellite.GetComponent<FlightControl>().signalsNeedle = miss_needle;
 
         terrainSatellite.transform.position = new Vector3( 0, 200, 0 );
 
@@ -79,7 +74,6 @@ public class ScanningTests {
         terrainController.SetActive(true);
     }
 
-    /* Remove for US301, add for US299
     [UnityTest]
     public IEnumerator Test_FlightControl() {
 
@@ -89,7 +83,7 @@ public class ScanningTests {
 
         yield return new WaitForSeconds(2.0f);
        
-        Assert.True( satellite.GetComponent<FlightControl>().signals.text.Equals("2/10") );
+        Assert.AreEqual( satelliteInstance.GetComponent<FlightControl>().signals_collected, 2 );
     } 
 
     [UnityTest]
@@ -107,5 +101,5 @@ public class ScanningTests {
 
         Assert.AreEqual( 25, terrainController.GetComponent<TerrainController>().tileDict.Count );
     }
-    */
+    
 }
