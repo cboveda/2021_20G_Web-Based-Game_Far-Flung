@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 
 public class ComGameTests
-{ 
+{
 
     [UnityTest]
     public IEnumerator TestSceneSwitching()
@@ -175,22 +175,99 @@ public class ComGameTests
         // verify color is back to default when selecting hide final instructions
         scriptObject.GetComponent<TileActions>().hideFinalInstructions();
         Assert.AreEqual(finalObject.GetComponent<Text>().color, finalObjectDefaultColor);
-        
+
         // verify tiles that have valid moves at default positions
         string[] validMoveTiles = { "13", "31", "32" };
         GameObject tileObject;
         foreach (string tile in validMoveTiles)
         {
-            tileObject = GameObject.Find(tile);            
+            tileObject = GameObject.Find(tile);
             Assert.AreEqual(tileObject.GetComponent<TileActions>().checkValidMove(), true);
         }
 
         // verify tiles that do not have valid moves at default positions
-        string[] invalidMoveTiles = { "11", "12", "14", "21", "22", "23", "24", "33", "34" };        
+        string[] invalidMoveTiles = { "11", "12", "14", "21", "22", "23", "24", "33", "34" };
         foreach (string tile in invalidMoveTiles)
         {
             tileObject = GameObject.Find(tile);
             Assert.AreEqual(tileObject.GetComponent<TileActions>().checkValidMove(), false);
         }
+    }
+
+    [UnityTest]
+    public IEnumerator TestDataButtons()
+    {
+        // Verify data buttons can be enabled and disabled
+
+        // load scene with the scriptable tile objects
+        SceneManager.LoadScene("comUnscramble");
+        yield return new WaitForSeconds(0.2f); // delay to load scene
+
+        // verify data buttons are enabled at start
+        GameObject dataButtonObject;
+        string[] dataButtons = { "ImagerButton", "SpectometerButton", "MagnetometerButton", "RadioButton" };
+        foreach (string button in dataButtons)
+        {
+            dataButtonObject = GameObject.Find(button);
+            Assert.AreEqual(dataButtonObject.GetComponent<UnityEngine.UI.Button>().interactable, true);
+        }
+
+        GameObject ob = new GameObject();
+        ob.AddComponent<SendDataActions>();
+        SendDataActions sendButtonObject = GameObject.FindObjectOfType<SendDataActions>();
+
+        // disable data buttons
+        sendButtonObject.DisableDataButtons();
+
+        // verify data buttons are disabled
+        foreach (string button in dataButtons)
+        {
+            dataButtonObject = GameObject.Find(button);
+            Assert.AreEqual(dataButtonObject.GetComponent<UnityEngine.UI.Button>().interactable, false);
+        }
+
+        // enable data buttons
+        sendButtonObject.EnableDataButtons();
+
+        // verify data buttons are enabled
+        foreach (string button in dataButtons)
+        {
+            dataButtonObject = GameObject.Find(button);
+            Assert.AreEqual(dataButtonObject.GetComponent<UnityEngine.UI.Button>().interactable, true);
+        }
+    }
+
+    [UnityTest]
+    public IEnumerator TestScrambledWords()
+    {
+        // verify scrambled words default properties at start
+
+        // load scene with the scriptable tile objects
+        SceneManager.LoadScene("comUnscramble");
+        yield return new WaitForSeconds(0.2f); // delay to load scene
+
+
+        // verify all words are disabled at start
+        int buttonLastIndex = 49;
+        GameObject buttons = GameObject.Find("ButtonCanvas");
+        for (int buttonIndex = 9; buttonIndex < buttonLastIndex; buttonIndex++)
+        {
+            Assert.AreEqual(buttons.transform.GetChild(buttonIndex).GetComponent<UnityEngine.UI.Toggle>().interactable, false);
+
+        }
+
+        GameObject ob = new GameObject();
+        ob.AddComponent<ComUnscrambleMain>();
+        ComUnscrambleMain unscrambleMainObject = GameObject.FindObjectOfType<ComUnscrambleMain>();
+
+        // verify all words are scrambled at start
+        int wordCount = 5;
+        for (int word = 0; word < wordCount; word++)
+        {
+            int wordRow = word + 1;
+            
+            Assert.AreEqual(unscrambleMainObject.checkWordWin(wordRow), false);
+        }
+
     }
 }
