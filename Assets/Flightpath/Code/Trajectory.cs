@@ -18,7 +18,7 @@ namespace Flightpath
 
         void Start()
         {
-            transform.position = new Vector3(Satellite.StartX, Satellite.StartY, 0);
+            transform.position = new Vector3(Satellite.StartX, Satellite.StartY, -200);
             transform.up = Satellite.GetLaunchDirection();
             _baseScaleY = transform.localScale.y;
         }

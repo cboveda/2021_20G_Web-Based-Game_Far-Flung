@@ -15,9 +15,9 @@ namespace Flightpath
             }
         }
 
-        private void OnBecameInvisible()
+        private void OnTriggerExit(Collider other)
         {
-            if (EventSystem)
+            if (other.CompareTag("FlightpathBounds") && EventSystem)
             {
                 EventSystem.GetComponent<LaunchManager>().OnSatelliteLeaveWindow();
             }
