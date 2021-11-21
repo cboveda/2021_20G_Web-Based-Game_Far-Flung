@@ -3,6 +3,7 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 using UnityEditor;
+using UnityEngine.SceneManagement;
 
 public class ScanningTests {
 
@@ -31,8 +32,6 @@ public class ScanningTests {
         miss_needle = new GameObject();
 
         satellite.AddComponent<FlightControl>();
-        satellite.GetComponent<FlightControl>().hozSlerpSpped  = 0.2f;
-        satellite.GetComponent<FlightControl>().vertSlerpSpeed = 0.2f;
         satellite.GetComponent<FlightControl>().altitudeNeedle = alt_needle;
         satellite.GetComponent<FlightControl>().signalsNeedle = miss_needle;
 
