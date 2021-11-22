@@ -3358,7 +3358,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2016691013}
   - component: {fileID: 2016691012}
-  - component: {fileID: 2016691011}
   - component: {fileID: 2016691014}
   m_Layer: 0
   m_Name: ZoomCamera
@@ -3367,14 +3366,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &2016691011
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2016691010}
-  m_Enabled: 1
 --- !u!20 &2016691012
 Camera:
   m_ObjectHideFlags: 0
@@ -3444,7 +3435,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ec7f3b012055d3469666c4c21e607df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
 --- !u!1 &2055317728
 GameObject:
   m_ObjectHideFlags: 0

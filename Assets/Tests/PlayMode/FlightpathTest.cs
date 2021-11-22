@@ -100,24 +100,107 @@ public class FlightpathTest
     [UnityTest]
     public IEnumerator Test_SceneTransitionIntro() 
     {
-        SceneManager.LoadScene("1_FlightpathIntro");
+        SceneManager.LoadScene("1_FlightpathIntro", LoadSceneMode.Single);
+        yield return new WaitForSeconds(0.4f);
         var controller = GameObject.FindObjectOfType<TimelineController>();
-        yield return new WaitForFixedUpdate();
         controller.Director_Played(null);
         controller.Director_Stopped(null);
-        yield return new WaitForFixedUpdate();
+        yield return new WaitForSeconds(0.4f);
         Assert.AreEqual(SceneManager.GetActiveScene().name, "2_Flightpath");
     }
 
     [UnityTest]
-    public IEnumerator Test_SceneTransitionOutro() 
+    public IEnumerator Test_SceneTransitionToOutro() 
     {
-        SceneManager.LoadScene("2_Flightpath");
-        var controller = GameObject.FindObjectOfType<TimelineControllerOutro>();
-        yield return new WaitForFixedUpdate();
-        controller.Director_Stopped(null);
-        yield return new WaitForFixedUpdate();
+        SceneManager.LoadScene("2_Flightpath", LoadSceneMode.Single);
+        yield return new WaitForSeconds(1.0f);
+        var manager = GameObject.FindObjectOfType<LaunchManager>();
+        manager.OnAsteroidCollisionDetected();
+        yield return new WaitForSeconds(1.0f);
         Assert.AreEqual(SceneManager.GetActiveScene().name, "3_FlightpathOutro");
+        var controller = GameObject.FindObjectOfType<TimelineControllerOutro>();
+        controller.Director_Stopped(null);
+        yield return new WaitForSeconds(0.4f);
+    }
+
+    [UnityTest]
+    public IEnumerator Test_SceneTransitionOutroToNext() 
+    {
+        SceneManager.LoadScene("3_FlightpathOutro", LoadSceneMode.Single);
+        yield return new WaitForSeconds(0.4f);
+        int next = SceneManager.GetActiveScene().buildIndex + 1;
+        var controller = GameObject.FindObjectOfType<TimelineControllerOutro>();
+        controller.Director_Stopped(null);
+        yield return new WaitForSeconds(0.4f);
+        Assert.AreEqual(SceneManager.GetActiveScene().buildIndex, next);
+    }
+
+    [UnityTest]
+    public IEnumerator Test_SatelliteAsteroidCollision()
+    {
+        SceneManager.LoadScene("2_Flightpath", LoadSceneMode.Single);
+        yield return new WaitForSeconds(1.0f);
+        var manager = GameObject.FindObjectOfType<LaunchManager>();
+        manager.OnLaunchButtonClicked();
+        yield return new WaitForFixedUpdate();
+        var asteroid = GameObject.FindWithTag("FlightpathAsteroid");
+        var satellite = GameObject.FindWithTag("FlightpathSatellite");
+        satellite.transform.position = asteroid.transform.position;
+        yield return new WaitForSeconds(1.0f);
+        Assert.AreEqual(SceneManager.GetActiveScene().name, "3_FlightpathOutro");
+        var controller = GameObject.FindObjectOfType<TimelineControllerOutro>();
+        controller.Director_Stopped(null);
+        yield return new WaitForSeconds(0.4f);
+    }
+
+    [UnityTest]
+    public IEnumerator Test_SatelliteBoundaryCollision()
+    {
+        SceneManager.LoadScene("2_Flightpath", LoadSceneMode.Single);
+        yield return new WaitForSeconds(1.0f);
+        var manager = GameObject.FindObjectOfType<LaunchManager>();
+        manager.OnLaunchButtonClicked();
+        yield return new WaitForSeconds(1.0f);
+        var satellite = GameObject.FindWithTag("FlightpathSatellite");
+        satellite.transform.position = new Vector3(3000, 3000, 3000);
+        yield return new WaitForSeconds(1.0f);
+        Assert.AreEqual(SceneManager.GetActiveScene().name, "2_Flightpath");
+        Assert.AreEqual(false, manager.SatellitePath.Active);
+        Assert.AreEqual(true, manager.LoseText.enabled);
+    }
+
+    [UnityTest]
+    public IEnumerator Test_LaunchManagerResetButton()
+    {
+        SceneManager.LoadScene("2_Flightpath", LoadSceneMode.Single);
+        yield return new WaitForSeconds(1.0f);
+        var manager = GameObject.FindObjectOfType<LaunchManager>();
+        var satellite = GameObject.FindWithTag("FlightpathSatellite");
+        Vector3 originalPosition = satellite.transform.position;
+        manager.OnLaunchButtonClicked();
+        yield return new WaitForFixedUpdate();
+        Vector3 currentPosition = satellite.transform.position;
+        Assert.AreNotEqual(currentPosition, originalPosition);
+        manager.OnResetButtonClicked();
+        yield return new WaitForFixedUpdate();
+        Assert.AreEqual(originalPosition, satellite.transform.position);
+    }
+
+    [UnityTest]
+    public IEnumerator Test_PathFader()
+    {
+        SceneManager.LoadScene("2_Flightpath", LoadSceneMode.Single);
+        yield return new WaitForSeconds(1.0f);
+        var manager = GameObject.FindObjectOfType<LaunchManager>();
+        var pathDrawing = GameObject.FindObjectOfType<SatellitePathDrawing>();
+        manager.OnLaunchButtonClicked();
+        yield return new WaitForSeconds(1.0f);
+        manager.OnResetButtonClicked();
+        yield return new WaitForFixedUpdate();
+        GameObject child = pathDrawing.transform.GetChild(0).gameObject;
+        manager.OnLaunchButtonClicked();
+        yield return new WaitForSeconds(1.0f);
+        Assert.False(child);
     }
 }
  
