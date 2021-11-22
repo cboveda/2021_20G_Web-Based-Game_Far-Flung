@@ -1,15 +1,8 @@
 fileFormatVersion: 2
-<<<<<<< HEAD:Assets/Hub/Materials/Logo.mat.meta
-guid: 5830dd874dd888a409e4627949453885
-NativeFormatImporter:
-  externalObjects: {}
-  mainObjectFileID: 2100000
-=======
 guid: 8c455bb03bdec6043943bc3a7396b132
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 8400000
->>>>>>> dev:Assets/Flightpath/Scenes/CameraZoom.renderTexture.meta
   userData: 
   assetBundleName: 
   assetBundleVariant: 
