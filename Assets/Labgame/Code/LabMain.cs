@@ -14,6 +14,8 @@ public class LabMain : MonoBehaviour
     bool spectraPuzzleActive;
     int levelRadio;
     int levelSpectra;
+
+    Camera lcdCamera1;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +26,7 @@ public class LabMain : MonoBehaviour
         spectraPuzzleActive = false;
         isCurrentSpectraPuzzleSolved = false;
         GetNewRadioPuzzle();
+        lcdCamera1 = GameObject.Find("ComputerScreen1Camera").GetComponent<Camera>();
 
 
 
@@ -37,6 +40,28 @@ public class LabMain : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if(Physics.Raycast(ray, out hit))
+        {
+            if (hit.collider.tag == "LCD1")
+            {
+                //Debug.Log("Hit this: " + hit.collider.gameObject.name.ToString()); 
+                ray = lcdCamera1.ViewportPointToRay(new Vector3(hit.textureCoord.x, hit.textureCoord.y));
+                if(Physics.Raycast(ray, out hit))
+                {
+                    if (hit.collider.tag == "UI")
+                    {
+                        Debug.Log("Hit this: " + hit.collider.gameObject.name.ToString());
+                    }
+                }
+                
+
+            }
+            
+
+        }
+
         if (isCurrentRadioPuzzleSolved && radioPuzzleActive)
         {
             
