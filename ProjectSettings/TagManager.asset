@@ -7,7 +7,11 @@ TagManager:
   - NeutronSignal
   - FlightpathSatellite
   - FlightpathAsteroid
+<<<<<<< HEAD
   - LCD1
+=======
+  - FlightpathBounds
+>>>>>>> dev
   layers:
   - Default
   - TransparentFX
