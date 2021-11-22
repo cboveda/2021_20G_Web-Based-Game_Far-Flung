@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Flightpath
 {
-    public class CameraFollower : MonoBehaviour
+    public class ViewportFollower : MonoBehaviour
     {
         [SerializeField]
         private GameObject target;
@@ -16,7 +16,7 @@ namespace Flightpath
 
         void Update()
         {
-            transform.position = target.transform.position - new Vector3(0,0,100);
+            transform.position = target.transform.position - new Vector3(0,56,201);
         }
     }
 }

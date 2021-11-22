@@ -28,7 +28,7 @@ namespace Flightpath
                 if (_timer >= TimeInterval && PathPrefab != null)
                 {
                     _pathHistory.AddLast(Instantiate(PathPrefab,
-                        new Vector3(Satellite.transform.position.x, Satellite.transform.position.y, Satellite.transform.position.z + 10),
+                        new Vector3(Satellite.transform.position.x, Satellite.transform.position.y, Satellite.transform.position.z - 199),
                         Quaternion.identity,
                         transform.gameObject.transform));
                     _timer = 0;
