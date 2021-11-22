@@ -3,15 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - NeutronSignal
-  - FlightpathSatellite
-  - FlightpathAsteroid
-<<<<<<< HEAD
-  - LCD1
-=======
-  - FlightpathBounds
->>>>>>> dev
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -46,39 +38,6 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Hidden
-    uniqueID: 1077781473
-    locked: 0
-  - name: Background
-    uniqueID: 328015885
-    locked: 0
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Board
-    uniqueID: 2375774021
-    locked: 0
-  - name: Puzzle
-    uniqueID: 4208128229
-    locked: 0
-  - name: Numbers
-    uniqueID: 28944531
-    locked: 0
-  - name: FinalPiece
-    uniqueID: 126324765
-    locked: 0
-  - name: ViewImage
-    uniqueID: 1796528267
-    locked: 0
-  - name: FinalPieceNumber
-    uniqueID: 3725535621
-    locked: 0
-  - name: WinBackground
-    uniqueID: 2501096523
-    locked: 0
-  - name: WinBoard
-    uniqueID: 2666429677
-    locked: 0
-  - name: WinImage
-    uniqueID: 3944205665
     locked: 0
