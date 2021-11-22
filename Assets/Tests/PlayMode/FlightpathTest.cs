@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
+using UnityEngine.SceneManagement;
 using Flightpath;
 
 public class FlightpathTest
@@ -96,45 +97,27 @@ public class FlightpathTest
         Assert.AreEqual((Vector3) Vector2.right, pathFollower.transform.position);
     }
 
-    // [UnityTest]
-    // public IEnumerator Test_PathFollowerEndsAtEndPoint()
-    // {
-    //     GameObject path = new GameObject();
-    //     path.AddComponent<Path>();
-    //     var pathComponent = path.GetComponent<Path>();
-        
-    //     GameObject startPoint = new GameObject();
-    //     GameObject startDirection = new GameObject();
-    //     GameObject endPoint = new GameObject();
-    //     GameObject endDirection = new GameObject();
+    [UnityTest]
+    public IEnumerator Test_SceneTransitionIntro() 
+    {
+        SceneManager.LoadScene("1_FlightpathIntro");
+        var controller = GameObject.FindObjectOfType<TimelineController>();
+        yield return new WaitForFixedUpdate();
+        controller.Director_Played(null);
+        controller.Director_Stopped(null);
+        yield return new WaitForFixedUpdate();
+        Assert.AreEqual(SceneManager.GetActiveScene().name, "2_Flightpath");
+    }
 
-    //     startPoint.transform.position = Vector2.right;
-    //     startDirection.transform.position = Vector2.down;
-    //     endPoint.transform.position = Vector2.left;
-    //     endDirection.transform.position = Vector2.up;
-
-    //     startPoint.transform.parent = path.transform;
-    //     startDirection.transform.parent = path.transform;
-    //     endPoint.transform.parent = path.transform;
-    //     endDirection.transform.parent = path.transform;
-
-    //     pathComponent.StartPoint = startPoint.transform;
-    //     pathComponent.StartDirection = startDirection.transform;
-    //     pathComponent.EndPoint = endPoint.transform;
-    //     pathComponent.EndDirection = endDirection.transform;
-
-    //     GameObject pathFollower = new GameObject();
-    //     pathFollower.AddComponent<PathFollower>();
-    //     var pathFollowerComponent = pathFollower.GetComponent<PathFollower>();
-    //     pathFollowerComponent.Path = path.transform;
-    //     pathFollowerComponent.Speed = 100.0f;
-    //     pathFollowerComponent.Start();
-    //     pathFollowerComponent.BeginMovement();
-    //     while(!pathFollowerComponent.IsUnlocked()) 
-    //     {
-    //         yield return new WaitForFixedUpdate();
-    //     }    
-    //     Assert.AreEqual(Vector2.left, (Vector2) pathFollower.transform.position);
-    // }
+    [UnityTest]
+    public IEnumerator Test_SceneTransitionOutro() 
+    {
+        SceneManager.LoadScene("2_Flightpath");
+        var controller = GameObject.FindObjectOfType<TimelineControllerOutro>();
+        yield return new WaitForFixedUpdate();
+        controller.Director_Stopped(null);
+        yield return new WaitForFixedUpdate();
+        Assert.AreEqual(SceneManager.GetActiveScene().name, "3_FlightpathOutro");
+    }
 }
  
