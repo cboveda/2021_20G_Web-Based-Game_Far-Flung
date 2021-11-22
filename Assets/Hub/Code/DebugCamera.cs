@@ -5,8 +5,9 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using Cinemachine;
 
-public class DebugMenu : MonoBehaviour
+public class DebugCamera : MonoBehaviour
 {
 
     //public DebugMenu debugMenuScript = null;
@@ -15,35 +16,45 @@ public class DebugMenu : MonoBehaviour
     public GameObject buttonPrefab;
     private const string BUTTON_PREFAB_PATH = "Prefabs/DebugButtonPF";
     private float canvasHeight;
-    private const float BUTTON_WIDTH = 90.0f;
+    private const float BUTTON_WIDTH = 150.0f;
     private const float BUTTON_HEIGHT = 30.0f;
-    private const float BUTTON_WIDTH_OFFSET = (BUTTON_WIDTH / 2 ) + 5.0f;
+    private const float BUTTON_WIDTH_OFFSET = (BUTTON_WIDTH / 2) + BUTTON_WIDTH;
     private const float BUTTON_HEIGHT_OFFSET = (BUTTON_HEIGHT / 2) + 5.0f;
+    private const int CAMERA_PRIORITY_HIGH = 1000;
+    private const int CAMERA_PRIORITY_LOW = 10;
+    private bool firstClickHappened = false;
+    private CinemachineVirtualCamera assemblyCamera;
+    private CinemachineVirtualCamera labCamera;
+    private CinemachineVirtualCamera flightPlanCamera;
+    private CinemachineVirtualCamera missionControlCamera;
+    private CinemachineVirtualCamera commsCamera;
     private List<GameObject> debugButtons;
+    private List<CinemachineVirtualCamera> virtualCameras;
+    private CameraPositionController cameraController;
 
     private bool debugMenuOpen;
 
     private string[] buttonNames =
     {
-        "Debug Menu",
-        "Hub",
+        "Camera Menu",
         "Assembly",
-        "Flightpath",
-        "Scanning",
+        "Flight Planning",
+        "Mission Control",
         "Communications",
         "Lab Analysis"
     };
-    
-    
+
+
     // Start is called before the first frame update
     void Start()
     {
-         
+
         buttonPrefab = Resources.Load<GameObject>(BUTTON_PREFAB_PATH);
-        
+
         debugCanvas = gameObject.AddComponent<Canvas>();
-        
-        debugCanvas.name = "DebugMenu";
+
+
+        debugCanvas.name = "DebugCams";
         debugCanvas.sortingOrder = 999;
         debugCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
 
@@ -53,6 +64,7 @@ public class DebugMenu : MonoBehaviour
 
         canvasHeight = debugCanvas.pixelRect.height;
         debugButtons = new List<GameObject>();
+        virtualCameras = new List<CinemachineVirtualCamera>();
 
         for (int i = 0; i < buttonNames.Length; i++)
         {
@@ -60,7 +72,7 @@ public class DebugMenu : MonoBehaviour
             button.transform.parent = this.transform;
             debugButtons.Add(button);
 
-            if(button.name != "Debug Menu")
+            if (button.name != "Camera Menu")
             {
                 button.SetActive(false);
             }
@@ -68,22 +80,19 @@ public class DebugMenu : MonoBehaviour
 
         debugMenuOpen = false;
 
-        
-        
+        //commsCamera = GameObject.Find("vcamComms").GetComponent<CinemachineVirtualCamera>();
 
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+
+
+
     }
 
     private GameObject GetNewUIButton(string displayName, int buttonNumber)
     {
         GameObject goButton = Instantiate<GameObject>(buttonPrefab);
         goButton.name = displayName;
-        
+
         goButton.GetComponentInChildren<Text>().text = displayName;
         Vector3 buttonLocation = new Vector3(BUTTON_WIDTH_OFFSET, canvasHeight - BUTTON_HEIGHT * (buttonNumber + 1) + BUTTON_HEIGHT_OFFSET, 0);
         goButton.GetComponent<RectTransform>().anchorMin = new Vector2(0, 1);
@@ -91,9 +100,7 @@ public class DebugMenu : MonoBehaviour
         goButton.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, BUTTON_WIDTH);
         goButton.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, BUTTON_HEIGHT);
         goButton.GetComponent<RectTransform>().SetPositionAndRotation(buttonLocation, Quaternion.identity);
-        //Debug.Log("Creating button.  Adding Listener.");
-        //goButton.AddComponent<DebugMenu>();
-        
+
         goButton.GetComponent<Button>().onClick.AddListener(() => { DebugButtonClicked(); });
 
 
@@ -104,9 +111,15 @@ public class DebugMenu : MonoBehaviour
     {
         Debug.Log("I done got clicked.");
         string buttonName = EventSystem.current.currentSelectedGameObject.name;
-        Debug.Log(buttonName + " is what got clicked.");
+        Debug.Log(buttonName + " is what got clicked omg finally.");
 
-        if (buttonName.Equals("Debug Menu"))
+        if (!firstClickHappened)
+        {
+            FirstMenuClick();
+            firstClickHappened = true;
+        }
+
+        if (buttonName.Equals("Camera Menu"))
         {
             if (!debugMenuOpen)
             {
@@ -120,7 +133,7 @@ public class DebugMenu : MonoBehaviour
             {
                 foreach (GameObject button in debugButtons)
                 {
-                    if(!button.name.Equals("Debug Menu"))
+                    if (!button.name.Equals("Camera Menu"))
                     {
                         button.SetActive(false);
                     }
@@ -130,27 +143,49 @@ public class DebugMenu : MonoBehaviour
         }
         else if (buttonName == "Assembly")
         {
-            SceneManager.LoadScene("Assembly");
+            SetPriorityCamera(assemblyCamera);
+            //cameraController.AdjustCurrentCamera(assemblyCamera);
         }
-        else if (buttonName == "Flightpath")
+        else if (buttonName == "Flight Planning")
         {
-            SceneManager.LoadScene("1_FlightpathIntro");
+            SetPriorityCamera(flightPlanCamera);
+            //cameraController.AdjustCurrentCamera(flightPlanCamera);
         }
         else if (buttonName == "Communications")
         {
-            SceneManager.LoadScene("ComGame");
+            SetPriorityCamera(commsCamera);
+            //cameraController.AdjustCurrentCamera(labCamera);
         }
-        else if (buttonName == "Scanning")
+        else if (buttonName == "Mission Control")
         {
-            SceneManager.LoadScene("StartScene.Scanning");
+            SetPriorityCamera(missionControlCamera);
+            //cameraController.AdjustCurrentCamera(missionControlCamera);
         }
         else if (buttonName == "Lab Analysis")
         {
-            SceneManager.LoadScene("scene5");
+            SetPriorityCamera(labCamera);
+            //cameraController.AdjustCurrentCamera(labCamera);
         }
-        else if (buttonName == "Hub")
+    }
+
+    private void SetPriorityCamera(CinemachineVirtualCamera camera)
+    {
+        foreach (CinemachineVirtualCamera vCamera in virtualCameras)
         {
-            SceneManager.LoadScene("Hub");
+            vCamera.Priority = CAMERA_PRIORITY_LOW;
         }
+        camera.Priority = CAMERA_PRIORITY_HIGH;
+        cameraController.AdjustCurrentCamera(camera);
+    }
+
+    private void FirstMenuClick()
+    {
+        virtualCameras.Add(assemblyCamera = GameObject.Find("vcamAssembly").GetComponent<CinemachineVirtualCamera>());
+        virtualCameras.Add(labCamera = GameObject.Find("vcamLab").GetComponent<CinemachineVirtualCamera>());
+        virtualCameras.Add(flightPlanCamera = GameObject.Find("vcamFlightPlanning").GetComponent<CinemachineVirtualCamera>());
+        virtualCameras.Add(missionControlCamera = GameObject.Find("vcamMissionControl").GetComponent<CinemachineVirtualCamera>());
+        virtualCameras.Add(commsCamera = GameObject.Find("vcamComms").GetComponent<CinemachineVirtualCamera>());
+
+        cameraController = GameObject.Find("CameraControlScript").GetComponent<CameraPositionController>();
     }
 }

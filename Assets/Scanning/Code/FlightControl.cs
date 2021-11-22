@@ -10,7 +10,9 @@ public class FlightControl : MonoBehaviour
     // HUD
     public GameObject altitudeNeedle;
     public GameObject signalsNeedle;
-    int signals_collected = 0;
+    
+    [HideInInspector]
+    public int signals_collected = 0;
     public int limit = 10;
     float limitAdjust;
 

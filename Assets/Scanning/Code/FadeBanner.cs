@@ -4,7 +4,7 @@ public class FadeBanner : MonoBehaviour
 {
    public Animator animator;
 
-    public void TriggerFade() {
+    public virtual void TriggerFade() { // virtual added to allow unit testing
         animator.SetTrigger("FadeIn");
     }
 }
