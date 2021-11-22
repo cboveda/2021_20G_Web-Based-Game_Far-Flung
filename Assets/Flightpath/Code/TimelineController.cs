@@ -11,19 +11,19 @@ namespace Flightpath
         private PlayableDirector director;
         public GameObject startButton;
 
-        private void Awake()
+        public void Awake()
         {
             director = GetComponent<PlayableDirector>();
             director.played += Director_Played;
             director.stopped += Director_Stopped;
         }
 
-        private void Director_Stopped(PlayableDirector o)
+        public void Director_Stopped(PlayableDirector o)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
 
-        private void Director_Played(PlayableDirector o)
+        public void Director_Played(PlayableDirector o)
         {
             startButton.SetActive(false);
         }

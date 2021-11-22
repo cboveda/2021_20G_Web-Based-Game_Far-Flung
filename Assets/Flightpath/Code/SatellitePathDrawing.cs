@@ -12,12 +12,12 @@ namespace Flightpath
         public bool Active;
         public float TimeInterval;
         private float _timer;
-        private LinkedList<GameObject> _pathHistory;
+        public LinkedList<GameObject> PathHistory;
 
         public void Start()
         {
             _timer = 0;
-            _pathHistory = new LinkedList<GameObject>();
+            PathHistory = new LinkedList<GameObject>();
         }
 
         void Update()
@@ -27,7 +27,7 @@ namespace Flightpath
                 _timer += Time.deltaTime;
                 if (_timer >= TimeInterval && PathPrefab != null)
                 {
-                    _pathHistory.AddLast(Instantiate(PathPrefab,
+                    PathHistory.AddLast(Instantiate(PathPrefab,
                         new Vector3(Satellite.transform.position.x, Satellite.transform.position.y, Satellite.transform.position.z - 199),
                         Quaternion.identity,
                         transform.gameObject.transform));
@@ -38,11 +38,11 @@ namespace Flightpath
 
         public void ClearHistory()
         {
-            while (_pathHistory.First != null)
+            while (PathHistory.First != null)
             {
-                GameObject node = _pathHistory.First.Value;
+                GameObject node = PathHistory.First.Value;
                 node.GetComponent<SatellitePathFader>().BeginFade(1);
-                _pathHistory.RemoveFirst();
+                PathHistory.RemoveFirst();
             }
         }
     }
