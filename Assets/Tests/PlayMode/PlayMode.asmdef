@@ -9,7 +9,7 @@
         "ScanningAssembly",
         "FrameworkAssembly",
         "LabgameAssembly",
-        "FlightpathAssembly"
+        "Flightpath"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

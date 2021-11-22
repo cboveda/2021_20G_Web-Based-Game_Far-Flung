@@ -1,9 +1,5 @@
 using UnityEngine;
 
-/* 
-    A utility class for createing height maps using perlin noise which emulate
-    psyche 16's surface.
-*/
 public static class TerrainGenerator {
 
     public static int perlin_octaves = 5;
@@ -13,8 +9,6 @@ public static class TerrainGenerator {
     public static float[,] GetTerrainHeights( Vector3 vBase, int meshDim, int terrainSeed, AnimationCurve basePerlinCurve ) {
 
         float[,] heights = new float[meshDim, meshDim];
-        float normalMin = float.MaxValue;
-        float normalMax = float.MinValue;
 
         Vector2[] offsets = CreateOffsets( vBase, terrainSeed );
         
@@ -22,12 +16,6 @@ public static class TerrainGenerator {
             for ( int z = 0; z < meshDim; ++z ) {
 
                 heights[x, z] = PerlinCalculator( x, z, offsets, meshDim, basePerlinCurve );
-
-                if (heights[x, z] > normalMax) {
-                    normalMax = heights[x, z];
-                } else if ( heights[x, z] < normalMin ) {
-                    normalMin = heights[x, z];
-                }
             }
         }
 

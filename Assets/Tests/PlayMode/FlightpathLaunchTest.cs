@@ -4,6 +4,7 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 using UnityEngine.UI;
+using Flightpath;
 
 public class FlightpathLaunchTest
 {
@@ -26,8 +27,6 @@ public class FlightpathLaunchTest
         satellite.GetComponent<Launch>().SetAngle(0f);
         satellite.GetComponent<Launch>().SetPower(1.0f);
 
-
-
         launchManager = new GameObject();
         launchManager.AddComponent<LaunchManager>();
         var launchManagerComponent = launchManager.GetComponent<LaunchManager>();
@@ -36,11 +35,18 @@ public class FlightpathLaunchTest
         GameObject angleSlider = new GameObject();
         angleSlider.AddComponent<Slider>();
         angleSlider.GetComponent<Slider>().minValue = 10f;
+        
         GameObject powerSlider = new GameObject();
         powerSlider.AddComponent<Slider>();
         powerSlider.GetComponent<Slider>().minValue = 10f;
         launchManagerComponent.AngleSlider = angleSlider.GetComponent<Slider>();
         launchManagerComponent.PowerSlider = angleSlider.GetComponent<Slider>();
+        
+        GameObject pathDrawing = new GameObject();
+        pathDrawing.AddComponent<SatellitePathDrawing>();
+        pathDrawing.GetComponent<SatellitePathDrawing>().Start();
+        launchManagerComponent.SatellitePath = pathDrawing.GetComponent<SatellitePathDrawing>();
+
         GameObject arrow = new GameObject();
         arrow.AddComponent<Trajectory>();
         arrow.GetComponent<Trajectory>().Satellite = satellite.GetComponent<Launch>();
@@ -75,7 +81,7 @@ public class FlightpathLaunchTest
         pathFollower = new GameObject();
         pathFollower.AddComponent<PathFollower>();
         var pathFollowerComponent = pathFollower.GetComponent<PathFollower>();
-        pathFollowerComponent.Path = path.transform;
+        pathFollowerComponent.Path = path;
         pathFollowerComponent.Speed = 1.0f;
         pathFollowerComponent.Start();
     }

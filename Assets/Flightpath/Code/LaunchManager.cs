@@ -2,133 +2,151 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
-public class LaunchManager : MonoBehaviour
+namespace Flightpath
 {
-    public GameObject Satellite;
-    public Slider AngleSlider;
-    public Slider PowerSlider;
-    public Trajectory TrajectoryArrow;
-
-    // Placeholder members for win/lose text
-    public Text WinText;
-    public Text LoseText;
-    private bool _sceneAdvanceStart;
-
-
-    public void Start()
+    public class LaunchManager : MonoBehaviour
     {
-        Satellite.GetComponent<Launch>().SetAngle(AngleSlider.GetComponent<Slider>().minValue);
-        Satellite.GetComponent<Launch>().SetPower(PowerSlider.GetComponent<Slider>().minValue);
-        TrajectoryArrow.GetComponent<SpriteRenderer>().enabled = true;
-        TrajectoryArrow.SetPowerRange(PowerSlider.GetComponent<Slider>().minValue, PowerSlider.GetComponent<Slider>().maxValue);
-        _sceneAdvanceStart = false;
-        // todo
-        ResetPlaceholderText();
-    }
+        public GameObject Satellite;
+        public Slider AngleSlider;
+        public Slider PowerSlider;
+        public Trajectory TrajectoryArrow;
+        public SatellitePathDrawing SatellitePath;
 
-    public void OnAngleSliderChanged(float value)
-    {
-        Satellite.GetComponent<Launch>().SetAngle(value);
-    }
+        // Placeholder members for win/lose text
+        public Text WinText;
+        public Text LoseText;
+        private bool _sceneAdvanceStart;
+        private bool _launchLocked;
 
-    public void OnPowerSliderChanged(float value)
-    {
-        Satellite.GetComponent<Launch>().SetPower(value);
 
-    }
-
-    public void OnLaunchButtonClicked()
-    {
-        TrajectoryArrow.GetComponent<SpriteRenderer>().enabled = false;
-        Satellite.GetComponent<Launch>().DoLaunch();
-        PathFollower[] pathFollowers = FindObjectsOfType<PathFollower>();
-        foreach (PathFollower p in pathFollowers)
+        public void Start()
         {
-            p.BeginMovement();
-            p.StartOrbitter();
-        }
-    }
-
-    public void OnResetButtonClicked()
-    {
-        Satellite.GetComponent<Launch>().ResetLaunch();
-        TrajectoryArrow.GetComponent<SpriteRenderer>().enabled = true;
-        PathFollower[] pathFollowers = FindObjectsOfType<PathFollower>();
-        foreach (PathFollower p in pathFollowers)
-        {
-            p.ResetPosition();
-            p.StopOrbitter();
-        }
-        ResetPlaceholderText();
-    }
-
-    public void OnAsteroidCollisionDetected()
-    {
-        Satellite.GetComponent<Launch>().StopLaunch();
-        PathFollower[] pathFollowers = FindObjectsOfType<PathFollower>();
-        foreach (PathFollower p in pathFollowers)
-        {
-            p.StopPosition();
-            p.StopOrbitter();
+            Satellite.GetComponent<Launch>().SetAngle(AngleSlider.GetComponent<Slider>().minValue);
+            Satellite.GetComponent<Launch>().SetPower(PowerSlider.GetComponent<Slider>().minValue);
+            TrajectoryArrow.GetComponent<SpriteRenderer>().enabled = true;
+            TrajectoryArrow.SetPowerRange(PowerSlider.GetComponent<Slider>().minValue, PowerSlider.GetComponent<Slider>().maxValue);
+            _sceneAdvanceStart = false;
+            _launchLocked = false;
+            SatellitePath.Active = false;
+            // todo
+            ResetPlaceholderText();
         }
 
-        if (!_sceneAdvanceStart)
+        public void OnAngleSliderChanged(float value)
         {
-            StartCoroutine("DelayedSceneAdvance");
-        }
-        // todo
-        EnablePlaceholderWinText();
-    }
-
-    public void OnSatelliteLeaveWindow()
-    {
-        Satellite.GetComponent<Launch>().StopLaunch();
-        PathFollower[] pathFollowers = FindObjectsOfType<PathFollower>();
-        foreach (PathFollower p in pathFollowers)
-        {
-            p.StopPosition();
-            p.StopOrbitter();
+            Satellite.GetComponent<Launch>().SetAngle(value);
         }
 
-        // todo
-        LoseText.enabled = true;
-    }
+        public void OnPowerSliderChanged(float value)
+        {
+            Satellite.GetComponent<Launch>().SetPower(value);
 
-    private void ResetPlaceholderText()
-    {
-        if (WinText)
-        {
-            WinText.enabled = false;
         }
-        if (LoseText)
-        {
-            LoseText.enabled = false;
-        }
-    }
 
-    // Temporary methods for placeholder win/lose text
-    private void EnablePlaceholderWinText()
-    {
-        if (WinText)
+        public void OnLaunchButtonClicked()
         {
-            WinText.enabled = true;
+            if (!_launchLocked)
+            {
+                _launchLocked = true;
+                TrajectoryArrow.GetComponent<SpriteRenderer>().enabled = false;
+                Satellite.GetComponent<Launch>().DoLaunch();
+                PathFollower[] pathFollowers = FindObjectsOfType<PathFollower>();
+                foreach (PathFollower p in pathFollowers)
+                {
+                    p.BeginMovement();
+                    p.StartOrbitter();
+                }
+                SatellitePath.ClearHistory();
+                SatellitePath.Active = true;
+            }
         }
-    }
 
-    private void EnablePlaceholderLoseText()
-    {
-        if (LoseText)
+        public void OnResetButtonClicked()
         {
+            Satellite.GetComponent<Launch>().ResetLaunch();
+            TrajectoryArrow.GetComponent<SpriteRenderer>().enabled = true;
+            PathFollower[] pathFollowers = FindObjectsOfType<PathFollower>();
+            foreach (PathFollower p in pathFollowers)
+            {
+                p.ResetPosition();
+                p.StopOrbitter();
+            }
+            ResetPlaceholderText();
+            SatellitePath.Active = false;
+            _launchLocked = false;
+        }
+
+        public void OnAsteroidCollisionDetected()
+        {
+            Satellite.GetComponent<Launch>().StopLaunch();
+            PathFollower[] pathFollowers = FindObjectsOfType<PathFollower>();
+            foreach (PathFollower p in pathFollowers)
+            {
+                p.StopPosition();
+                p.StopOrbitter();
+            }
+            SatellitePath.Active = false;
+
+            if (!_sceneAdvanceStart)
+            {
+                StartCoroutine("DelayedSceneAdvance");
+            }
+            // todo
+            EnablePlaceholderWinText();
+        }
+
+        public void OnSatelliteLeaveWindow()
+        {
+            Satellite.GetComponent<Launch>().StopLaunch();
+            PathFollower[] pathFollowers = FindObjectsOfType<PathFollower>();
+            foreach (PathFollower p in pathFollowers)
+            {
+                p.StopPosition();
+                p.StopOrbitter();
+            }
+            SatellitePath.Active = false;
+
+            // todo
             LoseText.enabled = true;
         }
-    }
 
-    private IEnumerator DelayedSceneAdvance()
-    {
-        _sceneAdvanceStart = true;
-        yield return new WaitForSeconds(3.0f);
-        GetComponent<SceneControls>().Next();
-    }
+        private void ResetPlaceholderText()
+        {
+            if (WinText)
+            {
+                WinText.enabled = false;
+            }
+            if (LoseText)
+            {
+                LoseText.enabled = false;
+            }
+        }
 
+        // Temporary methods for placeholder win/lose text
+        private void EnablePlaceholderWinText()
+        {
+            if (WinText)
+            {
+                WinText.enabled = true;
+            }
+        }
+
+        private void EnablePlaceholderLoseText()
+        {
+            if (LoseText)
+            {
+                LoseText.enabled = true;
+            }
+        }
+
+        private IEnumerator DelayedSceneAdvance()
+        {
+            _sceneAdvanceStart = true;
+            yield return new WaitForSeconds(0.5f);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+
+    }
 }
