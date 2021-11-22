@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.TestTools;
 using UnityEditor;
 using UnityEngine.SceneManagement;
-using UnityEditor.Animations;
+using System.Text.RegularExpressions;
 
 public class ScanningTransitionTest {
 
@@ -13,35 +13,27 @@ public class ScanningTransitionTest {
     GameObject alt_needle;
     GameObject miss_needle;
 
-    FadeDriver fadeDriver;
-    FadeBanner fadeBanner;
-    Animator animator;
-    AnimatorController controller;
+    FadeDriverStub fdStub;
+    FadeBannerStub fbStub;
+
 
     // A Test behaves as an ordinary method
     [SetUp]
     public void SetUp() {
 
-        animator = new Animator();
-        controller = new AnimatorController();
-        controller.AddParameter( "FadeIn", AnimatorControllerParameterType.Trigger );
+        fdStub = new FadeDriverStub();
+        fbStub = new FadeBannerStub();
 
-        animator.runtimeAnimatorController = controller;
-
-        fadeDriver = AssetDatabase.LoadAssetAtPath<FadeDriver>("Assets/Scanning/Animations/FadeEffect.prefab");
-        fadeBanner = new GameObject().AddComponent<FadeBanner>();
-        fadeBanner.GetComponent<FadeBanner>().animator = animator;
-
-        satellite = new GameObject();
         neutronSignal = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Scanning/Prefabs/Signal_Variant.prefab");
 
         alt_needle = new GameObject();
         miss_needle = new GameObject();
+        satellite = new GameObject();
 
         satellite.AddComponent<FlightControl>();
         satellite.GetComponent<FlightControl>().limit = 3;
-        satellite.GetComponent<FlightControl>().fadeDriver = fadeDriver;
-        satellite.GetComponent<FlightControl>().bannerFader = fadeBanner;
+        satellite.GetComponent<FlightControl>().fadeDriver = fdStub;
+        satellite.GetComponent<FlightControl>().bannerFader = fbStub;
         satellite.GetComponent<FlightControl>().altitudeNeedle = alt_needle;
         satellite.GetComponent<FlightControl>().signalsNeedle = miss_needle;
 
@@ -60,17 +52,52 @@ public class ScanningTransitionTest {
     public IEnumerator Test_ScanninTransitionForFlightControl()
     {
 
+
         int index1 = SceneManager.GetActiveScene().buildIndex;
 
         var sig1 = Object.Instantiate(neutronSignal, new Vector3(0, 0, 3), Quaternion.identity);
         var sig2 = Object.Instantiate(neutronSignal, new Vector3(0, 0, 4), Quaternion.identity);
         var sig3 = Object.Instantiate(neutronSignal, new Vector3(0, 0, 5), Quaternion.identity);
-        yield return new WaitForSeconds( 2f );
+        yield return new WaitForSeconds( 4f );
 
-        int index2 = SceneManager.GetActiveScene().buildIndex;
+        //LogAssert.Expect(LogType.Error, new Regex(".*") ); // if this test is run in isolation use to prevent scene transition errors
 
-        Debug.Log( index1 );
-        Debug.Log( index2 );
+        Assert.True( fdStub.testSet() );
+        Assert.True( fbStub.testSet() );
+        
+    }
+}
 
+public class FadeDriverStub : FadeDriver {
+
+    bool isSet;
+
+    public FadeDriverStub() {
+        isSet = false;
+    }
+
+    public override void TriggerFade() {
+        isSet = true;
+    }
+
+    public bool testSet() {
+        return isSet;
+    }
+}
+
+public class FadeBannerStub : FadeBanner {
+
+    bool isSet;
+
+    public FadeBannerStub() {
+        isSet = false;
+    }
+
+    public override void TriggerFade() {
+        isSet = true;
+    }
+
+    public bool testSet() {
+        return isSet;
     }
 }
