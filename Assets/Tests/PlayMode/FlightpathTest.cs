@@ -199,7 +199,7 @@ public class FlightpathTest
         yield return new WaitForFixedUpdate();
         GameObject child = pathDrawing.transform.GetChild(0).gameObject;
         manager.OnLaunchButtonClicked();
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(5.0f);
         Assert.False(child);
     }
 }
