@@ -12,10 +12,11 @@ public class DropSlot : MonoBehaviour
 
     void OnTriggerStay(Collider other)
     {
-        if(!Input.GetMouseButton(0))
+        Debug.Log("triggered");
+        if(other.gameObject.GetComponent<DragObject>() && other.gameObject.GetComponent<DragObject>().isHeld==false)
         {
             if(other.gameObject == slotMatch){
-                Debug.Log("Collision");
+                Debug.Log("Drop in SLot");
                 other.transform.SetPositionAndRotation(transform.position + offset, transform.rotation);
                 Resources.FindObjectsOfTypeAll<TextPanel>()[0].ShowText(completionTextAsset, CallParentCompletion);
                 other.enabled = false;

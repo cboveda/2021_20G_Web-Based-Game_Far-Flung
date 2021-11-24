@@ -43,15 +43,17 @@ public class Pickup : MonoBehaviour
     void PickupObject(GameObject pickObj)
     {
         Debug.Log(pickObj.name);
-        if (pickObj.GetComponent<Rigidbody>())
+        if (pickObj.GetComponent<DragObject>() && pickObj.GetComponent<Rigidbody>())
         {
             Rigidbody objRig = pickObj.GetComponent<Rigidbody>();
             objRig.useGravity = false;
             objRig.drag = 10; //add air drag to the object
 
+            objRig.freezeRotation = true;
             objRig.transform.parent = holdParent;
 
             heldObj = pickObj;
+            heldObj.GetComponent<DragObject>().isHeld = true;
         }
     }
     void MoveObject()
@@ -69,8 +71,12 @@ public class Pickup : MonoBehaviour
         heldRig.useGravity = true;
         heldRig.drag = 1;
 
+        heldRig.freezeRotation = false;
+        heldObj.GetComponent<DragObject>().isHeld = false;
+
         heldObj.transform.parent = null;
         heldObj = null;
+        
     }
 
 
