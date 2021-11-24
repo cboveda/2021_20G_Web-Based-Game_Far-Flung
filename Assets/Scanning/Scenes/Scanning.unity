@@ -241,6 +241,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 303.7885, y: 152.66907}
   m_Pivot: {x: 1, y: 1}
+<<<<<<< HEAD
 --- !u!114 &627775102 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2956146169896980847, guid: 43abd9b63fee6b13185a16ab9ae5ab52, type: 3}
@@ -252,6 +253,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feed6f05165fb636e9718909b22ea5e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+=======
+>>>>>>> dev
 --- !u!1 &651636224
 GameObject:
   m_ObjectHideFlags: 0
@@ -897,6 +900,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c77a792db41f5d91b789acdd2689c3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
 --- !u!1001 &1426208260
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1003,6 +1007,8 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2956146169896980755, guid: 43abd9b63fee6b13185a16ab9ae5ab52, type: 3}
   m_PrefabInstance: {fileID: 1426208260}
   m_PrefabAsset: {fileID: 0}
+=======
+>>>>>>> dev
 --- !u!114 &1432689468 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2956146169896980847, guid: 43abd9b63fee6b13185a16ab9ae5ab52, type: 3}
@@ -1525,7 +1531,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2956146169896980840, guid: 43abd9b63fee6b13185a16ab9ae5ab52, type: 3}
       propertyPath: m_Name
+<<<<<<< HEAD
       value: EndGameTextWin
+=======
+      value: EndGameText
+>>>>>>> dev
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 43abd9b63fee6b13185a16ab9ae5ab52, type: 3}

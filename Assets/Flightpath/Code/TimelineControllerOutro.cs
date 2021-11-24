@@ -10,13 +10,13 @@ namespace Flightpath
     {
         private PlayableDirector director;
 
-        private void Awake()
+        public void Awake()
         {
             director = GetComponent<PlayableDirector>();
             director.stopped += Director_Stopped;
         }
 
-        private void Director_Stopped(PlayableDirector o)
+        public void Director_Stopped(PlayableDirector o)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
