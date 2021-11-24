@@ -222,6 +222,11 @@ public class LabMain : MonoBehaviour
         currentSpectraPuzzle.CheckSolution();
     }
 
+    public void GetNextSpectra()
+    {
+        currentSpectraPuzzle.GetNextExampleSpectra();
+    }
+
 
 
 }

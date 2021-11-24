@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SpectraPuzzleDisplay : MonoBehaviour
 {
@@ -12,12 +13,31 @@ public class SpectraPuzzleDisplay : MonoBehaviour
 
     GameObject[] spectraSolutionDisplayPrimatives = new GameObject[Spectra.SPECTRA_ARRAY_SIZE];
     GameObject[] spectraAttemptDisplayPrimatives = new GameObject[Spectra.SPECTRA_ARRAY_SIZE];
+    GameObject[] spectraExampleDisplayPrimatives = new GameObject[Spectra.SPECTRA_ARRAY_SIZE];
+    GameObject[] spectraPrimaryDisplayPrimatives = new GameObject[Spectra.SPECTRA_ARRAY_SIZE];
+    GameObject[] spectraSecondaryDisplayPrimatives = new GameObject[Spectra.SPECTRA_ARRAY_SIZE];
+    GameObject[] spectraTraceDisplayPrimatives = new GameObject[Spectra.SPECTRA_ARRAY_SIZE];
+    GameObject elementNameDisplay;
+    Text elementName;
     SpectraPuzzle currentPuzzle;
+
     GameObject solutionDisplay;
     RectTransform solutionRect;
 
     GameObject attemptDisplay;
     RectTransform attemptRect;
+
+    GameObject primaryDisplay;
+    RectTransform primaryRect;
+
+    GameObject secondaryDisplay;
+    RectTransform secondaryRect;
+
+    GameObject traceDisplay;
+    RectTransform traceRect;
+
+    GameObject exampleDisplay;
+    RectTransform exampleRect;
 
     // Start is called before the first frame update
     void Awake()
@@ -44,11 +64,24 @@ public class SpectraPuzzleDisplay : MonoBehaviour
             attemptRect = attemptDisplay.AddComponent<RectTransform>();
         }
 
-        
         attemptRect.transform.localScale = new Vector3(SPECTRA_DISPLAY_SCALE, 1, 1);
 
         attemptRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, SPECTRA_DISPLAY_WIDTH);
         attemptRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, SPECTRA_DISPLAY_HEIGHT);
+
+        exampleDisplay = GameObject.Find("SpectraExample");
+        elementNameDisplay = GameObject.Find("ElementName");
+        elementName = elementNameDisplay.GetComponent<Text>();
+
+        if ((exampleRect = exampleDisplay.GetComponent<RectTransform>()) == null)
+        {
+            exampleRect = exampleDisplay.AddComponent<RectTransform>();
+        }
+
+        exampleRect.transform.localScale = new Vector3(SPECTRA_DISPLAY_SCALE, 1, 1);
+
+        exampleRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, SPECTRA_DISPLAY_WIDTH);
+        exampleRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, SPECTRA_DISPLAY_HEIGHT);
 
         for (int i = 0; i < Spectra.SPECTRA_ARRAY_SIZE; i++)
         {
@@ -62,6 +95,14 @@ public class SpectraPuzzleDisplay : MonoBehaviour
         {
             spectraAttemptDisplayPrimatives[i] = GameObject.CreatePrimitive(PrimitiveType.Quad);
             spectraAttemptDisplayPrimatives[i].transform.SetParent(attemptRect);
+
+
+        }
+
+        for (int i = 0; i < Spectra.SPECTRA_ARRAY_SIZE; i++)
+        {
+            spectraExampleDisplayPrimatives[i] = GameObject.CreatePrimitive(PrimitiveType.Quad);
+            spectraExampleDisplayPrimatives[i].transform.SetParent(exampleRect);
 
 
         }
@@ -96,6 +137,24 @@ public class SpectraPuzzleDisplay : MonoBehaviour
             spectraAttemptDisplayPrimatives[i].transform.localPosition = new Vector3(i, 0, 0);
             spectraAttemptDisplayPrimatives[i].transform.localScale = new Vector3(GetBandWidthValueFromColor(renderer.material.color), COLOR_BAND_SCALE_HEIGHT, 1);
         }
+
+
+    }
+
+    public void UpdateExampleDisplay()
+    {
+        for (int i = 0; i < Spectra.SPECTRA_ARRAY_SIZE; i++)
+        {
+            MeshRenderer renderer = spectraExampleDisplayPrimatives[i].GetComponent<MeshRenderer>();
+            Material spectraMat = Resources.Load("SpectraMaterial", typeof(Material)) as Material;
+            renderer.material = spectraMat;
+            renderer.material.color = currentPuzzle.GetSpectraExampleColor(i);
+            
+
+            spectraExampleDisplayPrimatives[i].transform.localPosition = new Vector3(i, 0, 0);
+            spectraExampleDisplayPrimatives[i].transform.localScale = new Vector3(GetBandWidthValueFromColor(renderer.material.color), COLOR_BAND_SCALE_HEIGHT, 1);
+        }
+        elementName.text = currentPuzzle.spectraList[currentPuzzle.selectedElementSlot].GetSpectraName();
 
 
     }
