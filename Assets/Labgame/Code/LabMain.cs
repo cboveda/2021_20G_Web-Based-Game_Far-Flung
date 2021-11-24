@@ -16,16 +16,26 @@ public class LabMain : MonoBehaviour
     int levelRadio;
     int levelSpectra;
 
+    GameObject sineUIElements;
+    GameObject spectraUIElements;
+
+
     Camera lcdCamera1;
     // Start is called before the first frame update
     void Start()
     {
+        sineUIElements = GameObject.Find("SineUI");
+        spectraUIElements = GameObject.Find("SpectraUI");
         main = GameObject.Find("LabGameStart");
         mainComputerUI = GameObject.Find("ComputerUIMainPane").GetComponent<ComputerUIMainPane>();
         levelRadio = 0;
         radioPuzzleActive = true;
         spectraPuzzleActive = false;
         isCurrentSpectraPuzzleSolved = false;
+
+        sineUIElements.SetActive(true);
+        spectraUIElements.SetActive(false);
+        
         GetNewRadioPuzzle();
         lcdCamera1 = GameObject.Find("ComputerScreen1Camera").GetComponent<Camera>();
 
@@ -41,44 +51,44 @@ public class LabMain : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        List<RaycastResult> castResult = new List<RaycastResult>();
-        castResult.Clear();
+        //List<RaycastResult> castResult = new List<RaycastResult>();
+        //castResult.Clear();
 
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
+        //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //RaycastHit hit;
 
         
 
-        if (Physics.Raycast(ray, out hit))
-        {
-            if (hit.collider.tag == "LCD1")
-            {
-                //Debug.Log("Hit this: " + hit.collider.gameObject.name.ToString()); 
-                ray = lcdCamera1.ViewportPointToRay(new Vector3(hit.textureCoord.x, hit.textureCoord.y));
+        //if (Physics.Raycast(ray, out hit))
+        //{
+        //    if (hit.collider.tag == "LCD1")
+        //    {
+        //        //Debug.Log("Hit this: " + hit.collider.gameObject.name.ToString()); 
+        //        ray = lcdCamera1.ViewportPointToRay(new Vector3(hit.textureCoord.x, hit.textureCoord.y));
                 
                 
-                PointerEventData myEventData = new PointerEventData(EventSystem.current);
+        //        PointerEventData myEventData = new PointerEventData(EventSystem.current);
                 
-                myEventData.position = new Vector3(hit.textureCoord.x, hit.textureCoord.y);
+        //        myEventData.position = new Vector3(hit.textureCoord.x, hit.textureCoord.y);
 
-                EventSystem.current.RaycastAll(myEventData, castResult);
-                for (int i = 0; i < castResult.Count; i++)
-                {
-                    Debug.Log("I hit: " + castResult[i].gameObject.name);
-                }
-                //if (Physics.Raycast(ray, out hit))
-                //{
-                //    if (hit.collider.tag == "UI")
-                //    {
-                //        Debug.Log("Hit this: " + hit.collider.gameObject.name.ToString());
-                //    }
-                //}
-
-
-            }
+        //        EventSystem.current.RaycastAll(myEventData, castResult);
+        //        for (int i = 0; i < castResult.Count; i++)
+        //        {
+        //            Debug.Log("I hit: " + castResult[i].gameObject.name);
+        //        }
+        //        //if (Physics.Raycast(ray, out hit))
+        //        //{
+        //        //    if (hit.collider.tag == "UI")
+        //        //    {
+        //        //        Debug.Log("Hit this: " + hit.collider.gameObject.name.ToString());
+        //        //    }
+        //        //}
 
 
-        }
+        //    }
+
+
+        //}
 
         if (isCurrentRadioPuzzleSolved && radioPuzzleActive)
         {
@@ -121,6 +131,8 @@ public class LabMain : MonoBehaviour
 
         if (isCurrentRadioPuzzleSolved && spectraPuzzleActive && levelSpectra == 0)
         {
+            sineUIElements.SetActive(false);
+            spectraUIElements.SetActive(true);
             GetNewSpectraPuzzle();
         }
 
