@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class LabMain : MonoBehaviour
 {
@@ -40,25 +41,42 @@ public class LabMain : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        List<RaycastResult> castResult = new List<RaycastResult>();
+        castResult.Clear();
+
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        if(Physics.Raycast(ray, out hit))
+
+        
+
+        if (Physics.Raycast(ray, out hit))
         {
             if (hit.collider.tag == "LCD1")
             {
                 //Debug.Log("Hit this: " + hit.collider.gameObject.name.ToString()); 
                 ray = lcdCamera1.ViewportPointToRay(new Vector3(hit.textureCoord.x, hit.textureCoord.y));
-                if(Physics.Raycast(ray, out hit))
-                {
-                    if (hit.collider.tag == "UI")
-                    {
-                        Debug.Log("Hit this: " + hit.collider.gameObject.name.ToString());
-                    }
-                }
                 
+                
+                PointerEventData myEventData = new PointerEventData(EventSystem.current);
+                
+                myEventData.position = new Vector3(hit.textureCoord.x, hit.textureCoord.y);
+
+                EventSystem.current.RaycastAll(myEventData, castResult);
+                for (int i = 0; i < castResult.Count; i++)
+                {
+                    Debug.Log("I hit: " + castResult[i].gameObject.name);
+                }
+                //if (Physics.Raycast(ray, out hit))
+                //{
+                //    if (hit.collider.tag == "UI")
+                //    {
+                //        Debug.Log("Hit this: " + hit.collider.gameObject.name.ToString());
+                //    }
+                //}
+
 
             }
-            
+
 
         }
 
