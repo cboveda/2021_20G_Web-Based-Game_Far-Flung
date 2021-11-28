@@ -13,13 +13,16 @@ public class SpectraPuzzle : LabPuzzle
     public static Spectra silver = new Spectra("Silver", new int[] { 0, 1, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0, 2, 0, 0, 2, 0, 1, 0, 0 });
     public static Spectra none = new Spectra("None", new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 });
 
-    private Spectra primaryElement;
-    private Spectra secondaryElement;
-    private Spectra traceElement;
+    public Spectra primaryElement;
+    public Spectra secondaryElement;
+    public Spectra traceElement;
     private Spectra selectedElement;
     public int[] solution;
     public int[] example = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
     public int[] combinedSpectra = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+    public int[] primary = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    public int[] secondary = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    public int[] trace = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
     public List<Spectra> spectraList;
     public int selectedElementSlot;
 
@@ -122,6 +125,9 @@ public class SpectraPuzzle : LabPuzzle
     {
         combinedSpectra = CombineSpectra(primaryElement, secondaryElement, traceElement);
         mySpectraPuzzleDisplay.UpdateAttemptDisplay();
+        mySpectraPuzzleDisplay.UpdateElementalDisplay(1);
+        mySpectraPuzzleDisplay.UpdateElementalDisplay(2);
+        mySpectraPuzzleDisplay.UpdateElementalDisplay(3);
     }
 
     public void UpdateExampleSpectra()
@@ -202,6 +208,52 @@ public class SpectraPuzzle : LabPuzzle
             
             
             
+
+            if (a > 0)
+            {
+                a += 15;
+            }
+
+        }
+
+        return new Color32(r, g, b, a);
+    }
+
+    public Color32 GetAddedElementColor(int elementPosition, int slot)
+    {
+        byte r = 0;
+        byte g = 0;
+        byte b = 0;
+        byte a = 0;
+
+        int[] elementalSpectraArray;
+
+        switch (elementPosition)
+        {
+            case 1:
+                elementalSpectraArray = primaryElement.GetSpectraArray();
+                break;
+            case 2:
+                elementalSpectraArray = secondaryElement.GetSpectraArray();
+                break;
+            case 3:
+                elementalSpectraArray = traceElement.GetSpectraArray();
+                break;
+            default:
+                elementalSpectraArray = primaryElement.GetSpectraArray(); //this is a terrible hack.
+                break;
+        }
+
+        if (slot < Spectra.SPECTRA_ARRAY_SIZE)
+        {
+            r = spectraColorBySlot[slot].r;
+            g = spectraColorBySlot[slot].g;
+            b = spectraColorBySlot[slot].b;
+
+            a = (byte)(elementalSpectraArray[slot] * 10);
+
+
+
 
             if (a > 0)
             {

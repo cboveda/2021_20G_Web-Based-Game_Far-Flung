@@ -7,7 +7,8 @@ public class SpectraPuzzleDisplay : MonoBehaviour
 {
     public const int SPECTRA_DISPLAY_WIDTH = 600;
     public const int SPECTRA_DISPLAY_HEIGHT = 150;
-    public const float SPECTRA_DISPLAY_SCALE = 0.8f;
+    public const float SPECTRA_DISPLAY_SCALE_WIDTH = 0.8f;
+    public const float SPECTRA_DISPLAY_SCALE_HEIGHT = 0.8f;
     public const float COLOR_BAND_SCALE_WIDTH = 0.5f;
     public const float COLOR_BAND_SCALE_HEIGHT = 2f;
 
@@ -42,70 +43,19 @@ public class SpectraPuzzleDisplay : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        solutionDisplay = GameObject.Find("SpectraSolution");
+        MakeSpectraDisplay(solutionDisplay, "SpectraSolution", solutionRect, spectraSolutionDisplayPrimatives);
+        MakeSpectraDisplay(attemptDisplay, "SpectraAttempt", attemptRect, spectraAttemptDisplayPrimatives);
+        MakeSpectraDisplay(exampleDisplay, "SpectraExample", exampleRect, spectraExampleDisplayPrimatives);
+        MakeSpectraDisplay(primaryDisplay, "SpectraPrimary", primaryRect, spectraPrimaryDisplayPrimatives);
+        MakeSpectraDisplay(secondaryDisplay, "SpectraSecondary", secondaryRect, spectraSecondaryDisplayPrimatives);
+        MakeSpectraDisplay(traceDisplay, "SpectraTrace", traceRect, spectraTraceDisplayPrimatives);
 
-        if((solutionRect = solutionDisplay.GetComponent<RectTransform>()) == null)
-        {
-            solutionRect = solutionDisplay.AddComponent<RectTransform>();
-        }
 
-        
-        solutionRect.transform.localScale = new Vector3(SPECTRA_DISPLAY_SCALE, 1, 1);
-        
-        solutionRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, SPECTRA_DISPLAY_WIDTH);
-        solutionRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, SPECTRA_DISPLAY_HEIGHT);
 
-        
-
-        attemptDisplay = GameObject.Find("SpectraAttempt");
-
-        if ((attemptRect = attemptDisplay.GetComponent<RectTransform>()) == null)
-        {
-            attemptRect = attemptDisplay.AddComponent<RectTransform>();
-        }
-
-        attemptRect.transform.localScale = new Vector3(SPECTRA_DISPLAY_SCALE, 1, 1);
-
-        attemptRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, SPECTRA_DISPLAY_WIDTH);
-        attemptRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, SPECTRA_DISPLAY_HEIGHT);
-
-        exampleDisplay = GameObject.Find("SpectraExample");
         elementNameDisplay = GameObject.Find("ElementName");
         elementName = elementNameDisplay.GetComponent<Text>();
 
-        if ((exampleRect = exampleDisplay.GetComponent<RectTransform>()) == null)
-        {
-            exampleRect = exampleDisplay.AddComponent<RectTransform>();
-        }
-
-        exampleRect.transform.localScale = new Vector3(SPECTRA_DISPLAY_SCALE, 1, 1);
-
-        exampleRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, SPECTRA_DISPLAY_WIDTH);
-        exampleRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, SPECTRA_DISPLAY_HEIGHT);
-
-        for (int i = 0; i < Spectra.SPECTRA_ARRAY_SIZE; i++)
-        {
-            spectraSolutionDisplayPrimatives[i] = GameObject.CreatePrimitive(PrimitiveType.Quad);
-            spectraSolutionDisplayPrimatives[i].transform.SetParent(solutionRect);
-
-            
-        }
-
-        for (int i = 0; i < Spectra.SPECTRA_ARRAY_SIZE; i++)
-        {
-            spectraAttemptDisplayPrimatives[i] = GameObject.CreatePrimitive(PrimitiveType.Quad);
-            spectraAttemptDisplayPrimatives[i].transform.SetParent(attemptRect);
-
-
-        }
-
-        for (int i = 0; i < Spectra.SPECTRA_ARRAY_SIZE; i++)
-        {
-            spectraExampleDisplayPrimatives[i] = GameObject.CreatePrimitive(PrimitiveType.Quad);
-            spectraExampleDisplayPrimatives[i].transform.SetParent(exampleRect);
-
-
-        }
+        
 
     }
 
@@ -159,6 +109,43 @@ public class SpectraPuzzleDisplay : MonoBehaviour
 
     }
 
+    public void UpdateElementalDisplay(int elementalDisplayToUpdate)
+    {
+        GameObject[] elementalDisplayPrimatives;
+
+        switch (elementalDisplayToUpdate)
+        {
+            case 1:
+                elementalDisplayPrimatives = spectraPrimaryDisplayPrimatives;
+                break;
+            case 2:
+                elementalDisplayPrimatives = spectraSecondaryDisplayPrimatives;
+                break;
+            case 3:
+                elementalDisplayPrimatives = spectraTraceDisplayPrimatives;
+                break;
+            default:
+                elementalDisplayPrimatives = spectraPrimaryDisplayPrimatives;
+                break;
+        }
+
+        for (int i = 0; i < Spectra.SPECTRA_ARRAY_SIZE; i++)
+        {
+            
+            MeshRenderer renderer = elementalDisplayPrimatives[i].GetComponent<MeshRenderer>();
+            Material spectraMat = Resources.Load("SpectraMaterial", typeof(Material)) as Material;
+            renderer.material = spectraMat;
+            renderer.material.color = currentPuzzle.GetAddedElementColor(elementalDisplayToUpdate, i);
+
+
+            elementalDisplayPrimatives[i].transform.localPosition = new Vector3(i, 0, 0);
+            elementalDisplayPrimatives[i].transform.localScale = new Vector3(GetBandWidthValueFromColor(renderer.material.color), COLOR_BAND_SCALE_HEIGHT, 1);
+        }
+        
+
+
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -191,8 +178,43 @@ public class SpectraPuzzleDisplay : MonoBehaviour
             Destroy(spectraAttemptDisplayPrimatives[i]);
             Destroy(spectraSolutionDisplayPrimatives[i]);
             Destroy(spectraExampleDisplayPrimatives[i]);
+            Destroy(spectraPrimaryDisplayPrimatives[i]);
+            Destroy(spectraSecondaryDisplayPrimatives[i]);
+            Destroy(spectraTraceDisplayPrimatives[i]);
         }
 
         Destroy(this);
+    }
+
+    private void MakeSpectraDisplay(GameObject goDisplay, string goName, RectTransform displayRect, GameObject[] displayPrimatives)
+    {
+        float displayScale = SPECTRA_DISPLAY_SCALE_HEIGHT;
+
+        // Decided too late I wanted a separate height possibility...
+        if(goDisplay == primaryDisplay || goDisplay == secondaryDisplay || goDisplay == traceDisplay)
+        {
+            displayScale = 0.5f;
+        }
+
+        goDisplay = GameObject.Find(goName);
+
+        if ((displayRect = goDisplay.GetComponent<RectTransform>()) == null)
+        {
+            displayRect = goDisplay.AddComponent<RectTransform>();
+        }
+
+
+        displayRect.transform.localScale = new Vector3(SPECTRA_DISPLAY_SCALE_WIDTH, displayScale, 1);
+
+        displayRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, SPECTRA_DISPLAY_WIDTH);
+        displayRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, SPECTRA_DISPLAY_HEIGHT);
+
+        for (int i = 0; i < Spectra.SPECTRA_ARRAY_SIZE; i++)
+        {
+            displayPrimatives[i] = GameObject.CreatePrimitive(PrimitiveType.Quad);
+            displayPrimatives[i].transform.SetParent(displayRect);
+
+
+        }
     }
 }

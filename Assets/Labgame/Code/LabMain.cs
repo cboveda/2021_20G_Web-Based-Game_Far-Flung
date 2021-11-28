@@ -18,6 +18,7 @@ public class LabMain : MonoBehaviour
 
     GameObject sineUIElements;
     GameObject spectraUIElements;
+    GameObject spectraUIElements2;
 
 
     Camera lcdCamera1;
@@ -26,6 +27,7 @@ public class LabMain : MonoBehaviour
     {
         sineUIElements = GameObject.Find("SineUI");
         spectraUIElements = GameObject.Find("SpectraUI");
+        spectraUIElements2 = GameObject.Find("SpectraUIElements2");
         main = GameObject.Find("LabGameStart");
         mainComputerUI = GameObject.Find("ComputerUIMainPane").GetComponent<ComputerUIMainPane>();
         levelRadio = 0;
@@ -35,6 +37,7 @@ public class LabMain : MonoBehaviour
 
         sineUIElements.SetActive(true);
         spectraUIElements.SetActive(false);
+        spectraUIElements2.SetActive(false);
         
         GetNewRadioPuzzle();
         lcdCamera1 = GameObject.Find("ComputerScreen1Camera").GetComponent<Camera>();
@@ -133,6 +136,7 @@ public class LabMain : MonoBehaviour
         {
             sineUIElements.SetActive(false);
             spectraUIElements.SetActive(true);
+            spectraUIElements2.SetActive(true);
             GetNewSpectraPuzzle();
         }
 
