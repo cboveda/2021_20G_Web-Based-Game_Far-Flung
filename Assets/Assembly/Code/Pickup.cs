@@ -16,13 +16,13 @@ public class Pickup : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            Debug.Log("E pressed");
+            // Debug.Log("E pressed");
             if (heldObj == null)
             {
                 RaycastHit hit;
                 if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, pickupRange))
                 {
-                    Debug.Log("Call Pickup Object");
+                    // Debug.Log("Call Pickup Object");
                     PickupObject(hit.transform.gameObject);
                 }
             }
@@ -34,7 +34,7 @@ public class Pickup : MonoBehaviour
 
         if (heldObj != null)
         {
-            Debug.Log("Move call");
+            // Debug.Log("Move call");
             MoveObject();
         }
 
@@ -42,7 +42,7 @@ public class Pickup : MonoBehaviour
 
     void PickupObject(GameObject pickObj)
     {
-        Debug.Log(pickObj.name);
+        Debug.Log("Pickup " + pickObj.name);
         if (pickObj.GetComponent<DragObject>() && pickObj.GetComponent<Rigidbody>())
         {
             Rigidbody objRig = pickObj.GetComponent<Rigidbody>();
@@ -54,6 +54,11 @@ public class Pickup : MonoBehaviour
 
             heldObj = pickObj;
             heldObj.GetComponent<DragObject>().isHeld = true;
+        }
+
+        //if picking up an object in a slot make sure the slot is rendered again
+        if(heldObj.GetComponent<DragObject>().currentSlot){
+            heldObj.GetComponent<DragObject>().currentSlot.GetComponent<Renderer>().forceRenderingOff = false;
         }
     }
     void MoveObject()
@@ -73,6 +78,11 @@ public class Pickup : MonoBehaviour
 
         heldRig.freezeRotation = false;
         heldObj.GetComponent<DragObject>().isHeld = false;
+
+        //if the object is in a slot, drop the object 
+        if(heldObj.GetComponent<DragObject>().currentSlot){
+            heldObj.GetComponent<DragObject>().currentSlot.slotObject(heldObj);
+        }
 
         heldObj.transform.parent = null;
         heldObj = null;
