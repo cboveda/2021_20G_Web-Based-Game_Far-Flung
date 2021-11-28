@@ -10,14 +10,14 @@ public class DropSlot : MonoBehaviour
     public GameObject slotMatch; // set to premanently lock the object when placed
     public TextAsset completionTextAsset;
 
-    void OnCollisionEnter(Collider other){
+    void OnTriggerEnter(Collider other){
         Debug.Log("Enter slot");
         if(other.GetComponent<DragObject>()){
             other.GetComponent<DragObject>().currentSlot = this;
         }
     }
 
-    void OnCollisionExit(Collider other){
+    void OnTriggerExit(Collider other){
         Debug.Log("Exit slot");
         if(other.GetComponent<DragObject>()){
             other.GetComponent<DragObject>().currentSlot = null;
@@ -27,7 +27,7 @@ public class DropSlot : MonoBehaviour
     public void slotObject(GameObject gameObject)
     {
         // Debug.Log("triggered");
-        if(gameObject.GetComponent<DragObject>() && gameObject.GetComponent<DragObject>().isHeld==false)
+        if(gameObject.GetComponent<DragObject>())
         {
             bool defined = true;
             //for unspecified slots set the current object being placed to 
@@ -38,7 +38,7 @@ public class DropSlot : MonoBehaviour
             }
             if(gameObject == slotMatch){
                 Debug.Log("Drop in SLot");
-                transform.SetPositionAndRotation(transform.position + offset, transform.rotation);
+                gameObject.transform.SetPositionAndRotation(transform.position + offset, transform.rotation);
 
                 //try to find the text panel for a popup and check for set texdt if found show the appropriate text
                 if(Resources.FindObjectsOfTypeAll<TextPanel>().Length>0 && completionTextAsset){

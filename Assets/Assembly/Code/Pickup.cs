@@ -72,6 +72,7 @@ public class Pickup : MonoBehaviour
     }
     void DropObject()
     {
+        Debug.Log("Drop Cube");
         Rigidbody heldRig = heldObj.GetComponent<Rigidbody>();
         heldRig.useGravity = true;
         heldRig.drag = 1;
