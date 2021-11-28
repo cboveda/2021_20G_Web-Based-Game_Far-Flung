@@ -190,6 +190,7 @@ public class SpectraPuzzleDisplay : MonoBehaviour
         {
             Destroy(spectraAttemptDisplayPrimatives[i]);
             Destroy(spectraSolutionDisplayPrimatives[i]);
+            Destroy(spectraExampleDisplayPrimatives[i]);
         }
 
         Destroy(this);

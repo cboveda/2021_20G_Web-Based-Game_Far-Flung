@@ -228,6 +228,21 @@ public class SpectraPuzzle : LabPuzzle
         return spectraList[selectedElementSlot];
     }
 
+    public Spectra GetPrevExampleSpectra()
+    {
+        if (selectedElementSlot > 0)
+        {
+            selectedElementSlot--;
+        }
+        else
+        {
+            selectedElementSlot = spectraList.Count - 1;
+        }
+        //mySpectraPuzzleDisplay.UpdateExampleDisplay(spectraList[selectedElementSlot]);
+        UpdateExampleSpectra();
+        return spectraList[selectedElementSlot];
+    }
+
     public override bool CheckSolution()
     {
         if (Enumerable.SequenceEqual(solution, combinedSpectra))
@@ -242,8 +257,9 @@ public class SpectraPuzzle : LabPuzzle
         return false;
     }
 
-    public void AddSpectraToTest(Spectra insertedElement)
+    public void AddSpectraToTest()
     {
+        Spectra insertedElement = spectraList[selectedElementSlot];
         switch (numInserted)
         {
             case 0:
@@ -254,6 +270,30 @@ public class SpectraPuzzle : LabPuzzle
                 break;
             case 2:
                 SetTraceSpectra(insertedElement);
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void RemoveSpectra()
+    {
+        
+        switch (numInserted)
+        {
+            case 0:
+                break;
+            case 1:
+                numInserted -= 2;
+                SetPrimarySpectra(none);
+                break;
+            case 2:
+                numInserted -= 2;
+                SetSecondarySpectra(none);
+                break;
+            case 3:
+                numInserted -= 2;
+                SetTraceSpectra(none);
                 break;
             default:
                 break;

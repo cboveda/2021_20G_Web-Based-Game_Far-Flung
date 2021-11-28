@@ -214,7 +214,7 @@ public class LabMain : MonoBehaviour
 
     public void InsertSpectra(Spectra insertedElement)
     {
-        currentSpectraPuzzle.AddSpectraToTest(insertedElement);
+        currentSpectraPuzzle.AddSpectraToTest();
     }
 
     public void CheckSpectraAnswer()
@@ -225,6 +225,18 @@ public class LabMain : MonoBehaviour
     public void GetNextSpectra()
     {
         currentSpectraPuzzle.GetNextExampleSpectra();
+    }
+    public void GetPrevSpectra()
+    {
+        currentSpectraPuzzle.GetPrevExampleSpectra();
+    }
+    public void AddSpectra()
+    {
+        currentSpectraPuzzle.AddSpectraToTest();
+    }
+    public void RemoveSpectra()
+    {
+        currentSpectraPuzzle.RemoveSpectra();
     }
 
 

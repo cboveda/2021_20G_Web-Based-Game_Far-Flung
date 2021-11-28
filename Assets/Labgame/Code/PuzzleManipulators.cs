@@ -63,7 +63,19 @@ public class PuzzleManipulators : MonoBehaviour
         {
             main.GetComponent<LabMain>().GetNextSpectra();
         }
-        else if (buttonName == "Reset")
+        else if (buttonName == "ElementPrev")
+        {
+            main.GetComponent<LabMain>().GetPrevSpectra();
+        }
+        else if (buttonName == "ElementAdd")
+        {
+            main.GetComponent<LabMain>().AddSpectra();
+        }
+        else if (buttonName == "ElementRemove")
+        {
+            main.GetComponent<LabMain>().RemoveSpectra();
+        }
+        else if (buttonName == "ElementCheck")
         {
             main.GetComponent<LabMain>().CheckSpectraAnswer();
         }
