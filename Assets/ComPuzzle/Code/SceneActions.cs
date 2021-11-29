@@ -32,6 +32,17 @@ public class SceneActions : MonoBehaviour
             gameScene = "comUnscramble";
         }
 
+        if (sceneName == "comUnscramble")
+        {
+            gameScene = "comUnscrambleWin";
+        }
+
+        if (sceneName == "comUnscrambleWin")
+        {
+            // scene5 is the labgame
+            gameScene = "scene5";
+        }
+
         //Debug.Log(gameScene);
         SceneManager.LoadScene(gameScene);
     }
