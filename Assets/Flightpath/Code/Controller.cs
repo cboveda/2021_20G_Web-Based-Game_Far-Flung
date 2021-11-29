@@ -1,13 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Flightpath
 {
     public class Controller : MonoBehaviour
     {
-
-
         private GameObject _dynamicObjects;
         [SerializeField]
         private FlightpathPathBuilder _pathBuilder;
@@ -25,6 +24,14 @@ namespace Flightpath
         private GameObject _arrow;
         [SerializeField]
         private GameObject _satellitePathDrawing;
+        [SerializeField]
+        private GameObject _launchButton;
+        [SerializeField]
+        private GameObject _resetButton;
+        [SerializeField]
+        private GameObject _powerSlider;
+        [SerializeField]
+        private GameObject _angleSlider;
         private GameObject _sun;
         private GameObject _earth;
         private GameObject _mars;
@@ -59,6 +66,12 @@ namespace Flightpath
             _eventSystem.GetComponent<LaunchManager>().Satellite = _satellite;
             _arrow.GetComponent<Trajectory>().Satellite = _satellite.GetComponent<Launch>();
             _satellitePathDrawing.GetComponent<SatellitePathDrawing>().Satellite = _satellite;
+
+            // Canvas Elements
+            _launchButton.GetComponent<Button>().interactable = false;
+            _resetButton.GetComponent<Button>().interactable = false;
+            _powerSlider.GetComponent<Slider>().interactable = false;
+            _angleSlider.GetComponent<Slider>().interactable = false;
         }
     }
 }
