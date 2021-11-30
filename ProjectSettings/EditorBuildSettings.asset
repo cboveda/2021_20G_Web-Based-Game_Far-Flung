@@ -45,6 +45,9 @@ EditorBuildSettings:
     path: Assets/ComPuzzle/Scenes/comUnscramble.unity
     guid: c1460f887c699b44db02ad125fecce35
   - enabled: 1
+    path: Assets/ComPuzzle/Scenes/comUnscrambleWin.unity
+    guid: 622a6ae21de314045aa00ad51b7a3e63
+  - enabled: 1
     path: Assets/Labgame/Scenes/scene5.unity
     guid: 63f719445c5338540908079b4d7fec98
   - enabled: 0
