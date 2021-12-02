@@ -22,6 +22,12 @@ public class ComGameModes : MonoBehaviour
         string[] tileNumbers = { "n1", "n2", "n3", "n4", "n5", "n6", "n7", "n8", "n9", "n10", "n11", "n12" };
         string sortingLayer = "";
         string finalSortingLayer = "";
+        AudioSource[] audioSource;
+        AudioSource easyModeOn;
+        AudioSource easyModeOff;
+        audioSource = GetComponents<AudioSource>();
+        easyModeOn = audioSource[0];
+        easyModeOff = audioSource[1];
 
         easyToggleObject = GameObject.Find("EasyMode");
         easyToggle = easyToggleObject.GetComponent<Toggle>();
@@ -29,9 +35,14 @@ public class ComGameModes : MonoBehaviour
         sortingLayer = "Default";        
         if (easyToggle.isOn)
         {
+            easyModeOn.Play();
             sortingLayer = "Numbers";
             finalSortingLayer = "FinalPieceNumber";
-        }
+        } 
+        else
+        {
+            easyModeOff.Play();
+        }        
 
         foreach (string tileNumber in tileNumbers)
         {
@@ -56,6 +67,10 @@ public class ComGameModes : MonoBehaviour
         int x = 0;
         int y = 1;
         int[] tilePositions = { 11, 12, 13, 21, 22, 23, 24, 31, 32, 33, 34, };
+        AudioSource solveAudio;
+        solveAudio = GetComponent<AudioSource>();
+
+        solveAudio.Play();
 
         foreach (int tilePosition in tilePositions)
         {

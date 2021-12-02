@@ -17,13 +17,14 @@ public class LetterActions : MonoBehaviour
     string row = "None";
     bool switched = false;
     int switchCount = 0;
-    
-    
+    AudioSource audioSource;
+
+
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -126,6 +127,11 @@ public class LetterActions : MonoBehaviour
         {
             if (prevRow == rowSelected)
             {
+                if (prevButton != buttonName)
+                {
+                    audioSource.Play();
+                }                
+
                 //Debug.Log("swap");
                 // swap letter with previous letter selected
                 textObject.transform.GetChild(backgroundChild).GetChild(textChild).GetComponent<UnityEngine.UI.Text>().text = prevLetter;
