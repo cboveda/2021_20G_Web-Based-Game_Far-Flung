@@ -10,28 +10,22 @@ namespace Flightpath
         private Text _text;
         [SerializeField]
         private MessageScriptableObject messageContainer;
-        private int index;
-        private float timer;
+        private int _index;
         void Start()
         {
             _text = GetComponent<Text>();
-            index = 0;
-            timer = 0;
-            _text.text = messageContainer.Messages[index];
+            _index = 0;
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-            timer += Time.deltaTime;
-            if (timer > 3)
+        public void showNext() {
+            if (_index < MessageCount())
             {
-                timer = 0;
-                index++;
-                if (index >= messageContainer.Messages.Length)
-                    index = 0;
-                _text.text = messageContainer.Messages[index];
+                _text.text = messageContainer.Messages[_index++];
             }
+        }
+
+        public int MessageCount() {
+            return messageContainer.Messages.Length;
         }
     }
 }
