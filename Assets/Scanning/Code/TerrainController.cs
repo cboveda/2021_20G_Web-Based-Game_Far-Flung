@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class TerrainController : MonoBehaviour {
@@ -24,8 +25,12 @@ public class TerrainController : MonoBehaviour {
 
     List<Vector2> forRemoval = new List<Vector2>();
     bool unloadWaste;
+
+    bool first;
     
     void Awake() {
+
+        first = true;
 
         satellite.GetComponent<FlightControl>().speed = 0;
 
@@ -44,6 +49,10 @@ public class TerrainController : MonoBehaviour {
     }
 
     void Update() {
+
+        if ( first ) {
+            StartCoroutine( upstart_load() );
+        }
 
         int currTileZ = (int) Mathf.Floor(satellite.transform.position.z / tileDim);
         int currTileX = (int) Mathf.Floor(satellite.transform.position.x / tileDim);
@@ -113,6 +122,12 @@ public class TerrainController : MonoBehaviour {
             Resources.UnloadUnusedAssets();
             unloadWaste = false;
         }
+    }
+
+    IEnumerator upstart_load() {
+
+        yield return new WaitForSeconds(1f);
+        first = false;
     }
 }
 
