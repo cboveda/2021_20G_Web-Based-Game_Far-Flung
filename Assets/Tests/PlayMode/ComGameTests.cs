@@ -71,10 +71,11 @@ public class ComGameTests
         VerifySuccess(scriptObject, false);
 
         GameObject mode = new GameObject();
+        mode.AddComponent<AudioSource>();
         mode.AddComponent<ComGameModes>();
         ComGameModes modeObject = GameObject.FindObjectOfType<ComGameModes>();
 
-        // solve puzzle
+         // solve puzzle
         modeObject.SolvePuzzle();
         yield return new WaitForSeconds(0.2f); // delay to solve
 
