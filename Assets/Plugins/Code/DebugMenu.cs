@@ -26,8 +26,9 @@ public class DebugMenu : MonoBehaviour
     private string[] buttonNames =
     {
         "Debug Menu",
+        "Hub",
         "Assembly",
-        "Flight Plan",
+        "Flightpath",
         "Scanning",
         "Communications",
         "Lab Analysis"
@@ -47,7 +48,7 @@ public class DebugMenu : MonoBehaviour
         debugCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
 
         GraphicRaycaster myCaster = gameObject.AddComponent<GraphicRaycaster>();
-        myCaster.transform.parent = this.transform;
+        myCaster.transform.SetParent(this.transform);
         myCaster.blockingObjects = GraphicRaycaster.BlockingObjects.None;
 
         canvasHeight = debugCanvas.pixelRect.height;
@@ -56,7 +57,7 @@ public class DebugMenu : MonoBehaviour
         for (int i = 0; i < buttonNames.Length; i++)
         {
             GameObject button = GetNewUIButton(buttonNames[i], i);
-            button.transform.parent = this.transform;
+            button.transform.SetParent(this.transform);
             debugButtons.Add(button);
 
             if(button.name != "Debug Menu")
@@ -131,9 +132,9 @@ public class DebugMenu : MonoBehaviour
         {
             SceneManager.LoadScene("Assembly");
         }
-        else if (buttonName == "Flight Plan")
+        else if (buttonName == "Flightpath")
         {
-            SceneManager.LoadScene("Flightpath");
+            SceneManager.LoadScene("1_FlightpathIntro");
         }
         else if (buttonName == "Communications")
         {
@@ -146,6 +147,10 @@ public class DebugMenu : MonoBehaviour
         else if (buttonName == "Lab Analysis")
         {
             SceneManager.LoadScene("scene5");
+        }
+        else if (buttonName == "Hub")
+        {
+            SceneManager.LoadScene("Hub");
         }
     }
 }

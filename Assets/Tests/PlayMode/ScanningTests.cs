@@ -2,15 +2,15 @@ using System.Collections;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
-using UnityEngine.UI;
 using UnityEditor;
+using UnityEngine.SceneManagement;
 
 public class ScanningTests {
 
     GameObject satellite;
     GameObject neutronSignal;
-    GameObject HUD1;
-    GameObject HUD2;
+    GameObject alt_needle;
+    GameObject miss_needle;
 
     GameObject terrainController;
     GameObject terrainSatellite;
@@ -19,6 +19,8 @@ public class ScanningTests {
     GameObject sigSpawner;
     AnimationCurve basePerlinCurve;
 
+    GameObject camera;
+
     [SetUp]
     public void SetUp() {
 
@@ -26,17 +28,12 @@ public class ScanningTests {
         satellite = new GameObject();
         neutronSignal = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Scanning/Prefabs/Signal_Variant.prefab");
 
-        HUD1 = new GameObject();
-        HUD1.AddComponent<Text>();
-
-        HUD2 = new GameObject();   
-        HUD2.AddComponent<Text>();
+        alt_needle = new GameObject();
+        miss_needle = new GameObject();
 
         satellite.AddComponent<FlightControl>();
-        satellite.GetComponent<FlightControl>().hozSlerpSpped  = 0.2f;
-        satellite.GetComponent<FlightControl>().vertSlerpSpeed = 0.2f;
-        satellite.GetComponent<FlightControl>().altitude = HUD1.GetComponent<Text>();
-        satellite.GetComponent<FlightControl>().signals = HUD2.GetComponent<Text>();
+        satellite.GetComponent<FlightControl>().altitudeNeedle = alt_needle;
+        satellite.GetComponent<FlightControl>().signalsNeedle = miss_needle;
 
         satellite.AddComponent<BoxCollider>();
         satellite.GetComponent<BoxCollider>().isTrigger = true;
@@ -51,14 +48,15 @@ public class ScanningTests {
         // Setup for terraincontroller
         terrainSatellite = new GameObject();
         terrainSatellite.AddComponent<FlightControl>();
-
-        terrainSatellite.GetComponent<FlightControl>().altitude = HUD1.GetComponent<Text>();
-        terrainSatellite.GetComponent<FlightControl>().signals = HUD2.GetComponent<Text>();
+        terrainSatellite.GetComponent<FlightControl>().altitudeNeedle = alt_needle;
+        terrainSatellite.GetComponent<FlightControl>().signalsNeedle = miss_needle;
 
         terrainSatellite.transform.position = new Vector3( 0, 200, 0 );
 
         sigSpawner = new GameObject();
         sigSpawner.AddComponent<SignalSpawner>();
+        sigSpawner.GetComponent<SignalSpawner>().spawnFrequency = 3;
+        sigSpawner.GetComponent<SignalSpawner>().prefabSignal = neutronSignal;
 
         basePerlinCurve = AnimationCurve.Constant(0f, 1f, 1f);
         surfaceGrad = new Gradient();
@@ -77,6 +75,13 @@ public class ScanningTests {
         terrainController.GetComponent<TerrainController>().renderDistX = 20;
 
         terrainController.SetActive(true);
+
+        // set up camera
+        camera = new GameObject();
+        camera.AddComponent<CameraFollow>();
+        camera.GetComponent<CameraFollow>().lead = terrainSatellite;
+        camera.GetComponent<CameraFollow>().smoothTime = 0f;
+
     }
 
     [UnityTest]
@@ -88,8 +93,8 @@ public class ScanningTests {
 
         yield return new WaitForSeconds(2.0f);
        
-        Assert.True( satellite.GetComponent<FlightControl>().signals.text.Equals("2/10") );
-    }
+        Assert.AreEqual( satelliteInstance.GetComponent<FlightControl>().signals_collected, 2 );
+    } 
 
     [UnityTest]
     public IEnumerator Test_TerrainConroller() {
@@ -105,5 +110,15 @@ public class ScanningTests {
         yield return new WaitForSeconds(1.0f);
 
         Assert.AreEqual( 25, terrainController.GetComponent<TerrainController>().tileDict.Count );
+    }
+    
+    [UnityTest]
+    public IEnumerator Test_TestCameraFollow() {
+
+        Vector3 delta = camera.transform.position - ( terrainSatellite.transform.position + new Vector3( 0, 4, -10 ) );
+        Assert.AreEqual( delta.x, 0, 1.0f );
+        Assert.AreEqual( delta.y, 0, 1.0f );
+        Assert.AreEqual( delta.z, 0, 1.0f );
+        yield return null;
     }
 }

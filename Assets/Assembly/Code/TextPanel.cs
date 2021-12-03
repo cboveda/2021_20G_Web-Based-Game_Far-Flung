@@ -11,11 +11,10 @@ public class TextPanel : MonoBehaviour
 
     public void ShowText(TextAsset textAsset, Action doAfterClose)
     {
-        if (textAsset != null)
-        {
+        if (textAsset != null) {
             mainText.text = textAsset.text;
-        }
-        else
+        } 
+        else 
         {
             mainText.text = "Error Text not found";
         }
