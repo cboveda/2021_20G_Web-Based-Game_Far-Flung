@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
+using UnityEngine.UI;
 
 public class LabSpectraTest
 {
@@ -93,6 +94,12 @@ public class LabSpectraTest
         GameObject spectraSolution = new GameObject("SpectraSolution");
         GameObject spectraAttempt = new GameObject("SpectraAttempt");
         GameObject puzzleHolder1 = new GameObject();
+        GameObject spectraExample = new GameObject("SpectraExample");
+        GameObject spectraPrimary = new GameObject("SpectraPrimary");
+        GameObject spectraSecondary = new GameObject("SpectraSecondary");
+        GameObject spectraTrace = new GameObject("SpectraTrace");
+        GameObject elementName = new GameObject("ElementName");
+        elementName.gameObject.AddComponent<Text>();
         SpectraPuzzle puzzle1 = puzzleHolder1.AddComponent<SpectraPuzzle>();
 
         puzzle1.InitializeSpectraPuzzle("Puzzle1", 0);
