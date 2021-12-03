@@ -29,9 +29,11 @@ public class DialogTyper : MonoBehaviour
         {
             timer -= Time.deltaTime;
 
-            if (timer <= 0f)
+            while (timer <= 0f)
             {
-                uiTextObject.text = textToType.Substring(0, stringIndex);
+                string tempText = textToType.Substring(0, stringIndex);
+                tempText += "<color=#00000000>" + textToType.Substring(stringIndex) + "</color>";
+                uiTextObject.text = tempText;
                 stringIndex++;
                 timer = typingSpeed;
 

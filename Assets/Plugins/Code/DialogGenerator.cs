@@ -3,22 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class DialogGenerator : MonoBehaviour
 {
     [SerializeField]
     public DialogScriptableObject dialogContainer;
 
     
-    public Canvas dialogCanvas;
-    public Image dialogBackground;
-    public Image dialogPortrait;
-    public Image dialogPortraitBackground;
-    public Text dialogUIText;
+    private Canvas dialogCanvas;
+    private Image dialogBackground;
+    private Image dialogPortrait;
+    private Image dialogPortraitBackground;
+    private Text dialogUIText;
 
-    public GameObject goCanvasContainer;
-    public GameObject goBackgroundContainer;
-    public GameObject goPortraitContainer;
-    public GameObject goTextContainer;
+    private GameObject goCanvasContainer;
+    private GameObject goBackgroundContainer;
+    private GameObject goPortraitContainer;
+    private GameObject goTextContainer;
 
     private DialogTyper dialogTyper;
 
@@ -26,7 +27,7 @@ public class DialogGenerator : MonoBehaviour
 
     private const string DIALOG_BACKGROUND_PATH = "Dialog";
     private const string DIALOG_PORTRAIT_BACKGROUND_PATH = "PortraitBack";
-    private const int DIALOG_FONT_SIZE = 24;
+    private const int DIALOG_FONT_SIZE = 36;
     private const float DIALOG_TYPING_SPEED = 0.05f;
 
     // Start is called before the first frame update
@@ -45,7 +46,7 @@ public class DialogGenerator : MonoBehaviour
         goCanvasContainer.name = "DMCanvas";
         goCanvasContainer.transform.SetParent(this.transform);
         goCanvasContainer.layer = 5;
-        goCanvasContainer.SetActive(true);
+        
         
         dialogCanvas = goCanvasContainer.gameObject.AddComponent<Canvas>();
         dialogCanvas.transform.SetParent(goCanvasContainer.transform);
@@ -118,5 +119,15 @@ public class DialogGenerator : MonoBehaviour
             dialogEntryPosition++;
             dialogTyper.AddTyper(dialogUIText, dialogContainer.GetNextDialogMessage(dialogEntryPosition).dialogText, DIALOG_TYPING_SPEED);
         }
+        else
+        {
+            goCanvasContainer.SetActive(false);
+        }
+    }
+
+    public bool BeginPlayingDialog()
+    {
+        goCanvasContainer.SetActive(true);
+        return true;
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+
 public class LabMain : MonoBehaviour
 {
     private ComputerUIMainPane mainComputerUI;
@@ -19,6 +20,9 @@ public class LabMain : MonoBehaviour
     GameObject sineUIElements;
     GameObject spectraUIElements;
     GameObject spectraUIElements2;
+
+    
+    
 
 
     Camera lcdCamera1;

@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Test
   m_EditorClassIdentifier: 
   dialogs:
-  - dialogText: This is text
+  - dialogText: This as;ldfkjas;dlfkjas;ldkfjas;ldf;asdlkfjas;dlkfjas;ldkfj;asldkfja;sldkfja;sldkfja;sldkfja;sldkfj;asldkfj;asldkfj;asldkfj;asldkfj
+      is a LARGE amount of text.  I actually want it to go over a line.  Can this
+      allow for fake spaces
     robotVoice: 1
   - dialogText: This is more text, low energy.
     robotVoice: 2
