@@ -54,11 +54,7 @@ public class TerrainController : MonoBehaviour {
             {
                 Vector2 pVec = new Vector2( z, x ); // .x = z, .y = x
 
-                if ( tileDict.ContainsKey( pVec ) ) {
-
-                    tileDict[pVec].tile.SetVisible();
-
-                } else {
+                if ( !tileDict.ContainsKey( pVec ) ) {
 
                     MapTile tile = new MapTile( "Mesh( " + z + ", " + x + " )" );
 
@@ -77,13 +73,13 @@ public class TerrainController : MonoBehaviour {
                     tileDict.Add( pVec, omTile );
                 }
             }
-        } 
+        }
 
         // update each tiles visibility each frame and prune tiles from dict as the fall behind
         foreach ( KeyValuePair<Vector2, OpenMapTile> mt in tileDict ) {
     
-            mt.Value.tile.Update();
-            mt.Value.tile.UnsetVisible();
+            //mt.Value.tile.Update();
+            //mt.Value.tile.UnsetVisible();
 
             if ( mt.Key.x < currTileZ && mt.Value.tile.fin ) {
                 forRemoval.Add( mt.Key ); 
