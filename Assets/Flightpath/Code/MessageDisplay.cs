@@ -9,30 +9,43 @@ namespace Flightpath
     {
         private Text _text;
         [SerializeField]
-        private MessageScriptableObject messageContainer;
+        private MessageScriptableObject _messageContainer;
         private int _index;
         void Start()
         {
             _text = GetComponent<Text>();
             _index = 0;
-            _text.text = messageContainer.Messages[_index++];
+            if (_messageContainer != null) {
+                _text.text = _messageContainer.Messages[_index++];
+            }
         }
 
         public void showNext() 
         {
-            if (_index < MessageCount())
+            if (_index < MessageCount() && _messageContainer != null)
             {
-                _text.text = messageContainer.Messages[_index++];
+                Debug.Log(_text);
+                Debug.Log(_messageContainer);
+                Debug.Log(_messageContainer.Messages);
+                Debug.Log(_messageContainer.Messages[0]);
+                _text.text = _messageContainer.Messages[_index++];
             }
         }
 
         public void hide()
         {
-            _text.enabled = false;
+            if (_text != null)
+            {
+                _text.enabled = false;
+            }
         }
 
         public int MessageCount() {
-            return messageContainer.Messages.Length;
+            if (_messageContainer != null)
+            {
+                return _messageContainer.Messages.Length;
+            }
+            return 0;
         }
     }
 }
