@@ -21,6 +21,10 @@ public class ComUnscrambleMain : MonoBehaviour
     bool wordFinal = false;
     bool wordFinalColor = false;
 
+    GameObject continueButton;
+    GameObject continueText;
+    GameObject successObject;
+
 
     public bool word1ColorUpdated
     {
@@ -97,12 +101,41 @@ public class ComUnscrambleMain : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {       
+    {
         HideLetters();
         DisableAllWords();
 
+        HideContinueButton();
+
         //UpdateFinalWord();
+        
     }
+
+
+    public void HideContinueButton()
+    {
+        
+        continueButton = GameObject.Find("Continue");
+
+        continueButton.GetComponent<UnityEngine.UI.Button>().enabled = false;
+        continueButton.GetComponent<UnityEngine.UI.Image>().enabled = false;
+
+        continueText = GameObject.Find("ContinueText");
+        continueText.GetComponent<UnityEngine.UI.Text>().enabled = false;
+    }
+
+    public void EnableContinueButton()
+    {
+
+        continueButton = GameObject.Find("Continue");
+       
+        continueButton.GetComponent<UnityEngine.UI.Button>().enabled = true;
+        continueButton.GetComponent<UnityEngine.UI.Image>().enabled = true;
+
+        continueText = GameObject.Find("ContinueText");
+        continueText.GetComponent<UnityEngine.UI.Text>().enabled = true;
+    }
+
 
     // Update is called once per frame
     void Update()
@@ -416,6 +449,8 @@ public class ComUnscrambleMain : MonoBehaviour
                     UpdateWinColor(row);
                     DisableWord(row);
                     FindObjectOfType<ComUnscrambleMain>().wordFinalColorUpdated = true;
+                    FindObjectOfType<SendDataActions>().DisableDataButtons();
+                    StartCoroutine(WinScene());
                 }
                 break;
         }
@@ -425,8 +460,24 @@ public class ComUnscrambleMain : MonoBehaviour
         return wordWin;
 
     }
-        
 
+    IEnumerator WinScene()
+    {
+
+        // display success comments
+        successObject = GameObject.Find("Success");
+        successObject.GetComponent<UnityEngine.UI.Text>().color = Color.yellow;
+
+        // add 3 second delay
+        yield return new WaitForSeconds(3f);
+        Debug.Log("win scene");
+
+        
+        EnableContinueButton();
+
+
+
+    }
 
     public void UpdateWinColor(int row)
     {

@@ -13,11 +13,18 @@ public class SpectraPuzzle : LabPuzzle
     public static Spectra silver = new Spectra("Silver", new int[] { 0, 1, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0, 2, 0, 0, 2, 0, 1, 0, 0 });
     public static Spectra none = new Spectra("None", new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 });
 
-    private Spectra primaryElement;
-    private Spectra secondaryElement;
-    private Spectra traceElement;
+    public Spectra primaryElement;
+    public Spectra secondaryElement;
+    public Spectra traceElement;
+    private Spectra selectedElement;
     public int[] solution;
+    public int[] example = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
     public int[] combinedSpectra = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+    public int[] primary = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    public int[] secondary = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    public int[] trace = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    public List<Spectra> spectraList;
+    public int selectedElementSlot;
 
     public bool solved;
 
@@ -38,7 +45,18 @@ public class SpectraPuzzle : LabPuzzle
         this.Name = name;
         mySpectraPuzzleDisplay = gameObject.AddComponent<SpectraPuzzleDisplay>();
         solved = false;
-        
+
+        spectraList = new List<Spectra>();
+        spectraList.Add(iron);
+        spectraList.Add(nickel);
+        spectraList.Add(aluminum);
+        spectraList.Add(gold);
+        spectraList.Add(silver);
+        spectraList.Add(none);
+
+        selectedElementSlot = 3;
+        selectedElement = spectraList[selectedElementSlot];
+
 
         spectraColorBySlot[0] = new Color32(0, 0, 255, 0);
         spectraColorBySlot[1] = new Color32(26, 78, 201, 0);
@@ -79,6 +97,7 @@ public class SpectraPuzzle : LabPuzzle
         
         mySpectraPuzzleDisplay.SetSpectraPuzzleToDisplay(this);
         mySpectraPuzzleDisplay.UpdateSolutionDisplay();
+        UpdateExampleSpectra();
     }
 
     public void SetPrimarySpectra(Spectra primary)
@@ -106,6 +125,23 @@ public class SpectraPuzzle : LabPuzzle
     {
         combinedSpectra = CombineSpectra(primaryElement, secondaryElement, traceElement);
         mySpectraPuzzleDisplay.UpdateAttemptDisplay();
+        mySpectraPuzzleDisplay.UpdateElementalDisplay(1);
+        mySpectraPuzzleDisplay.UpdateElementalDisplay(2);
+        mySpectraPuzzleDisplay.UpdateElementalDisplay(3);
+    }
+
+    public void UpdateExampleSpectra()
+    {
+        int[] result = new int[Spectra.SPECTRA_ARRAY_SIZE];
+
+        for(int i = 0; i < Spectra.SPECTRA_ARRAY_SIZE; i++)
+        {
+            result[i] += spectraList[selectedElementSlot].GetSpectraArray()[i] * 3;
+        }
+
+        example = result;
+
+        mySpectraPuzzleDisplay.UpdateExampleDisplay();
     }
 
     public int[] CombineSpectra(Spectra primary, Spectra secondary, Spectra trace)
@@ -155,6 +191,110 @@ public class SpectraPuzzle : LabPuzzle
         return new Color32(r, g, b, a);
     }
 
+    public Color32 GetSpectraExampleColor(int slot)
+    {
+        byte r = 0;
+        byte g = 0;
+        byte b = 0;
+        byte a = 0;
+
+        if (slot < Spectra.SPECTRA_ARRAY_SIZE)
+        {
+            r = spectraColorBySlot[slot].r;
+            g = spectraColorBySlot[slot].g;
+            b = spectraColorBySlot[slot].b;
+
+            a = (byte)(example[slot] * 10);
+            
+            
+            
+
+            if (a > 0)
+            {
+                a += 15;
+            }
+
+        }
+
+        return new Color32(r, g, b, a);
+    }
+
+    public Color32 GetAddedElementColor(int elementPosition, int slot)
+    {
+        byte r = 0;
+        byte g = 0;
+        byte b = 0;
+        byte a = 0;
+
+        int[] elementalSpectraArray;
+
+        switch (elementPosition)
+        {
+            case 1:
+                elementalSpectraArray = primaryElement.GetSpectraArray();
+                break;
+            case 2:
+                elementalSpectraArray = secondaryElement.GetSpectraArray();
+                break;
+            case 3:
+                elementalSpectraArray = traceElement.GetSpectraArray();
+                break;
+            default:
+                elementalSpectraArray = primaryElement.GetSpectraArray(); //this is a terrible hack.
+                break;
+        }
+
+        if (slot < Spectra.SPECTRA_ARRAY_SIZE)
+        {
+            r = spectraColorBySlot[slot].r;
+            g = spectraColorBySlot[slot].g;
+            b = spectraColorBySlot[slot].b;
+
+            a = (byte)(elementalSpectraArray[slot] * 10);
+
+
+
+
+            if (a > 0)
+            {
+                a += 15;
+            }
+
+        }
+
+        return new Color32(r, g, b, a);
+    }
+
+    public Spectra GetNextExampleSpectra()
+    {
+        if (selectedElementSlot < spectraList.Count - 1)
+        {
+            selectedElementSlot++;
+        }
+        else
+        {
+            selectedElementSlot = 0;
+        }
+        //mySpectraPuzzleDisplay.UpdateExampleDisplay(spectraList[selectedElementSlot]);
+        UpdateExampleSpectra();
+        return spectraList[selectedElementSlot];
+    }
+
+    public Spectra GetPrevExampleSpectra()
+    {
+        if (selectedElementSlot > 0)
+        {
+            selectedElementSlot--;
+        }
+        else
+        {
+            selectedElementSlot = spectraList.Count - 1;
+        }
+        //mySpectraPuzzleDisplay.UpdateExampleDisplay(spectraList[selectedElementSlot]);
+        UpdateExampleSpectra();
+        return spectraList[selectedElementSlot];
+    }
+
     public override bool CheckSolution()
     {
         if (Enumerable.SequenceEqual(solution, combinedSpectra))
@@ -169,8 +309,9 @@ public class SpectraPuzzle : LabPuzzle
         return false;
     }
 
-    public void AddSpectraToTest(Spectra insertedElement)
+    public void AddSpectraToTest()
     {
+        Spectra insertedElement = spectraList[selectedElementSlot];
         switch (numInserted)
         {
             case 0:
@@ -181,6 +322,30 @@ public class SpectraPuzzle : LabPuzzle
                 break;
             case 2:
                 SetTraceSpectra(insertedElement);
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void RemoveSpectra()
+    {
+        
+        switch (numInserted)
+        {
+            case 0:
+                break;
+            case 1:
+                numInserted -= 2;
+                SetPrimarySpectra(none);
+                break;
+            case 2:
+                numInserted -= 2;
+                SetSecondarySpectra(none);
+                break;
+            case 3:
+                numInserted -= 2;
+                SetTraceSpectra(none);
                 break;
             default:
                 break;
