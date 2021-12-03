@@ -4,6 +4,7 @@ using UnityEngine;
 
 abstract public class LabPuzzle : MonoBehaviour
 {
+    
     //private string name;
   
 

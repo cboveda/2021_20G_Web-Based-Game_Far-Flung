@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 
 public class DebugMenu : MonoBehaviour
 {
-
+    
     //public DebugMenu debugMenuScript = null;
     public Canvas debugCanvas;
     public RectTransform menuPosition;

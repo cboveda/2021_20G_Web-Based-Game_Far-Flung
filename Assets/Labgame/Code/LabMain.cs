@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-
 public class LabMain : MonoBehaviour
 {
     private ComputerUIMainPane mainComputerUI;
@@ -23,7 +22,7 @@ public class LabMain : MonoBehaviour
 
     
     
-
+    
 
     Camera lcdCamera1;
     // Start is called before the first frame update
@@ -47,7 +46,7 @@ public class LabMain : MonoBehaviour
         lcdCamera1 = GameObject.Find("ComputerScreen1Camera").GetComponent<Camera>();
 
 
-
+        //GameObject.Find("DialogMaker").GetComponent<DialogGenerator>().BeginPlayingDialog();
 
 
 
