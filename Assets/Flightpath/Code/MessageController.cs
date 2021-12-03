@@ -38,24 +38,26 @@ namespace Flightpath {
             {
                 if (Input.GetMouseButtonDown(0))
                 {
-                    _stage++;
                     _messageDisplay.showNext();
-                    if (_stage == 1) 
+                    if (_stage == 0) 
                     {
                         _angleSlider.interactable = true;
                     }
-                    else if (_stage == 2) 
+                    else if (_stage == 1) 
                     {
                         _powerSlider.interactable = true;
                     }
-                    else if (_stage == 3) 
+                    else if (_stage == 2) 
                     {
                         _launchButton.interactable = true;
                     }
-                    else if (_stage == 4) 
+                    else if (_stage == 3) 
                     {
                         _resetButton.interactable = true;
+                    } else {
+                        _messageDisplay.hide();
                     }
+                    _stage++;
                 }
             }
         }

@@ -13,8 +13,12 @@ MonoBehaviour:
   m_Name: MessageScriptableObject
   m_EditorClassIdentifier: 
   Messages:
-  - This is a gameplay message
-  - This is another message
-  - There are so many messages
-  - This is a fourth message.
-  - This is a fifth
+  - It's time to plot our route to the Psyche! Click anywhere to continue.
+  - We'll use Mars to give us a gravity assist and speed boost! Try using the angle
+    slider to aim close to Mars.
+  - Now, let's adjust the power so that we pass by Mars at just the right time! Try
+    using the power slider.
+  - Let's run the simulated flightpath to see if it reaches Psyche! Press the Launch
+    button when ready.
+  - '<Debug: If no win> Close one! We can use the Reset button to start the simulation
+    over and try again.'

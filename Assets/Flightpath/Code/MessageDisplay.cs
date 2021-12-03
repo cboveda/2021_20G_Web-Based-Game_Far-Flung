@@ -15,13 +15,20 @@ namespace Flightpath
         {
             _text = GetComponent<Text>();
             _index = 0;
+            _text.text = messageContainer.Messages[_index++];
         }
 
-        public void showNext() {
+        public void showNext() 
+        {
             if (_index < MessageCount())
             {
                 _text.text = messageContainer.Messages[_index++];
             }
+        }
+
+        public void hide()
+        {
+            _text.enabled = false;
         }
 
         public int MessageCount() {
