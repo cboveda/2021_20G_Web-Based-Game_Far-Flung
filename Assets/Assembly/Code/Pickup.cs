@@ -46,6 +46,7 @@ public class Pickup : MonoBehaviour
         if (pickObj.GetComponent<DragObject>() && pickObj.GetComponent<Rigidbody>())
         {
             Rigidbody objRig = pickObj.GetComponent<Rigidbody>();
+            objRig.constraints = RigidbodyConstraints.None;
             objRig.useGravity = false;
             objRig.drag = 10; //add air drag to the object
 
