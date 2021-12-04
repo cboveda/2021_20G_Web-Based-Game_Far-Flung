@@ -661,8 +661,8 @@ MonoBehaviour:
     m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: Try again!
 --- !u!222 &325797911
@@ -3435,6 +3435,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ec7f3b012055d3469666c4c21e607df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
 --- !u!1 &2055317728
 GameObject:
   m_ObjectHideFlags: 0
