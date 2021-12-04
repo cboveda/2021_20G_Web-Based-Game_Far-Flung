@@ -109,7 +109,7 @@ public class LetterActions : MonoBehaviour
         {
             textObject.transform.GetChild(backgroundChild).GetComponent<Image>().color = new Color(0.0f, 1.0f, 1.0f, 0.02f);
         }
-
+        
         prevLetter = FindObjectOfType<LetterActions>().selectedLetter;
         prevButton = FindObjectOfType<LetterActions>().selectedButton;
         prevRow = FindObjectOfType<LetterActions>().selectedRow;
@@ -117,14 +117,14 @@ public class LetterActions : MonoBehaviour
         rowSelected = getSelectedRow(buttonName);
         letterSelected = textObject.transform.GetChild(backgroundChild).GetChild(textChild).GetComponent<UnityEngine.UI.Text>().text;
         if (prevLetter == "None")
-        {
+        {            
             FindObjectOfType<LetterActions>().selectedLetter = letterSelected;
             FindObjectOfType<LetterActions>().selectedButton = buttonName;
             FindObjectOfType<LetterActions>().selectedRow = rowSelected;
 
         }
         else
-        {
+        {            
             if (prevRow == rowSelected)
             {
                 if (prevButton != buttonName)
@@ -174,15 +174,15 @@ public class LetterActions : MonoBehaviour
         int buttonNumber = 0;
         string row = "";
 
-        buttonIndex1 = buttonName.Substring(1, 1);
+        buttonIndex1 = button.Substring(1, 1);
         if (buttonIndex1 == dash)
         {
-            buttonIndex = buttonName.Substring(0, 1);
+            buttonIndex = button.Substring(0, 1);
             buttonNumber = int.Parse(buttonIndex);
         }
         else
         {
-            buttonIndex = buttonName.Substring(0, 2);
+            buttonIndex = button.Substring(0, 2);
             buttonNumber = int.Parse(buttonIndex);
         }
 
