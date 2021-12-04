@@ -98,7 +98,7 @@ public class MeshData {
         {
             int z = 0;
 
-            normals[ x + (z * meshDim) ] = CalcNormalFromPoints( (x+1), (z+1) );
+            normals[ x ] = CalcNormalFromPoints( (x+1), (z+1) );
             
             z = ( meshDim-1 );
 
@@ -109,7 +109,7 @@ public class MeshData {
         {
             int x = 0;
             
-            normals[ x + (z * meshDim) ] = CalcNormalFromPoints( (x+1), (z+1) );
+            normals[ z * meshDim ] = CalcNormalFromPoints( (x+1), (z+1) );
 
             x = ( meshDim-1 );
 

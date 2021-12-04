@@ -25,19 +25,12 @@ public class TerrainController : MonoBehaviour {
 
     List<Vector2> forRemoval = new List<Vector2>();
     bool unloadWaste;
-
-    bool first;
     
     void Awake() {
-
-        first = true;
-
         satellite.GetComponent<FlightControl>().speed = 0;
-
         tileRenderRangeZ = Mathf.RoundToInt( renderDistZ / tileDim );
         tileRenderRangeX = Mathf.RoundToInt( renderDistX / tileDim );
         unloadWaste = false;
-
         Update();
         while ( stageOne.Count != 0 ) {
             Update();
@@ -50,10 +43,6 @@ public class TerrainController : MonoBehaviour {
 
     void Update() {
 
-        if ( first ) {
-            StartCoroutine( upstart_load() );
-        }
-
         int currTileZ = (int) Mathf.Floor(satellite.transform.position.z / tileDim);
         int currTileX = (int) Mathf.Floor(satellite.transform.position.x / tileDim);
 
@@ -63,10 +52,11 @@ public class TerrainController : MonoBehaviour {
             {
                 Vector2 pVec = new Vector2( z, x ); // .x = z, .y = x
 
-                if ( !tileDict.ContainsKey( pVec ) ) {
+                if ( tileDict.ContainsKey( pVec ) ) {
+                    tileDict[pVec].tile.SetVisible();
 
+                } else {
                     MapTile tile = new MapTile( "Mesh( " + z + ", " + x + " )" );
-
                     stageOne.Enqueue (
                         new MapTileJob {
                             tile = tile, z = z, x = x, tileDim = tileDim, tScale = terrainScale, 
@@ -74,11 +64,9 @@ public class TerrainController : MonoBehaviour {
                             sigSpawner = sigSpawner
                         }
                     );
-
                     OpenMapTile omTile = new OpenMapTile {
                         key = pVec, tile = tile
                     };
-
                     tileDict.Add( pVec, omTile );
                 }
             }
@@ -86,17 +74,14 @@ public class TerrainController : MonoBehaviour {
 
         // update each tiles visibility each frame and prune tiles from dict as the fall behind
         foreach ( KeyValuePair<Vector2, OpenMapTile> mt in tileDict ) {
-    
-            //mt.Value.tile.Update();
-            //mt.Value.tile.UnsetVisible();
-
+            mt.Value.tile.Update();
+            mt.Value.tile.UnsetVisible();
             if ( mt.Key.x < currTileZ && mt.Value.tile.fin ) {
                 forRemoval.Add( mt.Key ); 
             }
         }
 
         foreach ( Vector2 v2 in forRemoval ) {
-
             tileDict[v2].tile.Destroy();
             tileDict.Remove( v2 );
             unloadWaste = true;
@@ -106,28 +91,18 @@ public class TerrainController : MonoBehaviour {
 
         // cycle through queued jobs
         if ( stageThree.Count > 0 ) {
-        
             MapTileFactory.MapTileStageThree( stageThree.Dequeue() );
 
         } else if ( stageTwo.Count > 0 ) {
-
             stageThree.Enqueue( MapTileFactory.MapTileStageTwo( stageTwo.Dequeue() ) );
             
         } else if ( stageOne.Count > 0 ) {
-            
             stageTwo.Enqueue( MapTileFactory.MapTileStageOne( stageOne.Dequeue() ) );
 
         } else if ( unloadWaste ) {
-
             Resources.UnloadUnusedAssets();
             unloadWaste = false;
         }
-    }
-
-    IEnumerator upstart_load() {
-
-        yield return new WaitForSeconds(1f);
-        first = false;
     }
 }
 
