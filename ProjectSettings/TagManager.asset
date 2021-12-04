@@ -8,6 +8,7 @@ TagManager:
   - FlightpathSatellite
   - FlightpathAsteroid
   - FlightpathBounds
+  - FlightpathMars
   layers:
   - Default
   - TransparentFX

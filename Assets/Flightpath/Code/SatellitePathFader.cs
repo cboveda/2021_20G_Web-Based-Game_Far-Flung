@@ -7,7 +7,6 @@ namespace Flightpath
     public class SatellitePathFader : MonoBehaviour
     {
         private SpriteRenderer _renderer;
-
         private bool _startFade;
         private float _timer;
         private float _fadeDuration;
