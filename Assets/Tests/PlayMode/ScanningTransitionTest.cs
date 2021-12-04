@@ -17,6 +17,8 @@ public class ScanningTransitionTest {
     FadeBannerStub fbStubWin;
     FadeBannerStub fbStubLose;
 
+    
+
     // A Test behaves as an ordinary method
     [SetUp]
     public void SetUp() {
@@ -55,8 +57,6 @@ public class ScanningTransitionTest {
     [UnityTest]
     public IEnumerator Test_ScanninTransitionForFlightControl()
     {
-        int index1 = SceneManager.GetActiveScene().buildIndex;
-
         var sig1 = Object.Instantiate(neutronSignal, new Vector3(0, 0, 3), Quaternion.identity);
         var sig2 = Object.Instantiate(neutronSignal, new Vector3(0, 0, 4), Quaternion.identity);
         var sig3 = Object.Instantiate(neutronSignal, new Vector3(0, 0, 5), Quaternion.identity);
@@ -64,9 +64,13 @@ public class ScanningTransitionTest {
 
         //LogAssert.Expect(LogType.Error, new Regex(".*") ); // if this test is run in isolation use to prevent scene transition errors
 
+        Debug.Log( fdStub.testSet() );
+        Debug.Log( fbStubWin.testSet() );
+        Debug.Log( fbStubLose.testSet() );
+
         Assert.True( fdStub.testSet() );
-        Assert.True( fbStubWin.testSet() );
-        Assert.False( fbStubLose.testSet() );   
+        Assert.False( fbStubWin.testSet() );
+        Assert.True( fbStubLose.testSet() );   
     }
 }
 
@@ -79,6 +83,7 @@ public class FadeDriverStub : FadeDriver {
     }
 
     public override void TriggerFade() {
+        Debug.Log("FDS Contact");
         isSet = true;
     }
 
@@ -96,6 +101,7 @@ public class FadeBannerStub : FadeBanner {
     }
 
     public override void TriggerFade() {
+        Debug.Log("FBS Contact");
         isSet = true;
     }
 
