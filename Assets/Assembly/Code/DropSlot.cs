@@ -8,7 +8,12 @@ public class DropSlot : MonoBehaviour
 
     public Vector3 offset;
     public GameObject slotMatch; // set to premanently lock the object when placed
+    public bool undefinedSlot;
     public TextAsset completionTextAsset;
+
+    void Start(){
+        undefinedSlot = slotMatch?false: true;
+    }
 
     void OnTriggerEnter(Collider other)
     {
@@ -22,10 +27,11 @@ public class DropSlot : MonoBehaviour
     void OnTriggerExit(Collider other)
     {
         Debug.Log("Exit slot");
-        if (other.GetComponent<DragObject>())
+        if (other.GetComponent<DragObject>() && other.GetComponent<DragObject>().currentSlot==this)
         {
             other.GetComponent<DragObject>().currentSlot = null;
         }
+        GetComponent<Renderer>().forceRenderingOff = false;
     }
 
     public void placeObjectInSlot(GameObject gameObject)
@@ -33,13 +39,11 @@ public class DropSlot : MonoBehaviour
         // Debug.Log("triggered");
         if (gameObject.GetComponent<DragObject>())
         {
-            bool defined = true;
             //for unspecified slots set the current object being placed to 
-            if (!slotMatch)
+            if (undefinedSlot)
             {
-                Debug.Log("undefined slot");
+                // Debug.Log("undefined slot");
                 slotMatch = gameObject;
-                defined = false;
             }
             if (gameObject == slotMatch)
             {
@@ -51,18 +55,17 @@ public class DropSlot : MonoBehaviour
                 }
 
 
-                //try to find the text panel for a popup and check for set texdt if found show the appropriate text
-                if (Resources.FindObjectsOfTypeAll<TextPanel>().Length > 0 && completionTextAsset)
-                {
-                    Resources.FindObjectsOfTypeAll<TextPanel>()[0].ShowText(completionTextAsset, CallParentCompletion);
-                }
-                else
-                {
-                    CallParentCompletion();
-                }
-                Debug.Log("defined:" + defined);
+                // //try to find the text panel for a popup and check for set texdt if found show the appropriate text
+                // if (Resources.FindObjectsOfTypeAll<TextPanel>().Length > 0 && completionTextAsset)
+                // {
+                //     Resources.FindObjectsOfTypeAll<TextPanel>()[0].ShowText(completionTextAsset, CallParentCompletion);
+                // }
+                // else
+                // {
+                //     CallParentCompletion();
+                // }
                 //if the slot is defined make it so the object can't be moved again and the slot is invisible
-                if (defined)
+                if (!undefinedSlot)
                 {
                     Debug.Log("defined slot running");
                     gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
