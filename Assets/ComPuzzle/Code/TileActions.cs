@@ -70,6 +70,8 @@ public class TileActions : MonoBehaviour
     GameObject easyModeButton;
     GameObject solveText;
     GameObject solveButton;
+
+    AudioSource audioSource;
         
     bool disable = false;
 
@@ -120,7 +122,8 @@ public class TileActions : MonoBehaviour
 
         continueText = GameObject.Find("ContinueText");
         continueText.GetComponent<Text>().enabled = false;
-               
+
+        audioSource = GetComponent<AudioSource>();
 
     }
 
@@ -246,6 +249,8 @@ public class TileActions : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && onTile && validMove)
         {
             //Debug.Log("Pressed primary button on " + spriteName);
+
+            audioSource.Play();
 
             // get current tile and blank tile positions
             tilePosition = rend.transform.position;
