@@ -17,7 +17,8 @@ public class FlightControl : MonoBehaviour
     float limitAdjust;
 
     public FadeDriver fadeDriver;
-    public FadeBanner bannerFader;
+    public FadeBanner winFadeBanner;
+    public FadeBanner loseFadeBanner;
 
     [Range(0,1)]
     public float hozSlerpSpped;
@@ -99,12 +100,18 @@ public class FlightControl : MonoBehaviour
     }
 
     IEnumerator ExitOnWin() {
-        bannerFader.TriggerFade();
+        winFadeBanner.TriggerFade();
         yield return new WaitForSeconds(1.0f);
-        StartCoroutine(ExitOnLose());
+        StartCoroutine(Exit());
     }
 
     IEnumerator ExitOnLose() {
+        loseFadeBanner.TriggerFade();
+        yield return new WaitForSeconds(1.0f);
+        StartCoroutine(Exit());
+    }
+
+    IEnumerator Exit() {
         fadeDriver.TriggerFade();
         yield return new WaitForSeconds(1.0f);
         SceneManager.LoadScene( SceneManager.GetActiveScene().buildIndex + 1 );
