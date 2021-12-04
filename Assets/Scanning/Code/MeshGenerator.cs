@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Runtime.CompilerServices;
 
 /* 
     A utility class for generating meshData objects for which represent
@@ -92,6 +93,9 @@ public class MeshData {
         return mesh;
     }
 
+    /* This fucntion designates the border normal vectors of a mesh which need to be recalculated
+     * in light of adjacent mesh normals 
+     */
     Vector3[] UpdateBorderNormals( Vector3[] normals ) {
 
         for ( int x = 0; x < meshDim; ++x )
@@ -118,6 +122,8 @@ public class MeshData {
         return normals;
     }
 
+    /* A single border normals vector is recalculatd from the six adjacent triangle vectors */
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     Vector3 CalcNormalFromPoints( int x, int z ) {
 
         Vector3 norm = AdjacentTriangleNormal( Vscale( x, z ), Vscale( x-1, z ), Vscale( x-1, z+1 ) );
@@ -131,13 +137,15 @@ public class MeshData {
         return norm.normalized;
     }
 
+    /* Creates vertical scaled terrain heights using the super map featuring adjacent mesh data */
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     Vector3 Vscale( int x, int z ) {
-        
         return new Vector3( x, terrainScale * superHeights[x, z], z );
     }
 
+    /* Calculates the cross product of three vectors */
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     Vector3 AdjacentTriangleNormal( Vector3 r, Vector3 a, Vector3 b ) {
-
         Vector3 ra = a - r;
         Vector3 rb = b - r;
         return Vector3.Cross( ra, rb ).normalized;
