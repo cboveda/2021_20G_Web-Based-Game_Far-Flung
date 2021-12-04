@@ -101,7 +101,7 @@ namespace DialogMaker
             dialogUIText.fontSize = DIALOG_FONT_SIZE;
             dialogUIText.color = new Color32(249, 160, 0, 255);
 
-            goCanvasContainer.SetActive(true);
+            goCanvasContainer.SetActive(false);
 
             dialogTyper = gameObject.AddComponent<DialogTyper>();
 
