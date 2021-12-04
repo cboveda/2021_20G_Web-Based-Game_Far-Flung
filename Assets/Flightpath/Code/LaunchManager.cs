@@ -75,6 +75,11 @@ namespace Flightpath
             }
             ResetPlaceholderText();
             SatellitePath.Active = false;
+            var particles = Satellite.GetComponent<ParticleSystem>();
+            if (particles != null) {
+                particles.Stop();
+                particles.Clear();
+            }
             _launchLocked = false;
         }
 
@@ -97,7 +102,22 @@ namespace Flightpath
             EnablePlaceholderWinText();
         }
 
+        public void OnMarsCollisionDetected() 
+        {
+            StopAll();
+            LoseText.text = "Oops, ran into Mars! Try again."; 
+            LoseText.enabled = true;
+            Satellite.GetComponent<ParticleSystem>().Play();
+        }
+
         public void OnSatelliteLeaveWindow()
+        {
+            StopAll();
+            LoseText.text = "Missed the target! Try again.";
+            LoseText.enabled = true;
+        }
+
+        private void StopAll() 
         {
             Satellite.GetComponent<Launch>().StopLaunch();
             PathFollower[] pathFollowers = FindObjectsOfType<PathFollower>();
@@ -107,9 +127,6 @@ namespace Flightpath
                 p.StopOrbitter();
             }
             SatellitePath.Active = false;
-
-            // todo
-            LoseText.enabled = true;
         }
 
         private void ResetPlaceholderText()

@@ -17,13 +17,14 @@ public class LetterActions : MonoBehaviour
     string row = "None";
     bool switched = false;
     int switchCount = 0;
-    
-    
+    AudioSource audioSource;
+
+
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -108,7 +109,7 @@ public class LetterActions : MonoBehaviour
         {
             textObject.transform.GetChild(backgroundChild).GetComponent<Image>().color = new Color(0.0f, 1.0f, 1.0f, 0.02f);
         }
-
+        
         prevLetter = FindObjectOfType<LetterActions>().selectedLetter;
         prevButton = FindObjectOfType<LetterActions>().selectedButton;
         prevRow = FindObjectOfType<LetterActions>().selectedRow;
@@ -116,16 +117,21 @@ public class LetterActions : MonoBehaviour
         rowSelected = getSelectedRow(buttonName);
         letterSelected = textObject.transform.GetChild(backgroundChild).GetChild(textChild).GetComponent<UnityEngine.UI.Text>().text;
         if (prevLetter == "None")
-        {
+        {            
             FindObjectOfType<LetterActions>().selectedLetter = letterSelected;
             FindObjectOfType<LetterActions>().selectedButton = buttonName;
             FindObjectOfType<LetterActions>().selectedRow = rowSelected;
 
         }
         else
-        {
+        {            
             if (prevRow == rowSelected)
             {
+                if (prevButton != buttonName)
+                {
+                    audioSource.Play();
+                }                
+
                 //Debug.Log("swap");
                 // swap letter with previous letter selected
                 textObject.transform.GetChild(backgroundChild).GetChild(textChild).GetComponent<UnityEngine.UI.Text>().text = prevLetter;
@@ -168,15 +174,15 @@ public class LetterActions : MonoBehaviour
         int buttonNumber = 0;
         string row = "";
 
-        buttonIndex1 = buttonName.Substring(1, 1);
+        buttonIndex1 = button.Substring(1, 1);
         if (buttonIndex1 == dash)
         {
-            buttonIndex = buttonName.Substring(0, 1);
+            buttonIndex = button.Substring(0, 1);
             buttonNumber = int.Parse(buttonIndex);
         }
         else
         {
-            buttonIndex = buttonName.Substring(0, 2);
+            buttonIndex = button.Substring(0, 2);
             buttonNumber = int.Parse(buttonIndex);
         }
 

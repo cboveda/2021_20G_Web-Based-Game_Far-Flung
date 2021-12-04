@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5a2e3c37f844f644aa8c54e03b351d1, type: 3}
+  m_Name: MessageScriptableObject
+  m_EditorClassIdentifier: 
+  Messages:
+  - It's time to plot our route to the Psyche! Click anywhere to continue.
+  - We'll use Mars to give us a gravity assist and speed boost! Try using the angle
+    slider to aim close to Mars.
+  - Now, let's adjust the power so that we pass by Mars at just the right time! Try
+    using the power slider.
+  - Let's run the simulated flightpath to see if it reaches Psyche! Press the Launch
+    button when ready.
+  - '<Debug: If no win> Close one! We can use the Reset button to start the simulation
+    over and try again.'

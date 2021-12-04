@@ -6,6 +6,7 @@ using UnityEngine.TestTools;
 using System;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 
 public class ComGameTests
@@ -71,6 +72,7 @@ public class ComGameTests
         VerifySuccess(scriptObject, false);
 
         GameObject mode = new GameObject();
+        mode.AddComponent<AudioSource>();
         mode.AddComponent<ComGameModes>();
         ComGameModes modeObject = GameObject.FindObjectOfType<ComGameModes>();
 
@@ -265,8 +267,142 @@ public class ComGameTests
         for (int word = 0; word < wordCount; word++)
         {
             int wordRow = word + 1;
-            
+
             Assert.AreEqual(unscrambleMainObject.checkWordWin(wordRow), false);
+        }
+
+    }
+
+    [UnityTest]
+    public IEnumerator TestTileActionsButtons()
+    {
+
+        // verify instructions button and view image button
+
+        // load scene with the scriptable tile objects
+        SceneManager.LoadScene("comGame");
+        yield return new WaitForSeconds(0.2f); // delay to load scene
+
+        // get instructions object to use
+        GameObject instructions = GameObject.Find("Instructions");
+
+        // get default color
+        int canvasChild = 0;
+        int textChild = 1;
+        Color instructionsDefaultColor = instructions.transform.GetChild(canvasChild).GetChild(textChild).GetComponent<Text>().color;
+
+        // verify instructions are displayed when mouse on
+        instructions.GetComponent<TileActions>().OnMouseEnter();
+        Assert.AreEqual(instructions.transform.GetChild(canvasChild).GetChild(textChild).GetComponent<Text>().color, Color.yellow);
+
+        // verify instructions are hidden when mouse exit
+        instructions.GetComponent<TileActions>().OnMouseExit();
+        Assert.AreEqual(instructions.transform.GetChild(canvasChild).GetChild(textChild).GetComponent<Text>().color, instructionsDefaultColor);
+
+        // get view image object to use
+        GameObject viewImage = GameObject.Find("ViewImage");
+        int imageChild = 1;
+
+        // verify image is displayed when mouse on
+        string displaySortingLayer = "ViewImage";
+        viewImage.GetComponent<TileActions>().OnMouseEnter();
+        Assert.AreEqual(viewImage.transform.GetChild(imageChild).GetComponent<SpriteRenderer>().sortingLayerName, displaySortingLayer);
+
+        // verify image is hidden when mouse exit
+        string hideSortingLayer = "Hidden";
+        viewImage.GetComponent<TileActions>().OnMouseExit();
+        Assert.AreEqual(viewImage.transform.GetChild(imageChild).GetComponent<SpriteRenderer>().sortingLayerName, hideSortingLayer);
+    }
+
+    [UnityTest]
+    public IEnumerator TestLetterActions()
+    {
+
+        // verify rows and letter swapping
+
+        // load scene with the scriptable tile objects
+        SceneManager.LoadScene("comUnscramble");
+        yield return new WaitForSeconds(0.2f); // delay to load scene
+
+        // get a scriptable tile object to use
+        GameObject button1 = GameObject.Find("1_Button");
+
+        // test values
+        Dictionary<string, string> testRows = new Dictionary<string, string>()
+        {
+              {"1_Button", "1"},
+              {"10_Button", "2"},
+              {"21_Button", "3"},
+              {"32_Button", "4"},
+        };
+
+        // verify test values
+        string row = "";
+        foreach (KeyValuePair<string, string> testRow in testRows)
+        {
+            row = button1.GetComponent<LetterActions>().getSelectedRow(testRow.Key);
+            Assert.AreEqual(row, testRow.Value);
+
+        }
+
+        // set previous row, letter, and button
+        LetterActions.FindObjectOfType<LetterActions>().selectedRow = "1";
+        LetterActions.FindObjectOfType<LetterActions>().selectedLetter = "E";
+        LetterActions.FindObjectOfType<LetterActions>().selectedButton = "1_Button";
+
+        // select button to swap        
+        GameObject button2 = GameObject.Find("2_Button");
+        EventSystem.current.SetSelectedGameObject(button2);
+
+        // verify button 1 and button 2 is default
+        int backgroundChild = 0;
+        int textChild = 0;
+        string button1letter = "E";
+        string button2letter = "F";
+
+        // swap button 1 and button 2
+        button1.GetComponent<LetterActions>().SwapLetters();
+
+        // verify button 1 and button 2 switch
+        Assert.AreEqual(button1.transform.GetChild(backgroundChild).GetChild(textChild).GetComponent<UnityEngine.UI.Text>().text, button2letter);
+        Assert.AreEqual(button2.transform.GetChild(backgroundChild).GetChild(textChild).GetComponent<UnityEngine.UI.Text>().text, button1letter);
+
+
+    }
+
+    [UnityTest]
+    public IEnumerator TestSendData()
+    {
+        // load scene with the scriptable tile objects
+        SceneManager.LoadScene("comUnscramble");
+        yield return new WaitForSeconds(0.2f); // delay to load scene
+
+        // verify word 1 letters are hidden
+        Color hiddenColor = new Color32(246, 34, 250, 0);
+        int backgroundChild = 0;
+        int textChild = 0;
+        string[] word1Buttons = { "1_Button", "2_Button", "3_Button", "4_Button", "5_Button", "6_Button", "7_Button", };
+        foreach (string button in word1Buttons)
+        {
+            GameObject word1button = GameObject.Find(button);
+            Assert.AreEqual(word1button.transform.GetChild(backgroundChild).GetChild(textChild).GetComponent<Text>().color, hiddenColor);
+        }
+
+        // get a scriptable object to use
+        GameObject scriptableObject = GameObject.Find("ImagerButton");
+
+        // send word 1 data
+        EventSystem.current.SetSelectedGameObject(scriptableObject);
+        scriptableObject.GetComponent<SendDataActions>().SendData();
+
+        yield return new WaitForSeconds(7.0f); // delay for sending signal
+
+        // verify word 1 letters are displayed after sending signal
+        Color letterColor = new Color32(246, 34, 250, 255);
+        foreach (string button in word1Buttons)
+        {
+            GameObject word1button = GameObject.Find(button);
+            Assert.AreEqual(word1button.transform.GetChild(backgroundChild).GetChild(textChild).GetComponent<Text>().color, letterColor);
         }
 
     }

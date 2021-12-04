@@ -13,6 +13,10 @@ namespace Flightpath
             {
                 EventSystem.GetComponent<LaunchManager>().OnAsteroidCollisionDetected();
             }
+            if (other.CompareTag("FlightpathMars")) 
+            {
+                EventSystem.GetComponent<LaunchManager>().OnMarsCollisionDetected();
+            }
         }
 
         private void OnTriggerExit(Collider other)

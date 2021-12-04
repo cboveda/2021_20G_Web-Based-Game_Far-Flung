@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 
 public class ComUnscrambleMain : MonoBehaviour
@@ -20,6 +21,10 @@ public class ComUnscrambleMain : MonoBehaviour
 
     bool wordFinal = false;
     bool wordFinalColor = false;
+
+    GameObject continueButton;
+    GameObject continueText;
+    GameObject successObject;
 
 
     public bool word1ColorUpdated
@@ -97,12 +102,41 @@ public class ComUnscrambleMain : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {       
+    {
         HideLetters();
         DisableAllWords();
 
+        HideContinueButton();
+
         //UpdateFinalWord();
+        
     }
+
+
+    public void HideContinueButton()
+    {
+        
+        continueButton = GameObject.Find("Continue");
+
+        continueButton.GetComponent<UnityEngine.UI.Button>().enabled = false;
+        continueButton.GetComponent<UnityEngine.UI.Image>().enabled = false;
+
+        continueText = GameObject.Find("ContinueText");
+        continueText.GetComponent<UnityEngine.UI.Text>().enabled = false;
+    }
+
+    public void EnableContinueButton()
+    {
+
+        continueButton = GameObject.Find("Continue");
+       
+        continueButton.GetComponent<UnityEngine.UI.Button>().enabled = true;
+        continueButton.GetComponent<UnityEngine.UI.Image>().enabled = true;
+
+        continueText = GameObject.Find("ContinueText");
+        continueText.GetComponent<UnityEngine.UI.Text>().enabled = true;
+    }
+
 
     // Update is called once per frame
     void Update()
@@ -416,6 +450,8 @@ public class ComUnscrambleMain : MonoBehaviour
                     UpdateWinColor(row);
                     DisableWord(row);
                     FindObjectOfType<ComUnscrambleMain>().wordFinalColorUpdated = true;
+                    FindObjectOfType<SendDataActions>().DisableDataButtons();
+                    StartCoroutine(WinScene());
                 }
                 break;
         }
@@ -425,8 +461,24 @@ public class ComUnscrambleMain : MonoBehaviour
         return wordWin;
 
     }
-        
 
+    IEnumerator WinScene()
+    {
+
+        // display success comments
+        successObject = GameObject.Find("Success");
+        successObject.GetComponent<UnityEngine.UI.Text>().color = Color.yellow;
+
+        // add 3 second delay
+        yield return new WaitForSeconds(3f);
+        Debug.Log("win scene");
+
+        
+        EnableContinueButton();
+
+
+
+    }
 
     public void UpdateWinColor(int row)
     {
@@ -615,5 +667,53 @@ public class ComUnscrambleMain : MonoBehaviour
             buttonNumber++;
             FindObjectOfType<ComUnscrambleMain>().buttonStart = buttonNumber;
         }
+    }
+
+    public void OnMouseEnter()
+    {
+        SpriteRenderer rend;
+        string objectName = "";
+        GameObject instructions;
+        Color highlightedColor = new Color32(0, 0, 255, 255);
+
+
+        rend = GetComponent<SpriteRenderer>();
+        objectName = rend.transform.name;
+        //Debug.Log(objectName);
+
+        if (objectName == "InstructionsBox")
+        {            
+            instructions = GameObject.Find("InstructionsText");
+            instructions.GetComponent<UnityEngine.UI.Text>().color = Color.yellow;
+                        
+            rend.color = highlightedColor;
+
+        }
+
+
+    }
+
+    public void OnMouseExit()
+    {
+        SpriteRenderer rend;
+        string objectName = "";
+        GameObject instructions;
+        Color hiddenColor = new Color32(255, 255, 255, 0);
+        Color currentColor = new Color32(0, 15, 50, 255);
+
+        rend = GetComponent<SpriteRenderer>();
+        objectName = rend.transform.name;
+        //Debug.Log(objectName);
+
+        if (objectName == "InstructionsBox")
+        {
+            instructions = GameObject.Find("InstructionsText");
+            instructions.GetComponent<UnityEngine.UI.Text>().color = hiddenColor;
+
+            rend.color = currentColor;
+
+        }
+
+
     }
 }

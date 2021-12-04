@@ -7,7 +7,6 @@ namespace Flightpath
     public class SatellitePathFader : MonoBehaviour
     {
         private SpriteRenderer _renderer;
-        private bool _locked;
         private bool _startFade;
         private float _timer;
         private float _fadeDuration;
@@ -15,7 +14,6 @@ namespace Flightpath
         void Start()
         {
             _renderer = GetComponent<SpriteRenderer>();
-            _locked = false;
             _startFade = false;
             _timer = 0;
             _fadeDuration = 1;
