@@ -75,8 +75,11 @@ namespace Flightpath
             }
             ResetPlaceholderText();
             SatellitePath.Active = false;
-            Satellite.GetComponent<ParticleSystem>().Stop();
-            Satellite.GetComponent<ParticleSystem>().Clear();
+            var particles = Satellite.GetComponent<ParticleSystem>();
+            if (particles != null) {
+                particles.Stop();
+                particles.Clear();
+            }
             _launchLocked = false;
         }
 
