@@ -8,12 +8,13 @@ public class SendDataActions : MonoBehaviour
 
     int start = 0;
     string buttonName = "";
-    
+    AudioSource audioSource;
+
 
     // Start is called before the first frame update
     void Start()
     {
-
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -86,10 +87,15 @@ public class SendDataActions : MonoBehaviour
 
     IEnumerator SignalAnimation(int letterCount, bool wordUpdated, int wordRow)
     {
-
+        
         for (int letter = 0; letter < letterCount; letter++)
         {
-            StartCoroutine(SendSignal("signal_1", wordUpdated));
+            if (letter % 2 == 0)
+            {
+                audioSource.Play();
+            }            
+
+            StartCoroutine(SendSignal("signal_1", wordUpdated));            
 
             yield return new WaitForSeconds(0.06f);
 
