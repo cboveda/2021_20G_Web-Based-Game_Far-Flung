@@ -100,6 +100,12 @@ public class LabSpectraTest
         GameObject elementName = new GameObject("ElementName");
         elementName.gameObject.AddComponent<Text>();
         GameObject puzzleHolder1 = new GameObject();
+        GameObject spectraExample = new GameObject("SpectraExample");
+        GameObject spectraPrimary = new GameObject("SpectraPrimary");
+        GameObject spectraSecondary = new GameObject("SpectraSecondary");
+        GameObject spectraTrace = new GameObject("SpectraTrace");
+        GameObject elementName = new GameObject("ElementName");
+        elementName.gameObject.AddComponent<Text>();
         SpectraPuzzle puzzle1 = puzzleHolder1.AddComponent<SpectraPuzzle>();
 
         puzzle1.InitializeSpectraPuzzle("Puzzle1", 0);
