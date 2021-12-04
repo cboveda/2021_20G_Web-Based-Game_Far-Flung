@@ -13,7 +13,10 @@ public class DebugMenu : MonoBehaviour
     public Canvas debugCanvas;
     public RectTransform menuPosition;
     public GameObject buttonPrefab;
+    public GameObject fpsCounterPrefab;
+    private GameObject fpsCounter;
     private const string BUTTON_PREFAB_PATH = "Prefabs/DebugButtonPF";
+    private const string FPSCOUNTER_PREFAB_PATH = "Prefabs/FPSCounter";
     private float canvasHeight;
     private const float BUTTON_WIDTH = 90.0f;
     private const float BUTTON_HEIGHT = 30.0f;
@@ -31,7 +34,8 @@ public class DebugMenu : MonoBehaviour
         "Flightpath",
         "Scanning",
         "Communications",
-        "Lab Analysis"
+        "Lab Analysis",
+        "FPS Counter"
     };
     
     
@@ -40,6 +44,7 @@ public class DebugMenu : MonoBehaviour
     {
          
         buttonPrefab = Resources.Load<GameObject>(BUTTON_PREFAB_PATH);
+        fpsCounterPrefab = Resources.Load<GameObject>(FPSCOUNTER_PREFAB_PATH);
         
         debugCanvas = gameObject.AddComponent<Canvas>();
         
@@ -151,6 +156,18 @@ public class DebugMenu : MonoBehaviour
         else if (buttonName == "Hub")
         {
             SceneManager.LoadScene("Hub");
+        }
+        else if (buttonName == "FPS Counter")
+        {
+            if (fpsCounter == null)
+            {
+                fpsCounter = Instantiate<GameObject>(fpsCounterPrefab);
+                fpsCounter.transform.parent = this.transform;
+                fpsCounter.SetActive(true);
+            } 
+            else {
+                fpsCounter.SetActive(!fpsCounter.activeSelf);
+            }
         }
     }
 }
