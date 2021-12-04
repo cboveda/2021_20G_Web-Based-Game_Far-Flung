@@ -2849,7 +2849,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9f96d41feb697d4aac9ff5c107024df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  messageContainer: {fileID: 11400000, guid: 0c35b4dc0495fbe4e9047bc2b823f820, type: 2}
+  _messageContainer: {fileID: 11400000, guid: 0c35b4dc0495fbe4e9047bc2b823f820, type: 2}
 --- !u!114 &1641671570
 MonoBehaviour:
   m_ObjectHideFlags: 0
