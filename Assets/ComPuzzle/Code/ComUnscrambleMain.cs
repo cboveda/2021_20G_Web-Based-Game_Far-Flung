@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 
 public class ComUnscrambleMain : MonoBehaviour
@@ -666,5 +667,53 @@ public class ComUnscrambleMain : MonoBehaviour
             buttonNumber++;
             FindObjectOfType<ComUnscrambleMain>().buttonStart = buttonNumber;
         }
+    }
+
+    public void OnMouseEnter()
+    {
+        SpriteRenderer rend;
+        string objectName = "";
+        GameObject instructions;
+        Color highlightedColor = new Color32(0, 0, 255, 255);
+
+
+        rend = GetComponent<SpriteRenderer>();
+        objectName = rend.transform.name;
+        //Debug.Log(objectName);
+
+        if (objectName == "InstructionsBox")
+        {            
+            instructions = GameObject.Find("InstructionsText");
+            instructions.GetComponent<UnityEngine.UI.Text>().color = Color.yellow;
+                        
+            rend.color = highlightedColor;
+
+        }
+
+
+    }
+
+    public void OnMouseExit()
+    {
+        SpriteRenderer rend;
+        string objectName = "";
+        GameObject instructions;
+        Color hiddenColor = new Color32(255, 255, 255, 0);
+        Color currentColor = new Color32(0, 15, 50, 255);
+
+        rend = GetComponent<SpriteRenderer>();
+        objectName = rend.transform.name;
+        //Debug.Log(objectName);
+
+        if (objectName == "InstructionsBox")
+        {
+            instructions = GameObject.Find("InstructionsText");
+            instructions.GetComponent<UnityEngine.UI.Text>().color = hiddenColor;
+
+            rend.color = currentColor;
+
+        }
+
+
     }
 }
