@@ -20,6 +20,12 @@ namespace DialogMaker
         public string dialogText;
         [SerializeField]
         public RobotCharacter robotVoice;
+
+        public Dialog(string text, RobotCharacter voice)
+        {
+            dialogText = text;
+            robotVoice = voice;
+        }
     }
 }
 

@@ -9,7 +9,8 @@
         "ScanningAssembly",
         "FrameworkAssembly",
         "LabgameAssembly",
-        "Flightpath"
+        "Flightpath",
+        "DialogMaker"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

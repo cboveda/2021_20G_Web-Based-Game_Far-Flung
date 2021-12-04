@@ -48,7 +48,7 @@ public class LabMain : MonoBehaviour
         lcdCamera1 = GameObject.Find("ComputerScreen1Camera").GetComponent<Camera>();
 
 
-        
+        GameObject.Find("DialogSine").GetComponent<DialogGenerator>().BeginPlayingDialog();
 
 
 
@@ -108,7 +108,7 @@ public class LabMain : MonoBehaviour
             }
             else
             {
-                GameObject.Find("DialogMaker").GetComponent<DialogGenerator>().BeginPlayingDialog();
+                GameObject.Find("DialogSpectra").GetComponent<DialogGenerator>().BeginPlayingDialog();
                 mainComputerUI.DisplayComputerText("Congrats, you solved all radio puzzles.  Solve the spectra puzzle to the right.");
                 radioPuzzleActive = false;
                 spectraPuzzleActive = true;

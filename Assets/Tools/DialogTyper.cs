@@ -25,6 +25,12 @@ namespace DialogMaker
             currentlyTyping = true;
         }
 
+        public void FinishTypingFaster()
+        {
+            typingSpeed = 0.001f;
+            timer = typingSpeed;
+        }
+
         private void Update()
         {
             if (uiTextObject != null && textToType != null)

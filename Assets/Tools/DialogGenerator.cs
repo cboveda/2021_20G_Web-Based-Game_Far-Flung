@@ -21,6 +21,8 @@ namespace DialogMaker
         private GameObject goBackgroundContainer;
         private GameObject goPortraitContainer;
         private GameObject goTextContainer;
+        private GameObject goButtonContainer;
+        private Button btnDialogButton;
 
         private DialogTyper dialogTyper;
 
@@ -28,8 +30,10 @@ namespace DialogMaker
 
         private const string DIALOG_BACKGROUND_PATH = "Dialog";
         private const string DIALOG_PORTRAIT_BACKGROUND_PATH = "PortraitBack";
-        private const int DIALOG_FONT_SIZE = 36;
-        private const float DIALOG_TYPING_SPEED = 0.05f;
+        [SerializeField]
+        private int dialogFontSize = 36;
+        [SerializeField]
+        private float dialogTypingSpeed = 0.05f;
 
         // Start is called before the first frame update
         void Start()
@@ -37,10 +41,9 @@ namespace DialogMaker
             // If we don't have a dialog container, we can't do anything.  Assert.
             if (dialogContainer == null)
             {
-                Debug.Assert(dialogContainer != null, "Warning: A DialogScriptableObject is desired but not found.");
+                //Debug.Assert(dialogContainer == null, "Warning: A DialogScriptableObject is desired but not found.");
+                Debug.LogAssertion("Warning: A DialogScriptableObject is desired but not found.");
             }
-
-            this.name = "DialogMaker";
 
             // Create the necessary components and get ready...
             goCanvasContainer = new GameObject();
@@ -69,6 +72,9 @@ namespace DialogMaker
             dialogBackground.rectTransform.anchoredPosition = new Vector2(0, 195.6f);
             dialogBackground.sprite = Resources.Load<Sprite>(DIALOG_BACKGROUND_PATH);
             dialogBackground.type = Image.Type.Sliced;
+            btnDialogButton = goBackgroundContainer.gameObject.AddComponent<Button>();
+            btnDialogButton.transition = Selectable.Transition.None;
+            btnDialogButton.onClick.AddListener(() => BeginPlayingDialog());
 
 
             goPortraitContainer = new GameObject();
@@ -98,16 +104,12 @@ namespace DialogMaker
             dialogUIText.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 270);
             dialogUIText.rectTransform.anchoredPosition = new Vector2(-114.0f, 0);
             dialogUIText.font = Resources.GetBuiltinResource(typeof(Font), "Arial.ttf") as Font;
-            dialogUIText.fontSize = DIALOG_FONT_SIZE;
+            dialogUIText.fontSize = dialogFontSize;
             dialogUIText.color = new Color32(249, 160, 0, 255);
 
             goCanvasContainer.SetActive(false);
 
             dialogTyper = gameObject.AddComponent<DialogTyper>();
-
-            dialogTyper.AddTyper(dialogUIText, dialogContainer.GetNextDialogMessage(dialogEntryPosition).dialogText, DIALOG_TYPING_SPEED);
-
-
 
 
         }
@@ -115,21 +117,36 @@ namespace DialogMaker
         // Update is called once per frame
         void Update()
         {
-            if (dialogEntryPosition < dialogContainer.dialogs.Length - 1 && dialogTyper.currentlyTyping == false)
-            {
-                dialogEntryPosition++;
-                dialogTyper.AddTyper(dialogUIText, dialogContainer.GetNextDialogMessage(dialogEntryPosition).dialogText, DIALOG_TYPING_SPEED);
-            }
-            else
-            {
-                //goCanvasContainer.SetActive(false);
-            }
+            
         }
 
         public bool BeginPlayingDialog()
         {
-            goCanvasContainer.SetActive(true);
+            if (dialogTyper.currentlyTyping)
+            {
+                dialogTyper.FinishTypingFaster();
+            }
+            else
+            {
+                if(dialogEntryPosition < dialogContainer.dialogs.Length)
+                {
+                    goCanvasContainer.SetActive(true);
+                    dialogTyper.AddTyper(dialogUIText, dialogContainer.GetNextDialogMessage(dialogEntryPosition++).dialogText, dialogTypingSpeed);
+                }
+                else
+                {
+                    goCanvasContainer.SetActive(false);
+                    Destroy(this);
+                }
+                
+            }
+            
             return true;
+        }
+
+        public int GetCurrentDialogPosition()
+        {
+            return dialogEntryPosition;
         }
     }
 }

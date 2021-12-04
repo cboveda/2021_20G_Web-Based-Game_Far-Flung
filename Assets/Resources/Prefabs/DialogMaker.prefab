@@ -43,4 +43,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87dc691a6cdb1314b9917207cf12ef23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogContainer: {fileID: 11400000, guid: b65053e220f108f40a8cabd5a1f1bbd2, type: 2}
+  dialogContainer: {fileID: 0}
