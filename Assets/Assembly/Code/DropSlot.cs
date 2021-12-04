@@ -58,8 +58,7 @@ public class DropSlot : MonoBehaviour
                 }
                 else
                 {
-                    //show in debug log for dev
-                    Debug.Log("No text panel found");
+                    CallParentCompletion();
                 }
                 Debug.Log("defined:" + defined);
                 //if the slot is defined make it so the object can't be moved again and the slot is invisible
@@ -72,6 +71,8 @@ public class DropSlot : MonoBehaviour
                 //make the slot invisible
                 GetComponent<Renderer>().forceRenderingOff = true;
 
+                if(GetComponent<CompletionSlot>()) GetComponent<CompletionSlot>().completeSlot();
+
             }
         }
     }
@@ -80,7 +81,9 @@ public class DropSlot : MonoBehaviour
     {
         if (transform.parent.GetComponent<Completion>() != null)
         {
-            transform.parent.GetComponent<Completion>().CheckCompletion();
+            if(transform.parent.GetComponent<Completion>().IsCompleted()){
+                transform.parent.GetComponent<Completion>().nextScene.Invoke();
+            }
         }
         else
         {
