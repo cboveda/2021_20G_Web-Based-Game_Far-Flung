@@ -6,7 +6,7 @@ public class TerrainController : MonoBehaviour {
 
     public int tileDim = 100;
     public int renderDistX = 500;
-    public int renderDistZ = 800;
+    public int renderDistZ = 700;
     public float terrainScale = 150;
     public static int tileRenderRangeZ; // forward
     public static int tileRenderRangeX; // left-right

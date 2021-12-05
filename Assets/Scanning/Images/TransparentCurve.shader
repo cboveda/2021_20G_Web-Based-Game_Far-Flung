@@ -34,7 +34,7 @@
 		{            
 			float4 vv = mul( unity_ObjectToWorld, v.vertex ); 
 			vv.xyz -= _WorldSpaceCameraPos.xyz;
-			vv = float4( 0.0f, ((vv.z * vv.z) + (vv.x * vv.x)) * - _Curvature, 0.0f, 0.0f );
+			vv = float4( 0.0f, ((1.5 * (vv.z * vv.z)) + (vv.x * vv.x)) * - _Curvature, 0.0f, 0.0f );
 			v.vertex += mul(unity_WorldToObject, vv);
 		}
 

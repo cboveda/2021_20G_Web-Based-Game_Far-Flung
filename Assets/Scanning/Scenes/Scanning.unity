@@ -465,7 +465,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileDim: 100
   renderDistX: 500
-  renderDistZ: 800
+  renderDistZ: 700
   terrainScale: 200
   terrainSeed: 60
   surfaceGrad:
