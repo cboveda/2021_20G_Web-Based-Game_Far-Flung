@@ -8,6 +8,7 @@
 		_Curvature ("Curvature", Float) = 0.001
 		_RimColor ( "Rim Color", Color ) = (1,1,1,1)
 		_RimPower ("Rim Power", Range( 0.5, 10.0 )) = 3.0
+		_OutColor("Out Color", Color) = (1,1,1,1)
 
 	}
 	SubShader {
@@ -29,6 +30,7 @@
 		half _Metallic;
 		float4 _RimColor;
 		float _RimPower;
+		float4 _OutColor;
 
 		struct Input {
 			float2 uv_MainTex;
@@ -54,7 +56,7 @@
 			o.Albedo = c.rgb;
 			o.Metallic = _Metallic;
 			o.Smoothness = _Glossiness;
-			o.Alpha = _Color.a;
+			o.Alpha = lerp( _Color, _OutColor, IN.uv_MainTex.y ).a;
 		}
 		ENDCG
 	} 
