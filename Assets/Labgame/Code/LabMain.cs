@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using DialogMaker;
+
 
 public class LabMain : MonoBehaviour
 {
@@ -20,6 +22,9 @@ public class LabMain : MonoBehaviour
     GameObject spectraUIElements;
     GameObject spectraUIElements2;
 
+    DialogGenerator Diagen;
+    
+    
 
     Camera lcdCamera1;
     // Start is called before the first frame update
@@ -43,7 +48,7 @@ public class LabMain : MonoBehaviour
         lcdCamera1 = GameObject.Find("ComputerScreen1Camera").GetComponent<Camera>();
 
 
-
+        GameObject.Find("DialogSine").GetComponent<DialogGenerator>().BeginPlayingDialog();
 
 
 
@@ -103,6 +108,7 @@ public class LabMain : MonoBehaviour
             }
             else
             {
+                GameObject.Find("DialogSpectra").GetComponent<DialogGenerator>().BeginPlayingDialog();
                 mainComputerUI.DisplayComputerText("Congrats, you solved all radio puzzles.  Solve the spectra puzzle to the right.");
                 radioPuzzleActive = false;
                 spectraPuzzleActive = true;
