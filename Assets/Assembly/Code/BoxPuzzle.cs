@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using System;
 
-public class BoxPuzzle : MonoBehaviour
+public class BoxPuzzle : MonoBehaviour, Completion
 {
 
     public Material greenMaterial;
@@ -19,10 +20,14 @@ public class BoxPuzzle : MonoBehaviour
 
     private DropSlot[,] slots;
 
+    public GameObject psyche;
+
     void Start()
     {
-        solution = new bool[(int)solutionSize.x, (int)solutionSize.y];
-        slots = new DropSlot[(int)solutionSize.x, (int)solutionSize.y];
+        if(solution==null){
+            solution = new bool[(int)solutionSize.x, (int)solutionSize.y];
+        }
+        slots = new DropSlot[solution.GetLength(0), solution.GetLength(1)];
         System.Random rnd = new System.Random ();
         for (int i = 0; i < solution.GetLength(0); i++) {
             for (int j = 0; j < solution.GetLength(1); j++) {
@@ -47,9 +52,9 @@ public class BoxPuzzle : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        solution = new bool[(int)solutionSize.x, (int)solutionSize.y];
-        for(int x = 0; x<solution.GetLength(0);x++){
-            for(int z = 0; z<solution.GetLength(1); z++){
+        // solution = new bool[(int)solutionSize.x, (int)solutionSize.y];
+        for(int x = 0; x<(int)solutionSize.x;x++){
+            for(int z = 0; z<(int)solutionSize.y; z++){
                 // Draw a yellow cube at the transform position
                 Gizmos.color =  Color.yellow;
                 Gizmos.DrawWireCube(transform.position + new Vector3(x*cubeSpacing, 0, z*cubeSpacing), Vector3.one*sizeOfCube);
@@ -58,13 +63,16 @@ public class BoxPuzzle : MonoBehaviour
     }
 
     public bool IsCompleted(){
+        if(solution==null) Debug.Log("solution null");
         for(int x = 0; x<solution.GetLength(0);x++){
              for(int z = 0; z<solution.GetLength(1); z++){
                 if(solution[x,z] != slots[x,z].IsCompleted()){ //will return false if solution and slot don't match
+                    Debug.Log("Box Not complete");
                     return false;
                 }
              }
         }
+        Debug.Log("Puzzle Completed");
         return true;
     }
 
@@ -75,7 +83,7 @@ public class BoxPuzzle : MonoBehaviour
     }
 
     public void OnCompletion(){
-
+       psyche.SetActive(true);
     }
 
     private bool hasTrue(){

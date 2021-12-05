@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DropSlot : MonoBehaviour
+public class DropSlot : MonoBehaviour, Completion
 {
 
     public Vector3 offset;
@@ -55,16 +55,16 @@ public class DropSlot : MonoBehaviour
                 }
 
 
-                // //try to find the text panel for a popup and check for set texdt if found show the appropriate text
-                // if (Resources.FindObjectsOfTypeAll<TextPanel>().Length > 0 && completionTextAsset)
-                // {
-                //     Resources.FindObjectsOfTypeAll<TextPanel>()[0].ShowText(completionTextAsset, CallParentCompletion);
-                // }
-                // else
-                // {
-                //     CallParentCompletion();
-                // }
-                //if the slot is defined make it so the object can't be moved again and the slot is invisible
+                //try to find the text panel for a popup and check for set texdt if found show the appropriate text
+                if (Resources.FindObjectsOfTypeAll<TextPanel>().Length > 0 && completionTextAsset)
+                {
+                    Resources.FindObjectsOfTypeAll<TextPanel>()[0].ShowText(completionTextAsset, CallParentCompletion);
+                }
+                else
+                {
+                    CallParentCompletion();
+                }
+                // if the slot is defined make it so the object can't be moved again and the slot is invisible
                 if (!undefinedSlot)
                 {
                     Debug.Log("defined slot running");
@@ -74,8 +74,6 @@ public class DropSlot : MonoBehaviour
                 //make the slot invisible
                 GetComponent<Renderer>().forceRenderingOff = true;
 
-                if(GetComponent<CompletionSlot>()) GetComponent<CompletionSlot>().completeSlot();
-
             }
         }
     }
@@ -84,8 +82,12 @@ public class DropSlot : MonoBehaviour
     {
         if (transform.parent.GetComponent<Completion>() != null)
         {
-            if(transform.parent.GetComponent<Completion>().IsCompleted()){
-                transform.parent.GetComponent<Completion>().nextScene.Invoke();
+            Completion parent = transform.parent.GetComponent<Completion>();
+            Debug.Log("Parent Called");
+            if(parent.IsCompleted()){
+                Debug.Log("Parent Completed"+ transform.parent.name);
+                parent.OnCompletion();
+                Debug.Log("ParentCompletion Called");
             }
         }
         else
@@ -96,8 +98,14 @@ public class DropSlot : MonoBehaviour
 
     public bool IsCompleted()
     {
-        bool completed = (slotMatch.transform.position == transform.position + offset);
+        if(slotMatch==null) {
+            Debug.Log("No match");
+            return false;
+        }
+        bool completed = (slotMatch.transform.position == this.transform.position + offset);
         // Debug.Log(transform.name + " " + completed);
         return completed;
     }
+
+    public void OnCompletion(){}
 }

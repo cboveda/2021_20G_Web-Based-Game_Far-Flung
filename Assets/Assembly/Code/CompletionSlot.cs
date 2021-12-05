@@ -1,14 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class CompletionSlot : MonoBehaviour
+public class CompletionSlot : MonoBehaviour, Completion
 {
-    public void completeSlot(){
-        DropSlot slot = GetComponent<DropSlot>();
-        GameObject slotMatch = slot.slotMatch;
-        slotMatch.GetComponent<Collider>().enabled = false;
-        slotMatch.GetComponent<Renderer>().forceRenderingOff = true;
-        GetComponent<Renderer>().forceRenderingOff = true;
+
+    public bool IsCompleted(){
+        foreach(Completion completetion in GetComponentsInChildren<Completion>()){
+            if(!completetion.IsCompleted()) return false;
+        }
+        return true;
     }
+
+    public void OnCompletion(){
+    }
+   
 }
