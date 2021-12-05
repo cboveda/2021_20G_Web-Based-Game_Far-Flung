@@ -6,6 +6,9 @@
 		_Glossiness ("Smoothness", Range(0,1)) = 0.5
 		_Metallic ("Metallic", Range(0,1)) = 0.0
 		_Curvature ("Curvature", Float) = 0.001
+		_RimColor ( "Rim Color", Color ) = (1,1,1,1)
+		_RimPower ("Rim Power", Range( 0.5, 10.0 )) = 3.0
+
 	}
 	SubShader {
 		Tags { "Queue"="Transparent" "RenderType"="Transparent" }
@@ -24,10 +27,13 @@
 		fixed4 _Color;
 		half _Glossiness;
 		half _Metallic;
+		float4 _RimColor;
+		float _RimPower;
 
 		struct Input {
 			float2 uv_MainTex;
 			float2 uv_BumpMap;
+			float3 viewDir;
 		};
 		
 		void vert( inout appdata_full v)
@@ -41,6 +47,10 @@
 		void surf (Input IN, inout SurfaceOutputStandard o) {
 			fixed4 c = tex2D (_MainTex, IN.uv_MainTex) * _Color;
 			o.Normal = UnpackNormal (tex2D (_BumpMap, IN.uv_BumpMap));
+
+			half rim = 1.0 - dot(IN.viewDir, o.Normal);
+			o.Emission = _RimColor.rgb * pow(rim, _RimPower);
+
 			o.Albedo = c.rgb;
 			o.Metallic = _Metallic;
 			o.Smoothness = _Glossiness;
