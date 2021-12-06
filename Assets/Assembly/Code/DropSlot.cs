@@ -3,12 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DropSlot : MonoBehaviour
+public class DropSlot : MonoBehaviour, Completion
 {
 
     public Vector3 offset;
     public GameObject slotMatch; // set to premanently lock the object when placed
+    public bool undefinedSlot;
     public TextAsset completionTextAsset;
+
+    void Start(){
+        undefinedSlot = slotMatch?false: true;
+    }
 
     void OnTriggerEnter(Collider other)
     {
@@ -22,10 +27,11 @@ public class DropSlot : MonoBehaviour
     void OnTriggerExit(Collider other)
     {
         Debug.Log("Exit slot");
-        if (other.GetComponent<DragObject>())
+        if (other.GetComponent<DragObject>() && other.GetComponent<DragObject>().currentSlot==this)
         {
             other.GetComponent<DragObject>().currentSlot = null;
         }
+        GetComponent<Renderer>().forceRenderingOff = false;
     }
 
     public void placeObjectInSlot(GameObject gameObject)
@@ -33,13 +39,11 @@ public class DropSlot : MonoBehaviour
         // Debug.Log("triggered");
         if (gameObject.GetComponent<DragObject>())
         {
-            bool defined = true;
             //for unspecified slots set the current object being placed to 
-            if (!slotMatch)
+            if (undefinedSlot)
             {
-                Debug.Log("undefined slot");
+                // Debug.Log("undefined slot");
                 slotMatch = gameObject;
-                defined = false;
             }
             if (gameObject == slotMatch)
             {
@@ -60,9 +64,8 @@ public class DropSlot : MonoBehaviour
                 {
                     CallParentCompletion();
                 }
-                Debug.Log("defined:" + defined);
-                //if the slot is defined make it so the object can't be moved again and the slot is invisible
-                if (defined)
+                // if the slot is defined make it so the object can't be moved again and the slot is invisible
+                if (!undefinedSlot)
                 {
                     Debug.Log("defined slot running");
                     gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
@@ -70,8 +73,6 @@ public class DropSlot : MonoBehaviour
 
                 //make the slot invisible
                 GetComponent<Renderer>().forceRenderingOff = true;
-
-                if(GetComponent<CompletionSlot>()) GetComponent<CompletionSlot>().completeSlot();
 
             }
         }
@@ -81,8 +82,12 @@ public class DropSlot : MonoBehaviour
     {
         if (transform.parent.GetComponent<Completion>() != null)
         {
-            if(transform.parent.GetComponent<Completion>().IsCompleted()){
-                transform.parent.GetComponent<Completion>().nextScene.Invoke();
+            Completion parent = transform.parent.GetComponent<Completion>();
+            Debug.Log("Parent Called");
+            if(parent.IsCompleted()){
+                Debug.Log("Parent Completed"+ transform.parent.name);
+                parent.OnCompletion();
+                Debug.Log("ParentCompletion Called");
             }
         }
         else
@@ -93,8 +98,14 @@ public class DropSlot : MonoBehaviour
 
     public bool IsCompleted()
     {
-        bool completed = (slotMatch.transform.position == transform.position + offset);
+        if(slotMatch==null) {
+            Debug.Log("No match");
+            return false;
+        }
+        bool completed = (slotMatch.transform.position == this.transform.position + offset);
         // Debug.Log(transform.name + " " + completed);
         return completed;
     }
+
+    public void OnCompletion(){}
 }
