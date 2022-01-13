@@ -45,6 +45,8 @@ public class TerrainController : MonoBehaviour {
 
     void Update() {
 
+        CImport.DoTheTest();
+
         int currTileZ = (int) Mathf.Floor(satellite.transform.position.z / tileDim);
         int currTileX = (int) Mathf.Floor(satellite.transform.position.x / tileDim);
 
