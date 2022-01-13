@@ -1,5 +1,5 @@
 #include <stdio.h>
 
-extern void TestPrintFromC( void ) {
+extern "C" void TestPrintFromC() {
     printf("What happens here?\n");
 }
