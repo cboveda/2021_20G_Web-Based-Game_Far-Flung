@@ -406,4 +406,33 @@ public class ComGameTests
         }
 
     }
+
+    [UnityTest]
+    public IEnumerator TestUnscrambleInfo()
+    {
+        // load scene with the scriptable tile objects
+        SceneManager.LoadScene("comUnscrambleWin");
+        yield return new WaitForSeconds(0.2f); // delay to load scene
+
+        // get a scriptable image object to use
+        GameObject scriptObject = GameObject.Find("imager");
+
+        // get an info object to use
+        GameObject infoObject = GameObject.Find("imagerinfo");
+        
+        // verify image and info is highlighted with mouse on
+        Color highlightColor = new Color32(255, 255, 255, 255);
+        String displaySortingLayer = "Board";
+        scriptObject.GetComponent<ComUnscrambleInfo>().OnMouseEnter();
+        Assert.AreEqual(scriptObject.GetComponent<SpriteRenderer>().color, highlightColor);
+        Assert.AreEqual(infoObject.GetComponent<SpriteRenderer>().sortingLayerName, displaySortingLayer);
+
+        // verify image and info is not highlighted with mouse off
+        Color highlightOff = new Color32(255, 255, 255, 150);
+        String hiddenSortingLayer = "Hidden";
+        scriptObject.GetComponent<ComUnscrambleInfo>().OnMouseExit();
+        Assert.AreEqual(scriptObject.GetComponent<SpriteRenderer>().color, highlightOff);
+        Assert.AreEqual(infoObject.GetComponent<SpriteRenderer>().sortingLayerName, hiddenSortingLayer);
+
+    }
 }
