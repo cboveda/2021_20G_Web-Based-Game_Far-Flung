@@ -1379,6 +1379,7 @@ MonoBehaviour:
   redMaterial: {fileID: 2100000, guid: 623e8b8acc22fba479f4997134850829, type: 2}
   sizeOfCube: 0.5
   solutionSize: {x: 1, y: 2}
+  numberOfPuzzles: 2
   cubeSpacing: 1.5
   psyche: {fileID: 396787327}
 --- !u!1 &554242767

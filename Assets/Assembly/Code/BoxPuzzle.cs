@@ -14,6 +14,8 @@ public class BoxPuzzle : MonoBehaviour, Completion
 
     public Vector2 solutionSize;
 
+    public int numberOfPuzzles;
+
     public float cubeSpacing = 1.5f;
 
     private bool[,] solution;
@@ -22,11 +24,26 @@ public class BoxPuzzle : MonoBehaviour, Completion
 
     public GameObject psyche;
 
+    private int puzzlesCompleted;
+
     void Start()
     {
         if(solution==null){
             solution = new bool[(int)solutionSize.x, (int)solutionSize.y];
         }
+        puzzlesCompleted = 0;
+        BuildPuzzle();     
+    }
+
+    void ClearPuzzleCubes(){
+        foreach (DropSlot slot in slots)
+        {
+            if(slot.slotMatch!=null) UnityEngine.Object.Destroy(slot.slotMatch);
+            UnityEngine.Object.Destroy(slot.gameObject);
+        }
+    }
+
+    void BuildPuzzle(){
         slots = new DropSlot[solution.GetLength(0), solution.GetLength(1)];
         System.Random rnd = new System.Random ();
         for (int i = 0; i < solution.GetLength(0); i++) {
@@ -47,7 +64,6 @@ public class BoxPuzzle : MonoBehaviour, Completion
 
             }
         }
-       
     }
 
     void OnDrawGizmos()
@@ -83,7 +99,15 @@ public class BoxPuzzle : MonoBehaviour, Completion
     }
 
     public void OnCompletion(){
-       psyche.SetActive(true);
+        // Debug.Log("Current Puzzle: " + puzzlesCompleted);
+        ClearPuzzleCubes(); //deletes the puzzle
+        if(++puzzlesCompleted<numberOfPuzzles){ 
+            BuildPuzzle();  //re-initiates the puzzle
+        }
+        else {
+            psyche.SetActive(true);
+        }
+        Debug.Log("Puzzles Completed: " + puzzlesCompleted);
     }
 
     private bool hasTrue(){
