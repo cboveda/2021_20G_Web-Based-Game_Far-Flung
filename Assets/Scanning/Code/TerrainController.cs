@@ -42,7 +42,7 @@ public class TerrainController : MonoBehaviour {
     void Start() {
         satellite.GetComponent<FlightControl>().speed = 40f;
 
-        Application.targetFrameRate = 30;
+        // Application.targetFrameRate = 30;
     }
 
     void Update() {
