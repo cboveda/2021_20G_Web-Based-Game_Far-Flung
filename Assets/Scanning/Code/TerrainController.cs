@@ -14,9 +14,6 @@ public class TerrainController : MonoBehaviour {
     public GameObject satellite;
     public SignalSpawner sigSpawner;
     public AnimationCurve basePerlinCurve;
-    
-    // DEBUG TEST REMOVE
-    public int numberFromOther;
 
     [HideInInspector]
     public Dictionary<Vector2, OpenMapTile> tileDict = new Dictionary<Vector2, OpenMapTile>();
@@ -44,8 +41,6 @@ public class TerrainController : MonoBehaviour {
 
     void Start() {
         satellite.GetComponent<FlightControl>().speed = 40f;
-        numberFromOther = 0;
-        numberFromOther = CImport.GetNumberFromC();
     }
 
     void Update() {
