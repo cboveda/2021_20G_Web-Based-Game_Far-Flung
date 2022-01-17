@@ -1356,7 +1356,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 553279311}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -42.4, y: 1.09, z: 0}
+  m_LocalPosition: {x: -42.95, y: 1.09, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 916854600}
@@ -1378,8 +1378,9 @@ MonoBehaviour:
   greenMaterial: {fileID: 2100000, guid: 20b054b2b90e0db4fa689fb9c5cb13e5, type: 2}
   redMaterial: {fileID: 2100000, guid: 623e8b8acc22fba479f4997134850829, type: 2}
   sizeOfCube: 0.5
-  solutionSize: {x: 1, y: 2}
-  numberOfPuzzles: 2
+  startingSolutionSize: {x: 2, y: 1}
+  maxSolutionSize: {x: 4, y: 6}
+  numberOfPuzzles: 3
   cubeSpacing: 1.5
   psyche: {fileID: 396787327}
 --- !u!1 &554242767

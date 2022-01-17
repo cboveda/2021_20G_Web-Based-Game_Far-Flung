@@ -12,7 +12,9 @@ public class BoxPuzzle : MonoBehaviour, Completion
     // Start is called before the first frame update
     public float sizeOfCube = 0.5f;
 
-    public Vector2 solutionSize;
+    public Vector2 startingSolutionSize;
+
+    public Vector2 maxSolutionSize;
 
     public int numberOfPuzzles;
 
@@ -25,13 +27,15 @@ public class BoxPuzzle : MonoBehaviour, Completion
     public GameObject psyche;
 
     private int puzzlesCompleted;
+    private Vector2 solutionStepSize;
+    private Vector2 currentSolutionSize;
 
     void Start()
     {
-        if(solution==null){
-            solution = new bool[(int)solutionSize.x, (int)solutionSize.y];
-        }
+        if(maxSolutionSize == null) maxSolutionSize = startingSolutionSize;
         puzzlesCompleted = 0;
+        solutionStepSize = (maxSolutionSize - startingSolutionSize)/numberOfPuzzles;
+        currentSolutionSize = startingSolutionSize;
         BuildPuzzle();     
     }
 
@@ -44,6 +48,7 @@ public class BoxPuzzle : MonoBehaviour, Completion
     }
 
     void BuildPuzzle(){
+        solution = new bool[(int)currentSolutionSize.x, (int)currentSolutionSize.y];
         slots = new DropSlot[solution.GetLength(0), solution.GetLength(1)];
         System.Random rnd = new System.Random ();
         for (int i = 0; i < solution.GetLength(0); i++) {
@@ -68,9 +73,10 @@ public class BoxPuzzle : MonoBehaviour, Completion
 
     void OnDrawGizmos()
     {
+        if(maxSolutionSize == Vector2.zero) maxSolutionSize = startingSolutionSize;
         // solution = new bool[(int)solutionSize.x, (int)solutionSize.y];
-        for(int x = 0; x<(int)solutionSize.x;x++){
-            for(int z = 0; z<(int)solutionSize.y; z++){
+        for(int x = 0; x<(int)maxSolutionSize.x;x++){
+            for(int z = 0; z<(int)maxSolutionSize.y; z++){
                 // Draw a yellow cube at the transform position
                 Gizmos.color =  Color.yellow;
                 Gizmos.DrawWireCube(transform.position + new Vector3(x*cubeSpacing, 0, z*cubeSpacing), Vector3.one*sizeOfCube);
@@ -101,7 +107,8 @@ public class BoxPuzzle : MonoBehaviour, Completion
     public void OnCompletion(){
         // Debug.Log("Current Puzzle: " + puzzlesCompleted);
         ClearPuzzleCubes(); //deletes the puzzle
-        if(++puzzlesCompleted<numberOfPuzzles){ 
+        if(++puzzlesCompleted<numberOfPuzzles){
+            currentSolutionSize += solutionStepSize; //increments the puzzle size
             BuildPuzzle();  //re-initiates the puzzle
         }
         else {
