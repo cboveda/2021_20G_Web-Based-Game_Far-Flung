@@ -41,12 +41,11 @@ public class TerrainController : MonoBehaviour {
 
     void Start() {
         satellite.GetComponent<FlightControl>().speed = 40f;
+
+        Application.targetFrameRate = 30;
     }
 
     void Update() {
-
-
-        
 
         int currTileZ = (int) Mathf.Floor(satellite.transform.position.z / tileDim);
         int currTileX = (int) Mathf.Floor(satellite.transform.position.x / tileDim);
