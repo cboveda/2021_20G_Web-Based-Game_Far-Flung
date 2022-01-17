@@ -2,7 +2,7 @@ using UnityEngine;
 
 public static class TerrainGenerator {
 
-    public static int perlin_octaves = 5;
+    public static int perlin_octaves = 4;
     public static float lacunarity = 2f;
     public static float persistance = 0.4f;
 
