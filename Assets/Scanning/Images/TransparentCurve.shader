@@ -12,6 +12,7 @@
 		LOD 100
 
 		ZWrite Off
+		Lighting Off
 		Blend SrcAlpha OneMinusSrcAlpha
 		
 		CGPROGRAM
