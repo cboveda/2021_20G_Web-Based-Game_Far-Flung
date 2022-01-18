@@ -435,4 +435,36 @@ public class ComGameTests
         Assert.AreEqual(infoObject.GetComponent<SpriteRenderer>().sortingLayerName, hiddenSortingLayer);
 
     }
+
+    [UnityTest]
+    public IEnumerator TestUnscrambleContinue()
+    {
+        // verify scrambled words default properties at start
+
+        // load scene with the scriptable tile objects
+        SceneManager.LoadScene("comUnscramble");
+        yield return new WaitForSeconds(0.2f); // delay to load scene
+
+        // verify continue button is disabled start
+        GameObject continueButton = GameObject.Find("Continue");
+        GameObject continueText = GameObject.Find("ContinueText");
+
+        Assert.AreEqual(continueButton.GetComponent<UnityEngine.UI.Button>().enabled, false);
+        Assert.AreEqual(continueButton.GetComponent<UnityEngine.UI.Image>().enabled, false);
+        Assert.AreEqual(continueText.GetComponent<UnityEngine.UI.Text>().enabled, false);
+
+        GameObject ob = new GameObject();
+        ob.AddComponent<ComUnscrambleMain>();
+        ComUnscrambleMain unscrambleMainObject = GameObject.FindObjectOfType<ComUnscrambleMain>();
+
+        // enable the continue button
+        unscrambleMainObject.EnableContinueButton();
+
+        // verify continue button is enabled
+        Assert.AreEqual(continueButton.GetComponent<UnityEngine.UI.Button>().enabled, true);
+        Assert.AreEqual(continueButton.GetComponent<UnityEngine.UI.Image>().enabled, true);
+        Assert.AreEqual(continueText.GetComponent<UnityEngine.UI.Text>().enabled, true);
+
+    }
+
 }
