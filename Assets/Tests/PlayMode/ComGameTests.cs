@@ -465,6 +465,7 @@ public class ComGameTests
         Assert.AreEqual(continueButton.GetComponent<UnityEngine.UI.Image>().enabled, true);
         Assert.AreEqual(continueText.GetComponent<UnityEngine.UI.Text>().enabled, true);
 
+
     }
 
 }
