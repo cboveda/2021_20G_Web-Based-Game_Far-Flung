@@ -40,6 +40,9 @@ public class SpectraPuzzleDisplay : MonoBehaviour
     GameObject exampleDisplay;
     RectTransform exampleRect;
 
+    GameObject spectraResponse;
+
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -55,6 +58,7 @@ public class SpectraPuzzleDisplay : MonoBehaviour
         elementNameDisplay = GameObject.Find("ElementName");
         elementName = elementNameDisplay.GetComponent<Text>();
 
+        spectraResponse = GameObject.Find("ResponseIndicator");
         
 
     }
