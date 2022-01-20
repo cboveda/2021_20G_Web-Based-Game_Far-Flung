@@ -420,19 +420,21 @@ public class ComGameTests
         // get an info object to use
         GameObject infoObject = GameObject.Find("imagerinfo");
         
-        // verify image and info is highlighted with mouse on
+        // verify image and info is highlighted and displayed
         Color highlightColor = new Color32(255, 255, 255, 255);
         String displaySortingLayer = "Board";
-        scriptObject.GetComponent<ComUnscrambleInfo>().OnMouseEnter();
+        scriptObject.GetComponent<ComUnscrambleInfo>().HighlightPicture("imager");
+        scriptObject.GetComponent<ComUnscrambleInfo>().DisplayInfo("imager");
         Assert.AreEqual(scriptObject.GetComponent<SpriteRenderer>().color, highlightColor);
         Assert.AreEqual(infoObject.GetComponent<SpriteRenderer>().sortingLayerName, displaySortingLayer);
 
-        // verify image and info is not highlighted with mouse off
+        // verify image and info is hidden and instructions are displayed
         Color highlightOff = new Color32(255, 255, 255, 150);
         String hiddenSortingLayer = "Hidden";
-        scriptObject.GetComponent<ComUnscrambleInfo>().OnMouseExit();
-        Assert.AreEqual(scriptObject.GetComponent<SpriteRenderer>().color, highlightOff);
+        scriptObject.GetComponent<ComUnscrambleInfo>().HideInfo("imager");
+        GameObject instructions = GameObject.Find("InstructionsText");        
         Assert.AreEqual(infoObject.GetComponent<SpriteRenderer>().sortingLayerName, hiddenSortingLayer);
+        Assert.AreEqual(instructions.GetComponent<UnityEngine.UI.Text>().enabled, true);
 
     }
 
@@ -464,6 +466,7 @@ public class ComGameTests
         Assert.AreEqual(continueButton.GetComponent<UnityEngine.UI.Button>().enabled, true);
         Assert.AreEqual(continueButton.GetComponent<UnityEngine.UI.Image>().enabled, true);
         Assert.AreEqual(continueText.GetComponent<UnityEngine.UI.Text>().enabled, true);
+
 
     }
 
