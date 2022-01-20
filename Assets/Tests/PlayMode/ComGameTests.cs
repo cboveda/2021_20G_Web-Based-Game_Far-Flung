@@ -428,12 +428,13 @@ public class ComGameTests
         Assert.AreEqual(scriptObject.GetComponent<SpriteRenderer>().color, highlightColor);
         Assert.AreEqual(infoObject.GetComponent<SpriteRenderer>().sortingLayerName, displaySortingLayer);
 
-        // verify image and info is not highlighted with mouse off
+        // verify image and info is hidden and instructions are displayed
         Color highlightOff = new Color32(255, 255, 255, 150);
         String hiddenSortingLayer = "Hidden";
-        scriptObject.GetComponent<ComUnscrambleInfo>().OnMouseExit();
-        Assert.AreEqual(scriptObject.GetComponent<SpriteRenderer>().color, highlightOff);
+        scriptObject.GetComponent<ComUnscrambleInfo>().HideInfo("imager");
+        GameObject instructions = GameObject.Find("InstructionsText");        
         Assert.AreEqual(infoObject.GetComponent<SpriteRenderer>().sortingLayerName, hiddenSortingLayer);
+        Assert.AreEqual(instructions.GetComponent<UnityEngine.UI.Text>().enabled, true);
 
     }
 
