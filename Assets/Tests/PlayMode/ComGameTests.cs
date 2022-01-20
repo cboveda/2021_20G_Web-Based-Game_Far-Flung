@@ -420,10 +420,11 @@ public class ComGameTests
         // get an info object to use
         GameObject infoObject = GameObject.Find("imagerinfo");
         
-        // verify image and info is highlighted with mouse on
+        // verify image and info is highlighted and displayed
         Color highlightColor = new Color32(255, 255, 255, 255);
         String displaySortingLayer = "Board";
-        scriptObject.GetComponent<ComUnscrambleInfo>().OnMouseEnter();
+        scriptObject.GetComponent<ComUnscrambleInfo>().HighlightPicture("imager");
+        scriptObject.GetComponent<ComUnscrambleInfo>().DisplayInfo("imager");
         Assert.AreEqual(scriptObject.GetComponent<SpriteRenderer>().color, highlightColor);
         Assert.AreEqual(infoObject.GetComponent<SpriteRenderer>().sortingLayerName, displaySortingLayer);
 
