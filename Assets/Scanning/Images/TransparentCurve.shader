@@ -4,7 +4,6 @@
 		_MainTex ("Albedo (RGB)", 2D) = "white" {}
 		_BumpMap ("Normalmap", 2D) = "bump" {}
 		_Glossiness ("Smoothness", Range(0,1)) = 0.5
-		_Metallic ("Metallic", Range(0,1)) = 0.0
 		_Curvature ("Curvature", Float) = 0.001
 	}
 	SubShader {
@@ -24,7 +23,6 @@
 		float _Curvature;
 		fixed4 _Color;
 		half _Glossiness;
-		half _Metallic;
 
 		struct Input {
 			float2 uv_MainTex;
@@ -43,7 +41,6 @@
 			fixed4 c = tex2D (_MainTex, IN.uv_MainTex) * _Color;
 			o.Normal = UnpackNormal (tex2D (_BumpMap, IN.uv_BumpMap));
 			o.Albedo = c.rgb;
-			o.Metallic = _Metallic;
 			o.Smoothness = _Glossiness;
 			o.Alpha = _Color.a;
 		}
