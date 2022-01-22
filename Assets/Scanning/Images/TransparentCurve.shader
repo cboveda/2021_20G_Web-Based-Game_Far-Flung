@@ -43,6 +43,7 @@
 			o.Albedo = c.rgb;
 			o.Smoothness = _Glossiness;
 			o.Alpha = _Color.a;
+			o.Emission = half3(0.2, 0.15, 0.15);
 		}
 		ENDCG
 	} 
