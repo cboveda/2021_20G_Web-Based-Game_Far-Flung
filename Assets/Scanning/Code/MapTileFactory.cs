@@ -27,6 +27,7 @@ public class MapTileFactory {
         job.tile.meshObj.transform.position = job.coord;
         job.tile.neutronSignals = job.sigSpawner.CreateSignals( job.meshData.normalizedHeightMap, job.tScale, job.coord );
         job.tile.fin = true;
+        job.tile.SetVisible();
     }
 }
 
@@ -54,15 +55,11 @@ public class MapTile {
     }
 
     public void SetVisible() {
-        isVisible = true;
+        meshObj.SetActive( true );
     }
 
     public void UnsetVisible() {
-        isVisible = false;
-    }
-
-    public void Update() {
-        meshObj.SetActive( isVisible );
+        meshObj.SetActive( false );
     }
 
     public void Destroy() {
