@@ -104,12 +104,6 @@ public class ScanningTests {
         yield return new WaitForSeconds(1.0f);
 
         Assert.AreEqual( 25, terrainController.GetComponent<TerrainController>().tileDict.Count );
-
-        terrainSatellite.transform.position = new Vector3( 0, 100, 200 );
-
-        yield return new WaitForSeconds(1.0f);
-
-        Assert.AreEqual( 25, terrainController.GetComponent<TerrainController>().tileDict.Count );
     }
     
     [UnityTest]
