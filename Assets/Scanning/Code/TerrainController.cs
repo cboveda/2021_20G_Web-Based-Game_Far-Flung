@@ -40,7 +40,7 @@ public class TerrainController : MonoBehaviour {
     void Start() {
         satellite.GetComponent<FlightControl>().speed = 35f;
 
-        // Application.targetFrameRate = 30;
+        // Application.targetFrameRate = 30; // Use to throttle web client, optional
     }
 
     void Update() {
@@ -53,10 +53,6 @@ public class TerrainController : MonoBehaviour {
                 Vector2 pVec = new Vector2( z, x ); // .x = z, .y = x
 
                 if ( !tileDict.ContainsKey( pVec ) ) {
-
-                    //tileDict[pVec].tile.SetVisible();
-
-                    //} else {
 
                     MapTile tile = new MapTile( "Mesh( " + z + ", " + x + " )" );
 
@@ -72,21 +68,8 @@ public class TerrainController : MonoBehaviour {
                     tileDict.Add( pVec, omTile );
                 }
             }
-        } 
-        // update each tiles visibility each frame and prune tiles from dict as the fall behind
-        foreach ( KeyValuePair<Vector2, OpenMapTile> mt in tileDict ) {
-            
-            if ( mt.Key.x < currTileZ && mt.Value.tile.fin ) {
-                mt.Value.tile.UnsetVisible();
-                forRemoval.Add( mt.Key );
-            }
         }
-        foreach ( Vector2 v2 in forRemoval ) {
-            tileDict[v2].tile.Destroy();
-            tileDict.Remove( v2 );
-            unloadWaste = true;
-        }
-        forRemoval.Clear();
+
         // cycle through queued jobs
         if ( stageThree.Count > 0 ) {
             MapTileFactory.MapTileStageThree( stageThree.Dequeue() );
@@ -100,6 +83,19 @@ public class TerrainController : MonoBehaviour {
         } else if ( unloadWaste ) {
             Resources.UnloadUnusedAssets();
             unloadWaste = false;
+
+        } else {    // prune tiles from dict as the fall behind
+            foreach ( KeyValuePair<Vector2, OpenMapTile> mt in tileDict ) {
+                if ( mt.Key.x < currTileZ && mt.Value.tile.fin ) {
+                    forRemoval.Add( mt.Key );
+                }
+            }
+            foreach ( Vector2 v2 in forRemoval ) {
+                tileDict[v2].tile.Destroy();
+                tileDict.Remove( v2 );
+                unloadWaste = true;
+            }
+            forRemoval.Clear();
         }
     }
 }

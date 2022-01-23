@@ -27,7 +27,6 @@ public class MapTileFactory {
         job.tile.meshObj.transform.position = job.coord;
         job.tile.neutronSignals = job.sigSpawner.CreateSignals( job.meshData.normalizedHeightMap, job.tScale, job.coord );
         job.tile.fin = true;
-        job.tile.SetVisible();
     }
 }
 
@@ -52,14 +51,6 @@ public class MapTile {
         meshFilter = meshObj.AddComponent<MeshFilter>();
         meshCollider = meshObj.AddComponent<MeshCollider>();
         meshCollider.cookingOptions = MeshColliderCookingOptions.None;
-    }
-
-    public void SetVisible() {
-        meshObj.SetActive( true );
-    }
-
-    public void UnsetVisible() {
-        meshObj.SetActive( false );
     }
 
     public void Destroy() {
