@@ -41,6 +41,7 @@ public class SpectraPuzzleDisplay : MonoBehaviour
     RectTransform exampleRect;
 
     GameObject spectraResponse;
+    Text responseText;
 
 
     // Start is called before the first frame update
@@ -59,6 +60,8 @@ public class SpectraPuzzleDisplay : MonoBehaviour
         elementName = elementNameDisplay.GetComponent<Text>();
 
         spectraResponse = GameObject.Find("ResponseIndicator");
+        responseText = spectraResponse.GetComponent<Text>();
+
         
 
     }
@@ -220,5 +223,10 @@ public class SpectraPuzzleDisplay : MonoBehaviour
 
 
         }
+    }
+
+    public void DisplayIncorrectGuess()
+    {
+        responseText.text = "Incorrect guess.";
     }
 }
