@@ -17,7 +17,6 @@ public class MouseLook : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
@@ -25,22 +24,33 @@ public class MouseLook : MonoBehaviour
     {
         if (Input.GetButtonDown("Cancel"))
         {
-            if(Cursor.lockState == CursorLockMode.Locked){
-            //Actives Menu Canvas
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-            MenuObject.SetActive(true) ;
+            if (Cursor.lockState == CursorLockMode.Locked)
+            {
+                PauseAssembly();
             }
-            else {
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-                MenuObject.SetActive(false);
+            else
+            {
+                ResumeAssembly();
             }
         }
         if (Cursor.lockState == CursorLockMode.Locked)
         {
             LookUpdate();
         }
+    }
+
+    public void PauseAssembly()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        MenuObject.SetActive(true);
+    }
+
+    public void ResumeAssembly()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        MenuObject.SetActive(false);
     }
 
     void LookUpdate()
