@@ -216,6 +216,7 @@ public class ComGameTests
 
         GameObject ob = new GameObject();
         ob.AddComponent<SendDataActions>();
+        ob.AddComponent<AudioSource>();
         SendDataActions sendButtonObject = GameObject.FindObjectOfType<SendDataActions>();
 
         // disable data buttons
