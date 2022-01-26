@@ -84,6 +84,7 @@ public class ComGameTests
 
         GameObject main = new GameObject();
         main.AddComponent<ComGameMain>();
+        main.AddComponent<AudioSource>();
         ComGameMain mainObject = GameObject.FindObjectOfType<ComGameMain>();
 
         // set the tiles back to start positions 
