@@ -262,6 +262,7 @@ public class ComGameTests
 
         GameObject ob = new GameObject();
         ob.AddComponent<ComUnscrambleMain>();
+        ob.AddComponent<AudioSource>();
         ComUnscrambleMain unscrambleMainObject = GameObject.FindObjectOfType<ComUnscrambleMain>();
 
         // verify all words are scrambled at start
@@ -459,6 +460,7 @@ public class ComGameTests
 
         GameObject ob = new GameObject();
         ob.AddComponent<ComUnscrambleMain>();
+        ob.AddComponent<AudioSource>();
         ComUnscrambleMain unscrambleMainObject = GameObject.FindObjectOfType<ComUnscrambleMain>();
 
         // enable the continue button
