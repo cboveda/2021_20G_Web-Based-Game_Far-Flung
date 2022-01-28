@@ -216,6 +216,7 @@ public class ComGameTests
 
         GameObject ob = new GameObject();
         ob.AddComponent<SendDataActions>();
+        ob.AddComponent<AudioSource>();
         SendDataActions sendButtonObject = GameObject.FindObjectOfType<SendDataActions>();
 
         // disable data buttons
@@ -406,4 +407,68 @@ public class ComGameTests
         }
 
     }
+
+    [UnityTest]
+    public IEnumerator TestUnscrambleInfo()
+    {
+        // load scene with the scriptable tile objects
+        SceneManager.LoadScene("comUnscrambleWin");
+        yield return new WaitForSeconds(0.2f); // delay to load scene
+
+        // get a scriptable image object to use
+        GameObject scriptObject = GameObject.Find("imager");
+
+        // get an info object to use
+        GameObject infoObject = GameObject.Find("imagerinfo");
+        
+        // verify image and info is highlighted and displayed
+        Color highlightColor = new Color32(255, 255, 255, 255);
+        String displaySortingLayer = "Board";
+        scriptObject.GetComponent<ComUnscrambleInfo>().HighlightPicture("imager");
+        scriptObject.GetComponent<ComUnscrambleInfo>().DisplayInfo("imager");
+        Assert.AreEqual(scriptObject.GetComponent<SpriteRenderer>().color, highlightColor);
+        Assert.AreEqual(infoObject.GetComponent<SpriteRenderer>().sortingLayerName, displaySortingLayer);
+
+        // verify image and info is hidden and instructions are displayed
+        Color highlightOff = new Color32(255, 255, 255, 150);
+        String hiddenSortingLayer = "Hidden";
+        scriptObject.GetComponent<ComUnscrambleInfo>().HideInfo("imager");
+        GameObject instructions = GameObject.Find("InstructionsText");        
+        Assert.AreEqual(infoObject.GetComponent<SpriteRenderer>().sortingLayerName, hiddenSortingLayer);
+        Assert.AreEqual(instructions.GetComponent<UnityEngine.UI.Text>().enabled, true);
+
+    }
+
+    [UnityTest]
+    public IEnumerator TestUnscrambleContinue()
+    {
+        // verify scrambled words default properties at start
+
+        // load scene with the scriptable tile objects
+        SceneManager.LoadScene("comUnscramble");
+        yield return new WaitForSeconds(0.2f); // delay to load scene
+
+        // verify continue button is disabled start
+        GameObject continueButton = GameObject.Find("Continue");
+        GameObject continueText = GameObject.Find("ContinueText");
+
+        Assert.AreEqual(continueButton.GetComponent<UnityEngine.UI.Button>().enabled, false);
+        Assert.AreEqual(continueButton.GetComponent<UnityEngine.UI.Image>().enabled, false);
+        Assert.AreEqual(continueText.GetComponent<UnityEngine.UI.Text>().enabled, false);
+
+        GameObject ob = new GameObject();
+        ob.AddComponent<ComUnscrambleMain>();
+        ComUnscrambleMain unscrambleMainObject = GameObject.FindObjectOfType<ComUnscrambleMain>();
+
+        // enable the continue button
+        unscrambleMainObject.EnableContinueButton();
+
+        // verify continue button is enabled
+        Assert.AreEqual(continueButton.GetComponent<UnityEngine.UI.Button>().enabled, true);
+        Assert.AreEqual(continueButton.GetComponent<UnityEngine.UI.Image>().enabled, true);
+        Assert.AreEqual(continueText.GetComponent<UnityEngine.UI.Text>().enabled, true);
+
+
+    }
+
 }
