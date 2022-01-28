@@ -100,7 +100,9 @@ public class LabSpectraTest
         GameObject elementName = new GameObject("ElementName");
         elementName.gameObject.AddComponent<Text>();
         GameObject puzzleHolder1 = new GameObject();
-        
+        GameObject spectraResponse = new GameObject("ResponseIndicator");
+        spectraResponse.gameObject.AddComponent<Text>();
+
         elementName.gameObject.AddComponent<Text>();
         SpectraPuzzle puzzle1 = puzzleHolder1.AddComponent<SpectraPuzzle>();
 
