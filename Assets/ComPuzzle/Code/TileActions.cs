@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Linq;
 
 public class TileActions : MonoBehaviour
 {
@@ -72,7 +73,9 @@ public class TileActions : MonoBehaviour
     GameObject solveButton;
 
     AudioSource audioSource;
-        
+    GameObject volumeSlider;
+    float volumeStart = 0.5f;
+            
     bool disable = false;
 
 
@@ -124,6 +127,9 @@ public class TileActions : MonoBehaviour
         continueText.GetComponent<Text>().enabled = false;
 
         audioSource = GetComponent<AudioSource>();
+        volumeSlider = GameObject.Find("VolumeSlider");
+
+        volumeSlider.GetComponent<Slider>().value = volumeStart;
 
     }
 
@@ -236,8 +242,8 @@ public class TileActions : MonoBehaviour
     }
 
     void Update()
-    {
-        
+    {              
+
         // disable tiles
         if (FindObjectOfType<TileActions>().DisableTiles == true )
         {
@@ -245,6 +251,12 @@ public class TileActions : MonoBehaviour
         }
 
         spriteName = rend.sprite.name;
+
+        string[] noAudioList = { "Square", finalPiece, "Circle" };
+        if (!noAudioList.Contains(spriteName))
+        {
+            audioSource.volume = volumeSlider.GetComponent<Slider>().value;
+        }        
 
         if (Input.GetMouseButtonDown(0) && onTile && validMove)
         {

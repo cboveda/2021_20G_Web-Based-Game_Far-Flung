@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class SendDataActions : MonoBehaviour
 {
@@ -9,18 +10,22 @@ public class SendDataActions : MonoBehaviour
     int start = 0;
     string buttonName = "";
     AudioSource audioSource;
+    GameObject volumeSlider;
+    float volumeStart = 0.5f;
 
 
     // Start is called before the first frame update
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        volumeSlider = GameObject.Find("VolumeSlider");
+        volumeSlider.GetComponent<Slider>().value = volumeStart;
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        audioSource.volume = volumeSlider.GetComponent<Slider>().value;
     }
 
 
