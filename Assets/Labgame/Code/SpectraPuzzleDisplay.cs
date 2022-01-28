@@ -40,6 +40,10 @@ public class SpectraPuzzleDisplay : MonoBehaviour
     GameObject exampleDisplay;
     RectTransform exampleRect;
 
+    GameObject spectraResponse;
+    Text responseText;
+
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -54,6 +58,9 @@ public class SpectraPuzzleDisplay : MonoBehaviour
 
         elementNameDisplay = GameObject.Find("ElementName");
         elementName = elementNameDisplay.GetComponent<Text>();
+
+        spectraResponse = GameObject.Find("ResponseIndicator");
+        responseText = spectraResponse.GetComponent<Text>();
 
         
 
@@ -93,6 +100,7 @@ public class SpectraPuzzleDisplay : MonoBehaviour
 
     public void UpdateExampleDisplay()
     {
+        ClearStatusDisplay();
         for (int i = 0; i < Spectra.SPECTRA_ARRAY_SIZE; i++)
         {
             MeshRenderer renderer = spectraExampleDisplayPrimatives[i].GetComponent<MeshRenderer>();
@@ -112,7 +120,7 @@ public class SpectraPuzzleDisplay : MonoBehaviour
     public void UpdateElementalDisplay(int elementalDisplayToUpdate)
     {
         GameObject[] elementalDisplayPrimatives;
-
+        ClearStatusDisplay();
         switch (elementalDisplayToUpdate)
         {
             case 1:
@@ -182,7 +190,7 @@ public class SpectraPuzzleDisplay : MonoBehaviour
             Destroy(spectraSecondaryDisplayPrimatives[i]);
             Destroy(spectraTraceDisplayPrimatives[i]);
         }
-
+        ClearStatusDisplay();
         Destroy(this);
     }
 
@@ -216,5 +224,15 @@ public class SpectraPuzzleDisplay : MonoBehaviour
 
 
         }
+    }
+
+    public void DisplayIncorrectGuess()
+    {
+        responseText.text = "Incorrect guess.";
+    }
+
+    public void ClearStatusDisplay()
+    {
+        responseText.text = "";
     }
 }
