@@ -148,6 +148,19 @@ namespace DialogMaker
         {
             return dialogEntryPosition;
         }
+
+        public bool AllDialogComplete()
+        {
+            if(dialogEntryPosition >= dialogContainer.dialogs.Length && dialogTyper.currentlyTyping == false)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+            
+        }
     }
 }
 

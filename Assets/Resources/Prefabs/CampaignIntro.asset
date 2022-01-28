@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c8f0b50b74f8f34d910f4ef4e9b0b1c, type: 3}
+  m_Name: CampaignIntro
+  m_EditorClassIdentifier: 
+  dialogs:
+  - dialogText: Shhhh!  It's awake!
+    robotVoice: 1
+  - dialogText: What do we do with it?
+    robotVoice: 2
+  - dialogText: ...maybe we try to say "Hi" to it?
+    robotVoice: 1
+  - dialogText: Okay.  "Hi to it."
+    robotVoice: 2
+  - dialogText: Uhh...  Don't listen to him.  Hello!  Hi!  You're probably wondering
+      why you're here...
+    robotVoice: 1
+  - dialogText: We are huge fans of space.
+    robotVoice: 1
+  - dialogText: Huge fans.
+    robotVoice: 2
+  - dialogText: And we need your help!  Long story short, you've been asleep for
+      hundreds of years, and our records indicate that you either worked on the Psyche
+      mission of 2022, or at least maybe heard of it...
+    robotVoice: 1
+  - dialogText: Have you heard of it?  It was a satellite sent to a potentially metalloid
+      meteor...
+    robotVoice: 2
+  - dialogText: Assembly Area is ready.  We should proceed with the subject.
+    robotVoice: 0
+  - dialogText: That's AUTO.  He's uh...pretty straight forward.  Don't mind him. 
+      I'm RD1, pleased to meet you!
+    robotVoice: 1
+  - dialogText: And I'm ID-10-T.  Charmed.
+    robotVoice: 2
+  - dialogText: OH I AM SO EXCITED.  Let's get this show started and see what it
+      might have been like for a human on the Psyche mission!
+    robotVoice: 1
