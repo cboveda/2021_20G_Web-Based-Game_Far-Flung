@@ -305,6 +305,8 @@ public class SpectraPuzzle : LabPuzzle
             
             return true;
         }
+        // Call error display here.
+        mySpectraPuzzleDisplay.DisplayIncorrectGuess();
         Debug.Log("Puzzle not Solved.");
         return false;
     }
