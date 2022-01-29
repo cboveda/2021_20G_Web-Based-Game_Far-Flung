@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
+using System;
 
 
 public class ComUnscrambleMain : MonoBehaviour
@@ -25,6 +27,9 @@ public class ComUnscrambleMain : MonoBehaviour
     GameObject continueButton;
     GameObject continueText;
     GameObject successObject;
+
+    AudioSource audioSource;
+    GameObject volumeSlider;
 
 
     public bool word1ColorUpdated
@@ -109,7 +114,11 @@ public class ComUnscrambleMain : MonoBehaviour
         HideContinueButton();
 
         //UpdateFinalWord();
-        
+
+        audioSource = GetComponent<AudioSource>();
+        volumeSlider = GameObject.Find("VolumeSlider");
+        audioSource.Play();
+
     }
 
 
@@ -152,6 +161,8 @@ public class ComUnscrambleMain : MonoBehaviour
         int row3 = 3;
         int row4 = 4;
         int row5 = 5;
+
+        audioSource.volume = volumeSlider.GetComponent<Slider>().value;
 
         winWordsAll = FindObjectOfType<ComUnscrambleMain>().wordsAllWin;
         if (!winWordsAll)
