@@ -1291,8 +1291,8 @@ MonoBehaviour:
   greenMaterial: {fileID: 2100000, guid: 20b054b2b90e0db4fa689fb9c5cb13e5, type: 2}
   redMaterial: {fileID: 2100000, guid: 623e8b8acc22fba479f4997134850829, type: 2}
   sizeOfCube: 0.5
-  startingSolutionSize: {x: 2, y: 1}
-  maxSolutionSize: {x: 4, y: 6}
+  startingSolutionSize: {x: 1, y: 1, z: 1}
+  maxSolutionSize: {x: 1, y: 3, z: 2}
   numberOfPuzzles: 3
   cubeSpacing: 1.5
   psyche: {fileID: 396787327}
