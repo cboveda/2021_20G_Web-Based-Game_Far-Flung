@@ -15,6 +15,7 @@ public class MainMenu : MonoBehaviour
     {
         diagIntro = GameObject.Find("DialogIntro").GetComponent<DialogGenerator>();
         introStarted = false;
+        
     }
 
     // Update is called once per frame
@@ -25,9 +26,9 @@ public class MainMenu : MonoBehaviour
             //if (diagIntro.AllDialogComplete())
             if(diagIntro == null)
             {
-                Scene scene = SceneManager.GetActiveScene();
-                sceneNum = scene.buildIndex;
-                SceneManager.LoadScene(sceneNum + 1);
+                //Scene scene = SceneManager.GetActiveScene();
+                //sceneNum = scene.buildIndex;
+                SceneManager.LoadScene(HubTracker.LevelToLoad++ + 1);
             }
         }
         
