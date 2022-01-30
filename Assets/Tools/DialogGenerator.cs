@@ -24,12 +24,18 @@ namespace DialogMaker
         private GameObject goButtonContainer;
         private Button btnDialogButton;
 
+        private GameObject goAudioContainer;
+        private AudioSource dialogAudioSource;
+
         private DialogTyper dialogTyper;
 
         private int dialogEntryPosition = 0;
 
         private const string DIALOG_BACKGROUND_PATH = "Dialog";
         private const string DIALOG_PORTRAIT_BACKGROUND_PATH = "PortraitBack";
+        private const string DIALOG_PORTRAIT_BACKGROUND_HIGHENERGY_PATH = "PortraitBackJact";
+        private const string DIALOG_PORTRAIT_BACKGROUND_LOWENERGY_PATH = "PortraitBackID10T";
+        private const string DIALOG_PORTRAIT_BACKGROUND_SERIOUS_PATH = "PortraitBackRoot";
         [SerializeField]
         private int dialogFontSize = 36;
         [SerializeField]
@@ -46,6 +52,12 @@ namespace DialogMaker
             }
 
             // Create the necessary components and get ready...
+
+            goAudioContainer = new GameObject();
+            goAudioContainer.name = "DialogAudioSource";
+            goAudioContainer.transform.SetParent(this.transform);
+            dialogAudioSource = goAudioContainer.AddComponent<AudioSource>();
+
             goCanvasContainer = new GameObject();
             goCanvasContainer.name = "DMCanvas";
             goCanvasContainer.transform.SetParent(this.transform);
@@ -131,7 +143,12 @@ namespace DialogMaker
                 if(dialogEntryPosition < dialogContainer.dialogs.Length)
                 {
                     goCanvasContainer.SetActive(true);
-                    dialogTyper.AddTyper(dialogUIText, dialogContainer.GetNextDialogMessage(dialogEntryPosition++).dialogText, dialogTypingSpeed);
+                    dialogPortraitBackground.sprite = GetDialogPortraitBackgroundSprite(dialogContainer.dialogs[dialogEntryPosition].robotVoice);
+                    dialogTyper.AddTyper(dialogUIText, dialogContainer.GetNextDialogMessage(dialogEntryPosition).dialogText, dialogTypingSpeed);
+                    dialogAudioSource.clip = dialogContainer.dialogs[dialogEntryPosition].dialogAudio;
+                    dialogAudioSource.Play();
+                    dialogEntryPosition++;
+
                 }
                 else
                 {
@@ -161,6 +178,26 @@ namespace DialogMaker
             }
             
         }
+
+        private Sprite GetDialogPortraitBackgroundSprite(RobotCharacter roboCharacter)
+        {
+            switch (roboCharacter)
+            {
+                case RobotCharacter.HighEnergy:
+                    return Resources.Load<Sprite>(DIALOG_PORTRAIT_BACKGROUND_HIGHENERGY_PATH);
+                    break;
+                case RobotCharacter.LowEnergy:
+                    return Resources.Load<Sprite>(DIALOG_PORTRAIT_BACKGROUND_LOWENERGY_PATH);
+                    break;
+                case RobotCharacter.Serious:
+                    return Resources.Load<Sprite>(DIALOG_PORTRAIT_BACKGROUND_SERIOUS_PATH);
+                    break;
+                default:
+                    return Resources.Load<Sprite>(DIALOG_PORTRAIT_BACKGROUND_PATH);
+                    break;
+            }
+        }
+        
     }
 }
 
