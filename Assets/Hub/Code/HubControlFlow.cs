@@ -12,13 +12,19 @@ public class HubControlFlow : MonoBehaviour
     DialogGenerator diagFlight;
     DialogGenerator diagScan;
     AudioSource bgAudio;
+    FadeController fader;
+    GameObject mainMenu;
     bool introStarted;
     // Start is called before the first frame update
     void Start()
     {
         diagIntro = GameObject.Find("DialogIntro").GetComponent<DialogGenerator>();
+
         //diagFlight = GameObject.Find("DialogFlight").GetComponent<DialogGenerator>();
         //diagScan = GameObject.Find("DialogScan").GetComponent<DialogGenerator>();
+        fader = GameObject.Find("FadeController").GetComponent<FadeController>();
+        //mainMenu = GameObject.Find("Canvas");
+        //fader.Fade();
         introStarted = false;
         //if (HubTracker.LevelToLoad == 0)
         //{
@@ -73,5 +79,36 @@ public class HubControlFlow : MonoBehaviour
                 //SceneManager.LoadScene(HubTracker.LevelToLoad++ + 1);
             }
         }
+    }
+
+    public void Fade()
+    {
+        fader.Fade();
+    }
+
+    public void StartIntro()
+    {
+        StartCoroutine(BeginGame());
+    }
+
+    IEnumerator BeginGame()
+    {
+        //diagIntro = GameObject.Find("DialogIntro").GetComponent<DialogGenerator>();
+        Fade();
+        yield return new WaitForSeconds(2);
+        diagIntro.BeginPlayingDialog();
+        HubTracker.LevelToLoad = 1;
+        HubTracker.IntroStarted = true;
+        GameObject.Find("UIBackground").SetActive(false);
+        GameObject.Find("PlayButton").SetActive(false);
+        GameObject.Find("FarFlungLogoImg").SetActive(false);
+        //mainMenu.SetActive(false);
+        yield return new WaitForSeconds(2);
+        fader.ResetAndFade();
+    }
+
+    IEnumerator delay(int amount)
+    {
+        yield return new WaitForSeconds(amount);
     }
 }

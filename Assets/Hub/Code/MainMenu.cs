@@ -7,15 +7,16 @@ using DialogMaker;
 
 public class MainMenu : MonoBehaviour
 {
-    int sceneNum;
-    DialogGenerator diagIntro;
-    DialogGenerator diagFlight;
-    DialogGenerator diagScan;
-    bool introStarted;
+    //int sceneNum;
+    HubControlFlow hubController;
+    //DialogGenerator diagIntro;
+    //DialogGenerator diagFlight;
+    //DialogGenerator diagScan;
+    //bool introStarted;
     // Start is called before the first frame update
     void Start()
     {
-        
+        hubController = GameObject.Find("HubControlFlow").GetComponent<HubControlFlow>();
 
     }
 
@@ -29,14 +30,15 @@ public class MainMenu : MonoBehaviour
     public void PlayButtonClicked()
     {
         Debug.Log("Play button clicked");
-
+        //hubController.Fade();
+        hubController.StartIntro();
         //Scene scene = SceneManager.GetActiveScene();
         //sceneNum = scene.buildIndex;
 
-        diagIntro = GameObject.Find("DialogIntro").GetComponent<DialogGenerator>();
-        diagIntro.BeginPlayingDialog();
-        HubTracker.LevelToLoad = 1;
-        HubTracker.IntroStarted = true;
+        //diagIntro = GameObject.Find("DialogIntro").GetComponent<DialogGenerator>();
+        //diagIntro.BeginPlayingDialog();
+        //HubTracker.LevelToLoad = 1;
+        //HubTracker.IntroStarted = true;
         //introStarted = true;
         
 
