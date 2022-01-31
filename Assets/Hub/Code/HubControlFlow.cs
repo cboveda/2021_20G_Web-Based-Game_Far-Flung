@@ -20,7 +20,7 @@ public class HubControlFlow : MonoBehaviour
     {
         diagIntro = GameObject.Find("DialogIntro").GetComponent<DialogGenerator>();
 
-        //diagFlight = GameObject.Find("DialogFlight").GetComponent<DialogGenerator>();
+        diagFlight = GameObject.Find("DialogFlight").GetComponent<DialogGenerator>();
         //diagScan = GameObject.Find("DialogScan").GetComponent<DialogGenerator>();
         fader = GameObject.Find("FadeController").GetComponent<FadeController>();
         //mainMenu = GameObject.Find("Canvas");
@@ -68,11 +68,14 @@ public class HubControlFlow : MonoBehaviour
                 //Scene scene = SceneManager.GetActiveScene();
                 //sceneNum = scene.buildIndex;
                 //SceneManager.LoadScene(HubTracker.LevelToLoad++ + 1);
+                HubTracker.LevelToLoad++;
                 SceneManager.LoadScene("Assembly 3d");
             }
             else if (diagFlight == null && HubTracker.LevelToLoad == 2)
             {
-                //SceneManager.LoadScene(HubTracker.LevelToLoad++ + 1);
+                HubTracker.LevelToLoad++;
+                SceneManager.LoadScene("1_FlightpathIntro");
+                
             }
             else if (diagScan == null && HubTracker.LevelToLoad == 3)
             {

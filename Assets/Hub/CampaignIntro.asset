@@ -14,47 +14,47 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogs:
   - dialogText: -gasp- Shhhh!  It's awake!
-    robotVoice: 1
+    robotPortrait: 1
     dialogAudio: {fileID: 8300000, guid: aca89bd6b1f539d4b9e3dbe89f60affa, type: 3}
   - dialogText: Oh great.  Now what?
-    robotVoice: 2
+    robotPortrait: 2
     dialogAudio: {fileID: 8300000, guid: 30c507e33a7288545b763b1d61b12b04, type: 3}
   - dialogText: Maybe...maybe we try to say "Hi" to it?
-    robotVoice: 1
+    robotPortrait: 1
     dialogAudio: {fileID: 8300000, guid: 806409bef7a423542a2c7e211918d50a, type: 3}
   - dialogText: "Umm.  Alright.  I\u2019ll try:  \"Hi to it.\""
-    robotVoice: 2
+    robotPortrait: 2
     dialogAudio: {fileID: 8300000, guid: 0994f67098e3d0d43ac4902bcdee348c, type: 3}
   - dialogText: Uhh...  Don't listen to him.  Hello!  Hi!  You're probably wondering
       why you're here...
-    robotVoice: 1
+    robotPortrait: 1
     dialogAudio: {fileID: 8300000, guid: 6eda662a27834544c9ddf363a3d810ba, type: 3}
   - dialogText: We are huge fans of space.
-    robotVoice: 1
+    robotPortrait: 1
     dialogAudio: {fileID: 8300000, guid: 08489b3a14a40c243a0c4a0b172077fe, type: 3}
   - dialogText: Huge fans.
-    robotVoice: 2
+    robotPortrait: 2
     dialogAudio: {fileID: 8300000, guid: cae64bc627c5c80458323bceb02a2a2d, type: 3}
   - dialogText: And we need your help!  Long story short, you've been asleep for
       hundreds of years, and our records indicate that you either worked on the Psyche
       mission of 2022, or at least maybe heard of it...
-    robotVoice: 1
+    robotPortrait: 1
     dialogAudio: {fileID: 8300000, guid: dc2ffa11de9b60b4fbe329412fcc8d5c, type: 3}
   - dialogText: Have you heard of it?  It was a satellite sent to a potentially metalloid
       meteor...
-    robotVoice: 1
+    robotPortrait: 1
     dialogAudio: {fileID: 8300000, guid: 03c260f143351894ba43e5b3abb4da2c, type: 3}
   - dialogText: The Assembly Area is ready.  We should proceed with the subject.
-    robotVoice: 0
+    robotPortrait: 0
     dialogAudio: {fileID: 8300000, guid: 3e4c1b86a8eb9004795ba73d23d87671, type: 3}
   - dialogText: That's ROOT.  He's...pretty straight forward.  Don't mind him.  I'm
       Jact, pleased to meet you!
-    robotVoice: 1
+    robotPortrait: 1
     dialogAudio: {fileID: 8300000, guid: 7116703831cb3a54d87dceed3f921191, type: 3}
   - dialogText: "And I'm ID-10-T.  Charmed, I\u2019m sure..."
-    robotVoice: 2
+    robotPortrait: 2
     dialogAudio: {fileID: 8300000, guid: 96c67f600714c5c45a1587ac96cff639, type: 3}
   - dialogText: Oh, I am so excited!  Let's get this show on the road and see what
       it might have been like for a human on the mission to Psyche!
-    robotVoice: 1
+    robotPortrait: 1
     dialogAudio: {fileID: 8300000, guid: c30cc1b63d117344b8bcc3c7c512b2da, type: 3}
