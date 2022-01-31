@@ -13,17 +13,8 @@ MonoBehaviour:
   m_Name: 1_DialogScriptableObject
   m_EditorClassIdentifier: 
   dialogs:
-  - dialogText: It's time to plot our route to the Psyche! Click anywhere to continue.
+  - dialogText: It's time to plot our route to the asteroid Psyche!
     robotVoice: 3
   - dialogText: We'll use Mars to give us a gravity assist and speed boost! Try using
       the angle slider to aim close to Mars.
-    robotVoice: 3
-  - dialogText: Now, let's adjust the power so that we pass by Mars at just the right
-      time! Try using the power slider.
-    robotVoice: 3
-  - dialogText: Great, now let's run the simulated flightpath to see if it reaches
-      Psyche! Press the Launch button when ready.
-    robotVoice: 3
-  - dialogText: Oops! We ran in to Mars. Hit the reset button and try making some
-      adjustments to the angle and power. Then, hit the launch button to try again.
     robotVoice: 3

@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c8f0b50b74f8f34d910f4ef4e9b0b1c, type: 3}
   m_Name: 4_DialogScriptableObject
   m_EditorClassIdentifier: 
-  dialogs: []
+  dialogs:
+  - dialogText: Oops! We ran in to Mars. Hit the reset button and try making some
+      adjustments to the angle and power. Then, hit the launch button to try again.
+    robotVoice: 0

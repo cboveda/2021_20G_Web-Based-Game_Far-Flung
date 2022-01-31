@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c8f0b50b74f8f34d910f4ef4e9b0b1c, type: 3}
   m_Name: 2_DialogScriptableObject
   m_EditorClassIdentifier: 
-  dialogs: []
+  dialogs:
+  - dialogText: Now, let's adjust the power so that we pass by Mars at just the right
+      time! Try using the power slider.
+    robotVoice: 0
