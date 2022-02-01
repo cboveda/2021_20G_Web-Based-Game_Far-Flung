@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: 4_DialogScriptableObject
   m_EditorClassIdentifier: 
   dialogs:
-  - dialogText: Oops! We ran in to Mars. Hit the reset button and try making some
-      adjustments to the angle and power. Then, hit the launch button to try again.
+  - dialogText: Oops! We ran into Mars!
+    robotVoice: 0
+  - dialogText: Hit the reset button and try making some adjustments to the angle
+      and power. Then, hit the launch button to try again.
     robotVoice: 0

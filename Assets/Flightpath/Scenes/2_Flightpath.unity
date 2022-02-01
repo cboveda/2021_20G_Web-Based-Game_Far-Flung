@@ -1585,7 +1585,8 @@ MonoBehaviour:
   _resetButton: {fileID: 1433370923}
   _powerSlider: {fileID: 1957714126}
   _angleSlider: {fileID: 472336773}
-  DialogGeneratorPrefab: {fileID: 8172208294005014274, guid: 5835d40e467de3f48ac74c2846c867ac, type: 3}
+  _launchManager: {fileID: 65087361}
+  _dialogGeneratorPrefab: {fileID: 8172208294005014274, guid: 5835d40e467de3f48ac74c2846c867ac, type: 3}
   Scripts:
   - {fileID: 11400000, guid: 39003961b5b27224aa73edafce6551f4, type: 2}
   - {fileID: 11400000, guid: d8af7b58da6c14f489544cd0a8c2dd4d, type: 2}
@@ -3567,7 +3568,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!224 &2055317732
 RectTransform:
