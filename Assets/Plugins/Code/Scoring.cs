@@ -85,13 +85,13 @@ public class Scoring : MonoBehaviour
         goButton.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, BUTTON_HEIGHT);
         goButton.GetComponent<RectTransform>().SetPositionAndRotation(buttonLocation, Quaternion.identity);
         
-        goButton.GetComponent<Button>().onClick.AddListener(() => { DebugButtonClicked(); });
+        goButton.GetComponent<Button>().onClick.AddListener(() => { ScoreButtonClicked(); });
    
         return goButton;
     }
 
 
-    public void DebugButtonClicked()
+    public void ScoreButtonClicked()
     {
         //Debug.Log("I done got clicked.");
         string buttonName = EventSystem.current.currentSelectedGameObject.name;
