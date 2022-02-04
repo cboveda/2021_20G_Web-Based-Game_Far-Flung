@@ -1,18 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using System;
 
 
 public class ComGameMain : MonoBehaviour
 {
+    AudioSource audioSource;
+    GameObject volumeSlider;
+    
     // Start is called before the first frame update
     void Start()
     {
         SetTileStartPositions();
+
+        audioSource = GetComponent<AudioSource>();
+        volumeSlider = GameObject.Find("VolumeSlider");        
+        audioSource.Play();
     }
 
 
-    public void SetTileStartPositions()
+    void Update()
+    {        
+        audioSource.volume = volumeSlider.GetComponent<Slider>().value * 0.15F;
+    }
+
+
+        public void SetTileStartPositions()
     {
         //Debug.Log("set start positions");
 

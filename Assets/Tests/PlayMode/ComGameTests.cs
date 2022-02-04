@@ -84,6 +84,7 @@ public class ComGameTests
 
         GameObject main = new GameObject();
         main.AddComponent<ComGameMain>();
+        main.AddComponent<AudioSource>();
         ComGameMain mainObject = GameObject.FindObjectOfType<ComGameMain>();
 
         // set the tiles back to start positions 
@@ -261,6 +262,7 @@ public class ComGameTests
 
         GameObject ob = new GameObject();
         ob.AddComponent<ComUnscrambleMain>();
+        ob.AddComponent<AudioSource>();
         ComUnscrambleMain unscrambleMainObject = GameObject.FindObjectOfType<ComUnscrambleMain>();
 
         // verify all words are scrambled at start
@@ -458,6 +460,7 @@ public class ComGameTests
 
         GameObject ob = new GameObject();
         ob.AddComponent<ComUnscrambleMain>();
+        ob.AddComponent<AudioSource>();
         ComUnscrambleMain unscrambleMainObject = GameObject.FindObjectOfType<ComUnscrambleMain>();
 
         // enable the continue button

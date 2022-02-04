@@ -12,15 +12,48 @@ public class MouseLook : MonoBehaviour
 
     public float lookUpLimit;
     public float lookDownLimit;
-    
+    public GameObject MenuObject;
+
     // Start is called before the first frame update
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
     void Update()
+    {
+        if (Input.GetButtonDown("Cancel"))
+        {
+            if (Cursor.lockState == CursorLockMode.Locked)
+            {
+                PauseAssembly();
+            }
+            else
+            {
+                ResumeAssembly();
+            }
+        }
+        if (Cursor.lockState == CursorLockMode.Locked)
+        {
+            LookUpdate();
+        }
+    }
+
+    public void PauseAssembly()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        MenuObject.SetActive(true);
+    }
+
+    public void ResumeAssembly()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        MenuObject.SetActive(false);
+    }
+
+    void LookUpdate()
     {
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
@@ -32,7 +65,8 @@ public class MouseLook : MonoBehaviour
         playerBody.Rotate(Vector3.up * mouseX);
     }
 
-    void OnDestroy(){
+    void OnDestroy()
+    {
         Cursor.lockState = CursorLockMode.None;
     }
 }
