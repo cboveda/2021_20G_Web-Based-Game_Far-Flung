@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c8f0b50b74f8f34d910f4ef4e9b0b1c, type: 3}
+  m_Name: ScanningDialogIntro
+  m_EditorClassIdentifier: 
+  dialogs:
+  - dialogText: "Wow.  Incredible.  You really got it there.  I\u2019m impressed."
+    robotPortrait: 1
+    dialogAudio: {fileID: 0}
+  - dialogText: "I\u2019m also impressed."
+    robotPortrait: 2
+    dialogAudio: {fileID: 0}
+  - dialogText: "Next is the real exciting part.  We need to collect data!  Now,
+      normally we wouldn\u2019t just joystick the controls for a satellite.  In fact,
+      that probably wasn\u2019t possible.  But this is the future, and we\u2019re
+      Space Enthusiasts!"
+    robotPortrait: 1
+    dialogAudio: {fileID: 0}
+  - dialogText: Very enthusiastic.
+    robotPortrait: 2
+    dialogAudio: {fileID: 0}
+  - dialogText: Flight controls are now available to assume direct control.
+    robotPortrait: 0
+    dialogAudio: {fileID: 0}
+  - dialogText: "Okay.  Do it.  But use a gentle touch!  \u2026we don\u2019t want
+      to wreck all our hard work so far."
+    robotPortrait: 0
+    dialogAudio: {fileID: 0}

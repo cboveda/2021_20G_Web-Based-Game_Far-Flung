@@ -40,8 +40,8 @@ MonoBehaviour:
       mission of 2022, or at least maybe heard of it...
     robotPortrait: 1
     dialogAudio: {fileID: 8300000, guid: dc2ffa11de9b60b4fbe329412fcc8d5c, type: 3}
-  - dialogText: Have you heard of it?  It was a satellite sent to a potentially metalloid
-      meteor...
+  - dialogText: Have you heard of it?  It was a satellite sent to a potentially metallic
+      asteroid...
     robotPortrait: 1
     dialogAudio: {fileID: 8300000, guid: 03c260f143351894ba43e5b3abb4da2c, type: 3}
   - dialogText: The Assembly Area is ready.  We should proceed with the subject.

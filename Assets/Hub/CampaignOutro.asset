@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c8f0b50b74f8f34d910f4ef4e9b0b1c, type: 3}
+  m_Name: CampaignOutro
+  m_EditorClassIdentifier: 
+  dialogs:
+  - dialogText: Wow.  Would you look at that.  You.  Did.  Great.
+    robotPortrait: 1
+    dialogAudio: {fileID: 0}
+  - dialogText: It was a team effort.
+    robotPortrait: 2
+    dialogAudio: {fileID: 0}
+  - dialogText: Early outlook is Psyche is made of metal, and that is what we wanted
+      to confirm.  So, from the bottom of my processing unit, thank you.
+    robotPortrait: 1
+    dialogAudio: {fileID: 0}
+  - dialogText: "You\u2019re welcome."
+    robotPortrait: 2
+    dialogAudio: {fileID: 0}
+  - dialogText: Mission complete.  Subject may now be returned to storage.
+    robotPortrait: 0
+    dialogAudio: {fileID: 0}
+  - dialogText: "Heh heh!  So again\u2026thank you.  But uh\u2026we don\u2019t have
+      anything to feed you, so we should probably put you back in stasis.  If you
+      want to try anything over again, you\u2019re welcome to, and we\u2019ll pretend
+      like it\u2019s the first time.  Otherwise, let us know when you\u2019re ready
+      for your next mission:  To Return\u2026TO SLEEP!"
+    robotPortrait: 1
+    dialogAudio: {fileID: 0}
