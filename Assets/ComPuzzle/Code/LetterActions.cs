@@ -18,6 +18,7 @@ public class LetterActions : MonoBehaviour
     bool switched = false;
     int switchCount = 0;
     AudioSource audioSource;
+    GameObject volumeSlider;
 
 
 
@@ -25,12 +26,13 @@ public class LetterActions : MonoBehaviour
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        volumeSlider = GameObject.Find("VolumeSlider");
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        audioSource.volume = volumeSlider.GetComponent<Slider>().value;
     }
 
 
