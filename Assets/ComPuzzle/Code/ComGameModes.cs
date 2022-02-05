@@ -17,10 +17,17 @@ public class ComGameModes : MonoBehaviour
     GameObject volumeSlider;
     bool easyModeUsed = false;
     bool solvePuzzleUsed = false;
+    bool showingScore = false;
 
     public void EasyModeOn()
     {
         //Debug.Log("easy mode");
+        showingScore = FindObjectOfType<Scoring>().getShowingScore;
+        if (showingScore)
+        {
+            return;
+        }
+
         if ( easyModeUsed == false )
         {
             Scoring.Instance.updateScore(-50);
@@ -71,6 +78,12 @@ public class ComGameModes : MonoBehaviour
     public void SolvePuzzle()
     {
         //Debug.Log("solve puzzle");
+
+        showingScore = FindObjectOfType<Scoring>().getShowingScore;
+        if (showingScore)
+        {
+            return;
+        }
 
         if (solvePuzzleUsed == false)
         {
