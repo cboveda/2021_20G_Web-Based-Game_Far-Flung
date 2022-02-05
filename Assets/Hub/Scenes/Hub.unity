@@ -7853,6 +7853,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8172208294005014276, guid: 5835d40e467de3f48ac74c2846c867ac, type: 3}
+      propertyPath: dialogContainer
+      value: 
+      objectReference: {fileID: 11400000, guid: 7680fa1fb6756874d9768a27fcc1478e, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5835d40e467de3f48ac74c2846c867ac, type: 3}
 --- !u!4 &276613153 stripped
@@ -17262,6 +17266,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8172208294005014276, guid: 5835d40e467de3f48ac74c2846c867ac, type: 3}
+      propertyPath: dialogContainer
+      value: 
+      objectReference: {fileID: 11400000, guid: 610ed530299679844b7f26b0369d5010, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5835d40e467de3f48ac74c2846c867ac, type: 3}
 --- !u!1 &624254747
@@ -21131,6 +21139,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8172208294005014276, guid: 5835d40e467de3f48ac74c2846c867ac, type: 3}
+      propertyPath: dialogContainer
+      value: 
+      objectReference: {fileID: 11400000, guid: 979ad5a2e0a49f8489b9a9eebc94b50a, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5835d40e467de3f48ac74c2846c867ac, type: 3}
 --- !u!1 &756658142
@@ -24151,6 +24163,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8172208294005014276, guid: 5835d40e467de3f48ac74c2846c867ac, type: 3}
+      propertyPath: dialogContainer
+      value: 
+      objectReference: {fileID: 11400000, guid: d5ea9efa53929654c87f0fcaf40b1b6c, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5835d40e467de3f48ac74c2846c867ac, type: 3}
 --- !u!1 &864655771
