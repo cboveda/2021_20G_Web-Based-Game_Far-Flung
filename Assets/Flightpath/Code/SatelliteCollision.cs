@@ -17,13 +17,25 @@ namespace Flightpath
             {
                 EventSystem.GetComponent<LaunchManager>().OnMarsCollisionDetected();
             }
-        }
-
-        private void OnTriggerExit(Collider other)
-        {
             if (other.CompareTag("FlightpathBounds") && EventSystem)
             {
-                EventSystem.GetComponent<LaunchManager>().OnSatelliteLeaveWindow();
+                if (other.name == "TopBoundary")
+                {
+                    EventSystem.GetComponent<LaunchManager>().OnSatelliteLeaveWindow(LaunchManager.TopBoundaryScriptIndex);
+                }
+                else if (other.name == "BottomBoundary")
+                {
+                    EventSystem.GetComponent<LaunchManager>().OnSatelliteLeaveWindow(LaunchManager.BottomBoundaryScriptIndex);
+                }
+                else if (other.name == "RightBoundary")
+                {
+                    EventSystem.GetComponent<LaunchManager>().OnSatelliteLeaveWindow(LaunchManager.RightBoundaryScriptIndex);
+                }
+                else if (other.name == "LeftBoundary")
+                {
+                    EventSystem.GetComponent<LaunchManager>().OnSatelliteLeaveWindow(LaunchManager.LeftBoundaryScriptIndex);
+                }
+                
             }
         }
     }
