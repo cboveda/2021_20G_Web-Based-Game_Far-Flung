@@ -19,6 +19,7 @@ namespace Flightpath
         public Text LoseText;
         private bool _sceneAdvanceStart;
         private bool _launchLocked;
+        private bool _stopped;
 
 
         public void Start()
@@ -31,7 +32,7 @@ namespace Flightpath
             _launchLocked = false;
             SatellitePath.Active = false;
             // todo
-            ResetPlaceholderText();
+            //ResetPlaceholderText();
         }
 
         public void OnAngleSliderChanged(float value)
@@ -81,6 +82,7 @@ namespace Flightpath
                 particles.Clear();
             }
             _launchLocked = false;
+            _stopped = false;
         }
 
         public void OnAsteroidCollisionDetected()
@@ -105,15 +107,13 @@ namespace Flightpath
         public void OnMarsCollisionDetected() 
         {
             StopAll();
-            LoseText.text = "Oops, ran into Mars! Try again."; 
-            LoseText.enabled = true;
+            //LoseText.enabled = true;
             Satellite.GetComponent<ParticleSystem>().Play();
         }
 
         public void OnSatelliteLeaveWindow()
         {
             StopAll();
-            LoseText.text = "Missed the target! Try again.";
             LoseText.enabled = true;
         }
 
@@ -127,6 +127,7 @@ namespace Flightpath
                 p.StopOrbitter();
             }
             SatellitePath.Active = false;
+            _stopped = true;
         }
 
         private void ResetPlaceholderText()
@@ -163,6 +164,11 @@ namespace Flightpath
             _sceneAdvanceStart = true;
             yield return new WaitForSeconds(0.5f);
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+
+        public bool hasStopped()
+        {
+            return _stopped;
         }
 
     }
