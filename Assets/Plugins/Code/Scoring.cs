@@ -175,6 +175,7 @@ public class Scoring : MonoBehaviour
         showingScore = FindObjectOfType<Scoring>().getShowingScore;
         if (showingScore)
         {
+            scoreDetails = GameObject.Find("ScoreDetails");
             scoreDetails.SetActive(false);
             FindObjectOfType<Scoring>().getShowingScore = false;
         }
@@ -231,7 +232,7 @@ public class Scoring : MonoBehaviour
                 if (showingScore)
                 {
                     gameScore = GameObject.Find("ComUnscrambleScore");
-                    gameScore.transform.GetChild(0).GetComponent<Text>().text = comPuzzleScore.ToString();
+                    gameScore.transform.GetChild(0).GetComponent<Text>().text = comUnscrambleScore.ToString();
                 }
                 break;
             case "Assembly 3d":
