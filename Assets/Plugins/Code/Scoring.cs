@@ -9,6 +9,8 @@ using UnityEngine.SceneManagement;
 public class Scoring : MonoBehaviour
 {
 
+    
+
     public Canvas scoringCanvas;
     public GameObject buttonPrefab;
     public GameObject scoringPrefab;
@@ -20,6 +22,29 @@ public class Scoring : MonoBehaviour
     private const float BUTTON_HEIGHT = 30.0f;
     private const float BUTTON_WIDTH_OFFSET = 100.0f;
     private List<GameObject> scoringButtons;
+    
+
+    int totalScore = 0;
+    int comPuzzleScore = 0;
+    int comUnscrambleScore = 0;
+
+    public int getTotalScore
+    {
+        get { return totalScore; }
+        set { totalScore = value; }
+    }
+
+    public int getComPuzzleScore
+    {
+        get { return comPuzzleScore; }
+        set { comPuzzleScore = value; }
+    }
+
+    public int getComUnscrambleScore
+    {
+        get { return comUnscrambleScore; }
+        set { comUnscrambleScore = value; }
+    }
 
     private Dictionary<string, string> scoringBox = new Dictionary<string, string>()
     {
@@ -27,9 +52,25 @@ public class Scoring : MonoBehaviour
         {"ScoreBox", "0"}
     };
 
+
+    public static Scoring Instance;
+    private void Awake()
+    {
+        
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+     
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+
+
     // Start is called before the first frame update
     void Start()
-    {
+    {        
 
         buttonPrefab = Resources.Load<GameObject>(BUTTON_PREFAB_PATH);
         scoringPrefab = Resources.Load<GameObject>(SCORING_PREFAB_PATH);
@@ -108,9 +149,60 @@ public class Scoring : MonoBehaviour
             EventSystem.current.SetSelectedGameObject(null);
         }
     }
-    // Update is called once per frame
-    void Update()
+
+    public void updateScore(int score)
     {
+        GameObject scoringObj = GameObject.Find("ScoreBox");
+        Scene scene = SceneManager.GetActiveScene();
+        string sceneName = scene.name;
+
+        switch (sceneName)
+        {
+            case "comGame":
+                comPuzzleScore = FindObjectOfType<Scoring>().getComPuzzleScore + score;
+                FindObjectOfType<Scoring>().getComPuzzleScore = comPuzzleScore;
+                scoringObj.GetComponentInChildren<Text>().text = comPuzzleScore.ToString();
+                break;
+            case "comUnscramble":
+                comUnscrambleScore = FindObjectOfType<Scoring>().getComUnscrambleScore + score;
+                FindObjectOfType<Scoring>().getComUnscrambleScore = comUnscrambleScore;
+                scoringObj.GetComponentInChildren<Text>().text = comUnscrambleScore.ToString();
+                break;
+        }
+
+        setCurrentScore();
+
+    }
+
+    public void setCurrentScore()
+    {
+        GameObject scoringObj = GameObject.Find("ScoreBox");
+        int total = 0;
+        int score = 0;
+        string[] allScenes = { "comGame", "comUnscramble" };       
+        foreach (string scene in allScenes)
+        {
+            score = getGameScore(scene);
+            total += score;
+        }
+        FindObjectOfType<Scoring>().getTotalScore = total;
+        totalScore = FindObjectOfType<Scoring>().getTotalScore;        
+        scoringObj.GetComponentInChildren<Text>().text = totalScore.ToString();
+    }
+
+    public int getGameScore(string sceneName)
+    {
+        int score = 0;
+        switch (sceneName)
+        {
+            case "comGame":
+                score = FindObjectOfType<Scoring>().getComPuzzleScore;
+                break;
+            case "comUnscramble":
+                score = FindObjectOfType<Scoring>().getComUnscrambleScore;
+                break;
+        }
+        return score;
 
     }
 
