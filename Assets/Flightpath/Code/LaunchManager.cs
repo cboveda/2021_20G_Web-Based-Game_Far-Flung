@@ -30,7 +30,7 @@ namespace Flightpath
         private DialogScriptableObject[] Scripts;
         private bool _sceneAdvanceStart;
         private bool _launchLocked;
-    
+        private bool _stopped;
 
 
         public void Start()
@@ -101,6 +101,7 @@ namespace Flightpath
                 particles.Clear();
             }
             _launchLocked = false;
+            _stopped = false;
         }
 
         public void OnAsteroidCollisionDetected()
@@ -123,6 +124,7 @@ namespace Flightpath
             _dg = _dialogGenerator.GetComponent<DialogGenerator>();
             _dg.dialogContainer = Scripts[MarsBoundaryScriptIndex];
             StartCoroutine("DelayedDialogStart");
+
             Satellite.GetComponent<ParticleSystem>().Play();
         }
 
@@ -151,6 +153,7 @@ namespace Flightpath
                 p.StopOrbitter();
             }
             SatellitePath.Active = false;
+            _stopped = true;
         }
 
         private IEnumerator DelayedSceneAdvance()
@@ -159,5 +162,11 @@ namespace Flightpath
             yield return new WaitForSeconds(2f);
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
+
+        public bool hasStopped()
+        {
+            return _stopped;
+        }
+
     }
 }
