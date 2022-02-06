@@ -152,8 +152,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1b23a7964f72b381a6c96b54a018d39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadingScreen: {fileID: 342512233}
-  slider: {fileID: 222409420}
 --- !u!4 &63512560
 Transform:
   m_ObjectHideFlags: 0
@@ -858,13 +856,13 @@ GameObject:
   - component: {fileID: 992911405}
   - component: {fileID: 992911404}
   - component: {fileID: 992911403}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &992911402
 RectTransform:
   m_ObjectHideFlags: 0
@@ -882,7 +880,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 220, y: -90}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 329.7431, y: 50.2521}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &992911403
@@ -924,14 +922,14 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 992911404}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 63512559}
-        m_TargetAssemblyTypeName: LoadNextScene, ScanningAssembly
-        m_MethodName: LoadScene
+      - m_Target: {fileID: 100459551}
+        m_TargetAssemblyTypeName: FadeDriver, ScanningAssembly
+        m_MethodName: TriggerFade
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -941,9 +939,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 100459551}
-        m_TargetAssemblyTypeName: FadeDriver, ScanningAssembly
-        m_MethodName: TriggerFade
+      - m_Target: {fileID: 63512559}
+        m_TargetAssemblyTypeName: LoadFromStart, ScanningAssembly
+        m_MethodName: LoadScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1290,8 +1288,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 0, y: 154}
+  m_SizeDelta: {x: 548.2995, y: 103.2722}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1584420145
 MonoBehaviour:
@@ -1305,7 +1303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d8aa58a3bfcb47d4a0cabc0d742f917, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 992911401}
+  start_scanning: {fileID: 992911403}
 --- !u!1 &1808716024
 GameObject:
   m_ObjectHideFlags: 0
