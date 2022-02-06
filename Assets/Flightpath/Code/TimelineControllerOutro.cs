@@ -18,7 +18,7 @@ namespace Flightpath
 
         public void Director_Stopped(PlayableDirector o)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            SceneManager.LoadScene("Hub");
         }
     }
 }

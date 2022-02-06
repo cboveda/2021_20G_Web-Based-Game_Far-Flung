@@ -134,6 +134,9 @@ namespace DialogMaker
 
         public bool BeginPlayingDialog()
         {
+            if (dialogContainer == null || dialogTyper == null) {
+                return false;
+            }
             if (dialogTyper.currentlyTyping)
             {
                 dialogTyper.FinishTypingFaster();
