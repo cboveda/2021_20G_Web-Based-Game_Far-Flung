@@ -5,12 +5,12 @@ using UnityEngine.UI;
 
 public class LoadFromStart : MonoBehaviour {
 
-    public GameObject loadingScreen;
-    public Slider slider;
+    // public GameObject loadingScreen;
+    // public Slider slider;
 
     public void LoadScene() {
         
-        loadingScreen.SetActive(true);
+        // loadingScreen.SetActive(true);
         StartCoroutine(LoadSceneInBG());
     }
 
@@ -22,7 +22,7 @@ public class LoadFromStart : MonoBehaviour {
 
         while ( !nextScene.isDone ) { // creates game objects in next scene
 
-            slider.value = Mathf.Clamp01( nextScene.progress / 0.9f );
+            // slider.value = Mathf.Clamp01( nextScene.progress / 0.9f );
 
             if (nextScene.progress >= 0.9f)
             {
