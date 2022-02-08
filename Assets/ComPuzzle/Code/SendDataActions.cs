@@ -12,7 +12,10 @@ public class SendDataActions : MonoBehaviour
     AudioSource audioSource;
     GameObject volumeSlider;
     float volumeStart = 0.5f;
-
+    bool imagePressed = false;
+    bool spectroPressed = false;
+    bool magnetoPressed = false;
+    bool radioPressed = false;
 
     // Start is called before the first frame update
     void Start()
@@ -48,32 +51,76 @@ public class SendDataActions : MonoBehaviour
 
         
         if (buttonName == "ImagerButton")
-        {            
+        {
+            if (imagePressed == false)
+            {
+                Scoring.Instance.updateScore(50);
+                imagePressed = true;
+            }
+
             FindObjectOfType<SendDataActions>().buttonStart = 1;
             wordUpdated = FindObjectOfType<ComUnscrambleMain>().word1ColorUpdated;
             wordRow = 1;
             letterCount = 7;
+
+            if (wordUpdated)
+            {
+                Scoring.Instance.updateScore(-50);
+            }
         }
         if (buttonName == "SpectometerButton")
         {
+            if (spectroPressed == false)
+            {
+                Scoring.Instance.updateScore(50);
+                spectroPressed = true;
+            }
+
             FindObjectOfType<SendDataActions>().buttonStart = 8;
             wordUpdated = FindObjectOfType<ComUnscrambleMain>().word2ColorUpdated;
             wordRow = 2;
             letterCount = 11;
+
+            if (wordUpdated)
+            {
+                Scoring.Instance.updateScore(-50);
+            }
         }
         if (buttonName == "MagnetometerButton")
         {
+            if (magnetoPressed == false)
+            {
+                Scoring.Instance.updateScore(50);
+                magnetoPressed = true;
+            }
+
             FindObjectOfType<SendDataActions>().buttonStart = 19;
             wordUpdated = FindObjectOfType<ComUnscrambleMain>().word3ColorUpdated;
             wordRow = 3;
             letterCount = 8;
+
+            if (wordUpdated)
+            {
+                Scoring.Instance.updateScore(-50);
+            }
         }
         if (buttonName == "RadioButton")
         {
+            if (radioPressed == false)
+            {
+                Scoring.Instance.updateScore(50);
+                radioPressed = true;
+            }
+
             FindObjectOfType<SendDataActions>().buttonStart = 27;
             wordUpdated = FindObjectOfType<ComUnscrambleMain>().word4ColorUpdated;
             wordRow = 4;
             letterCount = 7;
+
+            if (wordUpdated)
+            {
+                Scoring.Instance.updateScore(-50);
+            }
         }
 
 

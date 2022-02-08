@@ -77,6 +77,7 @@ public class TileActions : MonoBehaviour
     float volumeStart = 0.5f;
             
     bool disable = false;
+    bool showingScore = false;
 
 
     void Start()
@@ -140,7 +141,8 @@ public class TileActions : MonoBehaviour
     {
 
         // disable tiles
-        if (FindObjectOfType<TileActions>().DisableTiles == true)
+        showingScore = FindObjectOfType<Scoring>().getShowingScore;
+        if (FindObjectOfType<TileActions>().DisableTiles == true || showingScore)
         {
             return;
         }
@@ -256,12 +258,12 @@ public class TileActions : MonoBehaviour
         if (!noAudioList.Contains(spriteName))
         {
             audioSource.volume = volumeSlider.GetComponent<Slider>().value;
-        }        
+        }
 
         if (Input.GetMouseButtonDown(0) && onTile && validMove)
         {
             //Debug.Log("Pressed primary button on " + spriteName);
-
+            Scoring.Instance.updateScore(-2);
             audioSource.Play();
 
             // get current tile and blank tile positions
@@ -291,6 +293,8 @@ public class TileActions : MonoBehaviour
         if (finalOn && !Input.GetMouseButton(0))
         {
             //Debug.Log("final");         
+
+            Scoring.Instance.updateScore(500);
 
             hideFinalInstructions();
 

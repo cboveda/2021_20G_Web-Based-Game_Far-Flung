@@ -12,6 +12,7 @@ public class SceneActions : MonoBehaviour
 
     public void StartGameScene()
     {
+
         Scene scene = SceneManager.GetActiveScene();
         sceneName = scene.name;
 
@@ -45,6 +46,8 @@ public class SceneActions : MonoBehaviour
 
         //Debug.Log(gameScene);
         SceneManager.LoadScene(gameScene);
+
+
     }
 
 

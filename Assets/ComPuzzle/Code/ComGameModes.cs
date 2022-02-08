@@ -15,11 +15,24 @@ public class ComGameModes : MonoBehaviour
     GameObject tilePosObject;
     GameObject blankPosObject;
     GameObject volumeSlider;
-
+    bool easyModeUsed = false;
+    bool solvePuzzleUsed = false;
+    bool showingScore = false;
 
     public void EasyModeOn()
     {
         //Debug.Log("easy mode");
+        showingScore = FindObjectOfType<Scoring>().getShowingScore;
+        if (showingScore)
+        {
+            return;
+        }
+
+        if ( easyModeUsed == false )
+        {
+            Scoring.Instance.updateScore(-50);
+            easyModeUsed = true;
+        }        
 
         string[] tileNumbers = { "n1", "n2", "n3", "n4", "n5", "n6", "n7", "n8", "n9", "n10", "n11", "n12" };
         string sortingLayer = "";
@@ -65,6 +78,18 @@ public class ComGameModes : MonoBehaviour
     public void SolvePuzzle()
     {
         //Debug.Log("solve puzzle");
+
+        showingScore = FindObjectOfType<Scoring>().getShowingScore;
+        if (showingScore)
+        {
+            return;
+        }
+
+        if (solvePuzzleUsed == false)
+        {
+            Scoring.Instance.updateScore(-1000);
+            solvePuzzleUsed = true;
+        }
 
         string tileNumber = "";
         float[] winPos = { 0.0F, 0.0F };

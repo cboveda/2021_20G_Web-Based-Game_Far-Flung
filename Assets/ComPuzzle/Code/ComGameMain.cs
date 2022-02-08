@@ -19,6 +19,9 @@ public class ComGameMain : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         volumeSlider = GameObject.Find("VolumeSlider");        
         audioSource.Play();
+
+        // start score of 1000
+        Scoring.Instance.updateScore(1000);        
     }
 
 
@@ -28,7 +31,7 @@ public class ComGameMain : MonoBehaviour
     }
 
 
-        public void SetTileStartPositions()
+    public void SetTileStartPositions()
     {
         //Debug.Log("set start positions");
 
