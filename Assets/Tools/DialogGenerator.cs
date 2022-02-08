@@ -122,14 +122,6 @@ namespace DialogMaker
             goCanvasContainer.SetActive(false);
 
             dialogTyper = gameObject.AddComponent<DialogTyper>();
-
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-            
         }
 
         public bool BeginPlayingDialog()
@@ -143,7 +135,7 @@ namespace DialogMaker
             }
             else
             {
-                if(dialogEntryPosition < dialogContainer.dialogs.Length)
+                if (dialogEntryPosition < dialogContainer.dialogs.Length)
                 {
                     goCanvasContainer.SetActive(true);
                     dialogPortraitBackground.sprite = GetDialogPortraitBackgroundSprite(dialogContainer.dialogs[dialogEntryPosition].robotVoice);
@@ -151,14 +143,12 @@ namespace DialogMaker
                     dialogAudioSource.clip = dialogContainer.dialogs[dialogEntryPosition].dialogAudio;
                     dialogAudioSource.Play();
                     dialogEntryPosition++;
-
                 }
                 else
                 {
                     goCanvasContainer.SetActive(false);
                     Destroy(this);
                 }
-                
             }
             
             return true;
@@ -171,15 +161,7 @@ namespace DialogMaker
 
         public bool AllDialogComplete()
         {
-            if(dialogEntryPosition >= dialogContainer.dialogs.Length && dialogTyper.currentlyTyping == false)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-            
+            return (dialogEntryPosition >= dialogContainer.dialogs.Length && dialogTyper.currentlyTyping == false);
         }
 
         private Sprite GetDialogPortraitBackgroundSprite(RobotCharacter roboCharacter)
@@ -188,20 +170,14 @@ namespace DialogMaker
             {
                 case RobotCharacter.HighEnergy:
                     return Resources.Load<Sprite>(DIALOG_PORTRAIT_BACKGROUND_HIGHENERGY_PATH);
-                    break;
                 case RobotCharacter.LowEnergy:
                     return Resources.Load<Sprite>(DIALOG_PORTRAIT_BACKGROUND_LOWENERGY_PATH);
-                    break;
                 case RobotCharacter.Serious:
                     return Resources.Load<Sprite>(DIALOG_PORTRAIT_BACKGROUND_SERIOUS_PATH);
-                    break;
                 default:
                     return Resources.Load<Sprite>(DIALOG_PORTRAIT_BACKGROUND_PATH);
-                    break;
             }
         }
         
     }
 }
-
-

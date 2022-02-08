@@ -6,8 +6,10 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
+
 public class Scoring : MonoBehaviour
 {
+        
 
     public Canvas scoringCanvas;
     public GameObject buttonPrefab;
@@ -21,15 +23,90 @@ public class Scoring : MonoBehaviour
     private const float BUTTON_WIDTH_OFFSET = 100.0f;
     private List<GameObject> scoringButtons;
 
+    GameObject scoreDetails;
+    int totalScore = 0;
+    int comPuzzleScore = 0;
+    int comUnscrambleScore = 0;
+    int assemblyScore = 0;
+    int flightPathScore = 0;
+    int scanningScore = 0;
+    int labScore = 0;
+    public bool showingScore = false;
+
+
+    public bool getShowingScore
+    {
+        get { return showingScore; }
+        set { showingScore = value; }
+    }
+
+    public int getTotalScore
+    {
+        get { return totalScore; }
+        set { totalScore = value; }
+    }
+
+    public int getComPuzzleScore
+    {
+        get { return comPuzzleScore; }
+        set { comPuzzleScore = value; }
+    }
+
+    public int getComUnscrambleScore
+    {
+        get { return comUnscrambleScore; }
+        set { comUnscrambleScore = value; }
+    }
+
+    public int getAssemblyScore
+    {
+        get { return assemblyScore; }
+        set { assemblyScore = value; }
+    }
+
+    public int getFlightPathScore
+    {
+        get { return flightPathScore; }
+        set { flightPathScore = value; }
+    }
+
+    public int getScanningScore
+    {
+        get { return scanningScore; }
+        set { scanningScore = value; }
+    }
+
+        public int getLabScore
+    {
+        get { return labScore; }
+        set { labScore = value; }
+    }
+
     private Dictionary<string, string> scoringBox = new Dictionary<string, string>()
     {
         {"ScoringButton", "Score"},
         {"ScoreBox", "0"}
     };
 
+
+    public static Scoring Instance;
+    private void Awake()
+    {
+        
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+     
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+
+
     // Start is called before the first frame update
     void Start()
-    {
+    {        
 
         buttonPrefab = Resources.Load<GameObject>(BUTTON_PREFAB_PATH);
         scoringPrefab = Resources.Load<GameObject>(SCORING_PREFAB_PATH);
@@ -37,6 +114,8 @@ public class Scoring : MonoBehaviour
         scoringCanvas.name = "ScoringCanvas";
         scoringCanvas.sortingOrder = 999;
         scoringCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
+        scoreDetails = GameObject.Find("ScoreDetails");
+        scoreDetails.SetActive(false);
 
         GraphicRaycaster myCaster = gameObject.AddComponent<GraphicRaycaster>();
         myCaster.transform.SetParent(this.transform);
@@ -89,13 +168,26 @@ public class Scoring : MonoBehaviour
    
         return goButton;
     }
+    
 
+    public void hideScore()
+    {
+        showingScore = FindObjectOfType<Scoring>().getShowingScore;
+        if (showingScore)
+        {
+            scoreDetails = GameObject.Find("ScoreDetails");
+            scoreDetails.SetActive(false);
+            FindObjectOfType<Scoring>().getShowingScore = false;
+        }
+    }
 
     public void ScoreButtonClicked()
     {
         //Debug.Log("I done got clicked.");
+        //scoreDetails = GameObject.Find("ScoreDetails");
         string buttonName = EventSystem.current.currentSelectedGameObject.name;
         //Debug.Log(buttonName + " is what got clicked.");
+                
 
         if (buttonName.Equals("ScoringButton"))
         {
@@ -106,11 +198,110 @@ public class Scoring : MonoBehaviour
         {
             Debug.Log("Score Details");
             EventSystem.current.SetSelectedGameObject(null);
+            scoreDetails.SetActive(true);
+            FindObjectOfType<Scoring>().getShowingScore = true;
+            updateScore(0);                       
         }
     }
-    // Update is called once per frame
-    void Update()
+
+    public void updateScore(int score)
     {
+        GameObject scoringObj = GameObject.Find("ScoreBox");
+        GameObject gameScore;
+        showingScore = FindObjectOfType<Scoring>().getShowingScore;
+        Scene scene = SceneManager.GetActiveScene();
+        string sceneName = scene.name;
+
+        switch (sceneName)
+        {
+            
+            case "comGame":                                 
+                comPuzzleScore = FindObjectOfType<Scoring>().getComPuzzleScore + score;
+                FindObjectOfType<Scoring>().getComPuzzleScore = comPuzzleScore;
+                scoringObj.GetComponentInChildren<Text>().text = comPuzzleScore.ToString();
+                if (showingScore)
+                {
+                    gameScore = GameObject.Find("ComPuzzleScore");
+                    gameScore.transform.GetChild(0).GetComponent<Text>().text = comPuzzleScore.ToString();
+                }
+                break;
+            case "comUnscramble":
+                comUnscrambleScore = FindObjectOfType<Scoring>().getComUnscrambleScore + score;
+                FindObjectOfType<Scoring>().getComUnscrambleScore = comUnscrambleScore;
+                scoringObj.GetComponentInChildren<Text>().text = comUnscrambleScore.ToString();
+                if (showingScore)
+                {
+                    gameScore = GameObject.Find("ComUnscrambleScore");
+                    gameScore.transform.GetChild(0).GetComponent<Text>().text = comUnscrambleScore.ToString();
+                }
+                break;
+            case "Assembly 3d":
+                assemblyScore = FindObjectOfType<Scoring>().getAssemblyScore + score;
+                FindObjectOfType<Scoring>().getAssemblyScore = assemblyScore;
+                scoringObj.GetComponentInChildren<Text>().text = assemblyScore.ToString();
+                break;
+            case "2_FlightPath":
+                flightPathScore = FindObjectOfType<Scoring>().getFlightPathScore + score;
+                FindObjectOfType<Scoring>().getFlightPathScore = flightPathScore;
+                scoringObj.GetComponentInChildren<Text>().text = flightPathScore.ToString();
+                break;
+            case "scene5":
+                labScore = FindObjectOfType<Scoring>().getLabScore + score;
+                FindObjectOfType<Scoring>().getLabScore = labScore;
+                scoringObj.GetComponentInChildren<Text>().text = labScore.ToString();
+                break;
+            case "Scanning":
+                scanningScore = FindObjectOfType<Scoring>().getScanningScore + score;
+                FindObjectOfType<Scoring>().getScanningScore = scanningScore;
+                scoringObj.GetComponentInChildren<Text>().text = scanningScore.ToString();
+                break;
+        }
+
+        setCurrentScore();
+
+    }
+
+    public void setCurrentScore()
+    {
+        GameObject scoringObj = GameObject.Find("ScoreBox");
+        int total = 0;
+        int score = 0;
+        string[] allScenes = { "comGame", "comUnscramble", "Assembly 3d", "2_FlightPath", "scene5", "Scanning" };       
+        foreach (string scene in allScenes)
+        {
+            score = getGameScore(scene);
+            total += score;
+        }
+        FindObjectOfType<Scoring>().getTotalScore = total;
+        totalScore = FindObjectOfType<Scoring>().getTotalScore;        
+        scoringObj.GetComponentInChildren<Text>().text = totalScore.ToString();
+    }
+
+    public int getGameScore(string sceneName)
+    {
+        int score = 0;
+        switch (sceneName)
+        {
+            case "comGame":
+                score = FindObjectOfType<Scoring>().getComPuzzleScore;
+                break;
+            case "comUnscramble":
+                score = FindObjectOfType<Scoring>().getComUnscrambleScore;
+                break;
+            case "Assembly 3d":
+                assemblyScore = FindObjectOfType<Scoring>().getAssemblyScore;
+                break;
+            case "2_FlightPath":
+                flightPathScore = FindObjectOfType<Scoring>().getFlightPathScore;
+                break;
+            case "scene5":
+                labScore = FindObjectOfType<Scoring>().getLabScore;
+                break;
+            case "Scanning":
+                scanningScore = FindObjectOfType<Scoring>().getScanningScore;
+                break;
+        }
+        return score;
 
     }
 

@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class TerrainController : MonoBehaviour {
 
-    public int tileDim = 100;
+    public int tileDim = 75;
     public int renderDistX = 500;
-    public int renderDistZ = 800;
+    public int renderDistZ = 700;
     public float terrainScale = 150;
     public static int tileRenderRangeZ; // forward
     public static int tileRenderRangeX; // left-right
@@ -26,9 +26,7 @@ public class TerrainController : MonoBehaviour {
     bool unloadWaste;
     
     void Awake() {
-
         satellite.GetComponent<FlightControl>().speed = 0;
-
         tileRenderRangeZ = Mathf.RoundToInt( renderDistZ / tileDim );
         tileRenderRangeX = Mathf.RoundToInt( renderDistX / tileDim );
         unloadWaste = false;
@@ -40,25 +38,21 @@ public class TerrainController : MonoBehaviour {
     }
 
     void Start() {
-        satellite.GetComponent<FlightControl>().speed = 40f;
+        satellite.GetComponent<FlightControl>().speed = 35f;
+
+        // Application.targetFrameRate = 30; // Use to throttle web client, optional
     }
 
     void Update() {
-
         int currTileZ = (int) Mathf.Floor(satellite.transform.position.z / tileDim);
         int currTileX = (int) Mathf.Floor(satellite.transform.position.x / tileDim);
-
         for ( int z = currTileZ; z <= ( currTileZ + tileRenderRangeZ ); ++z ) 
         {
             for ( int x = ( currTileX - tileRenderRangeX ); x <= ( currTileX + tileRenderRangeX ); ++x ) 
             {
                 Vector2 pVec = new Vector2( z, x ); // .x = z, .y = x
 
-                if ( tileDict.ContainsKey( pVec ) ) {
-
-                    tileDict[pVec].tile.SetVisible();
-
-                } else {
+                if ( !tileDict.ContainsKey( pVec ) ) {
 
                     MapTile tile = new MapTile( "Mesh( " + z + ", " + x + " )" );
 
@@ -70,52 +64,38 @@ public class TerrainController : MonoBehaviour {
                         }
                     );
 
-                    OpenMapTile omTile = new OpenMapTile {
-                        key = pVec, tile = tile
-                    };
-
+                    OpenMapTile omTile = new OpenMapTile { key = pVec, tile = tile };
                     tileDict.Add( pVec, omTile );
                 }
             }
-        } 
-
-        // update each tiles visibility each frame and prune tiles from dict as the fall behind
-        foreach ( KeyValuePair<Vector2, OpenMapTile> mt in tileDict ) {
-    
-            mt.Value.tile.Update();
-            mt.Value.tile.UnsetVisible();
-
-            if ( mt.Key.x < currTileZ && mt.Value.tile.fin ) {
-                forRemoval.Add( mt.Key ); 
-            }
         }
-
-        foreach ( Vector2 v2 in forRemoval ) {
-
-            tileDict[v2].tile.Destroy();
-            tileDict.Remove( v2 );
-            unloadWaste = true;
-        }
-
-        forRemoval.Clear();
 
         // cycle through queued jobs
         if ( stageThree.Count > 0 ) {
-        
             MapTileFactory.MapTileStageThree( stageThree.Dequeue() );
 
         } else if ( stageTwo.Count > 0 ) {
-
             stageThree.Enqueue( MapTileFactory.MapTileStageTwo( stageTwo.Dequeue() ) );
             
         } else if ( stageOne.Count > 0 ) {
-            
             stageTwo.Enqueue( MapTileFactory.MapTileStageOne( stageOne.Dequeue() ) );
 
         } else if ( unloadWaste ) {
-
             Resources.UnloadUnusedAssets();
             unloadWaste = false;
+
+        } else {    // prune tiles from dict as the fall behind
+            foreach ( KeyValuePair<Vector2, OpenMapTile> mt in tileDict ) {
+                if ( mt.Key.x < currTileZ && mt.Value.tile.fin ) {
+                    forRemoval.Add( mt.Key );
+                }
+            }
+            foreach ( Vector2 v2 in forRemoval ) {
+                tileDict[v2].tile.Destroy();
+                tileDict.Remove( v2 );
+                unloadWaste = true;
+            }
+            forRemoval.Clear();
         }
     }
 }
