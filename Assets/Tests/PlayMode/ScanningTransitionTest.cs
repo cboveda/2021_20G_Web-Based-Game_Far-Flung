@@ -17,8 +17,6 @@ public class ScanningTransitionTest {
     FadeBannerStub fbStubWin;
     FadeBannerStub fbStubLose;
 
-    
-
     // A Test behaves as an ordinary method
     [SetUp]
     public void SetUp() {

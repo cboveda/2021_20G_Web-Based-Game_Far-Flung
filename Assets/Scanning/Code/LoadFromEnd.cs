@@ -7,7 +7,7 @@ public class LoadFromEnd : MonoBehaviour
     public FadeDriver fadeDriver;
 
     public void LoadNextScene() {
-        StartCoroutine( TriggerTransition( SceneManager.GetActiveScene().buildIndex + 1)  );
+        StartCoroutine( TriggerTransition( 0 ) ); // return to hub
     }
     public void RestartGame() {
         StartCoroutine( TriggerTransition( SceneManager.GetActiveScene().buildIndex - 2)  );

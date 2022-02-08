@@ -50,18 +50,7 @@ public class MapTile {
         meshRenderer = meshObj.AddComponent<MeshRenderer>();
         meshFilter = meshObj.AddComponent<MeshFilter>();
         meshCollider = meshObj.AddComponent<MeshCollider>();
-    }
-
-    public void SetVisible() {
-        isVisible = true;
-    }
-
-    public void UnsetVisible() {
-        isVisible = false;
-    }
-
-    public void Update() {
-        meshObj.SetActive( isVisible );
+        meshCollider.cookingOptions = MeshColliderCookingOptions.None;
     }
 
     public void Destroy() {
