@@ -10,10 +10,8 @@ namespace DialogMaker
 
         public Dialog[] dialogs;
 
-
         public Dialog GetNextDialogMessage(int slot)
         {
-
             return dialogs[slot];
         }
 

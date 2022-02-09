@@ -7,10 +7,13 @@ public class ScanningTest {
     public void Test_TerrainGeneratorGetTerrainHeights() {
 
         float[,] testSpec = {
-            { 0.183221f, 0.2240982f, 0.183221f, 0.1014668f },
-            { 0.1423439f, 0.1219054f, 0.1423439f, 0.1627825f },
-            { 0.183221f, 0.1014668f, 0.183221f, 0.2649753f },
-            { 0.1423439f, 0.1014668f, 0.2240982f, 0.3058524f }
+            { 0.1787749f, 0.2202964f, 0.1787749f, 0.09573194f },
+
+            { 0.1372534f, 0.1164927f, 0.1372534f, 0.1580142f },
+
+            { 0.1787749f, 0.09573194f, 0.1787749f, 0.2618178f },
+
+            { 0.1372534f, 0.09573194f, 0.2202964f, 0.3033393f }
         };
 
         Vector3 baseVec = new Vector3( 0, 0, 0 );
@@ -24,7 +27,7 @@ public class ScanningTest {
 
             for ( int j = 0; j < meshDim; ++j ) {
 
-                Assert.AreEqual( result[i,j], testSpec[i,j], 0.0001f );
+                Assert.AreEqual( result[i,j], testSpec[i,j], 0.001f );
             }
         }
     }
@@ -84,6 +87,7 @@ public class ScanningTest {
 
         for ( int i = 0; i < 3; ++i ) {
             for ( int j = 0; j < 3; ++j ) {
+
                 Assert.AreEqual( colors[ (i * tileDim) + j ], gradient.Evaluate( heights[i, j] ) );
             }
         }
