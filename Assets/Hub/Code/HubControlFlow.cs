@@ -11,6 +11,9 @@ public class HubControlFlow : MonoBehaviour
     DialogGenerator diagIntro;
     DialogGenerator diagFlight;
     DialogGenerator diagScan;
+    DialogGenerator diagComms;
+    DialogGenerator diagLab;
+    DialogGenerator diagOutro;
     AudioSource bgAudio;
     FadeController fader;
     GameObject mainMenu;
@@ -21,7 +24,10 @@ public class HubControlFlow : MonoBehaviour
         diagIntro = GameObject.Find("DialogIntro").GetComponent<DialogGenerator>();
 
         diagFlight = GameObject.Find("DialogFlight").GetComponent<DialogGenerator>();
-        //diagScan = GameObject.Find("DialogScan").GetComponent<DialogGenerator>();
+        diagScan = GameObject.Find("DialogScan").GetComponent<DialogGenerator>();
+        diagComms = GameObject.Find("DialogComms").GetComponent<DialogGenerator>();
+        diagLab = GameObject.Find("DialogLab").GetComponent<DialogGenerator>();
+        diagOutro = GameObject.Find("DialogOutro").GetComponent<DialogGenerator>();
         fader = GameObject.Find("FadeController").GetComponent<FadeController>();
         //mainMenu = GameObject.Find("Canvas");
         //fader.Fade();
@@ -39,10 +45,24 @@ public class HubControlFlow : MonoBehaviour
         switch (HubTracker.LevelToLoad)
         {
             case 2:
+                HideMainMenu();
                 diagFlight.BeginPlayingDialog();
                 break;
             case 3:
+                HideMainMenu();
                 diagScan.BeginPlayingDialog();
+                break;
+            case 4:
+                HideMainMenu();
+                diagScan.BeginPlayingDialog();
+                break;
+            case 5:
+                HideMainMenu();
+                diagScan.BeginPlayingDialog();
+                break;
+            case 6:
+                HideMainMenu();
+                diagOutro.BeginPlayingDialog();
                 break;
             default:
                 break;
@@ -79,7 +99,23 @@ public class HubControlFlow : MonoBehaviour
             }
             else if (diagScan == null && HubTracker.LevelToLoad == 3)
             {
-                //SceneManager.LoadScene(HubTracker.LevelToLoad++ + 1);
+                HubTracker.LevelToLoad++;
+                SceneManager.LoadScene("StartScene.Scanning");
+            }
+            else if (diagComms == null && HubTracker.LevelToLoad == 4)
+            {
+                HubTracker.LevelToLoad++;
+                SceneManager.LoadScene("comGameIntro");
+            }
+            else if (diagLab == null && HubTracker.LevelToLoad == 5)
+            {
+                HubTracker.LevelToLoad++;
+                SceneManager.LoadScene("scene5");
+            }
+            else if (diagOutro == null && HubTracker.LevelToLoad == 6)
+            {
+                //HubTracker.LevelToLoad++;
+                //SceneManager.LoadScene("scene5");
             }
         }
     }
@@ -102,9 +138,7 @@ public class HubControlFlow : MonoBehaviour
         diagIntro.BeginPlayingDialog();
         HubTracker.LevelToLoad = 1;
         HubTracker.IntroStarted = true;
-        GameObject.Find("UIBackground").SetActive(false);
-        GameObject.Find("PlayButton").SetActive(false);
-        GameObject.Find("FarFlungLogoImg").SetActive(false);
+        HideMainMenu();
         //mainMenu.SetActive(false);
         yield return new WaitForSeconds(2);
         fader.ResetAndFade();
@@ -113,5 +147,12 @@ public class HubControlFlow : MonoBehaviour
     IEnumerator delay(int amount)
     {
         yield return new WaitForSeconds(amount);
+    }
+
+    public void HideMainMenu()
+    {
+        GameObject.Find("UIBackground").SetActive(false);
+        GameObject.Find("PlayButton").SetActive(false);
+        GameObject.Find("FarFlungLogoImg").SetActive(false);
     }
 }
