@@ -115,7 +115,7 @@ public class Scoring : MonoBehaviour
         scoringCanvas.sortingOrder = 999;
         scoringCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
         scoreDetails = GameObject.Find("ScoreDetails");
-        scoreDetails.SetActive(false);
+        hideScoreDetailsDisplay();
 
         GraphicRaycaster myCaster = gameObject.AddComponent<GraphicRaycaster>();
         myCaster.transform.SetParent(this.transform);
@@ -170,7 +170,7 @@ public class Scoring : MonoBehaviour
     }
     
 
-    public void hideScore()
+    public void hideScoreDetailsDisplay()
     {
         showingScore = FindObjectOfType<Scoring>().getShowingScore;
         if (showingScore)
@@ -213,7 +213,7 @@ public class Scoring : MonoBehaviour
         string sceneName = scene.name;
 
         switch (sceneName)
-        {
+        {          
             
             case "comGame":                                 
                 comPuzzleScore = FindObjectOfType<Scoring>().getComPuzzleScore + score;
