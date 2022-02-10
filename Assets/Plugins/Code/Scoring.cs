@@ -233,21 +233,29 @@ public class Scoring : MonoBehaviour
                 assemblyScore = FindObjectOfType<Scoring>().getAssemblyScore + score;
                 FindObjectOfType<Scoring>().getAssemblyScore = assemblyScore;
                 scoringObj.GetComponentInChildren<Text>().text = assemblyScore.ToString();
+                gameScore = GameObject.Find("AssemblyScore");
+                gameScore.transform.GetChild(0).GetComponent<Text>().text = assemblyScore.ToString();
                 break;
             case "2_FlightPath":
                 flightPathScore = FindObjectOfType<Scoring>().getFlightPathScore + score;
                 FindObjectOfType<Scoring>().getFlightPathScore = flightPathScore;
                 scoringObj.GetComponentInChildren<Text>().text = flightPathScore.ToString();
+                gameScore = GameObject.Find("FlightPathScore");
+                gameScore.transform.GetChild(0).GetComponent<Text>().text = flightPathScore.ToString();
                 break;
             case "scene5":
                 labScore = FindObjectOfType<Scoring>().getLabScore + score;
                 FindObjectOfType<Scoring>().getLabScore = labScore;
                 scoringObj.GetComponentInChildren<Text>().text = labScore.ToString();
+                gameScore = GameObject.Find("LabScore");
+                gameScore.transform.GetChild(0).GetComponent<Text>().text = labScore.ToString();
                 break;
             case "Scanning":
                 scanningScore = FindObjectOfType<Scoring>().getScanningScore + score;
                 FindObjectOfType<Scoring>().getScanningScore = scanningScore;
                 scoringObj.GetComponentInChildren<Text>().text = scanningScore.ToString();
+                gameScore = GameObject.Find("ScanningScore");
+                gameScore.transform.GetChild(0).GetComponent<Text>().text = scanningScore.ToString();
                 break;
         }
 
@@ -269,7 +277,7 @@ public class Scoring : MonoBehaviour
         FindObjectOfType<Scoring>().getTotalScore = total;
         totalScore = FindObjectOfType<Scoring>().getTotalScore;
         totalGameScore.transform.GetChild(0).GetComponent<Text>().text = totalScore.ToString();
-        Debug.Log(totalScore);
+        //Debug.Log(totalScore);
     }
 
     public int getGameScore(string sceneName)
