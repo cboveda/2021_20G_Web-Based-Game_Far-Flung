@@ -299,7 +299,6 @@ public class Scoring : MonoBehaviour
                 break;
             case "2_Flightpath":
                 score = FindObjectOfType<Scoring>().getFlightPathScore;
-                Debug.Log(flightPathScore); 
                 break;
             case "scene5":
                 score = FindObjectOfType<Scoring>().getLabScore;
