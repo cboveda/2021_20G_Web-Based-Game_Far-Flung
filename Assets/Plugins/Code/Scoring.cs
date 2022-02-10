@@ -173,14 +173,11 @@ public class Scoring : MonoBehaviour
 
     public void hideScoreDetailsDisplay()
     {
+        scoreDetails = GameObject.Find("ScoreDetails");
         scoringCanvasGroup = scoreDetails.GetComponent<CanvasGroup>();
-        showingScore = FindObjectOfType<Scoring>().getShowingScore;
-        if (showingScore)
-        {
-            scoringCanvasGroup.alpha = 0f;
-            scoringCanvasGroup.blocksRaycasts = false;
-            FindObjectOfType<Scoring>().getShowingScore = false;
-        }
+        scoringCanvasGroup.alpha = 0f;
+        scoringCanvasGroup.blocksRaycasts = false;
+        FindObjectOfType<Scoring>().getShowingScore = false;        
     }
 
     public void ScoreButtonClicked()
