@@ -9,11 +9,16 @@ using Flightpath;
 public class FlightpathLaunchTest
 {
     private GameObject satellite;
+    private GameObject planet;
     private GameObject launchManager;
-
+    private LaunchManager launchManagerComponent;
     private GameObject path;
-
     private GameObject pathFollower;
+    private GameObject angleSlider;
+    private GameObject powerSlider;
+    private GameObject pathDrawing;
+    private GameObject arrow;
+    private GameObject startPoint;
 
     [SetUp]
     public void Setup()
@@ -27,27 +32,36 @@ public class FlightpathLaunchTest
         satellite.GetComponent<Launch>().SetAngle(0f);
         satellite.GetComponent<Launch>().SetPower(1.0f);
 
+        planet = new GameObject();
+        planet.AddComponent<Rigidbody>();
+        planet.GetComponent<Rigidbody>().useGravity = false;
+        planet.GetComponent<Rigidbody>().mass = 100f;
+        planet.AddComponent<Attractor>();
+        planet.GetComponent<Attractor>().Affected = false;
+        planet.transform.position = Vector3.right;
+        planet.GetComponent<Attractor>().Start();
+
         launchManager = new GameObject();
         launchManager.AddComponent<LaunchManager>();
-        var launchManagerComponent = launchManager.GetComponent<LaunchManager>();
+        launchManagerComponent = launchManager.GetComponent<LaunchManager>();
         launchManagerComponent.Satellite = satellite;
 
-        GameObject angleSlider = new GameObject();
+        angleSlider = new GameObject();
         angleSlider.AddComponent<Slider>();
         angleSlider.GetComponent<Slider>().minValue = 10f;
         
-        GameObject powerSlider = new GameObject();
+        powerSlider = new GameObject();
         powerSlider.AddComponent<Slider>();
         powerSlider.GetComponent<Slider>().minValue = 10f;
         launchManagerComponent.AngleSlider = angleSlider.GetComponent<Slider>();
         launchManagerComponent.PowerSlider = angleSlider.GetComponent<Slider>();
         
-        GameObject pathDrawing = new GameObject();
+        pathDrawing = new GameObject();
         pathDrawing.AddComponent<SatellitePathDrawing>();
         pathDrawing.GetComponent<SatellitePathDrawing>().Start();
         launchManagerComponent.SatellitePath = pathDrawing.GetComponent<SatellitePathDrawing>();
 
-        GameObject arrow = new GameObject();
+        arrow = new GameObject();
         arrow.AddComponent<Trajectory>();
         arrow.GetComponent<Trajectory>().Satellite = satellite.GetComponent<Launch>();
         arrow.AddComponent<SpriteRenderer>();
@@ -58,7 +72,7 @@ public class FlightpathLaunchTest
         path.AddComponent<Path>();
         var pathComponent = path.GetComponent<Path>();
         
-        GameObject startPoint = new GameObject();
+        startPoint = new GameObject();
         GameObject startDirection = new GameObject();
         GameObject endPoint = new GameObject();
         GameObject endDirection = new GameObject();
@@ -90,11 +104,16 @@ public class FlightpathLaunchTest
     public void Teardown()
     {
         Object.Destroy(satellite);
+        Object.Destroy(planet);
         Object.Destroy(launchManager);
         Object.Destroy(path);
         Object.Destroy(pathFollower);
+        Object.Destroy(angleSlider);
+        Object.Destroy(powerSlider);
+        Object.Destroy(pathDrawing);
+        Object.Destroy(arrow);
+        Object.Destroy(startPoint);
     }
-
 
     [UnityTest]
     public IEnumerator Test_LaunchComponentDoesNotLaunchOnFirstFrame()
@@ -153,7 +172,6 @@ public class FlightpathLaunchTest
     {
         Vector3 satelliteStart = satellite.transform.position;
         Vector3 pathFollowerStart = pathFollower.transform.position;
-        var launchManagerComponent = launchManager.GetComponent<LaunchManager>();
         launchManagerComponent.OnLaunchButtonClicked();
         yield return new WaitForFixedUpdate();
         Assert.AreNotEqual(0, satellite.GetComponent<Rigidbody>().velocity.magnitude);
@@ -166,7 +184,6 @@ public class FlightpathLaunchTest
     {
         Vector3 satelliteStart = satellite.transform.position;
         Vector3 pathFollowerStart = pathFollower.transform.position;
-        var launchManagerComponent = launchManager.GetComponent<LaunchManager>();
         launchManagerComponent.OnLaunchButtonClicked();
         yield return new WaitForFixedUpdate();
         launchManagerComponent.OnResetButtonClicked();
@@ -179,7 +196,6 @@ public class FlightpathLaunchTest
     [UnityTest]
     public IEnumerator Test_LaunchManagerChangesSatelliteAngle()
     {
-        var launchManagerComponent = launchManager.GetComponent<LaunchManager>();
         launchManagerComponent.OnAngleSliderChanged(20f);
         yield return new WaitForFixedUpdate();
         Assert.AreEqual(20f, satellite.GetComponent<Launch>().GetAngle(), 0.1f);
@@ -188,7 +204,6 @@ public class FlightpathLaunchTest
     [UnityTest]
     public IEnumerator Test_LaunchManagerChangesSatellitePower()
     {
-        var launchManagerComponent = launchManager.GetComponent<LaunchManager>();
         launchManagerComponent.OnPowerSliderChanged(20f);
         yield return new WaitForFixedUpdate();
         Assert.AreEqual(20f, satellite.GetComponent<Launch>().GetPower(), 0.1f);
@@ -220,5 +235,20 @@ public class FlightpathLaunchTest
         satellite.GetComponent<Launch>().ResetLaunch();
         yield return new WaitForFixedUpdate();
         Assert.AreEqual(expectedPosition, satellite.transform.position);
+    }
+
+     [UnityTest]
+    public IEnumerator Test_PathFollowerBeginsAtStartPoint()
+    {
+        yield return new WaitForFixedUpdate();
+        Assert.AreEqual((Vector3) Vector2.right, pathFollower.transform.position);
+    }
+
+    [UnityTest]
+    public IEnumerator Test_AttractorsDoNotAttractUnaffectedAttractors()
+    {
+        launchManagerComponent.OnLaunchButtonClicked();
+        yield return new WaitForFixedUpdate();
+        Assert.AreEqual(Vector3.right, planet.transform.position);  
     }
 }

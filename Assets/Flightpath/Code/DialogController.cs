@@ -76,10 +76,6 @@ namespace Flightpath
 
         private void DoAnglePhase()
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                _dg.BeginPlayingDialog();
-            }
             if (_angleSlider.interactable == false)
             {
                 _angleSlider.interactable = true;
@@ -103,10 +99,6 @@ namespace Flightpath
 
         private void DoPowerPhase()
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                _dg.BeginPlayingDialog();
-            }
             if (_powerSlider.interactable == false)
             {
                 _powerSlider.interactable = true;
@@ -130,10 +122,6 @@ namespace Flightpath
 
         private void DoLaunchPhase()
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                _dg.BeginPlayingDialog();
-            }
             if (_launchButton.interactable == false)
             {
                 _launchButton.interactable = true;
@@ -162,10 +150,6 @@ namespace Flightpath
 
         public void DoResetPhase()
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                _dg.BeginPlayingDialog();
-            }
             if (_resetButton.interactable == false)
             {
                 _resetButton.interactable = true;
