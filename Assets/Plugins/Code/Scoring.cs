@@ -257,7 +257,7 @@ public class Scoring : MonoBehaviour
 
     public void setCurrentScore()
     {
-        GameObject scoringObj = GameObject.Find("ScoreBox");
+        GameObject totalGameScore = GameObject.Find("TotalScore");
         int total = 0;
         int score = 0;
         string[] allScenes = { "comGame", "comUnscramble", "Assembly 3d", "2_FlightPath", "scene5", "Scanning" };       
@@ -267,8 +267,9 @@ public class Scoring : MonoBehaviour
             total += score;
         }
         FindObjectOfType<Scoring>().getTotalScore = total;
-        totalScore = FindObjectOfType<Scoring>().getTotalScore;        
-        scoringObj.GetComponentInChildren<Text>().text = totalScore.ToString();
+        totalScore = FindObjectOfType<Scoring>().getTotalScore;
+        totalGameScore.transform.GetChild(0).GetComponent<Text>().text = totalScore.ToString();
+        Debug.Log(totalScore);
     }
 
     public int getGameScore(string sceneName)
