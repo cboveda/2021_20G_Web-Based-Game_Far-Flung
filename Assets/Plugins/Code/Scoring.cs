@@ -107,7 +107,8 @@ public class Scoring : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {        
+    {
+        Debug.Log("scoring prefab");
 
         buttonPrefab = Resources.Load<GameObject>(BUTTON_PREFAB_PATH);
         scoringPrefab = Resources.Load<GameObject>(SCORING_PREFAB_PATH);
@@ -117,6 +118,11 @@ public class Scoring : MonoBehaviour
         scoringCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
         scoreDetails = GameObject.Find("ScoreDetails");        
         hideScoreDetailsDisplay();
+
+        CanvasScaler scoreCanvasScaler = gameObject.AddComponent<CanvasScaler>();
+        scoreCanvasScaler.transform.SetParent(this.transform);
+        scoreCanvasScaler.uiScaleMode = UnityEngine.UI.CanvasScaler.ScaleMode.ScaleWithScreenSize;
+        scoreCanvasScaler.referenceResolution = new Vector2(1440, 900);
 
         GraphicRaycaster myCaster = gameObject.AddComponent<GraphicRaycaster>();
         myCaster.transform.SetParent(this.transform);
