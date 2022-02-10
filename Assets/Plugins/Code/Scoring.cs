@@ -108,7 +108,6 @@ public class Scoring : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("scoring prefab");
 
         buttonPrefab = Resources.Load<GameObject>(BUTTON_PREFAB_PATH);
         scoringPrefab = Resources.Load<GameObject>(SCORING_PREFAB_PATH);
@@ -194,12 +193,12 @@ public class Scoring : MonoBehaviour
 
         if (buttonName.Equals("ScoringButton"))
         {
-            Debug.Log("Scoring Info");
+            //Debug.Log("Scoring Info");
             EventSystem.current.SetSelectedGameObject(null);
         }
         else if (buttonName == "ScoreBox")
         {
-            Debug.Log("Score Details");
+            //Debug.Log("Score Details");
             EventSystem.current.SetSelectedGameObject(null);
             scoringCanvasGroup.alpha = 1f;
             scoringCanvasGroup.blocksRaycasts = true;
@@ -210,6 +209,7 @@ public class Scoring : MonoBehaviour
 
     public void updateScore(int score)
     {
+        //Debug.Log("updated score");
         GameObject scoringObj = GameObject.Find("ScoreBox");
         GameObject gameScore;        
         Scene scene = SceneManager.GetActiveScene();
@@ -239,7 +239,7 @@ public class Scoring : MonoBehaviour
                 gameScore = GameObject.Find("AssemblyScore");
                 gameScore.transform.GetChild(0).GetComponent<Text>().text = assemblyScore.ToString();
                 break;
-            case "2_FlightPath":
+            case "2_Flightpath":
                 flightPathScore = FindObjectOfType<Scoring>().getFlightPathScore + score;
                 FindObjectOfType<Scoring>().getFlightPathScore = flightPathScore;
                 scoringObj.GetComponentInChildren<Text>().text = flightPathScore.ToString();
@@ -271,16 +271,16 @@ public class Scoring : MonoBehaviour
         GameObject totalGameScore = GameObject.Find("TotalScore");
         int total = 0;
         int score = 0;
-        string[] allScenes = { "comGame", "comUnscramble", "Assembly 3d", "2_FlightPath", "scene5", "Scanning" };       
-        foreach (string scene in allScenes)
+        string[] allScenes = { "comGame", "comUnscramble", "Assembly 3d", "2_Flightpath", "scene5", "Scanning" };       
+        foreach (string scene in allScenes)        
         {
             score = getGameScore(scene);
-            total += score;
+            total += score;            
         }
         FindObjectOfType<Scoring>().getTotalScore = total;
         totalScore = FindObjectOfType<Scoring>().getTotalScore;
         totalGameScore.transform.GetChild(0).GetComponent<Text>().text = totalScore.ToString();
-        //Debug.Log(totalScore);
+
     }
 
     public int getGameScore(string sceneName)
@@ -295,16 +295,17 @@ public class Scoring : MonoBehaviour
                 score = FindObjectOfType<Scoring>().getComUnscrambleScore;
                 break;
             case "Assembly 3d":
-                assemblyScore = FindObjectOfType<Scoring>().getAssemblyScore;
+                score = FindObjectOfType<Scoring>().getAssemblyScore;
                 break;
-            case "2_FlightPath":
-                flightPathScore = FindObjectOfType<Scoring>().getFlightPathScore;
+            case "2_Flightpath":
+                score = FindObjectOfType<Scoring>().getFlightPathScore;
+                Debug.Log(flightPathScore); 
                 break;
             case "scene5":
-                labScore = FindObjectOfType<Scoring>().getLabScore;
+                score = FindObjectOfType<Scoring>().getLabScore;
                 break;
             case "Scanning":
-                scanningScore = FindObjectOfType<Scoring>().getScanningScore;
+                score = FindObjectOfType<Scoring>().getScanningScore;
                 break;
         }
         return score;
