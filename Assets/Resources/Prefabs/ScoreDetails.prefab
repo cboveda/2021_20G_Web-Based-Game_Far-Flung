@@ -660,6 +660,7 @@ GameObject:
   - component: {fileID: 3906783610903675476}
   - component: {fileID: 3906783610903675477}
   - component: {fileID: 3906783610903675474}
+  - component: {fileID: 3709954213063167869}
   m_Layer: 0
   m_Name: ScoreDetails
   m_TagString: Untagged
@@ -748,6 +749,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!225 &3709954213063167869
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3906783610903675475}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &3906783611122820922
 GameObject:
   m_ObjectHideFlags: 0

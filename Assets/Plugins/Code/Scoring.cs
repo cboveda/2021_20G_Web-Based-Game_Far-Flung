@@ -22,6 +22,7 @@ public class Scoring : MonoBehaviour
     private const float BUTTON_HEIGHT = 30.0f;
     private const float BUTTON_WIDTH_OFFSET = 100.0f;
     private List<GameObject> scoringButtons;
+    CanvasGroup scoringCanvasGroup;
 
     GameObject scoreDetails;
     int totalScore = 0;
@@ -114,7 +115,7 @@ public class Scoring : MonoBehaviour
         scoringCanvas.name = "ScoringCanvas";
         scoringCanvas.sortingOrder = 999;
         scoringCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
-        scoreDetails = GameObject.Find("ScoreDetails");
+        scoreDetails = GameObject.Find("ScoreDetails");        
         hideScoreDetailsDisplay();
 
         GraphicRaycaster myCaster = gameObject.AddComponent<GraphicRaycaster>();
@@ -172,22 +173,21 @@ public class Scoring : MonoBehaviour
 
     public void hideScoreDetailsDisplay()
     {
+        scoringCanvasGroup = scoreDetails.GetComponent<CanvasGroup>();
         showingScore = FindObjectOfType<Scoring>().getShowingScore;
         if (showingScore)
         {
-            scoreDetails = GameObject.Find("ScoreDetails");
-            scoreDetails.SetActive(false);
+            scoringCanvasGroup.alpha = 0f;
+            scoringCanvasGroup.blocksRaycasts = false;
             FindObjectOfType<Scoring>().getShowingScore = false;
         }
     }
 
     public void ScoreButtonClicked()
     {
-        //Debug.Log("I done got clicked.");
-        //scoreDetails = GameObject.Find("ScoreDetails");
         string buttonName = EventSystem.current.currentSelectedGameObject.name;
-        //Debug.Log(buttonName + " is what got clicked.");
-                
+        scoringCanvasGroup = scoreDetails.GetComponent<CanvasGroup>();
+
 
         if (buttonName.Equals("ScoringButton"))
         {
@@ -198,7 +198,8 @@ public class Scoring : MonoBehaviour
         {
             Debug.Log("Score Details");
             EventSystem.current.SetSelectedGameObject(null);
-            scoreDetails.SetActive(true);
+            scoringCanvasGroup.alpha = 1f;
+            scoringCanvasGroup.blocksRaycasts = true;
             FindObjectOfType<Scoring>().getShowingScore = true;
             updateScore(0);                       
         }
@@ -207,8 +208,7 @@ public class Scoring : MonoBehaviour
     public void updateScore(int score)
     {
         GameObject scoringObj = GameObject.Find("ScoreBox");
-        GameObject gameScore;
-        showingScore = FindObjectOfType<Scoring>().getShowingScore;
+        GameObject gameScore;        
         Scene scene = SceneManager.GetActiveScene();
         string sceneName = scene.name;
 
@@ -219,21 +219,15 @@ public class Scoring : MonoBehaviour
                 comPuzzleScore = FindObjectOfType<Scoring>().getComPuzzleScore + score;
                 FindObjectOfType<Scoring>().getComPuzzleScore = comPuzzleScore;
                 scoringObj.GetComponentInChildren<Text>().text = comPuzzleScore.ToString();
-                if (showingScore)
-                {
-                    gameScore = GameObject.Find("ComPuzzleScore");
-                    gameScore.transform.GetChild(0).GetComponent<Text>().text = comPuzzleScore.ToString();
-                }
+                gameScore = GameObject.Find("ComPuzzleScore");
+                gameScore.transform.GetChild(0).GetComponent<Text>().text = comPuzzleScore.ToString();
                 break;
             case "comUnscramble":
                 comUnscrambleScore = FindObjectOfType<Scoring>().getComUnscrambleScore + score;
                 FindObjectOfType<Scoring>().getComUnscrambleScore = comUnscrambleScore;
-                scoringObj.GetComponentInChildren<Text>().text = comUnscrambleScore.ToString();
-                if (showingScore)
-                {
-                    gameScore = GameObject.Find("ComUnscrambleScore");
-                    gameScore.transform.GetChild(0).GetComponent<Text>().text = comUnscrambleScore.ToString();
-                }
+                scoringObj.GetComponentInChildren<Text>().text = comUnscrambleScore.ToString(); 
+                gameScore = GameObject.Find("ComUnscrambleScore");
+                gameScore.transform.GetChild(0).GetComponent<Text>().text = comUnscrambleScore.ToString();      
                 break;
             case "Assembly 3d":
                 assemblyScore = FindObjectOfType<Scoring>().getAssemblyScore + score;
