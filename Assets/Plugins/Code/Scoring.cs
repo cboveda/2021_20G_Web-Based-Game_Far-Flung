@@ -203,7 +203,7 @@ public class Scoring : MonoBehaviour
             //Debug.Log("Scoring Info");
             EventSystem.current.SetSelectedGameObject(null);
         }
-        else if (buttonName == "ScoreBox")
+        else if (buttonName == "MainScoreBox")
         {
             //Debug.Log("Score Details");
             EventSystem.current.SetSelectedGameObject(null);
