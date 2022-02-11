@@ -21,7 +21,7 @@ public class ComGameMain : MonoBehaviour
         audioSource.Play();
 
         // start score of 1000
-        Scoring.Instance.updateScore(1000);        
+        Scoring.Instance.initialize(1000);        
     }
 
 
