@@ -85,7 +85,9 @@ public class Scoring : MonoBehaviour
 
     private Dictionary<string, string> scoringBox = new Dictionary<string, string>()
     {
-        {"ScoringButton", "Score"},
+        {"MainScoring", "Total"},
+        {"MainScoreBox", "0"},
+        {"ScoringButton", "Game"},
         {"ScoreBox", "0"}
     };
 
@@ -133,23 +135,28 @@ public class Scoring : MonoBehaviour
         scoringButtons = new List<GameObject>();
 
         int itemNum = 0;
+        Color textColor = new Color32(255, 150, 0, 255);
         foreach (KeyValuePair<string, string> item in scoringBox)
         {
-            GameObject button = GetNewUIButton(item.Key, itemNum, item.Value);
+            if ( itemNum > 1 )
+            {
+                textColor = Color.red;
+            }
+            GameObject button = GetNewUIButton(item.Key, itemNum, item.Value, textColor);
             button.transform.SetParent(this.transform);
             scoringButtons.Add(button);
             itemNum++;
         }
     }
 
-    private GameObject GetNewUIButton(string displayName, int buttonNumber, string text)
+    private GameObject GetNewUIButton(string displayName, int buttonNumber, string text, Color textColor)
     {
         Color blackColor = new Color32(0, 0, 0, 255);
         GameObject goButton = Instantiate<GameObject>(buttonPrefab);
         goButton.name = displayName;
 
         goButton.GetComponentInChildren<Text>().text = text;
-        goButton.GetComponentInChildren<Text>().color = Color.red;
+        goButton.GetComponentInChildren<Text>().color = textColor;
         goButton.GetComponent<Image>().color = Color.white;
 
         ColorBlock colors = goButton.GetComponent<UnityEngine.UI.Button>().colors;
@@ -207,10 +214,22 @@ public class Scoring : MonoBehaviour
         }
     }
 
+    public void initialize(int score)
+    {
+        StartCoroutine(InitializeScore(score));
+    }
+
+    IEnumerator InitializeScore(int score)
+    {
+        yield return new WaitForSeconds(0.1f);        
+        updateScore(score);
+    }
+
+
     public void updateScore(int score)
     {
         //Debug.Log("updated score");
-        GameObject scoringObj = GameObject.Find("ScoreBox");
+        GameObject scoringObj = GameObject.Find("ScoreBox");        
         GameObject gameScore;        
         Scene scene = SceneManager.GetActiveScene();
         string sceneName = scene.name;
@@ -269,18 +288,20 @@ public class Scoring : MonoBehaviour
     public void setCurrentScore()
     {
         GameObject totalGameScore = GameObject.Find("TotalScore");
+        GameObject scoringMainObj = GameObject.Find("MainScoreBox");
         int total = 0;
         int score = 0;
         string[] allScenes = { "comGame", "comUnscramble", "Assembly 3d", "2_Flightpath", "scene5", "Scanning" };       
         foreach (string scene in allScenes)        
         {
             score = getGameScore(scene);
+            Debug.Log(score);
             total += score;            
         }
         FindObjectOfType<Scoring>().getTotalScore = total;
-        totalScore = FindObjectOfType<Scoring>().getTotalScore;
+        totalScore = FindObjectOfType<Scoring>().getTotalScore;        
         totalGameScore.transform.GetChild(0).GetComponent<Text>().text = totalScore.ToString();
-
+        scoringMainObj.GetComponentInChildren<Text>().text = totalScore.ToString();
     }
 
     public int getGameScore(string sceneName)

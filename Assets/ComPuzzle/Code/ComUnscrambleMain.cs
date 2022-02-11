@@ -119,6 +119,10 @@ public class ComUnscrambleMain : MonoBehaviour
         volumeSlider = GameObject.Find("VolumeSlider");
         audioSource.Play();
 
+        // start score of 0
+        Scoring.Instance.initialize(0);
+        
+
     }
 
 
