@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 
 public class Scoring : MonoBehaviour
 {
-        
+
 
     public Canvas scoringCanvas;
     public GameObject buttonPrefab;
@@ -37,6 +37,20 @@ public class Scoring : MonoBehaviour
     public bool showingScore = false;
     public bool showingGameScore = false;
 
+    int objective1 = 0;
+    int objective2 = 0;
+
+    public int getObjective1
+    {
+        get { return objective1; }
+        set { objective1 = value; }
+    }
+
+    public int getObjective2
+    {
+        get { return objective2; }
+        set { objective2 = value; }
+    }
 
     public bool getShowingGameScore
     {
@@ -86,7 +100,7 @@ public class Scoring : MonoBehaviour
         set { scanningScore = value; }
     }
 
-        public int getLabScore
+    public int getLabScore
     {
         get { return labScore; }
         set { labScore = value; }
@@ -104,13 +118,13 @@ public class Scoring : MonoBehaviour
     public static Scoring Instance;
     private void Awake()
     {
-        
+
         if (Instance != null)
         {
             Destroy(gameObject);
             return;
         }
-     
+
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
@@ -143,14 +157,14 @@ public class Scoring : MonoBehaviour
 
         canvasHeight = scoringCanvas.pixelRect.height;
         canvasWidth = scoringCanvas.pixelRect.width;
-        
+
         scoringButtons = new List<GameObject>();
 
         int itemNum = 0;
         Color textColor = new Color32(255, 150, 0, 255);
         foreach (KeyValuePair<string, string> item in scoringBox)
         {
-            if ( itemNum > 1 )
+            if (itemNum > 1)
             {
                 textColor = Color.red;
             }
@@ -181,7 +195,7 @@ public class Scoring : MonoBehaviour
         colors.highlightedColor = Color.gray;
         colors.pressedColor = Color.black;
         colors.selectedColor = Color.black;
-        colors.disabledColor = Color.black;        
+        colors.disabledColor = Color.black;
         goButton.GetComponent<UnityEngine.UI.Button>().colors = colors;
 
         //Debug.Log(canvasWidth / 2 + (BUTTON_WIDTH * buttonNumber));
@@ -193,12 +207,12 @@ public class Scoring : MonoBehaviour
         goButton.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, BUTTON_WIDTH);
         goButton.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, BUTTON_HEIGHT);
         goButton.GetComponent<RectTransform>().SetPositionAndRotation(buttonLocation, Quaternion.identity);
-        
+
         goButton.GetComponent<Button>().onClick.AddListener(() => { ScoreButtonClicked(); });
-   
+
         return goButton;
     }
-    
+
 
     public void hideScoreDetailsDisplay(string scoreObject)
     {
@@ -213,16 +227,16 @@ public class Scoring : MonoBehaviour
     public void ScoreButtonClicked()
     {
         string buttonName = EventSystem.current.currentSelectedGameObject.name;
-        
+
         bool displayOn = FindObjectOfType<Scoring>().getShowingScore;
         bool gameDisplayOn = FindObjectOfType<Scoring>().getShowingGameScore;
 
-        if (gameDisplayOn)
+        if (gameDisplayOn && buttonName == "ScoreBox")
         {
             hideScoreDetailsDisplay("GameDetails");
             return;
         }
-        if (displayOn)
+        if (displayOn && buttonName == "MainScoreBox")
         {
             hideScoreDetailsDisplay("ScoreDetails");
             return;
@@ -230,6 +244,10 @@ public class Scoring : MonoBehaviour
 
         if (buttonName.Equals("ScoreBox"))
         {
+            if (displayOn)
+            {
+                hideScoreDetailsDisplay("ScoreDetails");
+            }
             //Debug.Log("Scoring Info");
             scoringCanvasGroup = gameDetails.GetComponent<CanvasGroup>();
             EventSystem.current.SetSelectedGameObject(null);
@@ -242,6 +260,10 @@ public class Scoring : MonoBehaviour
         }
         else if (buttonName == "MainScoreBox")
         {
+            if (gameDisplayOn)
+            {
+                hideScoreDetailsDisplay("GameDetails");
+            }
             //Debug.Log("Score Details");
             scoringCanvasGroup = scoreDetails.GetComponent<CanvasGroup>();
             EventSystem.current.SetSelectedGameObject(null);
@@ -249,34 +271,34 @@ public class Scoring : MonoBehaviour
             scoringCanvasGroup.alpha = 1f;
             scoringCanvasGroup.blocksRaycasts = true;
             FindObjectOfType<Scoring>().getShowingScore = true;
-            updateScore(0);                       
+            updateScore(0, "");
         }
     }
 
-    public void initialize(int score)
+    public void initialize(int score, string objective)
     {
-        StartCoroutine(InitializeScore(score));
+        StartCoroutine(InitializeScore(score, objective));
     }
 
-    IEnumerator InitializeScore(int score)
+    IEnumerator InitializeScore(int score, string objective)
     {
-        yield return new WaitForSeconds(0.1f);        
-        updateScore(score);
+        yield return new WaitForSeconds(0.1f);
+        updateScore(score, objective);
     }
 
 
-    public void updateScore(int score)
+    public void updateScore(int score, string objective)
     {
         //Debug.Log("updated score");
-        GameObject scoringObj = GameObject.Find("ScoreBox");        
-        GameObject gameScore;        
+        GameObject scoringObj = GameObject.Find("ScoreBox");
+        GameObject gameScore;
         Scene scene = SceneManager.GetActiveScene();
         string sceneName = scene.name;
 
         switch (sceneName)
-        {          
-            
-            case "comGame":                                 
+        {
+
+            case "comGame":
                 comPuzzleScore = FindObjectOfType<Scoring>().getComPuzzleScore + score;
                 FindObjectOfType<Scoring>().getComPuzzleScore = comPuzzleScore;
                 scoringObj.GetComponentInChildren<Text>().text = comPuzzleScore.ToString();
@@ -286,9 +308,9 @@ public class Scoring : MonoBehaviour
             case "comUnscramble":
                 comUnscrambleScore = FindObjectOfType<Scoring>().getComUnscrambleScore + score;
                 FindObjectOfType<Scoring>().getComUnscrambleScore = comUnscrambleScore;
-                scoringObj.GetComponentInChildren<Text>().text = comUnscrambleScore.ToString(); 
+                scoringObj.GetComponentInChildren<Text>().text = comUnscrambleScore.ToString();
                 gameScore = GameObject.Find("ComUnscrambleScore");
-                gameScore.transform.GetChild(0).GetComponent<Text>().text = comUnscrambleScore.ToString();      
+                gameScore.transform.GetChild(0).GetComponent<Text>().text = comUnscrambleScore.ToString();
                 break;
             case "Assembly 3d":
                 assemblyScore = FindObjectOfType<Scoring>().getAssemblyScore + score;
@@ -322,6 +344,11 @@ public class Scoring : MonoBehaviour
 
         setCurrentScore();
 
+        if (objective != "")
+        {
+            gameScoreDetails(score, objective);
+        }
+
     }
 
     public void setCurrentScore()
@@ -330,15 +357,15 @@ public class Scoring : MonoBehaviour
         GameObject scoringMainObj = GameObject.Find("MainScoreBox");
         int total = 0;
         int score = 0;
-        string[] allScenes = { "comGame", "comUnscramble", "Assembly 3d", "2_Flightpath", "scene5", "Scanning" };       
-        foreach (string scene in allScenes)        
+        string[] allScenes = { "comGame", "comUnscramble", "Assembly 3d", "2_Flightpath", "scene5", "Scanning" };
+        foreach (string scene in allScenes)
         {
             score = getGameScore(scene);
             //Debug.Log(score);
-            total += score;            
+            total += score;
         }
         FindObjectOfType<Scoring>().getTotalScore = total;
-        totalScore = FindObjectOfType<Scoring>().getTotalScore;        
+        totalScore = FindObjectOfType<Scoring>().getTotalScore;
         totalGameScore.transform.GetChild(0).GetComponent<Text>().text = totalScore.ToString();
         scoringMainObj.GetComponentInChildren<Text>().text = totalScore.ToString();
     }
@@ -371,4 +398,24 @@ public class Scoring : MonoBehaviour
 
     }
 
+
+    public void gameScoreDetails(int score, string objectName)
+    {
+        GameObject gameScoreObj = GameObject.Find(objectName);
+        int newScore = 0;
+        switch (objectName)
+        {
+            case "Objective1":
+                newScore = FindObjectOfType<Scoring>().getObjective1 + score;
+                FindObjectOfType<Scoring>().getObjective1 = newScore;
+                break;
+            case "Objective2":
+                newScore = FindObjectOfType<Scoring>().getObjective2 + score;
+                FindObjectOfType<Scoring>().getObjective2 = newScore;
+                break;
+        }
+
+        gameScoreObj = GameObject.Find(objectName);
+        gameScoreObj.transform.GetChild(0).GetComponent<Text>().text = newScore.ToString();
+    }
 }

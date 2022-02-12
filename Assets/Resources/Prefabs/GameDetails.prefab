@@ -160,7 +160,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Objective 7
+  m_Text: 'Objective 7:
 
 '
 --- !u!1 &6577197009013133300
@@ -909,7 +909,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Objective 4
+  m_Text: 'Objective 4:'
 --- !u!1 &6577197010146535189
 GameObject:
   m_ObjectHideFlags: 0
@@ -989,7 +989,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Objective 5
+  m_Text: 'Objective 5:'
 --- !u!1 &6577197010235014858
 GameObject:
   m_ObjectHideFlags: 0
@@ -1069,7 +1069,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Objective 2
+  m_Text: 'Objective 2:
 
 '
 --- !u!1 &6577197010460788454
@@ -1230,7 +1230,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Objective 1
+  m_Text: 'Objective 1:'
 --- !u!1 &6577197010614431353
 GameObject:
   m_ObjectHideFlags: 0
@@ -1310,7 +1310,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Objective 3
+  m_Text: 'Objective 3:'
 --- !u!1 &6577197010718308752
 GameObject:
   m_ObjectHideFlags: 0
@@ -1390,6 +1390,6 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Objective 6
+  m_Text: 'Objective 6:
 
 '

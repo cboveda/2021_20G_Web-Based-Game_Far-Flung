@@ -120,7 +120,7 @@ public class ComUnscrambleMain : MonoBehaviour
         audioSource.Play();
 
         // start score of 0
-        Scoring.Instance.initialize(0);
+        Scoring.Instance.initialize(0, "");
         
 
     }

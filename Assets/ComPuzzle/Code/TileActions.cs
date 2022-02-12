@@ -263,7 +263,8 @@ public class TileActions : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && onTile && validMove)
         {
             //Debug.Log("Pressed primary button on " + spriteName);
-            Scoring.Instance.updateScore(-2);
+            Scoring.Instance.updateScore(-2, "Objective2");
+            //Scoring.Instance.gameScoreDetails(-2, "Objective2");
             audioSource.Play();
 
             // get current tile and blank tile positions
@@ -294,7 +295,7 @@ public class TileActions : MonoBehaviour
         {
             //Debug.Log("final");         
 
-            Scoring.Instance.updateScore(500);
+            Scoring.Instance.updateScore(500, "");
 
             hideFinalInstructions();
 
