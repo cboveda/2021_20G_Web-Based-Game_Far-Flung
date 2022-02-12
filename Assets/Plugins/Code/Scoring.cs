@@ -317,7 +317,7 @@ public class Scoring : MonoBehaviour
 
     void OnDestroy()
     {
-        Debug.Log("destroy");
+        //Debug.Log("destroy");
         FindObjectOfType<Scoring>().getInitialized = false;    
         resetGameScore();
     }
