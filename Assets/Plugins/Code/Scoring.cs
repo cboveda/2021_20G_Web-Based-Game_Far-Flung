@@ -197,8 +197,9 @@ public class Scoring : MonoBehaviour
         string buttonName = EventSystem.current.currentSelectedGameObject.name;
         scoringCanvasGroup = scoreDetails.GetComponent<CanvasGroup>();
 
+        bool displayOn = FindObjectOfType<Scoring>().getShowingScore;
 
-        if (buttonName.Equals("ScoringButton"))
+        if (buttonName.Equals("ScoreBox"))
         {
             //Debug.Log("Scoring Info");
             EventSystem.current.SetSelectedGameObject(null);
@@ -207,6 +208,11 @@ public class Scoring : MonoBehaviour
         {
             //Debug.Log("Score Details");
             EventSystem.current.SetSelectedGameObject(null);
+            if (displayOn)
+            {
+                hideScoreDetailsDisplay();
+                return;
+            }
             scoringCanvasGroup.alpha = 1f;
             scoringCanvasGroup.blocksRaycasts = true;
             FindObjectOfType<Scoring>().getShowingScore = true;
