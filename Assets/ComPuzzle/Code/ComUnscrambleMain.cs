@@ -120,7 +120,7 @@ public class ComUnscrambleMain : MonoBehaviour
         audioSource.Play();
 
         // start score of 0
-        Scoring.Instance.initialize(0, "");
+        Scoring.Instance.initialize(200, "ObjectiveA");
         
 
     }
@@ -486,7 +486,7 @@ public class ComUnscrambleMain : MonoBehaviour
 
         // add 3 second delay
         yield return new WaitForSeconds(3f);
-        Debug.Log("win scene");
+        //Debug.Log("win scene");
 
         
         EnableContinueButton();

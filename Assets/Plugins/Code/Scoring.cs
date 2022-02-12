@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 
+
 public class Scoring : MonoBehaviour
 {
 
@@ -36,9 +37,13 @@ public class Scoring : MonoBehaviour
     int labScore = 0;
     public bool showingScore = false;
     public bool showingGameScore = false;
+    public string sceneInitialized = "";
 
     int objective1 = 0;
     int objective2 = 0;
+
+    int objectiveA = 0;
+    int objectiveB = 0;
 
     public int getObjective1
     {
@@ -50,6 +55,24 @@ public class Scoring : MonoBehaviour
     {
         get { return objective2; }
         set { objective2 = value; }
+    }
+
+    public int getObjectiveA
+    {
+        get { return objectiveA; }
+        set { objectiveA = value; }
+    }
+
+    public int getObjectiveB
+    {
+        get { return objectiveB; }
+        set { objectiveB = value; }
+    }
+
+    public string getSceneInitialized
+    {
+        get { return sceneInitialized; }
+        set { sceneInitialized = value; }
     }
 
     public bool getShowingGameScore
@@ -140,8 +163,6 @@ public class Scoring : MonoBehaviour
         scoringCanvas.name = "ScoringCanvas";
         scoringCanvas.sortingOrder = 999;
         scoringCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
-        scoreDetails = GameObject.Find("ScoreDetails");
-        gameDetails = GameObject.Find("GameDetails");
 
         hideScoreDetailsDisplay("ScoreDetails");
         hideScoreDetailsDisplay("GameDetails");
@@ -228,6 +249,9 @@ public class Scoring : MonoBehaviour
     {
         string buttonName = EventSystem.current.currentSelectedGameObject.name;
 
+        scoreDetails = GameObject.Find("ScoreDetails");
+        gameDetails = GameObject.Find("GameDetails");
+
         bool displayOn = FindObjectOfType<Scoring>().getShowingScore;
         bool gameDisplayOn = FindObjectOfType<Scoring>().getShowingGameScore;
 
@@ -277,7 +301,14 @@ public class Scoring : MonoBehaviour
 
     public void initialize(int score, string objective)
     {
-        StartCoroutine(InitializeScore(score, objective));
+        Scene scene = SceneManager.GetActiveScene();
+        string sceneName = scene.name;
+        sceneInitialized = FindObjectOfType<Scoring>().getSceneInitialized;
+        if (sceneName != sceneInitialized)
+        {
+            FindObjectOfType<Scoring>().getSceneInitialized = sceneName;
+            StartCoroutine(InitializeScore(score, objective));
+        }        
     }
 
     IEnumerator InitializeScore(int score, string objective)
@@ -412,6 +443,14 @@ public class Scoring : MonoBehaviour
             case "Objective2":
                 newScore = FindObjectOfType<Scoring>().getObjective2 + score;
                 FindObjectOfType<Scoring>().getObjective2 = newScore;
+                break;
+            case "ObjectiveA":
+                newScore = FindObjectOfType<Scoring>().getObjectiveA + score;
+                FindObjectOfType<Scoring>().getObjectiveA = newScore;
+                break;
+            case "ObjectiveB":
+                newScore = FindObjectOfType<Scoring>().getObjectiveB + score;
+                FindObjectOfType<Scoring>().getObjectiveB = newScore;
                 break;
         }
 
