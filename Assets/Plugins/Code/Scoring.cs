@@ -23,8 +23,10 @@ public class Scoring : MonoBehaviour
     private const float BUTTON_WIDTH_OFFSET = 100.0f;
     private List<GameObject> scoringButtons;
     CanvasGroup scoringCanvasGroup;
+    CanvasGroup gameCanvasGroup;
 
     GameObject scoreDetails;
+    GameObject gameDetails;
     int totalScore = 0;
     int comPuzzleScore = 0;
     int comUnscrambleScore = 0;
@@ -33,7 +35,14 @@ public class Scoring : MonoBehaviour
     int scanningScore = 0;
     int labScore = 0;
     public bool showingScore = false;
+    public bool showingGameScore = false;
 
+
+    public bool getShowingGameScore
+    {
+        get { return showingGameScore; }
+        set { showingGameScore = value; }
+    }
 
     public bool getShowingScore
     {
@@ -117,9 +126,11 @@ public class Scoring : MonoBehaviour
         scoringCanvas.name = "ScoringCanvas";
         scoringCanvas.sortingOrder = 999;
         scoringCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
-        scoreDetails = GameObject.Find("ScoreDetails");     
+        scoreDetails = GameObject.Find("ScoreDetails");
+        gameDetails = GameObject.Find("GameDetails");
 
-        hideScoreDetailsDisplay();
+        hideScoreDetailsDisplay("ScoreDetails");
+        hideScoreDetailsDisplay("GameDetails");
 
         CanvasScaler scoreCanvasScaler = gameObject.AddComponent<CanvasScaler>();
         scoreCanvasScaler.transform.SetParent(this.transform);
@@ -189,36 +200,52 @@ public class Scoring : MonoBehaviour
     }
     
 
-    public void hideScoreDetailsDisplay()
+    public void hideScoreDetailsDisplay(string scoreObject)
     {
-        scoreDetails = GameObject.Find("ScoreDetails");
-        scoringCanvasGroup = scoreDetails.GetComponent<CanvasGroup>();
-        scoringCanvasGroup.alpha = 0f;
-        scoringCanvasGroup.blocksRaycasts = false;
-        FindObjectOfType<Scoring>().getShowingScore = false;        
+        GameObject details = GameObject.Find(scoreObject);
+        CanvasGroup scoreCanvasGroup = details.GetComponent<CanvasGroup>();
+        scoreCanvasGroup.alpha = 0f;
+        scoreCanvasGroup.blocksRaycasts = false;
+        FindObjectOfType<Scoring>().getShowingScore = false;
+        FindObjectOfType<Scoring>().getShowingGameScore = false;
     }
 
     public void ScoreButtonClicked()
     {
         string buttonName = EventSystem.current.currentSelectedGameObject.name;
-        scoringCanvasGroup = scoreDetails.GetComponent<CanvasGroup>();
-
+        
         bool displayOn = FindObjectOfType<Scoring>().getShowingScore;
+        bool gameDisplayOn = FindObjectOfType<Scoring>().getShowingGameScore;
+
+        if (gameDisplayOn)
+        {
+            hideScoreDetailsDisplay("GameDetails");
+            return;
+        }
+        if (displayOn)
+        {
+            hideScoreDetailsDisplay("ScoreDetails");
+            return;
+        }
 
         if (buttonName.Equals("ScoreBox"))
         {
             //Debug.Log("Scoring Info");
+            scoringCanvasGroup = gameDetails.GetComponent<CanvasGroup>();
             EventSystem.current.SetSelectedGameObject(null);
+
+            scoringCanvasGroup.alpha = 1f;
+            scoringCanvasGroup.blocksRaycasts = true;
+            FindObjectOfType<Scoring>().getShowingGameScore = true;
+            //updateGameScore(0);
+
         }
         else if (buttonName == "MainScoreBox")
         {
             //Debug.Log("Score Details");
+            scoringCanvasGroup = scoreDetails.GetComponent<CanvasGroup>();
             EventSystem.current.SetSelectedGameObject(null);
-            if (displayOn)
-            {
-                hideScoreDetailsDisplay();
-                return;
-            }
+
             scoringCanvasGroup.alpha = 1f;
             scoringCanvasGroup.blocksRaycasts = true;
             FindObjectOfType<Scoring>().getShowingScore = true;
@@ -307,7 +334,7 @@ public class Scoring : MonoBehaviour
         foreach (string scene in allScenes)        
         {
             score = getGameScore(scene);
-            Debug.Log(score);
+            //Debug.Log(score);
             total += score;            
         }
         FindObjectOfType<Scoring>().getTotalScore = total;
