@@ -117,7 +117,8 @@ public class Scoring : MonoBehaviour
         scoringCanvas.name = "ScoringCanvas";
         scoringCanvas.sortingOrder = 999;
         scoringCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
-        scoreDetails = GameObject.Find("ScoreDetails");        
+        scoreDetails = GameObject.Find("ScoreDetails");     
+
         hideScoreDetailsDisplay();
 
         CanvasScaler scoreCanvasScaler = gameObject.AddComponent<CanvasScaler>();
@@ -154,6 +155,11 @@ public class Scoring : MonoBehaviour
         Color blackColor = new Color32(0, 0, 0, 255);
         GameObject goButton = Instantiate<GameObject>(buttonPrefab);
         goButton.name = displayName;
+
+        if (displayName == "MainScoring" || displayName == "ScoringButton")
+        {
+            goButton.GetComponent<UnityEngine.UI.Button>().interactable = false;
+        }
 
         goButton.GetComponentInChildren<Text>().text = text;
         goButton.GetComponentInChildren<Text>().color = textColor;
