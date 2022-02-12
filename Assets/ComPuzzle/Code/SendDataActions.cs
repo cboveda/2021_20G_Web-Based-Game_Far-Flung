@@ -54,7 +54,7 @@ public class SendDataActions : MonoBehaviour
         {
             if (imagePressed == false)
             {
-                Scoring.Instance.updateScore(50, "ObjectiveB");
+                Scoring.Instance.addToScore(50, "ObjectiveB");
                 imagePressed = true;
             }
 
@@ -65,14 +65,14 @@ public class SendDataActions : MonoBehaviour
 
             if (wordUpdated)
             {
-                Scoring.Instance.updateScore(-50, "ObjectiveB");
+                Scoring.Instance.addToScore(-50, "ObjectiveB");
             }
         }
         if (buttonName == "SpectometerButton")
         {
             if (spectroPressed == false)
             {
-                Scoring.Instance.updateScore(50, "ObjectiveB");
+                Scoring.Instance.addToScore(50, "ObjectiveB");
                 spectroPressed = true;
             }
 
@@ -83,14 +83,14 @@ public class SendDataActions : MonoBehaviour
 
             if (wordUpdated)
             {
-                Scoring.Instance.updateScore(-50, "ObjectiveB");
+                Scoring.Instance.addToScore(-50, "ObjectiveB");
             }
         }
         if (buttonName == "MagnetometerButton")
         {
             if (magnetoPressed == false)
             {
-                Scoring.Instance.updateScore(50, "ObjectiveB");
+                Scoring.Instance.addToScore(50, "ObjectiveB");
                 magnetoPressed = true;
             }
 
@@ -101,14 +101,14 @@ public class SendDataActions : MonoBehaviour
 
             if (wordUpdated)
             {
-                Scoring.Instance.updateScore(-50, "ObjectiveB");
+                Scoring.Instance.addToScore(-50, "ObjectiveB");
             }
         }
         if (buttonName == "RadioButton")
         {
             if (radioPressed == false)
             {
-                Scoring.Instance.updateScore(50, "ObjectiveB");
+                Scoring.Instance.addToScore(50, "ObjectiveB");
                 radioPressed = true;
             }
 
@@ -119,7 +119,7 @@ public class SendDataActions : MonoBehaviour
 
             if (wordUpdated)
             {
-                Scoring.Instance.updateScore(-50, "ObjectiveB");
+                Scoring.Instance.addToScore(-50, "ObjectiveB");
             }
         }
 

@@ -37,7 +37,7 @@ public class Scoring : MonoBehaviour
     int labScore = 0;
     public bool showingScore = false;
     public bool showingGameScore = false;
-    public string sceneInitialized = "";
+    public bool initialized = false;
 
     int objective1 = 0;
     int objective2 = 0;
@@ -69,10 +69,10 @@ public class Scoring : MonoBehaviour
         set { objectiveB = value; }
     }
 
-    public string getSceneInitialized
+    public bool getInitialized
     {
-        get { return sceneInitialized; }
-        set { sceneInitialized = value; }
+        get { return initialized; }
+        set { initialized = value; }
     }
 
     public bool getShowingGameScore
@@ -295,30 +295,34 @@ public class Scoring : MonoBehaviour
             scoringCanvasGroup.alpha = 1f;
             scoringCanvasGroup.blocksRaycasts = true;
             FindObjectOfType<Scoring>().getShowingScore = true;
-            updateScore(0, "");
+            addToScore(0, "");
         }
     }
 
     public void initialize(int score, string objective)
     {
-        Scene scene = SceneManager.GetActiveScene();
-        string sceneName = scene.name;
-        sceneInitialized = FindObjectOfType<Scoring>().getSceneInitialized;
-        if (sceneName != sceneInitialized)
-        {
-            FindObjectOfType<Scoring>().getSceneInitialized = sceneName;
-            StartCoroutine(InitializeScore(score, objective));
-        }        
+        StartCoroutine(InitializeScore(score, objective));             
     }
 
     IEnumerator InitializeScore(int score, string objective)
     {
         yield return new WaitForSeconds(0.1f);
-        updateScore(score, objective);
+        initialized = FindObjectOfType<Scoring>().getInitialized;
+        if (initialized == false)
+        {
+            FindObjectOfType<Scoring>().getInitialized = true;
+            addToScore(score, objective);
+        }
     }
 
+    void OnDestroy()
+    {
+        Debug.Log("destroy");
+        FindObjectOfType<Scoring>().getInitialized = false;    
+        resetGameScore();
+    }
 
-    public void updateScore(int score, string objective)
+    public void addToScore(int score, string objective)
     {
         //Debug.Log("updated score");
         GameObject scoringObj = GameObject.Find("ScoreBox");
@@ -456,5 +460,64 @@ public class Scoring : MonoBehaviour
 
         gameScoreObj = GameObject.Find(objectName);
         gameScoreObj.transform.GetChild(0).GetComponent<Text>().text = newScore.ToString();
+    }
+
+    public void resetGameScore()
+    {
+        //Debug.Log("reset");
+        GameObject scoringObj = GameObject.Find("ScoreBox");
+        GameObject gameScore;
+        Scene scene = SceneManager.GetActiveScene();
+        string sceneName = scene.name;
+
+        switch (sceneName)
+        {
+
+            case "comGame":
+                comPuzzleScore = 0;
+                FindObjectOfType<Scoring>().getComPuzzleScore = comPuzzleScore;
+                scoringObj.GetComponentInChildren<Text>().text = comPuzzleScore.ToString();
+                gameScore = GameObject.Find("ComPuzzleScore");
+                gameScore.transform.GetChild(0).GetComponent<Text>().text = comPuzzleScore.ToString();
+                break;
+            case "comUnscramble":
+                comUnscrambleScore = 0;
+                FindObjectOfType<Scoring>().getComUnscrambleScore = comUnscrambleScore;
+                scoringObj.GetComponentInChildren<Text>().text = comUnscrambleScore.ToString();
+                gameScore = GameObject.Find("ComUnscrambleScore");
+                gameScore.transform.GetChild(0).GetComponent<Text>().text = comUnscrambleScore.ToString();
+                break;
+            case "Assembly 3d":
+                assemblyScore = 0;
+                FindObjectOfType<Scoring>().getAssemblyScore = assemblyScore;
+                scoringObj.GetComponentInChildren<Text>().text = assemblyScore.ToString();
+                gameScore = GameObject.Find("AssemblyScore");
+                gameScore.transform.GetChild(0).GetComponent<Text>().text = assemblyScore.ToString();
+                break;
+            case "2_Flightpath":
+                flightPathScore = 0;
+                FindObjectOfType<Scoring>().getFlightPathScore = flightPathScore;
+                scoringObj.GetComponentInChildren<Text>().text = flightPathScore.ToString();
+                gameScore = GameObject.Find("FlightPathScore");
+                gameScore.transform.GetChild(0).GetComponent<Text>().text = flightPathScore.ToString();
+                break;
+            case "scene5":
+                labScore = 0;
+                FindObjectOfType<Scoring>().getLabScore = labScore;
+                scoringObj.GetComponentInChildren<Text>().text = labScore.ToString();
+                gameScore = GameObject.Find("LabScore");
+                gameScore.transform.GetChild(0).GetComponent<Text>().text = labScore.ToString();
+                break;
+            case "Scanning":
+                scanningScore = 0;
+                FindObjectOfType<Scoring>().getScanningScore = scanningScore;
+                scoringObj.GetComponentInChildren<Text>().text = scanningScore.ToString();
+                gameScore = GameObject.Find("ScanningScore");
+                gameScore.transform.GetChild(0).GetComponent<Text>().text = scanningScore.ToString();
+                break;
+        }
+
+        setCurrentScore();
+
     }
 }

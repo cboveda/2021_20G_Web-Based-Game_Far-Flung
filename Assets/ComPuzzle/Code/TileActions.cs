@@ -263,7 +263,7 @@ public class TileActions : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && onTile && validMove)
         {
             //Debug.Log("Pressed primary button on " + spriteName);
-            Scoring.Instance.updateScore(-2, "Objective2");
+            Scoring.Instance.addToScore(-2, "Objective2");
             //Scoring.Instance.gameScoreDetails(-2, "Objective2");
             audioSource.Play();
 
@@ -295,7 +295,7 @@ public class TileActions : MonoBehaviour
         {
             //Debug.Log("final");         
 
-            Scoring.Instance.updateScore(500, "");
+            Scoring.Instance.addToScore(500, "");
 
             hideFinalInstructions();
 

@@ -120,6 +120,7 @@ public class ComUnscrambleMain : MonoBehaviour
         audioSource.Play();
 
         // start score of 0
+        Debug.Log("unscramble");
         Scoring.Instance.initialize(200, "ObjectiveA");
         
 

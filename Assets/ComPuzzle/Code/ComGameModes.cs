@@ -30,7 +30,7 @@ public class ComGameModes : MonoBehaviour
 
         if ( easyModeUsed == false )
         {
-            Scoring.Instance.updateScore(-50, "");
+            Scoring.Instance.addToScore(-50, "");
             easyModeUsed = true;
         }        
 
@@ -87,7 +87,7 @@ public class ComGameModes : MonoBehaviour
 
         if (solvePuzzleUsed == false)
         {
-            Scoring.Instance.updateScore(-1000, "");
+            Scoring.Instance.addToScore(-1000, "");
             solvePuzzleUsed = true;
         }
 
