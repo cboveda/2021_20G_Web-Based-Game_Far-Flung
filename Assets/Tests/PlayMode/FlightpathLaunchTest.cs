@@ -10,6 +10,7 @@ public class FlightpathLaunchTest
 {
     private GameObject satellite;
     private GameObject planet;
+    private GameObject asteroid;
     private GameObject launchManager;
     private LaunchManager launchManagerComponent;
     private GameObject path;
@@ -19,63 +20,66 @@ public class FlightpathLaunchTest
     private GameObject pathDrawing;
     private GameObject arrow;
     private GameObject startPoint;
+    private GameObject startDirection;
+    private GameObject endPoint;
+    private GameObject endDirection;
+    private GameObject boundaryLeft;
+    private GameObject boundaryRight;
+    private GameObject boundaryTop;
+    private GameObject boundaryBottom;
+
 
     [SetUp]
     public void Setup()
     {
-        satellite = new GameObject();
-        satellite.AddComponent<Rigidbody>();
-        satellite.GetComponent<Rigidbody>().useGravity = false;
-        satellite.AddComponent<Launch>();
-        satellite.AddComponent<Attractor>();
-        satellite.GetComponent<Launch>().Start();
-        satellite.GetComponent<Launch>().SetAngle(0f);
-        satellite.GetComponent<Launch>().SetPower(1.0f);
+        setupSatellite();
+        setupPlanet();
+        setupAsteroid();
+        setupBoundaries();
+        setupLaunchManager();
+        setupSliders();
+        setupPaths();
+        setupArrow();
+        setupPathFollower();
 
-        planet = new GameObject();
-        planet.AddComponent<Rigidbody>();
-        planet.GetComponent<Rigidbody>().useGravity = false;
-        planet.GetComponent<Rigidbody>().mass = 100f;
-        planet.AddComponent<Attractor>();
-        planet.GetComponent<Attractor>().Affected = false;
-        planet.transform.position = Vector3.right;
-        planet.GetComponent<Attractor>().Start();
 
-        launchManager = new GameObject();
-        launchManager.AddComponent<LaunchManager>();
-        launchManagerComponent = launchManager.GetComponent<LaunchManager>();
-        launchManagerComponent.Satellite = satellite;
+    }
 
-        angleSlider = new GameObject();
-        angleSlider.AddComponent<Slider>();
-        angleSlider.GetComponent<Slider>().minValue = 10f;
-        
-        powerSlider = new GameObject();
-        powerSlider.AddComponent<Slider>();
-        powerSlider.GetComponent<Slider>().minValue = 10f;
-        launchManagerComponent.AngleSlider = angleSlider.GetComponent<Slider>();
-        launchManagerComponent.PowerSlider = angleSlider.GetComponent<Slider>();
-        
-        pathDrawing = new GameObject();
-        pathDrawing.AddComponent<SatellitePathDrawing>();
-        pathDrawing.GetComponent<SatellitePathDrawing>().Start();
-        launchManagerComponent.SatellitePath = pathDrawing.GetComponent<SatellitePathDrawing>();
-
+    private void setupArrow()
+    {
         arrow = new GameObject();
         arrow.AddComponent<Trajectory>();
         arrow.GetComponent<Trajectory>().Satellite = satellite.GetComponent<Launch>();
         arrow.AddComponent<SpriteRenderer>();
         launchManagerComponent.TrajectoryArrow = arrow.GetComponent<Trajectory>();
         launchManagerComponent.Start();
+    }
+
+    private void setupPathFollower()
+    {
+        pathFollower = new GameObject();
+        pathFollower.AddComponent<PathFollower>();
+        var pathFollowerComponent = pathFollower.GetComponent<PathFollower>();
+        pathFollowerComponent.Path = path;
+        pathFollowerComponent.Speed = 1.0f;
+        pathFollowerComponent.Start();
+    }
+
+    private void setupPaths()
+    {
+        pathDrawing = new GameObject();
+        pathDrawing.AddComponent<SatellitePathDrawing>();
+        pathDrawing.GetComponent<SatellitePathDrawing>().Start();
+        launchManagerComponent.SatellitePath = pathDrawing.GetComponent<SatellitePathDrawing>();
 
         path = new GameObject();
         path.AddComponent<Path>();
         var pathComponent = path.GetComponent<Path>();
-        
+
         startPoint = new GameObject();
-        GameObject startDirection = new GameObject();
-        GameObject endPoint = new GameObject();
-        GameObject endDirection = new GameObject();
+        startDirection = new GameObject();
+        endPoint = new GameObject();
+        endDirection = new GameObject();
 
         startPoint.transform.position = Vector2.right;
         startDirection.transform.position = Vector2.down;
@@ -91,13 +95,99 @@ public class FlightpathLaunchTest
         pathComponent.StartDirection = startDirection.transform;
         pathComponent.EndPoint = endPoint.transform;
         pathComponent.EndDirection = endDirection.transform;
+    }
 
-        pathFollower = new GameObject();
-        pathFollower.AddComponent<PathFollower>();
-        var pathFollowerComponent = pathFollower.GetComponent<PathFollower>();
-        pathFollowerComponent.Path = path;
-        pathFollowerComponent.Speed = 1.0f;
-        pathFollowerComponent.Start();
+    private void setupSliders()
+    {
+        angleSlider = new GameObject();
+        angleSlider.AddComponent<Slider>();
+        angleSlider.GetComponent<Slider>().minValue = 10f;
+
+        powerSlider = new GameObject();
+        powerSlider.AddComponent<Slider>();
+        powerSlider.GetComponent<Slider>().minValue = 10f;
+        launchManagerComponent.AngleSlider = angleSlider.GetComponent<Slider>();
+        launchManagerComponent.PowerSlider = angleSlider.GetComponent<Slider>();
+    }
+
+    private void setupLaunchManager()
+    {
+        launchManager = new GameObject();
+        launchManager.AddComponent<LaunchManager>();
+        launchManagerComponent = launchManager.GetComponent<LaunchManager>();
+        launchManagerComponent.Satellite = satellite;
+        satellite.GetComponent<SatelliteCollision>().launchManager = launchManagerComponent;
+    }
+
+    private void setupBoundaries()
+    {
+        boundaryLeft = new GameObject();
+        boundaryLeft.name = "LeftBoundary";
+        boundaryLeft.tag = "FlightpathBounds";
+        boundaryLeft.AddComponent<BoxCollider>();
+        boundaryLeft.GetComponent<BoxCollider>().isTrigger = true;
+        boundaryLeft.transform.position = Vector3.left * 1000;
+
+        boundaryRight = new GameObject();
+        boundaryRight.name = "RightBoundary";
+        boundaryRight.tag = "FlightpathBounds";
+        boundaryRight.AddComponent<BoxCollider>();
+        boundaryRight.GetComponent<BoxCollider>().isTrigger = true;
+        boundaryRight.transform.position = Vector3.right * 1000;
+
+        boundaryTop = new GameObject();
+        boundaryTop.name = "TopBoundary";
+        boundaryTop.tag = "FlightpathBounds";
+        boundaryTop.AddComponent<BoxCollider>();
+        boundaryTop.GetComponent<BoxCollider>().isTrigger = true;
+        boundaryTop.transform.position = Vector3.up * 1000;
+
+        boundaryBottom = new GameObject();
+        boundaryBottom.name = "BottomBoundary";
+        boundaryBottom.tag = "FlightpathBounds";
+        boundaryBottom.AddComponent<BoxCollider>();
+        boundaryBottom.GetComponent<BoxCollider>().isTrigger = true;
+        boundaryBottom.transform.position = Vector3.down * 1000;
+    }
+
+    private void setupAsteroid()
+    {
+        asteroid = new GameObject();
+        asteroid.tag = "FlightpathAsteroid";
+        asteroid.AddComponent<BoxCollider>();
+        asteroid.GetComponent<BoxCollider>().isTrigger = true;
+        asteroid.transform.position = Vector3.left * 100;
+        
+    }
+
+    private void setupPlanet()
+    {
+        planet = new GameObject();
+        planet.AddComponent<Rigidbody>();
+        planet.GetComponent<Rigidbody>().useGravity = false;
+        planet.GetComponent<Rigidbody>().mass = 100f;
+        planet.AddComponent<Attractor>();
+        planet.GetComponent<Attractor>().Affected = false;
+        planet.tag = "FlightpathMars";
+        planet.AddComponent<BoxCollider>();
+        planet.GetComponent<BoxCollider>().isTrigger = true;
+        planet.transform.position = Vector3.right * 100;
+        planet.GetComponent<Attractor>().Start();
+    }
+
+    private void setupSatellite()
+    {
+        satellite = new GameObject();
+        satellite.AddComponent<Rigidbody>();
+        satellite.GetComponent<Rigidbody>().useGravity = false;
+        satellite.AddComponent<Launch>();
+        satellite.AddComponent<Attractor>();
+        satellite.AddComponent<BoxCollider>();
+        satellite.GetComponent<BoxCollider>().isTrigger = true;
+        satellite.AddComponent<SatelliteCollision>();
+        satellite.GetComponent<Launch>().Start();
+        satellite.GetComponent<Launch>().SetAngle(0f);
+        satellite.GetComponent<Launch>().SetPower(1.0f);
     }
 
     [TearDown]
@@ -105,6 +195,7 @@ public class FlightpathLaunchTest
     {
         Object.Destroy(satellite);
         Object.Destroy(planet);
+        Object.Destroy(asteroid);
         Object.Destroy(launchManager);
         Object.Destroy(path);
         Object.Destroy(pathFollower);
@@ -113,6 +204,13 @@ public class FlightpathLaunchTest
         Object.Destroy(pathDrawing);
         Object.Destroy(arrow);
         Object.Destroy(startPoint);
+        Object.Destroy(startDirection);
+        Object.Destroy(endPoint);
+        Object.Destroy(endDirection);
+        Object.Destroy(boundaryLeft);
+        Object.Destroy(boundaryRight);
+        Object.Destroy(boundaryTop);
+        Object.Destroy(boundaryBottom);
     }
 
     [UnityTest]
@@ -214,7 +312,7 @@ public class FlightpathLaunchTest
     {
         float expectedX = 15f;
         float expectedY = 30f;
-        Vector3 expectedPosition = new Vector3 (expectedX, expectedY, 0);
+        Vector3 expectedPosition = new Vector3(expectedX, expectedY, 0);
         satellite.GetComponent<Launch>().StartX = expectedX;
         satellite.GetComponent<Launch>().StartY = expectedY;
         satellite.GetComponent<Launch>().InitializePosition();
@@ -227,7 +325,7 @@ public class FlightpathLaunchTest
     {
         float expectedX = 1f;
         float expectedY = 1f;
-        Vector3 expectedPosition = new Vector3 (expectedX, expectedY, 0);
+        Vector3 expectedPosition = new Vector3(expectedX, expectedY, 0);
         satellite.GetComponent<Launch>().StartX = expectedX;
         satellite.GetComponent<Launch>().StartY = expectedY;
         Vector3 newPosition = new Vector3(15, 30, 0);
@@ -237,18 +335,91 @@ public class FlightpathLaunchTest
         Assert.AreEqual(expectedPosition, satellite.transform.position);
     }
 
-     [UnityTest]
+    [UnityTest]
     public IEnumerator Test_PathFollowerBeginsAtStartPoint()
     {
         yield return new WaitForFixedUpdate();
-        Assert.AreEqual((Vector3) Vector2.right, pathFollower.transform.position);
+        Assert.AreEqual((Vector3)Vector2.right, pathFollower.transform.position);
     }
 
     [UnityTest]
     public IEnumerator Test_AttractorsDoNotAttractUnaffectedAttractors()
     {
+        Vector3 expected = planet.transform.position;
         launchManagerComponent.OnLaunchButtonClicked();
         yield return new WaitForFixedUpdate();
-        Assert.AreEqual(Vector3.right, planet.transform.position);  
+        Assert.AreEqual(expected, planet.transform.position);
+    }
+
+    [UnityTest]
+    public IEnumerator Test_SatelliteCollisionLeftBoundary()
+    {
+        launchManagerComponent.OnLaunchButtonClicked();
+        //yield return new WaitForFixedUpdate();
+        satellite.transform.position = boundaryLeft.transform.position;
+        satellite.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        satellite.GetComponent<Attractor>().Affected = false;
+        yield return new WaitForFixedUpdate();
+        Assert.AreEqual(true, launchManagerComponent.hasStopped());
+    }
+
+    [UnityTest]
+    public IEnumerator Test_SatelliteCollisionRightBoundary()
+    {
+        launchManagerComponent.OnLaunchButtonClicked();
+        yield return new WaitForFixedUpdate();
+        satellite.transform.position = boundaryRight.transform.position;
+        satellite.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        satellite.GetComponent<Attractor>().Affected = false;
+        yield return new WaitForFixedUpdate();
+        Assert.AreEqual(true, launchManagerComponent.hasStopped());
+    }
+
+    [UnityTest]
+    public IEnumerator Test_SatelliteCollisionTopBoundary()
+    {
+        launchManagerComponent.OnLaunchButtonClicked();
+        yield return new WaitForFixedUpdate();
+        satellite.transform.position = boundaryTop.transform.position;
+        satellite.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        satellite.GetComponent<Attractor>().Affected = false;
+        yield return new WaitForFixedUpdate();
+        Assert.AreEqual(true, launchManagerComponent.hasStopped());
+    }
+
+    [UnityTest]
+    public IEnumerator Test_SatelliteCollisionBottomBoundary()
+    {
+        launchManagerComponent.OnLaunchButtonClicked();
+        yield return new WaitForFixedUpdate();
+        satellite.transform.position = boundaryBottom.transform.position;
+        satellite.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        satellite.GetComponent<Attractor>().Affected = false;
+        yield return new WaitForFixedUpdate();
+        Assert.AreEqual(true, launchManagerComponent.hasStopped());
+    }
+
+    [UnityTest]
+    public IEnumerator Test_SatelliteCollisionPlanet()
+    {
+        launchManagerComponent.OnLaunchButtonClicked();
+        yield return new WaitForFixedUpdate();
+        satellite.transform.position = planet.transform.position;
+        satellite.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        satellite.GetComponent<Attractor>().Affected = false;
+        yield return new WaitForFixedUpdate();
+        Assert.AreEqual(true, launchManagerComponent.hasStopped());
+    }
+
+    [UnityTest]
+    public IEnumerator Test_SatelliteCollisionAsteroid()
+    {
+        launchManagerComponent.OnLaunchButtonClicked();
+        yield return new WaitForFixedUpdate();
+        satellite.transform.position = asteroid.transform.position;
+        satellite.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        satellite.GetComponent<Attractor>().Affected = false;
+        yield return new WaitForFixedUpdate();
+        Assert.AreEqual(true, launchManagerComponent.hasStopped());
     }
 }

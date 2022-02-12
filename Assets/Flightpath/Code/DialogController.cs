@@ -161,6 +161,7 @@ namespace Flightpath
                 _launchButton.interactable = true;
                 _angleSlider.interactable = true;
                 _powerSlider.interactable = true;
+                _launchManager.enableMarsDialog();
             }
         }
 

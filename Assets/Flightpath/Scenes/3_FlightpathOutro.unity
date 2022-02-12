@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef6a4ac53302ac74689f1c948fe530a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _timeScale: 1.5
 --- !u!320 &26692448
 PlayableDirector:
   m_ObjectHideFlags: 0
