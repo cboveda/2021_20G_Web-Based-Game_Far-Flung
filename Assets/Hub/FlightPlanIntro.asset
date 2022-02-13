@@ -15,21 +15,21 @@ MonoBehaviour:
   dialogs:
   - dialogText: Alright!  I think we've got something we can really launch.  Aren't
       you excited?
-    robotPortrait: 1
+    robotVoice: 1
     dialogAudio: {fileID: 0}
   - dialogText: I'm excited.
-    robotPortrait: 2
+    robotVoice: 2
     dialogAudio: {fileID: 0}
   - dialogText: Let's strap this satellite to a huge rocket, and see if we can get
       it where it needs to go.
-    robotPortrait: 1
+    robotVoice: 1
     dialogAudio: {fileID: 0}
   - dialogText: I think I'm going to miss it.
-    robotPortrait: 2
+    robotVoice: 2
     dialogAudio: {fileID: 0}
   - dialogText: Rocket is fueled and awaiting launch parameters.
-    robotPortrait: 0
+    robotVoice: 0
     dialogAudio: {fileID: 0}
   - dialogText: Do you hear that!?  It's go time!  Let's do this!
-    robotPortrait: 1
+    robotVoice: 1
     dialogAudio: {fileID: 0}

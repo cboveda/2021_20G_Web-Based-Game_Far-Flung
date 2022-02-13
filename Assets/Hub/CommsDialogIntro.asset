@@ -14,26 +14,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogs:
   - dialogText: Root, did you see that?!
-    robotPortrait: 1
+    robotVoice: 1
     dialogAudio: {fileID: 0}
   - dialogText: Affirmative, flight activities were observed.
-    robotPortrait: 0
+    robotVoice: 0
     dialogAudio: {fileID: 0}
   - dialogText: You really kept a cool head there.  That was some fine stick work!
-    robotPortrait: 1
+    robotVoice: 1
     dialogAudio: {fileID: 0}
   - dialogText: But now what?
-    robotPortrait: 2
+    robotVoice: 2
     dialogAudio: {fileID: 0}
   - dialogText: "Well\u2026you collected a lot of science up there.  We should probably
       get it back to earth.  We have a blueprint to an experimental transmission
       array.  Maybe if you can unscramble that and figure out the radio\u2019s passwords,
       we can get the data back here!"
-    robotPortrait: 1
+    robotVoice: 1
     dialogAudio: {fileID: 0}
   - dialogText: "I\u2019m glad I thought of it."
-    robotPortrait: 2
+    robotVoice: 2
     dialogAudio: {fileID: 0}
   - dialogText: Right.  Totally your idea.
-    robotPortrait: 1
+    robotVoice: 1
     dialogAudio: {fileID: 0}

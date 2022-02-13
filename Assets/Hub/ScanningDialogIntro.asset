@@ -14,24 +14,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogs:
   - dialogText: "Wow.  Incredible.  You really got it there.  I\u2019m impressed."
-    robotPortrait: 1
+    robotVoice: 1
     dialogAudio: {fileID: 0}
   - dialogText: "I\u2019m also impressed."
-    robotPortrait: 2
+    robotVoice: 2
     dialogAudio: {fileID: 0}
   - dialogText: "Next is the real exciting part.  We need to collect data!  Now,
       normally we wouldn\u2019t just joystick the controls for a satellite.  In fact,
       that probably wasn\u2019t possible.  But this is the future, and we\u2019re
       Space Enthusiasts!"
-    robotPortrait: 1
+    robotVoice: 1
     dialogAudio: {fileID: 0}
   - dialogText: Very enthusiastic.
-    robotPortrait: 2
+    robotVoice: 2
     dialogAudio: {fileID: 0}
   - dialogText: Flight controls are now available to assume direct control.
-    robotPortrait: 0
+    robotVoice: 0
     dialogAudio: {fileID: 0}
   - dialogText: "Okay.  Do it.  But use a gentle touch!  \u2026we don\u2019t want
       to wreck all our hard work so far."
-    robotPortrait: 0
+    robotVoice: 1
     dialogAudio: {fileID: 0}
