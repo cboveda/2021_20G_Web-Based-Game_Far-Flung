@@ -15,23 +15,23 @@ MonoBehaviour:
   dialogs:
   - dialogText: "Wow.  Incredible.  You really got it there.  I\u2019m impressed."
     robotVoice: 1
-    dialogAudio: {fileID: 0}
+    dialogAudio: {fileID: 8300000, guid: c39e57691395c5647bf1e714f45548b0, type: 3}
   - dialogText: "I\u2019m also impressed."
     robotVoice: 2
-    dialogAudio: {fileID: 0}
+    dialogAudio: {fileID: 8300000, guid: c3ed3c1d5b061d94db868ea3e01d9b9a, type: 3}
   - dialogText: "Next is the real exciting part.  We need to collect data!  Now,
       normally we wouldn\u2019t just joystick the controls for a satellite.  In fact,
       that probably wasn\u2019t possible.  But this is the future, and we\u2019re
       Space Enthusiasts!"
     robotVoice: 1
-    dialogAudio: {fileID: 0}
+    dialogAudio: {fileID: 8300000, guid: 85c35116c9c351f4586c01820d2da62d, type: 3}
   - dialogText: Very enthusiastic.
     robotVoice: 2
-    dialogAudio: {fileID: 0}
+    dialogAudio: {fileID: 8300000, guid: 083b9c3ef18823d43bcaa6a7cb78272e, type: 3}
   - dialogText: Flight controls are now available to assume direct control.
     robotVoice: 0
-    dialogAudio: {fileID: 0}
+    dialogAudio: {fileID: 8300000, guid: 75c09118420bdeb4f8a17a55518b3ad1, type: 3}
   - dialogText: "Okay.  Do it.  But use a gentle touch!  \u2026we don\u2019t want
       to wreck all our hard work so far."
     robotVoice: 1
-    dialogAudio: {fileID: 0}
+    dialogAudio: {fileID: 8300000, guid: 03fd2f8d7f5634648ab06469d1c07383, type: 3}

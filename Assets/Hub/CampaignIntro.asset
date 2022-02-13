@@ -43,7 +43,7 @@ MonoBehaviour:
   - dialogText: Have you heard of it?  It was a satellite sent to a potentially metallic
       asteroid...
     robotVoice: 1
-    dialogAudio: {fileID: 8300000, guid: 03c260f143351894ba43e5b3abb4da2c, type: 3}
+    dialogAudio: {fileID: 8300000, guid: 57399affea2094645a1d5586aa0eca64, type: 3}
   - dialogText: The Assembly Area is ready.  We should proceed with the subject.
     robotVoice: 0
     dialogAudio: {fileID: 8300000, guid: 3e4c1b86a8eb9004795ba73d23d87671, type: 3}
