@@ -41,15 +41,10 @@ namespace DialogMaker
         [SerializeField]
         private float dialogTypingSpeed = 0.05f;
 
-        // Start is called before the first frame update
+        // Wake up and feel the morning sun...
         void Awake()
         {
-            // If we don't have a dialog container, we can't do anything.  Assert.
-            if (dialogContainer == null)
-            {
-                //Debug.Assert(dialogContainer == null, "Warning: A DialogScriptableObject is desired but not found.");
-                Debug.LogAssertion("Warning: A DialogScriptableObject is desired but not found.");
-            }
+            
 
             // Create the necessary components and get ready...
 
@@ -122,6 +117,17 @@ namespace DialogMaker
             goCanvasContainer.SetActive(false);
 
             dialogTyper = gameObject.AddComponent<DialogTyper>();
+        }
+
+        // Start is called before the first frame update
+        private void Start()
+        {
+            // If we don't have a dialog container, we can't do anything.  Assert.
+            if (dialogContainer == null)
+            {
+                //Debug.Assert(dialogContainer == null, "Warning: A DialogScriptableObject is desired but not found.");
+                Debug.LogAssertion("Warning: A DialogScriptableObject is desired but not found.");
+            }
         }
 
         public bool BeginPlayingDialog()
