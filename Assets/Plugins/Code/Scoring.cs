@@ -21,7 +21,7 @@ public class Scoring : MonoBehaviour
     private float canvasWidth;
     private const float BUTTON_WIDTH = 90.0f;
     private const float BUTTON_HEIGHT = 30.0f;
-    private const float BUTTON_WIDTH_OFFSET = 100.0f;
+    private const float BUTTON_WIDTH_OFFSET = 0.0f;
     private List<GameObject> scoringButtons;
     CanvasGroup scoringCanvasGroup;
     CanvasGroup gameCanvasGroup;
@@ -317,9 +317,8 @@ public class Scoring : MonoBehaviour
 
     void OnDestroy()
     {
-        //Debug.Log("destroy");
-        FindObjectOfType<Scoring>().getInitialized = false;    
-        resetGameScore();
+        FindObjectOfType<Scoring>().getInitialized = false;
+        resetGameScore(); 
     }
 
     public void addToScore(int score, string objective)
@@ -381,7 +380,7 @@ public class Scoring : MonoBehaviour
 
         if (objective != "")
         {
-            gameScoreDetails(score, objective);
+            gameScoreDetails(score, objective, false);
         }
 
     }
@@ -434,26 +433,38 @@ public class Scoring : MonoBehaviour
     }
 
 
-    public void gameScoreDetails(int score, string objectName)
+    public void gameScoreDetails(int score, string objectName, bool reset)
     {
         GameObject gameScoreObj = GameObject.Find(objectName);
         int newScore = 0;
         switch (objectName)
         {
             case "Objective1":
-                newScore = FindObjectOfType<Scoring>().getObjective1 + score;
+                if (!reset)
+                {
+                    newScore = FindObjectOfType<Scoring>().getObjective1 + score;
+                }                
                 FindObjectOfType<Scoring>().getObjective1 = newScore;
                 break;
             case "Objective2":
-                newScore = FindObjectOfType<Scoring>().getObjective2 + score;
+                if (!reset)
+                {
+                    newScore = FindObjectOfType<Scoring>().getObjective2 + score;
+                }
                 FindObjectOfType<Scoring>().getObjective2 = newScore;
                 break;
             case "ObjectiveA":
-                newScore = FindObjectOfType<Scoring>().getObjectiveA + score;
+                if (!reset)
+                {
+                    newScore = FindObjectOfType<Scoring>().getObjectiveA + score;
+                }   
                 FindObjectOfType<Scoring>().getObjectiveA = newScore;
                 break;
             case "ObjectiveB":
-                newScore = FindObjectOfType<Scoring>().getObjectiveB + score;
+                if (!reset)
+                {
+                    newScore = FindObjectOfType<Scoring>().getObjectiveB + score;
+                }
                 FindObjectOfType<Scoring>().getObjectiveB = newScore;
                 break;
         }
@@ -462,11 +473,29 @@ public class Scoring : MonoBehaviour
         gameScoreObj.transform.GetChild(0).GetComponent<Text>().text = newScore.ToString();
     }
 
+
+    public void resetObjectives(string [] gameObjectives)
+    {
+        foreach (string objective in gameObjectives)
+        {
+            gameScoreDetails(0, objective, true);
+        }
+    }
+
+
     public void resetGameScore()
     {
         //Debug.Log("reset");
         GameObject scoringObj = GameObject.Find("ScoreBox");
         GameObject gameScore;
+
+        string[] comPuzzleObjectives = { "Objective1", "Objective2", "Objective3", "Objective4", "Objective5", "Objective6", "Objective7", };
+        string[] comUnscrambleObjective = {"ObjectiveA", "ObjectiveB", "ObjectiveC", "ObjectiveD", "ObjectiveE", "ObjectiveF", "ObjectiveG", };
+        string[] assemblyObjectives = { };
+        string[] flightpathObjectives = { };
+        string[] scene5Objectives = { };
+        string[] scanningObjectives = { };
+
         Scene scene = SceneManager.GetActiveScene();
         string sceneName = scene.name;
 
@@ -479,6 +508,7 @@ public class Scoring : MonoBehaviour
                 scoringObj.GetComponentInChildren<Text>().text = comPuzzleScore.ToString();
                 gameScore = GameObject.Find("ComPuzzleScore");
                 gameScore.transform.GetChild(0).GetComponent<Text>().text = comPuzzleScore.ToString();
+                resetObjectives(comPuzzleObjectives);
                 break;
             case "comUnscramble":
                 comUnscrambleScore = 0;
@@ -486,6 +516,7 @@ public class Scoring : MonoBehaviour
                 scoringObj.GetComponentInChildren<Text>().text = comUnscrambleScore.ToString();
                 gameScore = GameObject.Find("ComUnscrambleScore");
                 gameScore.transform.GetChild(0).GetComponent<Text>().text = comUnscrambleScore.ToString();
+                resetObjectives(comUnscrambleObjective);
                 break;
             case "Assembly 3d":
                 assemblyScore = 0;
@@ -493,6 +524,7 @@ public class Scoring : MonoBehaviour
                 scoringObj.GetComponentInChildren<Text>().text = assemblyScore.ToString();
                 gameScore = GameObject.Find("AssemblyScore");
                 gameScore.transform.GetChild(0).GetComponent<Text>().text = assemblyScore.ToString();
+                resetObjectives(assemblyObjectives);
                 break;
             case "2_Flightpath":
                 flightPathScore = 0;
@@ -500,6 +532,7 @@ public class Scoring : MonoBehaviour
                 scoringObj.GetComponentInChildren<Text>().text = flightPathScore.ToString();
                 gameScore = GameObject.Find("FlightPathScore");
                 gameScore.transform.GetChild(0).GetComponent<Text>().text = flightPathScore.ToString();
+                resetObjectives(flightpathObjectives);
                 break;
             case "scene5":
                 labScore = 0;
@@ -507,6 +540,7 @@ public class Scoring : MonoBehaviour
                 scoringObj.GetComponentInChildren<Text>().text = labScore.ToString();
                 gameScore = GameObject.Find("LabScore");
                 gameScore.transform.GetChild(0).GetComponent<Text>().text = labScore.ToString();
+                resetObjectives(scene5Objectives);
                 break;
             case "Scanning":
                 scanningScore = 0;
@@ -514,6 +548,7 @@ public class Scoring : MonoBehaviour
                 scoringObj.GetComponentInChildren<Text>().text = scanningScore.ToString();
                 gameScore = GameObject.Find("ScanningScore");
                 gameScore.transform.GetChild(0).GetComponent<Text>().text = scanningScore.ToString();
+                resetObjectives(scanningObjectives);
                 break;
         }
 
