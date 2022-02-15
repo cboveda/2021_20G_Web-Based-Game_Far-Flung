@@ -47,17 +47,6 @@ namespace Flightpath
             SatellitePath.Active = false;
         }
 
-        public void Update()
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                if (_dg != null)
-                {
-                    _dg.BeginPlayingDialog();
-                }
-            }
-        }
-
         public void OnAngleSliderChanged(float value)
         {
             Satellite.GetComponent<Launch>().SetAngle(value);
