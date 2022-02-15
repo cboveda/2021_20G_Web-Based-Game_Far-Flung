@@ -41,6 +41,7 @@ public class HubControlFlow : MonoBehaviour
         diagLab = GameObject.Find("DialogLab").GetComponent<DialogGenerator>();
         diagOutro = GameObject.Find("DialogOutro").GetComponent<DialogGenerator>();
         fader = GameObject.Find("FadeController").GetComponent<FadeController>();
+
         //mainMenu = GameObject.Find("Canvas");
         //fader.Fade();
         introStarted = false;
@@ -52,7 +53,6 @@ public class HubControlFlow : MonoBehaviour
         bgAudio = GameObject.Find("Background Music").GetComponent<AudioSource>();
 
         bgAudio.volume = 0.5f;
-
 
         virtualCameras = new List<CinemachineVirtualCamera>();
         ReadyCameras();

@@ -42,7 +42,7 @@ namespace DialogMaker
         private float dialogTypingSpeed = 0.05f;
 
         // Start is called before the first frame update
-        void Start()
+        void Awake()
         {
             // If we don't have a dialog container, we can't do anything.  Assert.
             if (dialogContainer == null)
