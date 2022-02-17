@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c8f0b50b74f8f34d910f4ef4e9b0b1c, type: 3}
+  m_Name: CommsDialogIntro
+  m_EditorClassIdentifier: 
+  dialogs:
+  - dialogText: Root, did you see that?!
+    robotVoice: 1
+    dialogAudio: {fileID: 8300000, guid: 98dd5e3f81cb6ea42b7d991d504fd7e8, type: 3}
+  - dialogText: Affirmative, flight activities were observed.
+    robotVoice: 0
+    dialogAudio: {fileID: 8300000, guid: e50885517f70d6f45b9a7e91bc665a15, type: 3}
+  - dialogText: You really kept a cool head there.  That was some fine stick work!
+    robotVoice: 1
+    dialogAudio: {fileID: 8300000, guid: f51f1350c7b374d40888a25b70af7839, type: 3}
+  - dialogText: But now what?
+    robotVoice: 2
+    dialogAudio: {fileID: 8300000, guid: dfa7a0674cd1dc844b27b2d3108a717b, type: 3}
+  - dialogText: "Well\u2026you collected a lot of science up there.  We should probably
+      get it back to earth.  We have a blueprint to an experimental transmission
+      array.  Maybe if you can unscramble that and figure out the radio\u2019s passwords,
+      we can get the data back here!"
+    robotVoice: 1
+    dialogAudio: {fileID: 8300000, guid: eb20f221480750442afe19018532ca59, type: 3}
+  - dialogText: "I\u2019m glad I thought of it."
+    robotVoice: 2
+    dialogAudio: {fileID: 8300000, guid: 9b2ae7cde4f65644e93f3ef2908c83e3, type: 3}
+  - dialogText: Right.  Totally your idea.  Anyway, on with it!
+    robotVoice: 1
+    dialogAudio: {fileID: 8300000, guid: af37922758460a245a9ad8ff9cbfa071, type: 3}
