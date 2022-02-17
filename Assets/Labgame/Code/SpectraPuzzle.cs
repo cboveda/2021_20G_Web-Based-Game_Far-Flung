@@ -103,22 +103,19 @@ public class SpectraPuzzle : LabPuzzle
     public void SetPrimarySpectra(Spectra primary)
     {
         primaryElement = primary;
-        numInserted++;
-        UpdateDisplaySpectra();
+        
     }
 
     public void SetSecondarySpectra(Spectra secondary)
     {
         secondaryElement = secondary;
-        numInserted++;
-        UpdateDisplaySpectra();
+        
     }
 
     public void SetTraceSpectra(Spectra trace)
     {
         traceElement = trace;
-        numInserted++;
-        UpdateDisplaySpectra();
+        
     }
 
     public void UpdateDisplaySpectra()
@@ -277,6 +274,7 @@ public class SpectraPuzzle : LabPuzzle
         }
         //mySpectraPuzzleDisplay.UpdateExampleDisplay(spectraList[selectedElementSlot]);
         UpdateExampleSpectra();
+        GetAFeelForSpectraToTest();
         return spectraList[selectedElementSlot];
     }
 
@@ -292,6 +290,7 @@ public class SpectraPuzzle : LabPuzzle
         }
         //mySpectraPuzzleDisplay.UpdateExampleDisplay(spectraList[selectedElementSlot]);
         UpdateExampleSpectra();
+        GetAFeelForSpectraToTest();
         return spectraList[selectedElementSlot];
     }
 
@@ -318,12 +317,43 @@ public class SpectraPuzzle : LabPuzzle
         {
             case 0:
                 SetPrimarySpectra(insertedElement);
+                numInserted++;
+                UpdateDisplaySpectra();
                 break;
             case 1:
                 SetSecondarySpectra(insertedElement);
+                numInserted++;
+                UpdateDisplaySpectra();
                 break;
             case 2:
                 SetTraceSpectra(insertedElement);
+                numInserted++;
+                UpdateDisplaySpectra();
+                break;
+            default:
+                break;
+        }
+        GetAFeelForSpectraToTest();
+
+    }
+
+    // We don't want to commit right now...just get a feel for a solution.
+    public void GetAFeelForSpectraToTest()
+    {
+        Spectra insertedElement = spectraList[selectedElementSlot];
+        switch (numInserted)
+        {
+            case 0:
+                SetPrimarySpectra(insertedElement);
+                UpdateDisplaySpectra();
+                break;
+            case 1:
+                SetSecondarySpectra(insertedElement);
+                UpdateDisplaySpectra();
+                break;
+            case 2:
+                SetTraceSpectra(insertedElement);
+                UpdateDisplaySpectra();
                 break;
             default:
                 break;
@@ -338,19 +368,28 @@ public class SpectraPuzzle : LabPuzzle
             case 0:
                 break;
             case 1:
-                numInserted -= 2;
+                numInserted -= 1;
+                selectedElementSlot = spectraList.IndexOf(primaryElement);
                 SetPrimarySpectra(none);
+                SetSecondarySpectra(none);
+                SetTraceSpectra(none);
+                
                 break;
             case 2:
-                numInserted -= 2;
+                numInserted -= 1;
+                selectedElementSlot = spectraList.IndexOf(secondaryElement);
                 SetSecondarySpectra(none);
+                SetTraceSpectra(none);
                 break;
             case 3:
-                numInserted -= 2;
+                numInserted -= 1;
+                selectedElementSlot = spectraList.IndexOf(traceElement);
                 SetTraceSpectra(none);
                 break;
             default:
                 break;
         }
+        UpdateExampleSpectra();
+        GetAFeelForSpectraToTest();
     }
 }
