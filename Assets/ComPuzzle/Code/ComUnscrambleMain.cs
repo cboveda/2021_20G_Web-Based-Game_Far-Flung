@@ -119,6 +119,11 @@ public class ComUnscrambleMain : MonoBehaviour
         volumeSlider = GameObject.Find("VolumeSlider");
         audioSource.Play();
 
+        // start score of 0
+        //Debug.Log("unscramble");
+        Scoring.Instance.initialize(200, "ObjectiveA");
+        
+
     }
 
 
@@ -482,7 +487,7 @@ public class ComUnscrambleMain : MonoBehaviour
 
         // add 3 second delay
         yield return new WaitForSeconds(3f);
-        Debug.Log("win scene");
+        //Debug.Log("win scene");
 
         
         EnableContinueButton();
