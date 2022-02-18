@@ -115,6 +115,7 @@ public class LabSpectraTest
         puzzle1.SetPrimarySpectra(SpectraPuzzle.iron);
         puzzle1.SetSecondarySpectra(SpectraPuzzle.gold);
         puzzle1.SetTraceSpectra(SpectraPuzzle.silver);
+        puzzle1.UpdateDisplaySpectra();
 
         Assert.IsTrue(puzzle1.CheckSolution());
 
