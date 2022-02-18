@@ -116,6 +116,7 @@ public class FlightpathLaunchTest
         launchManager.AddComponent<LaunchManager>();
         launchManagerComponent = launchManager.GetComponent<LaunchManager>();
         launchManagerComponent.Satellite = satellite;
+        launchManagerComponent.enableMarsDialog();
         satellite.GetComponent<SatelliteCollision>().launchManager = launchManagerComponent;
     }
 
@@ -185,6 +186,7 @@ public class FlightpathLaunchTest
         satellite.AddComponent<BoxCollider>();
         satellite.GetComponent<BoxCollider>().isTrigger = true;
         satellite.AddComponent<SatelliteCollision>();
+        satellite.AddComponent<ParticleSystem>();
         satellite.GetComponent<Launch>().Start();
         satellite.GetComponent<Launch>().SetAngle(0f);
         satellite.GetComponent<Launch>().SetPower(1.0f);
