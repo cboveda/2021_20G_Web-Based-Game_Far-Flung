@@ -11,6 +11,9 @@ public class SpectraPuzzleDisplay : MonoBehaviour
     public const float SPECTRA_DISPLAY_SCALE_HEIGHT = 0.8f;
     public const float COLOR_BAND_SCALE_WIDTH = 0.5f;
     public const float COLOR_BAND_SCALE_HEIGHT = 2f;
+    public const float PRIMARY_POS_Y = 5.89f;
+    public const float SECONDARY_POS_Y = 4.3f;
+    public const float TERTIARY_POS_Y = 2.78f;
 
     GameObject[] spectraSolutionDisplayPrimatives = new GameObject[Spectra.SPECTRA_ARRAY_SIZE];
     GameObject[] spectraAttemptDisplayPrimatives = new GameObject[Spectra.SPECTRA_ARRAY_SIZE];
@@ -103,6 +106,7 @@ public class SpectraPuzzleDisplay : MonoBehaviour
         ClearStatusDisplay();
         for (int i = 0; i < Spectra.SPECTRA_ARRAY_SIZE; i++)
         {
+            // Update system's view:
             MeshRenderer renderer = spectraExampleDisplayPrimatives[i].GetComponent<MeshRenderer>();
             Material spectraMat = Resources.Load("SpectraMaterial", typeof(Material)) as Material;
             renderer.material = spectraMat;
@@ -111,6 +115,7 @@ public class SpectraPuzzleDisplay : MonoBehaviour
 
             spectraExampleDisplayPrimatives[i].transform.localPosition = new Vector3(i, 0, 0);
             spectraExampleDisplayPrimatives[i].transform.localScale = new Vector3(GetBandWidthValueFromColor(renderer.material.color), COLOR_BAND_SCALE_HEIGHT, 1);
+
         }
         elementName.text = currentPuzzle.spectraList[currentPuzzle.selectedElementSlot].GetSpectraName();
 
