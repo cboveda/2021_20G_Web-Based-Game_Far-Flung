@@ -25,7 +25,7 @@ public class SceneActions : MonoBehaviour
 
         if ( sceneName == "comGameWin")
         {
-            gameScene = "comUnscrambleIntro";
+            gameScene = "Hub";
         }
 
         if (sceneName == "comUnscrambleIntro")
