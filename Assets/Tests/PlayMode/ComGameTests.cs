@@ -20,7 +20,7 @@ public class ComGameTests
         Dictionary<string, string> testScenes = new Dictionary<string, string>()
         {
               {"comGame", "comGameWin"},
-              {"comGameWin", "comUnscrambleIntro"},
+              {"comGameWin", "Hub"},
               {"comUnscrambleIntro", "comUnscramble"}
         };
 
