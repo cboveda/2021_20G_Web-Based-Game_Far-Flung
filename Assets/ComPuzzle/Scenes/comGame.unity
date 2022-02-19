@@ -3886,6 +3886,28 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameDetails
       objectReference: {fileID: 0}
+    - target: {fileID: 6577197009973612542, guid: 4384b623689040a42bfb8c4802c2da84, type: 3}
+      propertyPath: m_Text
+      value: 'Solve Puzzle Used:'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6577197010146535191, guid: 4384b623689040a42bfb8c4802c2da84, type: 3}
+      propertyPath: m_Text
+      value: 'Complete Puzzle:'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6577197010235014852, guid: 4384b623689040a42bfb8c4802c2da84, type: 3}
+      propertyPath: m_Text
+      value: 'Puzzle Slide Moves:
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6577197010470699023, guid: 4384b623689040a42bfb8c4802c2da84, type: 3}
+      propertyPath: m_Text
+      value: 'Start Score:'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6577197010614431355, guid: 4384b623689040a42bfb8c4802c2da84, type: 3}
+      propertyPath: m_Text
+      value: 'Easy Mode Used:'
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4384b623689040a42bfb8c4802c2da84, type: 3}
 --- !u!1 &1059496524

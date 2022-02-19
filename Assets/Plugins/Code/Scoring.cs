@@ -41,6 +41,9 @@ public class Scoring : MonoBehaviour
 
     int objective1 = 0;
     int objective2 = 0;
+    int objective3 = 0;
+    int objective4 = 0;
+    int objective5 = 0;
 
     int objectiveA = 0;
     int objectiveB = 0;
@@ -55,6 +58,24 @@ public class Scoring : MonoBehaviour
     {
         get { return objective2; }
         set { objective2 = value; }
+    }
+
+    public int getObjective3
+    {
+        get { return objective3; }
+        set { objective3 = value; }
+    }
+
+    public int getObjective4
+    {
+        get { return objective4; }
+        set { objective4 = value; }
+    }
+
+    public int getObjective5
+    {
+        get { return objective5; }
+        set { objective5 = value; }
     }
 
     public int getObjectiveA
@@ -281,7 +302,7 @@ public class Scoring : MonoBehaviour
             FindObjectOfType<Scoring>().getShowingGameScore = true;
             //updateGameScore(0);
 
-        }
+        } 
         else if (buttonName == "MainScoreBox")
         {
             if (gameDisplayOn)
@@ -453,6 +474,29 @@ public class Scoring : MonoBehaviour
                 }
                 FindObjectOfType<Scoring>().getObjective2 = newScore;
                 break;
+            case "Objective3":
+                if (!reset)
+                {
+                    newScore = FindObjectOfType<Scoring>().getObjective3 + score;
+                }
+                FindObjectOfType<Scoring>().getObjective3 = newScore;
+                break;
+            case "Objective4":
+                if (!reset)
+                {
+                    newScore = FindObjectOfType<Scoring>().getObjective4 + score;
+                }
+                FindObjectOfType<Scoring>().getObjective4 = newScore;
+                break;
+            case "Objective5":
+                if (!reset)
+                {
+                    newScore = FindObjectOfType<Scoring>().getObjective5 + score;
+                }
+                FindObjectOfType<Scoring>().getObjective5 = newScore;
+                break;
+
+
             case "ObjectiveA":
                 if (!reset)
                 {

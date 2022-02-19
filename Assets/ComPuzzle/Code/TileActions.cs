@@ -295,7 +295,7 @@ public class TileActions : MonoBehaviour
         {
             //Debug.Log("final");         
 
-            Scoring.Instance.addToScore(500, "");
+            Scoring.Instance.addToScore(500, "Objective5");
 
             hideFinalInstructions();
 
