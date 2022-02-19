@@ -20,10 +20,10 @@ MonoBehaviour:
   - dialogText: Oh how I love data.
     robotVoice: 2
     dialogAudio: {fileID: 8300000, guid: 97b86f3611be65f44966809ac3a930c0, type: 3}
-  - dialogText: "Now comes the part people don\u2019t always think about.  We need
-      to make sense of the data, and see if that asteroid is really made of metal!"
+  - dialogText: "Now for the part people don\u2019t always think about.  We need
+      to make sense of the data, and see what that asteroid is really like!"
     robotVoice: 1
-    dialogAudio: {fileID: 8300000, guid: 50b352f41e8abce4d8bb515a034d366f, type: 3}
+    dialogAudio: {fileID: 8300000, guid: 451447312544b64419e0692f0e590744, type: 3}
   - dialogText: Analysis equipment is nearly ready.  Some calibration required.
     robotVoice: 0
     dialogAudio: {fileID: 8300000, guid: ac056b541f7dfae4da170afd4a7216a7, type: 3}

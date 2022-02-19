@@ -22,15 +22,15 @@ MonoBehaviour:
   - dialogText: You really kept a cool head there.  That was some fine stick work!
     robotVoice: 1
     dialogAudio: {fileID: 8300000, guid: f51f1350c7b374d40888a25b70af7839, type: 3}
-  - dialogText: But now what?
+  - dialogText: But now what do we do?
     robotVoice: 2
     dialogAudio: {fileID: 8300000, guid: dfa7a0674cd1dc844b27b2d3108a717b, type: 3}
-  - dialogText: "Well\u2026you collected a lot of science up there.  We should probably
-      get it back to earth.  We have a blueprint to an experimental transmission
+  - dialogText: "Well\u2026you collected a lot of science data up there.  We should
+      probably get it back to Earth.  We have a blueprint to an experimental transmission
       array.  Maybe if you can unscramble that and figure out the radio\u2019s passwords,
       we can get the data back here!"
     robotVoice: 1
-    dialogAudio: {fileID: 8300000, guid: eb20f221480750442afe19018532ca59, type: 3}
+    dialogAudio: {fileID: 8300000, guid: 2589f8caa8bdf83408efeca98e5423ea, type: 3}
   - dialogText: "I\u2019m glad I thought of it."
     robotVoice: 2
     dialogAudio: {fileID: 8300000, guid: 9b2ae7cde4f65644e93f3ef2908c83e3, type: 3}

@@ -40,10 +40,10 @@ MonoBehaviour:
       mission of 2022, or at least maybe heard of it...
     robotVoice: 1
     dialogAudio: {fileID: 8300000, guid: dc2ffa11de9b60b4fbe329412fcc8d5c, type: 3}
-  - dialogText: Have you heard of it?  It was a satellite sent to a potentially metallic
+  - dialogText: Have you heard of it?  It was an orbiter sent to a potentially metal-rich
       asteroid...
     robotVoice: 1
-    dialogAudio: {fileID: 8300000, guid: 57399affea2094645a1d5586aa0eca64, type: 3}
+    dialogAudio: {fileID: 8300000, guid: ec7f804295d6704479cec69cfe447881, type: 3}
   - dialogText: The Assembly Area is ready.  We should proceed with the subject.
     robotVoice: 0
     dialogAudio: {fileID: 8300000, guid: 3e4c1b86a8eb9004795ba73d23d87671, type: 3}
@@ -55,6 +55,6 @@ MonoBehaviour:
     robotVoice: 2
     dialogAudio: {fileID: 8300000, guid: 96c67f600714c5c45a1587ac96cff639, type: 3}
   - dialogText: Oh, I am so excited!  Let's get this show on the road and see what
-      it might have been like for a human on the mission to Psyche!
+      it might have been like for a human to be on the mission to Psyche!
     robotVoice: 1
-    dialogAudio: {fileID: 8300000, guid: c30cc1b63d117344b8bcc3c7c512b2da, type: 3}
+    dialogAudio: {fileID: 8300000, guid: 8d8be2c7da0b30241a064dfaa095db18, type: 3}
