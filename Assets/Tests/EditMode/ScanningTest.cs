@@ -1,5 +1,7 @@
 using NUnit.Framework;
 using UnityEngine;
+using Scanning;
+using UnityEngine.UI;
 
 public class ScanningTest {
 
@@ -107,5 +109,40 @@ public class ScanningTest {
         
         Assert.AreEqual( tex.wrapMode, TextureWrapMode.Clamp );
         Assert.AreEqual( tex.filterMode, FilterMode.Point );
+    }
+
+    [Test]
+    public void Test_ButtonControl() {
+
+        ButtonControl bc = new ButtonControl();
+        bc.start_scanning = new GameObject().AddComponent<Button>();
+
+        bc.start_scanning.interactable = false;
+
+        Assert.True(bc.DialogActionStartDialog());
+
+        bc.DialogActionDoWhenFinished();
+
+        Assert.True(bc.start_scanning.interactable);
+
+    }
+
+    [Test]
+    public void Test_EndSceneControl() {
+
+        EndSceneControl esc = new EndSceneControl();
+
+        esc.return_to_hub = new GameObject().AddComponent<Button>();
+        esc.restart_mission = new GameObject().AddComponent<Button>();
+
+        esc.return_to_hub.interactable = false;
+        esc.restart_mission.interactable = false;
+
+        Assert.True(esc.DialogActionStartDialog());
+
+        esc.DialogActionDoWhenFinished();
+
+        Assert.True(esc.restart_mission.interactable);
+        Assert.True(esc.return_to_hub.interactable);
     }
 }
