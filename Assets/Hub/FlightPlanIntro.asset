@@ -20,10 +20,10 @@ MonoBehaviour:
   - dialogText: I'm excited.
     robotVoice: 2
     dialogAudio: {fileID: 8300000, guid: 41ddf60e98412474dbdab6e705a9fafe, type: 3}
-  - dialogText: Let's strap this satellite to a huge rocket, and see if we can get
+  - dialogText: Let's strap this orbiter to a huge rocket, and see if we can get
       it where it needs to go.
     robotVoice: 1
-    dialogAudio: {fileID: 8300000, guid: 404e7c448c11e1644beb98fd1f75a048, type: 3}
+    dialogAudio: {fileID: 8300000, guid: 2095289f3dc33f24b84b417acc3ffe78, type: 3}
   - dialogText: I think I'm going to miss it.
     robotVoice: 2
     dialogAudio: {fileID: 8300000, guid: a3ca2dc9ac8d04648a658e2f1cc18938, type: 3}
