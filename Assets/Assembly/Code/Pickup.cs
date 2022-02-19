@@ -9,21 +9,23 @@ public class Pickup : MonoBehaviour
     // public float pickupRange = 10; //changes how far out the player can pickup objects
     // public Transform holdParent; //a transform object that effects where the held object is located
     public float moveForce = 250;
+    public GameObject target;
 
     private GameObject heldObj;
 
-    private Vector3 mousePosition;
+    private Vector3 mousePoint;
     private Vector3 pickupOffset;
+    private float distance;
 
     void Start()
     {
         cam = Camera.main;
+        distance = Vector3.Dot(target.transform.position - cam.transform.position, cam.transform.forward);
     }
 
     // Update is called once per frame
     void Update()
     {
-        mousePosition = cam.WorldToScreenPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Input.mousePosition.z));
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if (Input.GetMouseButton(0))
@@ -83,11 +85,11 @@ public class Pickup : MonoBehaviour
     }
 
     void PickupObject(GameObject pickObj)
-    {
+    {  
         Debug.Log("Pickup " + pickObj.name);
         if (pickObj.GetComponent<DragObject>() && pickObj.GetComponent<Rigidbody>())
         {
-            pickupOffset = pickObj.transform.position - mousePosition;
+            pickupOffset = pickObj.transform.position - mousePoint;
 
             Rigidbody objRig = pickObj.GetComponent<Rigidbody>();
             objRig.constraints = RigidbodyConstraints.None;
@@ -109,9 +111,13 @@ public class Pickup : MonoBehaviour
     }
     void MoveObject()
     {
-        if (Vector3.Distance(heldObj.transform.position, mousePosition) > 0.1f)
+        Vector2 mousePos = new Vector2();
+        mousePos.x = Input.mousePosition.x;
+        mousePos.y = Input.mousePosition.y;
+        mousePoint = cam.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, distance));
+        if (Vector3.Distance(heldObj.transform.position, mousePoint) > 0.1f)
         {
-            Vector3 moveDirection = (mousePosition - heldObj.transform.position); //move towards the hold parent
+            Vector3 moveDirection = (mousePoint - heldObj.transform.position); //move towards the hold parent
             heldObj.GetComponent<Rigidbody>().AddForce(moveDirection * moveForce);
 
         }
@@ -123,6 +129,7 @@ public class Pickup : MonoBehaviour
         Rigidbody heldRig = heldObj.GetComponent<Rigidbody>();
         heldRig.useGravity = true;
         heldRig.drag = 1;
+        heldRig.velocity = Vector3.zero;
 
         heldRig.freezeRotation = false;
         heldObj.GetComponent<DragObject>().isHeld = false;
