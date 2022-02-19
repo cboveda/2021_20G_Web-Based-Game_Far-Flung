@@ -20,11 +20,11 @@ MonoBehaviour:
     robotVoice: 2
     dialogAudio: {fileID: 8300000, guid: c3ed3c1d5b061d94db868ea3e01d9b9a, type: 3}
   - dialogText: "Next is the real exciting part.  We need to collect data!  Now,
-      normally we wouldn\u2019t just joystick the controls for a satellite.  In fact,
-      that probably wasn\u2019t possible.  But this is the future, and we\u2019re
-      Space Enthusiasts!"
+      normally we wouldn\u2019t just joystick the controls for an orbiter.  In fact,
+      that probably wasn\u2019t possible back in the 2020s.  But this is the future,
+      and we\u2019re Space Enthusiasts!"
     robotVoice: 1
-    dialogAudio: {fileID: 8300000, guid: 85c35116c9c351f4586c01820d2da62d, type: 3}
+    dialogAudio: {fileID: 8300000, guid: 36899fb6bfac07f42ab01c0e5fbf2e07, type: 3}
   - dialogText: Very enthusiastic.
     robotVoice: 2
     dialogAudio: {fileID: 8300000, guid: 083b9c3ef18823d43bcaa6a7cb78272e, type: 3}
