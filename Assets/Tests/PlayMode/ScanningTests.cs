@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.TestTools;
 using UnityEditor;
 using Scanning;
-using UnityEngine.UI;
-using System.Linq.Expressions;
+using DialogMaker;
 
 public class ScanningTests {
 
@@ -33,6 +32,8 @@ public class ScanningTests {
 
         dc = new GameObject();
         dc.AddComponent<DialogController>();
+        dc.GetComponent<DialogController>().scanning_scripts = new DialogScriptableObject[1];
+        dc.GetComponent<DialogController>().scanning_scripts[0] = AssetDatabase.LoadAssetAtPath<DialogScriptableObject>("Assets/Scanning/Code/ScriptableObjects/EndSceneOptions.asset");
         dc.GetComponent<DialogController>()._dialogGeneratorPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Resources/Prefabs/DialogMaker.prefab");
         dc.GetComponent<DialogController>().scene_script = das.GetComponent<DialogActionStub>();
 
@@ -131,9 +132,12 @@ public class ScanningTests {
     [UnityTest]
     public IEnumerator Test_DialogController() {
 
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.5f);
 
         Assert.True(das.GetComponent<DialogActionStub>().start);
+
+        yield return new WaitForSeconds(3.0f);
+
         Assert.True(das.GetComponent<DialogActionStub>().fin);
 
         yield return null;
