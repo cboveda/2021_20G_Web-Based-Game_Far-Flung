@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c8f0b50b74f8f34d910f4ef4e9b0b1c, type: 3}
+  m_Name: CampaignOutro
+  m_EditorClassIdentifier: 
+  dialogs:
+  - dialogText: Wow.  Would you look at that.  You.  Did.  Great.
+    robotVoice: 1
+    dialogAudio: {fileID: 8300000, guid: f78e50fa9ceeb47408e5643e118f6564, type: 3}
+  - dialogText: It was a team effort.
+    robotVoice: 2
+    dialogAudio: {fileID: 8300000, guid: fa6b78ab0feac004f95295950b7c87e6, type: 3}
+  - dialogText: Early outlook is that Psyche can give us insight into the history
+      of the solar system and that is what we wanted to find!  So, from the bottom
+      of my processing unit, thank you.
+    robotVoice: 1
+    dialogAudio: {fileID: 8300000, guid: 6fc21f141f84a6e4799f0929192bc681, type: 3}
+  - dialogText: "You\u2019re quite welcome."
+    robotVoice: 2
+    dialogAudio: {fileID: 8300000, guid: e68e36bcb9f9c13429665d8b5e98ef22, type: 3}
+  - dialogText: Mission complete.  Subject may now be returned to storage.
+    robotVoice: 0
+    dialogAudio: {fileID: 8300000, guid: c82ae0666caa4f948971444a24be76e0, type: 3}
+  - dialogText: "Heh heh!  So again\u2026thank you.  But uh\u2026we don\u2019t have
+      anything to feed you, so we should probably put you back in stasis."
+    robotVoice: 1
+    dialogAudio: {fileID: 8300000, guid: 95040bfa137041448b8603834492f9da, type: 3}
+  - dialogText: "If you want to try anything over again, you\u2019re welcome to,
+      and we\u2019ll pretend like it\u2019s the first time.  "
+    robotVoice: 1
+    dialogAudio: {fileID: 8300000, guid: 1451ede61aa6a844f9ea66cb8a672911, type: 3}
+  - dialogText: "Otherwise, let us know when you\u2019re ready for your next mission: 
+      To Return\u2026TO SLEEP!"
+    robotVoice: 1
+    dialogAudio: {fileID: 8300000, guid: ed504f5d1eaa16545a2542bba00688a3, type: 3}

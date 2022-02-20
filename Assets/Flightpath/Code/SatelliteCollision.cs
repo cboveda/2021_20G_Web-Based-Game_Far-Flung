@@ -6,34 +6,36 @@ namespace Flightpath
 {
     public class SatelliteCollision : MonoBehaviour
     {
-        public GameObject EventSystem;
+        public LaunchManager launchManager;
         private void OnTriggerEnter(Collider other)
         {
+            Debug.Log("Collision detected.");
             if (other.CompareTag("FlightpathAsteroid"))
             {
-                EventSystem.GetComponent<LaunchManager>().OnAsteroidCollisionDetected();
+                launchManager.OnAsteroidCollisionDetected();
             }
             if (other.CompareTag("FlightpathMars")) 
             {
-                EventSystem.GetComponent<LaunchManager>().OnMarsCollisionDetected();
+                launchManager.OnMarsCollisionDetected();
             }
-            if (other.CompareTag("FlightpathBounds") && EventSystem)
+            if (other.CompareTag("FlightpathBounds"))
             {
+                Debug.Log("I'm outside bounds!");
                 if (other.name == "TopBoundary")
                 {
-                    EventSystem.GetComponent<LaunchManager>().OnSatelliteLeaveWindow(LaunchManager.TopBoundaryScriptIndex);
+                    launchManager.OnSatelliteLeaveWindow(LaunchManager.TopBoundaryScriptIndex);
                 }
                 else if (other.name == "BottomBoundary")
                 {
-                    EventSystem.GetComponent<LaunchManager>().OnSatelliteLeaveWindow(LaunchManager.BottomBoundaryScriptIndex);
+                    launchManager.OnSatelliteLeaveWindow(LaunchManager.BottomBoundaryScriptIndex);
                 }
                 else if (other.name == "RightBoundary")
                 {
-                    EventSystem.GetComponent<LaunchManager>().OnSatelliteLeaveWindow(LaunchManager.RightBoundaryScriptIndex);
+                    launchManager.OnSatelliteLeaveWindow(LaunchManager.RightBoundaryScriptIndex);
                 }
                 else if (other.name == "LeftBoundary")
                 {
-                    EventSystem.GetComponent<LaunchManager>().OnSatelliteLeaveWindow(LaunchManager.LeftBoundaryScriptIndex);
+                    launchManager.OnSatelliteLeaveWindow(LaunchManager.LeftBoundaryScriptIndex);
                 }
                 
             }
