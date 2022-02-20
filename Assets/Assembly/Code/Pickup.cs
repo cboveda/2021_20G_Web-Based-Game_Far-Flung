@@ -20,7 +20,7 @@ public class Pickup : MonoBehaviour
     void Start()
     {
         cam = Camera.main;
-        distance = Vector3.Dot(target.transform.position - cam.transform.position, cam.transform.forward);
+        distance = Vector3.Distance(cam.transform.position, target.transform.position);
     }
 
     // Update is called once per frame
@@ -117,7 +117,7 @@ public class Pickup : MonoBehaviour
         mousePoint = cam.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, distance));
         if (Vector3.Distance(heldObj.transform.position, mousePoint) > 0.1f)
         {
-            Vector3 moveDirection = (mousePoint - heldObj.transform.position); //move towards the hold parent
+            Vector3 moveDirection = (mousePoint - heldObj.transform.position); //move towards the mouse
             heldObj.GetComponent<Rigidbody>().AddForce(moveDirection * moveForce);
 
         }
