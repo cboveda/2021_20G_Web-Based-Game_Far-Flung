@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class ConverorSystem : MonoBehaviour {
 
     public Queue<ConveyorObject> conveyor_object_backlog = new Queue<ConveyorObject>(); // objects that are cycled through 
