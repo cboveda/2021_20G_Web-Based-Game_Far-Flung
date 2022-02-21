@@ -10,25 +10,46 @@ public class ConveyorObject : MonoBehaviour
     public ConverorSystem HostConveyor;
 
     private bool AttachmentState;
+    private float TimeZero;
+    private float Distance;
 
-    void Start() {
+    public void InitalizeConveyorObject() {
 
         AttachmentState = true;
-
+        TimeZero = Time.time;
+        Distance = Vector3.Distance( Beginning, Destination );
+        transform.position = Beginning;
     }
 
     // Update is called once per frame
     void Update() {
 
         if ( AttachmentState ) { // if attached to the host conveyor
-        
-            // move towards destinations
 
-            // if destination reched ->  HostConveyor.EndObjectTravel( this );
-        
+            float distance_covered = (Time.time - TimeZero) * LERP_Speed;
+            float journey_fraction = distance_covered / Distance;
+            transform.position = Vector3.Lerp(Beginning, Destination, journey_fraction); // move with respect to time
+
+            if ( Vector3.Distance( Beginning, transform.position ) > Distance ) { // if we have reached the end of the conveyor
+                HostConveyor.EndObjectTravel( this );
+                AttachmentState = false; // no longer attached to conveyor
+            }
         }
-
     }
 
+    void OnPickUp() { // when the item is picked up
+
+        if ( AttachmentState ) {
+            HostConveyor.DetachFromConveyorSystem( this );
+            AttachmentState = false;
+        }
+    }
+
+    void OnDrop() { // when the item is released by the user
+
+        // if in hitbox of host conveyor && !AttachmentState {
+            HostConveyor.AttachToConveyorSystem( this );
+            AttachmentState = true;            
+    }
 
 }
