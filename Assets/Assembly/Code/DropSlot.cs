@@ -11,8 +11,19 @@ public class DropSlot : MonoBehaviour, Completion
     public bool undefinedSlot;
     public TextAsset completionTextAsset;
 
+    private GameObject slotObject;
+
     void Start(){
         undefinedSlot = slotMatch?false: true;
+    }
+
+    void Update(){
+        if(slotObject == null) return;
+        DragObject dragObject = slotObject.GetComponent<DragObject>();
+        // make sure the object can still be moved by the player
+        if(dragObject==null || dragObject.isHeld) return;
+
+        slotObject.transform.SetPositionAndRotation(this.transform.position, this.transform.rotation);
     }
 
     void OnTriggerEnter(Collider other)
@@ -22,6 +33,7 @@ public class DropSlot : MonoBehaviour, Completion
         {
             other.GetComponent<DragObject>().currentSlot = this;
         }
+
     }
 
     void OnTriggerExit(Collider other)
@@ -32,10 +44,12 @@ public class DropSlot : MonoBehaviour, Completion
             other.GetComponent<DragObject>().currentSlot = null;
         }
         GetComponent<Renderer>().forceRenderingOff = false;
+        slotObject = null;
     }
 
     public void placeObjectInSlot(GameObject gameObject)
     {
+        slotObject =  gameObject;
         // Debug.Log("triggered");
         if (gameObject.GetComponent<DragObject>())
         {
