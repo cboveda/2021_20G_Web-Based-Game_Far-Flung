@@ -209,6 +209,9 @@ public class HubTest
         Assert.AreEqual(false, assemblyButton.IsActive());
 
         SceneManager.UnloadSceneAsync("Hub");
+        yield return new WaitForSeconds(0.1f);
+        SceneManager.LoadScene("Assembly 3d");
+        yield return new WaitForSeconds(0.1f);
     }
 
 
