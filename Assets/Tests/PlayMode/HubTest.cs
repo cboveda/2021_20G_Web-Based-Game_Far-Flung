@@ -47,7 +47,7 @@ public class HubTest
         // Mimic game start
 
         hubController.StartIntro();
-        yield return new WaitForSeconds(2.1f);
+        yield return new WaitForSeconds(3.1f);
         diagIntro = GameObject.Find("DialogIntro").GetComponent<DialogGenerator>();
         diagIntro.FastForwardDialog();
         yield return new WaitForSeconds(0.1f);
@@ -106,7 +106,7 @@ public class HubTest
         Assert.AreEqual(6, HubTracker.LevelToLoad);
         //SceneManager.UnloadScene("Hub");
         //SceneManager.UnloadScene("1_FlightpathIntro");
-        SceneManager.UnloadScene("Hub");
+        SceneManager.UnloadSceneAsync("Hub");
 
     }
 
@@ -208,7 +208,7 @@ public class HubTest
 
         Assert.AreEqual(false, assemblyButton.IsActive());
 
-        SceneManager.UnloadScene("Hub");
+        SceneManager.UnloadSceneAsync("Hub");
     }
 
 
