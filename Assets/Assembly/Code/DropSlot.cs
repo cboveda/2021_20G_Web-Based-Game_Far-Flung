@@ -11,7 +11,7 @@ public class DropSlot : MonoBehaviour, Completion
     public bool undefinedSlot;
     public TextAsset completionTextAsset;
 
-    void Start(){
+    void Start() {
         undefinedSlot = slotMatch?false: true;
     }
 
@@ -107,5 +107,9 @@ public class DropSlot : MonoBehaviour, Completion
         return completed;
     }
 
-    public void OnCompletion(){}
+    public void OnCompletion() {
+
+        // TODO ?
+
+    }
 }

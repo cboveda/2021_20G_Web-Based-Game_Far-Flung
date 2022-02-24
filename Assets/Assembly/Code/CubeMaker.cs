@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CubeMaker : MonoBehaviour
@@ -16,12 +14,6 @@ public class CubeMaker : MonoBehaviour
         {
             createCube();
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     void createCube()

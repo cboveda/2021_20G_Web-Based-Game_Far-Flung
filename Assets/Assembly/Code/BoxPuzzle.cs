@@ -1,12 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
-using System;
 
-public class BoxPuzzle : MonoBehaviour, Completion
-{
-
+public class BoxPuzzle : MonoBehaviour, Completion {
+    
     public Material greenMaterial;
     public Material redMaterial;
     // Start is called before the first frame update
@@ -121,12 +116,6 @@ public class BoxPuzzle : MonoBehaviour, Completion
         }
         Debug.Log("Puzzle Completed");
         return true;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     public void OnCompletion()

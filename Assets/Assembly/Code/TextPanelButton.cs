@@ -1,22 +1,17 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class TextPanelButton : MonoBehaviour
 {
     private bool clicked;
 
-    public IEnumerator CloseOnClick(Action doAfterClick)
-    {
+    public IEnumerator CloseOnClick(Action doAfterClick) {
+
         yield return new WaitUntil(() => clicked);
 
-        WaitForEndOfFrame wait = new WaitForEndOfFrame();
-
-        if (!clicked)
-        {
-            yield return wait;
+        if (!clicked) {
+            yield return new WaitForEndOfFrame();
         }
 
         clicked = false;
@@ -25,8 +20,7 @@ public class TextPanelButton : MonoBehaviour
         doAfterClick();
     }
 
-    public void Clicked()
-    {
+    public void Clicked() {
         clicked = true;
     }
 }
