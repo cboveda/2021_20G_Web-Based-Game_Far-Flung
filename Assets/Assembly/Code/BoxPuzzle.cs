@@ -45,7 +45,6 @@ public class BoxPuzzle : MonoBehaviour, Completion
     {
         foreach (DropSlot slot in slots)
         {
-            if (slot.slotMatch != null) UnityEngine.Object.Destroy(slot.slotMatch);
             UnityEngine.Object.Destroy(slot.gameObject);
         }
     }

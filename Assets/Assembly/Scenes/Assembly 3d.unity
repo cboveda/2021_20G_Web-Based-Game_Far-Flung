@@ -610,7 +610,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0, z: 0}
-  slotMatch: {fileID: 0}
+  slotTypeMatch: green
   undefinedSlot: 0
   completionTextAsset: {fileID: 0}
 --- !u!4 &139724564 stripped
@@ -964,6 +964,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isHeld: 0
   currentSlot: {fileID: 0}
+  itemType: 
 --- !u!64 &396787329
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1222,7 +1223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0, z: 0}
-  slotMatch: {fileID: 0}
+  slotTypeMatch: blue
   undefinedSlot: 0
   completionTextAsset: {fileID: 0}
 --- !u!4 &483021563 stripped
@@ -1396,7 +1397,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0, z: 0}
-  slotMatch: {fileID: 0}
+  slotTypeMatch: red
   undefinedSlot: 0
   completionTextAsset: {fileID: 0}
 --- !u!4 &492459811 stripped
@@ -1791,7 +1792,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0, z: 0}
-  slotMatch: {fileID: 0}
+  slotTypeMatch: 
   undefinedSlot: 0
   completionTextAsset: {fileID: 4900000, guid: 705bf8751a828d443ad94b0491d657db, type: 3}
 --- !u!65 &571391221
@@ -3712,7 +3713,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0, z: 0}
-  slotMatch: {fileID: 0}
+  slotTypeMatch: red
   undefinedSlot: 0
   completionTextAsset: {fileID: 0}
 --- !u!4 &1258822552 stripped
@@ -4183,7 +4184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0, z: 0}
-  slotMatch: {fileID: 0}
+  slotTypeMatch: blue
   undefinedSlot: 0
   completionTextAsset: {fileID: 0}
 --- !u!4 &1430368268 stripped
@@ -4360,7 +4361,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0, z: 0}
-  slotMatch: {fileID: 396787327}
+  slotTypeMatch: 
   undefinedSlot: 0
   completionTextAsset: {fileID: 0}
 --- !u!64 &1475695298
@@ -4774,7 +4775,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0, z: 0}
-  slotMatch: {fileID: 0}
+  slotTypeMatch: green
   undefinedSlot: 0
   completionTextAsset: {fileID: 0}
 --- !u!4 &1727501248 stripped
@@ -5591,6 +5592,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isHeld: 0
   currentSlot: {fileID: 0}
+  itemType: 
 --- !u!4 &1983665553 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 480576, guid: 4c6af23e1d44956468e5edc7a02d0375, type: 3}

@@ -27,18 +27,21 @@ public class CubeMaker : MonoBehaviour
     {
         GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
         cube.transform.SetPositionAndRotation(transform.position, transform.rotation);
-        cube.AddComponent<DragObject>();
+        DragObject cubeDrag = cube.AddComponent<DragObject>();
         Rigidbody cubeRig = cube.AddComponent<Rigidbody>();
-        switch (Random.Range(0, 10))
+        switch (Random.Range(0, 5))
         {
             case int n when n < 1:
                 cube.GetComponent<MeshRenderer>().material.color = Color.red;
+                cubeDrag.itemType = "red";
                 break;
             case int n when n < 2:
                 cube.GetComponent<MeshRenderer>().material.color = Color.blue;
+                cubeDrag.itemType = "blue";
                 break;
             case int n when n < 3:
                 cube.GetComponent<MeshRenderer>().material.color = Color.green;
+                cubeDrag.itemType = "green";
                 break;
             default:
                 break;
