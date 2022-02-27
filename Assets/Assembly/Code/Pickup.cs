@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Pickup : MonoBehaviour
@@ -21,8 +19,9 @@ public class Pickup : MonoBehaviour
             if (heldObj == null) {
 
                 RaycastHit hit;
+                
                 if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, pickupRange)) {
-                    
+
                     // Debug.Log("Call Pickup Object");
                     PickupObject(hit.transform.gameObject);
                 }
