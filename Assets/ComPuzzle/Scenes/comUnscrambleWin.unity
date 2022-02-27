@@ -459,7 +459,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.6862745, b: 0.27058825, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -468,10 +468,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 50
+    m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 5
+    m_MinSize: 4
     m_MaxSize: 60
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -479,7 +479,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Next Game
+  m_Text: Return to Hub
 --- !u!222 &555487053
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -620,8 +620,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0000076294, y: -352.2}
-  m_SizeDelta: {x: 444.01, y: 131.0958}
+  m_AnchoredPosition: {x: -0.0000076294, y: -324}
+  m_SizeDelta: {x: 392.8208, y: 68.0021}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1090428754
 MonoBehaviour:
@@ -656,11 +656,11 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.11320752, g: 0, b: 0, a: 1}
-    m_HighlightedColor: {r: 0.8584906, g: 0.0040494935, b: 0.0040494935, a: 1}
-    m_PressedColor: {r: 0.9622642, g: 0.5582948, b: 0.5657487, a: 1}
+    m_NormalColor: {r: 0.1882353, g: 0.12941177, b: 0.26666668, a: 1}
+    m_HighlightedColor: {r: 0.1882353, g: 0.12941177, b: 0.26666668, a: 1}
+    m_PressedColor: {r: 0.38431373, g: 0.20784314, b: 0.4627451, a: 1}
     m_SelectedColor: {r: 0.1509434, g: 0, b: 0, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 0.1882353, g: 0.12941177, b: 0.26666668, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -779,7 +779,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.90058327, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.6862745, b: 0.27058825, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

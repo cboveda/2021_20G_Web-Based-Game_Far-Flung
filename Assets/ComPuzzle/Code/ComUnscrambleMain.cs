@@ -482,8 +482,9 @@ public class ComUnscrambleMain : MonoBehaviour
     {
 
         // display success comments
+        Color letterColor = new Color32(255, 175, 69, 255);
         successObject = GameObject.Find("Success");
-        successObject.GetComponent<UnityEngine.UI.Text>().color = Color.yellow;
+        successObject.GetComponent<UnityEngine.UI.Text>().color = letterColor;
 
         // add 3 second delay
         yield return new WaitForSeconds(3f);
@@ -690,8 +691,8 @@ public class ComUnscrambleMain : MonoBehaviour
         SpriteRenderer rend;
         string objectName = "";
         GameObject instructions;
-        Color highlightedColor = new Color32(0, 0, 255, 255);
-
+        Color highlightedColor = new Color32(98, 53, 118, 255);
+        Color letterColor = new Color32(255, 175, 69, 255);
 
         rend = GetComponent<SpriteRenderer>();
         objectName = rend.transform.name;
@@ -700,7 +701,7 @@ public class ComUnscrambleMain : MonoBehaviour
         if (objectName == "InstructionsBox")
         {            
             instructions = GameObject.Find("InstructionsText");
-            instructions.GetComponent<UnityEngine.UI.Text>().color = Color.yellow;
+            instructions.GetComponent<UnityEngine.UI.Text>().color = letterColor;
                         
             rend.color = highlightedColor;
 
@@ -715,7 +716,7 @@ public class ComUnscrambleMain : MonoBehaviour
         string objectName = "";
         GameObject instructions;
         Color hiddenColor = new Color32(255, 255, 255, 0);
-        Color currentColor = new Color32(0, 15, 50, 255);
+        Color currentColor = new Color32(48 , 33, 68, 255);
 
         rend = GetComponent<SpriteRenderer>();
         objectName = rend.transform.name;
