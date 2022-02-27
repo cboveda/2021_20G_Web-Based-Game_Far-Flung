@@ -160,6 +160,12 @@ namespace DialogMaker
             return true;
         }
 
+        public void FastForwardDialog()
+        {
+            goCanvasContainer.SetActive(false);
+            Destroy(this);
+        }
+
         public int GetCurrentDialogPosition()
         {
             return dialogEntryPosition;
