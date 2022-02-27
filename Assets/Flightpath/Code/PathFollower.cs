@@ -4,6 +4,10 @@ using UnityEngine;
 
 namespace Flightpath
 {
+    /*
+        Movement component of objects that follow a path.
+        Author: Chris Boveda
+    */
     public class PathFollower : MonoBehaviour
     {
         private float _t;

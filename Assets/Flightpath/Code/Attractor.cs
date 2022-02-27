@@ -2,8 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 namespace Flightpath
 {
+    /*
+        Component that creates a gravitational attraction effect in 3-D space
+        Author: Chris Boveda
+    */
     public class Attractor : MonoBehaviour
     {
         public static float MinDistance = 1f;

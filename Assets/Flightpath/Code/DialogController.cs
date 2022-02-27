@@ -6,6 +6,10 @@ using DialogMaker;
 
 namespace Flightpath
 {
+    /*
+        Runs through a set script of tutorial dialog with the help of the DialogMaker module.
+        Author: Chris Boveda
+    */
     public class DialogController : MonoBehaviour
     {
         [SerializeField]

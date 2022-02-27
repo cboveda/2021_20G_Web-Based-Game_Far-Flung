@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 namespace Flightpath
 {
+    /*
+        Creates a Text output of Satellite information, namely speed.
+        Author: Chris Boveda
+    */
     public class SpeedDisplay : MonoBehaviour
     {
         private Rigidbody satellite;

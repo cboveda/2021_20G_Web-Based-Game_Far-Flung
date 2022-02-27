@@ -7,6 +7,10 @@ using DialogMaker;
 
 namespace Flightpath
 {
+    /*
+        Event system component that handles the launch behavior of all game objects.
+        Author: Chris Boveda
+    */
     public class LaunchManager : MonoBehaviour
     {
         public const int NoScriptIndex = -1;
