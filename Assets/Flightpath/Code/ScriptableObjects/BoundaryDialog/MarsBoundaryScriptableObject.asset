@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7c8f0b50b74f8f34d910f4ef4e9b0b1c, type: 3}
-  m_Name: BotBoundScriptableObject
+  m_Name: MarsBoundaryScriptableObject
   m_EditorClassIdentifier: 
   dialogs:
-  - dialogText: Hm, it looks like we went off in the wrong direction and now we're
-      hurtling towards the Sun. Let's try again!
+  - dialogText: Oops, we hit Mars again. We want to get close enough to slingshot
+      around the planet, but not too close that we fall into it!
     robotVoice: 0
+    dialogAudio: {fileID: 0}
