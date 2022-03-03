@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c8f0b50b74f8f34d910f4ef4e9b0b1c, type: 3}
   m_Name: BotBoundScriptableObject 1
   m_EditorClassIdentifier: 
-  dialogs: []
+  dialogs:
+  - dialogText: That's strange... my sensor are telling my psyche is that way, but
+      we're going this way. Oh well, reset and try again!
+    robotVoice: 0
+    dialogAudio: {fileID: 0}

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: LeftBoundScriptableObject 1
   m_EditorClassIdentifier: 
   dialogs:
-  - dialogText: 
+  - dialogText: How... how did we end up over here? Oh well, let's adjust our settings
+      and launch again!
     robotVoice: 0
     dialogAudio: {fileID: 0}

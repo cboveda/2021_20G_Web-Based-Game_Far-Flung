@@ -29,6 +29,17 @@ namespace Flightpath
         private DialogGenerator _dg;
         [SerializeField]
         private DialogScriptableObject[] Scripts;
+        [SerializeField]
+        private DialogScriptableObject[] TopScripts;
+        [SerializeField]
+        private DialogScriptableObject[] BotScripts;
+        [SerializeField]
+        private DialogScriptableObject[] RightScripts;
+        [SerializeField]
+        private DialogScriptableObject[] LeftScripts;
+        [SerializeField]
+        private DialogScriptableObject[] MarsScripts;
+
         private bool _sceneAdvanceStart;
         private bool _launchLocked;
         private bool _stopped;
