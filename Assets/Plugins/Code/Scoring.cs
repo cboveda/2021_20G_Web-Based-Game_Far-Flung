@@ -39,55 +39,90 @@ public class Scoring : MonoBehaviour
     public bool showingGameScore = false;
     public bool initialized = false;
 
-    int objective1 = 0;
-    int objective2 = 0;
-    int objective3 = 0;
-    int objective4 = 0;
-    int objective5 = 0;
+    int comObjective1 = 0;
+    int comObjective2 = 0;
+    int comObjective3 = 0;
+    int comObjective4 = 0;
+    int comObjective5 = 0;
+    int comObjective6 = 0;
+    int comObjective7 = 0;
+    int comObjective8 = 0;
+    int comObjective9 = 0;
+    int comObjective10 = 0;
+    int comObjective11 = 0;
+    int comObjective12 = 0;
+    int comObjective13 = 0;
 
-    int objectiveA = 0;
-    int objectiveB = 0;
-
-    public int getObjective1
+    public int getComObjective1
     {
-        get { return objective1; }
-        set { objective1 = value; }
+        get { return comObjective1; }
+        set { comObjective1 = value; }
     }
 
-    public int getObjective2
+    public int getComObjective2
     {
-        get { return objective2; }
-        set { objective2 = value; }
+        get { return comObjective2; }
+        set { comObjective2 = value; }
     }
 
-    public int getObjective3
+    public int getComObjective3
     {
-        get { return objective3; }
-        set { objective3 = value; }
+        get { return comObjective3; }
+        set { comObjective3 = value; }
     }
 
-    public int getObjective4
+    public int getComObjective4
     {
-        get { return objective4; }
-        set { objective4 = value; }
+        get { return comObjective4; }
+        set { comObjective4 = value; }
     }
 
-    public int getObjective5
+    public int getComObjective5
     {
-        get { return objective5; }
-        set { objective5 = value; }
+        get { return comObjective5; }
+        set { comObjective5 = value; }
     }
 
-    public int getObjectiveA
+    public int getComObjective6
     {
-        get { return objectiveA; }
-        set { objectiveA = value; }
+        get { return comObjective6; }
+        set { comObjective6 = value; }
     }
 
-    public int getObjectiveB
+    public int getComObjective7
     {
-        get { return objectiveB; }
-        set { objectiveB = value; }
+        get { return comObjective7; }
+        set { comObjective7 = value; }
+    }
+
+    public int getComObjective8
+    {
+        get { return comObjective8; }
+        set { comObjective8 = value; }
+    }
+
+    public int getComObjective9
+    {
+        get { return comObjective9; }
+        set { comObjective9 = value; }
+    }
+
+    public int getComObjective10
+    {
+        get { return comObjective10; }
+        set { comObjective10 = value; }
+    }
+
+    public int getComObjective11
+    {
+        get { return comObjective11; }
+        set { comObjective11 = value; }
+    }
+
+    public int getComObjective12
+    {
+        get { return comObjective12; }
+        set { comObjective12 = value; }
     }
 
     public bool getInitialized
@@ -460,55 +495,91 @@ public class Scoring : MonoBehaviour
         int newScore = 0;
         switch (objectName)
         {
-            case "Objective1":
+            case "ComObjective1":
                 if (!reset)
                 {
-                    newScore = FindObjectOfType<Scoring>().getObjective1 + score;
+                    newScore = FindObjectOfType<Scoring>().getComObjective1 + score;
                 }                
-                FindObjectOfType<Scoring>().getObjective1 = newScore;
+                FindObjectOfType<Scoring>().getComObjective1 = newScore;
                 break;
-            case "Objective2":
+            case "ComObjective2":
                 if (!reset)
                 {
-                    newScore = FindObjectOfType<Scoring>().getObjective2 + score;
+                    newScore = FindObjectOfType<Scoring>().getComObjective2 + score;
                 }
-                FindObjectOfType<Scoring>().getObjective2 = newScore;
+                FindObjectOfType<Scoring>().getComObjective2 = newScore;
                 break;
-            case "Objective3":
+            case "ComObjective3":
                 if (!reset)
                 {
-                    newScore = FindObjectOfType<Scoring>().getObjective3 + score;
+                    newScore = FindObjectOfType<Scoring>().getComObjective3 + score;
                 }
-                FindObjectOfType<Scoring>().getObjective3 = newScore;
+                FindObjectOfType<Scoring>().getComObjective3 = newScore;
                 break;
-            case "Objective4":
+            case "ComObjective4":
                 if (!reset)
                 {
-                    newScore = FindObjectOfType<Scoring>().getObjective4 + score;
+                    newScore = FindObjectOfType<Scoring>().getComObjective4 + score;
                 }
-                FindObjectOfType<Scoring>().getObjective4 = newScore;
+                FindObjectOfType<Scoring>().getComObjective4 = newScore;
                 break;
-            case "Objective5":
+            case "ComObjective5":
                 if (!reset)
                 {
-                    newScore = FindObjectOfType<Scoring>().getObjective5 + score;
+                    newScore = FindObjectOfType<Scoring>().getComObjective5 + score;
                 }
-                FindObjectOfType<Scoring>().getObjective5 = newScore;
+                FindObjectOfType<Scoring>().getComObjective5 = newScore;
                 break;
 
-            case "ObjectiveA":
+            case "ComObjective6":
                 if (!reset)
                 {
-                    newScore = FindObjectOfType<Scoring>().getObjectiveA + score;
+                    newScore = FindObjectOfType<Scoring>().getComObjective6 + score;
                 }   
-                FindObjectOfType<Scoring>().getObjectiveA = newScore;
+                FindObjectOfType<Scoring>().getComObjective6 = newScore;
                 break;
-            case "ObjectiveB":
+            case "ComObjective7":
                 if (!reset)
                 {
-                    newScore = FindObjectOfType<Scoring>().getObjectiveB + score;
+                    newScore = FindObjectOfType<Scoring>().getComObjective7 + score;
                 }
-                FindObjectOfType<Scoring>().getObjectiveB = newScore;
+                FindObjectOfType<Scoring>().getComObjective7 = newScore;
+                break;
+            case "ComObjective8":
+                //Debug.Log("here");
+                if (!reset)
+                {
+                    newScore = FindObjectOfType<Scoring>().getComObjective8 + score;
+                }
+                FindObjectOfType<Scoring>().getComObjective8 = newScore;
+                break;
+            case "ComObjective9":
+                if (!reset)
+                {
+                    newScore = FindObjectOfType<Scoring>().getComObjective9 + score;
+                }
+                FindObjectOfType<Scoring>().getComObjective9 = newScore;
+                break;
+            case "ComObjective10":
+                if (!reset)
+                {
+                    newScore = FindObjectOfType<Scoring>().getComObjective10 + score;
+                }
+                FindObjectOfType<Scoring>().getComObjective10 = newScore;
+                break;
+            case "ComObjective11":
+                if (!reset)
+                {
+                    newScore = FindObjectOfType<Scoring>().getComObjective11 + score;
+                }
+                FindObjectOfType<Scoring>().getComObjective11 = newScore;
+                break;
+            case "ComObjective12":
+                if (!reset)
+                {
+                    newScore = FindObjectOfType<Scoring>().getComObjective12 + score;
+                }
+                FindObjectOfType<Scoring>().getComObjective12 = newScore;
                 break;
         }
 
@@ -532,8 +603,8 @@ public class Scoring : MonoBehaviour
         GameObject scoringObj = GameObject.Find("ScoreBox");
         GameObject gameScore;
 
-        string[] comPuzzleObjectives = { "Objective1", "Objective2", "Objective3", "Objective4", "Objective5", "Objective6", "Objective7", };
-        string[] comUnscrambleObjective = {"ObjectiveA", "ObjectiveB", "ObjectiveC", "ObjectiveD", "ObjectiveE", "ObjectiveF", "ObjectiveG", };
+        string[] comPuzzleObjectives = { "ComObjective1", "ComObjective2", "ComObjective3", "ComObjective4", "ComObjective5" };
+        string[] comUnscrambleObjective = { "ComObjective6", "ComObjective7", "ComObjective8", "ComObjective9", "ComObjective10", "ComObjective11", "ComObjective12", };
         string[] assemblyObjectives = { };
         string[] flightpathObjectives = { };
         string[] scene5Objectives = { };
