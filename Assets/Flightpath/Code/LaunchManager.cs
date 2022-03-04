@@ -29,10 +29,25 @@ namespace Flightpath
 
         [SerializeField]
         private GameObject _dialogGeneratorPrefab;
+        public GameObject DialogGeneratorPrefab { get; set; }
         private GameObject _dialogGenerator;
         private DialogGenerator _dg;
         [SerializeField]
-        private DialogScriptableObject[] Scripts;
+        private DialogScriptableObject[] _topScripts;
+        public DialogScriptableObject[] TopScripts { get; set; }
+        [SerializeField]
+        private DialogScriptableObject[] _botScripts;
+        public DialogScriptableObject[] BotScripts { get; set; }
+        [SerializeField]
+        private DialogScriptableObject[] _rightScripts;
+        public DialogScriptableObject[] RightScripts { get; set; }
+        [SerializeField]
+        private DialogScriptableObject[] _leftScripts;
+        public DialogScriptableObject[] LeftScripts { get; set; }
+        [SerializeField]
+        private DialogScriptableObject[] _marsScripts;
+        public DialogScriptableObject[] MarsScripts { get; set; }
+        private int _lastScript;
         private bool _sceneAdvanceStart;
         private bool _launchLocked;
         private bool _stopped;
@@ -48,6 +63,7 @@ namespace Flightpath
             _sceneAdvanceStart = false;
             _launchLocked = false;
             _marsDialogEnabled = false;
+            _lastScript = -1;
             SatellitePath.Active = false;
         }
 
@@ -67,6 +83,7 @@ namespace Flightpath
             if (!_launchLocked)
             {
                 _launchLocked = true;
+
                 TrajectoryArrow.GetComponent<SpriteRenderer>().enabled = false;
                 Satellite.GetComponent<Launch>().DoLaunch();
                 PathFollower[] pathFollowers = FindObjectsOfType<PathFollower>();
@@ -77,6 +94,10 @@ namespace Flightpath
                 }
                 SatellitePath.ClearHistory();
                 SatellitePath.Active = true;
+                if (_dg)
+                {
+                    _dg.FastForwardDialog();
+                }
             }
         }
 
@@ -99,6 +120,10 @@ namespace Flightpath
             }
             _launchLocked = false;
             _stopped = false;
+            if (_dg)
+            {
+                _dg.FastForwardDialog();
+            }
         }
 
         public void createDialogGenerator(int scriptIndex)
@@ -109,7 +134,37 @@ namespace Flightpath
             }
             _dialogGenerator = Object.Instantiate(_dialogGeneratorPrefab, this.transform);
             _dg = _dialogGenerator.GetComponent<DialogGenerator>();
-            _dg.dialogContainer = Scripts[scriptIndex];
+            switch (scriptIndex)
+            {
+                case TopBoundaryScriptIndex:
+                    _dg.dialogContainer = pickNewScript(_topScripts);
+                    break;
+                case BottomBoundaryScriptIndex:
+                    _dg.dialogContainer = pickNewScript(_botScripts);
+                    break;
+                case RightBoundaryScriptIndex:
+                    _dg.dialogContainer = pickNewScript(_rightScripts);
+                    break;
+                case LeftBoundaryScriptIndex:
+                    _dg.dialogContainer = pickNewScript(_leftScripts);
+                    break;
+                case MarsBoundaryScriptIndex:
+                    _dg.dialogContainer = pickNewScript(_marsScripts);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private DialogScriptableObject pickNewScript(DialogScriptableObject[] scriptCollection)
+        {
+            int newScript;
+            do
+            {
+                newScript = Random.Range(0, scriptCollection.Length);
+            } while (newScript == _lastScript);
+            _lastScript = newScript;
+            return scriptCollection[newScript];
         }
 
         public void OnAsteroidCollisionDetected()

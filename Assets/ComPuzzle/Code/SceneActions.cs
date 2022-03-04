@@ -25,7 +25,7 @@ public class SceneActions : MonoBehaviour
 
         if ( sceneName == "comGameWin")
         {
-            gameScene = "Hub";
+            gameScene = "comUnscrambleIntro";
         }
 
         if (sceneName == "comUnscrambleIntro")
@@ -40,8 +40,7 @@ public class SceneActions : MonoBehaviour
 
         if (sceneName == "comUnscrambleWin")
         {
-            // scene5 is the labgame
-            gameScene = "scene5";
+            gameScene = "Hub";
         }
 
         //Debug.Log(gameScene);

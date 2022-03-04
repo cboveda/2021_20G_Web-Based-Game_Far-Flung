@@ -5,9 +5,11 @@ using UnityEngine;
 using UnityEngine.TestTools;
 using UnityEngine.UI;
 using Flightpath;
+using DialogMaker;
 
 public class FlightpathLaunchTest
 {
+    private const string DG_PREFAB_PATH = "Prefabs/DialogMaker-GlobalClick";
     private GameObject satellite;
     private GameObject planet;
     private GameObject asteroid;
@@ -118,6 +120,14 @@ public class FlightpathLaunchTest
         launchManagerComponent.Satellite = satellite;
         launchManagerComponent.enableMarsDialog();
         satellite.GetComponent<SatelliteCollision>().launchManager = launchManagerComponent;
+        launchManagerComponent.DialogGeneratorPrefab = Resources.Load<GameObject>(DG_PREFAB_PATH);
+        var dialogSO = ScriptableObject.CreateInstance<DialogScriptableObject>();
+        dialogSO.dialogs = new Dialog[] { new Dialog("test", DialogMaker.RobotCharacter.None) };
+        launchManagerComponent.BotScripts = new DialogScriptableObject[] { dialogSO };
+        launchManagerComponent.TopScripts = new DialogScriptableObject[] { dialogSO };
+        launchManagerComponent.RightScripts = new DialogScriptableObject[] { dialogSO };
+        launchManagerComponent.LeftScripts = new DialogScriptableObject[] { dialogSO };
+        launchManagerComponent.MarsScripts = new DialogScriptableObject[] { dialogSO };
     }
 
     private void setupBoundaries()
@@ -158,7 +168,7 @@ public class FlightpathLaunchTest
         asteroid.AddComponent<BoxCollider>();
         asteroid.GetComponent<BoxCollider>().isTrigger = true;
         asteroid.transform.position = Vector3.left * 100;
-        
+
     }
 
     private void setupPlanet()
@@ -405,6 +415,7 @@ public class FlightpathLaunchTest
     public IEnumerator Test_SatelliteCollisionPlanet()
     {
         launchManagerComponent.OnLaunchButtonClicked();
+        launchManagerComponent.enableMarsDialog();
         yield return new WaitForFixedUpdate();
         satellite.transform.position = planet.transform.position;
         satellite.GetComponent<Rigidbody>().velocity = Vector3.zero;

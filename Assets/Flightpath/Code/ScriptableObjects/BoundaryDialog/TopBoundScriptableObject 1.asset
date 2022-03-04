@@ -10,13 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7c8f0b50b74f8f34d910f4ef4e9b0b1c, type: 3}
-  m_Name: 4_DialogScriptableObject
+  m_Name: TopBoundScriptableObject 1
   m_EditorClassIdentifier: 
   dialogs:
-  - dialogText: Oops! We ran into Mars!
-    robotVoice: 0
-    dialogAudio: {fileID: 0}
-  - dialogText: That's okay, we have a RESET button to bring us back to the beginning.
-      Then we can adjust our ANGLE and POWER, and press LAUNCH to try again!
+  - dialogText: A bit too far there! Let's dial back the power and try again.
     robotVoice: 0
     dialogAudio: {fileID: 0}

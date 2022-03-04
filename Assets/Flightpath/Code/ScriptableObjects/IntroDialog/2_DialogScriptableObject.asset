@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: 2_DialogScriptableObject
   m_EditorClassIdentifier: 
   dialogs:
-  - dialogText: Now, let's adjust the power so that we pass by Mars at just the right
-      time! Try using the power slider.
+  - dialogText: Now, let's adjust the POWER so that we pass by Mars at just the right
+      time!
     robotVoice: 0
+    dialogAudio: {fileID: 0}
