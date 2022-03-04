@@ -8,7 +8,8 @@ using DialogMaker;
 namespace Flightpath
 {
     /*
-        Event system component that handles the launch behavior of all game objects.
+        Event system for the Flightpath game. 
+        Acts as mediator between UI elements and game objects.
         Author: Chris Boveda
     */
     public class LaunchManager : MonoBehaviour
