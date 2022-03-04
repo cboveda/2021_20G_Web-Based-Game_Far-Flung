@@ -28,8 +28,6 @@ namespace Flightpath
         private GameObject _dialogGenerator;
         private DialogGenerator _dg;
         [SerializeField]
-        private DialogScriptableObject[] Scripts;
-        [SerializeField]
         private DialogScriptableObject[] TopScripts;
         [SerializeField]
         private DialogScriptableObject[] BotScripts;
@@ -39,7 +37,7 @@ namespace Flightpath
         private DialogScriptableObject[] LeftScripts;
         [SerializeField]
         private DialogScriptableObject[] MarsScripts;
-
+        private int _lastScript;
         private bool _sceneAdvanceStart;
         private bool _launchLocked;
         private bool _stopped;
@@ -55,6 +53,7 @@ namespace Flightpath
             _sceneAdvanceStart = false;
             _launchLocked = false;
             _marsDialogEnabled = false;
+            _lastScript = -1;
             SatellitePath.Active = false;
         }
 
@@ -74,6 +73,7 @@ namespace Flightpath
             if (!_launchLocked)
             {
                 _launchLocked = true;
+
                 TrajectoryArrow.GetComponent<SpriteRenderer>().enabled = false;
                 Satellite.GetComponent<Launch>().DoLaunch();
                 PathFollower[] pathFollowers = FindObjectsOfType<PathFollower>();
@@ -84,6 +84,10 @@ namespace Flightpath
                 }
                 SatellitePath.ClearHistory();
                 SatellitePath.Active = true;
+                if (_dg)
+                {
+                    _dg.FastForwardDialog();
+                }
             }
         }
 
@@ -106,6 +110,10 @@ namespace Flightpath
             }
             _launchLocked = false;
             _stopped = false;
+            if (_dg)
+            {
+                _dg.FastForwardDialog();
+            }
         }
 
         public void createDialogGenerator(int scriptIndex)
@@ -116,7 +124,37 @@ namespace Flightpath
             }
             _dialogGenerator = Object.Instantiate(_dialogGeneratorPrefab, this.transform);
             _dg = _dialogGenerator.GetComponent<DialogGenerator>();
-            _dg.dialogContainer = Scripts[scriptIndex];
+            switch (scriptIndex)
+            {
+                case TopBoundaryScriptIndex:
+                    _dg.dialogContainer = pickNewScript(TopScripts);
+                    break;
+                case BottomBoundaryScriptIndex:
+                    _dg.dialogContainer = pickNewScript(BotScripts);
+                    break;
+                case RightBoundaryScriptIndex:
+                    _dg.dialogContainer = pickNewScript(RightScripts);
+                    break;
+                case LeftBoundaryScriptIndex:
+                    _dg.dialogContainer = pickNewScript(LeftScripts);
+                    break;
+                case MarsBoundaryScriptIndex:
+                    _dg.dialogContainer = pickNewScript(MarsScripts);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private DialogScriptableObject pickNewScript(DialogScriptableObject[] scriptCollection)
+        {
+            int newScript;
+            do
+            {
+                newScript = Random.Range(0, scriptCollection.Length);
+            } while (newScript == _lastScript);
+            _lastScript = newScript;
+            return scriptCollection[newScript];
         }
 
         public void OnAsteroidCollisionDetected()
