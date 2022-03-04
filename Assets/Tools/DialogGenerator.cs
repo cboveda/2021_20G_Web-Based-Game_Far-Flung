@@ -23,6 +23,7 @@ namespace DialogMaker
         private GameObject goTextContainer;
         private GameObject goButtonContainer;
         private Button btnDialogButton;
+        public Button BtnDialogButton { get { return btnDialogButton; } }
 
         private GameObject goAudioContainer;
         private AudioSource dialogAudioSource;
@@ -44,7 +45,7 @@ namespace DialogMaker
         // Wake up and feel the morning sun...
         void Awake()
         {
-            
+
 
             // Create the necessary components and get ready...
 
@@ -132,7 +133,8 @@ namespace DialogMaker
 
         public bool BeginPlayingDialog()
         {
-            if (dialogContainer == null || dialogTyper == null) {
+            if (dialogContainer == null || dialogTyper == null)
+            {
                 return false;
             }
             if (dialogTyper.currentlyTyping)
@@ -156,7 +158,7 @@ namespace DialogMaker
                     Destroy(this);
                 }
             }
-            
+
             return true;
         }
 
@@ -190,6 +192,6 @@ namespace DialogMaker
                     return Resources.Load<Sprite>(DIALOG_PORTRAIT_BACKGROUND_PATH);
             }
         }
-        
+
     }
 }
