@@ -25,18 +25,24 @@ namespace Flightpath
 
         [SerializeField]
         private GameObject _dialogGeneratorPrefab;
+        public GameObject DialogGeneratorPrefab { get; set; }
         private GameObject _dialogGenerator;
         private DialogGenerator _dg;
         [SerializeField]
-        private DialogScriptableObject[] TopScripts;
+        private DialogScriptableObject[] _topScripts;
+        public DialogScriptableObject[] TopScripts { get; set; }
         [SerializeField]
-        private DialogScriptableObject[] BotScripts;
+        private DialogScriptableObject[] _botScripts;
+        public DialogScriptableObject[] BotScripts { get; set; }
         [SerializeField]
-        private DialogScriptableObject[] RightScripts;
+        private DialogScriptableObject[] _rightScripts;
+        public DialogScriptableObject[] RightScripts { get; set; }
         [SerializeField]
-        private DialogScriptableObject[] LeftScripts;
+        private DialogScriptableObject[] _leftScripts;
+        public DialogScriptableObject[] LeftScripts { get; set; }
         [SerializeField]
-        private DialogScriptableObject[] MarsScripts;
+        private DialogScriptableObject[] _marsScripts;
+        public DialogScriptableObject[] MarsScripts { get; set; }
         private int _lastScript;
         private bool _sceneAdvanceStart;
         private bool _launchLocked;
@@ -127,19 +133,19 @@ namespace Flightpath
             switch (scriptIndex)
             {
                 case TopBoundaryScriptIndex:
-                    _dg.dialogContainer = pickNewScript(TopScripts);
+                    _dg.dialogContainer = pickNewScript(_topScripts);
                     break;
                 case BottomBoundaryScriptIndex:
-                    _dg.dialogContainer = pickNewScript(BotScripts);
+                    _dg.dialogContainer = pickNewScript(_botScripts);
                     break;
                 case RightBoundaryScriptIndex:
-                    _dg.dialogContainer = pickNewScript(RightScripts);
+                    _dg.dialogContainer = pickNewScript(_rightScripts);
                     break;
                 case LeftBoundaryScriptIndex:
-                    _dg.dialogContainer = pickNewScript(LeftScripts);
+                    _dg.dialogContainer = pickNewScript(_leftScripts);
                     break;
                 case MarsBoundaryScriptIndex:
-                    _dg.dialogContainer = pickNewScript(MarsScripts);
+                    _dg.dialogContainer = pickNewScript(_marsScripts);
                     break;
                 default:
                     break;
