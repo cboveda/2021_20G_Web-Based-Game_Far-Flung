@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
-
+using System;
 
 
 public class Scoring : MonoBehaviour
@@ -28,6 +28,8 @@ public class Scoring : MonoBehaviour
 
     GameObject scoreDetails;
     GameObject gameDetails;
+    GameObject scoreBox;
+    GameObject mainScoreBox;
     int totalScore = 0;
     int comPuzzleScore = 0;
     int comUnscrambleScore = 0;
@@ -35,6 +37,7 @@ public class Scoring : MonoBehaviour
     int flightPathScore = 0;
     int scanningScore = 0;
     int labScore = 0;
+    int blankScore = 0;
     public bool showingScore = false;
     public bool showingGameScore = false;
     public bool initialized = false;
@@ -141,6 +144,12 @@ public class Scoring : MonoBehaviour
     {
         get { return showingScore; }
         set { showingScore = value; }
+    }
+
+    public int getBlankScore
+    {
+        get { return blankScore; }
+        set { blankScore = value; }
     }
 
     public int getTotalScore
@@ -263,6 +272,7 @@ public class Scoring : MonoBehaviour
             goButton.GetComponent<UnityEngine.UI.Button>().interactable = false;
         }
 
+
         goButton.GetComponentInChildren<Text>().text = text;
         goButton.GetComponentInChildren<Text>().color = textColor;
         goButton.GetComponent<Image>().color = Color.white;
@@ -270,7 +280,7 @@ public class Scoring : MonoBehaviour
         ColorBlock colors = goButton.GetComponent<UnityEngine.UI.Button>().colors;
         colors.normalColor = Color.black;
         colors.highlightedColor = Color.gray;
-        colors.pressedColor = Color.black;
+        colors.pressedColor = Color.gray;
         colors.selectedColor = Color.black;
         colors.disabledColor = Color.black;
         goButton.GetComponent<UnityEngine.UI.Button>().colors = colors;
@@ -307,17 +317,29 @@ public class Scoring : MonoBehaviour
 
         scoreDetails = GameObject.Find("ScoreDetails");
         gameDetails = GameObject.Find("GameDetails");
+        scoreBox = GameObject.Find("ScoreBox");
+        mainScoreBox = GameObject.Find("MainScoreBox");
+
+        Color highlightColor = new Color32(128, 128, 128, 255);
+        Color normalColor = new Color32(0, 0, 0, 255);
+
+        ColorBlock scoreBoxColors = scoreBox.GetComponent<UnityEngine.UI.Button>().colors;
+        ColorBlock mainScoreBoxColors = mainScoreBox.GetComponent<UnityEngine.UI.Button>().colors;
 
         bool displayOn = FindObjectOfType<Scoring>().getShowingScore;
         bool gameDisplayOn = FindObjectOfType<Scoring>().getShowingGameScore;
 
         if (gameDisplayOn && buttonName == "ScoreBox")
         {
+            scoreBoxColors.normalColor = normalColor;
+            scoreBox.GetComponent<UnityEngine.UI.Button>().colors = scoreBoxColors;
             hideScoreDetailsDisplay("GameDetails");
             return;
         }
         if (displayOn && buttonName == "MainScoreBox")
         {
+            mainScoreBoxColors.normalColor = normalColor;
+            mainScoreBox.GetComponent<UnityEngine.UI.Button>().colors = mainScoreBoxColors;
             hideScoreDetailsDisplay("ScoreDetails");
             return;
         }
@@ -326,10 +348,15 @@ public class Scoring : MonoBehaviour
         {
             if (displayOn)
             {
-                hideScoreDetailsDisplay("ScoreDetails");
+                hideScoreDetailsDisplay("ScoreDetails");                
             }
             //Debug.Log("Scoring Info");
             scoringCanvasGroup = gameDetails.GetComponent<CanvasGroup>();
+            mainScoreBoxColors.normalColor = normalColor;            
+            scoreBoxColors.normalColor = highlightColor;
+            scoreBox.GetComponent<UnityEngine.UI.Button>().colors = scoreBoxColors;
+            mainScoreBox.GetComponent<UnityEngine.UI.Button>().colors = mainScoreBoxColors;
+
             EventSystem.current.SetSelectedGameObject(null);
 
             scoringCanvasGroup.alpha = 1f;
@@ -346,6 +373,12 @@ public class Scoring : MonoBehaviour
             }
             //Debug.Log("Score Details");
             scoringCanvasGroup = scoreDetails.GetComponent<CanvasGroup>();
+
+            scoreBoxColors.normalColor = normalColor;            
+            mainScoreBoxColors.normalColor = highlightColor;
+            mainScoreBox.GetComponent<UnityEngine.UI.Button>().colors = mainScoreBoxColors;
+            scoreBox.GetComponent<UnityEngine.UI.Button>().colors = scoreBoxColors;
+
             EventSystem.current.SetSelectedGameObject(null);
 
             scoringCanvasGroup.alpha = 1f;
@@ -363,9 +396,28 @@ public class Scoring : MonoBehaviour
     IEnumerator InitializeScore(int score, string objective)
     {
         yield return new WaitForSeconds(0.1f);
+
+        string[] allScenes = { "comGame", "comUnscramble", "Assembly 3d", "2_Flightpath", "scene5", "Scanning" };
+        Scene scene = SceneManager.GetActiveScene();
+        string sceneName = scene.name;
+        int sceneIndex = Array.IndexOf(allScenes, sceneName);
+        int notFound = -1;
+        //Debug.Log(sceneIndex);
+        //Debug.Log(sceneName);
+        scoreBox = GameObject.Find("ScoreBox");
+        if (sceneIndex == notFound)
+        {            
+            scoreBox.GetComponent<UnityEngine.UI.Button>().interactable = false;
+        }
+        else
+        {
+            scoreBox.GetComponent<UnityEngine.UI.Button>().interactable = true;
+        }
+
         initialized = FindObjectOfType<Scoring>().getInitialized;
         if (initialized == false)
         {
+            //Debug.Log("initialize");
             FindObjectOfType<Scoring>().getInitialized = true;
             addToScore(score, objective);
         }
@@ -429,6 +481,10 @@ public class Scoring : MonoBehaviour
                 scoringObj.GetComponentInChildren<Text>().text = scanningScore.ToString();
                 gameScore = GameObject.Find("ScanningScore");
                 gameScore.transform.GetChild(0).GetComponent<Text>().text = scanningScore.ToString();
+                break;
+            default:
+                FindObjectOfType<Scoring>().getBlankScore = 0;
+                scoringObj.GetComponentInChildren<Text>().text = scanningScore.ToString();
                 break;
         }
 

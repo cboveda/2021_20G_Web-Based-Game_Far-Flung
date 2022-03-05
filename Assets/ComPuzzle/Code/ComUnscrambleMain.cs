@@ -490,7 +490,7 @@ public class ComUnscrambleMain : MonoBehaviour
     {
 
         // display success comments
-        Color letterColor = new Color32(255, 175, 69, 255);
+        Color letterColor = new Color32(255, 70, 215, 255);
         successObject = GameObject.Find("Success");
         successObject.GetComponent<UnityEngine.UI.Text>().color = letterColor;
 
