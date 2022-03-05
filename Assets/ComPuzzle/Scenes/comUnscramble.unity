@@ -2016,7 +2016,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.6862745, b: 0.27058825, a: 0}
+  m_Color: {r: 1, g: 0.27058828, b: 0.8667635, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4792,11 +4792,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6577197009002417812, guid: 4384b623689040a42bfb8c4802c2da84, type: 3}
       propertyPath: m_Name
-      value: ObjectiveG
+      value: ComObjective12
       objectReference: {fileID: 0}
     - target: {fileID: 6577197009002417814, guid: 4384b623689040a42bfb8c4802c2da84, type: 3}
       propertyPath: m_Text
-      value: 'Objective G:
+      value: 'Final Word Solved (+500):
 
 '
       objectReference: {fileID: 0}
@@ -4896,55 +4896,65 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameDetails
       objectReference: {fileID: 0}
+    - target: {fileID: 6577197009933722795, guid: 4384b623689040a42bfb8c4802c2da84, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 169.3
+      objectReference: {fileID: 0}
     - target: {fileID: 6577197009973612540, guid: 4384b623689040a42bfb8c4802c2da84, type: 3}
       propertyPath: m_Name
-      value: ObjectiveD
+      value: ComObjective9
       objectReference: {fileID: 0}
     - target: {fileID: 6577197009973612542, guid: 4384b623689040a42bfb8c4802c2da84, type: 3}
       propertyPath: m_Text
-      value: 'Objective D:'
+      value: 'Word 2 Solved (+250):'
       objectReference: {fileID: 0}
     - target: {fileID: 6577197010146535189, guid: 4384b623689040a42bfb8c4802c2da84, type: 3}
       propertyPath: m_Name
-      value: ObjectiveE
+      value: ComObjective10
       objectReference: {fileID: 0}
     - target: {fileID: 6577197010146535191, guid: 4384b623689040a42bfb8c4802c2da84, type: 3}
       propertyPath: m_Text
-      value: 'Objective E:'
+      value: 'Word 3 Solved (+250):'
       objectReference: {fileID: 0}
     - target: {fileID: 6577197010235014852, guid: 4384b623689040a42bfb8c4802c2da84, type: 3}
       propertyPath: m_Text
-      value: 'Objective B:
-
-'
+      value: 'Switching Tiles (-2):'
       objectReference: {fileID: 0}
     - target: {fileID: 6577197010235014858, guid: 4384b623689040a42bfb8c4802c2da84, type: 3}
       propertyPath: m_Name
-      value: ObjectiveB
+      value: ComObjective7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6577197010470699020, guid: 4384b623689040a42bfb8c4802c2da84, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 201.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 6577197010470699020, guid: 4384b623689040a42bfb8c4802c2da84, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -99.77996
       objectReference: {fileID: 0}
     - target: {fileID: 6577197010470699021, guid: 4384b623689040a42bfb8c4802c2da84, type: 3}
       propertyPath: m_Name
-      value: ObjectiveA
+      value: ComObjective6
       objectReference: {fileID: 0}
     - target: {fileID: 6577197010470699023, guid: 4384b623689040a42bfb8c4802c2da84, type: 3}
       propertyPath: m_Text
-      value: 'Objective A:'
+      value: 'Sending Data (+100 / -10):'
       objectReference: {fileID: 0}
     - target: {fileID: 6577197010614431353, guid: 4384b623689040a42bfb8c4802c2da84, type: 3}
       propertyPath: m_Name
-      value: ObjectiveC
+      value: ComObjective8
       objectReference: {fileID: 0}
     - target: {fileID: 6577197010614431355, guid: 4384b623689040a42bfb8c4802c2da84, type: 3}
       propertyPath: m_Text
-      value: 'Objective C:'
+      value: 'Word 1 Solved (+250):'
       objectReference: {fileID: 0}
     - target: {fileID: 6577197010718308752, guid: 4384b623689040a42bfb8c4802c2da84, type: 3}
       propertyPath: m_Name
-      value: ObjectiveF
+      value: ComObjective11
       objectReference: {fileID: 0}
     - target: {fileID: 6577197010718308754, guid: 4384b623689040a42bfb8c4802c2da84, type: 3}
       propertyPath: m_Text
-      value: 'Objective F:
+      value: 'Word 4 Solved (+250):
 
 '
       objectReference: {fileID: 0}

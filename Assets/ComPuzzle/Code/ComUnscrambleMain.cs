@@ -121,7 +121,7 @@ public class ComUnscrambleMain : MonoBehaviour
 
         // start score of 0
         //Debug.Log("unscramble");
-        Scoring.Instance.initialize(200, "ObjectiveA");
+        Scoring.Instance.initialize(0, "");
         
 
     }
@@ -176,9 +176,10 @@ public class ComUnscrambleMain : MonoBehaviour
             checkWinAllWords();
         }
 
-        winWord1 = FindObjectOfType<ComUnscrambleMain>().word1win;
+        winWord1 = FindObjectOfType<ComUnscrambleMain>().word1win;        
         if (!winWord1)
         {
+            //Debug.Log("winword1");
             //Debug.Log(checkWordWin(row1));
             checkWordWin(row1);
         }
@@ -420,12 +421,15 @@ public class ComUnscrambleMain : MonoBehaviour
         {
             case 1:
                 FindObjectOfType<ComUnscrambleMain>().word1win = true;
+                bool win = FindObjectOfType<ComUnscrambleMain>().word1win;
                 wordUpdated = FindObjectOfType<ComUnscrambleMain>().word1ColorUpdated;
+                //Debug.Log("wordWin");
                 if (!wordUpdated)
                 {
                     UpdateWinColor(row);
                     DisableWord(row);
                     FindObjectOfType<ComUnscrambleMain>().word1ColorUpdated = true;
+                    Scoring.Instance.addToScore(250, "ComObjective8");
                 }
                 break;
             case 2:
@@ -436,7 +440,8 @@ public class ComUnscrambleMain : MonoBehaviour
                     UpdateWinColor(row);
                     DisableWord(row);
                     FindObjectOfType<ComUnscrambleMain>().word2ColorUpdated = true;
-                }
+                    Scoring.Instance.addToScore(250, "ComObjective9");
+                }                
                 break;
             case 3:
                 FindObjectOfType<ComUnscrambleMain>().word3win = true;
@@ -446,7 +451,8 @@ public class ComUnscrambleMain : MonoBehaviour
                     UpdateWinColor(row);
                     DisableWord(row);
                     FindObjectOfType<ComUnscrambleMain>().word3ColorUpdated = true;
-                }
+                    Scoring.Instance.addToScore(250, "ComObjective10");
+                }                
                 break;
             case 4:
                 FindObjectOfType<ComUnscrambleMain>().word4win = true;
@@ -456,7 +462,8 @@ public class ComUnscrambleMain : MonoBehaviour
                     UpdateWinColor(row);
                     DisableWord(row);
                     FindObjectOfType<ComUnscrambleMain>().word4ColorUpdated = true;
-                }
+                    Scoring.Instance.addToScore(250, "ComObjective11");
+                }                
                 break;
             case 5:
                 FindObjectOfType<ComUnscrambleMain>().wordFinalWin = true;
@@ -467,8 +474,9 @@ public class ComUnscrambleMain : MonoBehaviour
                     DisableWord(row);
                     FindObjectOfType<ComUnscrambleMain>().wordFinalColorUpdated = true;
                     FindObjectOfType<SendDataActions>().DisableDataButtons();
+                    Scoring.Instance.addToScore(500, "ComObjective12");
                     StartCoroutine(WinScene());
-                }
+                }                
                 break;
         }
 
@@ -482,7 +490,7 @@ public class ComUnscrambleMain : MonoBehaviour
     {
 
         // display success comments
-        Color letterColor = new Color32(255, 175, 69, 255);
+        Color letterColor = new Color32(255, 70, 215, 255);
         successObject = GameObject.Find("Success");
         successObject.GetComponent<UnityEngine.UI.Text>().color = letterColor;
 
