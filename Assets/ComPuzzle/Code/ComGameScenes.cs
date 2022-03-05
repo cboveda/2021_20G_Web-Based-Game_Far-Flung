@@ -7,6 +7,7 @@ public class ComGameScenes : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // to reset game score
         Scoring.Instance.initialize(0, "");
     }
 
