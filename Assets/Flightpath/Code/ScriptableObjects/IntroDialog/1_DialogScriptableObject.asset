@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogs:
   - dialogText: It's time to plot our route to the asteroid Psyche!
-    robotVoice: 3
-  - dialogText: We'll use Mars to give us a gravity assist and speed boost! Try using
-      the angle slider to aim close to Mars.
-    robotVoice: 3
+    robotVoice: 0
+    dialogAudio: {fileID: 0}
+  - dialogText: We'll use Mars to give us a gravity assist and speed boost! Adjust
+      the ANGLE to aim close to Mars.
+    robotVoice: 0
+    dialogAudio: {fileID: 0}

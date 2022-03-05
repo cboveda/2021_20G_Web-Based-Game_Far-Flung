@@ -61,6 +61,9 @@ namespace Flightpath
             _powerTargetArrow.GetComponent<Image>().enabled = false;
             _powerTargetArrow2.GetComponent<Image>().enabled = false;
 
+            _launchButton.onClick.AddListener(() => _dg.FastForwardDialog());
+            _resetButton.onClick.AddListener(() => _dg.FastForwardDialog());
+
             _scriptIndex = 0;
             _scriptMax = Scripts.Length;
             _phase = -1;
@@ -76,7 +79,7 @@ namespace Flightpath
 
         private void DoAnglePhase()
         {
-            if (_angleSlider.interactable == false)
+            if (_angleSlider.interactable == false && _dg.GetCurrentDialogPosition() == 2)
             {
                 _angleSlider.interactable = true;
                 _angleTargetArrow.GetComponent<Image>().enabled = true;
@@ -93,6 +96,7 @@ namespace Flightpath
                 _angleTargetArrow2.GetComponent<Image>().enabled = false;
                 _angleHandle.GetComponent<Image>().color = _defaultColor;
                 _phase++;
+                _dg.FastForwardDialog();
                 SetDG();
             }
         }
@@ -116,6 +120,7 @@ namespace Flightpath
                 _powerTargetArrow2.GetComponent<Image>().enabled = false;
                 _powerHandle.GetComponent<Image>().color = _defaultColor;
                 _phase++;
+                _dg.FastForwardDialog();
                 SetDG();
             }
         }
@@ -132,6 +137,7 @@ namespace Flightpath
                 _launchButton.interactable = false;
                 _launchButton.GetComponent<Image>().color = _defaultColor;
                 _phase++;
+                _dg.FastForwardDialog();
                 SetDG();
             }
         }
@@ -150,19 +156,27 @@ namespace Flightpath
 
         public void DoResetPhase()
         {
-            if (_resetButton.interactable == false)
+            if (_resetButton.interactable == false && _dg.GetCurrentDialogPosition() == 2)
             {
                 _resetButton.interactable = true;
             }
-            _resetButton.GetComponent<Image>().color = Color.Lerp(_defaultColor, _highlightColor, Mathf.PingPong(Time.time, _lerpRatio));
+            if (_resetButton.interactable == true) {
+                _resetButton.GetComponent<Image>().color = Color.Lerp(_defaultColor, _highlightColor, Mathf.PingPong(Time.time, _lerpRatio));
+            }
             if (!_launchManager.hasStopped())
             {
+                _dg.FastForwardDialog();
                 _resetButton.GetComponent<Image>().color = _defaultColor;
                 _launchButton.interactable = true;
                 _angleSlider.interactable = true;
                 _powerSlider.interactable = true;
                 _launchManager.enableMarsDialog();
             }
+        }
+
+        public void UnlockAllPhase()
+        {
+
         }
 
         // Update is called once per frame

@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7c8f0b50b74f8f34d910f4ef4e9b0b1c, type: 3}
-  m_Name: BotBoundScriptableObject
+  m_Name: BotBoundScriptableObject 1
   m_EditorClassIdentifier: 
   dialogs:
-  - dialogText: Hm, it looks like we went off in the wrong direction and now we're
-      hurtling towards the Sun. Let's try again!
+  - dialogText: That's strange... my sensor are telling my psyche is that way, but
+      we're going this way. Oh well, reset and try again!
     robotVoice: 0
+    dialogAudio: {fileID: 0}
