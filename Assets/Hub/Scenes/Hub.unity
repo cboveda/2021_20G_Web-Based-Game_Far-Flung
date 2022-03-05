@@ -16188,7 +16188,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4409048668128338990, guid: b7a8e68f27281bb4bbf3a792be070ee1, type: 3}
       propertyPath: m_Text
-      value: Explore
+      value: Orbiter Control
       objectReference: {fileID: 0}
     - target: {fileID: 4409048668573765284, guid: b7a8e68f27281bb4bbf3a792be070ee1, type: 3}
       propertyPath: m_Pivot.x
@@ -33682,7 +33682,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4409048668128338990, guid: b7a8e68f27281bb4bbf3a792be070ee1, type: 3}
       propertyPath: m_Text
-      value: Explore
+      value: Flight Planning
       objectReference: {fileID: 0}
     - target: {fileID: 4409048668573765284, guid: b7a8e68f27281bb4bbf3a792be070ee1, type: 3}
       propertyPath: m_Pivot.x
@@ -60365,7 +60365,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9021108758056751253}
-  m_LocalRotation: {x: 0.117112204, y: 0.28734025, z: -0.035422835, w: 0.94998187}
+  m_LocalRotation: {x: 0.11711221, y: 0.28734028, z: -0.03542284, w: 0.94998187}
   m_LocalPosition: {x: 91.84559, y: 11.252345, z: -61.697773}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -61220,7 +61220,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9021108759186759540}
-  m_LocalRotation: {x: 0.119875215, y: -0.06892278, z: 0.008342569, w: 0.99035853}
+  m_LocalRotation: {x: 0.119875185, y: -0.06892282, z: 0.008342572, w: 0.99035853}
   m_LocalPosition: {x: 111.41822, y: 9.750822, z: -1.4165388}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -61410,7 +61410,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9021108759489262065}
-  m_LocalRotation: {x: 0.117112204, y: 0.28734025, z: -0.035422835, w: 0.94998187}
+  m_LocalRotation: {x: 0.11711221, y: 0.28734028, z: -0.03542284, w: 0.94998187}
   m_LocalPosition: {x: 126.92, y: 17.41, z: -49.03}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
