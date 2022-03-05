@@ -425,8 +425,15 @@ public class Scoring : MonoBehaviour
 
     void OnDestroy()
     {
-        FindObjectOfType<Scoring>().getInitialized = false;
-        resetGameScore(); 
+        try
+        {
+            FindObjectOfType<Scoring>().getInitialized = false;
+            resetGameScore();
+        }
+        catch
+        {
+            Debug.Log("Try/Catch for exception on exit.");
+        }
     }
 
     public void addToScore(int score, string objective)
