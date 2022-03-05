@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 namespace Flightpath
 {
+    /*
+        Controller class that handles in initialization of all object relationships at run time.
+        Author: Chris Boveda
+    */
     public class Controller : MonoBehaviour
     {
         private GameObject _dynamicObjects;

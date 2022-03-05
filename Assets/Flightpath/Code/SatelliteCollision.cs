@@ -4,6 +4,10 @@ using UnityEngine;
 
 namespace Flightpath
 {
+    /*
+        Satellite collision handler.
+        Author: Chris Boveda
+    */
     public class SatelliteCollision : MonoBehaviour
     {
         public LaunchManager launchManager;

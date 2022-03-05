@@ -7,6 +7,11 @@ using DialogMaker;
 
 namespace Flightpath
 {
+    /*
+        Event system for the Flightpath game. 
+        Acts as mediator between UI elements and game objects.
+        Author: Chris Boveda
+    */
     public class LaunchManager : MonoBehaviour
     {
         public const int NoScriptIndex = -1;

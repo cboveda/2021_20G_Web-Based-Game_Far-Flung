@@ -4,6 +4,10 @@ using UnityEngine;
 
 namespace Flightpath
 {
+    /*
+        Recipe for a bezier curve path.
+        Author: Chris Boveda
+    */
     [CreateAssetMenu(fileName = "PathScriptableObject", menuName = "ScriptableObjects/Flightpath/PathScriptableObject", order = 0)]
     public class PathScriptableObject : ScriptableObject
     {
