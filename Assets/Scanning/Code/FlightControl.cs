@@ -56,7 +56,6 @@ public class FlightControl : MonoBehaviour
                                       transform.position.z + speed );
 
         transform.position = Vector3.SmoothDamp( transform.position, target, ref velocity, smoothTime);
-
     }
 
     // Scoring and crashing

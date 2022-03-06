@@ -5,7 +5,7 @@ public class ConveyorObject : MonoBehaviour
     public Vector3 Beginning;
     public Vector3 Destination;
     public float LERP_Speed;
-    public ConverorSystem HostConveyor;
+    public ConveyorSystem HostConveyor;
 
     private bool AttachmentState;
     private float TimeZero;
@@ -14,6 +14,7 @@ public class ConveyorObject : MonoBehaviour
     public void InitalizeConveyorObject() {
 
         AttachmentState = true;
+        enabled = true;
         TimeZero = Time.time;
         Distance = Vector3.Distance( Beginning, Destination );
         transform.position = Beginning;
@@ -28,9 +29,10 @@ public class ConveyorObject : MonoBehaviour
             float journey_fraction = distance_covered / Distance;
             transform.position = Vector3.Lerp(Beginning, Destination, journey_fraction); // move with respect to time
 
-            if ( Vector3.Distance( Beginning, transform.position ) > Distance ) { // if we have reached the end of the conveyor
+            if ( Vector3.Distance( Beginning, transform.position ) >= Distance ) { // if we have reached the end of the conveyor
                 HostConveyor.EndObjectTravel( this );
                 AttachmentState = false; // no longer attached to conveyor
+                enabled = false;
             }
         }
     }

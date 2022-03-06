@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ConverorSystem : MonoBehaviour {
+public class ConveyorSystem : MonoBehaviour {
 
     public Queue<ConveyorObject> conveyor_object_backlog = new Queue<ConveyorObject>(); // objects that are cycled through 
     private List<ConveyorObject> conveyor_objects_in_use = new List<ConveyorObject>(); // objects on the conveyor belt currently
+
+    public ConveyorObject[] SystemItems;
 
     public Vector3 ConveyorStartPosition;
     public Vector3 ConveyorEndPosition;
@@ -14,6 +16,16 @@ public class ConverorSystem : MonoBehaviour {
     public float ConveyorSpeed = 0.1f;
 
     void Start() {
+
+        Debug.Log( "SystemItems count : " + SystemItems.Length );
+
+        foreach (ConveyorObject co in SystemItems) {
+
+            ConveyorObject co_e = Instantiate<ConveyorObject>(co);
+            co_e.enabled = false;
+
+            conveyor_object_backlog.Enqueue( co_e );
+        }
 
         float distance = Vector3.Distance(ConveyorStartPosition, ConveyorEndPosition);
         float interval = (distance / ConveyorCapacity) / ConveyorSpeed;
@@ -63,6 +75,8 @@ public class ConverorSystem : MonoBehaviour {
 
             if ( conveyor_object_backlog.Count > 0 ) {
 
+                Debug.Log( " Started object in motion... ");
+
                 ConveyorObject c_object = conveyor_object_backlog.Dequeue();
 
                 c_object.Beginning = ConveyorStartPosition;
@@ -76,5 +90,14 @@ public class ConverorSystem : MonoBehaviour {
 
             yield return new WaitForSeconds( interval );
         }
+    }
+
+    private void OnDrawGizmos() {
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(ConveyorStartPosition, 0.5f);
+
+        Gizmos.color = Color.blue;
+        Gizmos.DrawSphere(ConveyorEndPosition, 0.5f);
     }
 }
