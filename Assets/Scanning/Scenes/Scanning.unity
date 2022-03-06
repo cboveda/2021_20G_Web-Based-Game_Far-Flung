@@ -327,7 +327,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 053b128d7adec0cf694dccbfe73642f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 40
+  speed: 10
   maxAltitude: 150
   altitudeNeedle: {fileID: 942933102}
   signalsNeedle: {fileID: 1562910161}
@@ -336,8 +336,7 @@ MonoBehaviour:
   fadeDriver: {fileID: 1397074217}
   winFadeBanner: {fileID: 1432689468}
   loseFadeBanner: {fileID: 627775102}
-  hozSlerpSpped: 0.215
-  vertSlerpSpeed: 0.224
+  SlerpSpeed: 0.25
   rlTranslate: {x: 10, y: 0, z: 0}
   velocity: {x: 0, y: 0, z: 0}
   smoothTime: 0.3

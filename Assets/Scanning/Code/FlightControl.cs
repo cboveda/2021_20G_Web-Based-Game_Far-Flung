@@ -21,19 +21,11 @@ public class FlightControl : MonoBehaviour
     public FadeBanner loseFadeBanner;
 
     [Range(0,1)]
-    public float hozSlerpSpped;
-    [Range(0,1)]
-    public float vertSlerpSpeed;
+    public float SlerpSpeed;
 
     public Vector3 rlTranslate = new Vector3(10, 0, 0);
     public Vector3 velocity = Vector3.zero;
     public float smoothTime = 0.3f;
-
-    Quaternion bankRight = Quaternion.Euler(0, 30, -30);
-    Quaternion bankLeft = Quaternion.Euler(0, -30, 30);
-    Quaternion noseUp = Quaternion.Euler(-30, 0, 0);
-    Quaternion noseDown = Quaternion.Euler(30, 0, 0);
-    Quaternion noQuat = Quaternion.Euler(0, 0, 0);
 
     bool frozen = false;
 
@@ -45,38 +37,29 @@ public class FlightControl : MonoBehaviour
 
     void Update() {
 
-        if (frozen) return;
+        if (frozen) return; 
 
         altitudeNeedle.transform.rotation = Quaternion.Euler( 0, 0, ( 238 - (transform.position.y * 1.881f) ) );
-        signalsNeedle.transform.rotation = Quaternion.Slerp( 
-            signalsNeedle.transform.rotation, 
-            Quaternion.Euler( 0, 0, ( 223 - ( signals_collected * limitAdjust ) ) ), 
-            hozSlerpSpped );
+        signalsNeedle.transform.rotation = Quaternion.Slerp( signalsNeedle.transform.rotation, 
+                                                             Quaternion.Euler( 0, 0, ( 223 - ( signals_collected * limitAdjust ) ) ), 
+                                                             SlerpSpeed );
 
         float roll  = Input.GetAxis("Horizontal");
         float pitch = Input.GetAxis("Vertical");
 
-        if ( roll > 0 ) {
-            transform.rotation = Quaternion.Slerp( transform.rotation, bankRight, hozSlerpSpped );
-            transform.position = Vector3.SmoothDamp(transform.position, transform.position + rlTranslate, ref velocity, smoothTime);
-        } else if ( roll < 0 ) {
-            transform.rotation = Quaternion.Slerp( transform.rotation, bankLeft, hozSlerpSpped );
-            transform.position = Vector3.SmoothDamp(transform.position, transform.position - rlTranslate, ref velocity, smoothTime);
-        } else {
-            transform.rotation = Quaternion.Slerp( transform.rotation, noQuat, hozSlerpSpped );
-        }
+        Quaternion motion = Quaternion.Euler( ( 30 * pitch ), ( roll * 30), ( roll * -30) );
 
-        if ( pitch < 0 && ( transform.position.y < maxAltitude ) ) {
-            transform.rotation = Quaternion.Slerp( transform.rotation, noseUp, vertSlerpSpeed );
-        } else if ( pitch > 0 ) {
-            transform.rotation = Quaternion.Slerp( transform.rotation, noseDown, vertSlerpSpeed );
-        } else {
-            transform.rotation = Quaternion.Slerp( transform.rotation, noQuat, vertSlerpSpeed );
-        }
+        transform.rotation = Quaternion.Slerp( transform.rotation, motion, SlerpSpeed );
 
-        transform.Translate( Vector3.forward * speed * Time.deltaTime ); 
+        Vector3 target = new Vector3( transform.position.x + (10 * roll), 
+                                      Mathf.Clamp(transform.position.y - (5 * pitch), 0, maxAltitude), 
+                                      transform.position.z + speed );
+
+        transform.position = Vector3.SmoothDamp( transform.position, target, ref velocity, smoothTime);
+
     }
 
+    // Scoring and crashing
     void OnTriggerEnter( Collider collider ) {
 
         if ( collider.gameObject.CompareTag("NeutronSignal") ) {
@@ -86,7 +69,7 @@ public class FlightControl : MonoBehaviour
                 signals_collected++;
 
                 if ( signals_collected >= limit ) {
-                    speed = 10f;
+                    speed = 1f;
                     StartCoroutine(ExitOnWin());
                 }
             }
@@ -99,6 +82,7 @@ public class FlightControl : MonoBehaviour
         }        
     }
 
+    // Animations
     IEnumerator ExitOnWin() {
         winFadeBanner.TriggerFade();
         yield return new WaitForSeconds(1.0f);
