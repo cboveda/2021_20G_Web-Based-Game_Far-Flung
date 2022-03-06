@@ -28,11 +28,18 @@ public class HubControlFlow : MonoBehaviour
     DialogGenerator diagOutro;
     AudioSource bgAudio;
     FadeController fader;
-    GameObject mainMenu;
+    //MainMenu mainMenu;
     bool introStarted;
     // Start is called before the first frame update
     void Start()
     {
+        //mainMenu = GameObject.Find("MainMenu").GetComponent<MainMenu>();
+        if (!HubTracker.FirstLoad)
+        {
+            DialogGenerator.AudioOn = true;
+            HubTracker.FirstLoad = true;
+            //HideLevelSelectButtons();
+        }
         diagIntro = GameObject.Find("DialogIntro").GetComponent<DialogGenerator>();
 
         diagFlight = GameObject.Find("DialogFlight").GetComponent<DialogGenerator>();
@@ -42,13 +49,7 @@ public class HubControlFlow : MonoBehaviour
         diagOutro = GameObject.Find("DialogOutro").GetComponent<DialogGenerator>();
         fader = GameObject.Find("FadeController").GetComponent<FadeController>();
 
-        //mainMenu = GameObject.Find("Canvas");
-        //fader.Fade();
         introStarted = false;
-        //if (HubTracker.LevelToLoad == 0)
-        //{
-        //    HubTracker.LevelToLoad++;
-        //}
 
         bgAudio = GameObject.Find("Background Music").GetComponent<AudioSource>();
 
@@ -108,32 +109,38 @@ public class HubControlFlow : MonoBehaviour
                 //Scene scene = SceneManager.GetActiveScene();
                 //sceneNum = scene.buildIndex;
                 //SceneManager.LoadScene(HubTracker.LevelToLoad++ + 1);
-                HubTracker.LevelToLoad++;
-                SceneManager.LoadScene("Assembly 3d");
+                IncrementLevelToLoad();
+                LaunchAssembly();
             }
             else if (diagFlight == null && HubTracker.LevelToLoad == 2)
             {
-                HubTracker.LevelToLoad++;
-                SceneManager.LoadScene("1_FlightpathIntro");
-                
+                IncrementLevelToLoad();
+                LaunchFlightPlanning();
+
+
             }
             else if (diagScan == null && HubTracker.LevelToLoad == 3)
             {
-                HubTracker.LevelToLoad++;
-                SceneManager.LoadScene("StartScene.Scanning");
+                IncrementLevelToLoad();
+                LaunchScanning();
             }
             else if (diagComms == null && HubTracker.LevelToLoad == 4)
             {
-                HubTracker.LevelToLoad++;
-                SceneManager.LoadScene("comGameIntro");
+                IncrementLevelToLoad();
+                LaunchComms();
             }
             else if (diagLab == null && HubTracker.LevelToLoad == 5)
             {
-                HubTracker.LevelToLoad++;
-                SceneManager.LoadScene("scene5");
+                IncrementLevelToLoad();
+                LaunchLab();
             }
             else if (diagOutro == null && HubTracker.LevelToLoad == 6)
             {
+                introStarted = false;
+                HubTracker.IntroStarted = false;
+                IncrementLevelToLoad();
+                SceneManager.LoadScene("Hub");
+                
                 //HubTracker.LevelToLoad++;
                 //SceneManager.LoadScene("scene5");
             }
@@ -171,9 +178,61 @@ public class HubControlFlow : MonoBehaviour
 
     public void HideMainMenu()
     {
-        GameObject.Find("UIBackground").SetActive(false);
-        GameObject.Find("PlayButton").SetActive(false);
-        GameObject.Find("FarFlungLogoImg").SetActive(false);
+        MainMenu.HideMainMenu();
+        //GameObject.Find("UIBackground").SetActive(false);
+        //GameObject.Find("PlayButton").SetActive(false);
+        //GameObject.Find("ExploreButton").SetActive(false);
+        //GameObject.Find("FarFlungLogoImg").SetActive(false);
+    }
+
+    public void ShowMainMenu()
+    {
+        MainMenu.ShowMainMenu();
+        //GameObject.Find("UIBackground").SetActive(true);
+        //GameObject.Find("PlayButton").SetActive(true);
+        //GameObject.Find("ExploreButton").SetActive(true);
+        //GameObject.Find("FarFlungLogoImg").SetActive(true);
+    }
+
+    private void IncrementLevelToLoad()
+    {
+        if (HubTracker.IntroStarted)
+        {
+            HubTracker.LevelToLoad++;
+        }
+        else
+        {
+            HubTracker.LevelToLoad = 0;
+        }
+    }
+
+    public void LaunchAssembly()
+    {
+        HideMainMenu();
+        SceneManager.LoadScene("Assembly 3d");
+    }
+
+    public void LaunchFlightPlanning()
+    {
+        HideMainMenu();
+        SceneManager.LoadScene("1_FlightpathIntro");
+    }
+
+    public void LaunchScanning()
+    {
+        HideMainMenu();
+        SceneManager.LoadScene("StartScene.Scanning");
+    }
+    public void LaunchComms()
+    {
+        HideMainMenu();
+        SceneManager.LoadScene("comGameIntro");
+    }
+
+    public void LaunchLab()
+    {
+        HideMainMenu();
+        SceneManager.LoadScene("scene5");
     }
 
     private void ReadyCameras()

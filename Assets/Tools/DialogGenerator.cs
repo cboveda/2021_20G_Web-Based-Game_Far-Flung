@@ -9,7 +9,7 @@ namespace DialogMaker
     {
         [SerializeField]
         public DialogScriptableObject dialogContainer;
-
+        public static bool AudioOn = true;
 
         private Canvas dialogCanvas;
         private Image dialogBackground;
@@ -146,8 +146,12 @@ namespace DialogMaker
                     goCanvasContainer.SetActive(true);
                     dialogPortraitBackground.sprite = GetDialogPortraitBackgroundSprite(dialogContainer.dialogs[dialogEntryPosition].robotVoice);
                     dialogTyper.AddTyper(dialogUIText, dialogContainer.GetNextDialogMessage(dialogEntryPosition).dialogText, dialogTypingSpeed);
-                    dialogAudioSource.clip = dialogContainer.dialogs[dialogEntryPosition].dialogAudio;
-                    dialogAudioSource.Play();
+                    if (DialogGenerator.AudioOn)
+                    {
+                        dialogAudioSource.clip = dialogContainer.dialogs[dialogEntryPosition].dialogAudio;
+                        dialogAudioSource.Play();
+                    }
+                    
                     dialogEntryPosition++;
                 }
                 else
