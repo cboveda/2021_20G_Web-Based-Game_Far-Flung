@@ -22,7 +22,7 @@ public class ConveyorSystem : MonoBehaviour {
         foreach (ConveyorObject co in SystemItems) {
 
             ConveyorObject co_e = Instantiate<ConveyorObject>(co);
-            co_e.enabled = false;
+            co_e.gameObject.SetActive(false);
 
             conveyor_object_backlog.Enqueue( co_e );
         }

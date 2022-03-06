@@ -14,7 +14,7 @@ public class ConveyorObject : MonoBehaviour
     public void InitalizeConveyorObject() {
 
         AttachmentState = true;
-        enabled = true;
+        gameObject.SetActive(true);
         TimeZero = Time.time;
         Distance = Vector3.Distance( Beginning, Destination );
         transform.position = Beginning;
@@ -29,10 +29,10 @@ public class ConveyorObject : MonoBehaviour
             float journey_fraction = distance_covered / Distance;
             transform.position = Vector3.Lerp(Beginning, Destination, journey_fraction); // move with respect to time
 
-            if ( Vector3.Distance( Beginning, transform.position ) >= Distance ) { // if we have reached the end of the conveyor
+            if ( Vector3.Distance( Beginning, transform.position ) >= (Distance - 0.1) ) { // if we have reached the end of the conveyor
+                gameObject.SetActive(true);
                 HostConveyor.EndObjectTravel( this );
                 AttachmentState = false; // no longer attached to conveyor
-                enabled = false;
             }
         }
     }
