@@ -4,6 +4,10 @@ using UnityEngine;
 
 namespace Flightpath
 {
+    /*
+        An instance of a bezier curve path, with custom Gizmo drawing in edit mode.
+        Author: Chris Boveda
+    */
     public class Path : MonoBehaviour
     {
         public Transform StartPoint;

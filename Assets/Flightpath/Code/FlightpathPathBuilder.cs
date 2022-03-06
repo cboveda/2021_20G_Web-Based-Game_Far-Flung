@@ -5,6 +5,10 @@ using UnityEditor;
 
 namespace Flightpath
 {
+    /*
+        Factory class for bezier curve paths.
+        Author: Chris Boveda
+    */
     public class FlightpathPathBuilder : MonoBehaviour
     {
         [SerializeField]

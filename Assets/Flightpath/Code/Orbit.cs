@@ -4,6 +4,10 @@ using UnityEngine;
 
 namespace Flightpath
 {
+    /*
+        Orbital component for moons of planets.
+        Author: Chris Boveda
+    */
     public class Orbit : MonoBehaviour
     {
         public GameObject center;

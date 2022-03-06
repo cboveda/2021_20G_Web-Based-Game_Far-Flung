@@ -4,6 +4,10 @@ using UnityEngine;
 
 namespace Flightpath
 {
+    /*
+        Fades out a set of satellite path markers.
+        Author: Chris Boveda
+    */
     public class SatellitePathFader : MonoBehaviour
     {
         private SpriteRenderer _renderer;

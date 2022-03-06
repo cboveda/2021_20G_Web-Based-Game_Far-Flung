@@ -22,7 +22,7 @@ public class ComGameMain : MonoBehaviour
         audioSource.Play();
 
         // start score of 1000
-        Scoring.Instance.initialize(1000, "Objective1");
+        Scoring.Instance.initialize(1000, "ComObjective1");
         //Scoring.Instance.gameScoreDetails(1000, "Objective1");
     }
 
