@@ -54,7 +54,6 @@ public class DropSlot : MonoBehaviour, Completion
                     gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
                 }
 
-
                 //try to find the text panel for a popup and check for set texdt if found show the appropriate text
                 if (Resources.FindObjectsOfTypeAll<TextPanel>().Length > 0 && completionTextAsset)
                 {
@@ -73,7 +72,6 @@ public class DropSlot : MonoBehaviour, Completion
 
                 //make the slot invisible
                 GetComponent<Renderer>().forceRenderingOff = true;
-
             }
         }
     }

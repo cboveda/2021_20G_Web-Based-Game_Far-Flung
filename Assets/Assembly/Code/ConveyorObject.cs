@@ -37,15 +37,18 @@ public class ConveyorObject : MonoBehaviour
         }
     }
 
-    void OnPickUp() { // when the item is picked up
+    public void OnPickUp() { // when the item is picked up
 
         if ( AttachmentState ) {
+
+            Debug.Log( "ON PICKUP CALLED" );
+
             HostConveyor.DetachFromConveyorSystem( this );
             AttachmentState = false;
         }
     }
 
-    void OnDrop() { // when the item is released by the user
+    public void OnDrop() { // when the item is released by the user
 
         // if in hitbox of host conveyor && !AttachmentState {
             HostConveyor.AttachToConveyorSystem( this );

@@ -1321,13 +1321,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 554242767}
-  m_LocalRotation: {x: -0, y: -0.89033985, z: -0, w: 0.45529658}
-  m_LocalPosition: {x: 4.68, y: 0, z: 0.79}
-  m_LocalScale: {x: 1.2, y: 1.8, z: 1.2}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1175968343}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -125.832, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &554242770
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1867,14 +1867,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 671977520}
-  m_LocalRotation: {x: -0, y: -0.75583595, z: -0, w: 0.65476114}
-  m_LocalPosition: {x: 4.57, y: 1.55, z: 0.97}
+  m_LocalRotation: {x: -0, y: -0.76644796, z: -0, w: 0.64230645}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1938351189}
   m_Father: {fileID: 1175968343}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: -98.197, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -100.072, z: 0}
 --- !u!114 &671977524
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1901,7 +1901,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 671977520}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd85daa5e106f664d828b23acc5872d9, type: 3}
+  m_Script: {fileID: 11500000, guid: 25f394849f7613e368b41b2bbc8f9904, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   pickupRange: 10
@@ -3290,7 +3290,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1175968341}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 124.3, y: 2.13, z: -20.44}
+  m_LocalPosition: {x: 129.61, y: 3, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 554242768}
@@ -4727,7 +4727,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1938351188}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.01, y: -0.14, z: 2.86}
+  m_LocalPosition: {x: 0.01, y: 0.55, z: -0.36}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 671977523}
@@ -4779,7 +4779,7 @@ MonoBehaviour:
   ConveyorStartPosition: {x: 120, y: 3, z: -30}
   ConveyorEndPosition: {x: 120, y: 3, z: -10}
   ConveyorCapacity: 5
-  ConveyorSpeed: 5
+  ConveyorSpeed: 2
 --- !u!4 &1946716708
 Transform:
   m_ObjectHideFlags: 0
