@@ -103,15 +103,16 @@ public class HubTest
         diagOutro = GameObject.Find("DialogOutro").GetComponent<DialogGenerator>();
         diagOutro.FastForwardDialog();
         yield return new WaitForSeconds(0.1f);
-        Assert.AreEqual(6, HubTracker.LevelToLoad);
+        Assert.AreEqual(0, HubTracker.LevelToLoad);
         //SceneManager.UnloadScene("Hub");
         //SceneManager.UnloadScene("1_FlightpathIntro");
+        MainMenu.ResetMenu();
         SceneManager.UnloadSceneAsync("Hub");
 
     }
 
     [UnityTest]
-    public IEnumerator Test_Menu()
+    public IEnumerator Test_Cameras()
     {
 
         SceneManager.LoadScene("Hub");
@@ -212,6 +213,56 @@ public class HubTest
         yield return new WaitForSeconds(0.1f);
         SceneManager.LoadScene("Assembly 3d");
         yield return new WaitForSeconds(0.1f);
+        MainMenu.ResetMenu();
+    }
+
+    [UnityTest]
+    public IEnumerator Test_Menu_System()
+    {
+        SceneManager.LoadScene("Hub");
+        yield return new WaitForSeconds(0.1f);
+        MainMenu.AssemblyButtonClicked();
+        yield return new WaitForSeconds(0.5f);
+        Assert.AreEqual(SceneManager.GetActiveScene().name, "Assembly 3d");
+        yield return new WaitForSeconds(0.1f);
+        SceneManager.LoadScene("Hub");
+        yield return new WaitForSeconds(0.2f);
+
+        GameObject.Find("VoicesButton").GetComponent<Button>().onClick.Invoke();
+        yield return new WaitForSeconds(0.1f);
+        Assert.AreEqual(GameObject.Find("VoicesButtonText").GetComponent<Text>().text, "Voices: Off");
+
+        MainMenu.FlightPlanningButtonClicked();
+        yield return new WaitForSeconds(0.5f);
+        Assert.AreEqual(SceneManager.GetActiveScene().name, "1_FlightpathIntro");
+        yield return new WaitForSeconds(0.1f);
+        SceneManager.LoadScene("Hub");
+        yield return new WaitForSeconds(0.2f);
+
+        MainMenu.ScanningButtonClicked();
+        yield return new WaitForSeconds(0.5f);
+        Assert.AreEqual(SceneManager.GetActiveScene().name, "StartScene.Scanning");
+        yield return new WaitForSeconds(0.1f);
+        SceneManager.LoadScene("Hub");
+        yield return new WaitForSeconds(0.2f);
+
+        MainMenu.CommsButtonClicked();
+        yield return new WaitForSeconds(0.5f);
+        Assert.AreEqual(SceneManager.GetActiveScene().name, "comGameIntro");
+        yield return new WaitForSeconds(0.1f);
+        SceneManager.LoadScene("Hub");
+        yield return new WaitForSeconds(0.2f);
+
+        MainMenu.LabButtonClicked();
+        yield return new WaitForSeconds(0.5f);
+        Assert.AreEqual(SceneManager.GetActiveScene().name, "scene5");
+        yield return new WaitForSeconds(0.1f);
+
+
+        yield return new WaitForSeconds(0.1f);
+        SceneManager.LoadScene("Assembly 3d");
+        yield return new WaitForSeconds(0.1f);
+        MainMenu.ResetMenu();
     }
 
 
