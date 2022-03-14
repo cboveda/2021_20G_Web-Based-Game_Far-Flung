@@ -10,7 +10,9 @@
         "FrameworkAssembly",
         "LabgameAssembly",
         "Flightpath",
-        "DialogMaker"
+        "DialogMaker",
+        "HubAssembly",
+        "Cinemachine"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

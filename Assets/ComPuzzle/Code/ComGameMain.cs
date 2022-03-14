@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 using System;
 
 
+
 public class ComGameMain : MonoBehaviour
 {
     AudioSource audioSource;
@@ -21,7 +22,8 @@ public class ComGameMain : MonoBehaviour
         audioSource.Play();
 
         // start score of 1000
-        Scoring.Instance.updateScore(1000);        
+        Scoring.Instance.initialize(1000, "ComObjective1");
+        //Scoring.Instance.gameScoreDetails(1000, "Objective1");
     }
 
 

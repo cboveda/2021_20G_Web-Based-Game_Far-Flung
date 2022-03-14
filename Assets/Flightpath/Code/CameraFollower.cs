@@ -4,6 +4,10 @@ using UnityEngine;
 
 namespace Flightpath
 {
+    /*
+        Component moves the parent object in tandem with the target, the satellite.
+        Author: Chris Boveda
+    */
     public class CameraFollower : MonoBehaviour
     {
         [SerializeField]

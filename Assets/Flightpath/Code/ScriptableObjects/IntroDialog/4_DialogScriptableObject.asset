@@ -15,6 +15,8 @@ MonoBehaviour:
   dialogs:
   - dialogText: Oops! We ran into Mars!
     robotVoice: 0
-  - dialogText: Hit the reset button and try making some adjustments to the angle
-      and power. Then, hit the launch button to try again.
+    dialogAudio: {fileID: 0}
+  - dialogText: That's okay, we have a RESET button to bring us back to the beginning.
+      Then we can adjust our ANGLE and POWER, and press LAUNCH to try again!
     robotVoice: 0
+    dialogAudio: {fileID: 0}

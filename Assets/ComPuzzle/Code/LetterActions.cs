@@ -132,7 +132,9 @@ public class LetterActions : MonoBehaviour
                 if (prevButton != buttonName)
                 {
                     audioSource.Play();
-                }                
+                }
+
+                Scoring.Instance.addToScore(-2, "ComObjective7");
 
                 //Debug.Log("swap");
                 // swap letter with previous letter selected

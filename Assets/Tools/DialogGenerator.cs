@@ -9,7 +9,7 @@ namespace DialogMaker
     {
         [SerializeField]
         public DialogScriptableObject dialogContainer;
-
+        public static bool AudioOn = true;
 
         private Canvas dialogCanvas;
         private Image dialogBackground;
@@ -23,6 +23,7 @@ namespace DialogMaker
         private GameObject goTextContainer;
         private GameObject goButtonContainer;
         private Button btnDialogButton;
+        public Button BtnDialogButton { get { return btnDialogButton; } }
 
         private GameObject goAudioContainer;
         private AudioSource dialogAudioSource;
@@ -41,15 +42,10 @@ namespace DialogMaker
         [SerializeField]
         private float dialogTypingSpeed = 0.05f;
 
-        // Start is called before the first frame update
-        void Start()
+        // Wake up and feel the morning sun...
+        void Awake()
         {
-            // If we don't have a dialog container, we can't do anything.  Assert.
-            if (dialogContainer == null)
-            {
-                //Debug.Assert(dialogContainer == null, "Warning: A DialogScriptableObject is desired but not found.");
-                Debug.LogAssertion("Warning: A DialogScriptableObject is desired but not found.");
-            }
+
 
             // Create the necessary components and get ready...
 
@@ -124,9 +120,21 @@ namespace DialogMaker
             dialogTyper = gameObject.AddComponent<DialogTyper>();
         }
 
+        // Start is called before the first frame update
+        private void Start()
+        {
+            // If we don't have a dialog container, we can't do anything.  Assert.
+            if (dialogContainer == null)
+            {
+                //Debug.Assert(dialogContainer == null, "Warning: A DialogScriptableObject is desired but not found.");
+                Debug.LogAssertion("Warning: A DialogScriptableObject is desired but not found.");
+            }
+        }
+
         public bool BeginPlayingDialog()
         {
-            if (dialogContainer == null || dialogTyper == null) {
+            if (dialogContainer == null || dialogTyper == null)
+            {
                 return false;
             }
             if (dialogTyper.currentlyTyping)
@@ -140,8 +148,12 @@ namespace DialogMaker
                     goCanvasContainer.SetActive(true);
                     dialogPortraitBackground.sprite = GetDialogPortraitBackgroundSprite(dialogContainer.dialogs[dialogEntryPosition].robotVoice);
                     dialogTyper.AddTyper(dialogUIText, dialogContainer.GetNextDialogMessage(dialogEntryPosition).dialogText, dialogTypingSpeed);
-                    dialogAudioSource.clip = dialogContainer.dialogs[dialogEntryPosition].dialogAudio;
-                    dialogAudioSource.Play();
+                    if (DialogGenerator.AudioOn)
+                    {
+                        dialogAudioSource.clip = dialogContainer.dialogs[dialogEntryPosition].dialogAudio;
+                        dialogAudioSource.Play();
+                    }
+                    
                     dialogEntryPosition++;
                 }
                 else
@@ -150,8 +162,14 @@ namespace DialogMaker
                     Destroy(this);
                 }
             }
-            
+
             return true;
+        }
+
+        public void FastForwardDialog()
+        {
+            goCanvasContainer.SetActive(false);
+            Destroy(this);
         }
 
         public int GetCurrentDialogPosition()
@@ -178,6 +196,6 @@ namespace DialogMaker
                     return Resources.Load<Sprite>(DIALOG_PORTRAIT_BACKGROUND_PATH);
             }
         }
-        
+
     }
 }

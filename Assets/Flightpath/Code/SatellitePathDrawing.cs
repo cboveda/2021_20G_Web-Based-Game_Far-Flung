@@ -4,6 +4,10 @@ using UnityEngine;
 
 namespace Flightpath
 {
+    /*
+        Draws the path the satellite has moved along, and handles clean-up after each attempt.
+        Author: Chris Boveda
+    */
     public class SatellitePathDrawing : MonoBehaviour
     {
 
@@ -28,7 +32,7 @@ namespace Flightpath
                 if (_timer >= TimeInterval && PathPrefab != null)
                 {
                     PathHistory.AddLast(Instantiate(PathPrefab,
-                        new Vector3(Satellite.transform.position.x, Satellite.transform.position.y, Satellite.transform.position.z - 199),
+                        new Vector3(Satellite.transform.position.x, Satellite.transform.position.y, 0),
                         Quaternion.identity,
                         transform.gameObject.transform));
                     _timer = 0;

@@ -6,8 +6,14 @@ using UnityEngine.SceneManagement;
 
 namespace Flightpath
 {
+    /*
+        Orchestrates the animation timeline of the flightpath intro scene, and triggers scene transitions.
+        Author: Chris Boveda
+    */
     public class TimelineController : MonoBehaviour
     {
+        [SerializeField]
+        private float _timeScale;
         private PlayableDirector director;
         public GameObject startButton;
 
@@ -16,6 +22,7 @@ namespace Flightpath
             director = GetComponent<PlayableDirector>();
             director.played += Director_Played;
             director.stopped += Director_Stopped;
+            Time.timeScale = _timeScale;
         }
 
         public void Director_Stopped(PlayableDirector o)

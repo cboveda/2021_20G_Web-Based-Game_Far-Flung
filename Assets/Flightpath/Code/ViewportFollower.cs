@@ -4,6 +4,10 @@ using UnityEngine;
 
 namespace Flightpath
 {
+    /*
+        Follower component for the viewport providing a zoomed view of the satellite.
+        Author: Chris Boveda
+    */
     public class ViewportFollower : MonoBehaviour
     {
         [SerializeField]
@@ -16,7 +20,7 @@ namespace Flightpath
 
         void Update()
         {
-            transform.position = target.transform.position - new Vector3(0,56,201);
+            transform.position = new Vector3(target.transform.position.x, target.transform.position.y - 56, 0);
         }
     }
 }

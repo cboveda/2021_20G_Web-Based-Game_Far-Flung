@@ -119,6 +119,11 @@ public class ComUnscrambleMain : MonoBehaviour
         volumeSlider = GameObject.Find("VolumeSlider");
         audioSource.Play();
 
+        // start score of 0
+        //Debug.Log("unscramble");
+        Scoring.Instance.initialize(0, "");
+        
+
     }
 
 
@@ -171,9 +176,10 @@ public class ComUnscrambleMain : MonoBehaviour
             checkWinAllWords();
         }
 
-        winWord1 = FindObjectOfType<ComUnscrambleMain>().word1win;
+        winWord1 = FindObjectOfType<ComUnscrambleMain>().word1win;        
         if (!winWord1)
         {
+            //Debug.Log("winword1");
             //Debug.Log(checkWordWin(row1));
             checkWordWin(row1);
         }
@@ -415,12 +421,15 @@ public class ComUnscrambleMain : MonoBehaviour
         {
             case 1:
                 FindObjectOfType<ComUnscrambleMain>().word1win = true;
+                bool win = FindObjectOfType<ComUnscrambleMain>().word1win;
                 wordUpdated = FindObjectOfType<ComUnscrambleMain>().word1ColorUpdated;
+                //Debug.Log("wordWin");
                 if (!wordUpdated)
                 {
                     UpdateWinColor(row);
                     DisableWord(row);
                     FindObjectOfType<ComUnscrambleMain>().word1ColorUpdated = true;
+                    Scoring.Instance.addToScore(250, "ComObjective8");
                 }
                 break;
             case 2:
@@ -431,7 +440,8 @@ public class ComUnscrambleMain : MonoBehaviour
                     UpdateWinColor(row);
                     DisableWord(row);
                     FindObjectOfType<ComUnscrambleMain>().word2ColorUpdated = true;
-                }
+                    Scoring.Instance.addToScore(250, "ComObjective9");
+                }                
                 break;
             case 3:
                 FindObjectOfType<ComUnscrambleMain>().word3win = true;
@@ -441,7 +451,8 @@ public class ComUnscrambleMain : MonoBehaviour
                     UpdateWinColor(row);
                     DisableWord(row);
                     FindObjectOfType<ComUnscrambleMain>().word3ColorUpdated = true;
-                }
+                    Scoring.Instance.addToScore(250, "ComObjective10");
+                }                
                 break;
             case 4:
                 FindObjectOfType<ComUnscrambleMain>().word4win = true;
@@ -451,7 +462,8 @@ public class ComUnscrambleMain : MonoBehaviour
                     UpdateWinColor(row);
                     DisableWord(row);
                     FindObjectOfType<ComUnscrambleMain>().word4ColorUpdated = true;
-                }
+                    Scoring.Instance.addToScore(250, "ComObjective11");
+                }                
                 break;
             case 5:
                 FindObjectOfType<ComUnscrambleMain>().wordFinalWin = true;
@@ -462,8 +474,9 @@ public class ComUnscrambleMain : MonoBehaviour
                     DisableWord(row);
                     FindObjectOfType<ComUnscrambleMain>().wordFinalColorUpdated = true;
                     FindObjectOfType<SendDataActions>().DisableDataButtons();
+                    Scoring.Instance.addToScore(500, "ComObjective12");
                     StartCoroutine(WinScene());
-                }
+                }                
                 break;
         }
 
@@ -477,12 +490,13 @@ public class ComUnscrambleMain : MonoBehaviour
     {
 
         // display success comments
+        Color letterColor = new Color32(255, 70, 215, 255);
         successObject = GameObject.Find("Success");
-        successObject.GetComponent<UnityEngine.UI.Text>().color = Color.yellow;
+        successObject.GetComponent<UnityEngine.UI.Text>().color = letterColor;
 
         // add 3 second delay
         yield return new WaitForSeconds(3f);
-        Debug.Log("win scene");
+        //Debug.Log("win scene");
 
         
         EnableContinueButton();
@@ -685,8 +699,8 @@ public class ComUnscrambleMain : MonoBehaviour
         SpriteRenderer rend;
         string objectName = "";
         GameObject instructions;
-        Color highlightedColor = new Color32(0, 0, 255, 255);
-
+        Color highlightedColor = new Color32(98, 53, 118, 255);
+        Color letterColor = new Color32(255, 175, 69, 255);
 
         rend = GetComponent<SpriteRenderer>();
         objectName = rend.transform.name;
@@ -695,7 +709,7 @@ public class ComUnscrambleMain : MonoBehaviour
         if (objectName == "InstructionsBox")
         {            
             instructions = GameObject.Find("InstructionsText");
-            instructions.GetComponent<UnityEngine.UI.Text>().color = Color.yellow;
+            instructions.GetComponent<UnityEngine.UI.Text>().color = letterColor;
                         
             rend.color = highlightedColor;
 
@@ -710,7 +724,7 @@ public class ComUnscrambleMain : MonoBehaviour
         string objectName = "";
         GameObject instructions;
         Color hiddenColor = new Color32(255, 255, 255, 0);
-        Color currentColor = new Color32(0, 15, 50, 255);
+        Color currentColor = new Color32(48 , 33, 68, 255);
 
         rend = GetComponent<SpriteRenderer>();
         objectName = rend.transform.name;

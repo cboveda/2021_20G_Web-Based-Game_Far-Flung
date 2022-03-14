@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 namespace Flightpath
 {
+    /*
+        Controller class that handles in initialization of all object relationships at run time.
+        Author: Chris Boveda
+    */
     public class Controller : MonoBehaviour
     {
         private GameObject _dynamicObjects;
@@ -34,6 +38,7 @@ namespace Flightpath
         // Start is called before the first frame update
         void Awake()
         {
+            Time.timeScale = 1;
             // Setup Dynamic Objects Container
             _dynamicObjects = new GameObject();
             _dynamicObjects.name = "Dynamic Objects";
@@ -55,7 +60,7 @@ namespace Flightpath
 
             // Satellite
             _satellite = _objectFactory.GetFlightpathObject(FlightpathObjectFactory.BuildableObjects.Satellite, _dynamicObjects.transform);
-            _satellite.GetComponent<SatelliteCollision>().EventSystem = _eventSystem;
+            _satellite.GetComponent<SatelliteCollision>().launchManager = _eventSystem.GetComponent<LaunchManager>();
             _eventSystem.GetComponent<LaunchManager>().Satellite = _satellite;
             _arrow.GetComponent<Trajectory>().Satellite = _satellite.GetComponent<Launch>();
             _satellitePathDrawing.GetComponent<SatellitePathDrawing>().Satellite = _satellite;

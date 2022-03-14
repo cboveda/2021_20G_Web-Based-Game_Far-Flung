@@ -11,6 +11,7 @@ public class TileActions : MonoBehaviour
 
     SpriteRenderer rend;
     SpriteRenderer instructionsRend;
+    SpriteRenderer instructionsMain;
     Color currentColor;
     Color instructionsColor;
     bool onTile = false;
@@ -95,6 +96,9 @@ public class TileActions : MonoBehaviour
         instructionsRend = instructionsBox.GetComponent<SpriteRenderer>();
         instructionsLayer = instructionsRend.sortingLayerName;
 
+        instructions = GameObject.Find("Instructions");
+        instructionsMain = instructions.GetComponent<SpriteRenderer>();
+
         // get the final instructions objects starting color and layer
         finalInstructionsObject = GameObject.Find("FinalInstructionsText");
         finalInstructionsColor = finalInstructionsObject.GetComponent<Text>().color;
@@ -106,7 +110,6 @@ public class TileActions : MonoBehaviour
         // get final piece position
         finalPieceObject = GameObject.Find("14");
         finalPiecePosition = finalPieceObject.transform.position;
-
 
         // get the image objects starting color and layer
         viewImageObject = GameObject.Find("ViewImage");
@@ -160,18 +163,21 @@ public class TileActions : MonoBehaviour
         //Debug.Log(validMove);
 
         // show instructions
+        Color highlightColor = new Color(0.38f, 0.20f, 0.46f, 1.0f);
         objectName = rend.transform.name;
-        //Debug.Log(objectName);
+        //Debug.Log(objectName);        
         if (objectName == "Instructions")
-        {            
-            instructionsObject.GetComponent<Text>().color = Color.yellow;
+        {
+            Color letterColor = new Color(1.0f, 0.68f, 0.27f, 1.0f);
+            instructionsObject.GetComponent<Text>().color = letterColor;
             instructionsRend.sortingLayerName = "Numbers";
+            instructionsMain.color = highlightColor;
         }
 
         // show image
         if (objectName == "ViewImage")
-        {
-            viewImageRend.color = Color.yellow;
+        {            
+            viewImageRend.color = highlightColor;
             imageRend.sortingLayerName = "ViewImage";
         }
         
@@ -194,7 +200,7 @@ public class TileActions : MonoBehaviour
         if (objectName == "Instructions")
         {
             instructionsObject.GetComponent<Text>().color = instructionsColor;
-            instructionsRend.sortingLayerName = instructionsLayer;
+            instructionsRend.sortingLayerName = instructionsLayer;  
         }
 
         // hide image
@@ -263,7 +269,8 @@ public class TileActions : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && onTile && validMove)
         {
             //Debug.Log("Pressed primary button on " + spriteName);
-            Scoring.Instance.updateScore(-2);
+            Scoring.Instance.addToScore(-2, "ComObjective2");
+            //Scoring.Instance.gameScoreDetails(-2, "Objective2");
             audioSource.Play();
 
             // get current tile and blank tile positions
@@ -294,7 +301,7 @@ public class TileActions : MonoBehaviour
         {
             //Debug.Log("final");         
 
-            Scoring.Instance.updateScore(500);
+            Scoring.Instance.addToScore(500, "ComObjective5");
 
             hideFinalInstructions();
 
@@ -360,8 +367,10 @@ public class TileActions : MonoBehaviour
         // add 3 second delay
         yield return new WaitForSeconds(3f);
 
+        Color letterColor = new Color(1.0f, 0.68f, 0.27f, 1.0f);
+
         // update background and board layer to the front
-        background = GameObject.Find("Background");
+        background = GameObject.Find("ScrollBackground");
         background.GetComponent<SpriteRenderer>().sortingLayerName = "WinBackground";
 
         board = GameObject.Find("board");
@@ -369,7 +378,7 @@ public class TileActions : MonoBehaviour
 
         // display success comments
         successObject = GameObject.Find("Success");
-        successObject.GetComponent<Text>().color = Color.yellow;
+        successObject.GetComponent<Text>().color = letterColor;
 
         // display complete image
         imageRend.sortingLayerName = "WinImage";
@@ -383,7 +392,8 @@ public class TileActions : MonoBehaviour
 
     public void showFinalInstructions()
     {
-        finalInstructionsObject.GetComponent<Text>().color = Color.yellow;
+        Color letterColor = new Color(1.0f, 0.68f, 0.27f, 1.0f);
+        finalInstructionsObject.GetComponent<Text>().color = letterColor;
         finalInstructionsRend.sortingLayerName = "Numbers";
     }
 

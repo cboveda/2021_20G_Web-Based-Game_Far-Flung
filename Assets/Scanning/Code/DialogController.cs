@@ -6,12 +6,12 @@ namespace Scanning {
     public class DialogController : MonoBehaviour {
 
         [SerializeField]
-        private GameObject _dialogGeneratorPrefab;
+        public GameObject _dialogGeneratorPrefab;
         private GameObject _dialogGenerator;
         private DialogGenerator _dg;
 
         [SerializeField]
-        private DialogScriptableObject[] scanning_scripts;
+        public DialogScriptableObject[] scanning_scripts;
         private int script_index;
 
         public DialogAction scene_script;

@@ -4,6 +4,10 @@ using UnityEngine;
 
 namespace Flightpath
 {
+    /*
+        Satellite component that facilitates launching the satellite based on user defined velocity.
+        Author: Chris Boveda
+    */
     public class Launch : MonoBehaviour
     {
         private Vector3 _launchDirection;

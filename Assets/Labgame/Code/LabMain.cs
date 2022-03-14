@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using DialogMaker;
+using UnityEngine.SceneManagement;
 
 
 public class LabMain : MonoBehaviour
@@ -135,6 +136,8 @@ public class LabMain : MonoBehaviour
                 mainComputerUI.DisplayComputerText("Congrats, you solved all spectra puzzles.  Well done!");
                 radioPuzzleActive = false;
                 spectraPuzzleActive = false;
+                SceneManager.LoadScene("Hub");
+                
             }
         }
 

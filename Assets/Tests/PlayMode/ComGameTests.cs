@@ -172,8 +172,9 @@ public class ComGameTests
         Color finalObjectDefaultColor = finalObject.GetComponent<Text>().color;
 
         // verify color when selecting show final instructions
+        Color letterColor = new Color(1.0f, 0.68f, 0.27f, 1.0f);
         scriptObject.GetComponent<TileActions>().showFinalInstructions();
-        Assert.AreEqual(finalObject.GetComponent<Text>().color, Color.yellow);
+        Assert.AreEqual(finalObject.GetComponent<Text>().color, letterColor);
 
         // verify color is back to default when selecting hide final instructions
         scriptObject.GetComponent<TileActions>().hideFinalInstructions();
@@ -295,8 +296,9 @@ public class ComGameTests
         Color instructionsDefaultColor = instructions.transform.GetChild(canvasChild).GetChild(textChild).GetComponent<Text>().color;
 
         // verify instructions are displayed when mouse on
+        Color letterColor = new Color(1.0f, 0.68f, 0.27f, 1.0f);
         instructions.GetComponent<TileActions>().OnMouseEnter();
-        Assert.AreEqual(instructions.transform.GetChild(canvasChild).GetChild(textChild).GetComponent<Text>().color, Color.yellow);
+        Assert.AreEqual(instructions.transform.GetChild(canvasChild).GetChild(textChild).GetComponent<Text>().color, letterColor);
 
         // verify instructions are hidden when mouse exit
         instructions.GetComponent<TileActions>().OnMouseExit();

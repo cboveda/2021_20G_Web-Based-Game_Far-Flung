@@ -7,15 +7,21 @@ using DialogMaker;
 
 namespace Flightpath
 {
+    /*
+        Event system for the Flightpath game. 
+        Acts as mediator between UI elements and game objects.
+        Author: Chris Boveda
+    */
     public class LaunchManager : MonoBehaviour
     {
+        public const int NoScriptIndex = -1;
         public const int TopBoundaryScriptIndex = 0;
         public const int BottomBoundaryScriptIndex = 1;
         public const int LeftBoundaryScriptIndex = 2;
         public const int RightBoundaryScriptIndex = 3;
         public const int MarsBoundaryScriptIndex = 4;
         public const int WinBoundaryScriptIndex = 5;
-        
+
         public GameObject Satellite;
         public Slider AngleSlider;
         public Slider PowerSlider;
@@ -24,13 +30,29 @@ namespace Flightpath
 
         [SerializeField]
         private GameObject _dialogGeneratorPrefab;
+        public GameObject DialogGeneratorPrefab { get; set; }
         private GameObject _dialogGenerator;
         private DialogGenerator _dg;
         [SerializeField]
-        private DialogScriptableObject[] Scripts;
+        private DialogScriptableObject[] _topScripts;
+        public DialogScriptableObject[] TopScripts { get; set; }
+        [SerializeField]
+        private DialogScriptableObject[] _botScripts;
+        public DialogScriptableObject[] BotScripts { get; set; }
+        [SerializeField]
+        private DialogScriptableObject[] _rightScripts;
+        public DialogScriptableObject[] RightScripts { get; set; }
+        [SerializeField]
+        private DialogScriptableObject[] _leftScripts;
+        public DialogScriptableObject[] LeftScripts { get; set; }
+        [SerializeField]
+        private DialogScriptableObject[] _marsScripts;
+        public DialogScriptableObject[] MarsScripts { get; set; }
+        private int _lastScript;
         private bool _sceneAdvanceStart;
         private bool _launchLocked;
         private bool _stopped;
+        private bool _marsDialogEnabled;
 
 
         public void Start()
@@ -41,18 +63,9 @@ namespace Flightpath
             TrajectoryArrow.SetPowerRange(PowerSlider.GetComponent<Slider>().minValue, PowerSlider.GetComponent<Slider>().maxValue);
             _sceneAdvanceStart = false;
             _launchLocked = false;
+            _marsDialogEnabled = false;
+            _lastScript = -1;
             SatellitePath.Active = false;
-        }
-
-        public void Update() 
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                if (_dg != null)
-                {
-                    _dg.BeginPlayingDialog();
-                }
-            }
         }
 
         public void OnAngleSliderChanged(float value)
@@ -71,6 +84,7 @@ namespace Flightpath
             if (!_launchLocked)
             {
                 _launchLocked = true;
+
                 TrajectoryArrow.GetComponent<SpriteRenderer>().enabled = false;
                 Satellite.GetComponent<Launch>().DoLaunch();
                 PathFollower[] pathFollowers = FindObjectsOfType<PathFollower>();
@@ -81,6 +95,10 @@ namespace Flightpath
                 }
                 SatellitePath.ClearHistory();
                 SatellitePath.Active = true;
+                if (_dg)
+                {
+                    _dg.FastForwardDialog();
+                }
             }
         }
 
@@ -96,20 +114,64 @@ namespace Flightpath
             }
             SatellitePath.Active = false;
             var particles = Satellite.GetComponent<ParticleSystem>();
-            if (particles != null) {
+            if (particles != null)
+            {
                 particles.Stop();
                 particles.Clear();
             }
             _launchLocked = false;
             _stopped = false;
+            if (_dg)
+            {
+                _dg.FastForwardDialog();
+            }
+        }
+
+        public void createDialogGenerator(int scriptIndex)
+        {
+            if (_dialogGeneratorPrefab == null)
+            {
+                return;
+            }
+            _dialogGenerator = Object.Instantiate(_dialogGeneratorPrefab, this.transform);
+            _dg = _dialogGenerator.GetComponent<DialogGenerator>();
+            switch (scriptIndex)
+            {
+                case TopBoundaryScriptIndex:
+                    _dg.dialogContainer = pickNewScript(_topScripts);
+                    break;
+                case BottomBoundaryScriptIndex:
+                    _dg.dialogContainer = pickNewScript(_botScripts);
+                    break;
+                case RightBoundaryScriptIndex:
+                    _dg.dialogContainer = pickNewScript(_rightScripts);
+                    break;
+                case LeftBoundaryScriptIndex:
+                    _dg.dialogContainer = pickNewScript(_leftScripts);
+                    break;
+                case MarsBoundaryScriptIndex:
+                    _dg.dialogContainer = pickNewScript(_marsScripts);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private DialogScriptableObject pickNewScript(DialogScriptableObject[] scriptCollection)
+        {
+            int newScript;
+            do
+            {
+                newScript = Random.Range(0, scriptCollection.Length);
+            } while (newScript == _lastScript);
+            _lastScript = newScript;
+            return scriptCollection[newScript];
         }
 
         public void OnAsteroidCollisionDetected()
         {
             StopAll();
-            _dialogGenerator = Object.Instantiate(_dialogGeneratorPrefab, this.transform);
-            _dg = _dialogGenerator.GetComponent<DialogGenerator>();
-            _dg.dialogContainer = Scripts[WinBoundaryScriptIndex];
+            createDialogGenerator(WinBoundaryScriptIndex);
             StartCoroutine("DelayedDialogStart");
             if (!_sceneAdvanceStart)
             {
@@ -117,33 +179,47 @@ namespace Flightpath
             }
         }
 
-        public void OnMarsCollisionDetected() 
+        public void OnMarsCollisionDetected()
         {
             StopAll();
-            _dialogGenerator = Object.Instantiate(_dialogGeneratorPrefab, this.transform);
-            _dg = _dialogGenerator.GetComponent<DialogGenerator>();
-            _dg.dialogContainer = Scripts[MarsBoundaryScriptIndex];
-            StartCoroutine("DelayedDialogStart");
-
-            Satellite.GetComponent<ParticleSystem>().Play();
+            if (Satellite.GetComponent<ParticleSystem>() != null)
+            {
+                Satellite.GetComponent<ParticleSystem>().Play();
+            }
+            if (_marsDialogEnabled)
+            {
+                createDialogGenerator(MarsBoundaryScriptIndex);
+                StartCoroutine("DelayedDialogStartWithTime", 1.0);
+            }
         }
 
         public void OnSatelliteLeaveWindow(int scriptIndex)
         {
+            Debug.Log("Satellite outside bounds");
             StopAll();
-            _dialogGenerator = Object.Instantiate(_dialogGeneratorPrefab, this.transform);
-            _dg = _dialogGenerator.GetComponent<DialogGenerator>();
-            _dg.dialogContainer = Scripts[scriptIndex];
+            createDialogGenerator(scriptIndex);
             StartCoroutine("DelayedDialogStart");
         }
 
         private IEnumerator DelayedDialogStart()
         {
             yield return new WaitForFixedUpdate();
-            _dg.BeginPlayingDialog();
+            if (_dg != null)
+            {
+                _dg.BeginPlayingDialog();
+            }
         }
 
-        private void StopAll() 
+        private IEnumerator DelayedDialogStartWithTime(float t)
+        {
+            yield return new WaitForSeconds(t);
+            if (_dg != null)
+            {
+                _dg.BeginPlayingDialog();
+            }
+        }
+
+        private void StopAll()
         {
             Satellite.GetComponent<Launch>().StopLaunch();
             PathFollower[] pathFollowers = FindObjectsOfType<PathFollower>();
@@ -153,6 +229,7 @@ namespace Flightpath
                 p.StopOrbitter();
             }
             SatellitePath.Active = false;
+            Debug.Log("Stopping all moveables");
             _stopped = true;
         }
 
@@ -160,7 +237,10 @@ namespace Flightpath
         {
             _sceneAdvanceStart = true;
             yield return new WaitForSeconds(2f);
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            if (SceneManager.GetActiveScene().name == "2_Flightpath")
+            {
+                SceneManager.LoadScene("3_FlightpathOutro");
+            }
         }
 
         public bool hasStopped()
@@ -168,5 +248,9 @@ namespace Flightpath
             return _stopped;
         }
 
+        public void enableMarsDialog()
+        {
+            _marsDialogEnabled = true;
+        }
     }
 }

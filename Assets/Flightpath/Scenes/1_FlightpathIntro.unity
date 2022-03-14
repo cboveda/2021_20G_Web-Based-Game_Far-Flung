@@ -20424,6 +20424,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4152c8f4b8637843a845fe97e7b4256, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _timeScale: 1.75
   startButton: {fileID: 1323683062}
 --- !u!1 &1792921416
 GameObject:
