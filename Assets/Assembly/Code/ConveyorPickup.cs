@@ -4,10 +4,10 @@ public class ConveyorPickup : MonoBehaviour
 {
 
     public float pickupRange = 10; //changes how far out the player can pickup objects
-    public Transform holdParent; //a transform object that effects where the held object is located
+    public float HoldOffset;
     public float moveForce = 250;
 
-    private GameObject heldObj;
+    public GameObject heldObj;
 
     // Update is called once per frame
     void Update() {
@@ -21,6 +21,8 @@ public class ConveyorPickup : MonoBehaviour
                 RaycastHit hit;
                 
                 if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, pickupRange)) {
+
+                    Debug.Log(" -------- HIT ------------ ");
 
                     PickupObject(hit.transform.gameObject);
                     
@@ -39,10 +41,12 @@ public class ConveyorPickup : MonoBehaviour
 
     void PickupObject(GameObject pickObj) {
 
+        Debug.Log("Tried pickup ?");
+
         if ( pickObj.GetComponent<DragObject>() && pickObj.GetComponent<Rigidbody>() && 
                 pickObj.GetComponent<ConveyorObject>() ) {
 
-            Debug.Log("Pickup " + pickObj.name);
+            Debug.Log(" ----- Pickup ------- ->" + pickObj.name);
 
             pickObj.GetComponent<ConveyorObject>().OnPickUp();
 
@@ -52,7 +56,7 @@ public class ConveyorPickup : MonoBehaviour
             objRig.drag = 10; //add air drag to the object
 
             objRig.freezeRotation = true;
-            objRig.transform.parent = holdParent;
+            //objRig.transform.parent = holdParent;
 
             heldObj = pickObj;
             heldObj.GetComponent<DragObject>().isHeld = true;
@@ -67,9 +71,9 @@ public class ConveyorPickup : MonoBehaviour
 
     void MoveObject() {
 
-        if (Vector3.Distance(heldObj.transform.position, holdParent.position) > 0.1f) {
+        if (Vector3.Distance(heldObj.transform.position, (transform.forward * HoldOffset)) > 0.1f) {
 
-            Vector3 moveDirection = (holdParent.position - heldObj.transform.position); //move towards the hold parent
+            Vector3 moveDirection = ((transform.position * HoldOffset) - heldObj.transform.position); //move towards the hold parent
             heldObj.GetComponent<Rigidbody>().AddForce(moveDirection * moveForce);
 
         }
@@ -85,7 +89,7 @@ public class ConveyorPickup : MonoBehaviour
 
         heldRig.useGravity = true;
         heldRig.drag = 1;
-        heldRig.freezeRotation = false;
+        // heldRig.freezeRotation = false;
 
         heldObj.GetComponent<DragObject>().isHeld = false;
 
