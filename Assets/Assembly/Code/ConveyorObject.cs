@@ -30,7 +30,7 @@ public class ConveyorObject : MonoBehaviour
             transform.position = Vector3.Lerp(Beginning, Destination, journey_fraction); // move with respect to time
 
             if ( Vector3.Distance( Beginning, transform.position ) >= (Distance - 0.1) ) { // if we have reached the end of the conveyor
-                gameObject.SetActive(true);
+                gameObject.SetActive(false);
                 HostConveyor.EndObjectTravel( this );
                 AttachmentState = false; // no longer attached to conveyor
             }

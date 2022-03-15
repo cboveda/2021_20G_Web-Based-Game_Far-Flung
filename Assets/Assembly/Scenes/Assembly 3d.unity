@@ -1868,7 +1868,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 671977520}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0.5}
+  m_LocalPosition: {x: -0, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1175968343}
@@ -1903,7 +1903,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25f394849f7613e368b41b2bbc8f9904, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickupRange: 10
+  pickupRange: 50
   HoldOffset: 3
   moveForce: 250
   heldObj: {fileID: 0}
@@ -4738,6 +4738,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SystemItems:
+  - {fileID: 249915053003351365, guid: c3124c11ba48b716d81c1b4f5515f4ae, type: 3}
   - {fileID: 249915053003351365, guid: c3124c11ba48b716d81c1b4f5515f4ae, type: 3}
   - {fileID: 249915053003351365, guid: c3124c11ba48b716d81c1b4f5515f4ae, type: 3}
   - {fileID: 249915053003351365, guid: c3124c11ba48b716d81c1b4f5515f4ae, type: 3}
