@@ -51,6 +51,12 @@ public class ConveyorObject : MonoBehaviour
         }
     }
 
+    void OnCollisionEnter(Collision c) {
+
+        // snap to axis
+
+    }
+
     public void OnDrop() { // when the item is released by the user
 
         // if in hitbox of host conveyor && !AttachmentState {

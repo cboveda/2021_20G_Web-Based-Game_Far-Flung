@@ -19,8 +19,6 @@ public class ConveyorSystem : MonoBehaviour {
 
         // Debug.Log( "SystemItems count : " + SystemItems.Length );
 
-        // setup the collider
-
         foreach (ConveyorObject co in SystemItems) {
 
             ConveyorObject co_e = Instantiate<ConveyorObject>(co);
