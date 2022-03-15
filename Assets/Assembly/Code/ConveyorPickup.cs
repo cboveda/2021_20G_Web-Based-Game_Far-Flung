@@ -25,7 +25,7 @@ public class ConveyorPickup : MonoBehaviour
                 
                 if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, pickupRange)) {
 
-                    PickupObject(hit.transform.gameObject);
+                    PickupObject(hit);
                 }
 
             } else {
@@ -34,38 +34,7 @@ public class ConveyorPickup : MonoBehaviour
         }
 
         if (heldObj != null) {
-            // Debug.Log("Move call");
             MoveObject();
-        }
-    }
-
-    void PickupObject(GameObject pickObj) {
-
-        Debug.Log("Tried pickup ?");
-
-        if ( pickObj.GetComponent<DragObject>() && pickObj.GetComponent<Rigidbody>() && 
-                pickObj.GetComponent<ConveyorObject>() ) {
-
-            Debug.Log(" ----- Pickup ------- ->" + pickObj.name);
-
-            pickObj.GetComponent<ConveyorObject>().OnPickUp();
-
-            Rigidbody objRig = pickObj.GetComponent<Rigidbody>();
-            objRig.constraints = RigidbodyConstraints.None;
-            objRig.useGravity = false;
-            objRig.drag = 10; //add air drag to the object
-
-            objRig.freezeRotation = true;
-            //objRig.transform.parent = holdParent;
-
-            heldObj = pickObj;
-            heldObj.GetComponent<DragObject>().isHeld = true;
-
-            //if picking up an object in a slot make sure the slot is rendered again
-            if ( heldObj.GetComponent<DragObject>().currentSlot ) {
-                
-                heldObj.GetComponent<DragObject>().currentSlot.GetComponent<Renderer>().forceRenderingOff = false;
-            }
         }
     }
 
@@ -77,31 +46,46 @@ public class ConveyorPickup : MonoBehaviour
         Vector3 p2 = transform.position + (transform.forward * HoldOffset);
 
         if (Vector3.Distance(p1, p2) > 0.1f) {
-            Vector3 moveDirection = (p2 - p1); //move towards the hold parent
-            heldObj.GetComponent<Rigidbody>().AddForce(moveDirection * moveForce);
+            Vector3 moveDirection = (p2 - p1);
+            heldObj.GetComponent<Rigidbody>().AddForce(moveDirection * moveForce); // refactor? -> change to lerp, remove physics dependency
+        }
+    }
+
+    void PickupObject(RaycastHit hit) {
+
+        GameObject pickObj = hit.transform.gameObject;
+
+        DragObject d_o = pickObj.GetComponent<DragObject>();
+        ConveyorObject c_o = pickObj.GetComponent<ConveyorObject>();
+
+        if ( d_o && c_o ) {
+
+            HoldOffset = hit.distance - 1.0f;
+
+            c_o.OnPickUp();
+
+            heldObj = pickObj;
+            d_o.isHeld = true;
+
+            //if picking up an object in a slot make sure the slot is rendered again
+            if ( d_o.currentSlot ) { 
+                d_o.currentSlot.GetComponent<Renderer>().forceRenderingOff = false;
+            }
         }
     }
 
     void DropObject() {
 
-        //Debug.Log("Drop Cube");
-        
-        // gameObject.GetComponent<ConveyorObject>().OnDrop();
+        heldObj.GetComponent<ConveyorObject>().OnDrop();
 
-        Rigidbody heldRig = heldObj.GetComponent<Rigidbody>();
+        DragObject d_o = heldObj.GetComponent<DragObject>();
+        d_o.isHeld = false;
 
-        heldRig.useGravity = true;
-        heldRig.drag = 1;
-        heldRig.freezeRotation = false;
-
-        heldObj.GetComponent<DragObject>().isHeld = false;
-
-        //if the object is in a slot, drop the object 
-        if (heldObj.GetComponent<DragObject>().currentSlot) {
-            heldObj.GetComponent<DragObject>().currentSlot.placeObjectInSlot(heldObj);
+        if (d_o.currentSlot) {  //if the object is in a slot, drop the object
+            d_o.currentSlot.placeObjectInSlot(heldObj);
         }
 
-        heldObj.transform.parent = null;
+        // heldObj.transform.parent = null;
         heldObj = null;
     }
 }

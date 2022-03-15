@@ -8,6 +8,8 @@ public class ConveyorObject : MonoBehaviour
     public ConveyorSystem HostConveyor;
 
     private bool AttachmentState;
+    private bool HeldState;
+
     private float TimeZero;
     private float Distance;
 
@@ -17,6 +19,8 @@ public class ConveyorObject : MonoBehaviour
         Destination = end;
 
         AttachmentState = true;
+        HeldState = false;
+
         gameObject.SetActive(true);
         TimeZero = Time.time;
         Distance = Vector3.Distance( Beginning, Destination );
@@ -42,26 +46,45 @@ public class ConveyorObject : MonoBehaviour
 
     public void OnPickUp() { // when the item is picked up
 
-        if ( AttachmentState ) {
+        HeldState = true;
+        PhysicsOff();
 
-            Debug.Log( "ON PICKUP CALLED" );
+        if ( AttachmentState ) {
 
             HostConveyor.DetachFromConveyorSystem( this );
             AttachmentState = false;
         }
     }
 
-    void OnCollisionEnter(Collision c) {
+    void OnCollisionEnter( Collision c ) {
 
-        // snap to axis
+        if (!HeldState && GameObject.ReferenceEquals( c.gameObject, HostConveyor.gameObject)) {
 
+            PhysicsOff();
+            InitalizeConveyorObject( transform.position, Destination );
+            HostConveyor.AttachToConveyorSystem( this );
+        }
     }
 
     public void OnDrop() { // when the item is released by the user
 
-        // if in hitbox of host conveyor && !AttachmentState {
-            HostConveyor.AttachToConveyorSystem( this );
-            AttachmentState = true;            
+       HeldState = false;
+       PhysicsOn();
     }
 
+    private void PhysicsOn() {
+
+        Rigidbody heldRig = gameObject.GetComponent<Rigidbody>();
+        heldRig.useGravity = true;
+        heldRig.freezeRotation = false;
+        heldRig.drag = 2;
+    }
+
+    private void PhysicsOff() {
+
+        Rigidbody objRig = gameObject.GetComponent<Rigidbody>();
+        objRig.useGravity = false;
+        objRig.freezeRotation = true;
+        objRig.drag = 10;
+    }
 }

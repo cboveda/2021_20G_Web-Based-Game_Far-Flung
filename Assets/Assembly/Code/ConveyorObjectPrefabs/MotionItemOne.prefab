@@ -110,8 +110,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f0aa67fca06ae8aa83292f99fc128ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Beginning: {x: 120, y: 3, z: -30}
-  Destination: {x: 120, y: 3, z: -10}
   LERP_Speed: 5
   HostConveyor: {fileID: 0}
 --- !u!114 &6962703916834029533

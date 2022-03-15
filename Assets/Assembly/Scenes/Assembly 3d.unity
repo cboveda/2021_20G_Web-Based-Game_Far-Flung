@@ -4750,10 +4750,9 @@ MonoBehaviour:
   - {fileID: 249915053003351365, guid: c3124c11ba48b716d81c1b4f5515f4ae, type: 3}
   - {fileID: 249915053003351365, guid: c3124c11ba48b716d81c1b4f5515f4ae, type: 3}
   - {fileID: 249915053003351365, guid: c3124c11ba48b716d81c1b4f5515f4ae, type: 3}
-  ConveyorStartPosition: {x: 120, y: 3, z: -30}
-  ConveyorEndPosition: {x: 120, y: 3, z: -10}
   ConveyorCapacity: 5
   ConveyorSpeed: 2
+  ConveyorLength: 20
 --- !u!4 &1946716708
 Transform:
   m_ObjectHideFlags: 0
@@ -4761,13 +4760,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1946716706}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 116.28, y: 0.86, z: -34.2}
+  m_LocalRotation: {x: -0, y: -0.09996999, z: -0, w: 0.99499047}
+  m_LocalPosition: {x: 125.93, y: 1.59, z: -28.09}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 13
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -11.475, z: 0}
 --- !u!65 &1946716709
 BoxCollider:
   m_ObjectHideFlags: 0

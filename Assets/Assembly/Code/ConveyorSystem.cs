@@ -4,20 +4,22 @@ using UnityEngine;
 
 public class ConveyorSystem : MonoBehaviour {
 
-    public Queue<ConveyorObject> conveyor_object_backlog = new Queue<ConveyorObject>(); // objects that are cycled through 
-    private List<ConveyorObject> conveyor_objects_in_use = new List<ConveyorObject>(); // objects on the conveyor belt currently
-
     public ConveyorObject[] SystemItems;
-
-    public Vector3 ConveyorStartPosition;
-    public Vector3 ConveyorEndPosition;
 
     public int ConveyorCapacity = 5;
     public float ConveyorSpeed = 0.1f;
+    public float ConveyorLength = 20;
+
+    private Queue<ConveyorObject> conveyor_object_backlog = new Queue<ConveyorObject>(); 
+    private List<ConveyorObject> conveyor_objects_in_use = new List<ConveyorObject>();
+
+    private Vector3 ConveyorEndPosition;
+    private Vector3 ConveyorStartPosition;
 
     void Start() {
 
-        // Debug.Log( "SystemItems count : " + SystemItems.Length );
+        ConveyorStartPosition = transform.position;
+        ConveyorEndPosition = ConveyorStartPosition + (transform.forward * ConveyorLength);
 
         foreach (ConveyorObject co in SystemItems) {
 
@@ -27,14 +29,11 @@ public class ConveyorSystem : MonoBehaviour {
             conveyor_object_backlog.Enqueue( co_e );
         }
 
-        float distance = Vector3.Distance(ConveyorStartPosition, ConveyorEndPosition);
-        float interval = (distance / ConveyorCapacity) / ConveyorSpeed;
-
         BoxCollider gc = gameObject.GetComponent<BoxCollider>();
+        gc.center = new Vector3(0, -0.5f, (ConveyorLength / 2));
+        gc.size = new Vector3(1f, 0.1f, ConveyorLength);
 
-        gc.center = (ConveyorStartPosition - transform.position) + ((ConveyorEndPosition - ConveyorStartPosition) / 2);
-        gc.size = new Vector3(1, 1, distance);
-
+        float interval = (ConveyorLength / ConveyorCapacity) / ConveyorSpeed;
         StartCoroutine(StartObjectTravel(interval)); // start creating objects
     }
 
@@ -80,7 +79,7 @@ public class ConveyorSystem : MonoBehaviour {
 
             if ( conveyor_object_backlog.Count > 0 ) {
 
-                Debug.Log( " Started object in motion... ");
+                // Debug.Log( " Started object in motion... ");
 
                 ConveyorObject c_object = conveyor_object_backlog.Dequeue();
 
@@ -98,9 +97,9 @@ public class ConveyorSystem : MonoBehaviour {
     private void OnDrawGizmos() {
 
         Gizmos.color = Color.red;
-        Gizmos.DrawSphere(ConveyorStartPosition, 0.5f);
+        Gizmos.DrawSphere(transform.position, 0.5f);
 
         Gizmos.color = Color.blue;
-        Gizmos.DrawSphere(ConveyorEndPosition, 0.5f);
+        Gizmos.DrawSphere((transform.position + (transform.forward * ConveyorLength)), 0.5f);
     }
 }
