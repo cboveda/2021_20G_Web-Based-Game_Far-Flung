@@ -1906,6 +1906,8 @@ MonoBehaviour:
   pickupRange: 50
   HoldOffset: 3
   moveForce: 250
+  ObjectDistMin: 3
+  ObjectDistMax: 20
   heldObj: {fileID: 0}
 --- !u!4 &688071575 stripped
 Transform:
@@ -4718,6 +4720,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1946716708}
   - component: {fileID: 1946716707}
+  - component: {fileID: 1946716709}
   m_Layer: 0
   m_Name: ConveryorBelt
   m_TagString: Untagged
@@ -4759,12 +4762,25 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1946716706}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 120, y: 1, z: -30}
+  m_LocalPosition: {x: 116.28, y: 0.86, z: -34.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1946716709
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1946716706}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &1948854581 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 462218, guid: e5018fd5d21200f47b8430f9e3ad81b1, type: 3}

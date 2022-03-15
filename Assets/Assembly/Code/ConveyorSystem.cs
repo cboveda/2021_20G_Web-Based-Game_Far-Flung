@@ -17,7 +17,9 @@ public class ConveyorSystem : MonoBehaviour {
 
     void Start() {
 
-        Debug.Log( "SystemItems count : " + SystemItems.Length );
+        // Debug.Log( "SystemItems count : " + SystemItems.Length );
+
+        // setup the collider
 
         foreach (ConveyorObject co in SystemItems) {
 
@@ -29,6 +31,11 @@ public class ConveyorSystem : MonoBehaviour {
 
         float distance = Vector3.Distance(ConveyorStartPosition, ConveyorEndPosition);
         float interval = (distance / ConveyorCapacity) / ConveyorSpeed;
+
+        BoxCollider gc = gameObject.GetComponent<BoxCollider>();
+
+        gc.center = (ConveyorStartPosition - transform.position) + ((ConveyorEndPosition - ConveyorStartPosition) / 2);
+        gc.size = new Vector3(1, 1, distance);
 
         StartCoroutine(StartObjectTravel(interval)); // start creating objects
     }
@@ -79,11 +86,9 @@ public class ConveyorSystem : MonoBehaviour {
 
                 ConveyorObject c_object = conveyor_object_backlog.Dequeue();
 
-                c_object.Beginning = ConveyorStartPosition;
-                c_object.Destination = ConveyorEndPosition;
                 c_object.LERP_Speed = ConveyorSpeed;
                 c_object.HostConveyor = this;
-                c_object.InitalizeConveyorObject();
+                c_object.InitalizeConveyorObject(ConveyorStartPosition, ConveyorEndPosition);
 
                 conveyor_objects_in_use.Add( c_object );
             }

@@ -25,10 +25,7 @@ public class ConveyorPickup : MonoBehaviour
                 
                 if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, pickupRange)) {
 
-                    Debug.Log(" -------- HIT ------------ ");
-
                     PickupObject(hit.transform.gameObject);
-                    
                 }
 
             } else {

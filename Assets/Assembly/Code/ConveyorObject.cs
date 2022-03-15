@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class ConveyorObject : MonoBehaviour
 {
-    public Vector3 Beginning;
-    public Vector3 Destination;
+    private Vector3 Beginning;
+    private Vector3 Destination;
     public float LERP_Speed;
     public ConveyorSystem HostConveyor;
 
@@ -11,7 +11,10 @@ public class ConveyorObject : MonoBehaviour
     private float TimeZero;
     private float Distance;
 
-    public void InitalizeConveyorObject() {
+    public void InitalizeConveyorObject( Vector3 start, Vector3 end ) {
+
+        Beginning = start;
+        Destination = end;
 
         AttachmentState = true;
         gameObject.SetActive(true);
