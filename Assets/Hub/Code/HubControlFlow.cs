@@ -209,7 +209,7 @@ public class HubControlFlow : MonoBehaviour
     public void LaunchAssembly()
     {
         HideMainMenu();
-        SceneManager.LoadScene("Assembly 3d");
+        SceneManager.LoadScene("Assembly");
     }
 
     public void LaunchFlightPlanning()

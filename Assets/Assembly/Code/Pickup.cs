@@ -17,10 +17,13 @@ public class Pickup : MonoBehaviour
     private Vector3 pickupOffset;
     private float distance;
 
+    private Plane plane;
+
     void Start()
     {
         cam = Camera.main;
         distance = Vector3.Distance(cam.transform.position, target.transform.position);
+        plane = new Plane(Vector3.forward , target.transform.position);
     }
 
     // Update is called once per frame
@@ -111,6 +114,8 @@ public class Pickup : MonoBehaviour
     }
     void MoveObject()
     {
+        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+        plane.Raycast(ray,out distance);
         Vector2 mousePos = new Vector2();
         mousePos.x = Input.mousePosition.x;
         mousePos.y = Input.mousePosition.y;

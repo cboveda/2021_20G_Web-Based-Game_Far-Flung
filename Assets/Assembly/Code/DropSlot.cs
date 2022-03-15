@@ -13,8 +13,11 @@ public class DropSlot : MonoBehaviour, Completion
 
     private GameObject slotObject;
 
+    public bool completed;
+
     void Start(){
         undefinedSlot = System.String.IsNullOrEmpty(slotTypeMatch)?true: false;
+        completed = false;
     }
 
     void Update(){
@@ -23,7 +26,7 @@ public class DropSlot : MonoBehaviour, Completion
         // make sure the object can still be moved by the player
         if(dragObject==null || dragObject.isHeld) return;
 
-        slotObject.transform.SetPositionAndRotation(this.transform.position, this.transform.rotation);
+        //slotObject.transform.SetPositionAndRotation(this.transform.position, this.transform.rotation);
     }
 
     void OnTriggerEnter(Collider other)
@@ -62,7 +65,9 @@ public class DropSlot : MonoBehaviour, Completion
             if (slotTypeMatch == dragObject.itemType)
             {
                 slotObject =  gameObject;
+                completed = true;
                 Debug.Log("Drop in SLot");
+                gameObject.transform.parent = this.transform; 
                 gameObject.transform.SetPositionAndRotation(transform.position + offset, transform.rotation);
                 if (gameObject.GetComponent<Rigidbody>())
                 {
@@ -106,16 +111,10 @@ public class DropSlot : MonoBehaviour, Completion
 
     public bool IsCompleted()
     {
-        if(slotObject==null) {
-            Debug.Log("No match");
-            return false;
-        }
-        else{
-            return true;
-        }
+        return completed;
     }
 
     public void OnCompletion(){
-
+        CallParentCompletion();
     }
 }
