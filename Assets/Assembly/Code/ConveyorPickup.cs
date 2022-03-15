@@ -7,6 +7,9 @@ public class ConveyorPickup : MonoBehaviour
     public float HoldOffset;
     public float moveForce = 250;
 
+    public float ObjectDistMin = 3;
+    public float ObjectDistMax = 20;
+
     public GameObject heldObj;
 
     // Update is called once per frame
@@ -70,6 +73,8 @@ public class ConveyorPickup : MonoBehaviour
     }
 
     void MoveObject() {
+
+        HoldOffset = Mathf.Clamp((HoldOffset + Input.mouseScrollDelta.y), ObjectDistMin, ObjectDistMax);
 
         Vector3 p1 = heldObj.transform.position;
         Vector3 p2 = transform.position + (transform.forward * HoldOffset);
