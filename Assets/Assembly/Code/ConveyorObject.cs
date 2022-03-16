@@ -85,6 +85,7 @@ public class ConveyorObject : MonoBehaviour
         Rigidbody objRig = gameObject.GetComponent<Rigidbody>();
         objRig.useGravity = false;
         objRig.freezeRotation = true;
+        objRig.mass = 2;
         objRig.drag = 10;
     }
 }

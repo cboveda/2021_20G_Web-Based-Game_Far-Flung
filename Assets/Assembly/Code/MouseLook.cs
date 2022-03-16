@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MouseLook : MonoBehaviour
@@ -13,7 +11,11 @@ public class MouseLook : MonoBehaviour
     public Transform playerBody;
     public GameObject MenuObject;
 
-    // Update is called once per frame
+    void Start() {
+
+        ResumeAssembly();
+    }
+
     void Update()
     {
         if (Input.GetButtonDown("Cancel")) {
