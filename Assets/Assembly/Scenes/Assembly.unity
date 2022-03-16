@@ -3350,6 +3350,7 @@ MonoBehaviour:
   slotTypeMatch: red
   undefinedSlot: 0
   completionTextAsset: {fileID: 0}
+  completed: 0
 --- !u!65 &96507260
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6619,6 +6620,7 @@ MonoBehaviour:
   slotTypeMatch: green
   undefinedSlot: 0
   completionTextAsset: {fileID: 0}
+  completed: 0
 --- !u!65 &229089274
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11586,6 +11588,7 @@ MonoBehaviour:
   slotTypeMatch: blue
   undefinedSlot: 0
   completionTextAsset: {fileID: 0}
+  completed: 0
 --- !u!65 &393253081
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -42833,6 +42836,7 @@ MonoBehaviour:
   slotTypeMatch: red
   undefinedSlot: 0
   completionTextAsset: {fileID: 0}
+  completed: 0
 --- !u!65 &1483260676
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -44568,6 +44572,7 @@ MonoBehaviour:
   slotTypeMatch: green
   undefinedSlot: 0
   completionTextAsset: {fileID: 0}
+  completed: 0
 --- !u!65 &1564100198
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -48420,6 +48425,7 @@ MonoBehaviour:
   slotTypeMatch: blue
   undefinedSlot: 0
   completionTextAsset: {fileID: 0}
+  completed: 0
 --- !u!65 &1723810682
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -54351,7 +54357,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d65aab585bd55ba4eba477c1672032bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cubeFrequency: 3
+  cubeFrequency: 2
 --- !u!4 &1917000017 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 480576, guid: 4c6af23e1d44956468e5edc7a02d0375, type: 3}
