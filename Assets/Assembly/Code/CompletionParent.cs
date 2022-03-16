@@ -16,6 +16,7 @@ public class CompletionParent : MonoBehaviour, Completion
 
             if (!completion.IsCompleted()) return false;
         }
+        OnCompletion();
         return true;
     }
 

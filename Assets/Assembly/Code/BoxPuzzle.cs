@@ -1,7 +1,10 @@
 using UnityEngine;
+using UnityEngine.Events;
+using System;
+using UnityEngine.SceneManagement;
 
-public class BoxPuzzle : MonoBehaviour, Completion {
-    
+public class BoxPuzzle : MonoBehaviour, Completion
+{    
     public Material greenMaterial;
     public Material redMaterial;
     // Start is called before the first frame update
@@ -39,7 +42,6 @@ public class BoxPuzzle : MonoBehaviour, Completion {
     {
         foreach (DropSlot slot in slots)
         {
-            if (slot.slotMatch != null) UnityEngine.Object.Destroy(slot.slotMatch);
             UnityEngine.Object.Destroy(slot.gameObject);
         }
     }
@@ -129,7 +131,7 @@ public class BoxPuzzle : MonoBehaviour, Completion {
         }
         else
         {
-            psyche.SetActive(true);
+            SceneManager.LoadScene("Hub");
         }
         Debug.Log("Puzzle size: " + solution.GetLength(0) + " "+ solution.GetLength(1) + " "+ solution.GetLength(2) + " ");
         Debug.Log("Puzzles Completed: " + puzzlesCompleted);
