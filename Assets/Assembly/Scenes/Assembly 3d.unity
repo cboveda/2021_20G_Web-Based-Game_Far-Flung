@@ -4750,7 +4750,7 @@ MonoBehaviour:
   - {fileID: 249915053003351365, guid: c3124c11ba48b716d81c1b4f5515f4ae, type: 3}
   - {fileID: 249915053003351365, guid: c3124c11ba48b716d81c1b4f5515f4ae, type: 3}
   - {fileID: 249915053003351365, guid: c3124c11ba48b716d81c1b4f5515f4ae, type: 3}
-  ConveyorCapacity: 5
+  ConveyorCapacity: 3
   ConveyorSpeed: 2
   ConveyorLength: 20
 --- !u!4 &1946716708
