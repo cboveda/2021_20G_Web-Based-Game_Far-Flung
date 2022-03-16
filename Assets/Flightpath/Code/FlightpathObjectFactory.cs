@@ -5,6 +5,10 @@ using UnityEditor;
 
 namespace Flightpath
 {
+    /*
+        Factory class for the instantiation of prefabs.
+        Author: Chris Boveda
+    */
     public class FlightpathObjectFactory : MonoBehaviour
     {
         [SerializeField]

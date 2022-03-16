@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: MarsBoundaryScriptableObject
   m_EditorClassIdentifier: 
   dialogs:
-  - dialogText: Whoops, we hit Mars again. We want to get close enough to slingshot
+  - dialogText: Oops, we hit Mars again. We want to get close enough to slingshot
       around the planet, but not too close that we fall into it!
     robotVoice: 0
+    dialogAudio: {fileID: 0}

@@ -4,6 +4,10 @@ using UnityEngine;
 
 namespace Flightpath
 {
+    /*
+        Draws the path the satellite has moved along, and handles clean-up after each attempt.
+        Author: Chris Boveda
+    */
     public class SatellitePathDrawing : MonoBehaviour
     {
 

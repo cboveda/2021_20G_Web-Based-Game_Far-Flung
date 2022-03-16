@@ -54,8 +54,12 @@ public class SendDataActions : MonoBehaviour
         {
             if (imagePressed == false)
             {
-                Scoring.Instance.addToScore(50, "ObjectiveB");
+                Scoring.Instance.addToScore(100, "ComObjective6");
                 imagePressed = true;
+            }
+            else
+            {
+                Scoring.Instance.addToScore(-10, "ComObjective6");
             }
 
             FindObjectOfType<SendDataActions>().buttonStart = 1;
@@ -63,17 +67,17 @@ public class SendDataActions : MonoBehaviour
             wordRow = 1;
             letterCount = 7;
 
-            if (wordUpdated)
-            {
-                Scoring.Instance.addToScore(-50, "ObjectiveB");
-            }
         }
         if (buttonName == "SpectometerButton")
         {
             if (spectroPressed == false)
             {
-                Scoring.Instance.addToScore(50, "ObjectiveB");
+                Scoring.Instance.addToScore(100, "ComObjective6");
                 spectroPressed = true;
+            }
+            else
+            {
+                Scoring.Instance.addToScore(-10, "ComObjective6");
             }
 
             FindObjectOfType<SendDataActions>().buttonStart = 8;
@@ -81,17 +85,17 @@ public class SendDataActions : MonoBehaviour
             wordRow = 2;
             letterCount = 11;
 
-            if (wordUpdated)
-            {
-                Scoring.Instance.addToScore(-50, "ObjectiveB");
-            }
         }
         if (buttonName == "MagnetometerButton")
         {
             if (magnetoPressed == false)
             {
-                Scoring.Instance.addToScore(50, "ObjectiveB");
+                Scoring.Instance.addToScore(100, "ComObjective6");
                 magnetoPressed = true;
+            }
+            else
+            {
+                Scoring.Instance.addToScore(-10, "ComObjective6");
             }
 
             FindObjectOfType<SendDataActions>().buttonStart = 19;
@@ -99,17 +103,17 @@ public class SendDataActions : MonoBehaviour
             wordRow = 3;
             letterCount = 8;
 
-            if (wordUpdated)
-            {
-                Scoring.Instance.addToScore(-50, "ObjectiveB");
-            }
         }
         if (buttonName == "RadioButton")
         {
             if (radioPressed == false)
             {
-                Scoring.Instance.addToScore(50, "ObjectiveB");
+                Scoring.Instance.addToScore(100, "ComObjective6");
                 radioPressed = true;
+            }
+            else
+            {
+                Scoring.Instance.addToScore(-10, "ComObjective6");
             }
 
             FindObjectOfType<SendDataActions>().buttonStart = 27;
@@ -117,12 +121,7 @@ public class SendDataActions : MonoBehaviour
             wordRow = 4;
             letterCount = 7;
 
-            if (wordUpdated)
-            {
-                Scoring.Instance.addToScore(-50, "ObjectiveB");
-            }
         }
-
 
         FindObjectOfType<ComUnscrambleMain>().DisableWord(wordRow);
 

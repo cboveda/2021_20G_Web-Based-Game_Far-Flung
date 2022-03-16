@@ -9,7 +9,7 @@ namespace DialogMaker
     {
         [SerializeField]
         public DialogScriptableObject dialogContainer;
-
+        public static bool AudioOn = true;
 
         private Canvas dialogCanvas;
         private Image dialogBackground;
@@ -23,6 +23,7 @@ namespace DialogMaker
         private GameObject goTextContainer;
         private GameObject goButtonContainer;
         private Button btnDialogButton;
+        public Button BtnDialogButton { get { return btnDialogButton; } }
 
         private GameObject goAudioContainer;
         private AudioSource dialogAudioSource;
@@ -44,7 +45,7 @@ namespace DialogMaker
         // Wake up and feel the morning sun...
         void Awake()
         {
-            
+
 
             // Create the necessary components and get ready...
 
@@ -132,7 +133,8 @@ namespace DialogMaker
 
         public bool BeginPlayingDialog()
         {
-            if (dialogContainer == null || dialogTyper == null) {
+            if (dialogContainer == null || dialogTyper == null)
+            {
                 return false;
             }
             if (dialogTyper.currentlyTyping)
@@ -146,8 +148,12 @@ namespace DialogMaker
                     goCanvasContainer.SetActive(true);
                     dialogPortraitBackground.sprite = GetDialogPortraitBackgroundSprite(dialogContainer.dialogs[dialogEntryPosition].robotVoice);
                     dialogTyper.AddTyper(dialogUIText, dialogContainer.GetNextDialogMessage(dialogEntryPosition).dialogText, dialogTypingSpeed);
-                    dialogAudioSource.clip = dialogContainer.dialogs[dialogEntryPosition].dialogAudio;
-                    dialogAudioSource.Play();
+                    if (DialogGenerator.AudioOn)
+                    {
+                        dialogAudioSource.clip = dialogContainer.dialogs[dialogEntryPosition].dialogAudio;
+                        dialogAudioSource.Play();
+                    }
+                    
                     dialogEntryPosition++;
                 }
                 else
@@ -156,8 +162,14 @@ namespace DialogMaker
                     Destroy(this);
                 }
             }
-            
+
             return true;
+        }
+
+        public void FastForwardDialog()
+        {
+            goCanvasContainer.SetActive(false);
+            Destroy(this);
         }
 
         public int GetCurrentDialogPosition()
@@ -184,6 +196,6 @@ namespace DialogMaker
                     return Resources.Load<Sprite>(DIALOG_PORTRAIT_BACKGROUND_PATH);
             }
         }
-        
+
     }
 }

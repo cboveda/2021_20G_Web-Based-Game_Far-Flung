@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogs:
   - dialogText: Great, now let's run the simulated flightpath to see if it reaches
-      Psyche! Press the Launch button when ready.
+      Psyche! Press the LAUNCH button when ready.
     robotVoice: 0
+    dialogAudio: {fileID: 0}

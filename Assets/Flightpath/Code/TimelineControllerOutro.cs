@@ -6,6 +6,10 @@ using UnityEngine.SceneManagement;
 
 namespace Flightpath
 {
+    /*
+        Orchestrates the animation timeline of the flightpath outro scene, and triggers scene transitions.
+        Author: Chris Boveda
+    */
     public class TimelineControllerOutro : MonoBehaviour
     {
         [SerializeField]
