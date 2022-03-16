@@ -1864,7 +1864,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 558807789}
   m_LocalRotation: {x: -0, y: 0.6820698, z: -0, w: 0.73128706}
-  m_LocalPosition: {x: 114.89, y: 3.8597212, z: -18.95}
+  m_LocalPosition: {x: 115.04, y: 7.53, z: -21.09}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1106575060}
@@ -2454,7 +2454,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mouseSensitivity: 1000
-  lookUpLimit: 20
+  lookUpLimit: 60
   lookDownLimit: 60
   playerBody: {fileID: 1175968343}
   MenuObject: {fileID: 770692292}
@@ -6429,13 +6429,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1946716706}
-  m_LocalRotation: {x: -0, y: -0.09996999, z: -0, w: 0.99499047}
-  m_LocalPosition: {x: 125.93, y: 1.59, z: -28.09}
+  m_LocalRotation: {x: -0, y: -0.0076558455, z: -0, w: 0.9999707}
+  m_LocalPosition: {x: 125.95, y: 1.59, z: -29.08}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 13
-  m_LocalEulerAnglesHint: {x: 0, y: -11.475, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -0.877, z: 0}
 --- !u!65 &1946716709
 BoxCollider:
   m_ObjectHideFlags: 0
