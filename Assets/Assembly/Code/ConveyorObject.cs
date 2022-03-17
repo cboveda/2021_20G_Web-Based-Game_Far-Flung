@@ -13,6 +13,14 @@ public class ConveyorObject : MonoBehaviour
     private float TimeZero;
     private float Distance;
 
+    void Start() {
+
+        Rigidbody obj = gameObject.GetComponent<Rigidbody>();
+        obj.freezeRotation = false;
+        obj.mass = 4;
+        obj.drag = 3;
+    }
+
     public void InitalizeConveyorObject( Vector3 start, Vector3 end ) {
 
         Beginning = start;
@@ -74,18 +82,13 @@ public class ConveyorObject : MonoBehaviour
 
     private void PhysicsOn() {
 
-        Rigidbody heldRig = gameObject.GetComponent<Rigidbody>();
-        heldRig.useGravity = true;
-        heldRig.freezeRotation = false;
-        heldRig.drag = 2;
+        Rigidbody obj = gameObject.GetComponent<Rigidbody>();
+        obj.useGravity = true;
     }
 
     private void PhysicsOff() {
 
-        Rigidbody objRig = gameObject.GetComponent<Rigidbody>();
-        objRig.useGravity = false;
-        objRig.freezeRotation = true;
-        objRig.mass = 2;
-        objRig.drag = 10;
+        Rigidbody obj = gameObject.GetComponent<Rigidbody>();
+        obj.useGravity = false;
     }
 }

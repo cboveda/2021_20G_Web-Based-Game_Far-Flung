@@ -12,12 +12,14 @@ public class ConveyorPickup : MonoBehaviour
 
     public GameObject heldObj;
 
+    public float SmoothTime = 0.2f;
+
+    Vector3 velocity = Vector3.zero;
+
     // Update is called once per frame
     void Update() {
 
         if (Input.GetKeyDown(KeyCode.E)) {
-
-            // Debug.Log("E pressed");
 
             if (heldObj == null) {
 
@@ -28,26 +30,16 @@ public class ConveyorPickup : MonoBehaviour
                     PickupObject(hit);
                 }
 
-            } else {
-                DropObject();
-            }
-        }
+            } else { DropObject(); }
 
-        if (heldObj != null) {
-            MoveObject();
-        }
-    }
+        } else if (heldObj != null) {
 
-    void MoveObject() {
+            HoldOffset = Mathf.Clamp((HoldOffset + Input.mouseScrollDelta.y), ObjectDistMin, ObjectDistMax);
 
-        HoldOffset = Mathf.Clamp((HoldOffset + Input.mouseScrollDelta.y), ObjectDistMin, ObjectDistMax);
+            Vector3 p1 = heldObj.transform.position;
+            Vector3 p2 = transform.position + (transform.forward * HoldOffset);
 
-        Vector3 p1 = heldObj.transform.position;
-        Vector3 p2 = transform.position + (transform.forward * HoldOffset);
-
-        if (Vector3.Distance(p1, p2) > 0.1f) {
-            Vector3 moveDirection = (p2 - p1);
-            heldObj.GetComponent<Rigidbody>().AddForce(moveDirection * moveForce); // refactor? -> change to lerp, remove physics dependency
+            heldObj.transform.position = Vector3.SmoothDamp(p1, p2, ref velocity, SmoothTime);
         }
     }
 
@@ -61,10 +53,9 @@ public class ConveyorPickup : MonoBehaviour
         if ( d_o && c_o ) {
 
             HoldOffset = hit.distance - 1.0f;
+            heldObj = pickObj;
 
             c_o.OnPickUp();
-
-            heldObj = pickObj;
             d_o.isHeld = true;
 
             //if picking up an object in a slot make sure the slot is rendered again
@@ -85,7 +76,6 @@ public class ConveyorPickup : MonoBehaviour
             d_o.currentSlot.placeObjectInSlot(heldObj);
         }
 
-        // heldObj.transform.parent = null;
         heldObj = null;
     }
 }
