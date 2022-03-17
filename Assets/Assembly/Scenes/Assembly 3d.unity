@@ -819,32 +819,36 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 82a154763451a004da040da34d8a701e, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.9999707
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 82a154763451a004da040da34d8a701e, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: 0.00037753786
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 82a154763451a004da040da34d8a701e, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0.0044842656
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 82a154763451a004da040da34d8a701e, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0.0062088342
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 82a154763451a004da040da34d8a701e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 82a154763451a004da040da34d8a701e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 0.514
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 82a154763451a004da040da34d8a701e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: 0.712
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 82a154763451a004da040da34d8a701e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9aef45f02334b384b882abbe9e7c2992, type: 2}
     - target: {fileID: 919132149155446097, guid: 82a154763451a004da040da34d8a701e, type: 3}
       propertyPath: m_Name
       value: PsycheSinglePanel (4)
@@ -1734,6 +1738,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 82a154763451a004da040da34d8a701e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9aef45f02334b384b882abbe9e7c2992, type: 2}
     - target: {fileID: 919132149155446097, guid: 82a154763451a004da040da34d8a701e, type: 3}
       propertyPath: m_Name
       value: PsycheSinglePanel (9)
@@ -1802,6 +1810,7 @@ Transform:
   - {fileID: 1058100210}
   - {fileID: 538501127}
   - {fileID: 1708270296}
+  - {fileID: 908384621}
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
@@ -2193,6 +2202,67 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 90, y: 90, z: 0}
+--- !u!1001 &632472491
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 558807791}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 4bda6e191aa570524bcb2fd76a8e3689, type: 3}
+      propertyPath: m_RootOrder
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4bda6e191aa570524bcb2fd76a8e3689, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.084
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4bda6e191aa570524bcb2fd76a8e3689, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4bda6e191aa570524bcb2fd76a8e3689, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.996
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4bda6e191aa570524bcb2fd76a8e3689, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.67558056
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4bda6e191aa570524bcb2fd76a8e3689, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.20862314
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4bda6e191aa570524bcb2fd76a8e3689, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.21655083
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4bda6e191aa570524bcb2fd76a8e3689, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.6731813
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4bda6e191aa570524bcb2fd76a8e3689, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -145.01
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4bda6e191aa570524bcb2fd76a8e3689, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -180.819
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4bda6e191aa570524bcb2fd76a8e3689, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 90.462
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 4bda6e191aa570524bcb2fd76a8e3689, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9aef45f02334b384b882abbe9e7c2992, type: 2}
+    - target: {fileID: 919132149155446097, guid: 4bda6e191aa570524bcb2fd76a8e3689, type: 3}
+      propertyPath: m_Name
+      value: PsycheTopSensor (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4bda6e191aa570524bcb2fd76a8e3689, type: 3}
 --- !u!4 &649595061 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 462218, guid: e5018fd5d21200f47b8430f9e3ad81b1, type: 3}
@@ -2249,6 +2319,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 82a154763451a004da040da34d8a701e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9aef45f02334b384b882abbe9e7c2992, type: 2}
     - target: {fileID: 919132149155446097, guid: 82a154763451a004da040da34d8a701e, type: 3}
       propertyPath: m_Name
       value: PsycheSinglePanel (1)
@@ -2396,6 +2470,7 @@ MonoBehaviour:
   ObjectDistMin: 3
   ObjectDistMax: 20
   heldObj: {fileID: 0}
+  SmoothTime: 0.2
 --- !u!4 &688071575 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 462218, guid: e5018fd5d21200f47b8430f9e3ad81b1, type: 3}
@@ -2885,6 +2960,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 438450, guid: 115e41ba3fa8945449b0f303a50951aa, type: 3}
   m_PrefabInstance: {fileID: 4792596080958734604}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &908384621 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4bda6e191aa570524bcb2fd76a8e3689, type: 3}
+  m_PrefabInstance: {fileID: 632472491}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &910786207 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 438450, guid: 115e41ba3fa8945449b0f303a50951aa, type: 3}
@@ -3191,6 +3271,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 82a154763451a004da040da34d8a701e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9aef45f02334b384b882abbe9e7c2992, type: 2}
     - target: {fileID: 919132149155446097, guid: 82a154763451a004da040da34d8a701e, type: 3}
       propertyPath: m_Name
       value: PsycheSinglePanel (2)
@@ -3258,6 +3342,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 82a154763451a004da040da34d8a701e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9aef45f02334b384b882abbe9e7c2992, type: 2}
     - target: {fileID: 919132149155446097, guid: 82a154763451a004da040da34d8a701e, type: 3}
       propertyPath: m_Name
       value: PsycheSinglePanel (3)
@@ -3766,6 +3854,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 92d615c0db22708c0839a83004430c7c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9aef45f02334b384b882abbe9e7c2992, type: 2}
     - target: {fileID: 919132149155446097, guid: 92d615c0db22708c0839a83004430c7c, type: 3}
       propertyPath: m_Name
       value: PsycheBody
@@ -4165,6 +4257,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 82a154763451a004da040da34d8a701e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9aef45f02334b384b882abbe9e7c2992, type: 2}
     - target: {fileID: 919132149155446097, guid: 82a154763451a004da040da34d8a701e, type: 3}
       propertyPath: m_Name
       value: PsycheSinglePanel (5)
@@ -4296,6 +4392,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 7599b55287a82c8af9c0021f69a5532c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9aef45f02334b384b882abbe9e7c2992, type: 2}
     - target: {fileID: 919132149155446097, guid: 7599b55287a82c8af9c0021f69a5532c, type: 3}
       propertyPath: m_Name
       value: PsycheFrontRack
@@ -4835,6 +4935,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 8d537c8d5c676bc5d8ebb08123364460, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9aef45f02334b384b882abbe9e7c2992, type: 2}
     - target: {fileID: 919132149155446097, guid: 8d537c8d5c676bc5d8ebb08123364460, type: 3}
       propertyPath: m_Name
       value: PsycheHangerBracket (1)
@@ -5060,6 +5164,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 8d537c8d5c676bc5d8ebb08123364460, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9aef45f02334b384b882abbe9e7c2992, type: 2}
     - target: {fileID: 919132149155446097, guid: 8d537c8d5c676bc5d8ebb08123364460, type: 3}
       propertyPath: m_Name
       value: PsycheHangerBracket
@@ -5304,6 +5412,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 82a154763451a004da040da34d8a701e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9aef45f02334b384b882abbe9e7c2992, type: 2}
     - target: {fileID: 919132149155446097, guid: 82a154763451a004da040da34d8a701e, type: 3}
       propertyPath: m_Name
       value: PsycheSinglePanel
@@ -5584,6 +5696,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 82a154763451a004da040da34d8a701e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9aef45f02334b384b882abbe9e7c2992, type: 2}
     - target: {fileID: 919132149155446097, guid: 82a154763451a004da040da34d8a701e, type: 3}
       propertyPath: m_Name
       value: PsycheSinglePanel (7)
@@ -5668,6 +5784,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 2cbc93181af48e08b9b93a7935306abd, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9aef45f02334b384b882abbe9e7c2992, type: 2}
     - target: {fileID: 919132149155446097, guid: 2cbc93181af48e08b9b93a7935306abd, type: 3}
       propertyPath: m_Name
       value: PsycheNeutronCanon
@@ -6883,6 +7003,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 82a154763451a004da040da34d8a701e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9aef45f02334b384b882abbe9e7c2992, type: 2}
     - target: {fileID: 919132149155446097, guid: 82a154763451a004da040da34d8a701e, type: 3}
       propertyPath: m_Name
       value: PsycheSinglePanel (8)
@@ -6967,44 +7091,48 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4bda6e191aa570524bcb2fd76a8e3689, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.4
+      value: -0.768
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4bda6e191aa570524bcb2fd76a8e3689, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.76
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4bda6e191aa570524bcb2fd76a8e3689, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.23
+      value: -0.965
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4bda6e191aa570524bcb2fd76a8e3689, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.68785965
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4bda6e191aa570524bcb2fd76a8e3689, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0.18099192
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4bda6e191aa570524bcb2fd76a8e3689, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: -0.18566272
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4bda6e191aa570524bcb2fd76a8e3689, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: -0.6779531
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4bda6e191aa570524bcb2fd76a8e3689, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: -149.951
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4bda6e191aa570524bcb2fd76a8e3689, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -180.663
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4bda6e191aa570524bcb2fd76a8e3689, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: 91.009
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 4bda6e191aa570524bcb2fd76a8e3689, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9aef45f02334b384b882abbe9e7c2992, type: 2}
     - target: {fileID: 919132149155446097, guid: 4bda6e191aa570524bcb2fd76a8e3689, type: 3}
       propertyPath: m_Name
       value: PsycheTopSensor
@@ -7127,6 +7255,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 82a154763451a004da040da34d8a701e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9aef45f02334b384b882abbe9e7c2992, type: 2}
     - target: {fileID: 919132149155446097, guid: 82a154763451a004da040da34d8a701e, type: 3}
       propertyPath: m_Name
       value: PsycheSinglePanel (6)
