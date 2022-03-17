@@ -37,6 +37,8 @@ namespace DialogMaker
         private const string DIALOG_PORTRAIT_BACKGROUND_HIGHENERGY_PATH = "PortraitBackJact";
         private const string DIALOG_PORTRAIT_BACKGROUND_LOWENERGY_PATH = "PortraitBackID10T";
         private const string DIALOG_PORTRAIT_BACKGROUND_SERIOUS_PATH = "PortraitBackRoot";
+        private const float DIALOG_SCALE_XY = 0.7f;
+        
         [SerializeField]
         private int dialogFontSize = 36;
         [SerializeField]
@@ -77,7 +79,7 @@ namespace DialogMaker
             dialogBackground.rectTransform.anchorMin = new Vector2(0.5f, 0);
             dialogBackground.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 1158);
             dialogBackground.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 366);
-            dialogBackground.rectTransform.anchoredPosition = new Vector2(0, 195.6f);
+            dialogBackground.rectTransform.anchoredPosition = new Vector2(0, 150.0f);
             dialogBackground.sprite = Resources.Load<Sprite>(DIALOG_BACKGROUND_PATH);
             dialogBackground.type = Image.Type.Sliced;
             btnDialogButton = goBackgroundContainer.gameObject.AddComponent<Button>();
@@ -115,7 +117,7 @@ namespace DialogMaker
             dialogUIText.fontSize = dialogFontSize;
             dialogUIText.color = new Color32(249, 160, 0, 255);
 
-            dialogBackground.rectTransform.localScale = new Vector3(0.5f, 0.5f, 1f);
+            dialogBackground.rectTransform.localScale = new Vector3(DIALOG_SCALE_XY, DIALOG_SCALE_XY, 1f);
             goCanvasContainer.SetActive(false);
 
             //goBackgroundContainer.transform.localScale.Set(0.5f, 0.5f, 1f);
