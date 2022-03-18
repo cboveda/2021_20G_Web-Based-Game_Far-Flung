@@ -263,6 +263,8 @@ public class HubTest
         SceneManager.LoadScene("Assembly");
         yield return new WaitForSeconds(0.1f);
         MainMenu.ResetMenu();
+
+        SceneManager.LoadScene("Hub");
     }
 
 

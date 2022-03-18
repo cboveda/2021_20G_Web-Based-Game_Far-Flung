@@ -10,7 +10,7 @@ public class CubeMaker : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        createCube();
+        //createCube();
     }
 
     // Update is called once per frame
@@ -18,7 +18,7 @@ public class CubeMaker : MonoBehaviour
     {
         if (Time.time > nextCubeTime)
         {
-            nextCubeTime += cubeFrequency;
+            nextCubeTime = Time.time + cubeFrequency;
             createCube();
         }
     }
