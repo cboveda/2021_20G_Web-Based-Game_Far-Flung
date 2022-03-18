@@ -397,7 +397,7 @@ public class Scoring : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
 
-        string[] allScenes = { "comGame", "comUnscramble", "Assembly 3d", "2_Flightpath", "scene5", "Scanning" };
+        string[] allScenes = { "comGame", "comUnscramble", "Assembly", "2_Flightpath", "scene5", "Scanning" };
         Scene scene = SceneManager.GetActiveScene();
         string sceneName = scene.name;
         int sceneIndex = Array.IndexOf(allScenes, sceneName);
@@ -461,7 +461,7 @@ public class Scoring : MonoBehaviour
                 gameScore = GameObject.Find("ComUnscrambleScore");
                 gameScore.transform.GetChild(0).GetComponent<Text>().text = comUnscrambleScore.ToString();
                 break;
-            case "Assembly 3d":
+            case "Assembly":
                 assemblyScore = FindObjectOfType<Scoring>().getAssemblyScore + score;
                 FindObjectOfType<Scoring>().getAssemblyScore = assemblyScore;
                 scoringObj.GetComponentInChildren<Text>().text = assemblyScore.ToString();
@@ -510,7 +510,7 @@ public class Scoring : MonoBehaviour
         GameObject scoringMainObj = GameObject.Find("MainScoreBox");
         int total = 0;
         int score = 0;
-        string[] allScenes = { "comGame", "comUnscramble", "Assembly 3d", "2_Flightpath", "scene5", "Scanning" };
+        string[] allScenes = { "comGame", "comUnscramble", "Assembly", "2_Flightpath", "scene5", "Scanning" };
         foreach (string scene in allScenes)
         {
             score = getGameScore(scene);
@@ -534,7 +534,7 @@ public class Scoring : MonoBehaviour
             case "comUnscramble":
                 score = FindObjectOfType<Scoring>().getComUnscrambleScore;
                 break;
-            case "Assembly 3d":
+            case "Assembly":
                 score = FindObjectOfType<Scoring>().getAssemblyScore;
                 break;
             case "2_Flightpath":
@@ -695,7 +695,7 @@ public class Scoring : MonoBehaviour
                 gameScore.transform.GetChild(0).GetComponent<Text>().text = comUnscrambleScore.ToString();
                 resetObjectives(comUnscrambleObjective);
                 break;
-            case "Assembly 3d":
+            case "Assembly":
                 assemblyScore = 0;
                 FindObjectOfType<Scoring>().getAssemblyScore = assemblyScore;
                 scoringObj.GetComponentInChildren<Text>().text = assemblyScore.ToString();
