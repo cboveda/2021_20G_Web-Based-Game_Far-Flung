@@ -16,6 +16,8 @@ public class SendDataActions : MonoBehaviour
     bool spectroPressed = false;
     bool magnetoPressed = false;
     bool radioPressed = false;
+    bool showingScore = false;
+    bool showingGameScore = false;
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +42,13 @@ public class SendDataActions : MonoBehaviour
 
     public void SendData()
     {
+        showingScore = FindObjectOfType<Scoring>().getShowingScore;
+        showingGameScore = FindObjectOfType<Scoring>().getShowingGameScore;
+        if (showingScore || showingGameScore)
+        {
+            return;
+        }
+
         //int buttonStart = 0;
         int letterCount = 0;
         int wordRow = 0;

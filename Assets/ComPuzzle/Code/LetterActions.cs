@@ -19,6 +19,8 @@ public class LetterActions : MonoBehaviour
     int switchCount = 0;
     AudioSource audioSource;
     GameObject volumeSlider;
+    bool showingScore = false;
+    bool showingGameScore = false;
 
 
 
@@ -70,6 +72,13 @@ public class LetterActions : MonoBehaviour
 
     public void SwapLetters()
     {
+        showingScore = FindObjectOfType<Scoring>().getShowingScore;
+        showingGameScore = FindObjectOfType<Scoring>().getShowingGameScore;
+        if (showingScore || showingGameScore)
+        {
+            return;
+        }
+
         int textChild = 0;
         int backgroundChild = 0;
         string prevLetter = "";

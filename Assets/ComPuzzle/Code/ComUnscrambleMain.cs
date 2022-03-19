@@ -30,6 +30,8 @@ public class ComUnscrambleMain : MonoBehaviour
 
     AudioSource audioSource;
     GameObject volumeSlider;
+    bool showingScore = false;
+    bool showingGameScore = false;
 
 
     public bool word1ColorUpdated
@@ -696,7 +698,14 @@ public class ComUnscrambleMain : MonoBehaviour
 
     public void OnMouseEnter()
     {
-        SpriteRenderer rend;
+        showingScore = FindObjectOfType<Scoring>().getShowingScore;
+        showingGameScore = FindObjectOfType<Scoring>().getShowingGameScore;
+        if (showingScore || showingGameScore)
+        {
+            return;
+        }
+
+            SpriteRenderer rend;
         string objectName = "";
         GameObject instructions;
         Color highlightedColor = new Color32(98, 53, 118, 255);
@@ -708,6 +717,7 @@ public class ComUnscrambleMain : MonoBehaviour
 
         if (objectName == "InstructionsBox")
         {            
+
             instructions = GameObject.Find("InstructionsText");
             instructions.GetComponent<UnityEngine.UI.Text>().color = letterColor;
                         
