@@ -9,16 +9,17 @@ public class MouseLook : MonoBehaviour
     float xRotation = 0f;
 
     public Transform playerBody;
-    public GameObject MenuObject; 
+    // public GameObject MenuObject; 
 
     void Start() {
 
         ResumeAssembly();
+        LookUpdate();
     }
 
-    void Update()
-    {
-        if (Input.GetButtonDown("Cancel")) {
+    void Update() {
+        
+        if ( Input.GetButtonDown("Cancel") ) {
             if (Cursor.lockState == CursorLockMode.Locked)
             {
                 PauseAssembly();
@@ -37,14 +38,14 @@ public class MouseLook : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        MenuObject.SetActive(true);
+        // MenuObject.SetActive(true);
     }
 
     public void ResumeAssembly() {
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        MenuObject.SetActive(false);
+        // MenuObject.SetActive(false);
     }
 
     void LookUpdate() {
@@ -59,8 +60,7 @@ public class MouseLook : MonoBehaviour
         playerBody.Rotate(Vector3.up * mouseX);
     }
 
-    void OnDestroy()
-    {
+    void OnDestroy() {
         Cursor.lockState = CursorLockMode.None;
     }
 }
