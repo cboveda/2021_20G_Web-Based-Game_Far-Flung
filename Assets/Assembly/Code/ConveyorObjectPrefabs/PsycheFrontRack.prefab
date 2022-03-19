@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5787812255782611648
+--- !u!1 &4580257171310931947
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,27 +8,27 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6564454095424548986}
-  - component: {fileID: 7833584584820031455}
-  - component: {fileID: 5427555415745137429}
-  - component: {fileID: 2536762000170730722}
-  - component: {fileID: 206394717214403829}
-  - component: {fileID: 6610286605194522340}
-  - component: {fileID: 7964289059944787157}
+  - component: {fileID: 3808786403288692049}
+  - component: {fileID: 248925689855818484}
+  - component: {fileID: 2634794698249850430}
+  - component: {fileID: 3697805422755926849}
+  - component: {fileID: 3697805422755926854}
+  - component: {fileID: 3697805422755926855}
+  - component: {fileID: 3697805422755926852}
   m_Layer: 0
-  m_Name: PsycheBody
+  m_Name: PsycheFrontRack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6564454095424548986
+--- !u!4 &3808786403288692049
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5787812255782611648}
+  m_GameObject: {fileID: 4580257171310931947}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -36,21 +36,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &7833584584820031455
+--- !u!33 &248925689855818484
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5787812255782611648}
-  m_Mesh: {fileID: 532591105809680800, guid: 92d615c0db22708c0839a83004430c7c, type: 3}
---- !u!23 &5427555415745137429
+  m_GameObject: {fileID: 4580257171310931947}
+  m_Mesh: {fileID: 532591105809680800, guid: 7599b55287a82c8af9c0021f69a5532c, type: 3}
+--- !u!23 &2634794698249850430
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5787812255782611648}
+  m_GameObject: {fileID: 4580257171310931947}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -85,26 +85,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &2536762000170730722
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5787812255782611648}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.61, y: 3.1299999, z: 3.7018018}
-  m_Center: {x: -1.245, y: 1.245, z: 1.6509008}
---- !u!54 &206394717214403829
+--- !u!54 &3697805422755926849
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5787812255782611648}
+  m_GameObject: {fileID: 4580257171310931947}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -114,13 +101,26 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &6610286605194522340
+--- !u!65 &3697805422755926854
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4580257171310931947}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.5941582, y: 2.7129161, z: 0.65879613}
+  m_Center: {x: -1.2929208, y: 1.3364581, z: 0.18016484}
+--- !u!114 &3697805422755926855
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5787812255782611648}
+  m_GameObject: {fileID: 4580257171310931947}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 742c2cd2943292042917ee2984a57382, type: 3}
@@ -128,19 +128,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isHeld: 0
   currentSlot: {fileID: 0}
-  itemType: PsycheBody
---- !u!114 &7964289059944787157
+  itemType: PsycheFrontRack
+--- !u!114 &3697805422755926852
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5787812255782611648}
+  m_GameObject: {fileID: 4580257171310931947}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2f0aa67fca06ae8aa83292f99fc128ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemTypeIdentifier: PsycheBody
   LERP_Speed: 0
   HostConveyor: {fileID: 0}

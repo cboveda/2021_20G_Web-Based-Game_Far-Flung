@@ -1,7 +1,6 @@
 using UnityEngine;
 
-public class ConveyorPickup : MonoBehaviour
-{
+public class ConveyorPickup : MonoBehaviour {
 
     public float pickupRange = 10; //changes how far out the player can pickup objects
     public float HoldOffset;
@@ -16,7 +15,6 @@ public class ConveyorPickup : MonoBehaviour
 
     Vector3 velocity = Vector3.zero;
 
-    // Update is called once per frame
     void Update() {
 
         if (Input.GetKeyDown(KeyCode.E)) {
@@ -32,7 +30,7 @@ public class ConveyorPickup : MonoBehaviour
 
             } else { DropObject(); }
 
-        } else if (heldObj != null) {
+        } else if ( heldObj != null ) {
 
             HoldOffset = Mathf.Clamp((HoldOffset + Input.mouseScrollDelta.y), ObjectDistMin, ObjectDistMax);
 
@@ -46,36 +44,24 @@ public class ConveyorPickup : MonoBehaviour
     void PickupObject(RaycastHit hit) {
 
         GameObject pickObj = hit.transform.gameObject;
-
-        DragObject d_o = pickObj.GetComponent<DragObject>();
         ConveyorObject c_o = pickObj.GetComponent<ConveyorObject>();
 
-        if ( d_o && c_o ) {
+        if ( c_o ) {
 
             HoldOffset = hit.distance - 1.0f;
             heldObj = pickObj;
-
             c_o.OnPickUp();
-            d_o.isHeld = true;
-
-            //if picking up an object in a slot make sure the slot is rendered again
-            if ( d_o.currentSlot ) { 
-                d_o.currentSlot.GetComponent<Renderer>().forceRenderingOff = false;
-            }
         }
     }
 
     void DropObject() {
 
-        heldObj.GetComponent<ConveyorObject>().OnDrop();
+        ConveyorObject c_o = heldObj.GetComponent<ConveyorObject>();
 
-        DragObject d_o = heldObj.GetComponent<DragObject>();
-        d_o.isHeld = false;
-
-        if (d_o.currentSlot) {  //if the object is in a slot, drop the object
-            d_o.currentSlot.placeObjectInSlot(heldObj);
+        if ( c_o ) {
+            
+            c_o.OnDrop();
+            heldObj = null;
         }
-
-        heldObj = null;
     }
 }

@@ -108,11 +108,13 @@ public class BoxPuzzle : MonoBehaviour, Completion
             {
                 for (int z = 0; z < solution.GetLength(2); z++)
                 {
+                    /*
                     if (solution[x, y, z] != slots[x, y, z].IsCompleted())
                     { //will return false if solution and slot don't match
                         Debug.Log("Box Not complete");
                         return false;
                     }
+                    */
                 }
             }
         }

@@ -2,16 +2,18 @@ using UnityEngine;
 
 public class ConveyorObject : MonoBehaviour
 {
-    private Vector3 Beginning;
-    private Vector3 Destination;
+    public string ItemTypeIdentifier;
     public float LERP_Speed;
     public ConveyorSystem HostConveyor;
 
-    private bool AttachmentState;
-    private bool HeldState;
+    Vector3 Beginning;
+    Vector3 Destination;
 
-    private float TimeZero;
-    private float Distance;
+    bool AttachmentState;
+    bool HeldState;
+
+    float TimeZero;
+    float Distance;
 
     void Start() {
 
@@ -52,6 +54,16 @@ public class ConveyorObject : MonoBehaviour
         }
     }
 
+    void OnCollisionEnter( Collision c ) {
+
+        if (!HeldState && GameObject.ReferenceEquals( c.gameObject, HostConveyor.gameObject)) {
+
+            PhysicsOff();
+            InitalizeConveyorObject( transform.position, Destination );
+            HostConveyor.AttachToConveyorSystem( this );
+        }
+    }
+
     public void OnPickUp() { // when the item is picked up
 
         HeldState = true;
@@ -64,29 +76,19 @@ public class ConveyorObject : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter( Collision c ) {
-
-        if (!HeldState && GameObject.ReferenceEquals( c.gameObject, HostConveyor.gameObject)) {
-
-            PhysicsOff();
-            InitalizeConveyorObject( transform.position, Destination );
-            HostConveyor.AttachToConveyorSystem( this );
-        }
-    }
-
     public void OnDrop() { // when the item is released by the user
 
        HeldState = false;
        PhysicsOn();
     }
 
-    private void PhysicsOn() {
+    void PhysicsOn() {
 
         Rigidbody obj = gameObject.GetComponent<Rigidbody>();
         obj.useGravity = true;
     }
 
-    private void PhysicsOff() {
+    void PhysicsOff() {
 
         Rigidbody obj = gameObject.GetComponent<Rigidbody>();
         obj.useGravity = false;

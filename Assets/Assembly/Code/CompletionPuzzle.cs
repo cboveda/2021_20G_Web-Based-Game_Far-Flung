@@ -13,12 +13,13 @@ public class CompletionPuzzle : MonoBehaviour, Completion {
             //Implement completion check
             if (child != null && child.GetComponent<DropSlot>() != null) {
 
-                bool slotCompleted = child.GetComponent<DropSlot>().IsCompleted();
+                /* // bool slotCompleted = child.GetComponent<DropSlot>().IsCompleted();
                 // Debug.Log(child.name + " is " + slotCompleted);
                 if (!slotCompleted)
                 {
                     return false; //does nothing if one of the slots is incomplete
                 }
+                */
             }
         }
         return true; 

@@ -141,7 +141,7 @@ public class Pickup : MonoBehaviour
         //if the object is in a slot, drop the object 
         if (heldObj.GetComponent<DragObject>().currentSlot)
         {
-            heldObj.GetComponent<DragObject>().currentSlot.placeObjectInSlot(heldObj);
+            // heldObj.GetComponent<DragObject>().currentSlot.placeObjectInSlot(heldObj);
         }
 
         heldObj = null;

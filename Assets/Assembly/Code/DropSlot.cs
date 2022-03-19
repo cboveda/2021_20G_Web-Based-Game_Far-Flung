@@ -1,89 +1,47 @@
 using UnityEngine;
 
-public class DropSlot : MonoBehaviour, Completion
+public class DropSlot : MonoBehaviour
 {
 
     public Vector3 offset;
     public string slotTypeMatch; // set to premanently lock the object when placed
-    public bool undefinedSlot;
     public TextAsset completionTextAsset;
-
-    private GameObject slotObject;
 
     public bool completed;
 
-    void Start(){
-        undefinedSlot = System.String.IsNullOrEmpty(slotTypeMatch)?true: false;
+    void Start() {
+        
+        if ( System.String.IsNullOrEmpty(slotTypeMatch) ) {
+            slotTypeMatch = "No Type";
+        }
+        
         completed = false;
     }
 
-    void Update(){
-        if(slotObject == null) return;
-        DragObject dragObject = slotObject.GetComponent<DragObject>();
-        // make sure the object can still be moved by the player
-        if(dragObject==null || dragObject.isHeld) return;
+    void OnTriggerEnter(Collider other) {
 
-        //slotObject.transform.SetPositionAndRotation(this.transform.position, this.transform.rotation);
-    }
+        GameObject g_o = other.gameObject;
+        ConveyorObject c_o = g_o.GetComponent<ConveyorObject>();
 
-    void OnTriggerEnter(Collider other)
-    {
-        Debug.Log("Enter slot");
-        if (other.GetComponent<DragObject>())
-        {
-            other.GetComponent<DragObject>().currentSlot = this;
-        }
+        if ( c_o && c_o.ItemTypeIdentifier == slotTypeMatch ) {
 
-    }
-
-    void OnTriggerExit(Collider other)
-    {
-        Debug.Log("Exit slot");
-        if (other.GetComponent<DragObject>() && other.GetComponent<DragObject>().currentSlot==this)
-        {
-            other.GetComponent<DragObject>().currentSlot = null;
-        }
-        GetComponent<Renderer>().forceRenderingOff = false;
-        slotObject = null;
-    }
-
-    public void placeObjectInSlot(GameObject gameObject)
-    {
-        // Debug.Log("triggered");
-        if (gameObject.GetComponent<DragObject>())
-        {
-            DragObject dragObject = gameObject.GetComponent<DragObject>();
-            //for unspecified slots set the current object being placed to 
-            if (undefinedSlot)
-            {
-                // Debug.Log("undefined slot");
-                slotTypeMatch = dragObject.itemType;
+            completed = true;
+            Debug.Log("Drop in SLot");
+            g_o.transform.parent = this.transform; 
+            g_o.transform.SetPositionAndRotation(transform.position + offset, transform.rotation);
+            
+            if (g_o.GetComponent<Rigidbody>()) {
+                g_o.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             }
-            if (slotTypeMatch == dragObject.itemType)
-            {
-                slotObject =  gameObject;
-                completed = true;
-                Debug.Log("Drop in SLot");
-                gameObject.transform.parent = this.transform; 
-                gameObject.transform.SetPositionAndRotation(transform.position + offset, transform.rotation);
-                if (gameObject.GetComponent<Rigidbody>())
-                {
-                    gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-                }
 
-                //try to find the text panel for a popup and check for set texdt if found show the appropriate text
-                
-                // if the slot is defined make it so the object can't be moved again and the slot is invisible
-                if (!undefinedSlot)
-                {
-                    Debug.Log("defined slot running");
-                    gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
-                }
-
-                //make the slot invisible
-                GetComponent<Renderer>().forceRenderingOff = true;
-                OnCompletion();
-            }
+            // TODO: WINDOW POPUP (?)
+            
+            // Make it so the object can't be moved
+            g_o.layer = LayerMask.NameToLayer("Ignore Raycast");
+        
+            // make the slot invisible
+            GetComponent<Renderer>().forceRenderingOff = true;
+            CallParentCompletion();
         }
     }
 
@@ -98,19 +56,8 @@ public class DropSlot : MonoBehaviour, Completion
                 parent.OnCompletion();
                 Debug.Log("ParentCompletion Called");
             }
-        }
-        else
-        {
+        } else {
             Debug.Log("Parent does not have a completion script");
         }
-    }
-
-    public bool IsCompleted()
-    {
-        return completed;
-    }
-
-    public void OnCompletion(){
-        CallParentCompletion();
     }
 }
