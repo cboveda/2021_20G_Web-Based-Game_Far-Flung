@@ -264,7 +264,7 @@ public class HubTest
         yield return new WaitForSeconds(0.1f);
         MainMenu.ResetMenu();
 
-        SceneManager.LoadScene("Hub");
+        SceneManager.LoadScene("StartScene.Scanning");
     }
 
 
