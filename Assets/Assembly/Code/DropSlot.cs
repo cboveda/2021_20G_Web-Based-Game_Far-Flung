@@ -25,16 +25,16 @@ public class DropSlot : MonoBehaviour {
 
             if ( c_o && c_o.ItemTypeIdentifier == slotTypeMatch ) {
 
-                other.gameObject.transform.parent = this.transform; 
-                other.gameObject.transform.SetPositionAndRotation(transform.position + offset, transform.rotation);
+                if ( c_o.PlaceInModel() ) {
+    
+                    other.gameObject.transform.parent = this.transform; 
+                    other.gameObject.transform.SetPositionAndRotation(transform.position + offset, transform.rotation);
+    
+                    GetComponent<Renderer>().forceRenderingOff = true; // make the slot invisible
+                    transform.parent.gameObject.GetComponent<AssemblyGameDriver>().CompleteObject();
 
-                c_o.PlaceInModel();            
-            
-                // make the slot invisible
-                GetComponent<Renderer>().forceRenderingOff = true;
-                transform.parent.gameObject.GetComponent<AssemblyGameDriver>().CompleteObject();
-
-                set = true;
+                    set = true;
+                }
             }
         }
     }

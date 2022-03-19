@@ -96,9 +96,15 @@ public class ConveyorObject : MonoBehaviour
         obj.useGravity = false;
     }
 
-    public void PlaceInModel() {
+    public bool PlaceInModel() {
 
-        GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-        gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
+        bool f_state = finished;
+
+        if (!finished) {
+            GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
+            finished = true;
+        }
+        return !f_state;
     }
 }
