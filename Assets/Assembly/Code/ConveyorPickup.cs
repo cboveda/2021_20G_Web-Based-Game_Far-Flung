@@ -64,4 +64,8 @@ public class ConveyorPickup : MonoBehaviour {
             heldObj = null;
         }
     }
+
+    public void EvictHeldObject() {
+        heldObj = null;
+    }
 }

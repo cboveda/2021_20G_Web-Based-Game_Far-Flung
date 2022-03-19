@@ -616,9 +616,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0, z: 0}
   slotTypeMatch: green
-  undefinedSlot: 0
   completionTextAsset: {fileID: 0}
-  completed: 0
 --- !u!4 &139724564 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 438450, guid: 115e41ba3fa8945449b0f303a50951aa, type: 3}
@@ -879,9 +877,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0, z: 0}
   slotTypeMatch: PsycheSinglePanel
-  undefinedSlot: 0
   completionTextAsset: {fileID: 0}
-  completed: 0
 --- !u!65 &303471087
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1331,9 +1327,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0, z: 0}
   slotTypeMatch: blue
-  undefinedSlot: 0
   completionTextAsset: {fileID: 0}
-  completed: 0
 --- !u!4 &483021563 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 438450, guid: 115e41ba3fa8945449b0f303a50951aa, type: 3}
@@ -1506,9 +1500,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0, z: 0}
   slotTypeMatch: red
-  undefinedSlot: 0
   completionTextAsset: {fileID: 0}
-  completed: 0
 --- !u!4 &492459811 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4668136477141502, guid: 3a0886c24fc659749917506c7789d0a3, type: 3}
@@ -1802,9 +1794,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0, z: 0}
   slotTypeMatch: PsycheSinglePanel
-  undefinedSlot: 0
   completionTextAsset: {fileID: 0}
-  completed: 0
 --- !u!65 &554654989
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1833,6 +1823,7 @@ GameObject:
   m_Component:
   - component: {fileID: 558807791}
   - component: {fileID: 558807790}
+  - component: {fileID: 558807792}
   m_Layer: 0
   m_Name: PsycheGhost
   m_TagString: Untagged
@@ -1884,6 +1875,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &558807792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 558807789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29782ab206ce50a52a4f6ac58fe0c992, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DragDropSystem: {fileID: 671977525}
+  TotalComponents: 17
 --- !u!4 &558831445 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 438450, guid: 115e41ba3fa8945449b0f303a50951aa, type: 3}
@@ -2064,9 +2069,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0, z: 0}
   slotTypeMatch: 
-  undefinedSlot: 0
   completionTextAsset: {fileID: 4900000, guid: 705bf8751a828d443ad94b0491d657db, type: 3}
-  completed: 0
 --- !u!65 &571391221
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2352,9 +2355,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0, z: 0}
   slotTypeMatch: PsycheTopSensor
-  undefinedSlot: 0
   completionTextAsset: {fileID: 0}
-  completed: 0
 --- !u!65 &632472494
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2458,9 +2459,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0, z: 0}
   slotTypeMatch: PsycheSinglePanel
-  undefinedSlot: 0
   completionTextAsset: {fileID: 0}
-  completed: 0
 --- !u!65 &652303819
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3445,9 +3444,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0, z: 0}
   slotTypeMatch: PsycheSinglePanel
-  undefinedSlot: 0
   completionTextAsset: {fileID: 0}
-  completed: 0
 --- !u!65 &949183104
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3551,9 +3548,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0, z: 0}
   slotTypeMatch: PsycheSinglePanel
-  undefinedSlot: 0
   completionTextAsset: {fileID: 0}
-  completed: 0
 --- !u!65 &959587688
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4098,9 +4093,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0, z: 0}
   slotTypeMatch: PsycheBody
-  undefinedSlot: 0
   completionTextAsset: {fileID: 0}
-  completed: 0
 --- !u!65 &1106575063
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4531,9 +4524,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0, z: 0}
   slotTypeMatch: PsycheSinglePanel
-  undefinedSlot: 0
   completionTextAsset: {fileID: 0}
-  completed: 0
 --- !u!65 &1197608204
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4706,9 +4697,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0, z: 0}
   slotTypeMatch: PsycheFrontRack
-  undefinedSlot: 0
   completionTextAsset: {fileID: 0}
-  completed: 0
 --- !u!65 &1212709641
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4914,9 +4903,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0, z: 0}
   slotTypeMatch: red
-  undefinedSlot: 0
   completionTextAsset: {fileID: 0}
-  completed: 0
 --- !u!4 &1258822552 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 462218, guid: e5018fd5d21200f47b8430f9e3ad81b1, type: 3}
@@ -5341,9 +5328,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0, z: 0}
   slotTypeMatch: PsycheHangerBracket
-  undefinedSlot: 0
   completionTextAsset: {fileID: 0}
-  completed: 0
 --- !u!65 &1409439756
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5487,9 +5472,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0, z: 0}
   slotTypeMatch: blue
-  undefinedSlot: 0
   completionTextAsset: {fileID: 0}
-  completed: 0
 --- !u!4 &1430368268 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 438450, guid: 115e41ba3fa8945449b0f303a50951aa, type: 3}
@@ -5605,9 +5588,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0, z: 0}
   slotTypeMatch: PsycheHangerBracket
-  undefinedSlot: 0
   completionTextAsset: {fileID: 0}
-  completed: 0
 --- !u!65 &1447589926
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5766,9 +5747,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0, z: 0}
   slotTypeMatch: 
-  undefinedSlot: 0
   completionTextAsset: {fileID: 0}
-  completed: 0
 --- !u!64 &1475695298
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -5888,9 +5867,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0, z: 0}
   slotTypeMatch: PsycheSinglePanel
-  undefinedSlot: 0
   completionTextAsset: {fileID: 0}
-  completed: 0
 --- !u!65 &1491327457
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6202,9 +6179,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0, z: 0}
   slotTypeMatch: PsycheSinglePanel
-  undefinedSlot: 0
   completionTextAsset: {fileID: 0}
-  completed: 0
 --- !u!65 &1648479008
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6330,9 +6305,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0, z: 0}
   slotTypeMatch: PsycheNeutronCanon
-  undefinedSlot: 0
   completionTextAsset: {fileID: 0}
-  completed: 0
 --- !u!65 &1672962241
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6496,9 +6469,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0, z: 0}
   slotTypeMatch: green
-  undefinedSlot: 0
   completionTextAsset: {fileID: 0}
-  completed: 0
 --- !u!4 &1727501248 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 462218, guid: e5018fd5d21200f47b8430f9e3ad81b1, type: 3}
@@ -7576,9 +7547,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0, z: 0}
   slotTypeMatch: PsycheSinglePanel
-  undefinedSlot: 0
   completionTextAsset: {fileID: 0}
-  completed: 0
 --- !u!65 &1989233358
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7755,9 +7724,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0, z: 0}
   slotTypeMatch: PsycheTopSensor
-  undefinedSlot: 0
   completionTextAsset: {fileID: 0}
-  completed: 0
 --- !u!4 &2025532293 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 462218, guid: e5018fd5d21200f47b8430f9e3ad81b1, type: 3}
@@ -7898,9 +7865,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0, z: 0}
   slotTypeMatch: PsycheSinglePanel
-  undefinedSlot: 0
   completionTextAsset: {fileID: 0}
-  completed: 0
 --- !u!65 &2072735634
 BoxCollider:
   m_ObjectHideFlags: 0

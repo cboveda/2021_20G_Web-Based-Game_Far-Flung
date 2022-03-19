@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 364429439726236807}
   - component: {fileID: 2515895827709509709}
   - component: {fileID: 1989338001093582490}
-  - component: {fileID: 6310620021979823201}
   - component: {fileID: 6137741191091363241}
   - component: {fileID: 2987189097790767519}
   m_Layer: 0
@@ -97,23 +96,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f0aa67fca06ae8aa83292f99fc128ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ItemTypeIdentifier: PsycheTopSensor
   LERP_Speed: 0
   HostConveyor: {fileID: 0}
---- !u!114 &6310620021979823201
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4173356486051553688}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 742c2cd2943292042917ee2984a57382, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isHeld: 0
-  currentSlot: {fileID: 0}
-  itemType: 
 --- !u!54 &6137741191091363241
 Rigidbody:
   m_ObjectHideFlags: 0

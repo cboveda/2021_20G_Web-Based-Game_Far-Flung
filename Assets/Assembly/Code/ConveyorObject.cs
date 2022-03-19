@@ -11,6 +11,7 @@ public class ConveyorObject : MonoBehaviour
 
     bool AttachmentState;
     bool HeldState;
+    bool finished;
 
     float TimeZero;
     float Distance;
@@ -21,6 +22,7 @@ public class ConveyorObject : MonoBehaviour
         obj.freezeRotation = false;
         obj.mass = 4;
         obj.drag = 3;
+        finished = false;
     }
 
     public void InitalizeConveyorObject( Vector3 start, Vector3 end ) {
@@ -92,5 +94,11 @@ public class ConveyorObject : MonoBehaviour
 
         Rigidbody obj = gameObject.GetComponent<Rigidbody>();
         obj.useGravity = false;
+    }
+
+    public void PlaceInModel() {
+
+        GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+        gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
     }
 }

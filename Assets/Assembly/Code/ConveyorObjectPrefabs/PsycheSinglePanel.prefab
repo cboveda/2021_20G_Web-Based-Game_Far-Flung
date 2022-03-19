@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 2207335925051372382}
   - component: {fileID: 4127266612220118932}
   - component: {fileID: 3352765803422767900}
-  - component: {fileID: 3352765803422767901}
   - component: {fileID: 3352765803422767902}
   - component: {fileID: -6305567457995866300}
   m_Layer: 0
@@ -101,21 +100,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &3352765803422767901
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2469665216306767425}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 742c2cd2943292042917ee2984a57382, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isHeld: 0
-  currentSlot: {fileID: 0}
-  itemType: PsycheSinglePanel
 --- !u!114 &3352765803422767902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,6 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f0aa67fca06ae8aa83292f99fc128ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ItemTypeIdentifier: PsycheSinglePanel
   LERP_Speed: 0
   HostConveyor: {fileID: 0}
 --- !u!65 &-6305567457995866300
