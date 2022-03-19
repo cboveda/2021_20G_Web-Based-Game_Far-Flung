@@ -5,6 +5,7 @@ public class ConveyorObject : MonoBehaviour
     public string ItemTypeIdentifier;
     public float LERP_Speed;
     public ConveyorSystem HostConveyor;
+    public Vector3 NominalRotation; // Axis correction
 
     Vector3 Beginning;
     Vector3 Destination;
@@ -23,12 +24,13 @@ public class ConveyorObject : MonoBehaviour
         obj.mass = 4;
         obj.drag = 3;
         finished = false;
+        transform.rotation = Quaternion.Euler(NominalRotation);
     }
 
     public void InitalizeConveyorObject( Vector3 start, Vector3 end ) {
 
         Beginning = start;
-        Destination = end;
+        Destination = new Vector3(end.x, start.y, end.z);
 
         AttachmentState = true;
         HeldState = false;

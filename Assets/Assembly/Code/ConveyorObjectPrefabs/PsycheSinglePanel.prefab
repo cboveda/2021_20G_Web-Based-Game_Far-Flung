@@ -115,6 +115,7 @@ MonoBehaviour:
   ItemTypeIdentifier: PsycheSinglePanel
   LERP_Speed: 0
   HostConveyor: {fileID: 0}
+  NominalRotation: {x: 80, y: 13, z: 20}
 --- !u!65 &-6305567457995866300
 BoxCollider:
   m_ObjectHideFlags: 0

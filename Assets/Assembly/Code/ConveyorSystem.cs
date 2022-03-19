@@ -31,7 +31,7 @@ public class ConveyorSystem : MonoBehaviour {
 
         BoxCollider gc = gameObject.GetComponent<BoxCollider>();
         gc.center = new Vector3(0, -0.5f, (ConveyorLength / 2));
-        gc.size = new Vector3(1f, 0.1f, ConveyorLength);
+        gc.size = new Vector3(3f, 0.1f, ConveyorLength);
 
         float interval = (ConveyorLength / ConveyorCapacity) / ConveyorSpeed;
         StartCoroutine(StartObjectTravel(interval)); // start creating objects
