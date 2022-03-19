@@ -860,6 +860,41 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 82a154763451a004da040da34d8a701e, type: 3}
   m_PrefabInstance: {fileID: 303471083}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &303471085 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 82a154763451a004da040da34d8a701e, type: 3}
+  m_PrefabInstance: {fileID: 303471083}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &303471086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 303471085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b16685742872f4242adce1228848fa08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: {x: 0, y: 0, z: 0}
+  slotTypeMatch: PsycheSinglePanel
+  undefinedSlot: 0
+  completionTextAsset: {fileID: 0}
+  completed: 0
+--- !u!65 &303471087
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 303471085}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.5000005, y: 2.5, z: 0.05000001}
+  m_Center: {x: 0.0000019073393, y: -0.00000047683847, z: -0.0100204805}
 --- !u!4 &306773385 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 438450, guid: 115e41ba3fa8945449b0f303a50951aa, type: 3}
@@ -1748,6 +1783,41 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82a154763451a004da040da34d8a701e, type: 3}
+--- !u!1 &554654987 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 82a154763451a004da040da34d8a701e, type: 3}
+  m_PrefabInstance: {fileID: 554654986}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &554654988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 554654987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b16685742872f4242adce1228848fa08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: {x: 0, y: 0, z: 0}
+  slotTypeMatch: PsycheSinglePanel
+  undefinedSlot: 0
+  completionTextAsset: {fileID: 0}
+  completed: 0
+--- !u!65 &554654989
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 554654987}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.5000005, y: 2.5, z: 0.05000001}
+  m_Center: {x: -0.0000019073486, y: 0, z: -0.010012853}
 --- !u!4 &558123540 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 438450, guid: 115e41ba3fa8945449b0f303a50951aa, type: 3}
@@ -2263,6 +2333,41 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4bda6e191aa570524bcb2fd76a8e3689, type: 3}
+--- !u!1 &632472492 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 4bda6e191aa570524bcb2fd76a8e3689, type: 3}
+  m_PrefabInstance: {fileID: 632472491}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &632472493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 632472492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b16685742872f4242adce1228848fa08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: {x: 0, y: 0, z: 0}
+  slotTypeMatch: PsycheTopSensor
+  undefinedSlot: 0
+  completionTextAsset: {fileID: 0}
+  completed: 0
+--- !u!65 &632472494
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 632472492}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.6588293, y: 0.23918042, z: 0.35829842}
+  m_Center: {x: -0.020596871, y: 0.0000019101872, z: -0.06914914}
 --- !u!4 &649595061 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 462218, guid: e5018fd5d21200f47b8430f9e3ad81b1, type: 3}
@@ -2334,6 +2439,41 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 82a154763451a004da040da34d8a701e, type: 3}
   m_PrefabInstance: {fileID: 652303815}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &652303817 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 82a154763451a004da040da34d8a701e, type: 3}
+  m_PrefabInstance: {fileID: 652303815}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &652303818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 652303817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b16685742872f4242adce1228848fa08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: {x: 0, y: 0, z: 0}
+  slotTypeMatch: PsycheSinglePanel
+  undefinedSlot: 0
+  completionTextAsset: {fileID: 0}
+  completed: 0
+--- !u!65 &652303819
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 652303817}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.5000005, y: 2.5, z: 0.05000001}
+  m_Center: {x: 0.0000019073486, y: 0, z: -0.010012853}
 --- !u!4 &666637555 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 462218, guid: e5018fd5d21200f47b8430f9e3ad81b1, type: 3}
@@ -3286,6 +3426,41 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 82a154763451a004da040da34d8a701e, type: 3}
   m_PrefabInstance: {fileID: 949183100}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &949183102 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 82a154763451a004da040da34d8a701e, type: 3}
+  m_PrefabInstance: {fileID: 949183100}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &949183103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 949183102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b16685742872f4242adce1228848fa08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: {x: 0, y: 0, z: 0}
+  slotTypeMatch: PsycheSinglePanel
+  undefinedSlot: 0
+  completionTextAsset: {fileID: 0}
+  completed: 0
+--- !u!65 &949183104
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 949183102}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.5000005, y: 2.5, z: 0.05000001}
+  m_Center: {x: 0.0000038146973, y: 0, z: -0.010012853}
 --- !u!4 &954518092 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 438450, guid: 115e41ba3fa8945449b0f303a50951aa, type: 3}
@@ -3357,6 +3532,41 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 82a154763451a004da040da34d8a701e, type: 3}
   m_PrefabInstance: {fileID: 959587684}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &959587686 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 82a154763451a004da040da34d8a701e, type: 3}
+  m_PrefabInstance: {fileID: 959587684}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &959587687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 959587686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b16685742872f4242adce1228848fa08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: {x: 0, y: 0, z: 0}
+  slotTypeMatch: PsycheSinglePanel
+  undefinedSlot: 0
+  completionTextAsset: {fileID: 0}
+  completed: 0
+--- !u!65 &959587688
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 959587686}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.5000005, y: 2.5, z: 0.05000001}
+  m_Center: {x: 0.0000019073486, y: 0, z: -0.010012853}
 --- !u!4 &965936963 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 438450, guid: 115e41ba3fa8945449b0f303a50951aa, type: 3}
@@ -3869,6 +4079,41 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 92d615c0db22708c0839a83004430c7c, type: 3}
   m_PrefabInstance: {fileID: 1106575059}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1106575061 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 92d615c0db22708c0839a83004430c7c, type: 3}
+  m_PrefabInstance: {fileID: 1106575059}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1106575062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1106575061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b16685742872f4242adce1228848fa08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: {x: 0, y: 0, z: 0}
+  slotTypeMatch: PsycheBody
+  undefinedSlot: 0
+  completionTextAsset: {fileID: 0}
+  completed: 0
+--- !u!65 &1106575063
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1106575061}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.6100006, y: 3.1299999, z: 3.7018027}
+  m_Center: {x: -1.2450002, y: 1.245, z: 1.6509012}
 --- !u!4 &1106983922 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 438450, guid: 115e41ba3fa8945449b0f303a50951aa, type: 3}
@@ -4267,6 +4512,41 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82a154763451a004da040da34d8a701e, type: 3}
+--- !u!1 &1197608202 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 82a154763451a004da040da34d8a701e, type: 3}
+  m_PrefabInstance: {fileID: 1197608201}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1197608203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1197608202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b16685742872f4242adce1228848fa08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: {x: 0, y: 0, z: 0}
+  slotTypeMatch: PsycheSinglePanel
+  undefinedSlot: 0
+  completionTextAsset: {fileID: 0}
+  completed: 0
+--- !u!65 &1197608204
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1197608202}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.5000005, y: 2.5, z: 0.05000001}
+  m_Center: {x: -0.0000009536743, y: 0, z: -0.010012853}
 --- !u!4 &1198989737 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 462218, guid: e5018fd5d21200f47b8430f9e3ad81b1, type: 3}
@@ -4407,6 +4687,41 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7599b55287a82c8af9c0021f69a5532c, type: 3}
   m_PrefabInstance: {fileID: 1212709637}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1212709639 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 7599b55287a82c8af9c0021f69a5532c, type: 3}
+  m_PrefabInstance: {fileID: 1212709637}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1212709640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1212709639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b16685742872f4242adce1228848fa08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: {x: 0, y: 0, z: 0}
+  slotTypeMatch: PsycheFrontRack
+  undefinedSlot: 0
+  completionTextAsset: {fileID: 0}
+  completed: 0
+--- !u!65 &1212709641
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1212709639}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.594159, y: 2.7129169, z: 0.65879613}
+  m_Center: {x: -1.2929212, y: 1.3364584, z: 0.18016484}
 --- !u!4 &1216501693 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 462218, guid: e5018fd5d21200f47b8430f9e3ad81b1, type: 3}
@@ -4950,6 +5265,41 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8d537c8d5c676bc5d8ebb08123364460, type: 3}
   m_PrefabInstance: {fileID: 1409439752}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1409439754 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 8d537c8d5c676bc5d8ebb08123364460, type: 3}
+  m_PrefabInstance: {fileID: 1409439752}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1409439755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1409439754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b16685742872f4242adce1228848fa08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: {x: 0, y: 0, z: 0}
+  slotTypeMatch: PsycheHangerBracket
+  undefinedSlot: 0
+  completionTextAsset: {fileID: 0}
+  completed: 0
+--- !u!65 &1409439756
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1409439754}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.4000003, y: 2.5, z: 0.33998048}
+  m_Center: {x: -1.1000003, y: 0.14999998, z: 0.049990214}
 --- !u!4 &1411076771 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 438450, guid: 115e41ba3fa8945449b0f303a50951aa, type: 3}
@@ -5179,6 +5529,41 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8d537c8d5c676bc5d8ebb08123364460, type: 3}
   m_PrefabInstance: {fileID: 1447589922}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1447589924 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 8d537c8d5c676bc5d8ebb08123364460, type: 3}
+  m_PrefabInstance: {fileID: 1447589922}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1447589925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1447589924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b16685742872f4242adce1228848fa08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: {x: 0, y: 0, z: 0}
+  slotTypeMatch: PsycheHangerBracket
+  undefinedSlot: 0
+  completionTextAsset: {fileID: 0}
+  completed: 0
+--- !u!65 &1447589926
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1447589924}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.4000003, y: 2.5, z: 0.33998048}
+  m_Center: {x: -1.1000003, y: 0.14999998, z: 0.049990214}
 --- !u!4 &1447784684 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 438450, guid: 115e41ba3fa8945449b0f303a50951aa, type: 3}
@@ -5427,6 +5812,41 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 82a154763451a004da040da34d8a701e, type: 3}
   m_PrefabInstance: {fileID: 1491327453}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1491327455 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 82a154763451a004da040da34d8a701e, type: 3}
+  m_PrefabInstance: {fileID: 1491327453}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1491327456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1491327455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b16685742872f4242adce1228848fa08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: {x: 0, y: 0, z: 0}
+  slotTypeMatch: PsycheSinglePanel
+  undefinedSlot: 0
+  completionTextAsset: {fileID: 0}
+  completed: 0
+--- !u!65 &1491327457
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1491327455}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.5000005, y: 2.5, z: 0.05000001}
+  m_Center: {x: 0.0000038146973, y: 0, z: -0.010012853}
 --- !u!4 &1493379640 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 462218, guid: e5018fd5d21200f47b8430f9e3ad81b1, type: 3}
@@ -5706,6 +6126,41 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82a154763451a004da040da34d8a701e, type: 3}
+--- !u!1 &1648479006 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 82a154763451a004da040da34d8a701e, type: 3}
+  m_PrefabInstance: {fileID: 1648479005}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1648479007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1648479006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b16685742872f4242adce1228848fa08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: {x: 0, y: 0, z: 0}
+  slotTypeMatch: PsycheSinglePanel
+  undefinedSlot: 0
+  completionTextAsset: {fileID: 0}
+  completed: 0
+--- !u!65 &1648479008
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1648479006}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.5000005, y: 2.5, z: 0.05000001}
+  m_Center: {x: -0.0000009536743, y: 0, z: -0.010012853}
 --- !u!4 &1663456617 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 462218, guid: e5018fd5d21200f47b8430f9e3ad81b1, type: 3}
@@ -5799,6 +6254,41 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2cbc93181af48e08b9b93a7935306abd, type: 3}
   m_PrefabInstance: {fileID: 1672962237}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1672962239 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 2cbc93181af48e08b9b93a7935306abd, type: 3}
+  m_PrefabInstance: {fileID: 1672962237}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1672962240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1672962239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b16685742872f4242adce1228848fa08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: {x: 0, y: 0, z: 0}
+  slotTypeMatch: PsycheNeutronCanon
+  undefinedSlot: 0
+  completionTextAsset: {fileID: 0}
+  completed: 0
+--- !u!65 &1672962241
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1672962239}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.7882719, y: 0.49990728, z: 0.6540795}
+  m_Center: {x: -0.015988084, y: 0.000045433648, z: 0.32533094}
 --- !u!4 &1673415950 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 438450, guid: 115e41ba3fa8945449b0f303a50951aa, type: 3}
@@ -7013,6 +7503,41 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82a154763451a004da040da34d8a701e, type: 3}
+--- !u!1 &1989233356 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 82a154763451a004da040da34d8a701e, type: 3}
+  m_PrefabInstance: {fileID: 1989233355}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1989233357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1989233356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b16685742872f4242adce1228848fa08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: {x: 0, y: 0, z: 0}
+  slotTypeMatch: PsycheSinglePanel
+  undefinedSlot: 0
+  completionTextAsset: {fileID: 0}
+  completed: 0
+--- !u!65 &1989233358
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1989233356}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.5000005, y: 2.5, z: 0.05000001}
+  m_Center: {x: -0.0000009536743, y: 0, z: -0.010012853}
 --- !u!4 &1993123704 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 438450, guid: 115e41ba3fa8945449b0f303a50951aa, type: 3}
@@ -7144,6 +7669,41 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4bda6e191aa570524bcb2fd76a8e3689, type: 3}
   m_PrefabInstance: {fileID: 2023739688}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2023739690 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 4bda6e191aa570524bcb2fd76a8e3689, type: 3}
+  m_PrefabInstance: {fileID: 2023739688}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &2023739691
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2023739690}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.6588294, y: 0.23918039, z: 0.35829836}
+  m_Center: {x: -0.020581614, y: 0.0000000048368958, z: -0.06914913}
+--- !u!114 &2023739692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2023739690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b16685742872f4242adce1228848fa08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: {x: 0, y: 0, z: 0}
+  slotTypeMatch: PsycheTopSensor
+  undefinedSlot: 0
+  completionTextAsset: {fileID: 0}
+  completed: 0
 --- !u!4 &2025532293 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 462218, guid: e5018fd5d21200f47b8430f9e3ad81b1, type: 3}
@@ -7265,6 +7825,41 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82a154763451a004da040da34d8a701e, type: 3}
+--- !u!1 &2072735632 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 82a154763451a004da040da34d8a701e, type: 3}
+  m_PrefabInstance: {fileID: 2072735631}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2072735633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2072735632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b16685742872f4242adce1228848fa08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: {x: 0, y: 0, z: 0}
+  slotTypeMatch: PsycheSinglePanel
+  undefinedSlot: 0
+  completionTextAsset: {fileID: 0}
+  completed: 0
+--- !u!65 &2072735634
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2072735632}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.5000005, y: 2.5, z: 0.05000001}
+  m_Center: {x: 0, y: 0, z: -0.010012853}
 --- !u!4 &2074410740 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 462218, guid: e5018fd5d21200f47b8430f9e3ad81b1, type: 3}
