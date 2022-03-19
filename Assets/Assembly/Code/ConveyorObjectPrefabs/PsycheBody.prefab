@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 5427555415745137429}
   - component: {fileID: 2536762000170730722}
   - component: {fileID: 206394717214403829}
-  - component: {fileID: 6610286605194522340}
   - component: {fileID: 7964289059944787157}
   m_Layer: 0
   m_Name: PsycheBody
@@ -114,21 +113,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &6610286605194522340
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5787812255782611648}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 742c2cd2943292042917ee2984a57382, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isHeld: 0
-  currentSlot: {fileID: 0}
-  itemType: PsycheBody
 --- !u!114 &7964289059944787157
 MonoBehaviour:
   m_ObjectHideFlags: 0

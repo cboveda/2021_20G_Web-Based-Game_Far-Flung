@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 5297263028317402639}
   - component: {fileID: 1413434473988867270}
   - component: {fileID: 249915053003351365}
-  - component: {fileID: 6962703916834029533}
   - component: {fileID: 6352281337563259215}
   m_Layer: 0
   m_Name: MotionItemOne
@@ -110,22 +109,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f0aa67fca06ae8aa83292f99fc128ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ItemTypeIdentifier: 
   LERP_Speed: 5
   HostConveyor: {fileID: 0}
---- !u!114 &6962703916834029533
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7537041333447065159}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 742c2cd2943292042917ee2984a57382, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isHeld: 0
-  currentSlot: {fileID: 0}
 --- !u!54 &6352281337563259215
 Rigidbody:
   m_ObjectHideFlags: 0

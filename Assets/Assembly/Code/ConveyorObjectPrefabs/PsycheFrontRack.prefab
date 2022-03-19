@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 2634794698249850430}
   - component: {fileID: 3697805422755926849}
   - component: {fileID: 3697805422755926854}
-  - component: {fileID: 3697805422755926855}
   - component: {fileID: 3697805422755926852}
   m_Layer: 0
   m_Name: PsycheFrontRack
@@ -114,21 +113,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.5941582, y: 2.7129161, z: 0.65879613}
   m_Center: {x: -1.2929208, y: 1.3364581, z: 0.18016484}
---- !u!114 &3697805422755926855
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4580257171310931947}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 742c2cd2943292042917ee2984a57382, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isHeld: 0
-  currentSlot: {fileID: 0}
-  itemType: PsycheFrontRack
 --- !u!114 &3697805422755926852
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,5 +125,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f0aa67fca06ae8aa83292f99fc128ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ItemTypeIdentifier: PsycheFrontRack
   LERP_Speed: 0
   HostConveyor: {fileID: 0}
