@@ -7148,6 +7148,17 @@ MonoBehaviour:
   - {fileID: 4585202550902603827, guid: d40202ec511f341198ac9be30e5460ab, type: 3}
   - {fileID: 3352765803422767902, guid: 147d91dd06edd8f16996033ba975f89c, type: 3}
   - {fileID: 1989338001093582490, guid: b851b1ab81fef2becab3aba741d3a9b1, type: 3}
+  - {fileID: 1989338001093582490, guid: b851b1ab81fef2becab3aba741d3a9b1, type: 3}
+  - {fileID: 3352765803422767902, guid: 147d91dd06edd8f16996033ba975f89c, type: 3}
+  - {fileID: 3352765803422767902, guid: 147d91dd06edd8f16996033ba975f89c, type: 3}
+  - {fileID: 3352765803422767902, guid: 147d91dd06edd8f16996033ba975f89c, type: 3}
+  - {fileID: 3352765803422767902, guid: 147d91dd06edd8f16996033ba975f89c, type: 3}
+  - {fileID: 3352765803422767902, guid: 147d91dd06edd8f16996033ba975f89c, type: 3}
+  - {fileID: 3352765803422767902, guid: 147d91dd06edd8f16996033ba975f89c, type: 3}
+  - {fileID: 3352765803422767902, guid: 147d91dd06edd8f16996033ba975f89c, type: 3}
+  - {fileID: 3352765803422767902, guid: 147d91dd06edd8f16996033ba975f89c, type: 3}
+  - {fileID: 3352765803422767902, guid: 147d91dd06edd8f16996033ba975f89c, type: 3}
+  - {fileID: 8331971440665352534, guid: d6a9ca8cdf04b6983a3390c0d5755548, type: 3}
   ConveyorCapacity: 3
   ConveyorSpeed: 2
   ConveyorLength: 20
