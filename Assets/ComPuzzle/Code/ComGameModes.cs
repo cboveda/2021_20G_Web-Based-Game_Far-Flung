@@ -23,6 +23,7 @@ public class ComGameModes : MonoBehaviour
     public void EasyModeOn()
     {
         //Debug.Log("easy mode");
+        //easyToggle.interactable = true;
 
         easyToggleObject = GameObject.Find("EasyMode");
         easyToggle = easyToggleObject.GetComponent<Toggle>();
@@ -31,17 +32,24 @@ public class ComGameModes : MonoBehaviour
         showingGameScore = FindObjectOfType<Scoring>().getShowingGameScore;
         if (showingScore || showingGameScore)
         {
-            easyToggle.interactable = false;
+            //easyToggle.interactable = false;
             if (easyToggle.isOn)
             {
                 easyToggle.isOn = false;
             }
             return;
         }
-        else
+
+        if (showingScore || showingGameScore)
         {
-            easyToggle.interactable = true;
+            //easyToggle.interactable = false;
+            if (!easyToggle.isOn)
+            {
+                easyToggle.isOn = true;
+            }
+            return;
         }
+
 
         if ( easyModeUsed == false )
         {
