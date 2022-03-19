@@ -12,3 +12,6 @@ public class CubeDeleter : MonoBehaviour
         OnCollisionEnter(collision);
     }
 }
+
+
+/* COMMON MERGE - DELETE FILE */

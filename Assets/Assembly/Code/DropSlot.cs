@@ -3,7 +3,7 @@ using UnityEngine;
 public class DropSlot : MonoBehaviour {
 
     public Vector3 offset;
-    public string slotTypeMatch; // set to premanently lock the object when placed
+    public string slotTypeMatch;
     public TextAsset completionTextAsset;
 
     bool set;

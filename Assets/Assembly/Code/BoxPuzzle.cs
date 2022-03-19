@@ -3,6 +3,9 @@ using UnityEngine.Events;
 using System;
 using UnityEngine.SceneManagement;
 
+
+/* COMMON MERGE - DELETE FILE */
+
 public class BoxPuzzle : MonoBehaviour, Completion
 {    
     public Material greenMaterial;
