@@ -48,6 +48,9 @@ namespace Flightpath
         [SerializeField]
         private DialogScriptableObject[] _marsScripts;
         public DialogScriptableObject[] MarsScripts { get; set; }
+        [SerializeField]
+        private DialogScriptableObject[] _winScripts;
+        public DialogScriptableObject[] WinScripts { get; set; }
         private int _lastScript;
         private bool _sceneAdvanceStart;
         private bool _launchLocked;
@@ -151,6 +154,9 @@ namespace Flightpath
                     break;
                 case MarsBoundaryScriptIndex:
                     _dg.dialogContainer = pickNewScript(_marsScripts);
+                    break;
+                case WinBoundaryScriptIndex:
+                    _dg.dialogContainer = pickNewScript(_winScripts);
                     break;
                 default:
                     break;
