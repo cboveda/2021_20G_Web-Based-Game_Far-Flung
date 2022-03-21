@@ -14,47 +14,65 @@ namespace Flightpath
     {
         [SerializeField]
         private Button _launchButton;
+        public Button LaunchButton { get; set; }
         [SerializeField]
         private Button _resetButton;
+        public Button ResetButton { get; set; }
         [SerializeField]
         private Slider _powerSlider;
+        public Slider PowerSlider { get; set; }
         [SerializeField]
         private GameObject _powerHandle;
+        public GameObject PowerHandle { get; set; }
         [SerializeField]
         private GameObject _powerTargetArrow;
+        public GameObject PowerTargetArrow { get; set; }
         [SerializeField]
         private GameObject _powerTargetArrow2;
+        public GameObject PowerTargetArrow2 { get; set; }
         [SerializeField]
         private Slider _angleSlider;
+        public Slider AngleSlider { get; set; }
         [SerializeField]
         private GameObject _angleHandle;
+        public GameObject AngleHandle { get; set; }
         [SerializeField]
         private GameObject _angleTargetArrow;
+        public GameObject AngleTargetArrow { get; set; }
         [SerializeField]
         private GameObject _angleTargetArrow2;
+        public GameObject AngleTargetArrow2 { get; set; }
         [SerializeField]
         private LaunchManager _launchManager;
+        public LaunchManager LaunchManager { get; set; }
 
         [SerializeField]
         private GameObject _dialogGeneratorPrefab;
+        public GameObject DialogGeneratorPrefab { get; set; }
         private GameObject _dialogGenerator;
         private DialogGenerator _dg;
+        public DialogGenerator Dg { get; set; }
         [SerializeField]
-        private DialogScriptableObject[] Scripts;
+        private DialogScriptableObject[] _scripts;
+        public DialogScriptableObject[] Scripts { get; set; }
         private int _scriptIndex;
         private int _scriptMax;
         private int _phase;
+        public int Phase { get; set; }
         private float _timeDelta;
         private float _timeMax;
         [SerializeField]
         private Color _highlightColor;
+        public Color HighlightColor { get; set; }
         [SerializeField]
         private Color _defaultColor;
+        public Color DefaultColor { get; set; }
         [SerializeField]
         private float _lerpRatio;
+        public Color LerpRatio { get; set; }
 
         // Start is called before the first frame update
-        void Start()
+        public void Start()
         {
             _launchButton.interactable = false;
             _resetButton.interactable = false;
@@ -69,13 +87,13 @@ namespace Flightpath
             _resetButton.onClick.AddListener(() => _dg.FastForwardDialog());
 
             _scriptIndex = 0;
-            _scriptMax = Scripts.Length;
+            _scriptMax = _scripts.Length;
             _phase = -1;
             _timeMax = 2;
             SetDG();
         }
 
-        private void DoIntermediatePhase()
+        public void DoIntermediatePhase()
         {
             _dg.BeginPlayingDialog();
             _phase++;
@@ -164,7 +182,8 @@ namespace Flightpath
             {
                 _resetButton.interactable = true;
             }
-            if (_resetButton.interactable == true) {
+            if (_resetButton.interactable == true)
+            {
                 _resetButton.GetComponent<Image>().color = Color.Lerp(_defaultColor, _highlightColor, Mathf.PingPong(Time.time, _lerpRatio));
             }
             if (!_launchManager.hasStopped())
@@ -224,7 +243,7 @@ namespace Flightpath
             {
                 _dialogGenerator = Object.Instantiate(_dialogGeneratorPrefab, this.transform);
                 _dg = _dialogGenerator.GetComponent<DialogGenerator>();
-                _dg.dialogContainer = Scripts[_scriptIndex++];
+                _dg.dialogContainer = _scripts[_scriptIndex++];
             }
         }
     }

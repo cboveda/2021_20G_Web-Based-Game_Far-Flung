@@ -15,10 +15,18 @@ public class FlightpathLaunchTest
     private GameObject asteroid;
     private GameObject launchManager;
     private LaunchManager launchManagerComponent;
+    private GameObject dialogController;
+    private DialogController dialogControllerComponent;
     private GameObject path;
     private GameObject pathFollower;
     private GameObject angleSlider;
     private GameObject powerSlider;
+    private GameObject launchButton;
+    private GameObject resetButton;
+    private GameObject powerTargetArrow;
+    private GameObject powerTargetArrow2;
+    private GameObject angleTargetArrow;
+    private GameObject angleTargetArrow2;
     private GameObject pathDrawing;
     private GameObject arrow;
     private GameObject startPoint;
@@ -43,8 +51,7 @@ public class FlightpathLaunchTest
         setupPaths();
         setupArrow();
         setupPathFollower();
-
-
+        setupDialogController();
     }
 
     private void setupArrow()
@@ -56,6 +63,16 @@ public class FlightpathLaunchTest
         launchManagerComponent.TrajectoryArrow = arrow.GetComponent<Trajectory>();
         launchManagerComponent.Start();
     }
+
+    private void setupButtons()
+    {
+        launchButton = new GameObject();
+        launchButton.AddComponent<Button>();
+
+        resetButton = new GameObject();
+        resetButton.AddComponent<Button>();
+    }
+
 
     private void setupPathFollower()
     {
@@ -108,8 +125,19 @@ public class FlightpathLaunchTest
         powerSlider = new GameObject();
         powerSlider.AddComponent<Slider>();
         powerSlider.GetComponent<Slider>().minValue = 10f;
+
         launchManagerComponent.AngleSlider = angleSlider.GetComponent<Slider>();
         launchManagerComponent.PowerSlider = angleSlider.GetComponent<Slider>();
+
+        powerTargetArrow = new GameObject();
+        powerTargetArrow.AddComponent<Image>();
+        powerTargetArrow2 = new GameObject();
+        powerTargetArrow.AddComponent<Image>();
+        angleTargetArrow = new GameObject();
+        angleTargetArrow.AddComponent<Image>();
+        angleTargetArrow2 = new GameObject();
+        angleTargetArrow2.AddComponent<Image>();
+
     }
 
     private void setupLaunchManager()
@@ -202,6 +230,41 @@ public class FlightpathLaunchTest
         satellite.GetComponent<Launch>().SetPower(1.0f);
     }
 
+    private void setupDialogController()
+    {
+        dialogController = new GameObject();
+        dialogController.AddComponent<DialogController>();
+        dialogControllerComponent = dialogController.GetComponent<DialogController>();
+
+        dialogControllerComponent.LaunchButton = launchButton.GetComponent<Button>();
+        dialogControllerComponent.ResetButton = resetButton.GetComponent<Button>();
+        dialogControllerComponent.PowerSlider = powerSlider.GetComponent<Slider>();
+        dialogControllerComponent.AngleSlider = AngleSlider.GetComponent<Slider>();
+        dialogControllerComponent.PowerHandle = new GameObject();
+        dialogControllerComponent.PowerHandle.AddComponent<Image>();
+        dialogControllerComponent.AngleHandle = new GameObject();
+        dialogControllerComponent.AngleHandle.AddComponent<Image>();
+        dialogControllerComponent.PowerTargetArrow = powerTargetArrow;
+        dialogControllerComponent.PowerTargetArrow2 = powerTargetArrow2;
+        dialogControllerComponent.AngleTargetArrow = angleTargetArrow;
+        dialogControllerComponent.AngleTargetArrow2 = angleTargetArrow2;
+        dialogControllerComponent.LaunchManager = launchManagerComponent;
+
+        dialogControllerComponent.DialogGeneratorPrefab = Resources.Load<GameObject>(DG_PREFAB_PATH);
+        var dialogSO = ScriptableObject.CreateInstance<DialogScriptableObject>();
+        dialogSO.dialogs = new Dialog[] {
+            new Dialog("test1", DialogMaker.RobotCharacter.None),
+            new Dialog("test2", DialogMaker.RobotCharacter.None) };
+        var scripts = new DialogScriptableObject[10];
+        Array.Fill(scripts, dialogSO);
+        dialogControllerComponent.Scripts = scripts;
+
+
+        dialogControllerComponent.DefaultColor = Color.black;
+        dialogControllerComponent.HighlightColor = Color.red;
+        dialogControllerComponent.LerpRatio = 1.0;
+    }
+
     [TearDown]
     public void Teardown()
     {
@@ -209,10 +272,17 @@ public class FlightpathLaunchTest
         Object.Destroy(planet);
         Object.Destroy(asteroid);
         Object.Destroy(launchManager);
+        Object.Destroy(dialogController);
         Object.Destroy(path);
         Object.Destroy(pathFollower);
         Object.Destroy(angleSlider);
         Object.Destroy(powerSlider);
+        Object.Destory(launchButton);
+        Object.Destory(resetButton);
+        Object.Destory(powerTargetArrow);
+        Object.Destory(powerTargetArrow2);
+        Object.Destory(angleTargetArrow);
+        Object.Destory(angleTargetArrow2);
         Object.Destroy(pathDrawing);
         Object.Destroy(arrow);
         Object.Destroy(startPoint);
@@ -434,5 +504,68 @@ public class FlightpathLaunchTest
         satellite.GetComponent<Attractor>().Affected = false;
         yield return new WaitForFixedUpdate();
         Assert.AreEqual(true, launchManagerComponent.hasStopped());
+    }
+
+    [UnityTest]
+    public IEnumerator Test_DialogControllerState()
+    {
+        // dialogControllerComponent.Start(); ???
+        // Phase 0
+        dialogControllerComponent.Dg.BeginPlayingDialog();
+        yield return new WaitForFixedUpdate();
+        Assert.AreEqual(0, dialogControllerComponent.Phase);
+        Assert.AreEqual(true, dialogControllerComponent.AngleSlider.interactable);
+        Assert.AreEqual(false, dialogControllerComponent.PowerSlider.interactable);
+        Assert.AreEqual(false, dialogControllerComponent.LaunchButton.interactable);
+        Assert.AreEqual(false, dialogControllerComponent.ResetButton.interactable);
+        dialogControllerComponent.AngleSlider.value = 42;
+        yield return new WaitForFixedUpdate();
+        Assert.AreEqual(false, dialogControllerComponent.AngleSlider.interactable);
+
+        //Phase 1
+        yield return new WaitForFixedUpdate();
+
+        //Phase 2
+        rt.AreEqual(2, dialogControllerComponent.Phase);
+        Assert.AreEqual(false, dialogControllerComponent.AngleSlider.interactable);
+        Assert.AreEqual(true, dialogControllerComponent.PowerSlider.interactable);
+        Assert.AreEqual(false, dialogControllerComponent.LaunchButton.interactable);
+        Assert.AreEqual(false, dialogControllerComponent.ResetButton.interactable);
+        dialogControllerComponent.PowerSlider.value = 85;
+        yield return new WaitForFixedUpdate();
+        Assert.AreEqual(false, dialogControllerComponent.PowerSlider.interactable);
+
+        //Phase 3
+        yield return new WaitForFixedUpdate();
+
+        //Phase 4
+        rt.AreEqual(2, dialogControllerComponent.Phase);
+        Assert.AreEqual(false, dialogControllerComponent.AngleSlider.interactable);
+        Assert.AreEqual(false, dialogControllerComponent.PowerSlider.interactable);
+        Assert.AreEqual(true, dialogControllerComponent.LaunchButton.interactable);
+        Assert.AreEqual(false, dialogControllerComponent.ResetButton.interactable);
+        launchManagerComponent.OnLaunchButtonClicked();
+        yield return new WaitForFixedUpdate();
+        satellite.transform.position = planet.transform.position;
+        satellite.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        satellite.GetComponent<Attractor>().Affected = false;
+        yield return new WaitForFixedUpdate();
+        Assert.AreEqual(false, dialogControllerComponent.LaunchButton.interactable);
+
+        //Phase 5
+        yield return new WaitForFixedUpdate();
+
+        //Phase 6
+        rt.AreEqual(6, dialogControllerComponent.Phase);
+        Assert.AreEqual(false, dialogControllerComponent.AngleSlider.interactable);
+        Assert.AreEqual(false, dialogControllerComponent.PowerSlider.interactable);
+        Assert.AreEqual(false, dialogControllerComponent.LaunchButton.interactable);
+        Assert.AreEqual(true, dialogControllerComponent.ResetButton.interactable);
+        launchManagerComponent.OnResetButtonClicked();
+        yield return new WaitForFixedUpdate();
+        Assert.AreEqual(true, dialogControllerComponent.ResetButton.interactable);
+        Assert.AreEqual(true, dialogControllerComponent.AngleSlider.interactable);
+        Assert.AreEqual(true, dialogControllerComponent.PowerSlider.interactable);
+        Assert.AreEqual(true, dialogControllerComponent.LaunchButton.interactable);
     }
 }
