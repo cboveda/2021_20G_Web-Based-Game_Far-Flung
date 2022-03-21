@@ -11455,7 +11455,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1787394373}
         m_TargetAssemblyTypeName: MouseLook, AssemblyGameAssembly
         m_MethodName: ResumeAssembly
         m_Mode: 1
@@ -33316,7 +33316,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1165713033
 RectTransform:
   m_ObjectHideFlags: 0
@@ -36824,9 +36824,8 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "Welcome to the assemly area. \n\nYou can press \"E\" to interact with
-    objects\n\nPlace the boxes in the green spots to unlock a new level, complete
-    enough levels and you will get the Psyche spacecraft.  \n\nPlace the Psyche Spacecraft
-    into the red slot to complete the area.  Press \"Esc\" to bring these instructions
+    objects.  Use the scroll wheel to move them closer or further.\n\nPlace the correct
+    Psyche Components into the Blueprint.\n\n  Press \"Esc\" to bring these instructions
     back up"
 --- !u!222 &1277763736
 CanvasRenderer:
@@ -50832,6 +50831,7 @@ MonoBehaviour:
   mouseSensitivity: 600
   lookUpLimit: 60
   lookDownLimit: 60
+  MenuObject: {fileID: 1165713032}
   playerBody: {fileID: 50791779}
 --- !u!114 &1787394374
 MonoBehaviour:
@@ -50850,7 +50850,7 @@ MonoBehaviour:
   moveForce: 250
   ObjectDistMin: 3
   ObjectDistMax: 20
-  heldObj: {fileID: 0}
+  heldObj: {fileID: 1165713032}
   SmoothTime: 0.2
 --- !u!81 &1787394375
 AudioListener:

@@ -5,6 +5,8 @@ public class MouseLook : MonoBehaviour
     public float mouseSensitivity = 100f;
     public float lookUpLimit;
     public float lookDownLimit;
+
+    public GameObject MenuObject;
     
     float xRotation = 0f;
 
@@ -38,14 +40,16 @@ public class MouseLook : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        // MenuObject.SetActive(true);
+        MenuObject.SetActive(true);
+        Time.timeScale = 0;
     }
 
     public void ResumeAssembly() {
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        // MenuObject.SetActive(false);
+        MenuObject.SetActive(false);
+        Time.timeScale =1;
     }
 
     void LookUpdate() {
