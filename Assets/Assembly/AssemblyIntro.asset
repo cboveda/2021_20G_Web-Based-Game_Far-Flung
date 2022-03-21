@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c8f0b50b74f8f34d910f4ef4e9b0b1c, type: 3}
+  m_Name: AssemblyIntro
+  m_EditorClassIdentifier: 
+  dialogs:
+  - dialogText: Welcoome to the assembly facility
+    robotVoice: 0
+    dialogAudio: {fileID: 0}
+  - dialogText: This is our high tech simulator fo what we think it was like making
+      the Psyche Spapcecraft
+    robotVoice: 1
+    dialogAudio: {fileID: 0}
+  - dialogText: I found a bunch of items that might go on the spacecraft
+    robotVoice: 2
+    dialogAudio: {fileID: 0}
+  - dialogText: Half of what you found was junk
+    robotVoice: 1
+    dialogAudio: {fileID: 0}
+  - dialogText: I thought it could have been used.
+    robotVoice: 2
+    dialogAudio: {fileID: 0}
+  - dialogText: Our records may have been incomplete so we found from the time of
+      the psyche mission
+    robotVoice: 0
+    dialogAudio: {fileID: 0}
+  - dialogText: Either way you can move around with the awsd keys and explore the
+      facility
+    robotVoice: 1
+    dialogAudio: {fileID: 0}
+  - dialogText: I put the items on a hover conveyor
+    robotVoice: 2
+    dialogAudio: {fileID: 0}
+  - dialogText: They didnt have Hover conveyors! I guess it will have to do though
+      you're already here.
+    robotVoice: 1
+    dialogAudio: {fileID: 0}
+  - dialogText: More to the point you can use the "E" key to pickup and drop objects
+      and the mouse scroll wheel to move them closer or further.
+    robotVoice: 0
+    dialogAudio: {fileID: 0}
+  - dialogText: Some of our records have notes on components, as you place them in
+      the blueprint we will tell you more about them.
+    robotVoice: 1
+    dialogAudio: {fileID: 0}
+  - dialogText: Good luck
+    robotVoice: 2
+    dialogAudio: {fileID: 0}
