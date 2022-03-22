@@ -47,6 +47,7 @@ public class FlightpathLaunchTest
         setupAsteroid();
         setupBoundaries();
         setupLaunchManager();
+        setupButtons();
         setupSliders();
         setupPaths();
         setupArrow();
@@ -130,14 +131,13 @@ public class FlightpathLaunchTest
         launchManagerComponent.PowerSlider = angleSlider.GetComponent<Slider>();
 
         powerTargetArrow = new GameObject();
-        powerTargetArrow.AddComponent<Image>();
         powerTargetArrow2 = new GameObject();
-        powerTargetArrow.AddComponent<Image>();
         angleTargetArrow = new GameObject();
-        angleTargetArrow.AddComponent<Image>();
         angleTargetArrow2 = new GameObject();
-        angleTargetArrow2.AddComponent<Image>();
-
+        // powerTargetArrow.AddComponent<Image>();
+        // powerTargetArrow.AddComponent<Image>();
+        // angleTargetArrow.AddComponent<Image>();
+        // angleTargetArrow2.AddComponent<Image>();
     }
 
     private void setupLaunchManager()
@@ -235,14 +235,13 @@ public class FlightpathLaunchTest
         dialogController = new GameObject();
         dialogController.AddComponent<DialogController>();
         dialogControllerComponent = dialogController.GetComponent<DialogController>();
-
         dialogControllerComponent.LaunchButton = launchButton.GetComponent<Button>();
         dialogControllerComponent.ResetButton = resetButton.GetComponent<Button>();
         dialogControllerComponent.PowerSlider = powerSlider.GetComponent<Slider>();
-        dialogControllerComponent.AngleSlider = AngleSlider.GetComponent<Slider>();
+        dialogControllerComponent.AngleSlider = angleSlider.GetComponent<Slider>();
         dialogControllerComponent.PowerHandle = new GameObject();
-        dialogControllerComponent.PowerHandle.AddComponent<Image>();
         dialogControllerComponent.AngleHandle = new GameObject();
+        dialogControllerComponent.PowerHandle.AddComponent<Image>();
         dialogControllerComponent.AngleHandle.AddComponent<Image>();
         dialogControllerComponent.PowerTargetArrow = powerTargetArrow;
         dialogControllerComponent.PowerTargetArrow2 = powerTargetArrow2;
@@ -252,17 +251,20 @@ public class FlightpathLaunchTest
 
         dialogControllerComponent.DialogGeneratorPrefab = Resources.Load<GameObject>(DG_PREFAB_PATH);
         var dialogSO = ScriptableObject.CreateInstance<DialogScriptableObject>();
-        dialogSO.dialogs = new Dialog[] {
+        dialogSO.dialogs = new Dialog[] 
+        {
             new Dialog("test1", DialogMaker.RobotCharacter.None),
-            new Dialog("test2", DialogMaker.RobotCharacter.None) };
+            new Dialog("test2", DialogMaker.RobotCharacter.None) 
+        };
         var scripts = new DialogScriptableObject[10];
-        Array.Fill(scripts, dialogSO);
+        for (int i = 0; i < scripts.Length; i++) 
+        { 
+            scripts[i] = dialogSO; 
+        }
         dialogControllerComponent.Scripts = scripts;
-
-
         dialogControllerComponent.DefaultColor = Color.black;
         dialogControllerComponent.HighlightColor = Color.red;
-        dialogControllerComponent.LerpRatio = 1.0;
+        dialogControllerComponent.LerpRatio = 1.0f;
     }
 
     [TearDown]
@@ -277,12 +279,12 @@ public class FlightpathLaunchTest
         Object.Destroy(pathFollower);
         Object.Destroy(angleSlider);
         Object.Destroy(powerSlider);
-        Object.Destory(launchButton);
-        Object.Destory(resetButton);
-        Object.Destory(powerTargetArrow);
-        Object.Destory(powerTargetArrow2);
-        Object.Destory(angleTargetArrow);
-        Object.Destory(angleTargetArrow2);
+        Object.Destroy(launchButton);
+        Object.Destroy(resetButton);
+        Object.Destroy(powerTargetArrow);
+        Object.Destroy(powerTargetArrow2);
+        Object.Destroy(angleTargetArrow);
+        Object.Destroy(angleTargetArrow2);
         Object.Destroy(pathDrawing);
         Object.Destroy(arrow);
         Object.Destroy(startPoint);
@@ -526,7 +528,7 @@ public class FlightpathLaunchTest
         yield return new WaitForFixedUpdate();
 
         //Phase 2
-        rt.AreEqual(2, dialogControllerComponent.Phase);
+        Assert.AreEqual(2, dialogControllerComponent.Phase);
         Assert.AreEqual(false, dialogControllerComponent.AngleSlider.interactable);
         Assert.AreEqual(true, dialogControllerComponent.PowerSlider.interactable);
         Assert.AreEqual(false, dialogControllerComponent.LaunchButton.interactable);
@@ -539,7 +541,7 @@ public class FlightpathLaunchTest
         yield return new WaitForFixedUpdate();
 
         //Phase 4
-        rt.AreEqual(2, dialogControllerComponent.Phase);
+        Assert.AreEqual(2, dialogControllerComponent.Phase);
         Assert.AreEqual(false, dialogControllerComponent.AngleSlider.interactable);
         Assert.AreEqual(false, dialogControllerComponent.PowerSlider.interactable);
         Assert.AreEqual(true, dialogControllerComponent.LaunchButton.interactable);
@@ -556,7 +558,7 @@ public class FlightpathLaunchTest
         yield return new WaitForFixedUpdate();
 
         //Phase 6
-        rt.AreEqual(6, dialogControllerComponent.Phase);
+        Assert.AreEqual(6, dialogControllerComponent.Phase);
         Assert.AreEqual(false, dialogControllerComponent.AngleSlider.interactable);
         Assert.AreEqual(false, dialogControllerComponent.PowerSlider.interactable);
         Assert.AreEqual(false, dialogControllerComponent.LaunchButton.interactable);
