@@ -68,6 +68,100 @@ public class LetterActions : MonoBehaviour
         set { switchCount = value; }
     }
 
+    public void SendHint()
+    {
+        Debug.Log("Send hint");
+
+        int letterCount = 0;
+        int row = 0;
+        int wordRow = 0;
+        int buttonNumber = 0;
+        GameObject letterObject;
+        string wordLetter = "";
+        string winLetter = "";
+        int backgroundChild = 0;
+        int textChild = 0;
+
+
+        buttonName = EventSystem.current.currentSelectedGameObject.name;
+        if (buttonName == "Hint1")
+        {
+            row = 1;
+        }
+
+        if (row == 1)
+        {
+            FindObjectOfType<ComUnscrambleMain>().buttonStart = 1;
+            letterCount = 7;
+            wordRow = 1;
+        }
+        if (row == 2)
+        {
+            FindObjectOfType<ComUnscrambleMain>().buttonStart = 8;
+            letterCount = 11;
+            wordRow = 2;
+        }
+        if (row == 3)
+        {
+            FindObjectOfType<ComUnscrambleMain>().buttonStart = 19;
+            letterCount = 8;
+            wordRow = 3;
+        }
+        if (row == 4)
+        {
+            FindObjectOfType<ComUnscrambleMain>().buttonStart = 27;
+            letterCount = 7;
+            wordRow = 4;
+        }
+
+        if (row == 5)
+        {
+            FindObjectOfType<ComUnscrambleMain>().buttonStart = 34;
+            letterCount = 7;
+            wordRow = 5;
+        }
+
+        for (int letterPos = 0; letterPos < letterCount; letterPos++)
+        {
+
+            buttonNumber = FindObjectOfType<ComUnscrambleMain>().buttonStart;
+            letterObject = GameObject.Find(buttonNumber.ToString() + "_Button");
+            wordLetter = letterObject.transform.GetChild(backgroundChild).GetChild(textChild).GetComponent<UnityEngine.UI.Text>().text;
+            winLetter = FindObjectOfType<ComGameData>().getWinLetter(wordRow, letterPos);
+
+            //Debug.Log(wordLetter);
+            //Debug.Log(winLetter);
+
+
+
+            if (wordLetter != winLetter)
+            {
+                StartCoroutine(ShowLetter(winLetter, wordLetter, wordRow, letterObject));
+                return;
+            }
+
+
+            buttonNumber++;
+            FindObjectOfType<ComUnscrambleMain>().buttonStart = buttonNumber;
+        }
+
+    }
+
+    IEnumerator ShowLetter(string winLetter, string wordLetter, int wordRow, GameObject letterObject)
+    {
+
+        Debug.Log("show letter");
+        int backgroundChild = 0;
+        int textChild = 0;
+
+        letterObject.transform.GetChild(backgroundChild).GetChild(textChild).GetComponent<UnityEngine.UI.Text>().text = winLetter;
+        yield return new WaitForSeconds(0.2f);
+        letterObject.transform.GetChild(backgroundChild).GetChild(textChild).GetComponent<UnityEngine.UI.Text>().text = wordLetter;
+
+
+    }
+
+  
 
 
     public void SwapLetters()
