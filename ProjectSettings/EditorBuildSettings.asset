@@ -9,8 +9,8 @@ EditorBuildSettings:
     path: Assets/Hub/Scenes/Hub.unity
     guid: c2cf9ef637fe880428d0ea797578f396
   - enabled: 1
-    path: Assets/Assembly/Scenes/Assembly 3d.unity
-    guid: c91be00a71ff24048802d2fd6b8ac331
+    path: Assets/Assembly/Scenes/Assembly.unity
+    guid: ef75e083679f98840865708838a0b7c7
   - enabled: 1
     path: Assets/Flightpath/Scenes/1_FlightpathIntro.unity
     guid: 9bbb31f71894b2042b56c14f73e136cf
@@ -66,6 +66,6 @@ EditorBuildSettings:
     path: Assets/Framework/Scenes/scene6.unity
     guid: dcedf053a1a3e36459750ce968a5596a
   - enabled: 0
-    path: Assets/Assembly/Scenes/Assembly.unity
-    guid: 051981de1bb5d3e4a96cde09828909ef
+    path: 
+    guid: 00000000000000000000000000000000
   m_configObjects: {}

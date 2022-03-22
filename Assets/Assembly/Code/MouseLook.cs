@@ -1,60 +1,55 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MouseLook : MonoBehaviour
 {
     public float mouseSensitivity = 100f;
-
-    public Transform playerBody;
-
-    float xRotation = 0f;
-
     public float lookUpLimit;
     public float lookDownLimit;
-    public GameObject MenuObject;
+    
+    float xRotation = 0f;
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    public Transform playerBody;
+    // public GameObject MenuObject; 
+
+    void Start() {
+
+        ResumeAssembly();
+        LookUpdate();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetButtonDown("Cancel"))
-        {
+    void Update() {
+        
+        if ( Input.GetButtonDown("Cancel") ) {
             if (Cursor.lockState == CursorLockMode.Locked)
             {
                 PauseAssembly();
-            }
-            else
-            {
+            
+            } else {
+            
                 ResumeAssembly();
             }
         }
-        if (Cursor.lockState == CursorLockMode.Locked)
-        {
+        if (Cursor.lockState == CursorLockMode.Locked) {
             LookUpdate();
         }
     }
 
-    public void PauseAssembly()
-    {
+    public void PauseAssembly() {
+
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        MenuObject.SetActive(true);
+        // MenuObject.SetActive(true);
     }
 
-    public void ResumeAssembly()
-    {
+    public void ResumeAssembly() {
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        MenuObject.SetActive(false);
+        // MenuObject.SetActive(false);
     }
 
-    void LookUpdate()
-    {
+    void LookUpdate() {
+
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
@@ -65,8 +60,7 @@ public class MouseLook : MonoBehaviour
         playerBody.Rotate(Vector3.up * mouseX);
     }
 
-    void OnDestroy()
-    {
+    void OnDestroy() {
         Cursor.lockState = CursorLockMode.None;
     }
 }

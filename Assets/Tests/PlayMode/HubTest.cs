@@ -211,7 +211,7 @@ public class HubTest
 
         SceneManager.UnloadSceneAsync("Hub");
         yield return new WaitForSeconds(0.1f);
-        SceneManager.LoadScene("Assembly 3d");
+        SceneManager.LoadScene("Assembly");
         yield return new WaitForSeconds(0.1f);
         MainMenu.ResetMenu();
     }
@@ -223,7 +223,7 @@ public class HubTest
         yield return new WaitForSeconds(0.1f);
         MainMenu.AssemblyButtonClicked();
         yield return new WaitForSeconds(0.5f);
-        Assert.AreEqual(SceneManager.GetActiveScene().name, "Assembly 3d");
+        Assert.AreEqual(SceneManager.GetActiveScene().name, "Assembly");
         yield return new WaitForSeconds(0.1f);
         SceneManager.LoadScene("Hub");
         yield return new WaitForSeconds(0.2f);
@@ -260,9 +260,11 @@ public class HubTest
 
 
         yield return new WaitForSeconds(0.1f);
-        SceneManager.LoadScene("Assembly 3d");
+        SceneManager.LoadScene("Assembly");
         yield return new WaitForSeconds(0.1f);
         MainMenu.ResetMenu();
+
+        SceneManager.LoadScene("StartScene.Scanning");
     }
 
 

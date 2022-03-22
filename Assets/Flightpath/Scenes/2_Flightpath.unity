@@ -283,24 +283,27 @@ MonoBehaviour:
   TrajectoryArrow: {fileID: 207803552}
   SatellitePath: {fileID: 1648258613}
   _dialogGeneratorPrefab: {fileID: 1112058421538219625, guid: f7e371b84ab245743b9c0d81899537c5, type: 3}
-  TopScripts:
+  _topScripts:
   - {fileID: 11400000, guid: 5fecc9ab5e62e574e9af1da9664c891a, type: 2}
   - {fileID: 11400000, guid: afa99081c6ec9f24c9d42163c1e6547f, type: 2}
   - {fileID: 11400000, guid: 779be58373d444542af3cfcfa5947b17, type: 2}
-  BotScripts:
+  _botScripts:
   - {fileID: 11400000, guid: ddbbd5fab47ce0f4985b96f285fbcf2e, type: 2}
   - {fileID: 11400000, guid: 971f734fb8ea16645acb3db242ed6a43, type: 2}
-  RightScripts:
+  - {fileID: 11400000, guid: 0c39cada3b231984ca4332819771d3a1, type: 2}
+  _rightScripts:
   - {fileID: 11400000, guid: 59f9d21bf7293954a8267cfedab43009, type: 2}
   - {fileID: 11400000, guid: c90960a597f8f2e44b8b7f2332c36fb5, type: 2}
   - {fileID: 11400000, guid: 9d00e4b20aeeebd4b998b3d15f7eda31, type: 2}
-  LeftScripts:
+  _leftScripts:
   - {fileID: 11400000, guid: 82c159f557a5ba341acc3abeb6b161c1, type: 2}
   - {fileID: 11400000, guid: a10940132862de646863fd7aabebb77e, type: 2}
-  MarsScripts:
+  _marsScripts:
   - {fileID: 11400000, guid: 616103c812feec543af849cf7dc6e8f0, type: 2}
   - {fileID: 11400000, guid: 8cccd1471e8c8ed4d85c4912df5ed49d, type: 2}
   - {fileID: 11400000, guid: c79b5d0fa1781fa43a25ef34493fc139, type: 2}
+  _winScripts:
+  - {fileID: 11400000, guid: bc684184460585e46a7b862ab14ce639, type: 2}
 --- !u!1 &193540375
 GameObject:
   m_ObjectHideFlags: 0
