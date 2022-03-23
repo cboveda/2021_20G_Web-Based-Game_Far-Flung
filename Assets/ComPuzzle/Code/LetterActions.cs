@@ -88,6 +88,18 @@ public class LetterActions : MonoBehaviour
         {
             row = 1;
         }
+        if (buttonName == "Hint2")
+        {
+            row = 2;
+        }
+        if (buttonName == "Hint3")
+        {
+            row = 3;
+        }
+        if (buttonName == "Hint4")
+        {
+            row = 4;
+        }
 
         if (row == 1)
         {
@@ -153,10 +165,13 @@ public class LetterActions : MonoBehaviour
         Debug.Log("show letter");
         int backgroundChild = 0;
         int textChild = 0;
+        Color originalColor = new Color32(246, 34, 250, 255);
 
         letterObject.transform.GetChild(backgroundChild).GetChild(textChild).GetComponent<UnityEngine.UI.Text>().text = winLetter;
-        yield return new WaitForSeconds(0.2f);
+        letterObject.transform.GetChild(backgroundChild).GetChild(textChild).GetComponent<UnityEngine.UI.Text>().color = Color.red;
+        yield return new WaitForSeconds(0.5f);
         letterObject.transform.GetChild(backgroundChild).GetChild(textChild).GetComponent<UnityEngine.UI.Text>().text = wordLetter;
+        letterObject.transform.GetChild(backgroundChild).GetChild(textChild).GetComponent<UnityEngine.UI.Text>().color = originalColor;
 
 
     }
