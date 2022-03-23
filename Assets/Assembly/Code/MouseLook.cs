@@ -15,8 +15,6 @@ public class MouseLook : MonoBehaviour
 
     void Start() {
 
-        ResumeAssembly();
-        LookUpdate();
     }
 
     void Update() {
@@ -24,11 +22,11 @@ public class MouseLook : MonoBehaviour
         if ( Input.GetButtonDown("Cancel") ) {
             if (Cursor.lockState == CursorLockMode.Locked)
             {
-                PauseAssembly();
+                ShowMenu();
             
             } else {
             
-                ResumeAssembly();
+                HideMenu();
             }
         }
         if (Cursor.lockState == CursorLockMode.Locked) {
@@ -40,7 +38,6 @@ public class MouseLook : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        MenuObject.SetActive(true);
         Time.timeScale = 0;
     }
 
@@ -48,8 +45,17 @@ public class MouseLook : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        MenuObject.SetActive(false);
         Time.timeScale =1;
+    }
+
+    public void ShowMenu(){
+        PauseAssembly();
+        MenuObject.SetActive(true);
+    }
+
+    public void HideMenu(){
+        MenuObject.SetActive(false);
+        ResumeAssembly();
     }
 
     void LookUpdate() {

@@ -11396,7 +11396,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1787394373}
         m_TargetAssemblyTypeName: MouseLook, AssemblyGameAssembly
-        m_MethodName: ResumeAssembly
+        m_MethodName: HideMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -16178,6 +16178,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AssemblyIntro
       objectReference: {fileID: 0}
+    - target: {fileID: 8172208294005014274, guid: 5835d40e467de3f48ac74c2846c867ac, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8172208294005014275, guid: 5835d40e467de3f48ac74c2846c867ac, type: 3}
       propertyPath: m_RootOrder
       value: 16
@@ -16226,8 +16230,47 @@ PrefabInstance:
       propertyPath: dialogContainer
       value: 
       objectReference: {fileID: 11400000, guid: 737bb3d824901c845884f4ea8c5f0e63, type: 2}
+    - target: {fileID: 8172208294005014276, guid: 5835d40e467de3f48ac74c2846c867ac, type: 3}
+      propertyPath: onDialogFinish.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8172208294005014276, guid: 5835d40e467de3f48ac74c2846c867ac, type: 3}
+      propertyPath: onDialogFinish.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8172208294005014276, guid: 5835d40e467de3f48ac74c2846c867ac, type: 3}
+      propertyPath: onDialogFinish.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1787394373}
+    - target: {fileID: 8172208294005014276, guid: 5835d40e467de3f48ac74c2846c867ac, type: 3}
+      propertyPath: onDialogFinish.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8172208294005014276, guid: 5835d40e467de3f48ac74c2846c867ac, type: 3}
+      propertyPath: onDialogFinish.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ResumeAssembly
+      objectReference: {fileID: 0}
+    - target: {fileID: 8172208294005014276, guid: 5835d40e467de3f48ac74c2846c867ac, type: 3}
+      propertyPath: onDialogFinish.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MouseLook, AssemblyGameAssembly
+      objectReference: {fileID: 0}
+    - target: {fileID: 8172208294005014276, guid: 5835d40e467de3f48ac74c2846c867ac, type: 3}
+      propertyPath: onDialogFinish.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5835d40e467de3f48ac74c2846c867ac, type: 3}
+--- !u!114 &561591462 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8172208294005014276, guid: 5835d40e467de3f48ac74c2846c867ac, type: 3}
+  m_PrefabInstance: {fileID: 561591461}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87dc691a6cdb1314b9917207cf12ef23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &562981473
 GameObject:
   m_ObjectHideFlags: 0
@@ -33133,7 +33176,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1165713033
 RectTransform:
   m_ObjectHideFlags: 0
@@ -48346,6 +48389,51 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1709172254}
   m_Mesh: {fileID: 4300000, guid: 4749fe7396d5e604995052b893de6274, type: 3}
+--- !u!1 &1709659060
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1709659062}
+  - component: {fileID: 1709659061}
+  m_Layer: 0
+  m_Name: AssemblyFlow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1709659061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1709659060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473b8d6849d5e224db8a90eefdd066cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  introDiag: {fileID: 561591462}
+  mouseLook: {fileID: 1787394373}
+--- !u!4 &1709659062
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1709659060}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 121.64885, y: -2.4866886, z: -35.592525}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1711917218 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 462218, guid: e5018fd5d21200f47b8430f9e3ad81b1, type: 3}
