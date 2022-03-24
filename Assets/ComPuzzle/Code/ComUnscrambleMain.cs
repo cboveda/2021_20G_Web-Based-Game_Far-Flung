@@ -357,8 +357,12 @@ public class ComUnscrambleMain : MonoBehaviour
         GameObject letterObject;
         int wordRow = 0;
         string winLetter = "";
-        bool wordUpdated = false;      
-       
+        bool wordUpdated = false;
+
+        GameObject hint1 = GameObject.Find("Hint1");
+        GameObject hint2 = GameObject.Find("Hint2");
+        GameObject hint3 = GameObject.Find("Hint3");
+        GameObject hint4 = GameObject.Find("Hint4");
 
 
 
@@ -432,6 +436,7 @@ public class ComUnscrambleMain : MonoBehaviour
                     DisableWord(row);
                     FindObjectOfType<ComUnscrambleMain>().word1ColorUpdated = true;
                     Scoring.Instance.addToScore(250, "ComObjective8");
+                    hint1.transform.GetComponent<UnityEngine.UI.Button>().interactable = false;
                 }
                 break;
             case 2:
@@ -443,6 +448,7 @@ public class ComUnscrambleMain : MonoBehaviour
                     DisableWord(row);
                     FindObjectOfType<ComUnscrambleMain>().word2ColorUpdated = true;
                     Scoring.Instance.addToScore(250, "ComObjective9");
+                    hint2.transform.GetComponent<UnityEngine.UI.Button>().interactable = false;
                 }                
                 break;
             case 3:
@@ -454,6 +460,7 @@ public class ComUnscrambleMain : MonoBehaviour
                     DisableWord(row);
                     FindObjectOfType<ComUnscrambleMain>().word3ColorUpdated = true;
                     Scoring.Instance.addToScore(250, "ComObjective10");
+                    hint3.transform.GetComponent<UnityEngine.UI.Button>().interactable = false;
                 }                
                 break;
             case 4:
@@ -465,6 +472,7 @@ public class ComUnscrambleMain : MonoBehaviour
                     DisableWord(row);
                     FindObjectOfType<ComUnscrambleMain>().word4ColorUpdated = true;
                     Scoring.Instance.addToScore(250, "ComObjective11");
+                    hint4.transform.GetComponent<UnityEngine.UI.Button>().interactable = false;
                 }                
                 break;
             case 5:

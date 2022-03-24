@@ -21,6 +21,10 @@ public class LetterActions : MonoBehaviour
     GameObject volumeSlider;
     bool showingScore = false;
     bool showingGameScore = false;
+    GameObject hint1;
+    GameObject hint2;
+    GameObject hint3;
+    GameObject hint4;
 
 
 
@@ -29,6 +33,11 @@ public class LetterActions : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         volumeSlider = GameObject.Find("VolumeSlider");
+
+        hint1 = GameObject.Find("Hint1");
+        hint2 = GameObject.Find("Hint2");
+        hint3 = GameObject.Find("Hint3");
+        hint4 = GameObject.Find("Hint4");
     }
 
     // Update is called once per frame
@@ -70,7 +79,7 @@ public class LetterActions : MonoBehaviour
 
     public void SendHint()
     {
-        Debug.Log("Send hint");
+        //Debug.Log("Send hint");
 
         int letterCount = 0;
         int row = 0;
@@ -87,18 +96,22 @@ public class LetterActions : MonoBehaviour
         if (buttonName == "Hint1")
         {
             row = 1;
+            hint1.transform.GetComponent<UnityEngine.UI.Button>().interactable = false;
         }
         if (buttonName == "Hint2")
         {
             row = 2;
+            hint2.transform.GetComponent<UnityEngine.UI.Button>().interactable = false;
         }
         if (buttonName == "Hint3")
         {
             row = 3;
+            hint3.transform.GetComponent<UnityEngine.UI.Button>().interactable = false;
         }
         if (buttonName == "Hint4")
         {
             row = 4;
+            hint4.transform.GetComponent<UnityEngine.UI.Button>().interactable = false;
         }
 
         if (row == 1)
@@ -162,7 +175,7 @@ public class LetterActions : MonoBehaviour
     IEnumerator ShowLetter(string winLetter, string wordLetter, int wordRow, GameObject letterObject)
     {
 
-        Debug.Log("show letter");
+        //Debug.Log("show letter");
         int backgroundChild = 0;
         int textChild = 0;
         Color originalColor = new Color32(246, 34, 250, 255);
@@ -172,7 +185,11 @@ public class LetterActions : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         letterObject.transform.GetChild(backgroundChild).GetChild(textChild).GetComponent<UnityEngine.UI.Text>().text = wordLetter;
         letterObject.transform.GetChild(backgroundChild).GetChild(textChild).GetComponent<UnityEngine.UI.Text>().color = originalColor;
-
+        
+        hint1.transform.GetComponent<UnityEngine.UI.Button>().interactable = true;
+        hint2.transform.GetComponent<UnityEngine.UI.Button>().interactable = true;
+        hint3.transform.GetComponent<UnityEngine.UI.Button>().interactable = true;
+        hint4.transform.GetComponent<UnityEngine.UI.Button>().interactable = true;
 
     }
 
