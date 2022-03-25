@@ -25,6 +25,7 @@ public class LetterActions : MonoBehaviour
     GameObject hint2;
     GameObject hint3;
     GameObject hint4;
+    GameObject hint5;
 
 
 
@@ -38,6 +39,7 @@ public class LetterActions : MonoBehaviour
         hint2 = GameObject.Find("Hint2");
         hint3 = GameObject.Find("Hint3");
         hint4 = GameObject.Find("Hint4");
+        hint5 = GameObject.Find("Hint5");
     }
 
     // Update is called once per frame
@@ -113,6 +115,11 @@ public class LetterActions : MonoBehaviour
             row = 4;
             hint4.transform.GetComponent<UnityEngine.UI.Button>().interactable = false;
         }
+        if (buttonName == "Hint5")
+        {
+            row = 5;
+            hint5.transform.GetComponent<UnityEngine.UI.Button>().interactable = false;
+        }
 
         if (row == 1)
         {
@@ -185,15 +192,27 @@ public class LetterActions : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         letterObject.transform.GetChild(backgroundChild).GetChild(textChild).GetComponent<UnityEngine.UI.Text>().text = wordLetter;
         letterObject.transform.GetChild(backgroundChild).GetChild(textChild).GetComponent<UnityEngine.UI.Text>().color = originalColor;
-        
-        hint1.transform.GetComponent<UnityEngine.UI.Button>().interactable = true;
-        hint2.transform.GetComponent<UnityEngine.UI.Button>().interactable = true;
-        hint3.transform.GetComponent<UnityEngine.UI.Button>().interactable = true;
-        hint4.transform.GetComponent<UnityEngine.UI.Button>().interactable = true;
+
+        switch (wordRow)
+        {
+            case 1:
+                hint1.transform.GetComponent<UnityEngine.UI.Button>().interactable = true;
+                break;
+            case 2:
+                hint2.transform.GetComponent<UnityEngine.UI.Button>().interactable = true;
+                break;
+            case 3:
+                hint3.transform.GetComponent<UnityEngine.UI.Button>().interactable = true;
+                break;
+            case 4:
+                hint4.transform.GetComponent<UnityEngine.UI.Button>().interactable = true;
+                break;
+            case 5:
+                hint5.transform.GetComponent<UnityEngine.UI.Button>().interactable = true;
+                break;
+        }
 
     }
-
-  
 
 
     public void SwapLetters()

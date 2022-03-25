@@ -304,6 +304,9 @@ public class ComUnscrambleMain : MonoBehaviour
 
         EnableWord(finalWordRow);
 
+        GameObject hint5 = GameObject.Find("Hint5");
+        hint5.transform.GetComponent<UnityEngine.UI.Button>().interactable = true;
+
         return win;
 
     }
@@ -363,6 +366,7 @@ public class ComUnscrambleMain : MonoBehaviour
         GameObject hint2 = GameObject.Find("Hint2");
         GameObject hint3 = GameObject.Find("Hint3");
         GameObject hint4 = GameObject.Find("Hint4");
+        GameObject hint5 = GameObject.Find("Hint5");
 
 
 
@@ -485,6 +489,7 @@ public class ComUnscrambleMain : MonoBehaviour
                     FindObjectOfType<ComUnscrambleMain>().wordFinalColorUpdated = true;
                     FindObjectOfType<SendDataActions>().DisableDataButtons();
                     Scoring.Instance.addToScore(500, "ComObjective12");
+                    hint5.transform.GetComponent<UnityEngine.UI.Button>().interactable = false;
                     StartCoroutine(WinScene());
                 }                
                 break;

@@ -22,6 +22,7 @@ public class SendDataActions : MonoBehaviour
     GameObject hint2;
     GameObject hint3;
     GameObject hint4;
+    GameObject hint5;
     int backgroundChild = 0;
     int textChild = 0;
     Color originalColor;
@@ -44,11 +45,13 @@ public class SendDataActions : MonoBehaviour
         hint2 = GameObject.Find("Hint2");
         hint3 = GameObject.Find("Hint3");
         hint4 = GameObject.Find("Hint4");
+        hint5 = GameObject.Find("Hint5");
 
         hint1.transform.GetComponent<UnityEngine.UI.Button>().interactable = false;
         hint2.transform.GetComponent<UnityEngine.UI.Button>().interactable = false;
         hint3.transform.GetComponent<UnityEngine.UI.Button>().interactable = false;
         hint4.transform.GetComponent<UnityEngine.UI.Button>().interactable = false;
+        hint5.transform.GetComponent<UnityEngine.UI.Button>().interactable = false;
 
     }
 
