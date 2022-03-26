@@ -16,13 +16,43 @@ public class SendDataActions : MonoBehaviour
     bool spectroPressed = false;
     bool magnetoPressed = false;
     bool radioPressed = false;
+    bool showingScore = false;
+    bool showingGameScore = false;
+    GameObject hint1;
+    GameObject hint2;
+    GameObject hint3;
+    GameObject hint4;
+    GameObject hint5;
+    int backgroundChild = 0;
+    int textChild = 0;
+    Color originalColor;
+    Color hiddenColor;
+    ColorBlock hintBlock;
+    Color originalText;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        
+        hiddenColor = new Color32(0, 0, 0, 0);
+
         audioSource = GetComponent<AudioSource>();
         volumeSlider = GameObject.Find("VolumeSlider");
         volumeSlider.GetComponent<Slider>().value = volumeStart;
+
+        hint1 = GameObject.Find("Hint1");
+        hint2 = GameObject.Find("Hint2");
+        hint3 = GameObject.Find("Hint3");
+        hint4 = GameObject.Find("Hint4");
+        hint5 = GameObject.Find("Hint5");
+
+        hint1.transform.GetComponent<UnityEngine.UI.Button>().interactable = false;
+        hint2.transform.GetComponent<UnityEngine.UI.Button>().interactable = false;
+        hint3.transform.GetComponent<UnityEngine.UI.Button>().interactable = false;
+        hint4.transform.GetComponent<UnityEngine.UI.Button>().interactable = false;
+        hint5.transform.GetComponent<UnityEngine.UI.Button>().interactable = false;
+
     }
 
     // Update is called once per frame
@@ -40,10 +70,18 @@ public class SendDataActions : MonoBehaviour
 
     public void SendData()
     {
+        showingScore = FindObjectOfType<Scoring>().getShowingScore;
+        showingGameScore = FindObjectOfType<Scoring>().getShowingGameScore;
+        if (showingScore || showingGameScore)
+        {
+            return;
+        }
+
         //int buttonStart = 0;
         int letterCount = 0;
         int wordRow = 0;
         bool wordUpdated = false;
+        string hintButton = "";
 
         buttonName = EventSystem.current.currentSelectedGameObject.name;               
         
@@ -67,6 +105,9 @@ public class SendDataActions : MonoBehaviour
             wordRow = 1;
             letterCount = 7;
 
+            hintButton = "Hint1";
+            hint1.transform.GetComponent<UnityEngine.UI.Button>().interactable = false;
+
         }
         if (buttonName == "SpectometerButton")
         {
@@ -84,6 +125,9 @@ public class SendDataActions : MonoBehaviour
             wordUpdated = FindObjectOfType<ComUnscrambleMain>().word2ColorUpdated;
             wordRow = 2;
             letterCount = 11;
+
+            hintButton = "Hint2";
+            hint2.transform.GetComponent<UnityEngine.UI.Button>().interactable = false;
 
         }
         if (buttonName == "MagnetometerButton")
@@ -103,6 +147,9 @@ public class SendDataActions : MonoBehaviour
             wordRow = 3;
             letterCount = 8;
 
+            hintButton = "Hint3";
+            hint3.transform.GetComponent<UnityEngine.UI.Button>().interactable = false;
+
         }
         if (buttonName == "RadioButton")
         {
@@ -121,6 +168,9 @@ public class SendDataActions : MonoBehaviour
             wordRow = 4;
             letterCount = 7;
 
+            hintButton = "Hint4";
+            hint4.transform.GetComponent<UnityEngine.UI.Button>().interactable = false;
+
         }
 
         FindObjectOfType<ComUnscrambleMain>().DisableWord(wordRow);
@@ -132,11 +182,11 @@ public class SendDataActions : MonoBehaviour
 
         
         //buttonStart = FindObjectOfType<SendDataActions>().buttonStart;
-        StartCoroutine(SignalAnimation(letterCount, wordUpdated, wordRow));
+        StartCoroutine(SignalAnimation(letterCount, wordUpdated, wordRow, hintButton));
 
     }
 
-    IEnumerator SignalAnimation(int letterCount, bool wordUpdated, int wordRow)
+    IEnumerator SignalAnimation(int letterCount, bool wordUpdated, int wordRow, string hintButton)
     {
         
         for (int letter = 0; letter < letterCount; letter++)
@@ -146,15 +196,15 @@ public class SendDataActions : MonoBehaviour
                 audioSource.Play();
             }            
 
-            StartCoroutine(SendSignal("signal_1", wordUpdated));            
+            StartCoroutine(SendSignal("signal_1", wordUpdated, hintButton));            
 
             yield return new WaitForSeconds(0.06f);
 
-            StartCoroutine(SendSignal("signal_2", wordUpdated));
+            StartCoroutine(SendSignal("signal_2", wordUpdated, hintButton));
 
             yield return new WaitForSeconds(0.05f);
 
-            StartCoroutine(SendSignal("signal_3", wordUpdated));
+            StartCoroutine(SendSignal("signal_3", wordUpdated, hintButton));
 
             yield return new WaitForSeconds(0.6f);
         }
@@ -162,13 +212,21 @@ public class SendDataActions : MonoBehaviour
         if (!wordUpdated)
         {
             FindObjectOfType<ComUnscrambleMain>().EnableWord(wordRow);
-        }        
+            EnableHintButton(hintButton);
+        }    
 
-        EnableDataButtons();
+        EnableDataButtons();        
 
     }
 
-    IEnumerator SendSignal(string signal, bool wordUpdated)
+    public void EnableHintButton(string hintButton)
+    {
+        GameObject hint = GameObject.Find(hintButton);
+        hint.transform.GetComponent<UnityEngine.UI.Button>().interactable = true;
+    }
+
+
+    IEnumerator SendSignal(string signal, bool wordUpdated, string hintButton)
     {
         float xSignal = 4.9f;
         float ySignal = 3.2f;

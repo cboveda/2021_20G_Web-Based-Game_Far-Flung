@@ -19,6 +19,13 @@ public class LetterActions : MonoBehaviour
     int switchCount = 0;
     AudioSource audioSource;
     GameObject volumeSlider;
+    bool showingScore = false;
+    bool showingGameScore = false;
+    GameObject hint1;
+    GameObject hint2;
+    GameObject hint3;
+    GameObject hint4;
+    GameObject hint5;
 
 
 
@@ -27,6 +34,12 @@ public class LetterActions : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         volumeSlider = GameObject.Find("VolumeSlider");
+
+        hint1 = GameObject.Find("Hint1");
+        hint2 = GameObject.Find("Hint2");
+        hint3 = GameObject.Find("Hint3");
+        hint4 = GameObject.Find("Hint4");
+        hint5 = GameObject.Find("Hint5");
     }
 
     // Update is called once per frame
@@ -66,10 +79,151 @@ public class LetterActions : MonoBehaviour
         set { switchCount = value; }
     }
 
+    public void SendHint()
+    {
+        //Debug.Log("Send hint");
+
+        int letterCount = 0;
+        int row = 0;
+        int wordRow = 0;
+        int buttonNumber = 0;
+        GameObject letterObject;
+        string wordLetter = "";
+        string winLetter = "";
+        int backgroundChild = 0;
+        int textChild = 0;
+
+
+        buttonName = EventSystem.current.currentSelectedGameObject.name;
+        if (buttonName == "Hint1")
+        {
+            row = 1;
+            hint1.transform.GetComponent<UnityEngine.UI.Button>().interactable = false;
+        }
+        if (buttonName == "Hint2")
+        {
+            row = 2;
+            hint2.transform.GetComponent<UnityEngine.UI.Button>().interactable = false;
+        }
+        if (buttonName == "Hint3")
+        {
+            row = 3;
+            hint3.transform.GetComponent<UnityEngine.UI.Button>().interactable = false;
+        }
+        if (buttonName == "Hint4")
+        {
+            row = 4;
+            hint4.transform.GetComponent<UnityEngine.UI.Button>().interactable = false;
+        }
+        if (buttonName == "Hint5")
+        {
+            row = 5;
+            hint5.transform.GetComponent<UnityEngine.UI.Button>().interactable = false;
+        }
+
+        if (row == 1)
+        {
+            FindObjectOfType<ComUnscrambleMain>().buttonStart = 1;
+            letterCount = 7;
+            wordRow = 1;
+        }
+        if (row == 2)
+        {
+            FindObjectOfType<ComUnscrambleMain>().buttonStart = 8;
+            letterCount = 11;
+            wordRow = 2;
+        }
+        if (row == 3)
+        {
+            FindObjectOfType<ComUnscrambleMain>().buttonStart = 19;
+            letterCount = 8;
+            wordRow = 3;
+        }
+        if (row == 4)
+        {
+            FindObjectOfType<ComUnscrambleMain>().buttonStart = 27;
+            letterCount = 7;
+            wordRow = 4;
+        }
+
+        if (row == 5)
+        {
+            FindObjectOfType<ComUnscrambleMain>().buttonStart = 34;
+            letterCount = 7;
+            wordRow = 5;
+        }
+
+        for (int letterPos = 0; letterPos < letterCount; letterPos++)
+        {
+
+            buttonNumber = FindObjectOfType<ComUnscrambleMain>().buttonStart;
+            letterObject = GameObject.Find(buttonNumber.ToString() + "_Button");
+            wordLetter = letterObject.transform.GetChild(backgroundChild).GetChild(textChild).GetComponent<UnityEngine.UI.Text>().text;
+            winLetter = FindObjectOfType<ComGameData>().getWinLetter(wordRow, letterPos);
+
+            //Debug.Log(wordLetter);
+            //Debug.Log(winLetter);
+
+
+
+            if (wordLetter != winLetter)
+            {
+                StartCoroutine(ShowLetter(winLetter, wordLetter, wordRow, letterObject));
+                return;
+            }
+
+
+            buttonNumber++;
+            FindObjectOfType<ComUnscrambleMain>().buttonStart = buttonNumber;
+        }
+
+    }
+
+    IEnumerator ShowLetter(string winLetter, string wordLetter, int wordRow, GameObject letterObject)
+    {
+
+        //Debug.Log("show letter");
+        int backgroundChild = 0;
+        int textChild = 0;
+        Color originalColor = new Color32(246, 34, 250, 255);
+
+        letterObject.transform.GetChild(backgroundChild).GetChild(textChild).GetComponent<UnityEngine.UI.Text>().text = winLetter;
+        letterObject.transform.GetChild(backgroundChild).GetChild(textChild).GetComponent<UnityEngine.UI.Text>().color = Color.red;
+        yield return new WaitForSeconds(0.5f);
+        letterObject.transform.GetChild(backgroundChild).GetChild(textChild).GetComponent<UnityEngine.UI.Text>().text = wordLetter;
+        letterObject.transform.GetChild(backgroundChild).GetChild(textChild).GetComponent<UnityEngine.UI.Text>().color = originalColor;
+
+        switch (wordRow)
+        {
+            case 1:
+                hint1.transform.GetComponent<UnityEngine.UI.Button>().interactable = true;
+                break;
+            case 2:
+                hint2.transform.GetComponent<UnityEngine.UI.Button>().interactable = true;
+                break;
+            case 3:
+                hint3.transform.GetComponent<UnityEngine.UI.Button>().interactable = true;
+                break;
+            case 4:
+                hint4.transform.GetComponent<UnityEngine.UI.Button>().interactable = true;
+                break;
+            case 5:
+                hint5.transform.GetComponent<UnityEngine.UI.Button>().interactable = true;
+                break;
+        }
+
+    }
 
 
     public void SwapLetters()
     {
+        showingScore = FindObjectOfType<Scoring>().getShowingScore;
+        showingGameScore = FindObjectOfType<Scoring>().getShowingGameScore;
+        if (showingScore || showingGameScore)
+        {
+            return;
+        }
+
         int textChild = 0;
         int backgroundChild = 0;
         string prevLetter = "";

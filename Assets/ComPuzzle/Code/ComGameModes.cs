@@ -18,15 +18,38 @@ public class ComGameModes : MonoBehaviour
     bool easyModeUsed = false;
     bool solvePuzzleUsed = false;
     bool showingScore = false;
+    bool showingGameScore = false;
 
     public void EasyModeOn()
     {
         //Debug.Log("easy mode");
+        //easyToggle.interactable = true;
+
+        easyToggleObject = GameObject.Find("EasyMode");
+        easyToggle = easyToggleObject.GetComponent<Toggle>();
+
         showingScore = FindObjectOfType<Scoring>().getShowingScore;
-        if (showingScore)
+        showingGameScore = FindObjectOfType<Scoring>().getShowingGameScore;
+        if (showingScore || showingGameScore)
         {
+            //easyToggle.interactable = false;
+            if (easyToggle.isOn)
+            {
+                easyToggle.isOn = false;
+            }
             return;
         }
+
+        if (showingScore || showingGameScore)
+        {
+            //easyToggle.interactable = false;
+            if (!easyToggle.isOn)
+            {
+                easyToggle.isOn = true;
+            }
+            return;
+        }
+
 
         if ( easyModeUsed == false )
         {
@@ -45,8 +68,7 @@ public class ComGameModes : MonoBehaviour
         easyModeOff = audioSource[1];
         volumeSlider = GameObject.Find("VolumeSlider");
 
-        easyToggleObject = GameObject.Find("EasyMode");
-        easyToggle = easyToggleObject.GetComponent<Toggle>();
+
 
         sortingLayer = "Default";        
         if (easyToggle.isOn)
@@ -80,7 +102,8 @@ public class ComGameModes : MonoBehaviour
         //Debug.Log("solve puzzle");
 
         showingScore = FindObjectOfType<Scoring>().getShowingScore;
-        if (showingScore)
+        showingGameScore = FindObjectOfType<Scoring>().getShowingGameScore;
+        if (showingScore || showingGameScore)
         {
             return;
         }
