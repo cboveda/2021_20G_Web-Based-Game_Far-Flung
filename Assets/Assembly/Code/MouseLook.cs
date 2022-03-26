@@ -20,11 +20,11 @@ public class MouseLook : MonoBehaviour
     void Update() {
         
         if ( Input.GetButtonDown("Cancel") ) {
-            if (Cursor.lockState == CursorLockMode.Locked)
+            if (Cursor.lockState == CursorLockMode.Locked )
             {
                 ShowMenu();
             
-            } else {
+            } else if(MenuObject.activeSelf){
             
                 HideMenu();
             }
