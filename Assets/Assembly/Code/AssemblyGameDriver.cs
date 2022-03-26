@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using DialogMaker;
 
 public class AssemblyGameDriver : MonoBehaviour {
 
@@ -10,7 +11,32 @@ public class AssemblyGameDriver : MonoBehaviour {
     public int TotalComponents;
     int FinishedCounter;
 
-    void Start() {
+     public DialogGenerator introDiag;
+    public DialogGenerator outroDiag;
+
+    public MouseLook mouseLook;
+    // Start is called before the first frame update
+    void Start()
+    {
+        if(introDiag == null){
+            try{
+                introDiag = GameObject.Find("AssemblyIntro").GetComponent<DialogGenerator>();
+            } catch {
+                Debug.Log("Failed to find Assembly Intro Dialog Generator");
+            }
+        }
+
+        if( mouseLook == null){
+            try{
+                mouseLook = GameObject.Find("Assembly Camera").GetComponent<MouseLook>();
+            } catch {
+                Debug.Log("Failed to find Assembly Camrera mouse look");
+            }
+        }
+        
+        mouseLook.PauseAssembly();
+        introDiag.BeginPlayingDialog();
+    
         FinishedCounter = 0;
     }
 
@@ -26,7 +52,11 @@ public class AssemblyGameDriver : MonoBehaviour {
         FinishedCounter++;
 
         if (FinishedCounter == TotalComponents) {
-            SceneManager.LoadScene("Hub"); // TODO: Something other than return to hub & fade effects
+            outroDiag.BeginPlayingDialog();
         }
+    }
+
+    public void ReturnToHub(){
+        SceneManager.LoadScene("Hub");
     }
 }

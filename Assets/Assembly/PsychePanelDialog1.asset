@@ -12,4 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c8f0b50b74f8f34d910f4ef4e9b0b1c, type: 3}
   m_Name: PsychePanelDialog1
   m_EditorClassIdentifier: 
-  dialogs: []
+  dialogs:
+  - dialogText: The solar panels were used to power the spacecraft
+    robotVoice: 2
+    dialogAudio: {fileID: 0}
+  - dialogText: Apparently near earth they generated enough energy for 3-4 Average
+      US homes
+    robotVoice: 1
+    dialogAudio: {fileID: 0}
+  - dialogText: Yes but near Psyche they only made enough power for a little more
+      than a hairdryer
+    robotVoice: 0
+    dialogAudio: {fileID: 0}

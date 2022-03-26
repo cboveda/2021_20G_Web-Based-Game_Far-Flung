@@ -10,10 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7c8f0b50b74f8f34d910f4ef4e9b0b1c, type: 3}
-  m_Name: PsycheBodyDialog
+  m_Name: AssemblyOutro
   m_EditorClassIdentifier: 
   dialogs:
-  - dialogText: The Main Body of the Psyche Sapcecraft housed the Propultion system
-      and other systems
+  - dialogText: Congragulations, you managed to assemble the Psyche Spacecraft.
+    robotVoice: 1
+    dialogAudio: {fileID: 0}
+  - dialogText: I'm glad you were able to make sense of all the parts
+    robotVoice: 2
+    dialogAudio: {fileID: 0}
+  - dialogText: Thank you again,  now we can explroe other aspects of the Psyche
+      mission
     robotVoice: 0
     dialogAudio: {fileID: 0}
