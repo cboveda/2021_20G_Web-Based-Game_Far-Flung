@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
+using DialogMaker;
 
 namespace Flightpath
 {
@@ -15,29 +16,22 @@ namespace Flightpath
         [SerializeField]
         private float _timeScale;
         private PlayableDirector director;
-        public GameObject startButton;
 
         public void Awake()
         {
             director = GetComponent<PlayableDirector>();
-            director.played += Director_Played;
             director.stopped += Director_Stopped;
             Time.timeScale = _timeScale;
+        }
+
+        public void Start()
+        {
+            director.Play();
         }
 
         public void Director_Stopped(PlayableDirector o)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        }
-
-        public void Director_Played(PlayableDirector o)
-        {
-            startButton.SetActive(false);
-        }
-
-        public void StartTimeline()
-        {
-            director.Play();
         }
     }
 }
