@@ -302,6 +302,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 616103c812feec543af849cf7dc6e8f0, type: 2}
   - {fileID: 11400000, guid: 8cccd1471e8c8ed4d85c4912df5ed49d, type: 2}
   - {fileID: 11400000, guid: c79b5d0fa1781fa43a25ef34493fc139, type: 2}
+  _winScripts:
+  - {fileID: 11400000, guid: bc684184460585e46a7b862ab14ce639, type: 2}
 --- !u!1 &193540375
 GameObject:
   m_ObjectHideFlags: 0

@@ -32,7 +32,6 @@ public class MapTileFactory {
 
 public class MapTile {
 
-    private bool isVisible;
     public bool fin;
 
     public GameObject meshObj;
@@ -43,7 +42,6 @@ public class MapTile {
 
     public MapTile( string tileName ) {
 
-        isVisible = false;
         fin = false;
 
         meshObj = new GameObject( tileName );

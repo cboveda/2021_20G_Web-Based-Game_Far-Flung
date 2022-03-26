@@ -327,7 +327,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 053b128d7adec0cf694dccbfe73642f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 40
+  speed: 10
   maxAltitude: 150
   altitudeNeedle: {fileID: 942933102}
   signalsNeedle: {fileID: 1562910161}
@@ -336,8 +336,7 @@ MonoBehaviour:
   fadeDriver: {fileID: 1397074217}
   winFadeBanner: {fileID: 1432689468}
   loseFadeBanner: {fileID: 627775102}
-  hozSlerpSpped: 0.215
-  vertSlerpSpeed: 0.224
+  SlerpSpeed: 0.25
   rlTranslate: {x: 10, y: 0, z: 0}
   velocity: {x: 0, y: 0, z: 0}
   smoothTime: 0.3
@@ -369,7 +368,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.9245283, g: 0.51026034, b: 0.21368816, a: 1}
+  m_Color: {r: 0.93333334, g: 0.657864, b: 0.3568627, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -470,22 +469,22 @@ MonoBehaviour:
   terrainSeed: 60
   surfaceGrad:
     serializedVersion: 2
-    key0: {r: 0, g: 0, b: 0, a: 1}
-    key1: {r: 0.21933165, g: 0.38362953, b: 0.4114895, a: 1}
-    key2: {r: 0.44250622, g: 0.7739807, b: 0.8301887, a: 0}
-    key3: {r: 0.31585577, g: 0.2394579, b: 0.17954639, a: 0}
-    key4: {r: 0.2924528, g: 0.1406868, b: 0.05931826, a: 0}
-    key5: {r: 0.38831675, g: 0.25711316, b: 0.18676905, a: 0}
-    key6: {r: 0.80861086, g: 0.76755863, b: 0.7455487, a: 0}
-    key7: {r: 1, g: 1, b: 1, a: 0}
-    ctime0: 0
-    ctime1: 14842
-    ctime2: 23130
-    ctime3: 32575
+    key0: {r: 0.13725491, g: 0.14117648, b: 0.23921569, a: 1}
+    key1: {r: 0.15686275, g: 0.1882353, b: 0.3372549, a: 1}
+    key2: {r: 0.764151, g: 0.764151, b: 0.764151, a: 0}
+    key3: {r: 0.7176471, g: 0.69803923, b: 0.7254902, a: 0}
+    key4: {r: 0.735849, g: 0.6524591, b: 0.5310609, a: 0}
+    key5: {r: 0.5529412, g: 0.4862745, b: 0.39215687, a: 0}
+    key6: {r: 0.7830189, g: 0.5339263, b: 0.37304202, a: 0}
+    key7: {r: 0.8773585, g: 0.60579515, b: 0.21933962, a: 0}
+    ctime0: 11372
+    ctime1: 25058
+    ctime2: 31033
+    ctime3: 35852
     ctime4: 41441
-    ctime5: 45296
-    ctime6: 54934
-    ctime7: 64957
+    ctime5: 47224
+    ctime6: 53006
+    ctime7: 64571
     atime0: 0
     atime1: 65535
     atime2: 0

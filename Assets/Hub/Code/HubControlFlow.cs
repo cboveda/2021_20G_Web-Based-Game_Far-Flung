@@ -9,6 +9,7 @@ using Cinemachine;
 public class HubControlFlow : MonoBehaviour
 {
     int sceneNum;
+    bool cameraTransitionedToNewLevel;
 
     private CinemachineVirtualCamera assemblyCamera;
     private CinemachineVirtualCamera labCamera;
@@ -50,6 +51,7 @@ public class HubControlFlow : MonoBehaviour
         fader = GameObject.Find("FadeController").GetComponent<FadeController>();
 
         introStarted = false;
+        cameraTransitionedToNewLevel = false;
 
         bgAudio = GameObject.Find("Background Music").GetComponent<AudioSource>();
 
@@ -61,29 +63,34 @@ public class HubControlFlow : MonoBehaviour
         switch (HubTracker.LevelToLoad)
         {
             case 2:
+                SetPriorityCamera(assemblyCamera);
                 HideMainMenu();
                 diagFlight.BeginPlayingDialog();
-                SetPriorityCamera(flightPlanCamera);
+                //SetPriorityCamera(flightPlanCamera);
                 break;
             case 3:
+                SetPriorityCamera(flightPlanCamera);
                 HideMainMenu();
                 diagScan.BeginPlayingDialog();
-                SetPriorityCamera(missionControlCamera);
+                //SetPriorityCamera(missionControlCamera);
                 break;
             case 4:
+                SetPriorityCamera(missionControlCamera);
                 HideMainMenu();
                 diagComms.BeginPlayingDialog();
-                SetPriorityCamera(commsCamera);
+                //SetPriorityCamera(commsCamera);
                 break;
             case 5:
+                SetPriorityCamera(commsCamera);
                 HideMainMenu();
                 diagLab.BeginPlayingDialog();
-                SetPriorityCamera(labCamera);
+                //SetPriorityCamera(labCamera);
                 break;
             case 6:
+                SetPriorityCamera(labCamera);
                 HideMainMenu();
                 diagOutro.BeginPlayingDialog();
-                SetPriorityCamera(assemblyCamera);
+                //SetPriorityCamera(assemblyCamera);
                 break;
             default:
                 break;
@@ -99,6 +106,12 @@ public class HubControlFlow : MonoBehaviour
         if (HubTracker.IntroStarted)
         {
             bgAudio.volume = 0.1f;
+        }
+
+        if (!cameraTransitionedToNewLevel)
+        {
+            cameraTransitionedToNewLevel = true;
+            StartCoroutine(SetCameraForUpcomingLevel());
         }
 
         if (HubTracker.LevelToLoad >= 0)
@@ -157,6 +170,32 @@ public class HubControlFlow : MonoBehaviour
         StartCoroutine(BeginGame());
     }
 
+    private IEnumerator SetCameraForUpcomingLevel()
+    {
+        yield return new WaitForSeconds(1);
+        switch (HubTracker.LevelToLoad)
+        {
+            case 2:
+                SetPriorityCamera(flightPlanCamera);
+                break;
+            case 3:
+                SetPriorityCamera(missionControlCamera);
+                break;
+            case 4:
+                SetPriorityCamera(commsCamera);
+                break;
+            case 5:
+                SetPriorityCamera(labCamera);
+                break;
+            case 6:
+                SetPriorityCamera(assemblyCamera);
+                break;
+            default:
+                break;
+
+        }
+    }
+
     IEnumerator BeginGame()
     {
         //diagIntro = GameObject.Find("DialogIntro").GetComponent<DialogGenerator>();
@@ -209,7 +248,7 @@ public class HubControlFlow : MonoBehaviour
     public void LaunchAssembly()
     {
         HideMainMenu();
-        SceneManager.LoadScene("Assembly 3d");
+        SceneManager.LoadScene("Assembly");
     }
 
     public void LaunchFlightPlanning()

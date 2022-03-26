@@ -38,7 +38,7 @@ public class TerrainController : MonoBehaviour {
     }
 
     void Start() {
-        satellite.GetComponent<FlightControl>().speed = 35f;
+        satellite.GetComponent<FlightControl>().speed = 10f;
 
         // Application.targetFrameRate = 30; // Use to throttle web client, optional
     }
