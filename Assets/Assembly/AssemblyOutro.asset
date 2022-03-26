@@ -16,10 +16,13 @@ MonoBehaviour:
   - dialogText: Congragulations, you managed to assemble the Psyche Spacecraft.
     robotVoice: 1
     dialogAudio: {fileID: 0}
-  - dialogText: I'm glad you were able to make sense of all the parts
+  - dialogText: I'm glad you were able to put everyting together
+    robotVoice: 0
+    dialogAudio: {fileID: 0}
+  - dialogText: Good Job
     robotVoice: 2
     dialogAudio: {fileID: 0}
-  - dialogText: Thank you again,  now we can explroe other aspects of the Psyche
-      mission
-    robotVoice: 0
+  - dialogText: Lets head on to other parts of the Psyche mission, I can't wait to
+      learn more about it
+    robotVoice: 2
     dialogAudio: {fileID: 0}

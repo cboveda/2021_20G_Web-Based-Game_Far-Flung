@@ -52,6 +52,7 @@ public class AssemblyGameDriver : MonoBehaviour {
         FinishedCounter++;
 
         if (FinishedCounter == TotalComponents) {
+            mouseLook.PauseAssembly();
             outroDiag.BeginPlayingDialog();
         }
     }
