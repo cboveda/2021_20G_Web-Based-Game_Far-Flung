@@ -50,7 +50,7 @@ public class HubTest
         yield return new WaitForSeconds(3.1f);
         diagIntro = GameObject.Find("DialogIntro").GetComponent<DialogGenerator>();
         diagIntro.FastForwardDialog();
-        yield return new WaitForSecondsRealtime(0.1f);
+        yield return new WaitForSecondsRealtime(1f);
         Time.timeScale = 1;
         yield return new WaitForSeconds(0.1f);
         Assert.AreEqual(true, HubTracker.IntroStarted);
