@@ -14,7 +14,6 @@ public class AssemblyGameDriver : MonoBehaviour {
      public DialogGenerator introDiag;
     public DialogGenerator outroDiag;
 
-    public MouseLook mouseLook;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,16 +24,8 @@ public class AssemblyGameDriver : MonoBehaviour {
                 Debug.Log("Failed to find Assembly Intro Dialog Generator");
             }
         }
-
-        if( mouseLook == null){
-            try{
-                mouseLook = GameObject.Find("Assembly Camera").GetComponent<MouseLook>();
-            } catch {
-                Debug.Log("Failed to find Assembly Camrera mouse look");
-            }
-        }
         
-        mouseLook.PauseAssembly();
+        MouseLook.PauseAssembly();
         introDiag.BeginPlayingDialog();
     
         FinishedCounter = 0;
@@ -52,12 +43,15 @@ public class AssemblyGameDriver : MonoBehaviour {
         FinishedCounter++;
 
         if (FinishedCounter == TotalComponents) {
-            mouseLook.PauseAssembly();
+            MouseLook.PauseAssembly();
             outroDiag.BeginPlayingDialog();
         }
     }
 
     public void ReturnToHub(){
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        Time.timeScale = 1;
         SceneManager.LoadScene("Hub");
     }
 }

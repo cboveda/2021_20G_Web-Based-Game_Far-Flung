@@ -6,15 +6,19 @@ public class MouseLook : MonoBehaviour
     public float lookUpLimit;
     public float lookDownLimit;
 
-    public GameObject MenuObject;
+    static GameObject menu;
+
+    public static GameObject MenuObject 
+    {get {return menu? menu: (menu = GameObject.Find("Menus").transform.Find("PauseMenu").gameObject);}}
     
     float xRotation = 0f;
 
     public Transform playerBody;
     // public GameObject MenuObject; 
 
+    
     void Start() {
-
+       
     }
 
     void Update() {
@@ -34,26 +38,26 @@ public class MouseLook : MonoBehaviour
         }
     }
 
-    public void PauseAssembly() {
+    public static void PauseAssembly() {
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         Time.timeScale = 0;
     }
 
-    public void ResumeAssembly() {
+    public static void ResumeAssembly() {
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         Time.timeScale =1;
     }
 
-    public void ShowMenu(){
+    public static void ShowMenu(){
         PauseAssembly();
         MenuObject.SetActive(true);
     }
 
-    public void HideMenu(){
+    public static void HideMenu(){
         MenuObject.SetActive(false);
         ResumeAssembly();
     }

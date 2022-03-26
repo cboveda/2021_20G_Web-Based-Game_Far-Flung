@@ -1,3 +1,7 @@
 Solar panel facts came from an article on nasa.gov at https://www.nasa.gov/feature/jpl/nasa-s-psyche-gets-huge-solar-arrays-for-trip-to-metal-rich-asteroid
     0. "When the arrays fully deploy in flight, the spacecraft will be about the size of a singles tennis court"
     1. "Near Earth, the solar arrays generate 21 kilowatts – enough electricity to power three or four average U.S. homes. But at Psyche, they’ll produce only about 2 kilowatts – sufficient for little more than a hair dryer."
+
+DSOC dialog -  https://www.nasa.gov/directorates/heo/scan/opticalcommunications/psyche-dsoc/
+
+Front Rack - https://psyche.asu.edu/mission/the-spacecraft/  and https://youtu.be/0zmSIfYK_kU  (embedded in first link)
