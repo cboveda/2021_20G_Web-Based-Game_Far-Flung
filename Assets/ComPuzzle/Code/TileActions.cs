@@ -79,6 +79,7 @@ public class TileActions : MonoBehaviour
             
     bool disable = false;
     bool showingScore = false;
+    bool showingGameScore = false;
 
 
     void Start()
@@ -145,7 +146,8 @@ public class TileActions : MonoBehaviour
 
         // disable tiles
         showingScore = FindObjectOfType<Scoring>().getShowingScore;
-        if (FindObjectOfType<TileActions>().DisableTiles == true || showingScore)
+        showingGameScore = FindObjectOfType<Scoring>().getShowingGameScore;
+        if (FindObjectOfType<TileActions>().DisableTiles == true || showingScore || showingGameScore)
         {
             return;
         }
