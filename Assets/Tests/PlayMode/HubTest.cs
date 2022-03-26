@@ -171,7 +171,7 @@ public class HubTest
         eventSystem.SetSelectedGameObject(assemblyButton.gameObject);
         yield return new WaitForSeconds(0.1f);
         assemblyButton.onClick.Invoke();
-        yield return new WaitForSecondsRealtime(0.1f);
+        yield return new WaitForSecondsRealtime(1f);
         Time.timeScale = 1;
         yield return new WaitForSeconds(0.1f);
 
@@ -216,7 +216,7 @@ public class HubTest
         SceneManager.UnloadSceneAsync("Hub");
         yield return new WaitForSeconds(0.1f);
         SceneManager.LoadScene("Assembly");
-        yield return new WaitForSecondsRealtime(0.1f);
+        yield return new WaitForSecondsRealtime(1f);
         Time.timeScale = 1;
         yield return new WaitForSeconds(0.1f);
         MainMenu.ResetMenu();
@@ -228,7 +228,7 @@ public class HubTest
         SceneManager.LoadScene("Hub");
         yield return new WaitForSeconds(0.1f);
         MainMenu.AssemblyButtonClicked();
-        yield return new WaitForSecondsRealtime(0.1f);
+        yield return new WaitForSecondsRealtime(1f);
         Time.timeScale = 1;
         yield return new WaitForSeconds(0.5f);
         Assert.AreEqual(SceneManager.GetActiveScene().name, "Assembly");
@@ -270,7 +270,7 @@ public class HubTest
 
         yield return new WaitForSeconds(0.1f);
         SceneManager.LoadScene("Assembly");
-        yield return new WaitForSecondsRealtime(0.1f);
+        yield return new WaitForSecondsRealtime(1f);
         Time.timeScale = 1;
         yield return new WaitForSeconds(0.1f);
         MainMenu.ResetMenu();
