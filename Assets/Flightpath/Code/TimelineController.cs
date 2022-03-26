@@ -17,9 +17,6 @@ namespace Flightpath
         private float _timeScale;
         private PlayableDirector director;
         public GameObject startButton;
-        public Color highlightColor;
-        public Color defaultColor;
-        public float lerpRatio;
 
         public void Awake()
         {
@@ -27,11 +24,6 @@ namespace Flightpath
             director.played += Director_Played;
             director.stopped += Director_Stopped;
             Time.timeScale = _timeScale;
-        }
-
-        public void Update()
-        {
-            startButton.GetComponent<Image>().color = Color.Lerp(defaultColor, highlightColor, Mathf.PingPong(Time.time, lerpRatio));
         }
 
         public void Director_Stopped(PlayableDirector o)
