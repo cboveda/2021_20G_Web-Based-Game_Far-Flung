@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
-using DialogMaker;
 
 namespace Flightpath
 {
@@ -16,22 +16,37 @@ namespace Flightpath
         [SerializeField]
         private float _timeScale;
         private PlayableDirector director;
+        public GameObject startButton;
+        public Color highlightColor;
+        public Color defaultColor;
+        public float lerpRatio;
 
         public void Awake()
         {
             director = GetComponent<PlayableDirector>();
+            director.played += Director_Played;
             director.stopped += Director_Stopped;
             Time.timeScale = _timeScale;
         }
 
-        public void Start()
+        public void Update()
         {
-            director.Play();
+            startButton.GetComponent<Image>().color = Color.Lerp(defaultColor, highlightColor, Mathf.PingPong(Time.time, lerpRatio));
         }
 
         public void Director_Stopped(PlayableDirector o)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+
+        public void Director_Played(PlayableDirector o)
+        {
+            startButton.SetActive(false);
+        }
+
+        public void StartTimeline()
+        {
+            director.Play();
         }
     }
 }
