@@ -179,6 +179,7 @@ namespace DialogMaker
         public void FastForwardDialog()
         {
             goCanvasContainer.SetActive(false);
+            if(onDialogFinish != null) onDialogFinish.Invoke();
             Destroy(this);
         }
 
