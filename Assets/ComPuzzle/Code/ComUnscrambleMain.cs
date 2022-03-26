@@ -505,7 +505,7 @@ public class ComUnscrambleMain : MonoBehaviour
     {
 
         // display success comments
-        Color letterColor = new Color32(255, 70, 215, 255);
+        Color letterColor = new Color32(249, 160, 0, 255);
         successObject = GameObject.Find("Success");
         successObject.GetComponent<UnityEngine.UI.Text>().color = letterColor;
 
@@ -713,7 +713,8 @@ public class ComUnscrambleMain : MonoBehaviour
     {
         showingScore = FindObjectOfType<Scoring>().getShowingScore;
         showingGameScore = FindObjectOfType<Scoring>().getShowingGameScore;
-        if (showingScore || showingGameScore)
+        wordsAll = FindObjectOfType<ComUnscrambleMain>().wordsAllWin;
+        if (showingScore || showingGameScore || wordsAll)
         {
             return;
         }
@@ -721,8 +722,8 @@ public class ComUnscrambleMain : MonoBehaviour
             SpriteRenderer rend;
         string objectName = "";
         GameObject instructions;
-        Color highlightedColor = new Color32(98, 53, 118, 255);
-        Color letterColor = new Color32(255, 175, 69, 255);
+        Color highlightedColor = new Color32(89, 38, 81, 255);
+        Color letterColor = new Color32(249, 160, 0, 255);
 
         rend = GetComponent<SpriteRenderer>();
         objectName = rend.transform.name;
