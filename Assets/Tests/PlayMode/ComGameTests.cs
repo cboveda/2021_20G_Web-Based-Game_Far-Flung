@@ -172,7 +172,7 @@ public class ComGameTests
         Color finalObjectDefaultColor = finalObject.GetComponent<Text>().color;
 
         // verify color when selecting show final instructions
-        Color letterColor = new Color(1.0f, 0.68f, 0.27f, 1.0f);
+        Color letterColor = new Color32(249, 160, 0, 255);
         scriptObject.GetComponent<TileActions>().showFinalInstructions();
         Assert.AreEqual(finalObject.GetComponent<Text>().color, letterColor);
 
@@ -296,7 +296,7 @@ public class ComGameTests
         Color instructionsDefaultColor = instructions.transform.GetChild(canvasChild).GetChild(textChild).GetComponent<Text>().color;
 
         // verify instructions are displayed when mouse on
-        Color letterColor = new Color(1.0f, 0.68f, 0.27f, 1.0f);
+        Color letterColor = new Color32(249, 160, 0, 255);
         instructions.GetComponent<TileActions>().OnMouseEnter();
         Assert.AreEqual(instructions.transform.GetChild(canvasChild).GetChild(textChild).GetComponent<Text>().color, letterColor);
 
