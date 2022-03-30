@@ -90,10 +90,17 @@ public class SpectraPuzzle : LabPuzzle
         numInserted = 0;
 
         
+        if(difficulty == 0)
+        {
+            solution = CombineSpectra(iron, gold, silver);
+        }
+        else
+        {
+            solution = CombineSpectra(nickel, aluminum, gold);
+        }
+
+
         
-
-
-        solution = CombineSpectra(iron, gold, silver);
         
         mySpectraPuzzleDisplay.SetSpectraPuzzleToDisplay(this);
         mySpectraPuzzleDisplay.UpdateSolutionDisplay();
