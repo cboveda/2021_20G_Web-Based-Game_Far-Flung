@@ -1,10 +1,11 @@
 using UnityEngine;
-
+using DialogMaker;
 public class DropSlot : MonoBehaviour {
 
     public Vector3 offset;
     public string slotTypeMatch;
-    public TextAsset completionTextAsset;
+    public DialogGenerator completionDialog;
+
 
     bool set;
 
@@ -34,6 +35,10 @@ public class DropSlot : MonoBehaviour {
                     transform.parent.gameObject.GetComponent<AssemblyGameDriver>().CompleteObject();
 
                     set = true;
+
+                    if(!completionDialog) return; //skips dialog if null
+                    MouseLook.PauseAssembly();
+                    completionDialog.BeginPlayingDialog();
                 }
             }
         }

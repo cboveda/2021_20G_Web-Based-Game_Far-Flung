@@ -79,6 +79,7 @@ public class TileActions : MonoBehaviour
             
     bool disable = false;
     bool showingScore = false;
+    bool showingGameScore = false;
 
 
     void Start()
@@ -145,7 +146,8 @@ public class TileActions : MonoBehaviour
 
         // disable tiles
         showingScore = FindObjectOfType<Scoring>().getShowingScore;
-        if (FindObjectOfType<TileActions>().DisableTiles == true || showingScore)
+        showingGameScore = FindObjectOfType<Scoring>().getShowingGameScore;
+        if (FindObjectOfType<TileActions>().DisableTiles == true || showingScore || showingGameScore)
         {
             return;
         }
@@ -163,12 +165,12 @@ public class TileActions : MonoBehaviour
         //Debug.Log(validMove);
 
         // show instructions
-        Color highlightColor = new Color(0.38f, 0.20f, 0.46f, 1.0f);
+        Color highlightColor = new Color32(89, 38, 81, 255);
         objectName = rend.transform.name;
         //Debug.Log(objectName);        
         if (objectName == "Instructions")
         {
-            Color letterColor = new Color(1.0f, 0.68f, 0.27f, 1.0f);
+            Color letterColor = new Color32(249, 160, 0, 255);
             instructionsObject.GetComponent<Text>().color = letterColor;
             instructionsRend.sortingLayerName = "Numbers";
             instructionsMain.color = highlightColor;
@@ -367,7 +369,7 @@ public class TileActions : MonoBehaviour
         // add 3 second delay
         yield return new WaitForSeconds(3f);
 
-        Color letterColor = new Color(1.0f, 0.68f, 0.27f, 1.0f);
+        Color letterColor = new Color32(249, 160, 0, 255);
 
         // update background and board layer to the front
         background = GameObject.Find("ScrollBackground");
@@ -392,7 +394,7 @@ public class TileActions : MonoBehaviour
 
     public void showFinalInstructions()
     {
-        Color letterColor = new Color(1.0f, 0.68f, 0.27f, 1.0f);
+        Color letterColor = new Color32(249, 160, 0, 255);
         finalInstructionsObject.GetComponent<Text>().color = letterColor;
         finalInstructionsRend.sortingLayerName = "Numbers";
     }

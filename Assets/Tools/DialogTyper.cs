@@ -35,7 +35,7 @@ namespace DialogMaker
         {
             if (uiTextObject != null && textToType != null)
             {
-                timer -= Time.deltaTime;
+                timer -= Time.fixedDeltaTime;
 
                 while (timer <= 0f)
                 {

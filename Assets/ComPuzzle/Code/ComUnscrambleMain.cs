@@ -30,6 +30,8 @@ public class ComUnscrambleMain : MonoBehaviour
 
     AudioSource audioSource;
     GameObject volumeSlider;
+    bool showingScore = false;
+    bool showingGameScore = false;
 
 
     public bool word1ColorUpdated
@@ -302,6 +304,9 @@ public class ComUnscrambleMain : MonoBehaviour
 
         EnableWord(finalWordRow);
 
+        GameObject hint5 = GameObject.Find("Hint5");
+        hint5.transform.GetComponent<UnityEngine.UI.Button>().interactable = true;
+
         return win;
 
     }
@@ -355,8 +360,13 @@ public class ComUnscrambleMain : MonoBehaviour
         GameObject letterObject;
         int wordRow = 0;
         string winLetter = "";
-        bool wordUpdated = false;      
-       
+        bool wordUpdated = false;
+
+        GameObject hint1 = GameObject.Find("Hint1");
+        GameObject hint2 = GameObject.Find("Hint2");
+        GameObject hint3 = GameObject.Find("Hint3");
+        GameObject hint4 = GameObject.Find("Hint4");
+        GameObject hint5 = GameObject.Find("Hint5");
 
 
 
@@ -430,6 +440,7 @@ public class ComUnscrambleMain : MonoBehaviour
                     DisableWord(row);
                     FindObjectOfType<ComUnscrambleMain>().word1ColorUpdated = true;
                     Scoring.Instance.addToScore(250, "ComObjective8");
+                    hint1.transform.GetComponent<UnityEngine.UI.Button>().interactable = false;
                 }
                 break;
             case 2:
@@ -441,6 +452,7 @@ public class ComUnscrambleMain : MonoBehaviour
                     DisableWord(row);
                     FindObjectOfType<ComUnscrambleMain>().word2ColorUpdated = true;
                     Scoring.Instance.addToScore(250, "ComObjective9");
+                    hint2.transform.GetComponent<UnityEngine.UI.Button>().interactable = false;
                 }                
                 break;
             case 3:
@@ -452,6 +464,7 @@ public class ComUnscrambleMain : MonoBehaviour
                     DisableWord(row);
                     FindObjectOfType<ComUnscrambleMain>().word3ColorUpdated = true;
                     Scoring.Instance.addToScore(250, "ComObjective10");
+                    hint3.transform.GetComponent<UnityEngine.UI.Button>().interactable = false;
                 }                
                 break;
             case 4:
@@ -463,6 +476,7 @@ public class ComUnscrambleMain : MonoBehaviour
                     DisableWord(row);
                     FindObjectOfType<ComUnscrambleMain>().word4ColorUpdated = true;
                     Scoring.Instance.addToScore(250, "ComObjective11");
+                    hint4.transform.GetComponent<UnityEngine.UI.Button>().interactable = false;
                 }                
                 break;
             case 5:
@@ -475,6 +489,7 @@ public class ComUnscrambleMain : MonoBehaviour
                     FindObjectOfType<ComUnscrambleMain>().wordFinalColorUpdated = true;
                     FindObjectOfType<SendDataActions>().DisableDataButtons();
                     Scoring.Instance.addToScore(500, "ComObjective12");
+                    hint5.transform.GetComponent<UnityEngine.UI.Button>().interactable = false;
                     StartCoroutine(WinScene());
                 }                
                 break;
@@ -490,7 +505,7 @@ public class ComUnscrambleMain : MonoBehaviour
     {
 
         // display success comments
-        Color letterColor = new Color32(255, 70, 215, 255);
+        Color letterColor = new Color32(249, 160, 0, 255);
         successObject = GameObject.Find("Success");
         successObject.GetComponent<UnityEngine.UI.Text>().color = letterColor;
 
@@ -696,11 +711,19 @@ public class ComUnscrambleMain : MonoBehaviour
 
     public void OnMouseEnter()
     {
-        SpriteRenderer rend;
+        showingScore = FindObjectOfType<Scoring>().getShowingScore;
+        showingGameScore = FindObjectOfType<Scoring>().getShowingGameScore;
+        wordsAll = FindObjectOfType<ComUnscrambleMain>().wordsAllWin;
+        if (showingScore || showingGameScore || wordsAll)
+        {
+            return;
+        }
+
+            SpriteRenderer rend;
         string objectName = "";
         GameObject instructions;
-        Color highlightedColor = new Color32(98, 53, 118, 255);
-        Color letterColor = new Color32(255, 175, 69, 255);
+        Color highlightedColor = new Color32(89, 38, 81, 255);
+        Color letterColor = new Color32(249, 160, 0, 255);
 
         rend = GetComponent<SpriteRenderer>();
         objectName = rend.transform.name;
@@ -708,6 +731,7 @@ public class ComUnscrambleMain : MonoBehaviour
 
         if (objectName == "InstructionsBox")
         {            
+
             instructions = GameObject.Find("InstructionsText");
             instructions.GetComponent<UnityEngine.UI.Text>().color = letterColor;
                         

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 namespace DialogMaker
 {
@@ -43,6 +44,8 @@ namespace DialogMaker
         private int dialogFontSize = 36;
         [SerializeField]
         private float dialogTypingSpeed = 0.05f;
+
+        public UnityEvent onDialogFinish;
 
         // Wake up and feel the morning sun...
         void Awake()
@@ -165,6 +168,7 @@ namespace DialogMaker
                 else
                 {
                     goCanvasContainer.SetActive(false);
+                    if(onDialogFinish != null) onDialogFinish.Invoke();
                     Destroy(this);
                 }
             }
@@ -175,6 +179,7 @@ namespace DialogMaker
         public void FastForwardDialog()
         {
             goCanvasContainer.SetActive(false);
+            if(onDialogFinish != null) onDialogFinish.Invoke();
             Destroy(this);
         }
 
