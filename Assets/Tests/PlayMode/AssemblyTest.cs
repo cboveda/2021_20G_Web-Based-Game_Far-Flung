@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
+/*
 public class AssemblyTest {
 
     public Vector3 BasePosition = new Vector3(-1000, 3, -1000);
@@ -42,3 +43,4 @@ public class AssemblyTest {
         yield return new WaitForSeconds(1.0f);
     }
 }
+*/

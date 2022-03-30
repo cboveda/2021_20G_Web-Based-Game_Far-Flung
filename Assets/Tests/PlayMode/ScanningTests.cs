@@ -123,9 +123,9 @@ public class ScanningTests {
     public IEnumerator Test_TestCameraFollow() {
 
         Vector3 delta = camera.transform.position - ( terrainSatellite.transform.position + new Vector3( 0, 4, -10 ) );
-        Assert.AreEqual( delta.x, 0, 1.0f );
-        Assert.AreEqual( delta.y, 0, 1.0f );
-        Assert.AreEqual( delta.z, 0, 1.0f );
+        Assert.AreEqual( delta.x, 0, 2.0f );
+        Assert.AreEqual( delta.y, 0, 2.0f );
+        Assert.AreEqual( delta.z, 0, 2.0f );
         yield return null;
     }
 
