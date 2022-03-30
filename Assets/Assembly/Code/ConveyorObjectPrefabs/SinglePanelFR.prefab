@@ -11,6 +11,9 @@ GameObject:
   - component: {fileID: 8587941479897373595}
   - component: {fileID: 4648177517292622910}
   - component: {fileID: 7450453082686611700}
+  - component: {fileID: 4859660604735153632}
+  - component: {fileID: 7893093034423522319}
+  - component: {fileID: 1827603460812327458}
   m_Layer: 0
   m_Name: SinglePanelFR
   m_TagString: Untagged
@@ -81,3 +84,48 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!54 &4859660604735153632
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8963764057061474593}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &7893093034423522319
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8963764057061474593}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 250, y: 250, z: 5}
+  m_Center: {x: 0, y: 0, z: -1.0012851}
+--- !u!114 &1827603460812327458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8963764057061474593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f0aa67fca06ae8aa83292f99fc128ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ItemTypeIdentifier: PsycheSinglePanel
+  LERP_Speed: 0
+  HostConveyor: {fileID: 0}
+  NominalRotation: {x: 80, y: 13, z: 20}
