@@ -29,6 +29,7 @@ public class Scoring : MonoBehaviour
     GameObject scoreDetails;
     GameObject gameDetails;
     GameObject scoreBox;
+    GameObject scoringButton;
     GameObject mainScoreBox;
     int totalScore = 0;
     int comPuzzleScore = 0;
@@ -213,14 +214,14 @@ public class Scoring : MonoBehaviour
     private void Awake()
     {
 
-        if (Instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
+        //if (Instance != null)
+        //{
+        //    Destroy(gameObject);
+        //    return;
+        //}
 
         Instance = this;
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
     }
 
 
@@ -435,6 +436,7 @@ public class Scoring : MonoBehaviour
 
     void OnDestroy()
     {
+
         try
         {
             FindObjectOfType<Scoring>().getInitialized = false;
