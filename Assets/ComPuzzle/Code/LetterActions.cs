@@ -94,6 +94,9 @@ public class LetterActions : MonoBehaviour
         int textChild = 0;
 
 
+        Scoring.Instance.addToScore(-25, "ComObjective13");
+
+
         buttonName = EventSystem.current.currentSelectedGameObject.name;
         if (buttonName == "Hint1")
         {

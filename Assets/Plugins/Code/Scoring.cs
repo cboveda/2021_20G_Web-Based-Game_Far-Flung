@@ -128,6 +128,12 @@ public class Scoring : MonoBehaviour
         set { comObjective12 = value; }
     }
 
+    public int getComObjective13
+    {
+        get { return comObjective13; }
+        set { comObjective13 = value; }
+    }
+
     public bool getInitialized
     {
         get { return initialized; }
@@ -648,6 +654,13 @@ public class Scoring : MonoBehaviour
                 }
                 FindObjectOfType<Scoring>().getComObjective12 = newScore;
                 break;
+            case "ComObjective13":
+                if (!reset)
+                {
+                    newScore = FindObjectOfType<Scoring>().getComObjective13 + score;
+                }
+                FindObjectOfType<Scoring>().getComObjective13 = newScore;
+                break;
         }
 
         gameScoreObj = GameObject.Find(objectName);
@@ -671,7 +684,7 @@ public class Scoring : MonoBehaviour
         GameObject gameScore;
 
         string[] comPuzzleObjectives = { "ComObjective1", "ComObjective2", "ComObjective3", "ComObjective4", "ComObjective5" };
-        string[] comUnscrambleObjective = { "ComObjective6", "ComObjective7", "ComObjective8", "ComObjective9", "ComObjective10", "ComObjective11", "ComObjective12", };
+        string[] comUnscrambleObjective = { "ComObjective6", "ComObjective7", "ComObjective8", "ComObjective9", "ComObjective10", "ComObjective11", "ComObjective12", "ComObjective13" };
         string[] assemblyObjectives = { };
         string[] flightpathObjectives = { };
         string[] scene5Objectives = { };
