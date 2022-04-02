@@ -90,7 +90,7 @@ public class SpectraPuzzle : LabPuzzle
         numInserted = 0;
 
         
-        if(difficulty == 0)
+        if(difficulty == 1)
         {
             solution = CombineSpectra(iron, gold, silver);
         }

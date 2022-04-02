@@ -188,7 +188,7 @@ public class LabMain : MonoBehaviour
         currentSpectraPuzzle = mySpectraPuzzle;
         isCurrentSpectraPuzzleSolved = false;
 
-        mySpectraPuzzle.InitializeSpectraPuzzle("Puzzle " + levelSpectra.ToString(), 0);
+        mySpectraPuzzle.InitializeSpectraPuzzle("Puzzle " + levelSpectra.ToString(), levelSpectra);
 
         
         
