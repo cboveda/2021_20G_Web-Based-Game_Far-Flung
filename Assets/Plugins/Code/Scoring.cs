@@ -204,7 +204,7 @@ public class Scoring : MonoBehaviour
     {
         {"MainScoring", "Total"},
         {"MainScoreBox", "0"},
-        {"ScoringButton", "Game"},
+        {"ScoringButton", "Score"},
         {"ScoreBox", "0"}
     };
 
@@ -213,14 +213,14 @@ public class Scoring : MonoBehaviour
     private void Awake()
     {
 
-        if (Instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
+        //if (Instance != null)
+        //{
+         //   Destroy(gameObject);
+        //    return;
+        //}
 
         Instance = this;
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
     }
 
 
