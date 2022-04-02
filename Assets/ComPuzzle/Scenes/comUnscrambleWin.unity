@@ -799,7 +799,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Highlight one of the pictures for more details or click next game to continue.
+  m_Text: Highlight one of the pictures for more details or click Return to Hub to
+    continue.
 --- !u!222 &1112281709
 CanvasRenderer:
   m_ObjectHideFlags: 0

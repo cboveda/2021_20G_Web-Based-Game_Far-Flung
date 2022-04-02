@@ -1851,7 +1851,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Slide the puzzle pieces to complete the picture.  Click on the game score
-    to see the objectives.
+    to see different objectives.
 --- !u!222 &517386943
 CanvasRenderer:
   m_ObjectHideFlags: 0
