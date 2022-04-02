@@ -16,22 +16,22 @@ public class FlightpathTutorialTest
         yield return new WaitForFixedUpdate();  // Load scene
 
         DialogController dc = Object.FindObjectOfType<DialogController>();
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(3f);
 
         dc.dg.BeginPlayingDialog();  // Speed up display
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(3f);
 
         dc.dg.BeginPlayingDialog();  // Advance to dg position 2
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(3f);
 
         Assert.AreEqual(true, dc.angleSlider.interactable);
         dc.angleSlider.value = 42;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(3f);
 
         Assert.AreEqual(false, dc.angleSlider.interactable);
         Assert.AreEqual(true, dc.powerSlider.interactable);
         dc.powerSlider.value = 84;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(3f);
 
         Assert.AreEqual(true, dc.launchButton.interactable);
         dc.launchManager.OnLaunchButtonClicked();
@@ -43,23 +43,23 @@ public class FlightpathTutorialTest
 
         Assert.AreEqual(false, dc.launchButton.interactable);
         dc.dg.BeginPlayingDialog();  // Speed up display
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(3f);
 
         dc.dg.BeginPlayingDialog();  // Advance to dg position 2
-        yield return new WaitForSeconds(1f);  // Unlock reset button
+        yield return new WaitForSeconds(3f);  // Unlock reset button
 
         Assert.AreEqual(true, dc.resetButton.interactable);
         dc.launchManager.OnResetButtonClicked();
-        yield return new WaitForSeconds(1f);  // Unlock all
+        yield return new WaitForSeconds(3f);  // Unlock all
 
         Assert.AreEqual(true, dc.resetButton.interactable);
         Assert.AreEqual(true, dc.launchButton.interactable);
         Assert.AreEqual(true, dc.angleSlider.interactable);
         Assert.AreEqual(true, dc.powerSlider.interactable);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(3f);
         dc.launchManager.OnLaunchButtonClicked();
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(3f);
         dc.launchManager.OnResetButtonClicked();
     }
 }
