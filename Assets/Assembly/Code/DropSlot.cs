@@ -43,4 +43,8 @@ public class DropSlot : MonoBehaviour {
             }
         }
     }
+
+    public void TriggerTestHook( Collider c ) {
+        this.OnTriggerEnter(c);
+    }
 }
