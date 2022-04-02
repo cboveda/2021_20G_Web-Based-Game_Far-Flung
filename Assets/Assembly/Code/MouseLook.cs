@@ -5,28 +5,32 @@ public class MouseLook : MonoBehaviour
     public float mouseSensitivity = 100f;
     public float lookUpLimit;
     public float lookDownLimit;
+
+    static GameObject menu;
+
+    public static GameObject MenuObject 
+    {get {return menu? menu: (menu = GameObject.Find("Menus").transform.Find("PauseMenu").gameObject);}}
     
     float xRotation = 0f;
 
     public Transform playerBody;
     // public GameObject MenuObject; 
 
+    
     void Start() {
-
-        ResumeAssembly();
-        LookUpdate();
+       
     }
 
     void Update() {
         
         if ( Input.GetButtonDown("Cancel") ) {
-            if (Cursor.lockState == CursorLockMode.Locked)
+            if (Cursor.lockState == CursorLockMode.Locked )
             {
-                PauseAssembly();
+                ShowMenu();
             
-            } else {
+            } else if(MenuObject.activeSelf){
             
-                ResumeAssembly();
+                HideMenu();
             }
         }
         if (Cursor.lockState == CursorLockMode.Locked) {
@@ -34,18 +38,28 @@ public class MouseLook : MonoBehaviour
         }
     }
 
-    public void PauseAssembly() {
+    public static void PauseAssembly() {
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        // MenuObject.SetActive(true);
+        Time.timeScale = 0;
     }
 
-    public void ResumeAssembly() {
+    public static void ResumeAssembly() {
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        // MenuObject.SetActive(false);
+        Time.timeScale =1;
+    }
+
+    public static void ShowMenu(){
+        PauseAssembly();
+        MenuObject.SetActive(true);
+    }
+
+    public static void HideMenu(){
+        MenuObject.SetActive(false);
+        ResumeAssembly();
     }
 
     void LookUpdate() {

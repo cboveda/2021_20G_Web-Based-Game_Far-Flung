@@ -18,7 +18,7 @@ public class ConveyorPickup : MonoBehaviour {
     void Update() {
 
         if (Input.GetKeyDown(KeyCode.E)) {
-
+            
             if (heldObj == null) {
 
                 RaycastHit hit;
@@ -42,7 +42,7 @@ public class ConveyorPickup : MonoBehaviour {
     }
 
     void PickupObject(RaycastHit hit) {
-
+        
         GameObject pickObj = hit.transform.gameObject;
         ConveyorObject c_o = pickObj.GetComponent<ConveyorObject>();
 
