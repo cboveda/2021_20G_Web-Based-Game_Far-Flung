@@ -17,7 +17,7 @@ public class AssemblyGameDriver : MonoBehaviour {
     // Start is called before the first frame update
     void Start()
     {
-        if(introDiag == null){
+        if (introDiag == null) {
             try{
                 introDiag = GameObject.Find("AssemblyIntro").GetComponent<DialogGenerator>();
             } catch {
