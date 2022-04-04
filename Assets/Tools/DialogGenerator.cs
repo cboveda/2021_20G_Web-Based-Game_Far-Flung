@@ -136,11 +136,11 @@ namespace DialogMaker
             if (dialogContainer == null)
             {
                 //Debug.Assert(dialogContainer == null, "Warning: A DialogScriptableObject is desired but not found.");
-                Debug.Log("Warning: A DialogScriptableObject is desired but not found.");
+                Debug.LogAssertion("Warning: A DialogScriptableObject is desired but not found.");
             }
         }
 
-        public bool BeginPlayingDialog()
+        public virtual bool BeginPlayingDialog()
         {
             if (dialogContainer == null || dialogTyper == null)
             {
