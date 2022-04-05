@@ -20,12 +20,6 @@ public class BackgroundScroll : MonoBehaviour
     int rightLimit = -11;
     float time;
 
-    public bool getScroll
-    {
-        get { return scroll; }
-        set { scroll = value; }
-    }
-
 
     // Start is called before the first frame update
     void Start()
