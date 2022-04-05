@@ -424,7 +424,7 @@ public class ComGameTests
 
         // get an info object to use
         GameObject infoObject = GameObject.Find("imagerinfo");
-        
+
         // verify image and info is highlighted and displayed
         Color highlightColor = new Color32(255, 255, 255, 255);
         String displaySortingLayer = "Board";
@@ -437,7 +437,17 @@ public class ComGameTests
         Color highlightOff = new Color32(255, 255, 255, 150);
         String hiddenSortingLayer = "Hidden";
         scriptObject.GetComponent<ComUnscrambleInfo>().HideInfo("imager");
-        GameObject instructions = GameObject.Find("InstructionsText");        
+        GameObject instructions = GameObject.Find("InstructionsText");
+        Assert.AreEqual(infoObject.GetComponent<SpriteRenderer>().sortingLayerName, hiddenSortingLayer);
+        Assert.AreEqual(instructions.GetComponent<UnityEngine.UI.Text>().enabled, true);
+
+        // verify image and info is highlighted and displayed with mouse on
+        scriptObject.GetComponent<ComUnscrambleInfo>().OnMouseEnter();
+        Assert.AreEqual(scriptObject.GetComponent<SpriteRenderer>().color, highlightColor);
+        Assert.AreEqual(infoObject.GetComponent<SpriteRenderer>().sortingLayerName, displaySortingLayer);
+
+        // verify image and info is highlighted and displayed with mouse off
+        scriptObject.GetComponent<ComUnscrambleInfo>().OnMouseExit();
         Assert.AreEqual(infoObject.GetComponent<SpriteRenderer>().sortingLayerName, hiddenSortingLayer);
         Assert.AreEqual(instructions.GetComponent<UnityEngine.UI.Text>().enabled, true);
 
@@ -476,4 +486,277 @@ public class ComGameTests
 
     }
 
+    [UnityTest]
+    public IEnumerator TestUnscrambleSpecialLetters()
+    {
+        // verify special letters are correct in win positions
+
+        // load scene with the scriptable objects
+        SceneManager.LoadScene("comUnscramble");
+        yield return new WaitForSeconds(0.2f); // delay to load scene
+
+        // test values
+        Dictionary<string, string> testLetters = new Dictionary<string, string>()
+        {
+              {"6", "C"},
+              {"9", "O"},
+              {"12", "O"},
+              {"18", "N"},
+              {"19", "M"},
+              {"23", "E"},
+              {"32", "T"},
+              {"34", "N"},
+              {"35", "O"},
+              {"36", "C"},
+              {"37", "O"},
+              {"38", "M"},
+              {"39", "E"},
+              {"40", "T"}
+
+        };
+
+
+        string[] specialLetters = { };
+        string winLetter = "";
+        string specialLetter = "";
+        int offset = -1;
+
+        ComGameData comGameData = GameObject.FindObjectOfType<ComGameData>();
+
+        int rows = 5;
+        for (int row = 1; row <= rows; row++)
+        {
+            specialLetters = comGameData.getSpecialLetters(row);
+            foreach (string index in specialLetters)
+            {
+                if (row == 2)
+                {
+                    offset = -8;
+                }
+                if (row == 3)
+                {
+                    offset = -19;
+                }
+                if (row == 4)
+                {
+                    offset = -27;
+                }
+                if (row == 5)
+                {
+                    offset = -34;
+                }
+
+                specialLetter = testLetters[index];
+                winLetter = comGameData.getWinLetter(row, int.Parse(index) + offset);
+                Assert.AreEqual(specialLetter, winLetter);
+            }
+        }
+
+    }
+
+
+    [UnityTest]
+    public IEnumerator TestUnscrambleMainGetterSetters()
+    {
+        // verify getters and setters
+
+        // load scene with the scriptable objects
+        SceneManager.LoadScene("comUnscramble");
+        yield return new WaitForSeconds(0.2f); // delay to load scene
+
+        ComUnscrambleMain unscrambleMainObject = GameObject.FindObjectOfType<ComUnscrambleMain>();
+        bool colorUpdated = false;
+        bool wordWin = false;
+
+        // verify color updated default
+        colorUpdated = unscrambleMainObject.word1ColorUpdated;
+        Assert.AreEqual(colorUpdated, false);
+        // verify color updated change
+        unscrambleMainObject.word1ColorUpdated = true;
+        colorUpdated = unscrambleMainObject.word1ColorUpdated;
+        Assert.AreEqual(colorUpdated, true);
+
+        // verify color updated default
+        colorUpdated = unscrambleMainObject.word2ColorUpdated;
+        Assert.AreEqual(colorUpdated, false);
+        // verify color updated change
+        unscrambleMainObject.word2ColorUpdated = true;
+        colorUpdated = unscrambleMainObject.word2ColorUpdated;
+        Assert.AreEqual(colorUpdated, true);
+
+        // verify color updated default
+        colorUpdated = unscrambleMainObject.word3ColorUpdated;
+        Assert.AreEqual(colorUpdated, false);
+        // verify color updated change
+        unscrambleMainObject.word3ColorUpdated = true;
+        colorUpdated = unscrambleMainObject.word3ColorUpdated;
+        Assert.AreEqual(colorUpdated, true);
+
+        // verify color updated default
+        colorUpdated = unscrambleMainObject.word4ColorUpdated;
+        Assert.AreEqual(colorUpdated, false);
+        // verify color updated change
+        unscrambleMainObject.word4ColorUpdated = true;
+        colorUpdated = unscrambleMainObject.word4ColorUpdated;
+        Assert.AreEqual(colorUpdated, true);
+
+        // verify color updated default
+        colorUpdated = unscrambleMainObject.wordFinalColorUpdated;
+        Assert.AreEqual(colorUpdated, false);
+        // verify color updated change
+        unscrambleMainObject.wordFinalColorUpdated = true;
+        colorUpdated = unscrambleMainObject.wordFinalColorUpdated;
+        Assert.AreEqual(colorUpdated, true);
+
+        // verify word win default
+        wordWin = unscrambleMainObject.word1win;
+        Assert.AreEqual(wordWin, false);
+        // verify word win change
+        unscrambleMainObject.word1win = true;
+        wordWin = unscrambleMainObject.word1win;
+        Assert.AreEqual(wordWin, true);
+
+        // verify word win default
+        wordWin = unscrambleMainObject.word2win;
+        Assert.AreEqual(wordWin, false);
+        // verify word win change
+        unscrambleMainObject.word2win = true;
+        wordWin = unscrambleMainObject.word2win;
+        Assert.AreEqual(wordWin, true);
+        
+        // verify word win default
+        wordWin = unscrambleMainObject.word3win;
+        Assert.AreEqual(wordWin, false);
+        // verify word win change
+        unscrambleMainObject.word3win = true;
+        wordWin = unscrambleMainObject.word3win;
+        Assert.AreEqual(wordWin, true);
+        
+        // verify word win default
+        wordWin = unscrambleMainObject.word4win;
+        Assert.AreEqual(wordWin, false);
+        // verify word win change
+        unscrambleMainObject.word4win = true;
+        wordWin = unscrambleMainObject.word4win;
+        Assert.AreEqual(wordWin, true);
+        
+        // verify word win default
+        wordWin = unscrambleMainObject.wordFinalWin;
+        Assert.AreEqual(wordWin, false);
+        // verify word win change
+        unscrambleMainObject.wordFinalWin = true;
+        wordWin = unscrambleMainObject.wordFinalWin;
+        Assert.AreEqual(wordWin, true);
+        
+        // verify word win default
+        wordWin = unscrambleMainObject.wordsAllWin;
+        Assert.AreEqual(wordWin, false);
+        // verify word win change
+        unscrambleMainObject.wordsAllWin = true;
+        wordWin = unscrambleMainObject.wordsAllWin;
+        Assert.AreEqual(wordWin, true);
+
+
+    }
+
+    [UnityTest]
+    public IEnumerator TestUnscrambleMainFinalWord()
+    {
+        // verify unscramble final word win 
+
+        // load scene with the scriptable objects
+        SceneManager.LoadScene("comUnscramble");
+        yield return new WaitForSeconds(0.2f); // delay to load scene
+
+        ComUnscrambleMain unscrambleMainObject = GameObject.FindObjectOfType<ComUnscrambleMain>();
+
+        GameObject letterbox = GameObject.Find("letterbox5");
+
+        string sortingLayer = "";
+        sortingLayer = letterbox.GetComponent<SpriteRenderer>().sortingLayerName;
+        Assert.AreEqual(sortingLayer, "Default");
+
+        unscrambleMainObject.UpdateFinalWord();
+
+        sortingLayer = letterbox.GetComponent<SpriteRenderer>().sortingLayerName;
+        Assert.AreEqual(sortingLayer, "Puzzle");
+
+    }
+
+    [UnityTest]
+    public IEnumerator TestUnscrambleWinScene()
+    {
+        // verify unscramble win scene
+
+        // load scene with the scriptable objects
+        SceneManager.LoadScene("comUnscramble");
+        yield return new WaitForSeconds(0.2f); // delay to load scene
+        
+        ComUnscrambleMain unscrambleMainObject = GameObject.FindObjectOfType<ComUnscrambleMain>();
+        ComGameData comGameDataObject = GameObject.FindObjectOfType<ComGameData>();
+        int backgroundChild = 0;
+        int textChild = 0;
+        bool finalWordWin = true;
+        string winLetter = "";
+        int wordRow = 1;
+        int index = 0;
+        GameObject letterObject;
+        int finalWord = 5;
+
+        // verify final word is not solved
+        finalWordWin = unscrambleMainObject.checkWordWin(finalWord);
+        Assert.AreEqual(finalWordWin, false);
+        
+        unscrambleMainObject.EnableWord(1);
+        unscrambleMainObject.EnableWord(2);
+        unscrambleMainObject.EnableWord(3);
+        unscrambleMainObject.EnableWord(4);
+        unscrambleMainObject.EnableWord(5);
+
+        // set buttons with win letters
+        int letterCount = 40;
+        for (int letterPos = 1; letterPos <= letterCount; letterPos++)
+        {
+            if (letterPos == 8)
+            {
+                wordRow = 2;
+                index = 0;
+            }
+            if (letterPos == 19)
+            {
+                wordRow = 3;
+                index = 0;
+            }
+            if (letterPos == 27)
+            {
+                wordRow = 4;
+                index = 0;
+            }
+            if (letterPos == 34)
+            {
+                wordRow = 5;
+                index = 0;
+            }
+
+            letterObject = GameObject.Find(letterPos.ToString() + "_Button");
+            winLetter = comGameDataObject.getWinLetter(wordRow, index);
+            Debug.Log(winLetter);
+            
+            letterObject.transform.GetChild(backgroundChild).GetChild(textChild).GetComponent<UnityEngine.UI.Text>().text = winLetter;
+
+            index++;
+        }
+
+        yield return new WaitForSeconds(4.0f); // delay to load win
+
+        // verify success comments are showing after final word win
+        Color winColor = new Color32(249, 160, 0, 255);
+        GameObject successObject = successObject = GameObject.Find("Success");
+        Color successColor = successObject.GetComponent<UnityEngine.UI.Text>().color;
+        Assert.AreEqual(successColor, winColor);
+
+        // verify final word solved
+        finalWordWin = unscrambleMainObject.checkWordWin(finalWord);
+        Assert.AreEqual(finalWordWin, true);
+    }
 }
