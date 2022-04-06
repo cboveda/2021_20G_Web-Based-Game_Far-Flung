@@ -1889,18 +1889,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9a8b20fc6cae9849be0391276a31eea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _launchButton: {fileID: 962324619}
-  _resetButton: {fileID: 1433370923}
-  _powerSlider: {fileID: 1957714126}
-  _powerHandle: {fileID: 1502241829}
-  _powerTargetArrow: {fileID: 262474308}
-  _powerTargetArrow2: {fileID: 42178380}
-  _angleSlider: {fileID: 472336773}
-  _angleHandle: {fileID: 193540375}
-  _angleTargetArrow: {fileID: 814986320}
-  _angleTargetArrow2: {fileID: 328216388}
-  _launchManager: {fileID: 65087361}
-  _dialogGeneratorPrefab: {fileID: 1112058421538219625, guid: f7e371b84ab245743b9c0d81899537c5, type: 3}
+  launchButton: {fileID: 962324619}
+  resetButton: {fileID: 1433370923}
+  powerSlider: {fileID: 1957714126}
+  powerHandle: {fileID: 1502241829}
+  powerTargetArrow: {fileID: 262474308}
+  powerTargetArrow2: {fileID: 42178380}
+  angleSlider: {fileID: 472336773}
+  angleHandle: {fileID: 193540375}
+  angleTargetArrow: {fileID: 814986320}
+  angleTargetArrow2: {fileID: 328216388}
+  launchManager: {fileID: 65087361}
+  dialogGeneratorPrefab: {fileID: 1112058421538219625, guid: f7e371b84ab245743b9c0d81899537c5, type: 3}
+  dialogGenerator: {fileID: 0}
+  dg: {fileID: 0}
   Scripts:
   - {fileID: 11400000, guid: 39003961b5b27224aa73edafce6551f4, type: 2}
   - {fileID: 11400000, guid: d8af7b58da6c14f489544cd0a8c2dd4d, type: 2}
@@ -2648,14 +2650,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5afb55324325c904b887f84a8e912e8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pathBuilder: {fileID: 1805849379}
-  _objectFactory: {fileID: 1596357452}
-  _earthPath: {fileID: 11400000, guid: f761327af285d104f9b336909d81b1a9, type: 2}
-  _marsPath: {fileID: 11400000, guid: 89019f3e12919e74d990626683385c92, type: 2}
-  _asteroidPath: {fileID: 11400000, guid: e573b9ed75b360f4f88b120a5cd3205b, type: 2}
-  _eventSystem: {fileID: 65087356}
-  _arrow: {fileID: 207803551}
-  _satellitePathDrawing: {fileID: 1648258612}
+  dynamicObjects: {fileID: 0}
+  pathBuilder: {fileID: 1805849379}
+  objectFactory: {fileID: 1596357452}
+  earthPath: {fileID: 11400000, guid: f761327af285d104f9b336909d81b1a9, type: 2}
+  marsPath: {fileID: 11400000, guid: 89019f3e12919e74d990626683385c92, type: 2}
+  asteroidPath: {fileID: 11400000, guid: e573b9ed75b360f4f88b120a5cd3205b, type: 2}
+  eventSystem: {fileID: 65087356}
+  arrow: {fileID: 207803551}
+  satellitePathDrawing: {fileID: 1648258612}
+  sun: {fileID: 0}
+  earth: {fileID: 0}
+  mars: {fileID: 0}
+  asteroid: {fileID: 0}
+  satellite: {fileID: 0}
 --- !u!4 &1334412776
 Transform:
   m_ObjectHideFlags: 0

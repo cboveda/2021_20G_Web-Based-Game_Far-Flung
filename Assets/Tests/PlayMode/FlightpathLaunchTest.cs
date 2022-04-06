@@ -249,7 +249,7 @@ public class FlightpathLaunchTest
         satellite.GetComponent<Launch>().DoLaunch();
         yield return new WaitForFixedUpdate();
         float angle = Vector3.Angle(satellite.GetComponent<Rigidbody>().velocity, Vector3.right);
-        Assert.AreEqual(targetAngle, angle, 0.1f);
+        Assert.AreEqual(targetAngle, angle, 1f);
     }
 
     [UnityTest]
@@ -260,21 +260,21 @@ public class FlightpathLaunchTest
         satellite.GetComponent<Launch>().DoLaunch();
         yield return new WaitForFixedUpdate();
         float power = satellite.GetComponent<Rigidbody>().velocity.magnitude;
-        Assert.AreEqual(targetPower, power, 0.1f);
+        Assert.AreEqual(targetPower, power, 1f);
     }
 
     [UnityTest]
     public IEnumerator Test_LaunchManagerInitializesSatelliteAngle()
     {
         yield return new WaitForFixedUpdate();
-        Assert.AreEqual(10f, satellite.GetComponent<Launch>().GetAngle(), 0.1f);
+        Assert.AreEqual(10f, satellite.GetComponent<Launch>().GetAngle(), 1f);
     }
 
     [UnityTest]
     public IEnumerator Test_LaunchManagerInitializesSatellitePower()
     {
         yield return new WaitForFixedUpdate();
-        Assert.AreEqual(10f, satellite.GetComponent<Launch>().GetPower(), 0.1f);
+        Assert.AreEqual(10f, satellite.GetComponent<Launch>().GetPower(), 1f);
     }
 
     [UnityTest]
