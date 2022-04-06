@@ -11,10 +11,6 @@ public class ConveyorSystem : MonoBehaviour {
     public float ConveyorSpeed = 0.1f;
     public float ConveyorLength = 20;
 
-    public float DisolveDurration = 1f;
-
-    public Material DisolveMaterial;
-
     private Queue<ConveyorObject> conveyor_object_backlog = new Queue<ConveyorObject>(); 
     private List<ConveyorObject> conveyor_objects_in_use = new List<ConveyorObject>();
 
@@ -30,8 +26,6 @@ public class ConveyorSystem : MonoBehaviour {
 
             ConveyorObject co_e = Instantiate<ConveyorObject>(co);
             co_e.gameObject.SetActive(false);
-            co_e.DisolveDurration = DisolveDurration;
-            co_e.DisolveMaterial = DisolveMaterial;
 
             conveyor_object_backlog.Enqueue( co_e );
         }
