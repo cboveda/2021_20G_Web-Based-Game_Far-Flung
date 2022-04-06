@@ -441,16 +441,6 @@ public class ComGameTests
         Assert.AreEqual(infoObject.GetComponent<SpriteRenderer>().sortingLayerName, hiddenSortingLayer);
         Assert.AreEqual(instructions.GetComponent<UnityEngine.UI.Text>().enabled, true);
 
-        // verify image and info is highlighted and displayed with mouse on
-        GameObject script = GameObject.Find("spectrometer");
-        script.GetComponent<ComUnscrambleInfo>().OnMouseEnter();
-        Assert.AreEqual(script.GetComponent<SpriteRenderer>().color, highlightColor);
-
-        // verify image and info is highlighted and displayed with mouse off
-        script.GetComponent<ComUnscrambleInfo>().OnMouseExit();
-        Assert.AreEqual(instructions.GetComponent<UnityEngine.UI.Text>().enabled, true);
-
-
     }
 
     [UnityTest]
