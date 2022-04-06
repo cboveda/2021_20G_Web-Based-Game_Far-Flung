@@ -4304,6 +4304,8 @@ MonoBehaviour:
   ConveyorCapacity: 3
   ConveyorSpeed: 2
   ConveyorLength: 20
+  DisolveDurration: 1
+  DisolveMaterial: {fileID: 2100000, guid: 3a11cefbf982475409c6818bf57ec382, type: 2}
 --- !u!4 &134868762
 Transform:
   m_ObjectHideFlags: 0

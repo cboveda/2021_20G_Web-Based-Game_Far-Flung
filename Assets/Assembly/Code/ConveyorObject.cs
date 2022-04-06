@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class ConveyorObject : MonoBehaviour
@@ -6,6 +7,10 @@ public class ConveyorObject : MonoBehaviour
     public float LERP_Speed;
     public ConveyorSystem HostConveyor;
     public Vector3 NominalRotation; // Axis correction
+
+    public float DisolveDurration = 1f;
+
+    public Material DisolveMaterial;
 
     Vector3 Beginning;
     Vector3 Destination;
@@ -39,6 +44,7 @@ public class ConveyorObject : MonoBehaviour
         TimeZero = Time.time;
         Distance = Vector3.Distance( Beginning, Destination );
         transform.position = Beginning;
+        StartCoroutine(resolveObject());
     }
 
     // Update is called once per frame
@@ -51,11 +57,52 @@ public class ConveyorObject : MonoBehaviour
             transform.position = Vector3.Lerp(Beginning, Destination, journey_fraction); // move with respect to time
 
             if ( Vector3.Distance( Beginning, transform.position ) >= (Distance - 0.1) ) { // if we have reached the end of the conveyor
-                gameObject.SetActive(false);
-                HostConveyor.EndObjectTravel( this );
-                AttachmentState = false; // no longer attached to conveyor
+                StartCoroutine(removeFromConveyor());
             }
         }
+    }
+
+    private IEnumerator removeFromConveyor(){
+        yield return StartCoroutine(disolveObject());//disolve the object
+        gameObject.SetActive(false);
+        HostConveyor.EndObjectTravel( this );
+        AttachmentState = false; // no longer attached to conveyor
+
+    }
+
+    /*
+        Disolves the object given over Disolve Durration
+    */
+    private IEnumerator disolveObject(){
+        Material originalMat = gameObject.GetComponent<Renderer>().material;
+        Material disolveMat = gameObject.GetComponent<Renderer>().material = DisolveMaterial;
+        float timeStart = Time.time;
+        float timeElapsed =0f;
+        while(timeElapsed < DisolveDurration){
+            float DisolveAmount = Mathf.Lerp(0, 1, timeElapsed/DisolveDurration); //move the disolve amount between 0 and 1 over interval
+            disolveMat.SetFloat("_DisolveAmount", DisolveAmount);
+            yield return null; //wait for next frame
+            timeElapsed = Time.time - timeStart;
+        }
+        gameObject.GetComponent<Renderer>().material = originalMat;
+    }
+
+    /*
+        Resolves an object (reverse disolve)
+    */
+    private IEnumerator resolveObject(){
+        Debug.Log("Resolve Called:" + DisolveDurration + ", " + DisolveMaterial.name);
+        Material originalMat = gameObject.GetComponent<Renderer>().material;
+        Material disolveMat = gameObject.GetComponent<Renderer>().material = DisolveMaterial;
+        float timeStart = Time.time;
+        float timeElapsed =0f;
+        while(timeElapsed < DisolveDurration){
+            float DisolveAmount = Mathf.Lerp(1, 0, timeElapsed/DisolveDurration); //move the disolve amount between 1 and 0 over interval
+            disolveMat.SetFloat("_DisolveAmount", DisolveAmount);
+            yield return null; //wait for next frame
+            timeElapsed = Time.time - timeStart;
+        }
+        gameObject.GetComponent<Renderer>().material = originalMat;
     }
 
     void OnCollisionEnter( Collision c ) {

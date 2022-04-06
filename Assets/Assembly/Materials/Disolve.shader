@@ -10,7 +10,7 @@ Shader "Custom/Disolve"
 
         [Header(Disolve)]
         _DisolveTex("Disolve Texture", 2D) = "white" {}
-        _DisolveAmout("Disolve Amout", Range(0, 1)) = 0.5
+        _DisolveAmount("Disolve Amount", Range(0, 1)) = 0.0
 
         [Header(Border)]
         [HDR]_BorderColor("Color", Color) = (1, 1, 1, 1)
@@ -44,7 +44,7 @@ Shader "Custom/Disolve"
         half3 _Emission;
         fixed4 _Color;
 
-        float _DisolveAmout;
+        float _DisolveAmount;
 
         float3 _BorderColor;
         float _BorderWidth;
@@ -60,8 +60,8 @@ Shader "Custom/Disolve"
         void surf (Input IN, inout SurfaceOutputStandard o)
         {
             float disolve = tex2D(_DisolveTex, IN.uv_DisolveTex).r;
-            disolve = disolve * 0.99;
-            float isVisable = disolve - _DisolveAmout;
+            disolve = disolve * 0.999;
+            float isVisable = disolve - _DisolveAmount;
             clip(isVisable);
 
             float isBoarder = smoothstep(_BorderWidth + _BorderFadeout, _BorderWidth, isVisable);
