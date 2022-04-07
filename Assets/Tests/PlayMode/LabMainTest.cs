@@ -181,13 +181,7 @@ public class LabMainTest
         yield return new WaitForSeconds(0.1f);
 
 
-        yield return new WaitForSeconds(0.1f);
-
-        //labMain.SetRadioPuzzleSolved();
-
-        yield return new WaitForSeconds(0.1f);
-
-        //labMain.SetRadioPuzzleSolved();
+        SceneManager.LoadScene("StartScene.Scanning");
 
         yield return new WaitForSeconds(0.1f);
 
