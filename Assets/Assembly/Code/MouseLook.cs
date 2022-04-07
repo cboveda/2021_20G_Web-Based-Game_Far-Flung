@@ -42,14 +42,14 @@ public class MouseLook : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        Time.timeScale = 0;
+        // Time.timeScale = 0;
     }
 
     public static void ResumeAssembly() {
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        Time.timeScale =1;
+        Time.timeScale = 1;
     }
 
     public static void ShowMenu(){
