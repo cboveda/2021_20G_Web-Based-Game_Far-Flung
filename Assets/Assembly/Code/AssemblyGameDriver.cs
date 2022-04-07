@@ -16,11 +16,11 @@ public class AssemblyGameDriver : MonoBehaviour {
     public DialogGenerator introDiag;
     public DialogGenerator outroDiag;
 
-    // Start is called before the first frame update
     void Start() {
         
-        MouseLook.PauseAssembly();
-        introDiag.BeginPlayingDialog();
+        // MouseLook.PauseAssembly();
+        MouseLook.ResumeAssembly();
+        // introDiag.BeginPlayingDialog();
     
         FinishedCounter = 0;
     }

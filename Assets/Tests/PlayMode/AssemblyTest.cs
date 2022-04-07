@@ -11,103 +11,46 @@ using DialogMaker;
 
 public class AssemblyTest {
 
-    GameObject game_driver;
-    GameObject counter;
-    GameObject conveyor;
-
-    [SetUp]
-    public void SetUp() {
-
-        // game driver setup
-        game_driver = new GameObject();
-        game_driver.AddComponent<AssemblyGameDriver>();
-
-        game_driver.GetComponent<AssemblyGameDriver>().RotationSpeed = 5;
-        game_driver.GetComponent<AssemblyGameDriver>().TotalComponents = 2;
-
-        // game driver - dialog generator interaction stub
-        counter = new GameObject();
-        counter.AddComponent<DialogGenerator_Stub>();
-        counter.GetComponent<DialogGenerator_Stub>().dialogContainer = ScriptableObject.CreateInstance<DialogScriptableObject>();
-        counter.GetComponent<DialogGenerator_Stub>().init();
-
-        game_driver.GetComponent<AssemblyGameDriver>().introDiag = counter.GetComponent<DialogGenerator_Stub>();
-        game_driver.GetComponent<AssemblyGameDriver>().outroDiag = counter.GetComponent<DialogGenerator_Stub>();
-    
-        // game driver - conveyor system interaction
-        conveyor = new GameObject();
-        conveyor.AddComponent<ConveyorPickup_Stub>();
-        conveyor.GetComponent<ConveyorPickup_Stub>().init();
-    
-        game_driver.GetComponent<AssemblyGameDriver>().DragDropSystem = conveyor.GetComponent<ConveyorPickup_Stub>();
-
-    }
+    public int AssemblyIntroDialogClickCount = 11;
 
     [UnityTest]
-    public IEnumerator Test_GameDriver() {
+    public IEnumerator Test_AssemblyGamePlay() {
 
-        Transform base_transform = game_driver.transform;
-
+        SceneManager.LoadScene("Assembly");
         yield return new WaitForSeconds(0.5f);
 
-        Assert.AreNotEqual(base_transform, game_driver.transform);
+        GameObject intro_dialog = GameObject.Find("AssemblyIntro");
 
-    }
+        Assert.NotNull(intro_dialog);
 
-    [UnityTest]
-    public IEnumerator Test_AssemblyTransition() {
+        // opening clicks for dialog
+        for (int i = 0; i < AssemblyIntroDialogClickCount; i++) {
 
+            intro_dialog.GetComponent<DialogGenerator>().BtnDialogButton.onClick.Invoke();
+        }
+
+        MouseLook.HideMenu();
+
+        // grab object
+        GameObject active_body = GameObject.Find("BodyTexture Variant(Clone)");
         yield return new WaitForSeconds(0.5f);
 
-        // test that start dialog is called
-        Assert.AreEqual(counter.GetComponent<DialogGenerator_Stub>().calls_counter, 1);
+        Assert.NotNull(active_body);
 
-        game_driver.GetComponent<AssemblyGameDriver>().CompleteObject();
+        GameObject player = GameObject.Find("Assembly Camera");
+        Assert.NotNull(player);
 
-        // test that evict is called
-        Assert.True(conveyor.GetComponent<ConveyorPickup_Stub>().evit_call_status);
+        
 
-        game_driver.GetComponent<AssemblyGameDriver>().CompleteObject();
+        // move object
 
-        // test outro is called
-        Assert.AreEqual(counter.GetComponent<DialogGenerator_Stub>().calls_counter, 2);
+        // drop object
 
-    }
-}
+        // pickup object
 
-class DialogGenerator_Stub : DialogGenerator {
+        // insert object into ghost
 
-    public int calls_counter;
+        yield return null;
 
-    void Awake() {}
-
-    void Start() {}
-
-    public void init() {
-        calls_counter = 0;
-    }
-
-    public override bool BeginPlayingDialog() {
-
-        Debug.Log("asdfASDFasdffdsafasd");
-
-        calls_counter++;
-        return true;
-    }
-}
-
-class ConveyorPickup_Stub : ConveyorPickup {
-
-    public bool evit_call_status;
-
-    public void init() {
-
-        evit_call_status = false;
-
-    }
-
-    new public void EvictHeldObject() {
-
-        evit_call_status = true;
     }
 }

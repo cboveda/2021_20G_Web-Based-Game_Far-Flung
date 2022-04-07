@@ -4491,7 +4491,7 @@ GameObject:
   - component: {fileID: 134868761}
   - component: {fileID: 134868760}
   m_Layer: 0
-  m_Name: ConveryorBelt
+  m_Name: ConveyorBelt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26402,6 +26402,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c35f316003512c448911d9d2196ca2a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelRadio: 0
 --- !u!4 &883411829
 Transform:
   m_ObjectHideFlags: 0

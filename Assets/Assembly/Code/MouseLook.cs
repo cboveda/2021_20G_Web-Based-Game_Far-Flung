@@ -12,14 +12,9 @@ public class MouseLook : MonoBehaviour
     {get {return menu? menu: (menu = GameObject.Find("Menus").transform.Find("PauseMenu").gameObject);}}
     
     float xRotation = 0f;
+    float yRotation = 0f;
 
     public Transform playerBody;
-    // public GameObject MenuObject; 
-
-    
-    void Start() {
-       
-    }
 
     void Update() {
         
@@ -52,26 +47,24 @@ public class MouseLook : MonoBehaviour
         Time.timeScale = 1;
     }
 
-    public static void ShowMenu(){
+    public static void ShowMenu() {
         PauseAssembly();
         MenuObject.SetActive(true);
     }
 
-    public static void HideMenu(){
+    public static void HideMenu() {
         MenuObject.SetActive(false);
         ResumeAssembly();
     }
 
     void LookUpdate() {
+ 
+        yRotation += Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
 
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
-
-        xRotation -= mouseY;
+        xRotation -= Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
         xRotation = Mathf.Clamp(xRotation, -lookUpLimit, lookDownLimit);
 
-        transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-        playerBody.Rotate(Vector3.up * mouseX);
+        transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0f);
     }
 
     void OnDestroy() {

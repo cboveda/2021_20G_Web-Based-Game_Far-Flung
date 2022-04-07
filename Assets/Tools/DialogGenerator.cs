@@ -140,7 +140,7 @@ namespace DialogMaker
             }
         }
 
-        public virtual bool BeginPlayingDialog()
+        public bool BeginPlayingDialog()
         {
             if (dialogContainer == null || dialogTyper == null)
             {
