@@ -7,7 +7,7 @@ using System;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-
+using System.Linq;
 
 public class ComGameTests
 {
@@ -21,7 +21,9 @@ public class ComGameTests
         {
               {"comGame", "comGameWin"},
               {"comGameWin", "comUnscrambleIntro"},
-              {"comUnscrambleIntro", "comUnscramble"}
+              {"comUnscrambleIntro", "comUnscramble"},
+              {"comUnscramble", "comUnscrambleWin"},
+              {"comUnscrambleWin", "Hub"}
         };
 
         GameObject ob = new GameObject();
@@ -382,32 +384,36 @@ public class ComGameTests
         SceneManager.LoadScene("comUnscramble");
         yield return new WaitForSeconds(0.2f); // delay to load scene
 
-        // verify word 1 letters are hidden
         Color hiddenColor = new Color32(246, 34, 250, 0);
         int backgroundChild = 0;
         int textChild = 0;
-        string[] word1Buttons = { "1_Button", "2_Button", "3_Button", "4_Button", "5_Button", "6_Button", "7_Button", };
-        foreach (string button in word1Buttons)
+        GameObject letterObject;
+        GameObject dataButtonObject;
+
+        // verify all letters are hidden
+        int buttonCount = 33;
+        for (int count = 1; count <= buttonCount; count++)
         {
-            GameObject word1button = GameObject.Find(button);
-            Assert.AreEqual(word1button.transform.GetChild(backgroundChild).GetChild(textChild).GetComponent<Text>().color, hiddenColor);
+            letterObject = GameObject.Find(count.ToString() + "_Button");
+            Assert.AreEqual(letterObject.transform.GetChild(backgroundChild).GetChild(textChild).GetComponent<Text>().color, hiddenColor);
         }
 
-        // get a scriptable object to use
-        GameObject scriptableObject = GameObject.Find("ImagerButton");
-
-        // send word 1 data
-        EventSystem.current.SetSelectedGameObject(scriptableObject);
-        scriptableObject.GetComponent<SendDataActions>().SendData();
-
-        yield return new WaitForSeconds(7.0f); // delay for sending signal
-
-        // verify word 1 letters are displayed after sending signal
-        Color letterColor = new Color32(246, 34, 250, 255);
-        foreach (string button in word1Buttons)
+        // send word data
+        string[] dataButtons = { "ImagerButton", "SpectometerButton", "MagnetometerButton", "RadioButton" };
+        foreach (string button in dataButtons)
         {
-            GameObject word1button = GameObject.Find(button);
-            Assert.AreEqual(word1button.transform.GetChild(backgroundChild).GetChild(textChild).GetComponent<Text>().color, letterColor);
+            dataButtonObject = GameObject.Find(button);
+            EventSystem.current.SetSelectedGameObject(dataButtonObject);
+            dataButtonObject.GetComponent<SendDataActions>().SendData();
+            yield return new WaitForSeconds(10.0f); // delay for sending signal
+        }
+
+        // verify letters are displayed after sending signal
+        Color letterColor = new Color32(246, 34, 250, 255);
+        for (int count = 1; count <= buttonCount; count++)
+        {
+            letterObject = GameObject.Find(count.ToString() + "_Button");
+            Assert.AreEqual(letterObject.transform.GetChild(backgroundChild).GetChild(textChild).GetComponent<Text>().color, letterColor);
         }
 
     }
@@ -613,7 +619,7 @@ public class ComGameTests
         unscrambleMainObject.word2win = true;
         wordWin = unscrambleMainObject.word2win;
         Assert.AreEqual(wordWin, true);
-        
+
         // verify word win default
         wordWin = unscrambleMainObject.word3win;
         Assert.AreEqual(wordWin, false);
@@ -621,7 +627,7 @@ public class ComGameTests
         unscrambleMainObject.word3win = true;
         wordWin = unscrambleMainObject.word3win;
         Assert.AreEqual(wordWin, true);
-        
+
         // verify word win default
         wordWin = unscrambleMainObject.word4win;
         Assert.AreEqual(wordWin, false);
@@ -629,7 +635,7 @@ public class ComGameTests
         unscrambleMainObject.word4win = true;
         wordWin = unscrambleMainObject.word4win;
         Assert.AreEqual(wordWin, true);
-        
+
         // verify word win default
         wordWin = unscrambleMainObject.wordFinalWin;
         Assert.AreEqual(wordWin, false);
@@ -637,7 +643,7 @@ public class ComGameTests
         unscrambleMainObject.wordFinalWin = true;
         wordWin = unscrambleMainObject.wordFinalWin;
         Assert.AreEqual(wordWin, true);
-        
+
         // verify word win default
         wordWin = unscrambleMainObject.wordsAllWin;
         Assert.AreEqual(wordWin, false);
@@ -681,7 +687,7 @@ public class ComGameTests
         // load scene with the scriptable objects
         SceneManager.LoadScene("comUnscramble");
         yield return new WaitForSeconds(0.2f); // delay to load scene
-        
+
         ComUnscrambleMain unscrambleMainObject = GameObject.FindObjectOfType<ComUnscrambleMain>();
         ComGameData comGameDataObject = GameObject.FindObjectOfType<ComGameData>();
         int backgroundChild = 0;
@@ -696,7 +702,7 @@ public class ComGameTests
         // verify final word is not solved
         finalWordWin = unscrambleMainObject.checkWordWin(finalWord);
         Assert.AreEqual(finalWordWin, false);
-        
+
         unscrambleMainObject.EnableWord(1);
         unscrambleMainObject.EnableWord(2);
         unscrambleMainObject.EnableWord(3);
@@ -730,8 +736,7 @@ public class ComGameTests
 
             letterObject = GameObject.Find(letterPos.ToString() + "_Button");
             winLetter = comGameDataObject.getWinLetter(wordRow, index);
-            Debug.Log(winLetter);
-            
+
             letterObject.transform.GetChild(backgroundChild).GetChild(textChild).GetComponent<UnityEngine.UI.Text>().text = winLetter;
 
             index++;
@@ -748,5 +753,153 @@ public class ComGameTests
         // verify final word solved
         finalWordWin = unscrambleMainObject.checkWordWin(finalWord);
         Assert.AreEqual(finalWordWin, true);
+    }
+
+    [UnityTest]
+    public IEnumerator TestUnscrambleHints()
+    {
+        // verify unscramble hints are displayed
+
+        // load scene with the scriptable objects
+        SceneManager.LoadScene("comUnscramble");
+        yield return new WaitForSeconds(0.2f); // delay to load scene
+
+        Color originalColor = new Color32(246, 34, 250, 0);
+        int backgroundChild = 0;
+        int textChild = 0;
+        string winLetter = "";
+        Color winColor;
+        string defaultLetter = "";
+        Color defaultColor;
+        EventSystem eventSystem = EventSystem.current;
+        GameObject hint;
+        GameObject letterObject;
+        string hintValue = "";
+        string buttonValue = "";
+        string defaultLetterValue = "";
+        string winLetterValue = "";
+
+        string[] hint1 = { "E", "S" };
+        string[] hint2 = { "N", "C" };
+        string[] hint3 = { "G", "M" };
+        string[] hint4 = { "T", "G" };
+        string[] hint5 = { "E", "N" };
+        string[] hintValues = { };
+
+
+        // test values
+        Dictionary<string, string> testHints = new Dictionary<string, string>()
+        {
+              {"Hint1", "1_Button" },
+              {"Hint2", "8_Button" },
+              {"Hint3", "19_Button" },
+              {"Hint4", "27_Button" },
+              {"Hint5", "34_Button" }
+
+        };
+
+
+        foreach (KeyValuePair<string, string> hintButton in testHints)
+        {
+
+            hintValue = hintButton.Key;
+            if (hintValue == "Hint1")
+            {
+                hintValues = hint1;
+            }
+            if (hintValue == "Hint2")
+            {
+                hintValues = hint2;
+            }
+            if (hintValue == "Hint3")
+            {
+                hintValues = hint3;
+            }
+            if (hintValue == "Hint4")
+            {
+                hintValues = hint4;
+            }
+            if (hintValue == "Hint5")
+            {
+                hintValues = hint5;
+            }
+
+            buttonValue = hintButton.Value;
+            defaultLetterValue = hintValues[0];
+            winLetterValue = hintValues[1];
+
+            // verify letter values are default
+            letterObject = GameObject.Find(buttonValue);
+            defaultLetter = letterObject.transform.GetChild(backgroundChild).GetChild(textChild).GetComponent<UnityEngine.UI.Text>().text;
+            defaultColor = letterObject.transform.GetChild(backgroundChild).GetChild(textChild).GetComponent<UnityEngine.UI.Text>().color;
+            Assert.AreEqual(defaultLetter, defaultLetterValue);
+            Assert.AreEqual(defaultColor, originalColor);
+
+            // send hints
+            hint = GameObject.Find(hintValue);
+            eventSystem.SetSelectedGameObject(hint);
+            hint.GetComponent<LetterActions>().SendHint();
+
+            // verify letter hint is displayed
+            winLetter = letterObject.transform.GetChild(backgroundChild).GetChild(textChild).GetComponent<UnityEngine.UI.Text>().text;
+            winColor = letterObject.transform.GetChild(backgroundChild).GetChild(textChild).GetComponent<UnityEngine.UI.Text>().color;
+            yield return new WaitForSeconds(1.0f); // delay for hints
+            Assert.AreEqual(winLetter, winLetterValue);
+            Assert.AreEqual(winColor, Color.red);
+
+        }
+
+    }
+
+    [UnityTest]
+    public IEnumerator TestComPuzzleWinScene()
+    {
+        // verify com puzzle win scene
+
+        // load scene with the scriptable objects
+        SceneManager.LoadScene("comGame");
+        yield return new WaitForSeconds(0.2f); // delay to load scene
+
+        // get a scriptable tile object to use
+        GameObject scriptObject = GameObject.Find("14");
+
+        GameObject mode = new GameObject();
+        mode.AddComponent<AudioSource>();
+        mode.AddComponent<ComGameModes>();
+        ComGameModes modeObject = GameObject.FindObjectOfType<ComGameModes>();
+
+        // solve puzzle
+        modeObject.SolvePuzzle();
+        yield return new WaitForSeconds(0.2f); // delay to solve
+
+        // move tile to display win
+        scriptObject.transform.position = new Vector3(5.5f, 2.3f);
+        yield return new WaitForSeconds(4.0f); // delay to load scene
+
+        // verify win scene is displayed
+        GameObject background = GameObject.Find("ScrollBackground");
+        string backgroundLayer = background.GetComponent<SpriteRenderer>().sortingLayerName;
+        string winLayer = "WinBackground";
+        Assert.AreEqual(backgroundLayer, winLayer);
+
+        GameObject board = GameObject.Find("board");
+        string boardLayer = board.GetComponent<SpriteRenderer>().sortingLayerName;
+        winLayer = "WinBoard";
+        Assert.AreEqual(boardLayer, winLayer);
+
+        GameObject successObject = GameObject.Find("Success");
+        Color letterColor = new Color32(249, 160, 0, 255);
+        Color successColor = successObject.GetComponent<Text>().color;
+        Assert.AreEqual(successColor, letterColor);
+
+        GameObject continueButton = GameObject.Find("Continue");
+        GameObject continueText = GameObject.Find("ContinueText");
+        continueButton.GetComponent<Button>().enabled = true;
+        continueButton.GetComponent<Image>().enabled = true;
+        continueText.GetComponent<Text>().enabled = true;
+        Assert.AreEqual(continueButton.GetComponent<Button>().enabled, true);
+        Assert.AreEqual(continueButton.GetComponent<Image>().enabled, true);
+        Assert.AreEqual(continueText.GetComponent<Text>().enabled, true);
+
     }
 }
