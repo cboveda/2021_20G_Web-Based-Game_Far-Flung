@@ -4188,23 +4188,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SystemItems:
-  - {fileID: 1827603460812327458, guid: bfd9bf1ed27a24b8ba53cb1858e62715, type: 3}
-  - {fileID: 1827603460812327458, guid: bfd9bf1ed27a24b8ba53cb1858e62715, type: 3}
-  - {fileID: 1827603460812327458, guid: bfd9bf1ed27a24b8ba53cb1858e62715, type: 3}
-  - {fileID: 1827603460812327458, guid: bfd9bf1ed27a24b8ba53cb1858e62715, type: 3}
-  - {fileID: -3808662610474967401, guid: 8f4321bdca0518795a7c52dbfbfebb91, type: 3}
-  - {fileID: -3808662610474967401, guid: 8f4321bdca0518795a7c52dbfbfebb91, type: 3}
-  - {fileID: 8396440704939313581, guid: 6c66128638316712188e486baa062256, type: 3}
-  - {fileID: -750214961466929733, guid: e261324b0781dc392babbccd59598179, type: 3}
-  - {fileID: 1827603460812327458, guid: bfd9bf1ed27a24b8ba53cb1858e62715, type: 3}
-  - {fileID: 1827603460812327458, guid: bfd9bf1ed27a24b8ba53cb1858e62715, type: 3}
-  - {fileID: 1827603460812327458, guid: bfd9bf1ed27a24b8ba53cb1858e62715, type: 3}
-  - {fileID: 8331971440665352534, guid: d6a9ca8cdf04b6983a3390c0d5755548, type: 3}
-  - {fileID: 1827603460812327458, guid: bfd9bf1ed27a24b8ba53cb1858e62715, type: 3}
-  - {fileID: 8331971440665352534, guid: d6a9ca8cdf04b6983a3390c0d5755548, type: 3}
-  - {fileID: 1827603460812327458, guid: bfd9bf1ed27a24b8ba53cb1858e62715, type: 3}
-  - {fileID: 1827603460812327458, guid: bfd9bf1ed27a24b8ba53cb1858e62715, type: 3}
-  - {fileID: 8550990280631464321, guid: 86abd625f3f83d9819035a6812b3426b, type: 3}
+  - {fileID: 8181788389397995838, guid: ab7ffcc6cbaddc9089b920c19cc405f6, type: 3}
+  - {fileID: 752161933586100511, guid: 957c2ce58e73e673eb7f0a6810bb84b8, type: 3}
+  - {fileID: 8357697901844642435, guid: 2f7797fa3d5b317448a08f5ad8e86391, type: 3}
+  - {fileID: 9063782435558985724, guid: 7f483431f33e7f3c39a73f6b71b82253, type: 3}
+  - {fileID: 633802823912368651, guid: 44d5a22870c23badb8a24d4d83c80c10, type: 3}
+  - {fileID: 4491498332347564871, guid: 8ed02406c2e963e3193581a49948a2e7, type: 3}
   ConveyorCapacity: 3
   ConveyorSpeed: 2
   ConveyorLength: 20

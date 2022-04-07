@@ -32,6 +32,19 @@ MonoBehaviour:
   LERP_Speed: 0
   HostConveyor: {fileID: 0}
   NominalRotation: {x: 0, y: 0, z: 0}
+--- !u!65 &6267893916512183467
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4307192658322761930}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.5, y: 2.5, z: 0.049999997}
+  m_Center: {x: 0, y: 0, z: -0.01001285}
 --- !u!1001 &3965227294098888091
 PrefabInstance:
   m_ObjectHideFlags: 0

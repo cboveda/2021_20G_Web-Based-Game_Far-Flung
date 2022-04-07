@@ -1,21 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &9063782435558985724
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3391427463537794703}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f0aa67fca06ae8aa83292f99fc128ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ItemTypeIdentifier: 
-  LERP_Speed: 0
-  HostConveyor: {fileID: 0}
-  NominalRotation: {x: 0, y: 0, z: 0}
 --- !u!54 &4142690870447871652
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -32,6 +16,35 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &9063782435558985724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3391427463537794703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f0aa67fca06ae8aa83292f99fc128ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ItemTypeIdentifier: 
+  LERP_Speed: 0
+  HostConveyor: {fileID: 0}
+  NominalRotation: {x: 0, y: 0, z: 0}
+--- !u!65 &4860052182563398704
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3391427463537794703}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.7882717, y: 0.49990723, z: 0.6540795}
+  m_Center: {x: -0.015980452, y: 0.000046387315, z: 0.32533094}
 --- !u!1001 &2581033859716064222
 PrefabInstance:
   m_ObjectHideFlags: 0
