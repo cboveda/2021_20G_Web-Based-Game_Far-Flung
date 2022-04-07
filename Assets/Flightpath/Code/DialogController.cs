@@ -13,34 +13,34 @@ namespace Flightpath
     public class DialogController : MonoBehaviour
     {
         [SerializeField]
-        private Button _launchButton;
+        public Button launchButton;
         [SerializeField]
-        private Button _resetButton;
+        public Button resetButton;
         [SerializeField]
-        private Slider _powerSlider;
+        public Slider powerSlider;
         [SerializeField]
-        private GameObject _powerHandle;
+        public GameObject powerHandle;
         [SerializeField]
-        private GameObject _powerTargetArrow;
+        public GameObject powerTargetArrow;
         [SerializeField]
-        private GameObject _powerTargetArrow2;
+        public GameObject powerTargetArrow2;
         [SerializeField]
-        private Slider _angleSlider;
+        public Slider angleSlider;
         [SerializeField]
-        private GameObject _angleHandle;
+        public GameObject angleHandle;
         [SerializeField]
-        private GameObject _angleTargetArrow;
+        public GameObject angleTargetArrow;
         [SerializeField]
-        private GameObject _angleTargetArrow2;
+        public GameObject angleTargetArrow2;
         [SerializeField]
-        private LaunchManager _launchManager;
+        public LaunchManager launchManager;
 
         [SerializeField]
-        private GameObject _dialogGeneratorPrefab;
-        private GameObject _dialogGenerator;
-        private DialogGenerator _dg;
+        public GameObject dialogGeneratorPrefab;
+        public GameObject dialogGenerator;
+        public DialogGenerator dg;
         [SerializeField]
-        private DialogScriptableObject[] Scripts;
+        public DialogScriptableObject[] Scripts;
         private int _scriptIndex;
         private int _scriptMax;
         private int _phase;
@@ -56,17 +56,17 @@ namespace Flightpath
         // Start is called before the first frame update
         void Start()
         {
-            _launchButton.interactable = false;
-            _resetButton.interactable = false;
-            _powerSlider.interactable = false;
-            _angleSlider.interactable = false;
-            _angleTargetArrow.GetComponent<Image>().enabled = false;
-            _angleTargetArrow2.GetComponent<Image>().enabled = false;
-            _powerTargetArrow.GetComponent<Image>().enabled = false;
-            _powerTargetArrow2.GetComponent<Image>().enabled = false;
+            launchButton.interactable = false;
+            resetButton.interactable = false;
+            powerSlider.interactable = false;
+            angleSlider.interactable = false;
+            angleTargetArrow.GetComponent<Image>().enabled = false;
+            angleTargetArrow2.GetComponent<Image>().enabled = false;
+            powerTargetArrow.GetComponent<Image>().enabled = false;
+            powerTargetArrow2.GetComponent<Image>().enabled = false;
 
-            _launchButton.onClick.AddListener(() => _dg.FastForwardDialog());
-            _resetButton.onClick.AddListener(() => _dg.FastForwardDialog());
+            launchButton.onClick.AddListener(() => dg.FastForwardDialog());
+            resetButton.onClick.AddListener(() => dg.FastForwardDialog());
 
             _scriptIndex = 0;
             _scriptMax = Scripts.Length;
@@ -77,71 +77,71 @@ namespace Flightpath
 
         private void DoIntermediatePhase()
         {
-            _dg.BeginPlayingDialog();
+            dg.BeginPlayingDialog();
             _phase++;
         }
 
         private void DoAnglePhase()
         {
-            if (_angleSlider.interactable == false && _dg.GetCurrentDialogPosition() == 2)
+            if (angleSlider.interactable == false && dg.GetCurrentDialogPosition() == 2)
             {
-                _angleSlider.interactable = true;
-                _angleTargetArrow.GetComponent<Image>().enabled = true;
-                _angleTargetArrow2.GetComponent<Image>().enabled = true;
+                angleSlider.interactable = true;
+                angleTargetArrow.GetComponent<Image>().enabled = true;
+                angleTargetArrow2.GetComponent<Image>().enabled = true;
             }
-            _angleTargetArrow.GetComponent<Image>().color = Color.Lerp(_defaultColor, _highlightColor, Mathf.PingPong(Time.time, _lerpRatio));
-            _angleTargetArrow2.GetComponent<Image>().color = Color.Lerp(_defaultColor, _highlightColor, Mathf.PingPong(Time.time, _lerpRatio));
-            _angleHandle.GetComponent<Image>().color = Color.Lerp(_defaultColor, _highlightColor, Mathf.PingPong(Time.time, _lerpRatio));
-            float value = _angleSlider.GetComponent<Slider>().value;
+            angleTargetArrow.GetComponent<Image>().color = Color.Lerp(_defaultColor, _highlightColor, Mathf.PingPong(Time.time, _lerpRatio));
+            angleTargetArrow2.GetComponent<Image>().color = Color.Lerp(_defaultColor, _highlightColor, Mathf.PingPong(Time.time, _lerpRatio));
+            angleHandle.GetComponent<Image>().color = Color.Lerp(_defaultColor, _highlightColor, Mathf.PingPong(Time.time, _lerpRatio));
+            float value = angleSlider.GetComponent<Slider>().value;
             if (42 <= value && value <= 43)
             {
-                _angleSlider.interactable = false;
-                _angleTargetArrow.GetComponent<Image>().enabled = false;
-                _angleTargetArrow2.GetComponent<Image>().enabled = false;
-                _angleHandle.GetComponent<Image>().color = _defaultColor;
+                angleSlider.interactable = false;
+                angleTargetArrow.GetComponent<Image>().enabled = false;
+                angleTargetArrow2.GetComponent<Image>().enabled = false;
+                angleHandle.GetComponent<Image>().color = _defaultColor;
                 _phase++;
-                _dg.FastForwardDialog();
+                dg.FastForwardDialog();
                 SetDG();
             }
         }
 
         private void DoPowerPhase()
         {
-            if (_powerSlider.interactable == false)
+            if (powerSlider.interactable == false)
             {
-                _powerSlider.interactable = true;
-                _powerTargetArrow.GetComponent<Image>().enabled = true;
-                _powerTargetArrow2.GetComponent<Image>().enabled = true;
+                powerSlider.interactable = true;
+                powerTargetArrow.GetComponent<Image>().enabled = true;
+                powerTargetArrow2.GetComponent<Image>().enabled = true;
             }
-            _powerHandle.GetComponent<Image>().color = Color.Lerp(_defaultColor, _highlightColor, Mathf.PingPong(Time.time, _lerpRatio));
-            _powerTargetArrow.GetComponent<Image>().color = Color.Lerp(_defaultColor, _highlightColor, Mathf.PingPong(Time.time, _lerpRatio));
-            _powerTargetArrow2.GetComponent<Image>().color = Color.Lerp(_defaultColor, _highlightColor, Mathf.PingPong(Time.time, _lerpRatio));
-            float value = _powerSlider.GetComponent<Slider>().value;
+            powerHandle.GetComponent<Image>().color = Color.Lerp(_defaultColor, _highlightColor, Mathf.PingPong(Time.time, _lerpRatio));
+            powerTargetArrow.GetComponent<Image>().color = Color.Lerp(_defaultColor, _highlightColor, Mathf.PingPong(Time.time, _lerpRatio));
+            powerTargetArrow2.GetComponent<Image>().color = Color.Lerp(_defaultColor, _highlightColor, Mathf.PingPong(Time.time, _lerpRatio));
+            float value = powerSlider.GetComponent<Slider>().value;
             if (84 <= value && value <= 86)
             {
-                _powerSlider.interactable = false;
-                _powerTargetArrow.GetComponent<Image>().enabled = false;
-                _powerTargetArrow2.GetComponent<Image>().enabled = false;
-                _powerHandle.GetComponent<Image>().color = _defaultColor;
+                powerSlider.interactable = false;
+                powerTargetArrow.GetComponent<Image>().enabled = false;
+                powerTargetArrow2.GetComponent<Image>().enabled = false;
+                powerHandle.GetComponent<Image>().color = _defaultColor;
                 _phase++;
-                _dg.FastForwardDialog();
+                dg.FastForwardDialog();
                 SetDG();
             }
         }
 
         private void DoLaunchPhase()
         {
-            if (_launchButton.interactable == false)
+            if (launchButton.interactable == false)
             {
-                _launchButton.interactable = true;
+                launchButton.interactable = true;
             }
-            _launchButton.GetComponent<Image>().color = Color.Lerp(_defaultColor, _highlightColor, Mathf.PingPong(Time.time, _lerpRatio));
-            if (_launchManager.hasStopped())
+            launchButton.GetComponent<Image>().color = Color.Lerp(_defaultColor, _highlightColor, Mathf.PingPong(Time.time, _lerpRatio));
+            if (launchManager.hasStopped())
             {
-                _launchButton.interactable = false;
-                _launchButton.GetComponent<Image>().color = _defaultColor;
+                launchButton.interactable = false;
+                launchButton.GetComponent<Image>().color = _defaultColor;
                 _phase++;
-                _dg.FastForwardDialog();
+                dg.FastForwardDialog();
                 SetDG();
             }
         }
@@ -160,21 +160,22 @@ namespace Flightpath
 
         public void DoResetPhase()
         {
-            if (_resetButton.interactable == false && _dg.GetCurrentDialogPosition() == 2)
+            if (resetButton.interactable == false && dg.GetCurrentDialogPosition() == 2)
             {
-                _resetButton.interactable = true;
+                resetButton.interactable = true;
             }
-            if (_resetButton.interactable == true) {
-                _resetButton.GetComponent<Image>().color = Color.Lerp(_defaultColor, _highlightColor, Mathf.PingPong(Time.time, _lerpRatio));
-            }
-            if (!_launchManager.hasStopped())
+            if (resetButton.interactable == true)
             {
-                _dg.FastForwardDialog();
-                _resetButton.GetComponent<Image>().color = _defaultColor;
-                _launchButton.interactable = true;
-                _angleSlider.interactable = true;
-                _powerSlider.interactable = true;
-                _launchManager.enableMarsDialog();
+                resetButton.GetComponent<Image>().color = Color.Lerp(_defaultColor, _highlightColor, Mathf.PingPong(Time.time, _lerpRatio));
+            }
+            if (!launchManager.hasStopped())
+            {
+                dg.FastForwardDialog();
+                resetButton.GetComponent<Image>().color = _defaultColor;
+                launchButton.interactable = true;
+                angleSlider.interactable = true;
+                powerSlider.interactable = true;
+                launchManager.enableMarsDialog();
             }
         }
 
@@ -222,9 +223,9 @@ namespace Flightpath
         {
             if (_scriptIndex < _scriptMax)
             {
-                _dialogGenerator = Object.Instantiate(_dialogGeneratorPrefab, this.transform);
-                _dg = _dialogGenerator.GetComponent<DialogGenerator>();
-                _dg.dialogContainer = Scripts[_scriptIndex++];
+                dialogGenerator = Object.Instantiate(dialogGeneratorPrefab, this.transform);
+                dg = dialogGenerator.GetComponent<DialogGenerator>();
+                dg.dialogContainer = Scripts[_scriptIndex++];
             }
         }
     }
