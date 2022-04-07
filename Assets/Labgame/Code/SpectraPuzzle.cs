@@ -6,12 +6,12 @@ using System.Linq;
 public class SpectraPuzzle : LabPuzzle
 {
 
-    public static Spectra iron = new Spectra("Iron", new int[] { 0, 4, 4, 0, 0, 0, 4, 4, 4, 4, 2, 0, 1, 0, 0, 0, 0, 0, 0, 0 });
-    public static Spectra nickel = new Spectra("Nickel", new int[] { 0, 0, 0, 1, 0, 2, 4, 4, 0, 1, 0, 2, 2, 0, 2, 0, 0, 0, 0, 0 });
-    public static Spectra aluminum = new Spectra("Aluminum", new int[] { 0, 0, 0, 0, 2, 0, 3, 4, 0, 0, 2, 0, 1, 0, 1, 0, 0, 1, 0, 0 });
-    public static Spectra gold = new Spectra("Gold", new int[] { 0, 0, 0, 0, 2, 0, 3, 4, 0, 0, 2, 0, 1, 0, 1, 0, 0, 1, 0, 0 });
-    public static Spectra silver = new Spectra("Silver", new int[] { 0, 1, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0, 2, 0, 0, 2, 0, 1, 0, 0 });
-    public static Spectra none = new Spectra("None", new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 });
+    public static Spectra iron = new Spectra("Iron", new int[]          { 0, 4, 4, 0, 0, 0, 4, 4, 4, 4, 2, 0, 1, 0, 0, 0, 0, 0, 0, 0 });
+    public static Spectra nickel = new Spectra("Nickel", new int[]      { 0, 0, 0, 1, 0, 2, 4, 4, 0, 1, 0, 2, 2, 0, 2, 0, 0, 0, 0, 0 });
+    public static Spectra aluminum = new Spectra("Aluminum", new int[]  { 0, 0, 0, 0, 2, 0, 3, 4, 0, 0, 2, 0, 1, 0, 1, 0, 0, 1, 0, 0 });
+    public static Spectra gold = new Spectra("Gold", new int[]          { 0, 0, 0, 0, 0, 4, 0, 0, 3, 0, 0, 0, 4, 1, 0, 3, 0, 1, 0, 0 });
+    public static Spectra silver = new Spectra("Silver", new int[]      { 0, 1, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0, 2, 0, 0, 2, 0, 1, 0, 0 });
+    public static Spectra none = new Spectra("None", new int[]          { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 });
 
     public Spectra primaryElement;
     public Spectra secondaryElement;
@@ -36,7 +36,7 @@ public class SpectraPuzzle : LabPuzzle
     Color32[] spectraColorBySlot = new Color32[Spectra.SPECTRA_ARRAY_SIZE];
     
 
-    int puzzleDifficulty;
+    public int puzzleDifficulty;
 
 
     public void InitializeSpectraPuzzle(string name, int difficulty)
@@ -90,10 +90,17 @@ public class SpectraPuzzle : LabPuzzle
         numInserted = 0;
 
         
+        if(difficulty == 1)
+        {
+            solution = CombineSpectra(iron, gold, silver);
+        }
+        else
+        {
+            solution = CombineSpectra(nickel, aluminum, gold);
+        }
+
+
         
-
-
-        solution = CombineSpectra(iron, gold, silver);
         
         mySpectraPuzzleDisplay.SetSpectraPuzzleToDisplay(this);
         mySpectraPuzzleDisplay.UpdateSolutionDisplay();
