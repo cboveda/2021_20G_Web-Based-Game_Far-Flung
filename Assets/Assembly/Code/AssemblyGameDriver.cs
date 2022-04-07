@@ -48,7 +48,7 @@ public class AssemblyGameDriver : MonoBehaviour {
         }
     }
 
-    public void ReturnToHub(){
+    public void ReturnToHub() {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         Time.timeScale = 1;

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: EndSceneOptions
   m_EditorClassIdentifier: 
   dialogs:
-  - dialogText: Mission Over
+  - dialogText: 'Mission over. '
     robotVoice: 0
     dialogAudio: {fileID: 0}
