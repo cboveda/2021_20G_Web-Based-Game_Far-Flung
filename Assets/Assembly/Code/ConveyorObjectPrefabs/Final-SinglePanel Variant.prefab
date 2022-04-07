@@ -16,22 +16,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &633802823912368651
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4307192658322761930}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f0aa67fca06ae8aa83292f99fc128ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ItemTypeIdentifier: 
-  LERP_Speed: 0
-  HostConveyor: {fileID: 0}
-  NominalRotation: {x: 0, y: 0, z: 0}
 --- !u!65 &6267893916512183467
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -45,6 +29,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.5, y: 2.5, z: 0.049999997}
   m_Center: {x: 0, y: 0, z: -0.01001285}
+--- !u!114 &633802823912368651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4307192658322761930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f0aa67fca06ae8aa83292f99fc128ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ItemTypeIdentifier: PsycheSinglePanel
+  LERP_Speed: 0
+  HostConveyor: {fileID: 0}
+  NominalRotation: {x: 80, y: 13, z: 20}
 --- !u!1001 &3965227294098888091
 PrefabInstance:
   m_ObjectHideFlags: 0

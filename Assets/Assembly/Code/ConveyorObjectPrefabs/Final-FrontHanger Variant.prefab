@@ -16,22 +16,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &752161933586100511
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3199741917690176287}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f0aa67fca06ae8aa83292f99fc128ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ItemTypeIdentifier: 
-  LERP_Speed: 0
-  HostConveyor: {fileID: 0}
-  NominalRotation: {x: 0, y: 0, z: 0}
 --- !u!65 &5383273319902143100
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -45,6 +29,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.5941582, y: 2.7129161, z: 0.65879613}
   m_Center: {x: -1.2929208, y: 1.3364581, z: 0.18016484}
+--- !u!114 &752161933586100511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3199741917690176287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f0aa67fca06ae8aa83292f99fc128ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ItemTypeIdentifier: PsycheFrontRack
+  LERP_Speed: 0
+  HostConveyor: {fileID: 0}
+  NominalRotation: {x: 0, y: 0, z: 0}
 --- !u!1001 &2352758637204905550
 PrefabInstance:
   m_ObjectHideFlags: 0
