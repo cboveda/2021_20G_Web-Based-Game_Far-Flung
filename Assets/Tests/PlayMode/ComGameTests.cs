@@ -22,8 +22,8 @@ public class ComGameTests
               {"comGame", "comGameWin"},
               {"comGameWin", "comUnscrambleIntro"},
               {"comUnscrambleIntro", "comUnscramble"},
-              {"comUnscramble", "comUnscrambleWin"},
-              {"comUnscrambleWin", "Hub"}
+              {"comUnscramble", "comUnscrambleWin"}
+              //{"comUnscrambleWin", "Hub"}
         };
 
         GameObject ob = new GameObject();
