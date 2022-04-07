@@ -8,7 +8,7 @@ public class ComGameScenes : MonoBehaviour
     void Start()
     {
         // to reset game score
-        Scoring.Instance.initialize(0, "");
+        //Scoring.Instance.initialize(0, "");
     }
 
     // Update is called once per frame

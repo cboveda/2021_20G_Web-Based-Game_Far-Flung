@@ -1850,8 +1850,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Slide the puzzle pieces to complete the picture.  The piece that is outside
-    the puzzle is the top right corner of the picture.
+  m_Text: Slide the puzzle pieces to complete the picture.  Click on the game score
+    to see different objectives.
 --- !u!222 &517386943
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2900,8 +2900,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 725642290}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.3405, y: -4.33, z: 0}
-  m_LocalScale: {x: 12.333507, y: 0.34251788, z: 0.8368056}
+  m_LocalPosition: {x: 0.0377, y: -4.33, z: 0}
+  m_LocalScale: {x: 9.728027, y: 0.34251788, z: 0.8368056}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 22
@@ -6414,7 +6414,6 @@ GameObject:
   - component: {fileID: 1792302890}
   - component: {fileID: 1792302889}
   - component: {fileID: 1792302888}
-  - component: {fileID: 1792302891}
   - component: {fileID: 1792302892}
   m_Layer: 0
   m_Name: ScrollBackground
@@ -6435,7 +6434,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0ee7df55956d85468324998c8bd1a3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollSpeed: 0.1
 --- !u!212 &1792302889
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6501,18 +6499,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 28
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1792302891
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1792302887}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f39392e258da0d4d9947731334c72b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!82 &1792302892
 AudioSource:
   m_ObjectHideFlags: 0

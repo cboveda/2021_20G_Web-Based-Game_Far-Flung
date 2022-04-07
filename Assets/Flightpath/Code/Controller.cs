@@ -11,59 +11,58 @@ namespace Flightpath
     */
     public class Controller : MonoBehaviour
     {
-        private GameObject _dynamicObjects;
+        public GameObject dynamicObjects;
         [SerializeField]
-        private FlightpathPathBuilder _pathBuilder;
+        public FlightpathPathBuilder pathBuilder;
         [SerializeField]
-        private FlightpathObjectFactory _objectFactory;
+        public FlightpathObjectFactory objectFactory;
         [SerializeField]
-        private PathScriptableObject _earthPath;
+        public PathScriptableObject earthPath;
         [SerializeField]
-        private PathScriptableObject _marsPath;
+        public PathScriptableObject marsPath;
         [SerializeField]
-        private PathScriptableObject _asteroidPath;
+        public PathScriptableObject asteroidPath;
         [SerializeField]
-        private GameObject _eventSystem;
+        public GameObject eventSystem;
         [SerializeField]
-        private GameObject _arrow;
+        public GameObject arrow;
         [SerializeField]
-        private GameObject _satellitePathDrawing;
+        public GameObject satellitePathDrawing;
 
-        private GameObject _sun;
-        private GameObject _earth;
-        private GameObject _mars;
-        private GameObject _asteroid;
-        private GameObject _satellite;
+        public GameObject sun;
+        public GameObject earth;
+        public GameObject mars;
+        public GameObject asteroid;
+        public GameObject satellite;
 
-        // Start is called before the first frame update
         void Awake()
         {
             Time.timeScale = 1;
             // Setup Dynamic Objects Container
-            _dynamicObjects = new GameObject();
-            _dynamicObjects.name = "Dynamic Objects";
+            dynamicObjects = new GameObject();
+            dynamicObjects.name = "Dynamic Objects";
 
             // Sun
-            _sun = _objectFactory.GetFlightpathObject(FlightpathObjectFactory.BuildableObjects.Sun, _dynamicObjects.transform);
+            sun = objectFactory.GetFlightpathObject(FlightpathObjectFactory.BuildableObjects.Sun, dynamicObjects.transform);
 
             // Earth
-            _earth = _objectFactory.GetFlightpathObject(FlightpathObjectFactory.BuildableObjects.Earth, _dynamicObjects.transform);
-            _earth.GetComponent<PathFollower>().Path = _pathBuilder.GetPath(_earthPath, _dynamicObjects.transform);
+            earth = objectFactory.GetFlightpathObject(FlightpathObjectFactory.BuildableObjects.Earth, dynamicObjects.transform);
+            earth.GetComponent<PathFollower>().Path = pathBuilder.GetPath(earthPath, dynamicObjects.transform);
 
             // Mars
-            _mars = _objectFactory.GetFlightpathObject(FlightpathObjectFactory.BuildableObjects.Mars, _dynamicObjects.transform);
-            _mars.GetComponent<PathFollower>().Path = _pathBuilder.GetPath(_marsPath, _dynamicObjects.transform);
+            mars = objectFactory.GetFlightpathObject(FlightpathObjectFactory.BuildableObjects.Mars, dynamicObjects.transform);
+            mars.GetComponent<PathFollower>().Path = pathBuilder.GetPath(marsPath, dynamicObjects.transform);
 
             // Asteroid
-            _asteroid = _objectFactory.GetFlightpathObject(FlightpathObjectFactory.BuildableObjects.Asteroid, _dynamicObjects.transform);
-            _asteroid.GetComponent<PathFollower>().Path = _pathBuilder.GetPath(_asteroidPath, _dynamicObjects.transform);
+            asteroid = objectFactory.GetFlightpathObject(FlightpathObjectFactory.BuildableObjects.Asteroid, dynamicObjects.transform);
+            asteroid.GetComponent<PathFollower>().Path = pathBuilder.GetPath(asteroidPath, dynamicObjects.transform);
 
             // Satellite
-            _satellite = _objectFactory.GetFlightpathObject(FlightpathObjectFactory.BuildableObjects.Satellite, _dynamicObjects.transform);
-            _satellite.GetComponent<SatelliteCollision>().launchManager = _eventSystem.GetComponent<LaunchManager>();
-            _eventSystem.GetComponent<LaunchManager>().Satellite = _satellite;
-            _arrow.GetComponent<Trajectory>().Satellite = _satellite.GetComponent<Launch>();
-            _satellitePathDrawing.GetComponent<SatellitePathDrawing>().Satellite = _satellite;
+            satellite = objectFactory.GetFlightpathObject(FlightpathObjectFactory.BuildableObjects.Satellite, dynamicObjects.transform);
+            satellite.GetComponent<SatelliteCollision>().launchManager = eventSystem.GetComponent<LaunchManager>();
+            eventSystem.GetComponent<LaunchManager>().Satellite = satellite;
+            arrow.GetComponent<Trajectory>().Satellite = satellite.GetComponent<Launch>();
+            satellitePathDrawing.GetComponent<SatellitePathDrawing>().Satellite = satellite;
 
 
         }
