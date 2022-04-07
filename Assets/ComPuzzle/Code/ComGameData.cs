@@ -8,7 +8,7 @@ public class ComGameData : MonoBehaviour
 
     public float[] getWinPosition(int position)
     {
-        // blank tile win position
+        // blank tile win position //test only
         Tuple<float, float> pos00 = new Tuple<float, float>(5.5F, 2.3F);
 
         Tuple<float, float> pos11 = new Tuple<float, float>(-2.75F, 2.3F);
