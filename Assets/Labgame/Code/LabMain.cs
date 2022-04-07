@@ -16,7 +16,7 @@ public class LabMain : MonoBehaviour
     bool isCurrentSpectraPuzzleSolved;
     bool radioPuzzleActive;
     bool spectraPuzzleActive;
-    int levelRadio;
+    public int levelRadio;
     int levelSpectra;
 
     GameObject sineUIElements;
@@ -204,6 +204,11 @@ public class LabMain : MonoBehaviour
     public void RemoveSpectra()
     {
         currentSpectraPuzzle.RemoveSpectra();
+    }
+
+    public RadioPuzzle GetCurrentRadioPuzzle()
+    {
+        return currentRadioPuzzle;
     }
 
 }

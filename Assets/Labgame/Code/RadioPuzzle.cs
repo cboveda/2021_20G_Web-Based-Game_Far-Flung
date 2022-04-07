@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class RadioPuzzle : LabPuzzle
 {
-    private float frequencyAnswer;
-    private float amplitudeAnswer;
-    private float frequencyStart;
-    private float amplitudeStart;
-    private float frequencyCurrentGuess;
-    private float amplitudeCurrentGuess;
+    public float frequencyAnswer;
+    public float amplitudeAnswer;
+    public float frequencyStart;
+    public float amplitudeStart;
+    public float frequencyCurrentGuess;
+    public float amplitudeCurrentGuess;
     public bool solved;
 
     public GameObject radioSolver;
