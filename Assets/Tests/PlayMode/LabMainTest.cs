@@ -11,15 +11,6 @@ public class LabMainTest
     public IEnumerator Test_LabFlow()
     {
 
-        Spectra spectraFail1 = new Spectra("Fail1", new int[] { 0, 0, 0 });
-        LogAssert.Expect(LogType.Assert, "Spectra was not of the right size.");
-        Assert.AreNotEqual(spectraFail1.GetSpectraArray(), Spectra.SPECTRA_ARRAY_SIZE);
-
-        Spectra spectra1 = new Spectra("Iron", new int[] { 0, 4, 4, 0, 0, 0, 4, 4, 4, 4, 2, 0, 1, 0, 0, 0, 0, 0, 0, 0 });
-
-        Assert.AreEqual(spectra1.GetSpectraArray().Length, Spectra.SPECTRA_ARRAY_SIZE);
-        Assert.AreEqual(spectra1.GetSpectraName(), "Iron");
-
         yield return new WaitForSeconds(0.1f);
 
 
