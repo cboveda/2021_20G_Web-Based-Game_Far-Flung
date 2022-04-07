@@ -44,11 +44,11 @@ public class LabSpectraTest
         elementName.gameObject.AddComponent<Text>();
         SpectraPuzzle puzzle1 = puzzleHolder1.AddComponent<SpectraPuzzle>();
 
-        puzzle1.InitializeSpectraPuzzle("Puzzle1", 0);
-
-        int[] puzzle1CombinedArraysAnswer = { 0, 13, 12, 0, 4, 2, 18, 20, 14, 12, 10, 0, 7, 0, 2, 2, 0, 3, 0, 0 };
-
-        Assert.AreEqual(puzzle1.solution, puzzle1CombinedArraysAnswer);
+        puzzle1.InitializeSpectraPuzzle("Puzzle1", 1);
+        
+        int[] puzzle1CombinedArraysAnswer = { 0, 13, 12, 0, 0, 10, 12, 12, 20, 12, 6, 0, 13, 2, 0, 8, 0, 3, 0, 0 };
+        
+        Assert.AreEqual(puzzle1CombinedArraysAnswer, puzzle1.solution);
 
         puzzle1.SetPrimarySpectra(SpectraPuzzle.iron);
         puzzle1.SetSecondarySpectra(SpectraPuzzle.gold);

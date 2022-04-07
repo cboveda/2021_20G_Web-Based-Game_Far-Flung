@@ -36,7 +36,7 @@ public class SpectraPuzzle : LabPuzzle
     Color32[] spectraColorBySlot = new Color32[Spectra.SPECTRA_ARRAY_SIZE];
     
 
-    int puzzleDifficulty;
+    public int puzzleDifficulty;
 
 
     public void InitializeSpectraPuzzle(string name, int difficulty)
