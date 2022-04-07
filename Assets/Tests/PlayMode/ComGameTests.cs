@@ -405,7 +405,7 @@ public class ComGameTests
             dataButtonObject = GameObject.Find(button);
             EventSystem.current.SetSelectedGameObject(dataButtonObject);
             dataButtonObject.GetComponent<SendDataActions>().SendData();
-            yield return new WaitForSeconds(12.0f); // delay for sending signal
+            yield return new WaitForSeconds(10.0f); // delay for sending signal
         }
 
         // verify letters are displayed after sending signal
@@ -742,7 +742,7 @@ public class ComGameTests
             index++;
         }
 
-        yield return new WaitForSeconds(6.0f); // delay to load win
+        yield return new WaitForSeconds(4.0f); // delay to load win
 
         // verify success comments are showing after final word win
         Color winColor = new Color32(249, 160, 0, 255);
@@ -843,7 +843,7 @@ public class ComGameTests
             // verify letter hint is displayed
             winLetter = letterObject.transform.GetChild(backgroundChild).GetChild(textChild).GetComponent<UnityEngine.UI.Text>().text;
             winColor = letterObject.transform.GetChild(backgroundChild).GetChild(textChild).GetComponent<UnityEngine.UI.Text>().color;
-            yield return new WaitForSeconds(3.0f); // delay for hints
+            yield return new WaitForSeconds(1.0f); // delay for hints
             Assert.AreEqual(winLetter, winLetterValue);
             Assert.AreEqual(winColor, Color.red);
 
@@ -874,7 +874,7 @@ public class ComGameTests
 
         // move tile to display win
         scriptObject.transform.position = new Vector3(5.5f, 2.3f);
-        yield return new WaitForSeconds(6.0f); // delay to load scene
+        yield return new WaitForSeconds(4.0f); // delay to load scene
 
         // verify win scene is displayed
         GameObject background = GameObject.Find("ScrollBackground");
