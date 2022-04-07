@@ -35,30 +35,6 @@ public class PuzzleManipulators : MonoBehaviour
         {
             main.GetComponent<LabMain>().DecrementAmplitude();
         }
-        //else if (buttonName == "AmplitudeDec")
-        //{
-        //    main.GetComponent<LabMain>().DecrementAmplitude();
-        //}
-        //else if (buttonName == "Insert Iron")
-        //{
-        //    main.GetComponent<LabMain>().InsertSpectra(SpectraPuzzle.iron);
-        //}
-        //else if (buttonName == "Insert Nickel")
-        //{
-        //    main.GetComponent<LabMain>().InsertSpectra(SpectraPuzzle.nickel);
-        //}
-        //else if (buttonName == "Insert Aluminum")
-        //{
-        //    main.GetComponent<LabMain>().InsertSpectra(SpectraPuzzle.aluminum);
-        //}
-        //else if (buttonName == "Insert Gold")
-        //{
-        //    main.GetComponent<LabMain>().InsertSpectra(SpectraPuzzle.gold);
-        //}
-        //else if (buttonName == "Insert Silver")
-        //{
-        //    main.GetComponent<LabMain>().InsertSpectra(SpectraPuzzle.silver);
-        //}
         else if (buttonName == "ElementNext")
         {
             main.GetComponent<LabMain>().GetNextSpectra();
