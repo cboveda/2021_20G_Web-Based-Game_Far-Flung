@@ -36,7 +36,7 @@ public class HubTest
     public IEnumerator Test_Hub()
     {
         SceneManager.LoadScene("Hub");
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.5f);
 
         GameObject goHubControl = GameObject.Find("HubControlFlow");
         HubControlFlow hubController = goHubControl.GetComponent<HubControlFlow>();
@@ -118,7 +118,7 @@ public class HubTest
     {
 
         SceneManager.LoadScene("Hub");
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.5f);
         string[] buttonNames =
         {
         "Camera Menu",
@@ -226,7 +226,7 @@ public class HubTest
     public IEnumerator Test_Menu_System()
     {
         SceneManager.LoadScene("Hub");
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.5f);
         MainMenu.AssemblyButtonClicked();
         yield return new WaitForSecondsRealtime(1f);
         Time.timeScale = 1;
