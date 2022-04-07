@@ -128,6 +128,12 @@ public class Scoring : MonoBehaviour
         set { comObjective12 = value; }
     }
 
+    public int getComObjective13
+    {
+        get { return comObjective13; }
+        set { comObjective13 = value; }
+    }
+
     public bool getInitialized
     {
         get { return initialized; }
@@ -198,7 +204,7 @@ public class Scoring : MonoBehaviour
     {
         {"MainScoring", "Total"},
         {"MainScoreBox", "0"},
-        {"ScoringButton", "Game"},
+        {"ScoringButton", "Score"},
         {"ScoreBox", "0"}
     };
 
@@ -207,14 +213,14 @@ public class Scoring : MonoBehaviour
     private void Awake()
     {
 
-        if (Instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
+        //if (Instance != null)
+        //{
+         //   Destroy(gameObject);
+        //    return;
+        //}
 
         Instance = this;
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
     }
 
 
@@ -250,14 +256,18 @@ public class Scoring : MonoBehaviour
         Color textColor = new Color32(255, 150, 0, 255);
         foreach (KeyValuePair<string, string> item in scoringBox)
         {
-            if (itemNum > 1)
+            if (item.Key == "ScoringButton" || item.Key == "ScoreBox")
             {
-                textColor = Color.red;
+                //if (itemNum > 1)
+                //{
+                    textColor = Color.red;
+                //}
+
+                GameObject button = GetNewUIButton(item.Key, itemNum, item.Value, textColor);
+                button.transform.SetParent(this.transform);
+                scoringButtons.Add(button);
+                itemNum++;
             }
-            GameObject button = GetNewUIButton(item.Key, itemNum, item.Value, textColor);
-            button.transform.SetParent(this.transform);
-            scoringButtons.Add(button);
-            itemNum++;
         }
     }
 
@@ -318,13 +328,13 @@ public class Scoring : MonoBehaviour
         scoreDetails = GameObject.Find("ScoreDetails");
         gameDetails = GameObject.Find("GameDetails");
         scoreBox = GameObject.Find("ScoreBox");
-        mainScoreBox = GameObject.Find("MainScoreBox");
+        //mainScoreBox = GameObject.Find("MainScoreBox");
 
         Color highlightColor = new Color32(128, 128, 128, 255);
         Color normalColor = new Color32(0, 0, 0, 255);
 
         ColorBlock scoreBoxColors = scoreBox.GetComponent<UnityEngine.UI.Button>().colors;
-        ColorBlock mainScoreBoxColors = mainScoreBox.GetComponent<UnityEngine.UI.Button>().colors;
+        //ColorBlock mainScoreBoxColors = mainScoreBox.GetComponent<UnityEngine.UI.Button>().colors;
 
         bool displayOn = FindObjectOfType<Scoring>().getShowingScore;
         bool gameDisplayOn = FindObjectOfType<Scoring>().getShowingGameScore;
@@ -338,8 +348,8 @@ public class Scoring : MonoBehaviour
         }
         if (displayOn && buttonName == "MainScoreBox")
         {
-            mainScoreBoxColors.normalColor = normalColor;
-            mainScoreBox.GetComponent<UnityEngine.UI.Button>().colors = mainScoreBoxColors;
+            //mainScoreBoxColors.normalColor = normalColor;
+            //mainScoreBox.GetComponent<UnityEngine.UI.Button>().colors = mainScoreBoxColors;
             hideScoreDetailsDisplay("ScoreDetails");
             return;
         }
@@ -352,17 +362,17 @@ public class Scoring : MonoBehaviour
             }
             //Debug.Log("Scoring Info");
             scoringCanvasGroup = gameDetails.GetComponent<CanvasGroup>();
-            mainScoreBoxColors.normalColor = normalColor;            
+            //mainScoreBoxColors.normalColor = normalColor;            
             scoreBoxColors.normalColor = highlightColor;
             scoreBox.GetComponent<UnityEngine.UI.Button>().colors = scoreBoxColors;
-            mainScoreBox.GetComponent<UnityEngine.UI.Button>().colors = mainScoreBoxColors;
+            //mainScoreBox.GetComponent<UnityEngine.UI.Button>().colors = mainScoreBoxColors;
 
             EventSystem.current.SetSelectedGameObject(null);
 
             scoringCanvasGroup.alpha = 1f;
             scoringCanvasGroup.blocksRaycasts = true;
             FindObjectOfType<Scoring>().getShowingGameScore = true;
-            //updateGameScore(0);
+            
 
         }
         else if (buttonName == "MainScoreBox")
@@ -375,8 +385,8 @@ public class Scoring : MonoBehaviour
             scoringCanvasGroup = scoreDetails.GetComponent<CanvasGroup>();
 
             scoreBoxColors.normalColor = normalColor;            
-            mainScoreBoxColors.normalColor = highlightColor;
-            mainScoreBox.GetComponent<UnityEngine.UI.Button>().colors = mainScoreBoxColors;
+            //mainScoreBoxColors.normalColor = highlightColor;
+            //mainScoreBox.GetComponent<UnityEngine.UI.Button>().colors = mainScoreBoxColors;
             scoreBox.GetComponent<UnityEngine.UI.Button>().colors = scoreBoxColors;
 
             EventSystem.current.SetSelectedGameObject(null);
@@ -520,7 +530,7 @@ public class Scoring : MonoBehaviour
         FindObjectOfType<Scoring>().getTotalScore = total;
         totalScore = FindObjectOfType<Scoring>().getTotalScore;
         totalGameScore.transform.GetChild(0).GetComponent<Text>().text = totalScore.ToString();
-        scoringMainObj.GetComponentInChildren<Text>().text = totalScore.ToString();
+        //scoringMainObj.GetComponentInChildren<Text>().text = totalScore.ToString();
     }
 
     public int getGameScore(string sceneName)
@@ -644,6 +654,13 @@ public class Scoring : MonoBehaviour
                 }
                 FindObjectOfType<Scoring>().getComObjective12 = newScore;
                 break;
+            case "ComObjective13":
+                if (!reset)
+                {
+                    newScore = FindObjectOfType<Scoring>().getComObjective13 + score;
+                }
+                FindObjectOfType<Scoring>().getComObjective13 = newScore;
+                break;
         }
 
         gameScoreObj = GameObject.Find(objectName);
@@ -667,7 +684,7 @@ public class Scoring : MonoBehaviour
         GameObject gameScore;
 
         string[] comPuzzleObjectives = { "ComObjective1", "ComObjective2", "ComObjective3", "ComObjective4", "ComObjective5" };
-        string[] comUnscrambleObjective = { "ComObjective6", "ComObjective7", "ComObjective8", "ComObjective9", "ComObjective10", "ComObjective11", "ComObjective12", };
+        string[] comUnscrambleObjective = { "ComObjective6", "ComObjective7", "ComObjective8", "ComObjective9", "ComObjective10", "ComObjective11", "ComObjective12", "ComObjective13" };
         string[] assemblyObjectives = { };
         string[] flightpathObjectives = { };
         string[] scene5Objectives = { };

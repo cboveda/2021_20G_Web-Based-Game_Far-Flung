@@ -5,30 +5,91 @@ using UnityEngine;
 public class BackgroundScroll : MonoBehaviour
 {
 
-    public float scrollSpeed = 0.1f;
-    Vector2 startPos;
+    
+    float speed = 0.0005f;
+    float startPos = 0.0f;
+    float yPos = 0.0f;
     float newPos = 0.0f;
-    int moveRight = 0;
+    bool moveLeft = true;
     int direction = 0;
     bool rightActive = true;
+    GameObject scrollBackground;
+    bool scroll = true;
+    float xPos = 0.0f;
+    int leftLimit = 11;
+    int rightLimit = -11;
+    float time;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        startPos = transform.position;        
+        
+        scrollBackground = GameObject.Find("ScrollBackground");
+        startPos = scrollBackground.transform.position.x;
+        yPos = scrollBackground.transform.position.y;
     }
 
     IEnumerator Delay()
     {
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(2.0f);
+
+        //Debug.Log("delay");
+        scroll = true;
+
+        if (moveLeft)
+        {
+            moveLeft = false;
+        }
+        else
+        {
+            moveLeft = true;
+        }
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        newPos = Mathf.Repeat(Time.time * scrollSpeed, 20);
-        transform.position = startPos + Vector2.right * newPos; 
 
+        //Debug.Log(scroll);
+        if (scroll)
+        {
+            xPos = scrollBackground.transform.position.x;
+            if (moveLeft)
+            {
+                //Debug.Log("move left");
+                
+                if (xPos < leftLimit)
+                {
+                    startPos += speed;
+
+                }
+                else
+                {
+                    scroll = false;
+                    StartCoroutine(Delay());
+                    
+                }
+            }
+
+            if (!moveLeft)
+            {
+                //Debug.Log("move right");
+                
+                if (xPos > rightLimit)
+                {
+                    startPos -= speed;
+
+                }
+                else
+                {
+                    scroll = false;
+                    StartCoroutine(Delay());
+                }
+            }  
+            
+            scrollBackground.transform.position = new Vector2(startPos, yPos);
+        }
     }
 }
