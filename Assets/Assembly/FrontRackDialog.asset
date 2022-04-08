@@ -13,12 +13,6 @@ MonoBehaviour:
   m_Name: FrontRackDialog
   m_EditorClassIdentifier: 
   dialogs:
-  - dialogText: These are the Magnetometers, Gamma Ray and Neutron Spectromiters
-    robotVoice: 1
-    dialogAudio: {fileID: 0}
-  - dialogText: Those are Sensors
-    robotVoice: 2
-    dialogAudio: {fileID: 0}
-  - dialogText: They were Sensors used to measure the Psyche asteroid
+  - dialogText: These are Sensors used to measure the Psyche asteroid
     robotVoice: 0
     dialogAudio: {fileID: 0}
