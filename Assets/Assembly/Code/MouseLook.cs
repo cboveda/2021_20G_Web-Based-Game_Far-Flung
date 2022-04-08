@@ -14,8 +14,6 @@ public class MouseLook : MonoBehaviour
     float xRotation = 0f;
     float yRotation = 0f;
 
-    public Transform playerBody;
-
     void Update() {
         
         if ( Input.GetButtonDown("Cancel") ) {
