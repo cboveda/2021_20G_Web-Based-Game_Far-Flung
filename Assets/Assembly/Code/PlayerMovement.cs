@@ -3,9 +3,9 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour {
 
     public float speed = 0.3f;
-    float height = 4f;
+    public float height = 4f;
 
-    float zMin = -9;
+    float zMin = -9; // local space bounds of enclosure
     float zMax = 86;
     float xMin = -73;
     float xMax = 4;

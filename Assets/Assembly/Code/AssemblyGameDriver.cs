@@ -18,9 +18,8 @@ public class AssemblyGameDriver : MonoBehaviour {
 
     void Start() {
         
-        // MouseLook.PauseAssembly();
-        MouseLook.ResumeAssembly();
-        // introDiag.BeginPlayingDialog();
+        MouseLook.PauseAssembly();          
+        introDiag.BeginPlayingDialog(); 
     
         FinishedCounter = 0;
     }
