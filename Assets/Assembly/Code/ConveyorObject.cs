@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class ConveyorObject : MonoBehaviour
@@ -6,6 +7,10 @@ public class ConveyorObject : MonoBehaviour
     public float LERP_Speed;
     public ConveyorSystem HostConveyor;
     public Vector3 NominalRotation; // Axis correction
+
+    public float DisolveDurration = 1f;
+
+    public Material DisolveMaterial;
 
     Vector3 Beginning;
     Vector3 Destination;
