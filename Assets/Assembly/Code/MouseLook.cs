@@ -11,8 +11,8 @@ public class MouseLook : MonoBehaviour
     public static GameObject MenuObject 
     {get {return menu? menu: (menu = GameObject.Find("Menus").transform.Find("PauseMenu").gameObject);}}
     
-    float xRotation = 0f;
-    float yRotation = 0f;
+    public float xRotation = 0f;
+    public float yRotation = 0f;
 
     void Update() {
         
@@ -43,7 +43,9 @@ public class MouseLook : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         Time.timeScale = 1;
+
     }
+
 
     public static void ShowMenu() {
         PauseAssembly();
@@ -53,6 +55,14 @@ public class MouseLook : MonoBehaviour
     public static void HideMenu() {
         MenuObject.SetActive(false);
         ResumeAssembly();
+    }
+
+    public void MouseImprint()  {
+        
+        yRotation += Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+
+        xRotation -= Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+        xRotation = Mathf.Clamp(xRotation, -lookUpLimit, lookDownLimit);
     }
 
     void LookUpdate() {
