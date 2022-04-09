@@ -13,44 +13,29 @@ MonoBehaviour:
   m_Name: AssemblyIntro
   m_EditorClassIdentifier: 
   dialogs:
-  - dialogText: Welcome to the assembly facility
-    robotVoice: 0
-    dialogAudio: {fileID: 0}
-  - dialogText: This is our high tech simulator for what we think it was like making
-      the Psyche Spapcecraft
+  - dialogText: Welcome to the assembly area! This high-tech simulation is a recreation
+      of what it was like to build the Psyche spacecraft.
     robotVoice: 1
     dialogAudio: {fileID: 0}
-  - dialogText: I found a bunch of items.
+  - dialogText: I put the components on a hover conveyor.
     robotVoice: 2
     dialogAudio: {fileID: 0}
-  - dialogText: Half of what you found was junk
+  - dialogText: They didn't have hover conveyors in 2022!
     robotVoice: 1
     dialogAudio: {fileID: 0}
-  - dialogText: I thought it could have been used.
-    robotVoice: 2
-    dialogAudio: {fileID: 0}
-  - dialogText: Our records may have been incomplete so we found items from the time
-      of the psyche mission
-    robotVoice: 0
-    dialogAudio: {fileID: 0}
-  - dialogText: Either way you can move around with the awsd keys and explore the
-      facility
+  - dialogText: Anyways, you can move around the assembly area with the 'AWSD' or
+      the ARROW keys on your keyboard.
     robotVoice: 1
     dialogAudio: {fileID: 0}
-  - dialogText: I put the items on a hover conveyor
-    robotVoice: 2
-    dialogAudio: {fileID: 0}
-  - dialogText: They didn't have Hover conveyors!
+  - dialogText: Look at components on the conveyor with your mouse and use the 'E'
+      key to pick them up.
     robotVoice: 1
     dialogAudio: {fileID: 0}
-  - dialogText: More to the point you can use the "E" key to pickup and drop objects
-      and the mouse scroll wheel to move them closer or further.
-    robotVoice: 0
-    dialogAudio: {fileID: 0}
-  - dialogText: Some of our records have notes on components, as you place them in
-      the blueprint we will tell you more about them.
+  - dialogText: Once you have picked up an item, you can place it in the correct
+      spot on the holographic blueprint by looking at it. You may need to move around
+      to find the right spot!
     robotVoice: 1
     dialogAudio: {fileID: 0}
-  - dialogText: Good luck
-    robotVoice: 2
+  - dialogText: Place all of the components in the correct spot to complete the assembly!
+    robotVoice: 1
     dialogAudio: {fileID: 0}
