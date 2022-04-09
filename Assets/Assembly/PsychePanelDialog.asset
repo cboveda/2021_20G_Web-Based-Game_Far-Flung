@@ -10,17 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7c8f0b50b74f8f34d910f4ef4e9b0b1c, type: 3}
-  m_Name: PsychePanelDialog5
+  m_Name: PsychePanelDialog
   m_EditorClassIdentifier: 
   dialogs:
-  - dialogText: The solar panels were pretty similar to the ones you put on your
-      house.
-    robotVoice: 2
+  - dialogText: 'Solar panels capture energy from the Sun to provide power. '
+    robotVoice: 0
     dialogAudio: {fileID: 0}
-  - dialogText: 'Yes, but they were specially designed to be lighter and more efficient '
-    robotVoice: 1
-    dialogAudio: {fileID: 0}
-  - dialogText: They were also designed to be radiation resistant and work with less
-      sunlight
+  - dialogText: The panels used on the spacecraft were similar to those used on Earth,
+      but they were specially designed to be lighter, more efficient, and to withstand
+      hazards in space.
     robotVoice: 0
     dialogAudio: {fileID: 0}
