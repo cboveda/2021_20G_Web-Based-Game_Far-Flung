@@ -44,7 +44,7 @@ MonoBehaviour:
   ItemTypeIdentifier: PsycheFrontRack
   LERP_Speed: 0
   HostConveyor: {fileID: 0}
-  NominalRotation: {x: -84, y: -122, z: 100}
+  NominalRotation: {x: 90, y: 0, z: 54}
   DisolveDurration: 1
   DisolveMaterial: {fileID: 0}
 --- !u!1001 &2352758637204905550

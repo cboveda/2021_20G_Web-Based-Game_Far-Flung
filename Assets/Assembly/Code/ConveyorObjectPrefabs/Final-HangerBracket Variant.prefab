@@ -44,7 +44,7 @@ MonoBehaviour:
   ItemTypeIdentifier: PsycheHangerBracket
   LERP_Speed: 0
   HostConveyor: {fileID: 0}
-  NominalRotation: {x: 85, y: 71, z: 7}
+  NominalRotation: {x: 85, y: 70, z: 70}
   DisolveDurration: 1
   DisolveMaterial: {fileID: 0}
 --- !u!1001 &7793059402292840495
