@@ -21,10 +21,3 @@ MonoBehaviour:
       efficiently
     robotVoice: 1
     dialogAudio: {fileID: 0}
-  - dialogText: They used lasers
-    robotVoice: 2
-    dialogAudio: {fileID: 0}
-  - dialogText: Lasers from earth to help the psyche spacecraft stabalize and then
-      a laser to send data back.  Its soo exiting.
-    robotVoice: 1
-    dialogAudio: {fileID: 0}

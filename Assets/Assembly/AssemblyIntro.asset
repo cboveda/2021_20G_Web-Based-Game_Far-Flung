@@ -13,38 +13,24 @@ MonoBehaviour:
   m_Name: AssemblyIntro
   m_EditorClassIdentifier: 
   dialogs:
-  - dialogText: Welcome to the assembly facility
-    robotVoice: 0
-    dialogAudio: {fileID: 0}
   - dialogText: This is our high tech simulator for what we think it was like making
       the Psyche Spapcecraft
     robotVoice: 1
     dialogAudio: {fileID: 0}
-  - dialogText: I found a bunch of items.
-    robotVoice: 2
-    dialogAudio: {fileID: 0}
-  - dialogText: Half of what you found was junk
-    robotVoice: 1
-    dialogAudio: {fileID: 0}
-  - dialogText: I thought it could have been used.
-    robotVoice: 2
-    dialogAudio: {fileID: 0}
-  - dialogText: Our records may have been incomplete so we found items from the time
-      of the psyche mission
+  - dialogText: We have the blueprints and the parts for the Spacecraft
     robotVoice: 0
     dialogAudio: {fileID: 0}
-  - dialogText: Either way you can move around with the awsd keys and explore the
-      facility
+  - dialogText: You can move around with the "awsd" keys and explore the facility
     robotVoice: 1
     dialogAudio: {fileID: 0}
-  - dialogText: I put the items on a hover conveyor
+  - dialogText: I put the parts on a hover conveyor
     robotVoice: 2
     dialogAudio: {fileID: 0}
   - dialogText: They didn't have Hover conveyors!
     robotVoice: 1
     dialogAudio: {fileID: 0}
-  - dialogText: More to the point you can use the "E" key to pickup and drop objects
-      and the mouse scroll wheel to move them closer or further.
+  - dialogText: You can use the "E" key to pickup and drop objects from the conveyor
+      and use the mouse scroll wheel to move them closer or further.
     robotVoice: 0
     dialogAudio: {fileID: 0}
   - dialogText: Some of our records have notes on components, as you place them in
