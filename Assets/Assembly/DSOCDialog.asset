@@ -13,11 +13,8 @@ MonoBehaviour:
   m_Name: DSOCDialog
   m_EditorClassIdentifier: 
   dialogs:
-  - dialogText: That is the Deep Space Optical Communications package or DSOC for
-      short
+  - dialogText: That is the Deep Space Optical Communications package, or DSOC for
+      short. It uses lasers to communicate with Earth during the spacecraft's journey
+      to Psyche.
     robotVoice: 0
-    dialogAudio: {fileID: 0}
-  - dialogText: That was a system that nasa was testing to transmit more data more
-      efficiently
-    robotVoice: 1
     dialogAudio: {fileID: 0}

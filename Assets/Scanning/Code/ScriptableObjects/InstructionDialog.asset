@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: InstructionDialog
   m_EditorClassIdentifier: 
   dialogs:
-  - dialogText: Use the arrow keys to control psyche on its orbit, collect neutron
-      signals to complete the mission. Watch your gauges and dont crash!
+  - dialogText: Use the ARROW keys to control the Psyche spacecraft on its orbit
+      around the asteroid. Fly through the neutron signals coming from the surface
+      to collect them. Collect enough signals to complete the mission. Watch your
+      gauges and dont crash!
     robotVoice: 0
     dialogAudio: {fileID: 0}

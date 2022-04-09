@@ -13,16 +13,7 @@ MonoBehaviour:
   m_Name: AssemblyOutro
   m_EditorClassIdentifier: 
   dialogs:
-  - dialogText: Congragulations, you managed to assemble the Psyche Spacecraft.
+  - dialogText: Well done! You assembled the Psyche spacecraft. Let's continue on
+      with the mission!
     robotVoice: 1
-    dialogAudio: {fileID: 0}
-  - dialogText: I'm glad you were able to put everyting together
-    robotVoice: 0
-    dialogAudio: {fileID: 0}
-  - dialogText: Good Job
-    robotVoice: 2
-    dialogAudio: {fileID: 0}
-  - dialogText: Lets head on to other parts of the Psyche mission, I can't wait to
-      learn more about it
-    robotVoice: 2
     dialogAudio: {fileID: 0}

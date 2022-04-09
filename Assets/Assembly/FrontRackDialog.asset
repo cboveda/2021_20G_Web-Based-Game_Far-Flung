@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: FrontRackDialog
   m_EditorClassIdentifier: 
   dialogs:
-  - dialogText: These are Sensors used to measure the Psyche asteroid
-    robotVoice: 0
+  - dialogText: These are the sensors used to collect data about the Psyche asteroid.
+      There's a magnetometers, as well as gamma ray and neutron spectrometers.
+    robotVoice: 1
     dialogAudio: {fileID: 0}
