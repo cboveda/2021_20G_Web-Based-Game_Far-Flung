@@ -29,7 +29,6 @@ public class ConveyorObject : MonoBehaviour
         obj.mass = 4;
         obj.drag = 3;
         finished = false;
-        transform.rotation = Quaternion.Euler(NominalRotation);
     }
 
     public void InitalizeConveyorObject( Vector3 start, Vector3 end ) {
@@ -44,6 +43,7 @@ public class ConveyorObject : MonoBehaviour
         TimeZero = Time.time;
         Distance = Vector3.Distance( Beginning, Destination );
         transform.position = Beginning;
+        transform.rotation = Quaternion.Euler(NominalRotation);
     }
 
     // Update is called once per frame

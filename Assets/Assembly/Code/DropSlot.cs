@@ -6,7 +6,6 @@ public class DropSlot : MonoBehaviour {
     public string slotTypeMatch;
     public DialogGenerator completionDialog;
 
-
     bool set;
 
     void Start() {

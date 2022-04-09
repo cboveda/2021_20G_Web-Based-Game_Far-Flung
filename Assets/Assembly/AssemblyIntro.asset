@@ -14,29 +14,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogs:
   - dialogText: This is our high tech simulator for what we think it was like making
-      the Psyche Spapcecraft
+      the Psyche spacecraft.
     robotVoice: 1
     dialogAudio: {fileID: 0}
-  - dialogText: We have the blueprints and the parts for the Spacecraft
+  - dialogText: We have the blueprints and the parts for the Spacecraft.
     robotVoice: 0
     dialogAudio: {fileID: 0}
-  - dialogText: You can move around with the "awsd" keys and explore the facility
+  - dialogText: You can move around with the "awsd" keys and explore the facility.
     robotVoice: 1
     dialogAudio: {fileID: 0}
-  - dialogText: I put the parts on a hover conveyor
+  - dialogText: I put the parts on a hover conveyor. They didn't have Hover conveyors!
     robotVoice: 2
-    dialogAudio: {fileID: 0}
-  - dialogText: They didn't have Hover conveyors!
-    robotVoice: 1
     dialogAudio: {fileID: 0}
   - dialogText: You can use the "E" key to pickup and drop objects from the conveyor
       and use the mouse scroll wheel to move them closer or further.
     robotVoice: 0
     dialogAudio: {fileID: 0}
-  - dialogText: Some of our records have notes on components, as you place them in
-      the blueprint we will tell you more about them.
+  - dialogText: Place the pieces of the parts in the blueprint we will tell you more
+      about them as you assemble the spacecraft.
     robotVoice: 1
     dialogAudio: {fileID: 0}
-  - dialogText: Good luck
+  - dialogText: Good luck!
     robotVoice: 2
     dialogAudio: {fileID: 0}
