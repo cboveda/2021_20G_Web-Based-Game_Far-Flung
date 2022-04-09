@@ -4485,8 +4485,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 134868759}
-  m_LocalRotation: {x: -0, y: -0.007655846, z: -0, w: 0.99997073}
-  m_LocalPosition: {x: -31.938057, y: 0.5, z: 4.3389015}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -32.97, y: 1, z: 4.67}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1000967997}
@@ -4494,7 +4494,7 @@ Transform:
   - {fileID: 1583509256}
   m_Father: {fileID: 1418463184}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: -0.877, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &137085788 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 440078, guid: 1cba0c9032e0eff40948fdf6df7cc6d5, type: 3}
@@ -24807,8 +24807,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 825575447}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.40000004, z: 0.48999962}
-  m_LocalScale: {x: 0.79999995, y: 2.8, z: 0.50000006}
+  m_LocalPosition: {x: 0, y: 0, z: 0.5}
+  m_LocalScale: {x: 0.79999995, y: 2, z: 0.50000006}
   m_Children: []
   m_Father: {fileID: 1000967997}
   m_RootOrder: 0
@@ -30627,7 +30627,7 @@ GameObject:
   - component: {fileID: 1000967999}
   - component: {fileID: 1000967998}
   m_Layer: 0
-  m_Name: Cylinder
+  m_Name: Start Terminal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30641,7 +30641,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1000967996}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.59, y: 2, z: -0.02}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 5, y: 3, z: 5}
   m_Children:
   - {fileID: 825575448}
@@ -46511,7 +46511,7 @@ GameObject:
   - component: {fileID: 1583509258}
   - component: {fileID: 1583509257}
   m_Layer: 0
-  m_Name: Cylinder (1)
+  m_Name: End Terminal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46525,7 +46525,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1583509255}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.59, y: 2, z: 23.31}
+  m_LocalPosition: {x: 0, y: 1, z: 23}
   m_LocalScale: {x: 5, y: 3, z: 5}
   m_Children:
   - {fileID: 1442539580}
@@ -47090,7 +47090,7 @@ GameObject:
   - component: {fileID: 1599578235}
   - component: {fileID: 1599578234}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Conver Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47104,8 +47104,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1599578232}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.59, y: -0.63, z: 9.92}
-  m_LocalScale: {x: 2, y: 0.099999994, z: 21}
+  m_LocalPosition: {x: 0, y: -1, z: 11.5}
+  m_LocalScale: {x: 3, y: 0.5, z: 23}
   m_Children: []
   m_Father: {fileID: 134868762}
   m_RootOrder: 1
@@ -52416,7 +52416,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1787394371}
   m_LocalRotation: {x: -0, y: -0.6927297, z: -0, w: -0.72119737}
-  m_LocalPosition: {x: -40.62, y: 2.8026888, z: 16.59}
+  m_LocalPosition: {x: -40.62, y: 4, z: 16.59}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 299348619}

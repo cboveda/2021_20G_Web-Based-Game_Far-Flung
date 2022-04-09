@@ -44,7 +44,9 @@ MonoBehaviour:
   ItemTypeIdentifier: PsycheBody
   LERP_Speed: 0
   HostConveyor: {fileID: 0}
-  NominalRotation: {x: 0, y: 0, z: 0}
+  NominalRotation: {x: 0, y: 140, z: -90}
+  DisolveDurration: 1
+  DisolveMaterial: {fileID: 0}
 --- !u!1001 &2477432829765272611
 PrefabInstance:
   m_ObjectHideFlags: 0
