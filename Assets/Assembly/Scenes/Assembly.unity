@@ -60079,7 +60079,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 603367026252344404, guid: 8031d155735eb4c40b87903f9b2dd0c5, type: 3}
       propertyPath: m_Text
-      value: Press 'Esc' to Open
+      value: '[Escape] Menu'
       objectReference: {fileID: 0}
     - target: {fileID: 603367026252344404, guid: 8031d155735eb4c40b87903f9b2dd0c5, type: 3}
       propertyPath: m_FontData.m_VerticalOverflow
@@ -60091,7 +60091,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1821536914172042642, guid: 8031d155735eb4c40b87903f9b2dd0c5, type: 3}
       propertyPath: m_Name
-      value: OpenPauseMenuButton
+      value: InertPauseMenuPrompt
       objectReference: {fileID: 0}
     - target: {fileID: 7435723126718404380, guid: 8031d155735eb4c40b87903f9b2dd0c5, type: 3}
       propertyPath: m_Pivot.x
@@ -60123,11 +60123,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7435723126718404380, guid: 8031d155735eb4c40b87903f9b2dd0c5, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 200
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 7435723126718404380, guid: 8031d155735eb4c40b87903f9b2dd0c5, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 30
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 7435723126718404380, guid: 8031d155735eb4c40b87903f9b2dd0c5, type: 3}
       propertyPath: m_LocalPosition.x

@@ -5,8 +5,9 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
-
-
+/*
+    Pause menu functinality for all scenes via a plug-and-play component.
+*/
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] private Button openMenuButton;

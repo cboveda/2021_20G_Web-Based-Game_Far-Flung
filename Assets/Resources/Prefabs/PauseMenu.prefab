@@ -406,7 +406,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 603367026252344404, guid: 8031d155735eb4c40b87903f9b2dd0c5, type: 3}
       propertyPath: m_Text
-      value: Menu
+      value: '[Escape] Menu'
       objectReference: {fileID: 0}
     - target: {fileID: 603367026252344404, guid: 8031d155735eb4c40b87903f9b2dd0c5, type: 3}
       propertyPath: m_Color.b
@@ -502,11 +502,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7435723126718404380, guid: 8031d155735eb4c40b87903f9b2dd0c5, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 100
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 7435723126718404380, guid: 8031d155735eb4c40b87903f9b2dd0c5, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 30
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 7435723126718404380, guid: 8031d155735eb4c40b87903f9b2dd0c5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -538,7 +538,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7435723126718404380, guid: 8031d155735eb4c40b87903f9b2dd0c5, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -640
+      value: -620
       objectReference: {fileID: 0}
     - target: {fileID: 7435723126718404380, guid: 8031d155735eb4c40b87903f9b2dd0c5, type: 3}
       propertyPath: m_AnchoredPosition.y
