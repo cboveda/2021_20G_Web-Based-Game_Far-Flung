@@ -20,6 +20,7 @@ public class HubControlFlow : MonoBehaviour
     private CameraPositionController cameraController;
     private const int CAMERA_PRIORITY_HIGH = 1000;
     private const int CAMERA_PRIORITY_LOW = 10;
+    private MusicPlayer musicPlayer;
 
     DialogGenerator diagIntro;
     DialogGenerator diagFlight;
@@ -41,6 +42,7 @@ public class HubControlFlow : MonoBehaviour
             HubTracker.FirstLoad = true;
             //HideLevelSelectButtons();
         }
+        musicPlayer = GameObject.Find("MainMusic").GetComponent<MusicPlayer>();
         diagIntro = GameObject.Find("DialogIntro").GetComponent<DialogGenerator>();
 
         diagFlight = GameObject.Find("DialogFlight").GetComponent<DialogGenerator>();
@@ -52,7 +54,7 @@ public class HubControlFlow : MonoBehaviour
 
         introStarted = false;
         cameraTransitionedToNewLevel = false;
-
+        musicPlayer.StopMusic();
         bgAudio = GameObject.Find("Background Music").GetComponent<AudioSource>();
 
         bgAudio.volume = 0.5f;
@@ -248,29 +250,34 @@ public class HubControlFlow : MonoBehaviour
     public void LaunchAssembly()
     {
         HideMainMenu();
+        musicPlayer.StartMusic();
         SceneManager.LoadScene("Assembly");
     }
 
     public void LaunchFlightPlanning()
     {
         HideMainMenu();
+        musicPlayer.StartMusic();
         SceneManager.LoadScene("1_FlightpathIntro");
     }
 
     public void LaunchScanning()
     {
         HideMainMenu();
+        musicPlayer.StartMusic();
         SceneManager.LoadScene("StartScene.Scanning");
     }
     public void LaunchComms()
     {
         HideMainMenu();
+        musicPlayer.StartMusic();
         SceneManager.LoadScene("comGameIntro");
     }
 
     public void LaunchLab()
     {
         HideMainMenu();
+        musicPlayer.StartMusic();
         SceneManager.LoadScene("scene5");
     }
 
