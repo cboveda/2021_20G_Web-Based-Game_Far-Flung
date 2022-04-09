@@ -36,7 +36,7 @@ public class DropSlot : MonoBehaviour {
 
                     set = true;
 
-                    if(!completionDialog) return; //skips dialog if null
+                    if (!completionDialog) return; //skips dialog if null
                     MouseLook.PauseAssembly();
                     completionDialog.BeginPlayingDialog();
                 }

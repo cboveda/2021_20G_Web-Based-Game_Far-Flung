@@ -68,4 +68,12 @@ public class ConveyorPickup : MonoBehaviour {
     public void EvictHeldObject() {
         heldObj = null;
     }
+
+    public void TestHook_PickupObject(RaycastHit hit) {
+        PickupObject(hit);
+    }
+
+    public void TestHook_DropObject() {
+        DropObject();
+    }
 }

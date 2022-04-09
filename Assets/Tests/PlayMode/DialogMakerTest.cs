@@ -16,8 +16,6 @@ public class DialogMakerTest
         "has a change to interrupt it is really quite hypnotic.", RobotCharacter.Serious);
 
     
-
-
     [UnityTest]
     public IEnumerator Test_DialogCreation()
     {
