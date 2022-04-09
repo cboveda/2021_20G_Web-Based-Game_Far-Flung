@@ -858,7 +858,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 603367026252344404, guid: 8031d155735eb4c40b87903f9b2dd0c5, type: 3}
       propertyPath: m_Text
-      value: '[Escape] Menu'
+      value: '[Esc] Menu'
       objectReference: {fileID: 0}
     - target: {fileID: 603367026252344404, guid: 8031d155735eb4c40b87903f9b2dd0c5, type: 3}
       propertyPath: m_Color.b

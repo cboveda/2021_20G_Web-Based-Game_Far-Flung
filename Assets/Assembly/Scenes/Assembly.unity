@@ -38505,7 +38505,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1295655563
 RectTransform:
   m_ObjectHideFlags: 0
@@ -60786,7 +60786,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 603367026252344404, guid: 8031d155735eb4c40b87903f9b2dd0c5, type: 3}
       propertyPath: m_Text
-      value: '[Escape] Menu'
+      value: '[Esc] Menu'
       objectReference: {fileID: 0}
     - target: {fileID: 603367026252344404, guid: 8031d155735eb4c40b87903f9b2dd0c5, type: 3}
       propertyPath: m_FontData.m_VerticalOverflow
@@ -60834,7 +60834,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7435723126718404380, guid: 8031d155735eb4c40b87903f9b2dd0c5, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 40
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 7435723126718404380, guid: 8031d155735eb4c40b87903f9b2dd0c5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -60870,7 +60870,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7435723126718404380, guid: 8031d155735eb4c40b87903f9b2dd0c5, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -420
+      value: -425
       objectReference: {fileID: 0}
     - target: {fileID: 7435723126718404380, guid: 8031d155735eb4c40b87903f9b2dd0c5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
