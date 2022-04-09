@@ -59,7 +59,8 @@ public class DebugCamera : MonoBehaviour
         debugCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
 
         GraphicRaycaster myCaster = gameObject.AddComponent<GraphicRaycaster>();
-        myCaster.transform.parent = this.transform;
+        // myCaster.transform.parent = this.transform;
+        myCaster.transform.SetParent(this.transform, true);
         myCaster.blockingObjects = GraphicRaycaster.BlockingObjects.None;
 
         canvasHeight = debugCanvas.pixelRect.height;
@@ -69,7 +70,8 @@ public class DebugCamera : MonoBehaviour
         for (int i = 0; i < buttonNames.Length; i++)
         {
             GameObject button = GetNewUIButton(buttonNames[i], i);
-            button.transform.parent = this.transform;
+            // button.transform.parent = this.transform;
+            button.transform.SetParent(this.transform, true);
             debugButtons.Add(button);
 
             if (button.name != "Camera Menu")
