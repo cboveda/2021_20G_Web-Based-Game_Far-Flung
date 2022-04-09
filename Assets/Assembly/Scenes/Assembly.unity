@@ -5633,7 +5633,7 @@ PrefabInstance:
     - target: {fileID: 8172208294005014276, guid: 5835d40e467de3f48ac74c2846c867ac, type: 3}
       propertyPath: dialogContainer
       value: 
-      objectReference: {fileID: 11400000, guid: 821505a8e4e32b740a3586afaf75545a, type: 2}
+      objectReference: {fileID: 11400000, guid: eb2e7fe02fc4b17439bf6b46aa56d237, type: 2}
     - target: {fileID: 8172208294005014276, guid: 5835d40e467de3f48ac74c2846c867ac, type: 3}
       propertyPath: onDialogFinish.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -6712,7 +6712,7 @@ PrefabInstance:
     - target: {fileID: 8172208294005014276, guid: 5835d40e467de3f48ac74c2846c867ac, type: 3}
       propertyPath: dialogContainer
       value: 
-      objectReference: {fileID: 11400000, guid: 76150006bee47a340afd6831ea144271, type: 2}
+      objectReference: {fileID: 11400000, guid: eb2e7fe02fc4b17439bf6b46aa56d237, type: 2}
     - target: {fileID: 8172208294005014276, guid: 5835d40e467de3f48ac74c2846c867ac, type: 3}
       propertyPath: onDialogFinish.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -7379,7 +7379,7 @@ PrefabInstance:
     - target: {fileID: 8172208294005014276, guid: 5835d40e467de3f48ac74c2846c867ac, type: 3}
       propertyPath: dialogContainer
       value: 
-      objectReference: {fileID: 11400000, guid: b1f30ff383e45e348946e61ff6a27887, type: 2}
+      objectReference: {fileID: 11400000, guid: eb2e7fe02fc4b17439bf6b46aa56d237, type: 2}
     - target: {fileID: 8172208294005014276, guid: 5835d40e467de3f48ac74c2846c867ac, type: 3}
       propertyPath: onDialogFinish.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -14773,7 +14773,7 @@ PrefabInstance:
     - target: {fileID: 8172208294005014276, guid: 5835d40e467de3f48ac74c2846c867ac, type: 3}
       propertyPath: dialogContainer
       value: 
-      objectReference: {fileID: 11400000, guid: fab4de6f0030cae469500bcf71135926, type: 2}
+      objectReference: {fileID: 11400000, guid: eb2e7fe02fc4b17439bf6b46aa56d237, type: 2}
     - target: {fileID: 8172208294005014276, guid: 5835d40e467de3f48ac74c2846c867ac, type: 3}
       propertyPath: onDialogFinish.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -20730,7 +20730,7 @@ PrefabInstance:
     - target: {fileID: 8172208294005014276, guid: 5835d40e467de3f48ac74c2846c867ac, type: 3}
       propertyPath: dialogContainer
       value: 
-      objectReference: {fileID: 11400000, guid: 3a443aed625c68c40b5b5c675a593015, type: 2}
+      objectReference: {fileID: 11400000, guid: eb2e7fe02fc4b17439bf6b46aa56d237, type: 2}
     - target: {fileID: 8172208294005014276, guid: 5835d40e467de3f48ac74c2846c867ac, type: 3}
       propertyPath: onDialogFinish.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -49956,7 +49956,7 @@ PrefabInstance:
     - target: {fileID: 8172208294005014276, guid: 5835d40e467de3f48ac74c2846c867ac, type: 3}
       propertyPath: dialogContainer
       value: 
-      objectReference: {fileID: 11400000, guid: 34880a1a5f4054446a757a9838a805e3, type: 2}
+      objectReference: {fileID: 11400000, guid: eb2e7fe02fc4b17439bf6b46aa56d237, type: 2}
     - target: {fileID: 8172208294005014276, guid: 5835d40e467de3f48ac74c2846c867ac, type: 3}
       propertyPath: onDialogFinish.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -50667,7 +50667,7 @@ PrefabInstance:
     - target: {fileID: 8172208294005014276, guid: 5835d40e467de3f48ac74c2846c867ac, type: 3}
       propertyPath: dialogContainer
       value: 
-      objectReference: {fileID: 11400000, guid: aaf7b4ab3cf61b74a931103baa40c970, type: 2}
+      objectReference: {fileID: 11400000, guid: eb2e7fe02fc4b17439bf6b46aa56d237, type: 2}
     - target: {fileID: 8172208294005014276, guid: 5835d40e467de3f48ac74c2846c867ac, type: 3}
       propertyPath: onDialogFinish.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -51404,7 +51404,7 @@ PrefabInstance:
     - target: {fileID: 8172208294005014276, guid: 5835d40e467de3f48ac74c2846c867ac, type: 3}
       propertyPath: dialogContainer
       value: 
-      objectReference: {fileID: 11400000, guid: 90bfe612856bfe24e8415c2ac3c40e4e, type: 2}
+      objectReference: {fileID: 11400000, guid: eb2e7fe02fc4b17439bf6b46aa56d237, type: 2}
     - target: {fileID: 8172208294005014276, guid: 5835d40e467de3f48ac74c2846c867ac, type: 3}
       propertyPath: onDialogFinish.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -62217,7 +62217,7 @@ PrefabInstance:
     - target: {fileID: 8172208294005014276, guid: 5835d40e467de3f48ac74c2846c867ac, type: 3}
       propertyPath: dialogContainer
       value: 
-      objectReference: {fileID: 11400000, guid: 5dcd48f3abc55cc44ac23127756cb52d, type: 2}
+      objectReference: {fileID: 11400000, guid: eb2e7fe02fc4b17439bf6b46aa56d237, type: 2}
     - target: {fileID: 8172208294005014276, guid: 5835d40e467de3f48ac74c2846c867ac, type: 3}
       propertyPath: onDialogFinish.m_PersistentCalls.m_Calls.Array.size
       value: 1
