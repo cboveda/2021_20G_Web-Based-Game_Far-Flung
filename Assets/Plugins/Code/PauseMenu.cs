@@ -78,7 +78,7 @@ public class PauseMenu : MonoBehaviour
 
     public void toggleMenu()
     {
-        pauseMenuCanvas.SetActive(!pauseMenuCanvas.active);
+        pauseMenuCanvas.SetActive(!pauseMenuCanvas.activeInHierarchy);
     }
 
     public void returnToHub()

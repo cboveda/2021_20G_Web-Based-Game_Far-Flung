@@ -13,7 +13,7 @@ public class FlightControl : MonoBehaviour
     
     [HideInInspector]
     public int signals_collected = 0;
-    public int limit = 10;
+    public int limit = 20;
     float limitAdjust;
 
     public FadeDriver fadeDriver;

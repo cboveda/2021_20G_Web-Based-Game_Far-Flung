@@ -5,10 +5,10 @@ public class PlayerMovement : MonoBehaviour {
     public float speed = 0.3f;
     public float height = 4f;
 
-    float zMin = -9; // local space bounds of enclosure
-    float zMax = 86;
-    float xMin = -73;
-    float xMax = 4;
+    float zMin = 37; // local space bounds of enclosure
+    float zMax = 72;
+    float xMin = -52;
+    float xMax = -17;
 
     void Update() {
 
