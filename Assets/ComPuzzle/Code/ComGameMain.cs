@@ -16,10 +16,19 @@ public class ComGameMain : MonoBehaviour
     void Start()
     {
         SetTileStartPositions();
-
-        audioSource = GetComponent<AudioSource>();
+        try
+        {
+            audioSource = GameObject.Find("MainMusic").GetComponent<AudioSource>();
+        }
+        catch(Exception e)
+        {
+            Debug.Log("Unable to find MainMusic, probably because we're testing. Setting to null.");
+            audioSource = null;
+        }
+        
+        //audioSource = GetComponent<AudioSource>();
         volumeSlider = GameObject.Find("VolumeSlider");        
-        audioSource.Play();
+        //audioSource.Play();
 
         // start score of 1000
         Scoring.Instance.initialize(1000, "ComObjective1");
@@ -28,8 +37,12 @@ public class ComGameMain : MonoBehaviour
 
 
     void Update()
-    {        
-        audioSource.volume = volumeSlider.GetComponent<Slider>().value * 0.15F;
+    {   
+        if(audioSource != null)
+        {
+            audioSource.volume = volumeSlider.GetComponent<Slider>().value;
+        }
+        
     }
 
 
