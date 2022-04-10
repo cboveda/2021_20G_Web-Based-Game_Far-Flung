@@ -22,7 +22,7 @@ MonoBehaviour:
   - dialogText: Good Job
     robotVoice: 2
     dialogAudio: {fileID: 0}
-  - dialogText: Lets head on to other parts of the Psyche mission, I can't wait to
-      learn more about it
+  - dialogText: Let's head on to other parts of the Psyche mission, I can't wait
+      to learn more about it
     robotVoice: 2
     dialogAudio: {fileID: 0}
