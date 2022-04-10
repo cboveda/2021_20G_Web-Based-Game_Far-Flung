@@ -45,9 +45,16 @@ public class AssemblyTest {
             yield return new WaitForSeconds(1f);
         }
 
-        Vector3 diff = active_body.transform.position - player.transform.position;
+        active_body.GetComponent<ConveyorObject>().OnPickUp();
+        active_body.transform.position += new Vector3(0, 5, 0);
 
-        Vector3 start = active_body.transform.position;
+        yield return new WaitForSeconds(1f);
+
+        Vector3 virtual_cg = active_body.GetComponent<BoxCollider>().bounds.center;
+
+        // Debug.Log(virtual_cg);
+
+        Vector3 diff = virtual_cg - player.transform.position;
 
         RaycastHit hit;
                 
@@ -61,15 +68,17 @@ public class AssemblyTest {
 
         // object now at cursor position
 
-        Assert.True(start != active_body.transform.position);
+        Assert.True(virtual_cg != active_body.transform.position);
 
         // drop object and pickup object
 
         player.GetComponent<ConveyorPickup>().TestHook_DropObject();
 
         Assert.Null(player.GetComponent<ConveyorPickup>().heldObj);
+
+        active_body.GetComponent<ConveyorObject>().OnPickUp();
         
-        Vector3 diff_two = active_body.transform.position - player.transform.position;
+        Vector3 diff_two = active_body.GetComponent<BoxCollider>().bounds.center - player.transform.position;
 
         RaycastHit hit_two;
                 
