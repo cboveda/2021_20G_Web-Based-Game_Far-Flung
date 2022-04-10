@@ -51551,7 +51551,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8172208294005014275, guid: 5835d40e467de3f48ac74c2846c867ac, type: 3}
       propertyPath: m_RootOrder
-      value: 16
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 8172208294005014275, guid: 5835d40e467de3f48ac74c2846c867ac, type: 3}
       propertyPath: m_LocalPosition.x
@@ -52521,14 +52521,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1787394371}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -34.9, y: 4, z: 60.5}
+  m_LocalRotation: {x: 0, y: 0.38590598, z: 0, w: 0.92253816}
+  m_LocalPosition: {x: -43.71, y: 4, z: 54.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 299348619}
   m_Father: {fileID: 1418463184}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 45.4, z: 0}
 --- !u!114 &1787394373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52541,11 +52541,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f51b41cbff311b41ab750f7b3dd1730, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSensitivity: 400
+  MouseSpeed: 5
   lookUpLimit: 60
   lookDownLimit: 60
-  xRotation: 0
-  yRotation: 0
 --- !u!114 &1787394374
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MouseLook : MonoBehaviour
 {
-    public float mouseSensitivity = 100f;
+    public float MouseSpeed = 5f;
     public float lookUpLimit;
     public float lookDownLimit;
 
@@ -10,9 +10,6 @@ public class MouseLook : MonoBehaviour
 
     public static GameObject MenuObject 
     {get {return menu? menu: (menu = GameObject.Find("Menus").transform.Find("PauseMenu").gameObject);}}
-    
-    public float xRotation = 0f;
-    public float yRotation = 0f;
 
     void Update() {
         
@@ -35,7 +32,6 @@ public class MouseLook : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        // Time.timeScale = 0;
     }
 
     public static void ResumeAssembly() {
@@ -43,9 +39,7 @@ public class MouseLook : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         Time.timeScale = 1;
-
     }
-
 
     public static void ShowMenu() {
         PauseAssembly();
@@ -57,22 +51,11 @@ public class MouseLook : MonoBehaviour
         ResumeAssembly();
     }
 
-    public void MouseImprint()  {
-        
-        yRotation += Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-
-        xRotation -= Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
-        xRotation = Mathf.Clamp(xRotation, -lookUpLimit, lookDownLimit);
-    }
-
     void LookUpdate() {
- 
-        yRotation += Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-
-        xRotation -= Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
-        xRotation = Mathf.Clamp(xRotation, -lookUpLimit, lookDownLimit);
-
-        transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0f);
+        float h = MouseSpeed * Input.GetAxis("Mouse X");
+        float v = -MouseSpeed * Input.GetAxis("Mouse Y");
+        transform.Rotate(new Vector3(v, 0, 0), Space.Self);
+        transform.Rotate(new Vector3(0, h, 0), Space.World);
     }
 
     void OnDestroy() {
