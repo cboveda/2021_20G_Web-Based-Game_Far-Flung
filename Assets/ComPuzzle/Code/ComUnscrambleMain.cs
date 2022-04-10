@@ -117,9 +117,16 @@ public class ComUnscrambleMain : MonoBehaviour
 
         //UpdateFinalWord();
 
-        audioSource = GetComponent<AudioSource>();
+        try
+        {
+            audioSource = GameObject.Find("MainMusic").GetComponent<AudioSource>();
+        }
+        catch (Exception e)
+        {
+            Debug.Log("Unable to find MainMusic, probably because we're testing. Setting to null.");
+            audioSource = null;
+        }
         volumeSlider = GameObject.Find("VolumeSlider");
-        audioSource.Play();
 
         // start score of 0
         //Debug.Log("unscramble");
@@ -169,7 +176,11 @@ public class ComUnscrambleMain : MonoBehaviour
         int row4 = 4;
         int row5 = 5;
 
-        audioSource.volume = volumeSlider.GetComponent<Slider>().value;
+        if(audioSource != null)
+        {
+            audioSource.volume = volumeSlider.GetComponent<Slider>().value;
+        }
+        
 
         winWordsAll = FindObjectOfType<ComUnscrambleMain>().wordsAllWin;
         if (!winWordsAll)
