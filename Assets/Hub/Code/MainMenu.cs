@@ -16,6 +16,7 @@ public class MainMenu : MonoBehaviour
     // Main Menu Buttons
     static GameObject playCampaignButton;
     static GameObject exploreButton;
+    static GameObject creditsButton;
     static GameObject voicesButton;
     static GameObject exitButton;
 
@@ -32,27 +33,33 @@ public class MainMenu : MonoBehaviour
     static GameObject logo;
     static GameObject uiBackground;
     static GameObject voicesButtonText;
-    
+    static GameObject creditsDisplay;
 
+    void Awake()
+    {
+        hubController = GameObject.Find("HubControlFlow").GetComponent<HubControlFlow>();
+        uiBackground = GameObject.Find("UIBackground");
+        logo = GameObject.Find("FarFlungLogoImg");
+        creditsDisplay = GameObject.Find("CreditsDisplay");
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        hubController = GameObject.Find("HubControlFlow").GetComponent<HubControlFlow>();
-
-        if(mainMenuButtons.Count == 0)
+        if (mainMenuButtons.Count == 0)
         {
             // Main Menu Buttons
             playCampaignButton = GameObject.Find("PlayButton");
             exploreButton = GameObject.Find("ExploreButton");
+            creditsButton = GameObject.Find("CreditsButton");
             voicesButton = GameObject.Find("VoicesButton");
-
             voicesButtonText = GameObject.Find("VoicesButtonText");
-            
+
             exitButton = GameObject.Find("ExitButton");
 
             mainMenuButtons.Add(playCampaignButton);
             mainMenuButtons.Add(exploreButton);
+            mainMenuButtons.Add(creditsButton);
             mainMenuButtons.Add(voicesButton);
             mainMenuButtons.Add(exitButton);
         }
@@ -75,9 +82,6 @@ public class MainMenu : MonoBehaviour
             levelSelectButtons.Add(backToMainButton);
         }
 
-        uiBackground = GameObject.Find("UIBackground");
-        logo = GameObject.Find("FarFlungLogoImg");
-
         if (DialogGenerator.AudioOn)
         {
             voicesButtonText.GetComponent<Text>().text = "Voices: On";
@@ -90,9 +94,8 @@ public class MainMenu : MonoBehaviour
         if (!mainMenuInitialized)
         {
             mainMenuInitialized = true;
-            
+            creditsDisplay.SetActive(false);
             SwitchToMainMenu();
-
         }
 
     }
@@ -100,14 +103,14 @@ public class MainMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        
+
+
     }
 
     public static void PlayButtonClicked()
     {
         Debug.Log("Play button clicked");
-        
+
         hubController.StartIntro();
 
     }
@@ -117,6 +120,11 @@ public class MainMenu : MonoBehaviour
         Debug.Log("Level select button clicked");
         SwitchToLevelSelect();
 
+    }
+
+    public static void CreditsButtonClicked()
+    {
+        ToggleCredits();
     }
 
     public static void BackToMainButtonClicked()
@@ -180,6 +188,7 @@ public class MainMenu : MonoBehaviour
         {
             button.SetActive(true);
         }
+        creditsDisplay.SetActive(false);
     }
 
     private static void SwitchToMainMenu()
@@ -188,17 +197,23 @@ public class MainMenu : MonoBehaviour
         {
             button.SetActive(false);
         }
-        foreach ( GameObject button in mainMenuButtons) {
+        foreach (GameObject button in mainMenuButtons)
+        {
             button.SetActive(true);
         }
-        
-        
+        creditsDisplay.SetActive(false);
+    }
+
+    private static void ToggleCredits()
+    {
+        creditsDisplay.SetActive(!creditsDisplay.activeInHierarchy);
     }
 
     public static void HideMainMenu()
     {
         uiBackground.SetActive(false);
         logo.SetActive(false);
+        creditsDisplay.SetActive(false);
         foreach (GameObject button in mainMenuButtons)
         {
             button.SetActive(false);
@@ -213,6 +228,7 @@ public class MainMenu : MonoBehaviour
     {
         uiBackground.SetActive(true);
         logo.SetActive(true);
+        creditsDisplay.SetActive(false);
         SwitchToMainMenu();
     }
 
@@ -225,11 +241,11 @@ public class MainMenu : MonoBehaviour
 
     public static void ExitGame()
     {
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
-        #else
-            Application.Quit();
-        #endif
+#else
+        Application.Quit();
+#endif
     }
 
 }
