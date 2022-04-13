@@ -680,6 +680,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4324784389700235024, guid: c6d225936e86240c781712b23c4e7166, type: 3}
+      propertyPath: m_Text
+      value: "Instructions: \nComplete the communication puzzles. \n\nSlide Puzzle
+        Controls:\nClick a tile to slide it to a new position.\n\nUnscramble Controls:\nClick
+        two letters to swap positions.\n\n\n"
+      objectReference: {fileID: 0}
     - target: {fileID: 8572599925358295945, guid: c6d225936e86240c781712b23c4e7166, type: 3}
       propertyPath: m_Name
       value: PauseMenu
@@ -3124,8 +3130,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 126, y: 360.2484}
-  m_SizeDelta: {x: 214.3486, y: 48.2393}
+  m_AnchoredPosition: {x: 137.5, y: 342.2}
+  m_SizeDelta: {x: 396.01, y: 59.7455}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &818365349
 MonoBehaviour:
@@ -3140,7 +3146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.9777054, b: 0, a: 0}
+  m_Color: {r: 0.9764706, g: 0.627451, b: 0, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3149,11 +3155,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 40
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 4
-    m_MaxSize: 60
+    m_MinSize: 0
+    m_MaxSize: 300
     m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1

@@ -20,9 +20,9 @@ public class ComGameTests
         Dictionary<string, string> testScenes = new Dictionary<string, string>()
         {
               {"comGame", "comGameWin"},
-              {"comGameWin", "comUnscrambleIntro"},
-              {"comUnscrambleIntro", "comUnscramble"},
-              {"comUnscramble", "comUnscrambleWin"}
+              {"comGameWin", "comUnscrambleInfo"},
+              {"comUnscrambleInfo", "comUnscrambleIntro"},
+              {"comUnscrambleIntro", "comUnscramble"}
               //{"comUnscrambleWin", "Hub"}
         };
 
@@ -422,7 +422,7 @@ public class ComGameTests
     public IEnumerator TestUnscrambleInfo()
     {
         // load scene with the scriptable tile objects
-        SceneManager.LoadScene("comUnscrambleWin");
+        SceneManager.LoadScene("comUnscrambleInfo");
         yield return new WaitForSeconds(0.2f); // delay to load scene
 
         // get a scriptable image object to use
@@ -745,7 +745,7 @@ public class ComGameTests
         yield return new WaitForSeconds(4.0f); // delay to load win
 
         // verify success comments are showing after final word win
-        Color winColor = new Color32(249, 160, 0, 255);
+        Color winColor = new Color32(0, 0, 0, 255);
         GameObject successObject = successObject = GameObject.Find("Success");
         Color successColor = successObject.GetComponent<UnityEngine.UI.Text>().color;
         Assert.AreEqual(successColor, winColor);
@@ -888,7 +888,7 @@ public class ComGameTests
         Assert.AreEqual(boardLayer, winLayer);
 
         GameObject successObject = GameObject.Find("Success");
-        Color letterColor = new Color32(249, 160, 0, 255);
+        Color letterColor = new Color32(0, 0, 0, 255);
         Color successColor = successObject.GetComponent<Text>().color;
         Assert.AreEqual(successColor, letterColor);
 

@@ -479,7 +479,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Return to Hub
+  m_Text: Continue
 --- !u!222 &555487053
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -788,10 +788,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 50
+    m_FontSize: 49
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 3
+    m_MinSize: 0
     m_MaxSize: 50
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -799,8 +799,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Highlight one of the pictures for more details or click Return to Hub to
-    continue.
+  m_Text: Highlight the pictures to learn about the instruments in the next game
+    and click continue when ready to play.
 --- !u!222 &1112281709
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -369,7 +369,7 @@ public class TileActions : MonoBehaviour
         // add 3 second delay
         yield return new WaitForSeconds(3f);
 
-        Color letterColor = new Color32(249, 160, 0, 255);
+        Color letterColor = new Color32(0, 0, 0, 255);
 
         // update background and board layer to the front
         background = GameObject.Find("ScrollBackground");
