@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: EndSceneOptions
   m_EditorClassIdentifier: 
   dialogs:
-  - dialogText: Mission over. Better luck next time!
+  - dialogText: Mission over. Restart the mission to try this mission again, or return
+      to the hub to start the next mission.
     robotVoice: 0
     dialogAudio: {fileID: 0}
