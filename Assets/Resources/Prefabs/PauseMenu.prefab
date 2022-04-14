@@ -118,9 +118,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Instructions: \nComplete the communication puzzles. \n\nImage Scramble
-    Controls:\nClick a tile to shift it.\n\nWord Scramble Controls:\nClick on a letter,
-    then click on a new location to swap them.\n\n\n"
+  m_Text: "Instructions: \nComplete the communication puzzles. \n\nSlide Puzzle Controls:\nClick
+    a tile to slide it to a new position.\n\nUnscramble Controls:\nClick two letters
+    to swap positions.\n\n\n"
 --- !u!1 &4464777367435628838
 GameObject:
   m_ObjectHideFlags: 0
