@@ -46,7 +46,7 @@ public class LabSpectraTest
 
         puzzle1.InitializeSpectraPuzzle("Puzzle1", 1);
         
-        int[] puzzle1CombinedArraysAnswer = { 0, 13, 12, 0, 0, 10, 12, 12, 20, 12, 6, 0, 13, 2, 0, 8, 0, 3, 0, 0 };
+        int[] puzzle1CombinedArraysAnswer = { 0, 10, 8, 0, 0, 12, 8, 8, 18, 8, 4, 0, 14, 2, 0, 10, 0, 4, 0, 0 };
         
         Assert.AreEqual(puzzle1CombinedArraysAnswer, puzzle1.solution);
 

@@ -154,9 +154,9 @@ public class SpectraPuzzle : LabPuzzle
 
         for (int i = 0; i < Spectra.SPECTRA_ARRAY_SIZE; i++)
         {
-            result[i] += primary.GetSpectraArray()[i] * 3;
+            result[i] += primary.GetSpectraArray()[i] * 2;
             result[i] += secondary.GetSpectraArray()[i] * 2;
-            result[i] += trace.GetSpectraArray()[i];
+            result[i] += trace.GetSpectraArray()[i] * 2;
         }
 
 
