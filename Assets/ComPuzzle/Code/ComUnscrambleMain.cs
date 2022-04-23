@@ -27,6 +27,7 @@ public class ComUnscrambleMain : MonoBehaviour
     GameObject continueButton;
     GameObject continueText;
     GameObject successObject;
+    GameObject successBox;
 
     AudioSource audioSource;
     GameObject volumeSlider;
@@ -516,9 +517,11 @@ public class ComUnscrambleMain : MonoBehaviour
     {
 
         // display success comments
-        Color letterColor = new Color32(0, 0, 0, 255);
+        Color letterColor = new Color32(249, 160, 0, 255);
         successObject = GameObject.Find("Success");
         successObject.GetComponent<UnityEngine.UI.Text>().color = letterColor;
+        successBox = GameObject.Find("SuccessBox");
+        successBox.GetComponent<SpriteRenderer>().sortingLayerName = "WinBoard";
 
         // add 3 second delay
         yield return new WaitForSeconds(3f);
@@ -733,8 +736,9 @@ public class ComUnscrambleMain : MonoBehaviour
             SpriteRenderer rend;
         string objectName = "";
         GameObject instructions;
+        GameObject instructionsBack;
         Color highlightedColor = new Color32(89, 38, 81, 255);
-        Color letterColor = new Color32(0, 0, 0, 255);
+        Color letterColor = new Color32(249, 160, 0, 255);
 
         rend = GetComponent<SpriteRenderer>();
         objectName = rend.transform.name;
@@ -745,7 +749,9 @@ public class ComUnscrambleMain : MonoBehaviour
 
             instructions = GameObject.Find("InstructionsText");
             instructions.GetComponent<UnityEngine.UI.Text>().color = letterColor;
-                        
+            instructionsBack = GameObject.Find("InstructionsBack");
+            instructionsBack.GetComponent<SpriteRenderer>().sortingLayerName = "Board";
+
             rend.color = highlightedColor;
 
         }
@@ -758,6 +764,7 @@ public class ComUnscrambleMain : MonoBehaviour
         SpriteRenderer rend;
         string objectName = "";
         GameObject instructions;
+        GameObject instructionsBack;
         Color hiddenColor = new Color32(255, 255, 255, 0);
         Color currentColor = new Color32(48 , 33, 68, 255);
 
@@ -769,6 +776,8 @@ public class ComUnscrambleMain : MonoBehaviour
         {
             instructions = GameObject.Find("InstructionsText");
             instructions.GetComponent<UnityEngine.UI.Text>().color = hiddenColor;
+            instructionsBack = GameObject.Find("InstructionsBack");
+            instructionsBack.GetComponent<SpriteRenderer>().sortingLayerName = "Hidden";
 
             rend.color = currentColor;
 

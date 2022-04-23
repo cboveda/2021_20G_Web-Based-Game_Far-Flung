@@ -799,7 +799,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Highlight the pictures to learn about the instruments in the next game
+  m_Text: Highlight the pictures to learn about the instruments for the next game
     and click continue when ready to play.
 --- !u!222 &1112281709
 CanvasRenderer:
