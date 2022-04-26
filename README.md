@@ -10,7 +10,7 @@
 ## The Game
 
 - **Far-Flung** consists of a series of five mini-games. Each mini-game takes the player through one aspect of the Psyche mission: assembly of the orbitter itself, launching the orbitter to the asteroid Psyche, collecting data from the surface of the asteroid, communicating that data back to Earth, and finally analyzing the data. Each game offers a variety of different player experiences, and new ways to encourage the player to learn more about the Psyche mission.
-- The games are tied together by the Hub. From the Hub, players can choose to either play through a story-driven campaign through the mini-games, or they can explore each of the mini-games in a 'free play' mode. In the campaign mode, the games are linked together through cinematic experiences and engaging dialog. 
+- The games are tied together by the Hub. From the Hub, players can choose to either play through a story-driven campaign, or they can explore each of the mini-games in a 'free play' mode. In the campaign mode, the mini-games are linked together through cinematic experiences and engaging dialog.
 
 ### Hub
 
