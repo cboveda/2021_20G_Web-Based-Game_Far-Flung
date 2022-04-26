@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c8f0b50b74f8f34d910f4ef4e9b0b1c, type: 3}
+  m_Name: FlightPlanIntro
+  m_EditorClassIdentifier: 
+  dialogs:
+  - dialogText: Alright!  I think we've got something we can really launch.  Aren't
+      you excited?
+    robotVoice: 1
+    dialogAudio: {fileID: 8300000, guid: bb260fcd42b7f964a9c2959b76377990, type: 3}
+  - dialogText: I'm excited.
+    robotVoice: 2
+    dialogAudio: {fileID: 8300000, guid: 41ddf60e98412474dbdab6e705a9fafe, type: 3}
+  - dialogText: Let's strap this orbiter to a huge rocket, and see if we can get
+      it where it needs to go.
+    robotVoice: 1
+    dialogAudio: {fileID: 8300000, guid: 2095289f3dc33f24b84b417acc3ffe78, type: 3}
+  - dialogText: I think I'm going to miss it.
+    robotVoice: 2
+    dialogAudio: {fileID: 8300000, guid: a3ca2dc9ac8d04648a658e2f1cc18938, type: 3}
+  - dialogText: Rocket is fueled and awaiting launch parameters.
+    robotVoice: 0
+    dialogAudio: {fileID: 8300000, guid: 2ad33dbae9aa61f479690db937caaf67, type: 3}
+  - dialogText: Do you hear that!?  It's go time!  Let's do this!
+    robotVoice: 1
+    dialogAudio: {fileID: 8300000, guid: b8ed096b8130f2246a27283ef25ac2e1, type: 3}

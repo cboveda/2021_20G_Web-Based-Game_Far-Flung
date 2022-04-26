@@ -27,8 +27,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 11.064274
-  m_Center: {x: 0, y: 0.00000047683716, z: 0.000011444092}
+  m_Radius: 35
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1442879679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -55,7 +55,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: {fileID: 0}
-  Speed: 0.035
+  Speed: 0.045
 --- !u!1001 &3359445865887589294
 PrefabInstance:
   m_ObjectHideFlags: 0

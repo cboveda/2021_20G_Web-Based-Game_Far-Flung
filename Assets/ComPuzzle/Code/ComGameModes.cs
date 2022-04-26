@@ -14,24 +14,75 @@ public class ComGameModes : MonoBehaviour
     GameObject easyToggleObject;
     GameObject tilePosObject;
     GameObject blankPosObject;
+    GameObject volumeSlider;
+    bool easyModeUsed = false;
+    bool solvePuzzleUsed = false;
+    bool showingScore = false;
+    bool showingGameScore = false;
 
     public void EasyModeOn()
     {
         //Debug.Log("easy mode");
-
-        string[] tileNumbers = { "n1", "n2", "n3", "n4", "n5", "n6", "n7", "n8", "n9", "n10", "n11", "n12" };
-        string sortingLayer = "";
-        string finalSortingLayer = "";
+        //easyToggle.interactable = true;
 
         easyToggleObject = GameObject.Find("EasyMode");
         easyToggle = easyToggleObject.GetComponent<Toggle>();
 
+        showingScore = FindObjectOfType<Scoring>().getShowingScore;
+        showingGameScore = FindObjectOfType<Scoring>().getShowingGameScore;
+        if (showingScore || showingGameScore)
+        {
+            //easyToggle.interactable = false;
+            if (easyToggle.isOn)
+            {
+                easyToggle.isOn = false;
+            }
+            return;
+        }
+
+        if (showingScore || showingGameScore)
+        {
+            //easyToggle.interactable = false;
+            if (!easyToggle.isOn)
+            {
+                easyToggle.isOn = true;
+            }
+            return;
+        }
+
+
+        if ( easyModeUsed == false )
+        {
+            Scoring.Instance.addToScore(-50, "ComObjective3");
+            easyModeUsed = true;
+        }        
+
+        string[] tileNumbers = { "n1", "n2", "n3", "n4", "n5", "n6", "n7", "n8", "n9", "n10", "n11", "n12" };
+        string sortingLayer = "";
+        string finalSortingLayer = "";
+        AudioSource[] audioSource;
+        AudioSource easyModeOn;
+        AudioSource easyModeOff;
+        audioSource = GetComponents<AudioSource>();
+        easyModeOn = audioSource[0];
+        easyModeOff = audioSource[1];
+        volumeSlider = GameObject.Find("VolumeSlider");
+
+
+
         sortingLayer = "Default";        
         if (easyToggle.isOn)
         {
+            easyModeOn.volume = volumeSlider.GetComponent<Slider>().value;
+            easyModeOn.Play();
             sortingLayer = "Numbers";
             finalSortingLayer = "FinalPieceNumber";
-        }
+        } 
+        else
+        {
+            easyModeOff.volume = volumeSlider.GetComponent<Slider>().value;
+            easyModeOff.Play();
+        }        
 
         foreach (string tileNumber in tileNumbers)
         {
@@ -50,12 +101,31 @@ public class ComGameModes : MonoBehaviour
     {
         //Debug.Log("solve puzzle");
 
+        showingScore = FindObjectOfType<Scoring>().getShowingScore;
+        showingGameScore = FindObjectOfType<Scoring>().getShowingGameScore;
+        if (showingScore || showingGameScore)
+        {
+            return;
+        }
+
+        if (solvePuzzleUsed == false)
+        {
+            Scoring.Instance.addToScore(-1000, "ComObjective4");
+            solvePuzzleUsed = true;
+        }
+
         string tileNumber = "";
         float[] winPos = { 0.0F, 0.0F };
         int blankPosition = 0;
         int x = 0;
         int y = 1;
         int[] tilePositions = { 11, 12, 13, 21, 22, 23, 24, 31, 32, 33, 34, };
+        AudioSource solveAudio;
+        solveAudio = GetComponent<AudioSource>();
+        volumeSlider = GameObject.Find("VolumeSlider");
+
+        solveAudio.volume = volumeSlider.GetComponent<Slider>().value;
+        solveAudio.Play();
 
         foreach (int tilePosition in tilePositions)
         {

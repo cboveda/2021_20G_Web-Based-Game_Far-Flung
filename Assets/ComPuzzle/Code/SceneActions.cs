@@ -12,6 +12,7 @@ public class SceneActions : MonoBehaviour
 
     public void StartGameScene()
     {
+
         Scene scene = SceneManager.GetActiveScene();
         sceneName = scene.name;
 
@@ -24,6 +25,11 @@ public class SceneActions : MonoBehaviour
 
         if ( sceneName == "comGameWin")
         {
+            gameScene = "comUnscrambleInfo";
+        }
+
+        if (sceneName == "comUnscrambleInfo")
+        {
             gameScene = "comUnscrambleIntro";
         }
 
@@ -32,8 +38,15 @@ public class SceneActions : MonoBehaviour
             gameScene = "comUnscramble";
         }
 
+        if (sceneName == "comUnscramble")
+        {
+            gameScene = "Hub";
+        }
+
         //Debug.Log(gameScene);
         SceneManager.LoadScene(gameScene);
+
+
     }
 
 

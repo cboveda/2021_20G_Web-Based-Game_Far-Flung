@@ -8,14 +8,15 @@ TagManager:
   - FlightpathSatellite
   - FlightpathAsteroid
   - FlightpathBounds
+  - FlightpathMars
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Light Exempt
   - Water
   - UI
-  - 
+  - AboveUIElements
   - 
   - 
   - 

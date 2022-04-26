@@ -1,44 +1,49 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
-
-public class DropSlot : MonoBehaviour
-{
+using DialogMaker;
+public class DropSlot : MonoBehaviour {
 
     public Vector3 offset;
-    public GameObject slotMatch;
-    public TextAsset completionTextAsset;
+    public string slotTypeMatch;
+    public DialogGenerator completionDialog;
 
-    public void OnTriggerStay(Collider other)
-    {
-        if(!Input.GetMouseButton(0))
-        {
-            if(other != null && other.gameObject == slotMatch){
-                Debug.Log("Collision");
-                other.transform.SetPositionAndRotation(transform.position + offset, transform.rotation);
-                Resources.FindObjectsOfTypeAll<TextPanel>()[0].ShowText(completionTextAsset, CallParentCompletion);
-                other.enabled = false;
+    bool set;
+
+    void Start() {
+
+        set = false;
+        
+        if ( System.String.IsNullOrEmpty(slotTypeMatch) ) {
+            slotTypeMatch = "No Type";
+        }
+    }
+
+    void OnTriggerEnter(Collider other) {
+
+        if (!set) {
+
+            ConveyorObject c_o = other.gameObject.GetComponent<ConveyorObject>();
+
+            if ( c_o && c_o.ItemTypeIdentifier == slotTypeMatch ) {
+
+                if ( c_o.PlaceInModel() ) {
+    
+                    other.gameObject.transform.parent = this.transform; 
+                    other.gameObject.transform.SetPositionAndRotation(transform.position + offset, transform.rotation);
+    
+                    GetComponent<Renderer>().forceRenderingOff = true; // make the slot invisible
+                    transform.parent.gameObject.GetComponent<AssemblyGameDriver>().CompleteObject();
+
+                    set = true;
+
+                    if (!completionDialog) return; //skips dialog if null
+                    MouseLook.PauseAssembly();
+                    completionDialog.BeginPlayingDialog();
+                }
             }
         }
     }
 
-    public void CallParentCompletion()
-    {
-        if (transform.parent.GetComponent<Completion>() != null)
-        {
-            transform.parent.GetComponent<Completion>().CheckCompletion();
-        }
-        else
-        {
-            Debug.Log("Parent does not have a completion script");
-        }
-    }
-
-    public bool IsCompleted()
-    {
-        bool completed = (slotMatch.transform.position == transform.position + offset);
-        // Debug.Log(transform.name + " " + completed);
-        return completed;
+    public void TriggerTestHook( Collider c ) {
+        this.OnTriggerEnter(c);
     }
 }

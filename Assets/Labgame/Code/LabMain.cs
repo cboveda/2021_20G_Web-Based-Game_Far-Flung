@@ -1,6 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using DialogMaker;
+using UnityEngine.SceneManagement;
+
 
 public class LabMain : MonoBehaviour
 {
@@ -12,31 +16,47 @@ public class LabMain : MonoBehaviour
     bool isCurrentSpectraPuzzleSolved;
     bool radioPuzzleActive;
     bool spectraPuzzleActive;
-    int levelRadio;
+    public int levelRadio;
     int levelSpectra;
+
+    GameObject sineUIElements;
+    GameObject spectraUIElements;
+    GameObject spectraUIElements2;
+
+    DialogGenerator Diagen;
+    
+    
+
+    Camera lcdCamera1;
     // Start is called before the first frame update
     void Start()
     {
+        sineUIElements = GameObject.Find("SineUI");
+        spectraUIElements = GameObject.Find("SpectraUI");
+        spectraUIElements2 = GameObject.Find("SpectraUIElements2");
         main = GameObject.Find("LabGameStart");
         mainComputerUI = GameObject.Find("ComputerUIMainPane").GetComponent<ComputerUIMainPane>();
         levelRadio = 0;
         radioPuzzleActive = true;
         spectraPuzzleActive = false;
         isCurrentSpectraPuzzleSolved = false;
+
+        sineUIElements.SetActive(true);
+        spectraUIElements.SetActive(false);
+        spectraUIElements2.SetActive(false);
+        
         GetNewRadioPuzzle();
+        lcdCamera1 = GameObject.Find("ComputerScreen1Camera").GetComponent<Camera>();
 
 
-
-
-
-
-
+        GameObject.Find("DialogSine").GetComponent<DialogGenerator>().BeginPlayingDialog();
 
     }
 
     // Update is called once per frame
     void Update()
     {
+
         if (isCurrentRadioPuzzleSolved && radioPuzzleActive)
         {
             
@@ -47,6 +67,7 @@ public class LabMain : MonoBehaviour
             }
             else
             {
+                GameObject.Find("DialogSpectra").GetComponent<DialogGenerator>().BeginPlayingDialog();
                 mainComputerUI.DisplayComputerText("Congrats, you solved all radio puzzles.  Solve the spectra puzzle to the right.");
                 radioPuzzleActive = false;
                 spectraPuzzleActive = true;
@@ -58,8 +79,6 @@ public class LabMain : MonoBehaviour
             isCurrentRadioPuzzleSolved = true;
             
         }
-
-        
 
         if(isCurrentSpectraPuzzleSolved && spectraPuzzleActive)
         {
@@ -73,11 +92,16 @@ public class LabMain : MonoBehaviour
                 mainComputerUI.DisplayComputerText("Congrats, you solved all spectra puzzles.  Well done!");
                 radioPuzzleActive = false;
                 spectraPuzzleActive = false;
+                SceneManager.LoadScene("Hub");
+                
             }
         }
 
         if (isCurrentRadioPuzzleSolved && spectraPuzzleActive && levelSpectra == 0)
         {
+            sineUIElements.SetActive(false);
+            spectraUIElements.SetActive(true);
+            spectraUIElements2.SetActive(true);
             GetNewSpectraPuzzle();
         }
 
@@ -120,10 +144,8 @@ public class LabMain : MonoBehaviour
         currentSpectraPuzzle = mySpectraPuzzle;
         isCurrentSpectraPuzzleSolved = false;
 
-        mySpectraPuzzle.InitializeSpectraPuzzle("Puzzle " + levelSpectra.ToString(), 0);
+        mySpectraPuzzle.InitializeSpectraPuzzle("Puzzle " + levelSpectra.ToString(), levelSpectra);
 
-        
-        
 
     }
 
@@ -159,7 +181,7 @@ public class LabMain : MonoBehaviour
 
     public void InsertSpectra(Spectra insertedElement)
     {
-        currentSpectraPuzzle.AddSpectraToTest(insertedElement);
+        currentSpectraPuzzle.AddSpectraToTest();
     }
 
     public void CheckSpectraAnswer()
@@ -167,6 +189,26 @@ public class LabMain : MonoBehaviour
         currentSpectraPuzzle.CheckSolution();
     }
 
+    public void GetNextSpectra()
+    {
+        currentSpectraPuzzle.GetNextExampleSpectra();
+    }
+    public void GetPrevSpectra()
+    {
+        currentSpectraPuzzle.GetPrevExampleSpectra();
+    }
+    public void AddSpectra()
+    {
+        currentSpectraPuzzle.AddSpectraToTest();
+    }
+    public void RemoveSpectra()
+    {
+        currentSpectraPuzzle.RemoveSpectra();
+    }
 
+    public RadioPuzzle GetCurrentRadioPuzzle()
+    {
+        return currentRadioPuzzle;
+    }
 
 }

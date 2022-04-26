@@ -3,22 +3,59 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using DialogMaker;
 
 namespace Flightpath
 {
+    /*
+        Event system for the Flightpath game. 
+        Acts as mediator between UI elements and game objects.
+        Author: Chris Boveda
+    */
     public class LaunchManager : MonoBehaviour
     {
+        public const int NoScriptIndex = -1;
+        public const int TopBoundaryScriptIndex = 0;
+        public const int BottomBoundaryScriptIndex = 1;
+        public const int LeftBoundaryScriptIndex = 2;
+        public const int RightBoundaryScriptIndex = 3;
+        public const int MarsBoundaryScriptIndex = 4;
+        public const int WinBoundaryScriptIndex = 5;
+
         public GameObject Satellite;
         public Slider AngleSlider;
         public Slider PowerSlider;
         public Trajectory TrajectoryArrow;
         public SatellitePathDrawing SatellitePath;
 
-        // Placeholder members for win/lose text
-        public Text WinText;
-        public Text LoseText;
+        [SerializeField]
+        private GameObject _dialogGeneratorPrefab;
+        public GameObject DialogGeneratorPrefab { get; set; }
+        private GameObject _dialogGenerator;
+        private DialogGenerator _dg;
+        [SerializeField]
+        private DialogScriptableObject[] _topScripts;
+        public DialogScriptableObject[] TopScripts { get; set; }
+        [SerializeField]
+        private DialogScriptableObject[] _botScripts;
+        public DialogScriptableObject[] BotScripts { get; set; }
+        [SerializeField]
+        private DialogScriptableObject[] _rightScripts;
+        public DialogScriptableObject[] RightScripts { get; set; }
+        [SerializeField]
+        private DialogScriptableObject[] _leftScripts;
+        public DialogScriptableObject[] LeftScripts { get; set; }
+        [SerializeField]
+        private DialogScriptableObject[] _marsScripts;
+        public DialogScriptableObject[] MarsScripts { get; set; }
+        [SerializeField]
+        private DialogScriptableObject[] _winScripts;
+        public DialogScriptableObject[] WinScripts { get; set; }
+        private int _lastScript;
         private bool _sceneAdvanceStart;
         private bool _launchLocked;
+        private bool _stopped;
+        private bool _marsDialogEnabled;
 
 
         public void Start()
@@ -29,9 +66,9 @@ namespace Flightpath
             TrajectoryArrow.SetPowerRange(PowerSlider.GetComponent<Slider>().minValue, PowerSlider.GetComponent<Slider>().maxValue);
             _sceneAdvanceStart = false;
             _launchLocked = false;
+            _marsDialogEnabled = false;
+            _lastScript = -1;
             SatellitePath.Active = false;
-            // todo
-            ResetPlaceholderText();
         }
 
         public void OnAngleSliderChanged(float value)
@@ -50,6 +87,7 @@ namespace Flightpath
             if (!_launchLocked)
             {
                 _launchLocked = true;
+
                 TrajectoryArrow.GetComponent<SpriteRenderer>().enabled = false;
                 Satellite.GetComponent<Launch>().DoLaunch();
                 PathFollower[] pathFollowers = FindObjectsOfType<PathFollower>();
@@ -60,6 +98,10 @@ namespace Flightpath
                 }
                 SatellitePath.ClearHistory();
                 SatellitePath.Active = true;
+                if (_dg)
+                {
+                    _dg.FastForwardDialog();
+                }
             }
         }
 
@@ -73,31 +115,111 @@ namespace Flightpath
                 p.ResetPosition();
                 p.StopOrbitter();
             }
-            ResetPlaceholderText();
             SatellitePath.Active = false;
+            var particles = Satellite.GetComponent<ParticleSystem>();
+            if (particles != null)
+            {
+                particles.Stop();
+                particles.Clear();
+            }
             _launchLocked = false;
+            _stopped = false;
+            if (_dg)
+            {
+                _dg.FastForwardDialog();
+            }
+        }
+
+        public void createDialogGenerator(int scriptIndex)
+        {
+            if (_dialogGeneratorPrefab == null)
+            {
+                return;
+            }
+            _dialogGenerator = Object.Instantiate(_dialogGeneratorPrefab, this.transform);
+            _dg = _dialogGenerator.GetComponent<DialogGenerator>();
+            switch (scriptIndex)
+            {
+                case TopBoundaryScriptIndex:
+                    _dg.dialogContainer = pickNewScript(_topScripts);
+                    break;
+                case BottomBoundaryScriptIndex:
+                    _dg.dialogContainer = pickNewScript(_botScripts);
+                    break;
+                case RightBoundaryScriptIndex:
+                    _dg.dialogContainer = pickNewScript(_rightScripts);
+                    break;
+                case LeftBoundaryScriptIndex:
+                    _dg.dialogContainer = pickNewScript(_leftScripts);
+                    break;
+                case MarsBoundaryScriptIndex:
+                    _dg.dialogContainer = pickNewScript(_marsScripts);
+                    break;
+                case WinBoundaryScriptIndex:
+                    _dg.dialogContainer = pickNewScript(_winScripts);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private DialogScriptableObject pickNewScript(DialogScriptableObject[] scriptCollection)
+        {
+            return scriptCollection[Random.Range(0, scriptCollection.Length)];
         }
 
         public void OnAsteroidCollisionDetected()
         {
-            Satellite.GetComponent<Launch>().StopLaunch();
-            PathFollower[] pathFollowers = FindObjectsOfType<PathFollower>();
-            foreach (PathFollower p in pathFollowers)
-            {
-                p.StopPosition();
-                p.StopOrbitter();
-            }
-            SatellitePath.Active = false;
-
+            StopAll();
+            createDialogGenerator(WinBoundaryScriptIndex);
+            StartCoroutine("DelayedDialogStart");
             if (!_sceneAdvanceStart)
             {
                 StartCoroutine("DelayedSceneAdvance");
             }
-            // todo
-            EnablePlaceholderWinText();
         }
 
-        public void OnSatelliteLeaveWindow()
+        public void OnMarsCollisionDetected()
+        {
+            StopAll();
+            if (Satellite.GetComponent<ParticleSystem>() != null)
+            {
+                Satellite.GetComponent<ParticleSystem>().Play();
+            }
+            if (_marsDialogEnabled)
+            {
+                createDialogGenerator(MarsBoundaryScriptIndex);
+                StartCoroutine("DelayedDialogStartWithTime", 1.0);
+            }
+        }
+
+        public void OnSatelliteLeaveWindow(int scriptIndex)
+        {
+            Debug.Log("Satellite outside bounds");
+            StopAll();
+            createDialogGenerator(scriptIndex);
+            StartCoroutine("DelayedDialogStart");
+        }
+
+        private IEnumerator DelayedDialogStart()
+        {
+            yield return new WaitForFixedUpdate();
+            if (_dg != null)
+            {
+                _dg.BeginPlayingDialog();
+            }
+        }
+
+        private IEnumerator DelayedDialogStartWithTime(float t)
+        {
+            yield return new WaitForSeconds(t);
+            if (_dg != null)
+            {
+                _dg.BeginPlayingDialog();
+            }
+        }
+
+        private void StopAll()
         {
             Satellite.GetComponent<Launch>().StopLaunch();
             PathFollower[] pathFollowers = FindObjectsOfType<PathFollower>();
@@ -107,46 +229,28 @@ namespace Flightpath
                 p.StopOrbitter();
             }
             SatellitePath.Active = false;
-
-            // todo
-            LoseText.enabled = true;
-        }
-
-        private void ResetPlaceholderText()
-        {
-            if (WinText)
-            {
-                WinText.enabled = false;
-            }
-            if (LoseText)
-            {
-                LoseText.enabled = false;
-            }
-        }
-
-        // Temporary methods for placeholder win/lose text
-        private void EnablePlaceholderWinText()
-        {
-            if (WinText)
-            {
-                WinText.enabled = true;
-            }
-        }
-
-        private void EnablePlaceholderLoseText()
-        {
-            if (LoseText)
-            {
-                LoseText.enabled = true;
-            }
+            Debug.Log("Stopping all moveables");
+            _stopped = true;
         }
 
         private IEnumerator DelayedSceneAdvance()
         {
             _sceneAdvanceStart = true;
-            yield return new WaitForSeconds(0.5f);
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            yield return new WaitForSeconds(2f);
+            if (SceneManager.GetActiveScene().name == "2_Flightpath")
+            {
+                SceneManager.LoadScene("3_FlightpathOutro");
+            }
         }
 
+        public bool hasStopped()
+        {
+            return _stopped;
+        }
+
+        public void enableMarsDialog()
+        {
+            _marsDialogEnabled = true;
+        }
     }
 }

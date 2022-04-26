@@ -4,22 +4,44 @@ using UnityEngine;
 
 namespace Flightpath
 {
+    /*
+        Satellite collision handler.
+        Author: Chris Boveda
+    */
     public class SatelliteCollision : MonoBehaviour
     {
-        public GameObject EventSystem;
+        public LaunchManager launchManager;
         private void OnTriggerEnter(Collider other)
         {
+            Debug.Log("Collision detected.");
             if (other.CompareTag("FlightpathAsteroid"))
             {
-                EventSystem.GetComponent<LaunchManager>().OnAsteroidCollisionDetected();
+                launchManager.OnAsteroidCollisionDetected();
             }
-        }
-
-        private void OnTriggerExit(Collider other)
-        {
-            if (other.CompareTag("FlightpathBounds") && EventSystem)
+            if (other.CompareTag("FlightpathMars")) 
             {
-                EventSystem.GetComponent<LaunchManager>().OnSatelliteLeaveWindow();
+                launchManager.OnMarsCollisionDetected();
+            }
+            if (other.CompareTag("FlightpathBounds"))
+            {
+                Debug.Log("I'm outside bounds!");
+                if (other.name == "TopBoundary")
+                {
+                    launchManager.OnSatelliteLeaveWindow(LaunchManager.TopBoundaryScriptIndex);
+                }
+                else if (other.name == "BottomBoundary")
+                {
+                    launchManager.OnSatelliteLeaveWindow(LaunchManager.BottomBoundaryScriptIndex);
+                }
+                else if (other.name == "RightBoundary")
+                {
+                    launchManager.OnSatelliteLeaveWindow(LaunchManager.RightBoundaryScriptIndex);
+                }
+                else if (other.name == "LeftBoundary")
+                {
+                    launchManager.OnSatelliteLeaveWindow(LaunchManager.LeftBoundaryScriptIndex);
+                }
+                
             }
         }
     }

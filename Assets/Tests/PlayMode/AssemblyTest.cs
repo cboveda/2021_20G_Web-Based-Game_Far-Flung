@@ -3,66 +3,111 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
+using System;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using DialogMaker;
 
-public class AssemblyTest
-{
+public class AssemblyTest {
+
+    public int AssemblyIntroDialogClickCount = 11;
 
     [UnityTest]
-    public IEnumerator TestSceneSwitching()
-    {
-        string assemblySceneName = "Assembly";
-         // set the test scene
-        SceneManager.LoadScene(assemblySceneName);
-        yield return new WaitForSeconds(0.2f); // delay to load
+    public IEnumerator Test_AssemblyGamePlay() {
 
-        // verify the test scene was loaded
-        Scene currentScene = SceneManager.GetActiveScene();
-        yield return new WaitForSeconds(0.2f); // delay to get active scene
-        string sceneName = currentScene.name;
-        Assert.AreEqual(assemblySceneName, sceneName);
+        SceneManager.LoadScene("Assembly");
+        yield return new WaitForSeconds(0.5f);
 
-        //make sure the satelite slots exist
-        GameObject sateliteSlots = GameObject.Find("Satelite Slots");
-        Assert.NotNull(sateliteSlots);
-        //make sure the textpanel is not active
-        GameObject textPanel = GameObject.Find("Panel");
-        Assert.Null(textPanel);
-        //itterate through the slots
-        foreach(DropSlot slot in sateliteSlots.GetComponentsInChildren<DropSlot>()){
-            GameObject slotObject = slot.gameObject;
-            //move the matching object to the slot
-            slot.slotMatch.transform.SetPositionAndRotation(slotObject.transform.position, slotObject.transform.rotation);
-            yield return new WaitForSeconds(0.2f); // delay to let collision occur
-            //check the slot shows as completed
-            Assert.IsTrue(slot.IsCompleted());
-            //check the text panel appears
-            textPanel = GameObject.Find("Panel");
-            Assert.NotNull(textPanel);
-            //click the button
-            textPanel.GetComponentInChildren<Button>().onClick.Invoke();
-            yield return new WaitForSeconds(0.2f); // delay to let panel close
-            //check to see if all the slots are completed (will show another text box on completion)
-            if (sateliteSlots.GetComponent<Completion>().IsCompleted()){
-                break;
-            }
-            //check that the textpanel was set to inactive after clicking the button
-            textPanel = GameObject.Find("Panel");
-            Assert.Null(textPanel);
+        GameObject intro_dialog = GameObject.Find("AssemblyIntro");
+
+        Assert.NotNull(intro_dialog);
+
+        // opening clicks for dialog
+        for (int i = 0; i < AssemblyIntroDialogClickCount; i++) {
+
+            intro_dialog.GetComponent<DialogGenerator>().BtnDialogButton.onClick.Invoke();
         }
-        //check that all the slots were in fact completed
-        Assert.True(sateliteSlots.GetComponent<Completion>().IsCompleted());
-        //make sure the completion panel is displayed
-        textPanel = GameObject.Find("Panel");
-        Assert.NotNull(textPanel);
-        //click the button on the completion panel
-        textPanel.GetComponentInChildren<Button>().onClick.Invoke();
-        yield return new WaitForSeconds(0.2f); // delay to let scenes switch
-        //check the scene has changed
-        Scene assemblyScene = currentScene;
-        currentScene = SceneManager.GetActiveScene();
-        yield return new WaitForSeconds(0.2f); // delay to get active scene
-        Assert.AreNotEqual(currentScene, assemblyScene);
+
+        MouseLook.HideMenu();
+
+        // grab object
+        GameObject active_body = GameObject.Find("BodyTexture Variant(Clone)");
+        yield return new WaitForSeconds(0.5f);
+
+        Assert.NotNull(active_body);
+
+        GameObject player = GameObject.Find("Assembly Camera");
+        Assert.NotNull(player);
+
+        while (!active_body.activeInHierarchy) {
+            Debug.Log("waiting for body...");
+            yield return new WaitForSeconds(1f);
+        }
+
+        active_body.GetComponent<ConveyorObject>().OnPickUp();
+        active_body.transform.position += new Vector3(0, 5, 0);
+
+        yield return new WaitForSeconds(1f);
+
+        Vector3 virtual_cg = active_body.GetComponent<BoxCollider>().bounds.center;
+
+        // Debug.Log(virtual_cg);
+
+        Vector3 diff = virtual_cg - player.transform.position;
+
+        RaycastHit hit;
+                
+        Assert.True(Physics.Raycast(player.transform.position, diff, out hit, 50f));
+
+        player.GetComponent<ConveyorPickup>().TestHook_PickupObject(hit);
+
+        Assert.NotNull(player.GetComponent<ConveyorPickup>().heldObj);
+
+        yield return new WaitForSeconds(3f);
+
+        // object now at cursor position
+
+        Assert.True(virtual_cg != active_body.transform.position);
+
+        // drop object and pickup object
+
+        player.GetComponent<ConveyorPickup>().TestHook_DropObject();
+
+        Assert.Null(player.GetComponent<ConveyorPickup>().heldObj);
+
+        active_body.GetComponent<ConveyorObject>().OnPickUp();
+        
+        Vector3 diff_two = active_body.GetComponent<BoxCollider>().bounds.center - player.transform.position;
+
+        RaycastHit hit_two;
+                
+        Assert.True(Physics.Raycast(player.transform.position, diff_two, out hit_two, 50f));
+
+        player.GetComponent<ConveyorPickup>().TestHook_PickupObject(hit);
+
+        Assert.NotNull(player.GetComponent<ConveyorPickup>().heldObj);
+
+        // drop the object again so it can be moved around
+
+        player.GetComponent<ConveyorPickup>().TestHook_DropObject();
+
+        // simulate pickup
+
+        active_body.GetComponent<ConveyorObject>().OnPickUp();
+
+        // insert object into ghost
+        GameObject ghost_body = GameObject.Find("GhostBody");
+
+        yield return new WaitForSeconds(0.5f);
+
+        Assert.NotNull(ghost_body);
+
+        active_body.transform.position = ghost_body.transform.position;
+
+        yield return new WaitForSeconds(1f); // allow interaction
+
+        Assert.False(active_body.GetComponent<ConveyorObject>().PlaceInModel());
+
     }
 }

@@ -3,7 +3,8 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 using UnityEditor;
-using UnityEngine.SceneManagement;
+using Scanning;
+using DialogMaker;
 
 public class ScanningTests {
 
@@ -18,11 +19,23 @@ public class ScanningTests {
     Gradient surfaceGrad;
     GameObject sigSpawner;
     AnimationCurve basePerlinCurve;
+    GameObject dc;
+    GameObject das;
 
     GameObject camera;
 
     [SetUp]
     public void SetUp() {
+
+        das = new GameObject();
+        das.AddComponent<DialogActionStub>();
+
+        dc = new GameObject();
+        dc.AddComponent<DialogController>();
+        dc.GetComponent<DialogController>().scanning_scripts = new DialogScriptableObject[1];
+        dc.GetComponent<DialogController>().scanning_scripts[0] = AssetDatabase.LoadAssetAtPath<DialogScriptableObject>("Assets/Scanning/Code/ScriptableObjects/EndSceneOptions.asset");
+        dc.GetComponent<DialogController>()._dialogGeneratorPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Resources/Prefabs/DialogMaker.prefab");
+        dc.GetComponent<DialogController>().scene_script = das.GetComponent<DialogActionStub>();
 
         // Setup for flight control
         satellite = new GameObject();
@@ -104,21 +117,46 @@ public class ScanningTests {
         yield return new WaitForSeconds(1.0f);
 
         Assert.AreEqual( 25, terrainController.GetComponent<TerrainController>().tileDict.Count );
-
-        terrainSatellite.transform.position = new Vector3( 0, 100, 200 );
-
-        yield return new WaitForSeconds(1.0f);
-
-        Assert.AreEqual( 25, terrainController.GetComponent<TerrainController>().tileDict.Count );
     }
     
     [UnityTest]
     public IEnumerator Test_TestCameraFollow() {
 
         Vector3 delta = camera.transform.position - ( terrainSatellite.transform.position + new Vector3( 0, 4, -10 ) );
-        Assert.AreEqual( delta.x, 0, 1.0f );
-        Assert.AreEqual( delta.y, 0, 1.0f );
-        Assert.AreEqual( delta.z, 0, 1.0f );
+        Assert.AreEqual( delta.x, 0, 2.0f );
+        Assert.AreEqual( delta.y, 0, 2.0f );
+        Assert.AreEqual( delta.z, 0, 2.0f );
         yield return null;
+    }
+
+    [UnityTest]
+    public IEnumerator Test_DialogController() {
+
+        yield return new WaitForSeconds(0.5f);
+
+        Assert.True(das.GetComponent<DialogActionStub>().start);
+
+        yield return new WaitForSeconds(3.0f);
+
+        Assert.True(das.GetComponent<DialogActionStub>().fin);
+
+        yield return null;
+    }
+
+    public class DialogActionStub : DialogAction {
+
+        public bool start = false;
+        public bool fin = false;
+
+        public override bool DialogActionStartDialog() {
+            Debug.Log( "CALLED IN ACTION START" );
+            start = true;
+            return true;
+        }
+
+        public override void DialogActionDoWhenFinished() {
+            Debug.Log( "CALLED IN ACTION FINISH" );
+            fin = true;
+        }
     }
 }

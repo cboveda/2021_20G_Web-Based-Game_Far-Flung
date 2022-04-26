@@ -32,7 +32,6 @@ public class MapTileFactory {
 
 public class MapTile {
 
-    private bool isVisible;
     public bool fin;
 
     public GameObject meshObj;
@@ -43,25 +42,13 @@ public class MapTile {
 
     public MapTile( string tileName ) {
 
-        isVisible = false;
         fin = false;
 
         meshObj = new GameObject( tileName );
         meshRenderer = meshObj.AddComponent<MeshRenderer>();
         meshFilter = meshObj.AddComponent<MeshFilter>();
         meshCollider = meshObj.AddComponent<MeshCollider>();
-    }
-
-    public void SetVisible() {
-        isVisible = true;
-    }
-
-    public void UnsetVisible() {
-        isVisible = false;
-    }
-
-    public void Update() {
-        meshObj.SetActive( isVisible );
+        meshCollider.cookingOptions = MeshColliderCookingOptions.None;
     }
 
     public void Destroy() {

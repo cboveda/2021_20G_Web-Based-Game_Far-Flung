@@ -4,12 +4,14 @@ using UnityEngine;
 using System;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Linq;
 
 public class TileActions : MonoBehaviour
 {
 
     SpriteRenderer rend;
     SpriteRenderer instructionsRend;
+    SpriteRenderer instructionsMain;
     Color currentColor;
     Color instructionsColor;
     bool onTile = false;
@@ -21,6 +23,7 @@ public class TileActions : MonoBehaviour
     GameObject blank;
     GameObject instructionsObject;
     GameObject instructionsBox;
+    GameObject successBox;
     string objectName = "";
     string instructionsLayer = "";
 
@@ -70,8 +73,14 @@ public class TileActions : MonoBehaviour
     GameObject easyModeButton;
     GameObject solveText;
     GameObject solveButton;
-        
+
+    AudioSource audioSource;
+    GameObject volumeSlider;
+    float volumeStart = 0.5f;
+            
     bool disable = false;
+    bool showingScore = false;
+    bool showingGameScore = false;
 
 
     void Start()
@@ -89,6 +98,9 @@ public class TileActions : MonoBehaviour
         instructionsRend = instructionsBox.GetComponent<SpriteRenderer>();
         instructionsLayer = instructionsRend.sortingLayerName;
 
+        instructions = GameObject.Find("Instructions");
+        instructionsMain = instructions.GetComponent<SpriteRenderer>();
+
         // get the final instructions objects starting color and layer
         finalInstructionsObject = GameObject.Find("FinalInstructionsText");
         finalInstructionsColor = finalInstructionsObject.GetComponent<Text>().color;
@@ -100,7 +112,6 @@ public class TileActions : MonoBehaviour
         // get final piece position
         finalPieceObject = GameObject.Find("14");
         finalPiecePosition = finalPieceObject.transform.position;
-
 
         // get the image objects starting color and layer
         viewImageObject = GameObject.Find("ViewImage");
@@ -120,7 +131,11 @@ public class TileActions : MonoBehaviour
 
         continueText = GameObject.Find("ContinueText");
         continueText.GetComponent<Text>().enabled = false;
-               
+
+        audioSource = GetComponent<AudioSource>();
+        volumeSlider = GameObject.Find("VolumeSlider");
+
+        volumeSlider.GetComponent<Slider>().value = volumeStart;
 
     }
 
@@ -131,7 +146,9 @@ public class TileActions : MonoBehaviour
     {
 
         // disable tiles
-        if (FindObjectOfType<TileActions>().DisableTiles == true)
+        showingScore = FindObjectOfType<Scoring>().getShowingScore;
+        showingGameScore = FindObjectOfType<Scoring>().getShowingGameScore;
+        if (FindObjectOfType<TileActions>().DisableTiles == true || showingScore || showingGameScore)
         {
             return;
         }
@@ -149,18 +166,21 @@ public class TileActions : MonoBehaviour
         //Debug.Log(validMove);
 
         // show instructions
+        Color highlightColor = new Color32(89, 38, 81, 255);
         objectName = rend.transform.name;
-        //Debug.Log(objectName);
+        //Debug.Log(objectName);        
         if (objectName == "Instructions")
-        {            
-            instructionsObject.GetComponent<Text>().color = Color.yellow;
+        {
+            Color letterColor = new Color32(249, 160, 0, 255);
+            instructionsObject.GetComponent<Text>().color = letterColor;
             instructionsRend.sortingLayerName = "Numbers";
+            instructionsMain.color = highlightColor;
         }
 
         // show image
         if (objectName == "ViewImage")
-        {
-            viewImageRend.color = Color.yellow;
+        {            
+            viewImageRend.color = highlightColor;
             imageRend.sortingLayerName = "ViewImage";
         }
         
@@ -183,7 +203,7 @@ public class TileActions : MonoBehaviour
         if (objectName == "Instructions")
         {
             instructionsObject.GetComponent<Text>().color = instructionsColor;
-            instructionsRend.sortingLayerName = instructionsLayer;
+            instructionsRend.sortingLayerName = instructionsLayer;  
         }
 
         // hide image
@@ -233,8 +253,8 @@ public class TileActions : MonoBehaviour
     }
 
     void Update()
-    {
-        
+    {              
+
         // disable tiles
         if (FindObjectOfType<TileActions>().DisableTiles == true )
         {
@@ -243,9 +263,18 @@ public class TileActions : MonoBehaviour
 
         spriteName = rend.sprite.name;
 
+        string[] noAudioList = { "Square", finalPiece, "Circle" };
+        if (!noAudioList.Contains(spriteName))
+        {
+            audioSource.volume = volumeSlider.GetComponent<Slider>().value;
+        }
+
         if (Input.GetMouseButtonDown(0) && onTile && validMove)
         {
             //Debug.Log("Pressed primary button on " + spriteName);
+            Scoring.Instance.addToScore(-2, "ComObjective2");
+            //Scoring.Instance.gameScoreDetails(-2, "Objective2");
+            audioSource.Play();
 
             // get current tile and blank tile positions
             tilePosition = rend.transform.position;
@@ -274,6 +303,8 @@ public class TileActions : MonoBehaviour
         if (finalOn && !Input.GetMouseButton(0))
         {
             //Debug.Log("final");         
+
+            Scoring.Instance.addToScore(500, "ComObjective5");
 
             hideFinalInstructions();
 
@@ -339,8 +370,10 @@ public class TileActions : MonoBehaviour
         // add 3 second delay
         yield return new WaitForSeconds(3f);
 
+        Color letterColor = new Color32(249, 160, 0, 255);
+
         // update background and board layer to the front
-        background = GameObject.Find("Background");
+        background = GameObject.Find("ScrollBackground");
         background.GetComponent<SpriteRenderer>().sortingLayerName = "WinBackground";
 
         board = GameObject.Find("board");
@@ -348,7 +381,9 @@ public class TileActions : MonoBehaviour
 
         // display success comments
         successObject = GameObject.Find("Success");
-        successObject.GetComponent<Text>().color = Color.yellow;
+        successObject.GetComponent<Text>().color = letterColor;
+        successBox = GameObject.Find("SuccessBox");
+        successBox.GetComponent<SpriteRenderer>().sortingLayerName = "WinBoard";
 
         // display complete image
         imageRend.sortingLayerName = "WinImage";
@@ -362,7 +397,8 @@ public class TileActions : MonoBehaviour
 
     public void showFinalInstructions()
     {
-        finalInstructionsObject.GetComponent<Text>().color = Color.yellow;
+        Color letterColor = new Color32(249, 160, 0, 255);
+        finalInstructionsObject.GetComponent<Text>().color = letterColor;
         finalInstructionsRend.sortingLayerName = "Numbers";
     }
 

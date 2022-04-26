@@ -4,6 +4,10 @@ using UnityEngine;
 
 namespace Flightpath
 {
+    /*
+        Encapsulates information and behavior related to the Satellite trajectory before launch.
+        Author: Chris Boveda
+    */
     public class Trajectory : MonoBehaviour
     {
 

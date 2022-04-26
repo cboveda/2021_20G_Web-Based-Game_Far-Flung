@@ -8,7 +8,7 @@ public class CameraPositionController : MonoBehaviour
     public CinemachineVirtualCamera currentVirtualCamera;
     public CinemachineTrackedDolly currentCameraDolly;
 
-    private float cameraSpeed = 0.001f;
+    private float cameraSpeed = 0.0005f;
     // Start is called before the first frame update
     void Start()
     {

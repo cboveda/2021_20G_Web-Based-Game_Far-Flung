@@ -35,38 +35,26 @@ public class PuzzleManipulators : MonoBehaviour
         {
             main.GetComponent<LabMain>().DecrementAmplitude();
         }
-        else if (buttonName == "AmplitudeDec")
+        else if (buttonName == "ElementNext")
         {
-            main.GetComponent<LabMain>().DecrementAmplitude();
+            main.GetComponent<LabMain>().GetNextSpectra();
         }
-        else if (buttonName == "Insert Iron")
+        else if (buttonName == "ElementPrev")
         {
-            main.GetComponent<LabMain>().InsertSpectra(SpectraPuzzle.iron);
+            main.GetComponent<LabMain>().GetPrevSpectra();
         }
-        else if (buttonName == "Insert Nickel")
+        else if (buttonName == "ElementAdd")
         {
-            main.GetComponent<LabMain>().InsertSpectra(SpectraPuzzle.nickel);
+            main.GetComponent<LabMain>().AddSpectra();
         }
-        else if (buttonName == "Insert Aluminum")
+        else if (buttonName == "ElementRemove")
         {
-            main.GetComponent<LabMain>().InsertSpectra(SpectraPuzzle.aluminum);
+            main.GetComponent<LabMain>().RemoveSpectra();
         }
-        else if (buttonName == "Insert Gold")
-        {
-            main.GetComponent<LabMain>().InsertSpectra(SpectraPuzzle.gold);
-        }
-        else if (buttonName == "Insert Silver")
-        {
-            main.GetComponent<LabMain>().InsertSpectra(SpectraPuzzle.silver);
-        }
-        else if (buttonName == "Reset")
+        else if (buttonName == "ElementCheck")
         {
             main.GetComponent<LabMain>().CheckSpectraAnswer();
         }
     }
 
-    public void IncrementFrequency()
-    {
-        
-    }
 }

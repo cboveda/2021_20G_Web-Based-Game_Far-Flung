@@ -1,3 +1,17 @@
 {
-	"name": "ComPuzzleAssembly"
+    "name": "ComPuzzleAssembly",
+    "rootNamespace": "",
+    "references": [
+        "GUID:1dc8456ccace9df4fb00d9e0c1e6692b",
+        "GUID:64cb9616626ecd940a34ebe976b9bc69"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

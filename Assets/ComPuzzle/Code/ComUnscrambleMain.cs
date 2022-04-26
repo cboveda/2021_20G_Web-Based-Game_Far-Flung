@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
+using System;
 
 
 public class ComUnscrambleMain : MonoBehaviour
@@ -20,6 +23,16 @@ public class ComUnscrambleMain : MonoBehaviour
 
     bool wordFinal = false;
     bool wordFinalColor = false;
+
+    GameObject continueButton;
+    GameObject continueText;
+    GameObject successObject;
+    GameObject successBox;
+
+    AudioSource audioSource;
+    GameObject volumeSlider;
+    bool showingScore = false;
+    bool showingGameScore = false;
 
 
     public bool word1ColorUpdated
@@ -97,12 +110,57 @@ public class ComUnscrambleMain : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {       
+    {
         HideLetters();
         DisableAllWords();
 
+        HideContinueButton();
+
         //UpdateFinalWord();
+
+        try
+        {
+            audioSource = GameObject.Find("MainMusic").GetComponent<AudioSource>();
+        }
+        catch (Exception e)
+        {
+            Debug.Log("Unable to find MainMusic, probably because we're testing. Setting to null.");
+            audioSource = null;
+        }
+        volumeSlider = GameObject.Find("VolumeSlider");
+
+        // start score of 0
+        //Debug.Log("unscramble");
+        Scoring.Instance.initialize(0, "");
+        
+
     }
+
+
+    public void HideContinueButton()
+    {
+        
+        continueButton = GameObject.Find("Continue");
+
+        continueButton.GetComponent<UnityEngine.UI.Button>().enabled = false;
+        continueButton.GetComponent<UnityEngine.UI.Image>().enabled = false;
+
+        continueText = GameObject.Find("ContinueText");
+        continueText.GetComponent<UnityEngine.UI.Text>().enabled = false;
+    }
+
+    public void EnableContinueButton()
+    {
+
+        continueButton = GameObject.Find("Continue");
+       
+        continueButton.GetComponent<UnityEngine.UI.Button>().enabled = true;
+        continueButton.GetComponent<UnityEngine.UI.Image>().enabled = true;
+
+        continueText = GameObject.Find("ContinueText");
+        continueText.GetComponent<UnityEngine.UI.Text>().enabled = true;
+    }
+
 
     // Update is called once per frame
     void Update()
@@ -119,6 +177,12 @@ public class ComUnscrambleMain : MonoBehaviour
         int row4 = 4;
         int row5 = 5;
 
+        if(audioSource != null)
+        {
+            audioSource.volume = volumeSlider.GetComponent<Slider>().value;
+        }
+        
+
         winWordsAll = FindObjectOfType<ComUnscrambleMain>().wordsAllWin;
         if (!winWordsAll)
         {
@@ -126,9 +190,10 @@ public class ComUnscrambleMain : MonoBehaviour
             checkWinAllWords();
         }
 
-        winWord1 = FindObjectOfType<ComUnscrambleMain>().word1win;
+        winWord1 = FindObjectOfType<ComUnscrambleMain>().word1win;        
         if (!winWord1)
         {
+            //Debug.Log("winword1");
             //Debug.Log(checkWordWin(row1));
             checkWordWin(row1);
         }
@@ -251,6 +316,9 @@ public class ComUnscrambleMain : MonoBehaviour
 
         EnableWord(finalWordRow);
 
+        GameObject hint5 = GameObject.Find("Hint5");
+        hint5.transform.GetComponent<UnityEngine.UI.Button>().interactable = true;
+
         return win;
 
     }
@@ -304,8 +372,13 @@ public class ComUnscrambleMain : MonoBehaviour
         GameObject letterObject;
         int wordRow = 0;
         string winLetter = "";
-        bool wordUpdated = false;      
-       
+        bool wordUpdated = false;
+
+        GameObject hint1 = GameObject.Find("Hint1");
+        GameObject hint2 = GameObject.Find("Hint2");
+        GameObject hint3 = GameObject.Find("Hint3");
+        GameObject hint4 = GameObject.Find("Hint4");
+        GameObject hint5 = GameObject.Find("Hint5");
 
 
 
@@ -370,12 +443,16 @@ public class ComUnscrambleMain : MonoBehaviour
         {
             case 1:
                 FindObjectOfType<ComUnscrambleMain>().word1win = true;
+                bool win = FindObjectOfType<ComUnscrambleMain>().word1win;
                 wordUpdated = FindObjectOfType<ComUnscrambleMain>().word1ColorUpdated;
+                //Debug.Log("wordWin");
                 if (!wordUpdated)
                 {
                     UpdateWinColor(row);
                     DisableWord(row);
                     FindObjectOfType<ComUnscrambleMain>().word1ColorUpdated = true;
+                    Scoring.Instance.addToScore(250, "ComObjective8");
+                    hint1.transform.GetComponent<UnityEngine.UI.Button>().interactable = false;
                 }
                 break;
             case 2:
@@ -386,7 +463,9 @@ public class ComUnscrambleMain : MonoBehaviour
                     UpdateWinColor(row);
                     DisableWord(row);
                     FindObjectOfType<ComUnscrambleMain>().word2ColorUpdated = true;
-                }
+                    Scoring.Instance.addToScore(250, "ComObjective9");
+                    hint2.transform.GetComponent<UnityEngine.UI.Button>().interactable = false;
+                }                
                 break;
             case 3:
                 FindObjectOfType<ComUnscrambleMain>().word3win = true;
@@ -396,7 +475,9 @@ public class ComUnscrambleMain : MonoBehaviour
                     UpdateWinColor(row);
                     DisableWord(row);
                     FindObjectOfType<ComUnscrambleMain>().word3ColorUpdated = true;
-                }
+                    Scoring.Instance.addToScore(250, "ComObjective10");
+                    hint3.transform.GetComponent<UnityEngine.UI.Button>().interactable = false;
+                }                
                 break;
             case 4:
                 FindObjectOfType<ComUnscrambleMain>().word4win = true;
@@ -406,7 +487,9 @@ public class ComUnscrambleMain : MonoBehaviour
                     UpdateWinColor(row);
                     DisableWord(row);
                     FindObjectOfType<ComUnscrambleMain>().word4ColorUpdated = true;
-                }
+                    Scoring.Instance.addToScore(250, "ComObjective11");
+                    hint4.transform.GetComponent<UnityEngine.UI.Button>().interactable = false;
+                }                
                 break;
             case 5:
                 FindObjectOfType<ComUnscrambleMain>().wordFinalWin = true;
@@ -416,7 +499,11 @@ public class ComUnscrambleMain : MonoBehaviour
                     UpdateWinColor(row);
                     DisableWord(row);
                     FindObjectOfType<ComUnscrambleMain>().wordFinalColorUpdated = true;
-                }
+                    FindObjectOfType<SendDataActions>().DisableDataButtons();
+                    Scoring.Instance.addToScore(500, "ComObjective12");
+                    hint5.transform.GetComponent<UnityEngine.UI.Button>().interactable = false;
+                    StartCoroutine(WinScene());
+                }                
                 break;
         }
 
@@ -425,8 +512,27 @@ public class ComUnscrambleMain : MonoBehaviour
         return wordWin;
 
     }
-        
 
+    IEnumerator WinScene()
+    {
+
+        // display success comments
+        Color letterColor = new Color32(249, 160, 0, 255);
+        successObject = GameObject.Find("Success");
+        successObject.GetComponent<UnityEngine.UI.Text>().color = letterColor;
+        successBox = GameObject.Find("SuccessBox");
+        successBox.GetComponent<SpriteRenderer>().sortingLayerName = "WinBoard";
+
+        // add 3 second delay
+        yield return new WaitForSeconds(3f);
+        //Debug.Log("win scene");
+
+        
+        EnableContinueButton();
+
+
+
+    }
 
     public void UpdateWinColor(int row)
     {
@@ -615,5 +721,68 @@ public class ComUnscrambleMain : MonoBehaviour
             buttonNumber++;
             FindObjectOfType<ComUnscrambleMain>().buttonStart = buttonNumber;
         }
+    }
+
+    public void OnMouseEnter()
+    {
+        showingScore = FindObjectOfType<Scoring>().getShowingScore;
+        showingGameScore = FindObjectOfType<Scoring>().getShowingGameScore;
+        wordFinal = FindObjectOfType<ComUnscrambleMain>().wordFinalWin;
+        if (showingScore || showingGameScore || wordFinal)
+        {
+            return;
+        }
+
+            SpriteRenderer rend;
+        string objectName = "";
+        GameObject instructions;
+        GameObject instructionsBack;
+        Color highlightedColor = new Color32(89, 38, 81, 255);
+        Color letterColor = new Color32(249, 160, 0, 255);
+
+        rend = GetComponent<SpriteRenderer>();
+        objectName = rend.transform.name;
+        //Debug.Log(objectName);
+
+        if (objectName == "InstructionsBox")
+        {            
+
+            instructions = GameObject.Find("InstructionsText");
+            instructions.GetComponent<UnityEngine.UI.Text>().color = letterColor;
+            instructionsBack = GameObject.Find("InstructionsBack");
+            instructionsBack.GetComponent<SpriteRenderer>().sortingLayerName = "Board";
+
+            rend.color = highlightedColor;
+
+        }
+
+
+    }
+
+    public void OnMouseExit()
+    {
+        SpriteRenderer rend;
+        string objectName = "";
+        GameObject instructions;
+        GameObject instructionsBack;
+        Color hiddenColor = new Color32(255, 255, 255, 0);
+        Color currentColor = new Color32(48 , 33, 68, 255);
+
+        rend = GetComponent<SpriteRenderer>();
+        objectName = rend.transform.name;
+        //Debug.Log(objectName);
+
+        if (objectName == "InstructionsBox")
+        {
+            instructions = GameObject.Find("InstructionsText");
+            instructions.GetComponent<UnityEngine.UI.Text>().color = hiddenColor;
+            instructionsBack = GameObject.Find("InstructionsBack");
+            instructionsBack.GetComponent<SpriteRenderer>().sortingLayerName = "Hidden";
+
+            rend.color = currentColor;
+
+        }
+
+
     }
 }

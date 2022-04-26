@@ -1,5 +1,7 @@
 using NUnit.Framework;
 using UnityEngine;
+using Scanning;
+using UnityEngine.UI;
 
 public class ScanningTest {
 
@@ -7,10 +9,13 @@ public class ScanningTest {
     public void Test_TerrainGeneratorGetTerrainHeights() {
 
         float[,] testSpec = {
-            { 0.183221f, 0.2240982f, 0.183221f, 0.1014668f },
-            { 0.1423439f, 0.1219054f, 0.1423439f, 0.1627825f },
-            { 0.183221f, 0.1014668f, 0.183221f, 0.2649753f },
-            { 0.1423439f, 0.1014668f, 0.2240982f, 0.3058524f }
+            { 0.1787749f, 0.2202964f, 0.1787749f, 0.09573194f },
+
+            { 0.1372534f, 0.1164927f, 0.1372534f, 0.1580142f },
+
+            { 0.1787749f, 0.09573194f, 0.1787749f, 0.2618178f },
+
+            { 0.1372534f, 0.09573194f, 0.2202964f, 0.3033393f }
         };
 
         Vector3 baseVec = new Vector3( 0, 0, 0 );
@@ -24,7 +29,7 @@ public class ScanningTest {
 
             for ( int j = 0; j < meshDim; ++j ) {
 
-                Assert.AreEqual( result[i,j], testSpec[i,j], 0.0001f );
+                Assert.AreEqual( result[i,j], testSpec[i,j], 0.001f );
             }
         }
     }
@@ -84,6 +89,7 @@ public class ScanningTest {
 
         for ( int i = 0; i < 3; ++i ) {
             for ( int j = 0; j < 3; ++j ) {
+
                 Assert.AreEqual( colors[ (i * tileDim) + j ], gradient.Evaluate( heights[i, j] ) );
             }
         }
@@ -103,5 +109,40 @@ public class ScanningTest {
         
         Assert.AreEqual( tex.wrapMode, TextureWrapMode.Clamp );
         Assert.AreEqual( tex.filterMode, FilterMode.Point );
+    }
+
+    [Test]
+    public void Test_ButtonControl() {
+
+        ButtonControl bc = new ButtonControl();
+        bc.start_scanning = new GameObject().AddComponent<Button>();
+
+        bc.start_scanning.interactable = false;
+
+        Assert.True(bc.DialogActionStartDialog());
+
+        bc.DialogActionDoWhenFinished();
+
+        Assert.True(bc.start_scanning.interactable);
+
+    }
+
+    [Test]
+    public void Test_EndSceneControl() {
+
+        EndSceneControl esc = new EndSceneControl();
+
+        esc.return_to_hub = new GameObject().AddComponent<Button>();
+        esc.restart_mission = new GameObject().AddComponent<Button>();
+
+        esc.return_to_hub.interactable = false;
+        esc.restart_mission.interactable = false;
+
+        Assert.True(esc.DialogActionStartDialog());
+
+        esc.DialogActionDoWhenFinished();
+
+        Assert.True(esc.restart_mission.interactable);
+        Assert.True(esc.return_to_hub.interactable);
     }
 }

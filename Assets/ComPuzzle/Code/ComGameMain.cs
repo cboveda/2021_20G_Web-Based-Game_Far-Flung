@@ -1,14 +1,48 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using System;
+
 
 
 public class ComGameMain : MonoBehaviour
 {
+    AudioSource audioSource;
+    GameObject volumeSlider;
+    
     // Start is called before the first frame update
     void Start()
     {
         SetTileStartPositions();
+        try
+        {
+            audioSource = GameObject.Find("MainMusic").GetComponent<AudioSource>();
+        }
+        catch(Exception e)
+        {
+            Debug.Log("Unable to find MainMusic, probably because we're testing. Setting to null.");
+            audioSource = null;
+        }
+        
+        //audioSource = GetComponent<AudioSource>();
+        volumeSlider = GameObject.Find("VolumeSlider");        
+        //audioSource.Play();
+
+        // start score of 1000
+        Scoring.Instance.initialize(1000, "ComObjective1");
+        //Scoring.Instance.gameScoreDetails(1000, "Objective1");
+    }
+
+
+    void Update()
+    {   
+        if(audioSource != null)
+        {
+            audioSource.volume = volumeSlider.GetComponent<Slider>().value;
+        }
+        
     }
 
 
