@@ -165,13 +165,7 @@ namespace Flightpath
 
         private DialogScriptableObject pickNewScript(DialogScriptableObject[] scriptCollection)
         {
-            int newScript;
-            do
-            {
-                newScript = Random.Range(0, scriptCollection.Length);
-            } while (newScript == _lastScript);
-            _lastScript = newScript;
-            return scriptCollection[newScript];
+            return scriptCollection[Random.Range(0, scriptCollection.Length)];
         }
 
         public void OnAsteroidCollisionDetected()
