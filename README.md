@@ -50,7 +50,7 @@
    ![3](/img/3.png)  
 4) After the build is complete, confirm the contents of the output.  
    ![4](/img/4.png)  
-5) The native resolution of the game is **1440 x 900**. Do **not** change the 'height' and 'width' attributes of the canvas element. However, the style of the HTML canvas element can be adjusted to accomodate different different screensizes or website layouts by changing the height and width properties of the style attribute. Be sure that the height and width match a 1.6:1 ratio (e.g. 960 x 600, see below).  
+5) The native resolution of the game is **1440 x 900**. Do **not** change the 'height' and 'width' attributes of the canvas element. However, the style of the HTML canvas element can be adjusted to accomodate different screen sizes or website layouts by changing the height and width properties in the style attribute. Be sure that the height and width match a 1.6:1 ratio (e.g. 960 x 600, see below).  
    ![5](/img/5.png)  
 6) The scripts necessary to load the build in a web browser will not work when loaded from local storage. You may host the files on a simple static server for testing. Unity provides web server tool as part of its default installation, and it can be found here: `Unity\Editor\Data\PlaybackEngines\WebGLSupport\BuildTools\SimpleWebServer.exe`
 
@@ -64,7 +64,7 @@
 - Chris Boveda
 - Adam Carroll
 
-## Development Tools
+### Development Tools
 
 -  [Unity Editor v2020.3.18f1](https://unity3d.com/unity/qa/lts-releases)
 -  [Git LFS v2.13.3](https://git-lfs.github.com/)
