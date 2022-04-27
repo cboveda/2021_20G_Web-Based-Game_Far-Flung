@@ -1,7 +1,7 @@
 # Far Flung: A Psyche Mission Adventure
 
 [![Build](https://github.com/cboveda/psyche-game/actions/workflows/main.yml/badge.svg)](https://github.com/cboveda/psyche-game/actions/workflows/main.yml)
-[![codecov](https://codecov.io/gh/cboveda/psyche-game/branch/dev/graph/badge.svg?token=VODBNEAIG3)](https://codecov.io/gh/cboveda/psyche-game)
+[![codecov](https://codecov.io/gh/cboveda/2021_20G_Web-Based-Game_Far-Flung/branch/dev/graph/badge.svg?token=VODBNEAIG3)](https://codecov.io/gh/cboveda/2021_20G_Web-Based-Game_Far-Flung)
 
 ## Playable Demo
 
